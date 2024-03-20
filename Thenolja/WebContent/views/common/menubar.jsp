@@ -66,7 +66,7 @@
 
     <header id="header-navi">
         <div>
-           <img id="logo-img" src="./resources/image/thenoljaLogo.png"alt="logo"></div>
+           <img id="logo-img" src="./resources/image/logo.png"alt="logo"></div>
            <h2 id="header-title">더 놀자</h2>
         <div id="menu-list">
         <ul id="optionList" style="font-size: 20px;">
@@ -75,7 +75,8 @@
            <li><a href="#">회원가입</a></li>
            <li><a href="#">고객센터</a></li>
         </ul>
-
+	</div>
+</header>
 
      
 
