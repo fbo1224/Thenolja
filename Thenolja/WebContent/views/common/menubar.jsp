@@ -101,7 +101,7 @@
         <div id="header1">
             
             <div id="menu1" class="menu">
-                <a href="<%= contextPath%>"><img src="resources/img/Logo.png" id="logo"></a>
+                <a href="<%= contextPath%>"><img src="resource/img/Logo.png" id="logo"></a>
             </div>
 
             <% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.jsp.member.model.service.MemberService;
-import com.kh.jsp.member.model.vo.Member;
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
 
 /**
  * Servlet implementation class LoginController
