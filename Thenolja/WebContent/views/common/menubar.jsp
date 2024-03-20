@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.member.model.vo.Member" %>
 <%
    String contextPath = request.getContextPath();
+
+	Member loginUser = (Member)session.getAttribute("loginUser");
+
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>    
 <!DOCTYPE html>
 <html>
@@ -68,10 +73,14 @@ a{
            <h2 id="header-title">더 놀자</h2>
         <div id="menu-list">
         <ul id="optionList" style="font-size: 20px;">
-           <li><a href="#">로그인</a></li>
-           <li><a href="#">비회원 예약</a></li>
-           <li><a href="#">회원가입</a></li>
-           <li><a href="#">고객센터</a></li>
+        	<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
+	           <li><a href="#">로그인</a></li>
+           <% } else { %> <!-- 로그인상태라면 -->
+	           <li><a href="#">로그아웃</a></li>
+           	<% }%>
+	           <li><a href="#">비회원 예약</a></li>
+	           <li><a href="#">회원가입</a></li>
+	           <li><a href="#">고객센터</a></li>
         </ul>
         </div>
     </header>
