@@ -12,5 +12,9 @@
 </head>
 <body>
 
+	<%@ include file="views/common/menubar.jsp" %>
+
+	<h1>메인페이지</h1>
+
 </body>
 </html>

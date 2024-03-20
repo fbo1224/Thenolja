@@ -1,4 +1,4 @@
-package com.kh.jsp.member.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
