@@ -57,15 +57,13 @@
     #menu-list{
         margin-left: 400px;
     }
-    #reser{
-        width: 50px;
-        height: 30px;
-    }
+
 
     </style>
     
 </head>
 <body>
+
     <header id="header-navi">
         <div>
            <img id="logo-img" src="./resources/image/thenoljaLogo.png"alt="logo"></div>
@@ -77,14 +75,8 @@
            <li><a href="#">회원가입</a></li>
            <li><a href="#">고객센터</a></li>
         </ul>
-        </div>
-    </header>
-    
-    <div id="reser">
-    <form action="<%=contextPath%>/insertReservation">
-        <button type="submit">예약</button>
-    </form>
-    </div>
+
+
      
 
     

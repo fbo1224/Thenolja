@@ -20,7 +20,7 @@
     
     <div id="wrap">
         <div id="header">
-        <%@ include file="../common/menubar.jsp" %> 
+        <%@ include file="../../common/adminMenubar.jsp" %> 
         </div>
                
         <div id="content">
