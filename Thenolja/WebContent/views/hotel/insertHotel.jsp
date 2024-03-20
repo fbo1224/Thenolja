@@ -62,13 +62,23 @@
 				width: 100%;
 				height: 30%;
 			}
+	
 			#hotel-serviceList h3{
 				text-align: center;
 			}
-			.serviceList-half{
-				display: inline-block;
-				height: 50%;	
+			#serviceList-half1{
+				width: 40%;
+				margin: auto;
+				margin-top: 20px;
+				
 			}
+			#serviceList-half2{
+				width: 50%;
+				margin: auto;
+				margin-top: 20px;
+				white-space: nowrap;
+			}
+			
 		</style>
 	</head>
 
@@ -87,15 +97,19 @@
 							</div>
 
 							<div id="hotel-cate">
+								<div style="width: 80%; height: 40%; margin: auto; margin-top: 10px; ">
 								<label>숙소종류</label>
-								<select>
-									<option>호텔</option>
-									<option>모텔</option>
-									<option>게스트하우스</option>
-									<option>캠핑/글림핑</option>
-								</select>
-								<label>숙소명</label>
-								<input type="text" name="hotelName">
+									<select>
+										<option>호텔</option>
+										<option>모텔</option>
+										<option>게스트하우스</option>
+										<option>캠핑/글림핑</option>
+									</select>
+								</div>
+								<div style="width: 80%; height: 40%; margin: auto; margin-top: 10px;">
+									<label>숙소명</label>
+									<input type="text" name="hotelName">
+								</div>
 							</div>
 
 							<div id="hotel-nameNImg">
@@ -122,13 +136,13 @@
 								<div>
 									<h3>숙소 이용 가능한 서비스 목록</h3>
 								</div>
-								<div class="serviceList-half">
+								<div id="serviceList-half1">
 									<label>wifi</label><input type="checkbox" value="wifi">
 									<label>금연</label><input type="checkbox">
-									<lable>헬스장</lable><input type="checkbox">
+									<label>헬스장</label><input type="checkbox">
 									<label>에어컨</label><input type="checkbox">
 								</div>
-								<div class="serviceList-half">
+								<div id="serviceList-half2">
 									<label>주차장</label><input type="checkbox">
 									<label>반려견동반</label><input type="checkbox">
 									<label>엘레베이터</label><input type="checkbox">
