@@ -78,7 +78,7 @@ a{
             <% } else { %> <!-- 로그인상태라면 -->
 	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
             <% }%>
-	            <li><a href="#">비회원 예약</a></li>
+	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
 	            <li><a href="#">회원가입</a></li>
 	            <li><a href="#">고객센터</a></li>
         </ul>

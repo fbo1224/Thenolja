@@ -24,6 +24,7 @@
 		#content{
 			width: 50%;
 			height: 500px;
+			margin: auto;
 		}
 
 		#content1 > span{
@@ -73,7 +74,7 @@
 			height: 50px;
 		}
 
-		.btn{
+		div > .btn{
 			width: 300px;
 			height: 60px;
 			background-color: rgb(70, 149, 151);
@@ -86,7 +87,6 @@
 			text-align: center;
 		}
 	
-		/* div{border: 1px solid red;} */
 	
 	</style>
 
@@ -142,7 +142,6 @@
             <span><%= loginUser.getMemName() %></span>님 환영합니다~!!<br><br>
             <div>
                 <a href="<%=contextPath %>/myPage" class="btn btn-sm btn-primary">마이페이지</a>
-                <!-- <a href="/jsp/logout">로그아웃</a> -->
                 <a href="<%=contextPath %>/logout" class="btn btn-sm btn-primary">로그아웃</a>
             </div>
         </div>
