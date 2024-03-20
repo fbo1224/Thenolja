@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
-<%
-	// Member loginUser = (Member)session.getAttribute("loginUser");
-	
-	// String alertMsg = (String)session.getAttribute("alertMsg");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<style>
+		div{border: 1px solid red;}
 		#wrap{
 			width: 1200px;
 			height: 800px;
@@ -56,8 +53,7 @@
 			height: 100%;
 		}
 
-		#content2{width: 100%; height: 100px;}
-		#content3{width: 100%; height: 100px;}
+		#content2, #content3{width: 100%; height: 100px;}
 
 		#content2 > a{
 			text-align: center;
