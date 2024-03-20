@@ -24,6 +24,7 @@
     #header{
         width:1200px;
         height: 180px;
+        margin: auto;
     } 
     
     /*********************************/
@@ -155,7 +156,7 @@
             
 
             <div id="tnj_icon">
-                <img src="resources/img/TheNolJa.png" alt="">
+                <img src="resources/img/logo.png" alt="logo">
             </div>
 
             <div id="tnj_title">
