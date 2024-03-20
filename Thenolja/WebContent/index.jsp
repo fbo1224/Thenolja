@@ -10,11 +10,11 @@
 <%-- <%@ include file="views/common/menubar.jsp" %> --%>
 <%-- <%@ include file="views/hotel/hotelList.jsp" %> --%>
 <%-- <%@ include file="views/hotel/hotelDetail.jsp" %> --%>
+<%-- <%@ include file="views/hotel/insertHotel.jsp" %>  --%>
 </head>
 
 <body>
-	<%@ include file="views/hotel/insertHotel.jsp" %>
-	
+	<%@ include file="views/common/menubar.jsp" %>
 
 </body>
 </html>
