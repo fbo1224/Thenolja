@@ -17,13 +17,13 @@
 		#wrap{
 			width: 1200px;
 			height: 800px;
+			margin: auto;
 		}
 
 
 		#content{
 			width: 50%;
 			height: 500px;
-			margin: auto;
 		}
 
 		#content1 > span{
