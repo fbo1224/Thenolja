@@ -23,4 +23,11 @@
 hs_err_pid*
 replay_pid*
 /.metadata/
+<<<<<<< HEAD
 /server
+=======
+
+/Servers
+
+Thenolja/sql/driver/driver.properties
+>>>>>>> 700e3e1b046ba45ceb4bc0154fb01dad68f6b84d
