@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< Updated upstream
 <title>index.jsp</title>
+=======
+<title>메인페이지</title>
+>>>>>>> Stashed changes
 </head>
 <body>
 
