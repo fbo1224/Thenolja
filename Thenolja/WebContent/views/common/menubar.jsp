@@ -73,14 +73,14 @@ a{
            <h2 id="header-title">더 놀자</h2>
         <div id="menu-list">
         <ul id="optionList" style="font-size: 20px;">
-        	<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
-	           <li><a href="#">로그인</a></li>
-           <% } else { %> <!-- 로그인상태라면 -->
-	           <li><a href="#">로그아웃</a></li>
-           	<% }%>
-	           <li><a href="#">비회원 예약</a></li>
-	           <li><a href="#">회원가입</a></li>
-	           <li><a href="#">고객센터</a></li>
+       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
+            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
+            <% } else { %> <!-- 로그인상태라면 -->
+	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
+            <% }%>
+	            <li><a href="#">비회원 예약</a></li>
+	            <li><a href="#">회원가입</a></li>
+	            <li><a href="#">고객센터</a></li>
         </ul>
         </div>
     </header>
