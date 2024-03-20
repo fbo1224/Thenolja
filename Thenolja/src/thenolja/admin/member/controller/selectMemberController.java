@@ -35,7 +35,7 @@ public class selectMemberController extends HttpServlet {
 		ArrayList<Member> list = new MemberService().selectMemberList();
 		request.setAttribute("selectMemberList", list);
 
-		RequestDispatcher view = request.getRequestDispatcher("/views/tb_member/memberList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
 		view.forward(request, response);
 		
 	}
