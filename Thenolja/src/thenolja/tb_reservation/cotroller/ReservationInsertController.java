@@ -1,6 +1,7 @@
-package com.kh.thenolja.tb_reservation.cotroller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.thenolja.tb_reservation.model.vo.Reservation;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class ReservationInsertController

@@ -1,4 +1,4 @@
-package com.kh.thenolja.tb_reservation.cotroller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,7 +29,7 @@ public class insertReservation extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 	
-		request.getRequestDispatcher("views/tb_reservation/insertReservation.jsp").forward(request, response);
+		request.getRequestDispatcher("views/reservation/insertReservation.jsp").forward(request, response);
 	
 		
 	
