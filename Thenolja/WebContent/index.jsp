@@ -13,7 +13,6 @@
 
 	<%@ include file="views/hotel/hotelDetail.jsp" %>
 
-	<h1>메인페이지</h1>
 
 </body>
 </html>
