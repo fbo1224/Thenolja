@@ -7,25 +7,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>review</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>메뉴바</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+        div{
+            margin: auto;
+            box-sizing: border-box;
+            /*border: 1px solid red;*/
+        }
 
-    <style>
-    div {
-        box-sizing: border-box;
-    }
-    #header-navi{
-        width: 1200px;
-        height: 100px;
-        margin: 0px auto;
-        border-bottom: 3px solid darkcyan;
-        display: flex;
-        align-items: center;
-        
-    }
+        #wrap{
+            width: 1200px;
+            height: 150px;
+        }
+
+        #header1{
+            width: 80%;
+            height: 140px;
+        }
+
+        #header2{
+            width: 80%;
+            height: 10px;
+            padding: 5px;
+        }
+
+
+        div > hr{
+            height: 5px;
+            background-color: rgb(70, 149, 151);
+            border: none;
+            margin: auto;
+        }
+
+        #logo{
+            width: 100px; 
+            height: 75px;
+            margin-top: 70px;
+            margin-right: 100px;
+            left: 250px;
+            top: 25px;
+        }
+
+        .menu{
+            float: right;
+            height: 100%;
+            width: 200px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .menu > div > a{
+            text-decoration: none;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        #menu1{
+            float: left;
+
+        }
+
+        .detailMenu1{
+            width: 100%;
+            height: 80%;
+            float: left;
+        }
+
+        .detailMenu2{
+            width: 100%;
+            height: 20%;
+            float: left;
+        }
+
     #optionList{
         width: 100%;
         margin: 0px;

@@ -64,7 +64,7 @@
 		
 		<div id="content-2-lists">
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
@@ -74,7 +74,7 @@
   				</div>
 			</div>
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
@@ -84,7 +84,7 @@
   				</div>
 			</div>
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
@@ -94,7 +94,7 @@
   				</div>
 			</div>
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
@@ -104,7 +104,7 @@
   				</div>
 			</div>
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
@@ -114,7 +114,7 @@
   				</div>
 			</div>
 			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="views\tb_hotel\css\pepe2.jpeg"></div>
+  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
   				<div id="card-info">
 					<h4>부산</h4>
 					<p>판다호텔</p>
