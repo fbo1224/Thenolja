@@ -1,6 +1,7 @@
-package thenolja.member.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.member.model.service.MemberService;
+import thenolja.tb_reservation.model.Service.ReserService;
 
 /**
- * Servlet implementation class AjaxCheckController
+ * Servlet implementation class SelectCouponController
  */
-@WebServlet("/idCheck.do")
-public class AjaxCheckController extends HttpServlet {
+@WebServlet("/selectCoupon")
+public class SelectCouponController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCheckController() {
+    public SelectCouponController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +30,9 @@ public class AjaxCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String checkId = request.getParameter("checkId");
-		
-		int count = new MemberService().idCheck(checkId);
-		
-		response.setContentType("text/html); charset=UTF-8");
-		
-		response.getWriter().print(count > 0 ? "NNNNN" : "NNNNY");
-	
-	
+
+		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		request.setAttribute("insertReservation", list);
 	
 	
 	}

@@ -72,19 +72,38 @@ a{
     
 </head>
 <body>
+	<script>
+			// script태그 안에서도 스크립틀릿 같은 JSP요소를 사용할 수 있음
+			
+			const msg = '<%= alertMsg %>'; 
+			// 문자열을 넘겨받았기 때문에 문자열로 묶어주어야 가져올 수 있다.
+			
+			if(msg != 'null'){ // 양 옆에 따옴표를 붙였기 때문에 문자열null과 비교
+				alert(msg);
+			
+				// menubar.jsp가 로딩 될 때마다 alert이 계속 수행됨
+				// session에 들어있는 alertMsg키값에 해당하는 벨류값을 지워줄 것!
+				// XX.removeAttribute("키값");
+				<% session.removeAttribute("alertMsg"); %>
+			}
+	</script>
+
     <header id="header-navi">
         <div>
            <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
            <h2 id="header-title">더 놀자</h2>
         <div id="menu-list">
         <ul id="optionList" style="font-size: 20px;">
+        
        		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
             	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
             <% } else { %> <!-- 로그인상태라면 -->
 	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
             <% }%>
+            
             <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
 	            <li><a href="<%= contextPath %>/loginPage">마이페이지</a></li>
+	            
             <% } else { %> <!-- 로그인상태라면 -->
 	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
             <% }%>

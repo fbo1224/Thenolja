@@ -13,6 +13,8 @@
 		  		(
 		  		RESER_NO,
 		  		RESER_DATE,
+		  		RESER_NAME,
+		  		RESER_PHONE,
 		  		BICYCLE,
 		  		CANCEL_YN,
 		  		CHECKIN_TIME,
@@ -27,6 +29,8 @@
 		 		(
 		 		SEQ_RESERVATION.NEXTVAL,
 		 		SYSDATE,
+		 		?,
+		 		?,
 		 		?,
 		 		DEFAULT,
 		 		?,
