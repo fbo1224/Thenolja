@@ -8,12 +8,12 @@ public class HotelController {
 	public String insert(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		
-		view="views/hotel/insertHotel.jsp";
+		view="views/hotel/hotelList.jsp";
 		return view;
 	}
 	
 	public String hotelList(HttpServletRequest request, HttpServletResponse response) {
-		String view = "views/hotel/hotelList.jsp";
+		String view = "";
 		
 		view = "views/hotel/hotelList.jsp";
 		return view;
