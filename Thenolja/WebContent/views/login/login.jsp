@@ -81,7 +81,8 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 	
-	<% if(loginUser == null) { %>
+	<% if(loginUser == null) { %>    	
+      
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
@@ -135,6 +136,7 @@
                 <a href="<%=contextPath %>/logout" class="btn btn-sm btn-primary">로그아웃</a>
             </div>
         </div>
+
 		<% } %>
 		
 	</div>
