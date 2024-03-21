@@ -30,14 +30,14 @@
 			<table align="center" id="table">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" maxlength="12" required name="userId"></td>
+					<td><input type="text" maxlength="12" required name="memId"></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck()">중복확인</button></td>
 				</tr>
 				
 				<script>
 					function idCheck(){
 						
-						const $userId = $('#enroll-form input[name=userId]');
+						const $memId = $('#enroll-form input[name=memId]');
 						
 						// AJAX요청
 						$.ajax({ // 보낼 값이 많으므로 객체 만들기 {}
@@ -59,29 +59,34 @@
 				
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" maxlength="15" required name="userPwd"></td>
+					<td><input type="password" maxlength="15" required name="memPwd"></td>
 					<td></td>
 				</tr>
+				
 				<tr>
-					<td>비밀번호확인</td>
+					<td>비밀번호 확인</td>
 					<td><input type="password" maxlength="15" required></td>
 					<td><span id="pwdCheck">비밀번호가 일치하지 않습니다.</span></td>
 				</tr>
+				
 				<tr>
 					<td>이름</td>
 					<td><input type="text" maxlength="5" required name="memName"></td>
 					<td></td>
 				</tr>
-								<tr>
+				
+				<tr>
 					<td>닉네임</td>
 					<td><input type="text" maxlength="30" required name="nickname"></td>
 					<td></td>
 				</tr>
+				
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-제외하고 입력해주세요." name="memphone"></td>
+					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone"></td>
 					<td></td>
 				</tr>
+				
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email"></td>
@@ -90,6 +95,7 @@
 						<option></option>
 					</select>
 				</tr>
+				
 				<tr>
 					<td>생년월일</td>
 					<td><input type="text" name="address" placeholder="생년월일 8자리를 입력해주세요."></td>
