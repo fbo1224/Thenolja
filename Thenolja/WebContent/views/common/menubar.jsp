@@ -79,7 +79,7 @@ a{
 	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
             <% }%>
 	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
-	            <li><a href="#">회원가입</a></li>
+	            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
 	            <li><a href="#">고객센터</a></li>
         </ul>
         </div>
