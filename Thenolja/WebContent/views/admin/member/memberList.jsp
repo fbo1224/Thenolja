@@ -97,7 +97,9 @@
 	                       	   		<td><%= m.getGradeName() %></td>
 	                       	   		
 		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal">조회</button></td>
-		                            <td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="return deleteMember()">삭제</button></td>
+		                            
+		                            
 		                            <input type="hidden" name="memNo" value="<%= m.getMemNo() %>" > 
 	                       	  </tr>
                        		<% } %>

@@ -1,6 +1,8 @@
-package thenolja.member.controller;
+package thenolja.admin.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginPageController
+ * Servlet implementation class adminMainPage
  */
-@WebServlet("/loginPage")
-public class LoginPageController extends HttpServlet {
+@WebServlet("/adminMain")
+public class adminMainPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageController() {
+    public adminMainPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +28,8 @@ public class LoginPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("views\\login\\login.jsp").forward(request, response);
-	
+		RequestDispatcher view = request.getRequestDispatcher("/views/common/adminMain.jsp");
+		view.forward(request, response);
 	}
 
 	/**
