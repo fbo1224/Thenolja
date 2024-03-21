@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.ArrayList,  thenolja.admin.nonMember.model.vo.NonMember" %>    
+<%
+	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,12 +62,18 @@
                           </tr>
                         </thead>
                         <tbody>
+                        <% if(list.isEmpty()) {%>
+                        	<tr>
+                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <%} else { %>	
+                        	
                           <tr>
                             <td>8</td>
                             <td>김민지</td>
                             <td>010-3322-1122</td>
-
                           </tr>
+                         <%} %>
                         </tbody>
                       </table>
 
