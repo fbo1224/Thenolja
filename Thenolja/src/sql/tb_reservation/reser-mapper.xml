@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Reservation Mapper
+	</comment>
+	
+	<entry key="insertReser">
+		INSERT
+		  INTO 
+		  		TB_RESERVATION
+		  		(
+		  		RESER_NO,
+		  		RESER_DATE,
+		  		BICYCLE,
+		  		CANCEL_YN,
+		  		CHECKIN_TIME,
+		  		CHECKOUT_TIME,
+		  		PEOPLE,
+		  		ROOM_NO,
+		  		RE_MEM_NO,
+		  		PAYMENT,
+		  		PAYMENT_PRICE
+		  		)
+		VALUES
+		 		(
+		 		SEQ_RESERVATION.NEXTVAL,
+		 		SYSDATE,
+		 		?,
+		 		DEFAULT,
+		 		?,
+		 		?,
+		 		?,
+		 		SEQ_ROOM.CURRVAL,
+		 		SEQ_MNO.CURRVAL,
+		 		?,
+		 		?
+				)
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</properties>

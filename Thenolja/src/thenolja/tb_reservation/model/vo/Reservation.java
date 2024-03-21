@@ -15,6 +15,8 @@ public class Reservation {
 	private int reMemNo;
 	private String payment;
 	private int paymentPrice;
+	private String phone;
+	private String name;
 	public Reservation() {
 		super();
 	}
@@ -98,6 +100,18 @@ public class Reservation {
 	}
 	public void setPaymentPrice(int paymentPrice) {
 		this.paymentPrice = paymentPrice;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Override
 	public int hashCode() {
