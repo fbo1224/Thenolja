@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="thenolja.member.model.vo.Member" %>      
+<% Member loginUser = (Member)session.getAttribute("loginUser"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,23 +199,22 @@
             <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
                 <div id="reser_mem_info">
                     <br>
-                
                     <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
                     <br>
                     <div id="mem-name">
                         <h5>*예약자 이름</h5>
-                        <input type="text" id="reser-name" name="name" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                        <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
                     </div>
                     <div id="mem-phone">
                         <h5>*전화 번호</h5>
-                        <input type="text" id="reser-phone" name="phone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                        <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
                     </div>
                 
                     <div id="mem-bicycle">
                         <br>
                         <h5>*이동 방식</h5>
-                        <input type="checkbox" name="car" id="car"> 차량
-                        <input type="checkbox" name="walk" id="walk" checked> 도보
+                        <input type="checkbox" name="bicycle" id="car"> 차량
+                        <input type="checkbox" name="bicycle" id="walk" checked> 도보
                     </div>
                 </div>
                 

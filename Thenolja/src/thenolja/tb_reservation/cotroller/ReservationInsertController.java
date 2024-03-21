@@ -1,14 +1,16 @@
 package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
-
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
@@ -32,18 +34,30 @@ public class ReservationInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
-		String memName = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		String bicycle = request.getParameter("bicycle");
-		int couponNo = Integer.parseInt(request.getParameter("couponNo"));
-		String payment = request.getParameter("payment");
 		
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		String bicycle = request.getParameter("bicycle");
+		String payment = request.getParameter("payment");
+		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
-
-	
+		reser.setReserNo(reserNo);
+		reser.setBicycle(bicycle);
+		reser.setPayment(payment);
+		reser.setPaymentPrice(paymentPrice);
+		
+		int result = new ReserService().insertReser(reser);
+		
+		HttpSession session = request.getSession();
+		
+		if(result > 0) {
+			
+			response.sendRedirect(request.getContextPath() + "/reserDetail");
+		} else {
+			request.setAttribute("errorMsg", "예약에 실패했습니다!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 		
 		
 	
