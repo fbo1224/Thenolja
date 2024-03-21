@@ -113,7 +113,7 @@
 							<a href="">아이디 찾기</a>
 							/
 							<a href="">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-							<a href="../member/memberJoin.jsp" >회원가입</a>
+							<a href="views\\member\\memberJoin.jsp" >회원가입</a>
 						</div>
 
 						<div id="content3">

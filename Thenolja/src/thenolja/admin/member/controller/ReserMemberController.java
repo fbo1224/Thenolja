@@ -1,7 +1,6 @@
-package thenolja.tb_reservation.cotroller;
+package thenolja.admin.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_coupon.model.vo.Coupon;
-import thenolja.tb_reservation.model.Service.ReserService;
-
 /**
- * Servlet implementation class insertReservation
+ * Servlet implementation class ReserMemberController
  */
-@WebServlet("/insertReservation")
-public class insertReservation extends HttpServlet {
+@WebServlet("/reserMember")
+public class ReserMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public insertReservation() {
+    public ReserMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +29,10 @@ public class insertReservation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
-		ArrayList<Coupon> list = new ReserService().selectCoupon();
-		request.setAttribute("insertReservation", list);
-		//System.out.println(list);
-		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
+		
+		// 요청화면 만들기
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");
 		view.forward(request, response);
-	
 	}
 
 	/**

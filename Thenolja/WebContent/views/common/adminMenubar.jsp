@@ -167,11 +167,11 @@
             </div>
 
             <div id="tnj_title">
-                <h2><a href="<%= contextPath %>">관리자</a></h2>
+                <h2><a href="<%= contextPath %>/adminMain">관리자</a></h2>
             </div>
 
             <div id="admin_login">
-                <p><a href="#">로그아웃</a></P>
+                <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
             </div>
 
         </div>
@@ -184,7 +184,7 @@
                     <a href="#">회원관리</a>
                     <ul>
                         <li><a href="<%= contextPath %>/selectMember">회원조회</a></li>
-                        <li><a href="#">회원 예약 조회</a></li>
+                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
                         <li><a href="#">탈퇴 회원 조회</a></li>
                     </ul>
                 </li>

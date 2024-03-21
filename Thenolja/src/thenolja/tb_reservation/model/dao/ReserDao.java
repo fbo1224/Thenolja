@@ -40,7 +40,11 @@ public class ReserDao {
 			pstmt.setString(1, reser.getName());
 			pstmt.setString(2, reser.getPhone());
 			pstmt.setString(3, reser.getBicycle());
-			pstmt.setString(4, reser.getPayment());
+			// pstmt.setString(4, reser.getCheckIn());
+			// pstmt.setString(5, reser.getCheckOut());
+			// pstmt.setInt(4, reser.getPeople());
+			// pstmt.setString(7, reser.getPayment());
+			// pstmt.setInt(8, reser.getPaymentPrice());
 			
 			result = pstmt.executeUpdate();
 			
@@ -69,7 +73,7 @@ public class ReserDao {
 				c.setCouponNo(rset.getInt("COUPON_NO"));
 				c.setCouponContent(rset.getString("COUPON_CONTENT"));
 				c.setCouponDate(rset.getDate("COUPON_DATE"));
-				c.setCouponYN(rset.getString("COUPON_YN"));
+				//c.setCouponYN(rset.getString("COUPON_YN"));
 				c.setCouponCode(rset.getString("COUPON_CODE"));
 				
 				list.add(c);
@@ -82,6 +86,46 @@ public class ReserDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public Reservation selectReservation(Connection conn, int reserNo) {
+		
+		Reservation reser = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reserNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reser = new Reservation();
+				reser.setReserNo(rset.getInt("RESER_NO"));
+				reser.setReserDate(rset.getDate("RESER_DATE"));
+				reser.setName(rset.getString("RESER_NAME"));
+				reser.setPhone(rset.getString("RESER_PHoNE"));
+				reser.setBicycle(rset.getString("BICYCLE"));
+				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
+				reser.setPeople(rset.getInt("MAX_PEOPLE"));
+				reser.setRoomNo(rset.getInt("ROOM_NO"));
+				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
+				reser.setPayment(rset.getString("PAYMENT"));
+				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reser;
 	}
 
 }
