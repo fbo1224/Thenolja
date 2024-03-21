@@ -15,7 +15,7 @@
 
 <body>
 	
-	<%@ include file="views/hotel/insertHotel.jsp" %>
-	<%-- <%@ include file="views/common/menubar.jsp" %>  --%>
+	<%--<%@ include file="views/hotel/insertHotel.jsp" %>--%>
+	 <%@ include file="views/common/menubar.jsp" %>  
 </body>
 </html>
