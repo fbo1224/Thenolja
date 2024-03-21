@@ -8,7 +8,14 @@
 	<style>
 		#enroll-form input{
 			margin : 8px;
+			width: 300px;
+			height: 40px;
 		}
+		
+		#title{
+			font-weight="bolder";
+		}
+		
 	</style>
 </head>
 <body>
@@ -17,10 +24,10 @@
 
 	<div class="outer">
 		<br>
-		<h2 align ="center">회원가입</h2>
+		<h1 align ="center" id="title">회원가입</h2>
 		
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
-			<table align="center">
+			<table align="center" id="table">
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" maxlength="12" required name="userId"></td>
@@ -84,8 +91,8 @@
 					</select>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td><input type="text" name="address"></td>
+					<td>생년월일</td>
+					<td><input type="text" name="address" placeholder="생년월일 8자리를 입력해주세요."></td>
 					<td></td>
 				</tr>
 
