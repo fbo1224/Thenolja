@@ -24,8 +24,32 @@
 				<tr>
 					<td>* 아이디</td>
 					<td><input type="text" maxlength="12" required name="userId"></td>
-					<td><button type="button">중복확인</button></td>
+					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck()">중복확인</button></td>
 				</tr>
+				
+				<script>
+					function idCheck(){
+						
+						const $userId = $('#enroll-form input[name=userId]');
+						
+						// AJAX요청
+						$.ajax({ // 보낼 값이 많으므로 객체 만들기 {}
+							url : 'idCheck.do',
+							data : {checkId : $userId.val()},
+							success : function(){
+								 
+								
+							},
+							error : function(){
+								console.log('AJAX통신실패~@!');
+							}
+						});
+						
+						
+					}
+				
+				</script>
+				
 				<tr>
 					<td>* 비밀번호</td>
 					<td><input type="password" maxlength="15" required name="userPwd"></td>
@@ -49,7 +73,10 @@
 				<tr>
 					<td>&nbsp;&nbsp;이메일</td>
 					<td><input type="email" name="email"></td>
-					<td></td>
+					<td>@</td>
+					<select>
+						<option></option>
+					</select>
 				</tr>
 				<tr>
 					<td>&nbsp;&nbsp;주소</td>
@@ -75,8 +102,8 @@
 			<br><br>
 
 			<div align="center">
-				<button type="reset">취소</button>
-				<button type="submit">회원가입</button>
+				<button type="reset" class="btn btn-sm btn-secondary">취소</button>
+				<button type="submit" class="btn btn-sm btn-primary" disabled>회원가입</button>
 			</div>
 
 			<br><br>
