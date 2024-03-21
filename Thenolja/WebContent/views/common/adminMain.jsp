@@ -56,7 +56,7 @@
     
     <div id="wrap">
         <div id="header">
-	        <%@ include file="../../common/adminMenubar.jsp" %> 
+	        <%@ include file="views/common/adminMenubar.jsp" %> 
         </div>
                
         <div id="content">
