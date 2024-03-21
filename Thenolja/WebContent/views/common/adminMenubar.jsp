@@ -146,6 +146,13 @@
             font-size: 17px;
             background-color: #E5E3E4;
         }
+      	.form-control{
+			display: inline-block;
+			width: auto;
+		}
+		.form-check-input {
+			position:static;
+		}
 
 </style>
 </head>
