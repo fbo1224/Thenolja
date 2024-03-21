@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class adminMainPage
+ * Servlet implementation class ReserMemberController
  */
-@WebServlet("/adminMain")
-public class adminMainPage extends HttpServlet {
+@WebServlet("/reserMember")
+public class ReserMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminMainPage() {
+    public ReserMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +28,10 @@ public class adminMainPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/common/adminMain.jsp");
+		// 요청화면 만들기
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");
 		view.forward(request, response);
 	}
 

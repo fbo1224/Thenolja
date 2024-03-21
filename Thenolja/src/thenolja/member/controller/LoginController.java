@@ -51,11 +51,13 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공!");
 			
-			if(loginUser.getMemberStatus().equals("Y")) {
+			if(loginUser.getMemStatus().equals("Y")) {
 			
 				response.sendRedirect(request.getContextPath());
 			} else {
-				response.sendRedirect(request.getContextPath()+"/views/common/adminMain.jsp");
+				// response.sendRedirect(request.getContextPath()+"/views/common/adminMain.jsp");
+				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);;
+				
 			}
 		}
 		
