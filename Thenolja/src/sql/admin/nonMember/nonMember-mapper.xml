@@ -6,5 +6,21 @@
 		Member Mapper
 	</comment>
 	
+	
+	<entry key="selectNonMemberList">
+		
+		SELECT
+		        MEM_NO,
+		        MEM_NAME,
+		        MEM_PHONE
+		  FROM
+		        TB_NONMEM
+		  WHERE
+		        MEM_STATUS = 'N'
+		 ORDER
+		  	BY
+		  		MEM_NO DESC
+	
+	</entry>
 
 </properties>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.ArrayList,  thenolja.admin.nonMember.model.vo.NonMember" %>    
+<%
+	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,19 +59,29 @@
                             <th>비회원 번호</th>
                             <th>예약자명</th>
                             <th>전화번호</th>
+                          	<th></th>
                           </tr>
                         </thead>
                         <tbody>
+                        <% if(list.isEmpty()) {%>
+                        	<tr>
+                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <%} else { %>	
+                        	
+                        	<% for(NonMember n : list) { %>
                           <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-
+                            <td><%= n.getMemNo() %></td>
+                            <td><%= n.getMemName() %></td>
+                            <td><%= n.getMemPhone() %></td>
+                             <td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
                           </tr>
+                         <% } %>
+                        <% }  %>
                         </tbody>
                       </table>
 
-                </div>
+                </div>  
         
                 <div class="paging-area" align="center";>
                     <button class="btn btn-sm btn-outline-secondary"><</button>

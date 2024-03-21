@@ -76,6 +76,8 @@
     #tnj_title > h2{
         padding-top: 50px;
         padding-left: 30px;
+        font-weight: 700;
+        font-size: 30px;
     }
 
     #tnj_title > h2 > a{
@@ -146,6 +148,13 @@
             font-size: 17px;
             background-color: #E5E3E4;
         }
+      	.form-control{
+			display: inline-block;
+			width: auto;
+		}
+		.form-check-input {
+			position:static;
+		}
 
 </style>
 </head>
