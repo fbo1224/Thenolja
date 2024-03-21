@@ -69,7 +69,7 @@ a{
 <body>
     <header id="header-navi">
         <div>
-           <img id="logo-img" src="./resources/img/logo.png"alt="logo"></div>
+           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
            <h2 id="header-title">더 놀자</h2>
         <div id="menu-list">
         <ul id="optionList" style="font-size: 20px;">
