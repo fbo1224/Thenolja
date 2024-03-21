@@ -14,7 +14,6 @@
 <body>
 
 	<%@ include file="../common/menubar.jsp" %> 
-	<!-- 상위폴더로 가는 법 : ../ -->
 
 	<div class="outer">
 		<br>
@@ -26,7 +25,6 @@
 					<td>* 아이디</td>
 					<td><input type="text" maxlength="12" required name="userId"></td>
 					<td><button type="button">중복확인</button></td>
-					<!-- 중복확인 나중에 AJAX배우고 다음주..? -->
 				</tr>
 				<tr>
 					<td>* 비밀번호</td>
