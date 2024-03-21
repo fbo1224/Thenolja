@@ -44,7 +44,7 @@
 
                 <form action="#" method="get" id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원 ID입력" name="memId">
+                        <input type="text" placeholder="회원 ID입력" name="keyword">
                     </div>
         
                     <div id="search_btn">
