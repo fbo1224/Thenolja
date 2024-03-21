@@ -132,7 +132,7 @@
 				</h3>
 			</div>
 			<div id="detail-content-img">
-				<img src="views\tb_hotel\css\pepe5.jpg">
+				<img src="resources/img/pepe4.jpg" alt="pic">
 			</div>
 			
 			<div id="detail-content-imgInfo">
