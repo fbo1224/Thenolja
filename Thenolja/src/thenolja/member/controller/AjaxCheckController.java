@@ -34,10 +34,9 @@ public class AjaxCheckController extends HttpServlet {
 		
 		int count = new MemberService().idCheck(checkId);
 		
-		response.setContentType("text/html); charset=UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		response.getWriter().print(count > 0 ? "NNNNN" : "NNNNY");
-	
 	
 	
 	

@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 	<style>
 		#enroll-form input{
 			margin : 8px;
@@ -17,6 +19,8 @@
 		}
 		
 	</style>
+	
+	
 </head>
 <body>
 
@@ -31,14 +35,14 @@
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" maxlength="12" required name="memId"></td>
-					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck()">중복확인</button></td>
+					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck();">중복확인</button></td>
 				</tr>
 				
 				<script>
 					function idCheck(){
 						
-						const $userId = $('#enroll-form input[name=userId]');
-						
+						const $memId = $('#enroll-form input[name=memId]');
+						// console.log($memId);
 						// AJAX요청
 						$.ajax({ // 보낼 값이 많으므로 객체 만들기 {}
 							url : 'idCheck.do',
@@ -50,7 +54,7 @@
 								
 									$memId.val('').focus();
 								
-								}else{ // 중복 X == 사용 가능
+								} else { // 중복 X == 사용 가능
 									
 									if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
 										// 아이디 값은 변경이 불가능하도록 == readonly
