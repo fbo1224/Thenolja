@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class memberJoinController
  */
-@WebServlet("/myPage")
-public class myPageController extends HttpServlet {
+@WebServlet("/memberJoin")
+public class MemberJoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public myPageController() {
+    public MemberJoinController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,9 @@ public class myPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.getRequestDispatcher("views\\member\\memberJoin.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
-	
 	
 	
 	
