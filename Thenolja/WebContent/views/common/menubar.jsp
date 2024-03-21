@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
 <%
-   String contextPath = request.getContextPath();
-
+    String contextPath = request.getContextPath();
+	
+	Member loginUser = (Member)session.getAttribute("loginUser");
 
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>    
