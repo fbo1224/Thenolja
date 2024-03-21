@@ -98,7 +98,7 @@
 				
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="address" placeholder="생년월일 8자리를 입력해주세요."></td>
+					<td><input type="text" name="bornDate" placeholder="생년월일 8자리를 입력해주세요."></td>
 					<td></td>
 				</tr>
 
