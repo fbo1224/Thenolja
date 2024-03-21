@@ -62,6 +62,17 @@
 		       DUAL
 		       
 	</entry>
+	
+	<entry key="idCheck">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       MEM_ID = ?
+	
+	</entry>
+	
 	<entry key="updateMember">
 
 	

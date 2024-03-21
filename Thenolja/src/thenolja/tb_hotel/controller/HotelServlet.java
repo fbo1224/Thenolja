@@ -44,7 +44,6 @@ public class HotelServlet extends HttpServlet {
 		case "hotelList" : view =  hc.hotelList(request, response); break;
 		case "update" : view =  hc.update(request, response); flag = false; break;
 		case "select" : view =  hc.select(request, response); break;
-		case "insertRooms" : view =  hc.insertRooms(request, response); break;
 		}
 		
 		if(flag) {

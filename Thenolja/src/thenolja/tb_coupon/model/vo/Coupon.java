@@ -1,4 +1,4 @@
-package thenolja.tb_coupon;
+package thenolja.tb_coupon.model.vo;
 
 import java.sql.Date;
 

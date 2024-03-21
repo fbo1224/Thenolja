@@ -34,8 +34,8 @@ public class SelectCouponController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
-		request.setAttribute("CouponList", list);
-		
+		request.setAttribute("insertReservation", list);
+		//System.out.println(list);
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		view.forward(request, response);
 	

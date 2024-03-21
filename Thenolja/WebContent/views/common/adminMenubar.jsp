@@ -15,7 +15,7 @@
 <style>
     
   div{
-           /*border: 1px solid red;*/
+           
             box-sizing: border-box;
         }
   
@@ -26,8 +26,6 @@
         height: 180px;
         margin: auto;
     } 
-    
-    /*********************************/
 
 
     #tnj_header{

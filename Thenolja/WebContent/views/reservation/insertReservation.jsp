@@ -4,6 +4,8 @@
 <%@ page import="java.util.ArrayList" %>   
 <%
    ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+
+
 %>   
   
 <!DOCTYPE html>
@@ -218,12 +220,17 @@
                     <div id="mem-bicycle">
                         <br>
                         <h5>*이동 방식</h5>
-                        <input type="checkbox" name="bicycle" id="car"> 차량
-                        <input type="checkbox" name="bicycle" id="walk" checked> 도보
+                        <input type="checkbox" name="bicycle" id="car" value="car"> 차량
+                        <input type="checkbox" name="bicycle" id="walk" checked value="road"> 도보
                     </div>
                 </div>
-                
-                
+                     <!--              
+                    <script>
+                    	function paybtn(){
+                    		const value = document.getElementByName('bicycle').value;
+                    		console.log(value);
+                    	}
+                    </script>-->   
                 <div id="reser-coupon">
                     <br>
                     <h3>할인</h3>
@@ -231,7 +238,8 @@
                     <h5>쿠폰</h5>
                     <br>
                     <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="">쿠폰 적용</button>
+                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+                    <!-- onclick="location.href='<%=contextPath%>/selectCoupon'" -->
                 </div>
                 <div id="reser_pay">
                     <h3>결제 수단</h3>
@@ -243,6 +251,7 @@
                 </div>
                 <div id="reservation">
                     <button type="submit" id="reser-btn">?원 결제하기</button>
+
                     
                 </div>
             </form>
@@ -264,9 +273,10 @@
 	        
 	        <div class="modal-body">
 	        <table class="table table-hover">
+	        
 			<% if(list.isEmpty()) { %>
                 <tr>
-                   <th colspan="5">공지사항이 존재하지 않습니다.</th>
+                   <th colspan="5">쿠폰이 존재하지 않습니다.</th>
                 </tr>
              <% } else { %>
                
