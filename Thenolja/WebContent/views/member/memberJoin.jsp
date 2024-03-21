@@ -37,22 +37,37 @@
 				<script>
 					function idCheck(){
 						
-						const $memId = $('#enroll-form input[name=memId]');
+						const $userId = $('#enroll-form input[name=userId]');
 						
 						// AJAX요청
 						$.ajax({ // 보낼 값이 많으므로 객체 만들기 {}
 							url : 'idCheck.do',
-							data : {checkId : $userId.val()},
-							success : function(){
-								 
+							data : {checkId : $memId.val()},
+							success : function(result){
 								
+								if(result =='NNNNN'){ // 중복된 아이디
+									alert('이미 존재하거나 탈퇴한 회원의 아이디입니다.');
+								
+									$memId.val('').focus();
+								
+								}else{ // 중복 X == 사용 가능
+									
+									if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
+										// 아이디 값은 변경이 불가능하도록 == readonly
+										$memId.attr('readonly', true);
+										
+										// 중복확인 전 막아두었던 submit버튼 활성화
+										$('#enroll-form button[type=submit]').removeAttr('disabled');
+									}
+									else{
+										$memId.focus();
+									}
+								}
 							},
 							error : function(){
 								console.log('AJAX통신실패~@!');
 							}
 						});
-						
-						
 					}
 				
 				</script>
