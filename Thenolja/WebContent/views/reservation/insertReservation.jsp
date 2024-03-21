@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="thenolja.member.model.vo.Member" %>      
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,8 +158,8 @@
 
 </head>
 <body>
-    <%@ include file="../common/menubar.jsp" %>
-       
+    
+     <%@ include file="../common/menubar.jsp" %>
     <div id="content">
         <div id="content_title">
             <div id="left_img">
@@ -197,23 +199,22 @@
             <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
                 <div id="reser_mem_info">
                     <br>
-                
                     <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
                     <br>
                     <div id="mem-name">
                         <h5>*예약자 이름</h5>
-                        <input type="text" id="reser-name" name="name" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                        <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
                     </div>
                     <div id="mem-phone">
                         <h5>*전화 번호</h5>
-                        <input type="text" id="reser-phone" name="phone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                        <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
                     </div>
                 
                     <div id="mem-bicycle">
                         <br>
                         <h5>*이동 방식</h5>
-                        <input type="checkbox" name="car" id="car"> 차량
-                        <input type="checkbox" name="walk" id="walk" checked> 도보
+                        <input type="checkbox" name="bicycle" id="car"> 차량
+                        <input type="checkbox" name="bicycle" id="walk" checked> 도보
                     </div>
                 </div>
                 
@@ -224,7 +225,8 @@
                     <br>
                     <h5>쿠폰</h5>
                     <br>
-                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰"><button id="in-coupon">쿠폰 적용</button>
+                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
+                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
                 </div>
                 <div id="reser_pay">
                     <h3>결제 수단</h3>
@@ -243,6 +245,31 @@
         </div>
 
     </div>
+    <div class="container">
+	
+	  <!-- The Modal -->
+	  <div class="modal fade" id="myModal">
+	    <div class="modal-dialog modal-dialog-centered">
+	      <div class="modal-content">
+	      
+	        <div class="modal-header">
+	          <h4 class="modal-title">내 쿠폰</h4>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <div class="modal-body">
+	          	이거 있는데 쓸래?
+	        </div>
+	        
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        </div>
+	        
+	      </div>
+	    </div>
+	  </div>
+	  
+	</div>
 
 
 </body>

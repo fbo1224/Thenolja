@@ -17,13 +17,13 @@ import thenolja.admin.member.model.vo.Member;
  * Servlet implementation class selectMemberController
  */
 @WebServlet("/selectMember")
-public class selectMemberController extends HttpServlet {
+public class SelectMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectMemberController() {
+    public SelectMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }

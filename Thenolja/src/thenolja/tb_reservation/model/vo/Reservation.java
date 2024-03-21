@@ -8,17 +8,19 @@ public class Reservation {
 	private Date reserDate;
 	private String bicycle;
 	private String cancelYN;
-	private Date checkIn;
-	private Date checkOut;
+	private String checkIn;
+	private String checkOut;
 	private int people;
 	private int roomNo;
 	private int reMemNo;
 	private String payment;
 	private int paymentPrice;
+	private String phone;
+	private String name;
 	public Reservation() {
 		super();
 	}
-	public Reservation(int reserNo, Date reserDate, String bicycle, String cancelYN, Date checkIn, Date checkOut,
+	public Reservation(int reserNo, Date reserDate, String bicycle, String cancelYN, String checkIn, String checkOut,
 			int people, int roomNo, int reMemNo, String payment, int paymentPrice) {
 		super();
 		this.reserNo = reserNo;
@@ -57,16 +59,16 @@ public class Reservation {
 	public void setCancelYN(String cancelYN) {
 		this.cancelYN = cancelYN;
 	}
-	public Date getCheckIn() {
+	public String getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(Date checkIn) {
+	public void setCheckIn(String checkIn) {
 		this.checkIn = checkIn;
 	}
-	public Date getCheckOut() {
+	public String getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(Date checkOut) {
+	public void setCheckOut(String checkOut) {
 		this.checkOut = checkOut;
 	}
 	public int getPeople() {
@@ -98,6 +100,18 @@ public class Reservation {
 	}
 	public void setPaymentPrice(int paymentPrice) {
 		this.paymentPrice = paymentPrice;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Override
 	public int hashCode() {

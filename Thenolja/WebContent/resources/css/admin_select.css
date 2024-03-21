@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+        div{
+            box-sizing : border-box;
+        }
+
+        #wrap{
+            width: 1200px;
+            height: 1200px;
+            margin: auto;
+        }
+
+        #wrap > div{
+            width: 100%;
+        }
+
+        #header, #footer {
+            height: 15%;
+        }
+
+        #content{
+            height: 70%;
+        }
+
+        #content > div{
+            width: 100%;
+            float: left;
+        }
+
+        #content_1{
+            height : 10%;
+        }
+
+        #content_2{
+            height: 90%; 
+        }
+
+        /*****content_1*****/
+        #content_1{
+            position : relative;
+        }
+
+        #search_member{
+            width: 30%;
+            height: 50%;
+            position: absolute;
+            top : 0px;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            margin:auto;
+        }
+
+
+        #search_member > div{
+            height: 100%;
+            float: left;
+        }
+
+        #search_id{width: 80%;}
+
+        #search_btn{width: 20%;}
+
+        #search_member input{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border : 1px solid rgb(70, 149, 151);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #search_member input::placeholder{
+            padding-left: 10px;
+        }
+
+        #search_btn button{
+            width: 100%;
+            height: 100%;
+        }
+
+        /********content_2********************/
+        #content_2 > div{
+        width: 100%;
+        position: relative;
+    }
+
+    #mem_list_header,  .paging-area{height: 10%;}
+
+    #mem_list{height: 80%;}
+
+    #mem_title{width: 70%;}
+    #mem_sort{width: 30%;}
+
+    #mem_list_header > div{
+        height: 100%;
+        float: left;
+    }
+
+    #mem_title h2{
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+
+    #mem_sort select{
+        outline: none;
+        margin-top: 35px;
+        margin-left: 250px;
+    }
+
+    tr, th{
+        text-align: center;
+    }
+
+    .paging-area{
+        padding-top: 10px;
+    }
+
+    .modal-body{
+        font-size: 11px;
+    }
+
+    .modal-body img{
+        padding-bottom: 20px;
+    }
+
+    #tnj_header{
+        width: 100%;
+        height: 59%;
+    }
+    #line{
+        width: 80%;
+        height: 1%;
+        border-bottom: 3px solid  rgb(70, 149, 151);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    #tnj_menu{
+        width: 100%;
+        height: 40%;
+    }
