@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="thenolja.member.model.vo.Member" %>      
+<%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
+<%@ page import="java.util.ArrayList" %>   
+<%
+   ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+%>   
   
 <!DOCTYPE html>
 <html>
@@ -227,7 +231,7 @@
                     <h5>쿠폰</h5>
                     <br>
                     <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="<%= contextPath%>/selectCoupon">쿠폰 적용</button>
+                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="">쿠폰 적용</button>
                 </div>
                 <div id="reser_pay">
                     <h3>결제 수단</h3>
@@ -259,7 +263,24 @@
 	        </div>
 	        
 	        <div class="modal-body">
-	          	이거 있는데 쓸래?
+	        <table class="table table-hover">
+			<% if(list.isEmpty()) { %>
+                <tr>
+                   <th colspan="5">공지사항이 존재하지 않습니다.</th>
+                </tr>
+             <% } else { %>
+               
+            <% for(Coupon c : list) { %>
+               <tr class="list">
+                  <td><%= c.getCouponNo() %></td>
+                  <td><%= c.getCouponContent() %></td>
+                  <td><%= c.getCouponDate() %></td>
+                  <td><%= c.getCouponCode() %></td>
+               </tr>            
+             	<% } %>
+             
+             <% } %>
+             </table>
 	        </div>
 	        
 	        <div class="modal-footer">

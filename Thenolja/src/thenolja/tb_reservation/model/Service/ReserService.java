@@ -1,12 +1,16 @@
 package thenolja.tb_reservation.model.Service;
 
-import thenolja.tb_reservation.cotroller.Coupon;
-import thenolja.tb_reservation.model.dao.ReserDao;
-import thenolja.tb_reservation.model.vo.Reservation;
-import static thenolja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.close;
+import static thenolja.common.JDBCTemplate.commit;
+import static thenolja.common.JDBCTemplate.getConnection;
+import static thenolja.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+
+import thenolja.tb_coupon.model.vo.Coupon;
+import thenolja.tb_reservation.model.dao.ReserDao;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 public class ReserService {
 

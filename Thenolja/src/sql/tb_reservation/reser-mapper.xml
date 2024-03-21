@@ -43,6 +43,18 @@
 				)
 	</entry>
 	
+	<entry key="selectCoupon">
+		SELECT
+		        COUPON_CONTENT,
+		        COUPON_DATE,
+		        COUPON_CODE
+		  FROM
+		        TB_MY_COUPON
+		  JOIN
+		        TB_COUPON ON(TB_MY_COUPON.COUPON_NO = TB_COUPON.COUPON_NO)
+		  JOIN
+		        TB_MEMBER ON(MEM_NO = CO_MEM_NO);
+	</entry>
 	
 	
 	
