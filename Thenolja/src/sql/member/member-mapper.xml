@@ -29,8 +29,6 @@
 	           MEM_PWD = ?
 	       AND
 	           DELETE_YN = 'Y' <!-- 회원 Y, 비회원 N -->
-	       AND
-	           MEM_STATUS = 'Y' <!-- 비회원/회원 중 회원 -->
 	</entry>
 	
 	<entry key="insertMember">
