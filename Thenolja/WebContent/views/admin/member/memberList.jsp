@@ -119,9 +119,9 @@
                     <button class="btn btn-sm btn-outline-secondary">></button>
                 </div>
         
-
             </div>
         </div>
+        <div id="footer"></div>
 
     </div>
    
@@ -173,7 +173,7 @@
                 <div id="mem_update">
                     <button class="btn btn-sm btn-outline-secondary">수정</button>
                 </div>
-    
+
 
 
         </div>
