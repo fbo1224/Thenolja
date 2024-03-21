@@ -15,7 +15,7 @@ public class ReserDao {
 	private Properties prop = new Properties();
 	
 	public ReserDao() {
-		String fileName = ReserDao.class.getResource("/sql/Reservation/reser-mapper.xml").getPath();
+		String fileName = ReserDao.class.getResource("/sql/tb_reservation/reser-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -34,12 +34,9 @@ public class ReserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reser.getBicycle());
-			pstmt.setInt(2, reser.getPeople());
-			pstmt.setInt(3, reser.getRoomNo());
-			pstmt.setString(4, reser.getCheckIn());
-			pstmt.setString(5, reser.getCheckOut());
-			pstmt.setString(6, reser.getPayment());
-			pstmt.setInt(7, reser.getPaymentPrice());
+			pstmt.setString(2, reser.getName());
+			pstmt.setString(3, reser.getPhone());
+			pstmt.setString(4, reser.getPayment());
 			
 			result = pstmt.executeUpdate();
 			
