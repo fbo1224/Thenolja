@@ -22,7 +22,7 @@
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
 			<table align="center">
 				<tr>
-					<td>* 아이디</td>
+					<td>아이디</td>
 					<td><input type="text" maxlength="12" required name="userId"></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck()">중복확인</button></td>
 				</tr>
@@ -51,27 +51,32 @@
 				</script>
 				
 				<tr>
-					<td>* 비밀번호</td>
+					<td>비밀번호</td>
 					<td><input type="password" maxlength="15" required name="userPwd"></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>* 비밀번호확인</td>
+					<td>비밀번호확인</td>
 					<td><input type="password" maxlength="15" required></td>
+					<td><span id="pwdCheck">비밀번호가 일치하지 않습니다.</span></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" maxlength="5" required name="memName"></td>
+					<td></td>
+				</tr>
+								<tr>
+					<td>닉네임</td>
+					<td><input type="text" maxlength="30" required name="nickname"></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>* 이름</td>
-					<td><input type="text" maxlength="5" required name="userName"></td>
+					<td>전화번호</td>
+					<td><input type="text" placeholder="-제외하고 입력해주세요." name="memphone"></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>&nbsp;&nbsp;전화번호</td>
-					<td><input type="text" placeholder="-제외하고 입력해주세요." name="phone"></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>&nbsp;&nbsp;이메일</td>
+					<td>이메일</td>
 					<td><input type="email" name="email"></td>
 					<td>@</td>
 					<select>
@@ -79,24 +84,11 @@
 					</select>
 				</tr>
 				<tr>
-					<td>&nbsp;&nbsp;주소</td>
+					<td>주소</td>
 					<td><input type="text" name="address"></td>
 					<td></td>
 				</tr>
-				<tr>
-					<td>&nbsp;&nbsp;취미</td>
-					<td colspan="2">
-						<input type="checkbox" id="travel" value="여행" name="interest"><label for="travel">여행</label>
-						<input type="checkbox" id="lodge" value="숙박" name="interest"><label for="lodge">숙박</label>
-						<input type="checkbox" id="movie" value="영화" name="interest"><label for="movie">영화</label>
 
-						<br>
-
-						<input type="checkbox" id="lent" value="차량대여" name="interest"><label for="lent">차량대여</label>
-						<input type="checkbox" id="tea" value="다도" name="interest"><label for="tea">다도</label>
-						<input type="checkbox" id="java" value="자바" name="interest"><label for="java">자바</label>
-					</td>
-				</tr>
 			</table>
 
 			<br><br>
