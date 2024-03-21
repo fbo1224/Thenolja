@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<td>&nbsp;&nbsp;전화번호</td>
-					<td><input type="text" placeholder="-포함해서 입력해주세요." name="phone"></td>
+					<td><input type="text" placeholder="-제외하고 입력해주세요." name="phone"></td>
 					<td></td>
 				</tr>
 				<tr>
