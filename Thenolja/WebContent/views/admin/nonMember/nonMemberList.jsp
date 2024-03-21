@@ -59,6 +59,7 @@
                             <th>비회원 번호</th>
                             <th>예약자명</th>
                             <th>전화번호</th>
+                          	<th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -68,16 +69,19 @@
                         	</tr>
                         <%} else { %>	
                         	
+                        	<% for(NonMember n : list) { %>
                           <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
+                            <td><%= n.getMemNo() %></td>
+                            <td><%= n.getMemName() %></td>
+                            <td><%= n.getMemPhone() %></td>
+                             <td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
                           </tr>
-                         <%} %>
+                         <% } %>
+                        <% }  %>
                         </tbody>
                       </table>
 
-                </div>
+                </div>  
         
                 <div class="paging-area" align="center";>
                     <button class="btn btn-sm btn-outline-secondary"><</button>

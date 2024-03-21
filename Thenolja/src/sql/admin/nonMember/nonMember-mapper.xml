@@ -17,6 +17,9 @@
 		        TB_NONMEM
 		  WHERE
 		        MEM_STATUS = 'N'
+		 ORDER
+		  	BY
+		  		MEM_NO DESC
 	
 	</entry>
 

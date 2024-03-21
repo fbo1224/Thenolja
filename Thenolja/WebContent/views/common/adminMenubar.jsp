@@ -76,6 +76,8 @@
     #tnj_title > h2{
         padding-top: 50px;
         padding-left: 30px;
+        font-weight: 700;
+        font-size: 30px;
     }
 
     #tnj_title > h2 > a{
