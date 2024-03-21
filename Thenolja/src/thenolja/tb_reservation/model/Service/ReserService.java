@@ -22,7 +22,6 @@ public class ReserService {
 		close(conn);
 		
 		return result;
-		
 	}
 	
 	

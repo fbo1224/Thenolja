@@ -1,7 +1,6 @@
 package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,17 +34,17 @@ public class ReservationInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		String name = request.getParameter("memName");
+		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
 		String payment = request.getParameter("payment");
-		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
-		reser.setReserNo(reserNo);
+		reser.setName(name);
+		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
 		reser.setPayment(payment);
-		reser.setPaymentPrice(paymentPrice);
 		
 		int result = new ReserService().insertReser(reser);
 		
