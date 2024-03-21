@@ -30,7 +30,7 @@ public class ReserService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Coupon> list = new ReserDao().selectNoticeList(conn);
+		ArrayList<Coupon> list = new ReserDao().selectCoupon(conn);
 		
 		close(conn);
 		
