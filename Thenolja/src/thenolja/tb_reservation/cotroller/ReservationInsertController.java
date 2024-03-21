@@ -37,14 +37,14 @@ public class ReservationInsertController extends HttpServlet {
 		String name = request.getParameter("memName");
 		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
-		String payment = request.getParameter("payment");
+		// String payment = request.getParameter("payment");
 		
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
-		reser.setPayment(payment);
+		//reser.setPayment(payment);
 		
 		int result = new ReserService().insertReser(reser);
 		

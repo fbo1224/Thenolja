@@ -40,7 +40,11 @@ public class ReserDao {
 			pstmt.setString(1, reser.getName());
 			pstmt.setString(2, reser.getPhone());
 			pstmt.setString(3, reser.getBicycle());
-			pstmt.setString(4, reser.getPayment());
+			// pstmt.setString(4, reser.getCheckIn());
+			// pstmt.setString(5, reser.getCheckOut());
+			// pstmt.setInt(4, reser.getPeople());
+			// pstmt.setString(7, reser.getPayment());
+			// pstmt.setInt(8, reser.getPaymentPrice());
 			
 			result = pstmt.executeUpdate();
 			
@@ -69,7 +73,7 @@ public class ReserDao {
 				c.setCouponNo(rset.getInt("COUPON_NO"));
 				c.setCouponContent(rset.getString("COUPON_CONTENT"));
 				c.setCouponDate(rset.getDate("COUPON_DATE"));
-				c.setCouponYN(rset.getString("COUPON_YN"));
+				//c.setCouponYN(rset.getString("COUPON_YN"));
 				c.setCouponCode(rset.getString("COUPON_CODE"));
 				
 				list.add(c);
