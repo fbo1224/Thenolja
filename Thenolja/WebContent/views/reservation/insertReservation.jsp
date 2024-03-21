@@ -17,6 +17,7 @@
         box-sizing: border-box;
     }
     #content{
+    	padding-top: 20px;
         width: 1200px;
         height: 1500px;
         margin: auto;
@@ -195,7 +196,7 @@
                         </tr>
                     </table>
                 </div>
-
+ 
             <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
                 <div id="reser_mem_info">
                     <br>
@@ -226,7 +227,7 @@
                     <h5>쿠폰</h5>
                     <br>
                     <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="<%= contextPath%>/selectCoupon">쿠폰 적용</button>
                 </div>
                 <div id="reser_pay">
                     <h3>결제 수단</h3>
@@ -262,7 +263,7 @@
 	        </div>
 	        
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-secondary" data-dismiss="modal">적용</button>
 	        </div>
 	        
 	      </div>
