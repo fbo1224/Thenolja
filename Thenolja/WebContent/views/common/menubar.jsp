@@ -62,6 +62,11 @@ a{
 #menu-list{
     margin-left: 400px;
 }
+.card-body{
+	flex: none;
+	min-height: 0px;
+	padding : 0px;
+}
 
     </style>
     

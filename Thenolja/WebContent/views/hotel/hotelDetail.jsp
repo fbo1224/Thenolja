@@ -10,8 +10,7 @@
 #detail-content{
 	width: 100%;
 	height: 100%;
-	border: 1px solid red;
-	padding-bottom: 100px;
+	padding-bottom: 50px;
 }
 #detail-wrap {
 	width: 1200px;
@@ -30,13 +29,11 @@
 	margin: auto;
 	margin-top: 30px;
 	width: 80%;
-	border: 1px solid red;
-	
 }
 #detail-content-img{
 	margin: auto;
 	width: 80%;
-	border: 1px solid red;
+	box-shadow: 2px 2px 2px gray;
 }
 #detail-content-img > img{
 	width:100%;
@@ -45,16 +42,15 @@
 #detail-content-imgInfo{
 	margin: auto;
 	width: 80%;
-	border: 1px solid red;
 	display: flex;
 	justify-content: space-between;
 	height: 50px;
+	border-bottom: 1px solid gray;
 }
 #detail-content-services{
 	margin: auto;
 	width: 80%;
 	height: 50px;
-	border: 1px solid red;
 }
 #detail-content-services > ul {
 	margin: 0px;
@@ -67,13 +63,12 @@
 	margin: auto;
 	width: 80%;
 	height: 600px;
-	border: 1px solid red;
 }
 .content-rooms-card{
 	width: 80%;
 	height: 28%;
-	border: 1px solid red;
 	margin: auto;
+	border: 1px solid gray;
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
@@ -84,6 +79,7 @@
 	width: 30%;
 	height: 90%;
 	border-radius: 10px;
+	box-shadow: 2px 2px 2px gray;
 }
 #detail-content-intro, #detail-content-cancel {
 	width: 80%;
@@ -104,15 +100,19 @@
 .content-review-1 {
 	width: 60%;
 	height: 40%;
-	border: 1px solid red;
 	margin: auto;
 	margin-top: 15px;
 	border-radius: 12px;
 }
 .review-1-div {
 	display: flex;
-	justify-content: space-between;	
+	justify-content: space-between;
+	margin: 0px 3px;	
 }
+#detail-content-imgInfo span{
+	padding: 3px;
+}
+
 </style>
 </head>
 <body>
@@ -136,8 +136,14 @@
 			</div>
 			
 			<div id="detail-content-imgInfo">
-				<div><span>★</span><span>993개의 리뷰</span><span>리뷰조회</span></div>
-				<div><span>호텔/특급</span></div>
+				<div>
+					<span>★</span>
+					<span>993개의 리뷰</span>
+					<span>리뷰조회</span>
+				</div>
+				<div>
+					<span>호텔/특급</span>
+				</div>
 			</div>
 			
 			<div id="detail-content-services">
@@ -213,7 +219,7 @@
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
-					<div class="content-review-1">
+					<div class="content-review-1 card">
 						<div class="review-1-div">
 							<span>user01</span><span>골드</span>
 						</div>
@@ -221,11 +227,11 @@
 							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
 						</div>
 					</div>
-					<div class="content-review-1">
-						<div class="review-1-div">
+					<div class="content-review-1 card">
+						<div class="review-1-div card-body">
 							<span>user02</span><span>실버</span>
 						</div>
-						<div>
+						<div >
 							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
 						</div>
 					</div>
