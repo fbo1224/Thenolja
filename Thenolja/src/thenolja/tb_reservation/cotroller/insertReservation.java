@@ -1,4 +1,4 @@
-package thenolja.member.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class insertReservation
  */
-@WebServlet("/myPage")
-public class myPageController extends HttpServlet {
+@WebServlet("/insertReservation")
+public class insertReservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public myPageController() {
+    public insertReservation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,12 @@ public class myPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+	
+		request.getRequestDispatcher("views/reservation/insertReservation.jsp").forward(request, response);
+	
 		
-		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
-	
-	
 	
 	
 	}

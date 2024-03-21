@@ -44,7 +44,8 @@
         color: white;
     }
 
-    .content2{width: 320px; height: 100%; float: left;}
+    .content2{width: 320px; height: 100%; display:inline}
+
     .content3{width: 240px; height: 100%; float: left;}
     .content4{width: 240px; height: 100%; float: left;}
 

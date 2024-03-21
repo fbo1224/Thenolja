@@ -21,7 +21,22 @@ public class MemberService {
 		
 	}
 	
-	
+//----------------- 회원가입 ---------------------------------
+	public int insertMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().insertMember(conn, member);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);;
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 	

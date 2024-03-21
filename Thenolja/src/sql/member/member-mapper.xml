@@ -34,7 +34,35 @@
 	</entry>
 	
 	<entry key="insertMember">
-
+		INSERT
+		   ALL
+		  INTO
+		       TB_NONMEM
+		VALUES
+		       (
+		       SEQ_MNO.NEXTVAL,
+		       ?, <!-- 이름 -->
+		       ?, <!-- 번호 -->
+		       DEFAULT <!-- 회원 / 비회원 -->
+		       )
+		  INTO
+		       TB_MEMBER
+		VALUES
+		       (
+		       SEQ_MNO.CURRVAL,
+		       ?, <!-- 아이디 -->
+		       ?, <!-- 비밀번호 -->
+		       ?, <!-- 닉네임 -->
+		       ?, <!-- 생년월일 -->
+		       ?, <!-- 이메일 -->
+		       DEFAULT, <!-- 탈퇴여부 -->
+		       SYSDATE <!-- 가입일 -->
+		       )
+		SELECT
+		       *
+		  FROM
+		       DUAL
+		       
 	</entry>
 	<entry key="updateMember">
 

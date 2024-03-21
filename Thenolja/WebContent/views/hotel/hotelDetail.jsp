@@ -132,7 +132,7 @@
 				</h3>
 			</div>
 			<div id="detail-content-img">
-				<img src="views\tb_hotel\css\pepe5.jpg">
+				<img src="resources/img/pepe4.jpg" alt="pic">
 			</div>
 			
 			<div id="detail-content-imgInfo">
@@ -156,7 +156,7 @@
 			<div id="detail-content-rooms">
 				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
 				<div class="content-rooms-card">
-					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<img src="resources/img/pepe3.jpg">
 					<div>
 						<h3>오션뷰 1호실</h3>
 						<p>입실 16:00</p>
@@ -169,7 +169,7 @@
 				</div>
 				
 				<div class="content-rooms-card">
-					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<img src="resources/img/pepe4.jpg">
 					<div>
 						<h3>오션뷰 1호실</h3>
 						<p>입실 16:00</p>
@@ -182,7 +182,7 @@
 				</div>
 				
 				<div class="content-rooms-card">
-					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<img src="resources/img/pepe5.jpg">
 					<div>
 						<h3>오션뷰 1호실</h3>
 						<p>입실 16:00</p>

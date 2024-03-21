@@ -2,161 +2,114 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
 <%
-	String contextPath = request.getContextPath();
-	// String alertMsg = (String)request.getAttribute("alertMsg");
+    String contextPath = request.getContextPath();
 	
-	// System.out.println(contextPath);
-	// System.out.println(alertMsg);
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	
-	String alertMsg = (String)session.getAttribute("alertMsg");
-%>
 
+	String alertMsg = (String)session.getAttribute("alertMsg");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴바</title>
+<title>review</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-        div{
-            margin: auto;
-            box-sizing: border-box;
-            /*border: 1px solid red;*/
-        }
+div {
+    box-sizing: border-box;
+}
+#header-navi{
+    width: 1200px;
+    height: 100px;
+    margin: 0px auto;
+    border-bottom: 3px solid darkcyan;
+    display: flex;
+    align-items: center;
+    
+}
+#optionList{
+    width: 100%;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 30px;
+}
+li{
+    list-style: none;
+    float: left;
+}
+a{
+    text-decoration: none;
+    color: black;
+    padding-right: 20px;
+}
 
-        #wrap{
-            width: 1200px;
-            height: 150px;
-        }
+#header-title {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 30px;
+    font-size: 40px;
+}
+#logo-img{
+    width:115px;
+    height:100px;
+}
+#menu-list{
+    margin-left: 400px;
+}
 
-        #header1{
-            width: 80%;
-            height: 140px;
-        }
-
-        #header2{
-            width: 80%;
-            height: 10px;
-            padding: 5px;
-        }
-
-
-        div > hr{
-            height: 5px;
-            background-color: rgb(70, 149, 151);
-            border: none;
-            margin: auto;
-        }
-
-        #logo{
-            width: 100px; 
-            height: 75px;
-            margin-top: 70px;
-            margin-right: 100px;
-            left: 250px;
-            top: 25px;
-        }
-
-        .menu{
-            float: right;
-            height: 100%;
-            width: 200px;
-            text-align: center;
-            font-size: 20px;
-        }
-
-        .menu > div > a{
-            text-decoration: none;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        #menu1{
-            float: left;
-
-        }
-
-        .detailMenu1{
-            width: 100%;
-            height: 80%;
-            float: left;
-        }
-
-        .detailMenu2{
-            width: 100%;
-            height: 20%;
-            float: left;
-        }
-        
-        .detailMenu1 > span{
-        	font-size:20px;
-        }
-
-        
     </style>
+    
 </head>
 <body>
-	<div id="wrap">
-        <div id="header1">
-            
-            <div id="menu1" class="menu">
-                <a href="<%= contextPath%>"><img src="./resources/img/Logo.png" id="logo"></a>
-            </div>
+	<script>
+			// script태그 안에서도 스크립틀릿 같은 JSP요소를 사용할 수 있음
+			
+			const msg = '<%= alertMsg %>'; 
+			// 문자열을 넘겨받았기 때문에 문자열로 묶어주어야 가져올 수 있다.
+			
+			if(msg != 'null'){ // 양 옆에 따옴표를 붙였기 때문에 문자열null과 비교
+				alert(msg);
+			
+				// menubar.jsp가 로딩 될 때마다 alert이 계속 수행됨
+				// session에 들어있는 alertMsg키값에 해당하는 벨류값을 지워줄 것!
+				// XX.removeAttribute("키값");
+				<% session.removeAttribute("alertMsg"); %>
+			}
+	</script>
 
-            <% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
-
-	            <div id="menu2" class="menu">
-	                <div class="detailMenu1"></div>
-	                <div class="detailMenu2">
-	                    <a href="<%= contextPath %>/customerService">고객센터</a>
-	                </div>
-	            </div>
-	            <div id="menu3" class="menu">
-	                <div class="detailMenu1"></div>
-	                <div class="detailMenu2">
-	                    <a href="<%= contextPath %>/myPage">마이페이지</a>
-	                </div>
-	            </div>
-	
-	            <div id="menu4" class="menu">
-	                <div class="detailMenu1"></div>
-	                <div class="detailMenu2"><a href="<%= contextPath %>/loginPage">로그인</a></div>
-	                
-                <% } else { %> <!-- 로그인상태라면 -->
-                	<div id="menu2" class="menu">
-	                <div class="detailMenu1">
-	                	<span><%= loginUser.getMemName() %>님 환영합니다</span>
-	                </div>
-	                <div class="detailMenu2">
-	                    <a href="<%= contextPath %>/customerService">고객센터</a>
-	                </div>
-	            </div>
-	            <div id="menu3" class="menu">
-	                <div class="detailMenu1"></div>
-	                <div class="detailMenu2">
-	                    <a href="<%= contextPath %>/myPage">마이페이지</a>
-	                </div>
-	            </div>
-	
-	            <div id="menu4" class="menu">
-	                <div class="detailMenu1"></div>
-	                <div class="detailMenu2"><a href="<%= contextPath %>/logout">로그아웃</a></div>
-                	
-                <% }%>
-            </div>
-        </div>
+    <header id="header-navi">
+        <div>
+           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
+           <h2 id="header-title">더 놀자</h2>
+        <div id="menu-list">
+        <ul id="optionList" style="font-size: 20px;">
         
-        <div id="header2"><hr></div>
+       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
+            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
+            <% } else { %> <!-- 로그인상태라면 -->
+	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
+            <% }%>
+            
+            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+	            <li><a href="<%= contextPath %>/loginPage">마이페이지</a></li>
+	            
+            <% } else { %> <!-- 로그인상태라면 -->
+	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
+            <% }%>
+            
+	            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
+	            <li><a href="#">고객센터</a></li>
+        </ul>
+        </div>
+    </header>
 
 
-
-
-
-    </div>
-
-
-
-
+    
 </body>
 </html>

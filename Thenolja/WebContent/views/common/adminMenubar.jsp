@@ -24,6 +24,7 @@
     #header{
         width:1200px;
         height: 180px;
+        margin: auto;
     } 
     
     /*********************************/
@@ -75,6 +76,8 @@
     #tnj_title > h2{
         padding-top: 50px;
         padding-left: 30px;
+        font-weight: 700;
+        font-size: 30px;
     }
 
     #tnj_title > h2 > a{
@@ -145,6 +148,13 @@
             font-size: 17px;
             background-color: #E5E3E4;
         }
+      	.form-control{
+			display: inline-block;
+			width: auto;
+		}
+		.form-check-input {
+			position:static;
+		}
 
 </style>
 </head>
@@ -155,7 +165,7 @@
             
 
             <div id="tnj_icon">
-                <img src="resources/img/TheNolJa.png" alt="">
+                <img src="resources/img/logo.png" alt="logo">
             </div>
 
             <div id="tnj_title">
@@ -184,7 +194,7 @@
                 <li>
                     <a href="#">비회원관리</a>
                     <ul>
-                        <li><a href="#">비회원 조회</a></li>
+                        <li><a href="<%= contextPath %>/selectNonMem">비회원 조회</a></li>
                         <li><a href="#">비회원 예약 조회</a></li>
                     </ul>
                 </li>

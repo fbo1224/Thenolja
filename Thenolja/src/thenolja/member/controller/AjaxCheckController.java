@@ -1,29 +1,26 @@
-package thenolja.admin.member.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.member.model.service.MemberService;
 
 /**
- * Servlet implementation class selectMemberController
+ * Servlet implementation class AjaxCheckController
  */
-@WebServlet("/selectMember")
-public class selectMemberController extends HttpServlet {
+@WebServlet("/idCheck.do")
+public class AjaxCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectMemberController() {
+    public AjaxCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +29,18 @@ public class selectMemberController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Member> list = new MemberService().selectMemberList();
-		request.setAttribute("selectMemberList", list);
-
-		RequestDispatcher view = request.getRequestDispatcher("/views/tb_member/memberList.jsp");
-		view.forward(request, response);
 		
+		String checkId = request.getParameter("checkId");
+		
+		int count = new MemberService().idCheck(checkId);
+		
+		response.setContentType("text/html); charset=UTF-8");
+		
+		response.getWriter().print(count > 0 ? "NNNNN" : "NNNNY");
+	
+	
+	
+	
 	}
 
 	/**
