@@ -194,7 +194,7 @@
 					<h2>숙소추가하기</h2>
 				</div>
 				<div id="content-div">
-					<form id="content-add-form" action="#" enctype="multipart/form-data">
+					<form id="content-add-form" action="/insert.hotels" enctype="multipart/form-data">
 						<div id="content-div-half1">
 							<div id="addr-div">
 								<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo">
