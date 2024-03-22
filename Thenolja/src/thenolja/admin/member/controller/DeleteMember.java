@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.admin.member.model.service.MemberService;
+import thenolja.admin.member.model.vo.Member;
+
 /**
  * Servlet implementation class DeleteMember
  */
@@ -26,8 +29,14 @@ public class DeleteMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		int result = new MemberService().deleteMember(memNo);
+	      
+		
+		
+		
 	}
 
 	/**
