@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
+	// Reservation reser = (Reservation)request.getAttribute("reser");
+	int reserNo = Integer.parseInt(request.getAttribute("reserNo"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,19 +206,18 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">결제금액 : <%= reser.getPaymentPrice() %></td>
+                            <td width="170x">결제금액 : 1</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
                             <td width="170x">할인 금액 : 0원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=reser.getPaymentPrice() %></td>
-                        </tr>
+                            <td>결제금액 : 1
                     </table>
                 </div>
 
                 <div id="reser_price_info">
                     <h3>결제 내역</h3>
                     <hr>
-                    <p><%=reser.getPayment() %></p>
+                    <p>1</p>
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
@@ -240,9 +240,9 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td><%=reser.getName() %></td>
+                            <td>1</td>
                             <td width="80px">전화번호</td> 
-                            <td><%=reser.getPhone() %></td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td><%=reser.getBicycle() %></td> 
