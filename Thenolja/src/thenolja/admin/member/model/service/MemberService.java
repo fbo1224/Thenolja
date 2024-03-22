@@ -33,6 +33,11 @@ public class MemberService {
 		
 	}
 	
+	public void selectMember(int memNo) {
+		
+		Connection conn = getConnt
+	}
+	
 	
 	
 	

@@ -43,7 +43,7 @@
                
         <div id="content">
             <div id="content_1">
-                <form action="<%=contextPath%>/selectId?keyword=<%=member.getMemId() %>" method="get" id="search_member">
+                <form action="<%=contextPath%>/selectId" method="get" id="search_member">
                     <div id="search_id">
                         <input type="text" placeholder="회원 ID입력" name="keyword">
                     </div>
@@ -73,7 +73,7 @@
                 </div>
         
                 <div id="mem_list">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="mem_detail_List">
                         <thead>
                           <tr>
                             <th>번호</th>
@@ -97,7 +97,7 @@
 	                       	   		<td><%= m.getNickName() %></td>
 	                       	   		<td><%= m.getGradeName() %></td>
 	                       	   		
-		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal">조회</button></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem()">조회</button></td>
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="return deleteMember()">삭제</button></td>
 		                            
 		                            
@@ -109,8 +109,27 @@
                           
                         </tbody>
                       </table>
-
                 </div>
+        
+        		<script>
+        			function detailMem(){
+        				
+        				$.ajax({
+        					url : 'detailMember.do',
+        					data : {memNo : $('#mem_detail_List').val()},
+        					type : 'get',
+        					success : function(result){
+        						console.log('click');
+        					}
+        					
+        				});
+        			}
+        		
+        		</script>
+        
+        
+        
+        
         
                 <div class="paging-area" align="center";>
                     <button class="btn btn-sm btn-outline-secondary"><</button>
@@ -148,7 +167,7 @@
                 <table>
                     <tr>
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
-                        <td width="200">이름 : 안유진</td>
+                        <td width="200">이름 : <%= contextPath %></td>
                         <td width="200">등급 : 
                             <select>
                                 <option>패밀리</option>
