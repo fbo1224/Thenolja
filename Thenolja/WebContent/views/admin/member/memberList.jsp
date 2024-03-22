@@ -99,8 +99,6 @@
 		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="return deleteMember()">삭제</button></td>
 		                            
-		                            
-		                          
 	                       	  </tr>
                        		<% } %>
                        <% } %>
@@ -145,6 +143,7 @@
         						$('#name').text(result.memName);
         						$('#grade').text(result.gradeName);
         						$('#email').text(result.email);
+        						$('#phone').text(result.memPhone);
         						$('#bornDate').text(result.bornDate);
         						$('#joinDate').text(result.joinDate);
         					}
@@ -153,7 +152,14 @@
         				
         			}
         		
-        		</script>
+       </script>
+       
+       
+       
+       
+       
+       
+       
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="memberModal">
@@ -170,7 +176,7 @@
         <!-- Modal body -->
         <div class="modal-body">
             <div id="detailList">
-                <table>
+                <table style="font-size: 14px;">
                     <tr>
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
                         <td width="200">이름 :<span id="name"></span></td>
@@ -189,7 +195,7 @@
                         <td>가입일 : <span id="joinDate"></span></td>
                     </tr>
                     <tr>
-                        <td>전화번호 : 01045782088</td>
+                        <td>전화번호 :<span id="phone"></span></td>
                        <!-- <td>숙소 이용 횟수 : 1회</td> -->
                     </tr>
                     <tr>
