@@ -21,4 +21,19 @@ public class MemberService {
 		
 	}
 	
+	public Member selectIdMember(String memId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member member = new MemberDao().selectIdMember(conn, memId);
+		
+		JDBCTemplate.close(conn);
+		
+		return member;
+		
+	}
+	
+	
+	
+	
 }

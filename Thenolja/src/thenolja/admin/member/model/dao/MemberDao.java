@@ -63,5 +63,43 @@ public class MemberDao {
 	      return list;	
 	}
 	
+	public Member selectIdMember(Connection conn, String memId) {
+		
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectIdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			pstmt.setString(1, memId);
+			
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setMemNo(rset.getInt("MEM_NO"));
+				member.setMemId(rset.getString("MEM_ID"));
+				member.setNickName(rset.getString("NICKNAME"));
+				member.setGradeName(rset.getString("GRADE_NAME"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return member;
+	}
+	
+	
+	
 
 }

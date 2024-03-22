@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member" %>
 <%
+	Member member = (Member)request.getAttribute("member");
+	
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("selectMemberList");
 	
 %>
@@ -41,8 +43,7 @@
                
         <div id="content">
             <div id="content_1">
-
-                <form action="#" method="get" id="search_member">
+                <form action="<%=contextPath%>/selectId" method="get" id="search_member">
                     <div id="search_id">
                         <input type="text" placeholder="회원 ID입력" name="keyword">
                     </div>
