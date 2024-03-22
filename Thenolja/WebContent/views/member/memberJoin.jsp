@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 	<style>
 		#enroll-form input{
 			margin : 8px;
