@@ -38,12 +38,22 @@ public class HotelServlet extends HttpServlet {
 		HotelController hc = new HotelController();
 		String view = "";
 		boolean flag = true;
-		
+		request.setCharacterEncoding("UTF-8");
 		switch(mapping) {
-		case "insert" : view =  hc.insert(request, response); break;
-		case "hotelList" : view =  hc.hotelList(request, response); break;
-		case "update" : view =  hc.update(request, response); flag = false; break;
-		case "select" : view =  hc.select(request, response); break;
+			// insertHotel.jsp
+			case "insertForm" : view =  hc.insertForm(request, response); break;
+			
+			//
+			case "insert" : view =  hc.insert(request, response); break;
+			
+			// hotelList.jsp
+			case "hotelList" : view =  hc.hotelList(request, response); break;
+			
+			// 
+			case "update" : view =  hc.update(request, response); flag = false; break;
+
+			// hotelDetail
+			case "select" : view =  hc.select(request, response); break;
 		}
 		
 		if(flag) {

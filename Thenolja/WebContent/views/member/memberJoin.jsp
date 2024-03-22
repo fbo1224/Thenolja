@@ -27,7 +27,7 @@
 
 	<div class="outer">
 		<br>
-		<h1 align ="center" id="title">회원가입</h2>
+		<h1 align ="center" id="title">회원가입</h2><br><br><br>
 		
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
 			<table align="center" id="table">
@@ -68,7 +68,7 @@
 								}
 							},
 							error : function(){
-								console.log('AJAX통신실패~@!');
+								console.log('AJAX통신실패');
 							}
 						});
 					}
@@ -77,14 +77,38 @@
 				
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" maxlength="15" required name="memPwd"></td>
+					<td><input type="password" maxlength="15" required name="memPwd" class="pwdCheck"></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>비밀번호 확인</td>
-					<td><input type="password" maxlength="15" required></td>
-					<td><span id="pwdCheck">비밀번호가 일치하지 않습니다.</span></td>
+					<td><input type="password" maxlength="15" required class="pwdCheck"></td>
+					
+					<td><input type="button" onclick="pwdCheck()" value="비밀번호 일치여부확인"></td>
+
+					<script>
+						function pwdCheck(){
+							const p1 = document.getElementsByClassName('pwdCheck')[0].value;
+							const p2 = document.getElementsByClassName('pwdCheck')[1].value;
+							// const join = document.getElementById('memJoin');
+							if(p1 != p2){
+								alert("비밀번호가 일치하지 않습니다!");
+								// p1 = "";
+								// p2 = "";								
+								
+								return false;
+							}
+							else{
+								alert("비밀번호가 일치합니다.");
+								// p1.attr('readonly',true);
+								// p2.attr('readonly',true);
+								// join.removeAttr('disabled');
+								return true;
+							}
+						}
+					</script>
+					
 				</tr>
 				
 				<tr>
@@ -108,10 +132,17 @@
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email"></td>
+					<!--
 					<td>@</td>
-					<select>
-						<option></option>
-					</select>
+					<td>
+						<select>
+							<option value="직접입력">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="gmail.com">gmail.com</option>
+						</select>
+					</td>
+					-->
 				</tr>
 				
 				<tr>
@@ -126,7 +157,7 @@
 
 			<div align="center">
 				<button type="reset" class="btn btn-sm btn-secondary">취소</button>
-				<button type="submit" class="btn btn-sm btn-primary" disabled>회원가입</button>
+				<button type="submit" class="btn btn-sm btn-primary" disabled id="memJoin">회원가입</button>
 			</div>
 
 			<br><br>
