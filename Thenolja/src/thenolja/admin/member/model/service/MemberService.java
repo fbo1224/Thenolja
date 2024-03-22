@@ -21,7 +21,7 @@ public class MemberService {
 		
 	}
 	
-	public Member selectIdMember(String memId) {
+	/*public Member selectIdMember(String memId) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -31,11 +31,17 @@ public class MemberService {
 		
 		return member;
 		
-	}
+	}*/
 	
-	public void selectMember(int memNo) {
+	public Member selectMember(int memNo) {
 		
-		Connection conn = getConnt
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member member = new MemberDao().selectMember(conn, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return member;
 	}
 	
 	
