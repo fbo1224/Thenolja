@@ -17,7 +17,6 @@
 	}
 	#content-2-lists {
 		width: 100%;
-		border: 1px solid red;
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
@@ -58,7 +57,7 @@
 
 	<%@ include file="../common/menubar.jsp" %>
 	
-	<div id="wrap" style="border: 1px solid red">
+	<div id="wrap">
 	
 		<%@ include file="./common/searchForm.jsp" %>
 		
