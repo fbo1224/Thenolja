@@ -120,10 +120,6 @@
 							<button type="submit" class="btn">로그인</button>
 						</div>
 
-						<div id="content4" class="content">
-							<button type="button" class="btn" onclick="enrollPage();">회원가입</button>
-
-						</div>
 					</form>
 				
 				</div>
