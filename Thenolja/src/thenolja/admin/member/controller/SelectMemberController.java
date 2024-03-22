@@ -32,6 +32,7 @@ public class SelectMemberController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<Member> list = new MemberService().selectMemberList();
 		request.setAttribute("selectMemberList", list);
 

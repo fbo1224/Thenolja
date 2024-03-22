@@ -43,9 +43,22 @@ public class SelectMemberIdController extends HttpServlet {
 		Member member = new MemberService().selectIdMember(memId);
 		request.setAttribute("selectIdMember", member);
 		
+		
+		
+		
+		if(memId == member.getMemId()) {
+				
+				RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
+				view.forward(request, response);
+		} else {
+			
+			request.setAttribute("errorMsg", "회원 조회 실패");
+			RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
+		
 
-		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
-		view.forward(request, response);
+
 	}
 
 	/**

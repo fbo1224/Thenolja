@@ -43,7 +43,7 @@
                
         <div id="content">
             <div id="content_1">
-                <form action="<%=contextPath%>/selectId" method="get" id="search_member">
+                <form action="<%=contextPath%>/selectId?keyword=<%=member.getMemId() %>" method="get" id="search_member">
                     <div id="search_id">
                         <input type="text" placeholder="회원 ID입력" name="keyword">
                     </div>
