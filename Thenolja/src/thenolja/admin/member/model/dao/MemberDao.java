@@ -137,6 +137,20 @@ public class MemberDao {
 	}
 	
 	
+	public int deleteMember(Connection conn, int memNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		
+		
+		
+		
+		return result;
+	}
+
+	
 	
 
 }

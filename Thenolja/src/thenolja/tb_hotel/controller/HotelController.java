@@ -10,6 +10,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import thenolja.common.MyFileRenamePolicy;
+import thenolja.tb_hotel.model.vo.Hotel;
 
 public class HotelController {
 
@@ -51,6 +52,7 @@ public class HotelController {
 			String detailAddr = multiRequest.getParameter("detailAddr");
 			String hotelCate = multiRequest.getParameter("hotelCate");
 			String hotelName = multiRequest.getParameter("hotelName");
+			String ceoName = multiRequest.getParameter("ceoName");
 			String phone1 = multiRequest.getParameter("phone1");
 			String phone2 = multiRequest.getParameter("phone2");
 			String[] serList = multiRequest.getParameterValues("serList");
@@ -58,14 +60,35 @@ public class HotelController {
 			
 			// hotelImg 파일
 			
-			System.out.println(letterNo);
-			System.out.println(loadName);
-			System.out.println(detailAddr);
-			System.out.println(hotelCate);
-			System.out.println(hotelName);
-			System.out.println(phone1+phone2);
-			System.out.println(String.join(",", serList));
-			System.out.println(introText);
+//			System.out.println(letterNo);
+//			System.out.println(loadName);
+//			System.out.println(detailAddr);
+//			System.out.println(hotelCate);
+//			System.out.println(hotelName);
+//			System.out.println(phone1+phone2);
+			// System.out.println(String.join(",", serList)); 여기 옵션아님
+//			System.out.println(introText);
+			
+			// 지역뽑기
+			String location = loadName.substring(0, loadName.indexOf(" ")+1);
+			
+			// 지역을 제외한 
+			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
+			
+			Hotel h = new Hotel();
+			h.setHotelName(hotelName);
+			h.setHotelPhone(phone1+phone2);
+			h.setHotelLocation(location); // 지역
+			h.setHotelAddress(newlocation + detailAddr);
+			h.setHotelCategory(hotelCate);
+			h.setHotelIntro(introText);
+			h.setHostName(ceoName);
+			
+			if(multiRequest.getOriginalFileName("hotelImg") != null) {
+				h.setHotelPath("/resources/hotelImage"+multiRequest.getFilesystemName("hotelImg"));
+			}
+			
+			System.out.println(h);
 			view="/";
 		}
 		return view;

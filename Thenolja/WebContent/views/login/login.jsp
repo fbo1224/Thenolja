@@ -27,16 +27,15 @@
 
 		.content{
 			width: 100%;
-			height: 20%;
 			margin: auto;
 		}
+
 
 		#loginword > span{
 			text-align: center; 
 			height: 100px;
 			font-size: 40px;
 			font-weight: bold;
-			margin-left: 240px;
 		}
 		#login-area{width: 100%; height: 100%;}
 		
@@ -48,10 +47,9 @@
 			width: 400px;
 			height: 50px;
 		}
-
+		#content{text-align: center;}
 
 		#content2 > a{
-			text-align: center;
 			text-decoration: none;
 			color: black;
 		}
@@ -81,7 +79,6 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 	
-	<% if(loginUser == null) { %>    	
       
 		<div id="wrap">
 			<div id="content">
@@ -91,28 +88,17 @@
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/login" method="post">
 						<div id="contnet1">
-							<table>
-								<tr>
-									<td>
 										<input type="text" name="memId" id="id" class="input" placeholder="아이디 입력" maxlength="12" required>
 										<br>아이디가 일치하지 않습니다.
-									</td>
-								</tr>
-								<tr>
-									<td>
 										<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호 입력" maxlength="15" required>
 										<br><a href="">비밀번호를 잊으셨나요?</a>
-									</td>
-								</tr>
-							</table>
 						</div>
-
 
 						<div id="content2" class="content">
 							<br><br>
-							<a href="">아이디 찾기</a>
+							<a href="views\\member\\findId.jsp">아이디 찾기</a>
 							/
-							<a href="">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 							<a href="views\\member\\memberJoin.jsp" >회원가입</a>
 						</div>
 
@@ -124,17 +110,7 @@
 				
 				</div>
 			</div>
-		<% } else { %>
-			<div id="user-info">
-            	<span><%= loginUser.getMemName() %></span>님 환영합니다~!!<br><br>
-            <div>
-                <a href="<%=contextPath %>/myPage" class="btn btn-sm btn-primary">마이페이지</a>
-                <a href="<%=contextPath %>/logout" class="btn btn-sm btn-primary">로그아웃</a>
-            </div>
-        </div>
-
-		<% } %>
 		
-	</div>
+		</div>
 </body>
 </html>
