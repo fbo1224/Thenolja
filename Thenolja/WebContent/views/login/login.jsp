@@ -27,9 +27,9 @@
 
 		.content{
 			width: 100%;
-			height: 20%;
 			margin: auto;
 		}
+
 
 		#loginword > span{
 			text-align: center; 
@@ -48,10 +48,9 @@
 			width: 400px;
 			height: 50px;
 		}
-
+		#content{text-align: center;}
 
 		#content2 > a{
-			text-align: center;
 			text-decoration: none;
 			color: black;
 		}
@@ -81,7 +80,6 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 	
-	<% if(loginUser == null) { %>    	
       
 		<div id="wrap">
 			<div id="content">
@@ -110,9 +108,9 @@
 
 						<div id="content2" class="content">
 							<br><br>
-							<a href="">아이디 찾기</a>
+							<a href="views\\member\\findId.jsp">아이디 찾기</a>
 							/
-							<a href="">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 							<a href="views\\member\\memberJoin.jsp" >회원가입</a>
 						</div>
 
@@ -124,17 +122,7 @@
 				
 				</div>
 			</div>
-		<% } else { %>
-			<div id="user-info">
-            	<span><%= loginUser.getMemName() %></span>님 환영합니다~!!<br><br>
-            <div>
-                <a href="<%=contextPath %>/myPage" class="btn btn-sm btn-primary">마이페이지</a>
-                <a href="<%=contextPath %>/logout" class="btn btn-sm btn-primary">로그아웃</a>
-            </div>
-        </div>
-
-		<% } %>
 		
-	</div>
+		</div>
 </body>
 </html>
