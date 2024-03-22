@@ -27,7 +27,7 @@
 
 	<div class="outer">
 		<br>
-		<h1 align ="center" id="title">회원가입</h2>
+		<h1 align ="center" id="title">회원가입</h2><br><br><br>
 		
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
 			<table align="center" id="table">
@@ -132,10 +132,17 @@
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email"></td>
+					<!--
 					<td>@</td>
-					<select>
-						<option></option>
-					</select>
+					<td>
+						<select>
+							<option value="직접입력">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="gmail.com">gmail.com</option>
+						</select>
+					</td>
+					-->
 				</tr>
 				
 				<tr>
