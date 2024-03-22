@@ -36,7 +36,6 @@
 			height: 100px;
 			font-size: 40px;
 			font-weight: bold;
-			margin-left: 240px;
 		}
 		#login-area{width: 100%; height: 100%;}
 		
@@ -89,22 +88,11 @@
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/login" method="post">
 						<div id="contnet1">
-							<table>
-								<tr>
-									<td>
 										<input type="text" name="memId" id="id" class="input" placeholder="아이디 입력" maxlength="12" required>
 										<br>아이디가 일치하지 않습니다.
-									</td>
-								</tr>
-								<tr>
-									<td>
 										<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호 입력" maxlength="15" required>
 										<br><a href="">비밀번호를 잊으셨나요?</a>
-									</td>
-								</tr>
-							</table>
 						</div>
-
 
 						<div id="content2" class="content">
 							<br><br>

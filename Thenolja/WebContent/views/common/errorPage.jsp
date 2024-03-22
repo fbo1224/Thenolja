@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>서비스 실패 화면</title>
 <style>
-	h2{
+	h1{
 		color : orangered;
 		margin-top : 80px;
 		text-align : center;
@@ -22,7 +22,7 @@
 	
 	<%@ include file="menubar.jsp" %>
 	
-	<h2><%= errorMsg %></h2>
+	<h1><%= errorMsg %></h2>
 
 
 
