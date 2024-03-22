@@ -77,14 +77,31 @@
 				
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" maxlength="15" required name="memPwd"></td>
+					<td><input type="password" maxlength="15" required name="memPwd" class="pwdCheck"></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>비밀번호 확인</td>
-					<td><input type="password" maxlength="15" required></td>
-					<td><span id="pwdCheck">비밀번호가 일치하지 않습니다.</span></td>
+					<td><input type="password" maxlength="15" required class="pwdCheck"></td>
+					
+					<td><input type="button" onclick="pwdCheck()" value="비밀번호 일치여부확인"></td>
+
+					<script>
+						function pwdCheck(){
+							const p1 = document.getElementsByClassName('pwdCheck')[0].value;
+							const p2 = document.getElementsByClassName('pwdCheck')[1].value;
+							if(p1 != p2){
+								alert("비밀번호가 일치하지 않습니다!");
+								return false;
+							}
+							else{
+								alert("비밀번호가 일치합니다.");
+								return true;
+							}
+						}
+					</script>
+					
 				</tr>
 				
 				<tr>
