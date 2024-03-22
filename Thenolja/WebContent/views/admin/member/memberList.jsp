@@ -97,7 +97,7 @@
 	                       	   		<td><%= m.getGradeName() %></td>
 	                       	   		
 		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
-		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="return deleteMember()">삭제</button></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
 		                            
 	                       	  </tr>
                        		<% } %>
@@ -107,11 +107,6 @@
                         </tbody>
                       </table>
                 </div>
-        
-        	
-        
-        
-        
         
         
                 <div class="paging-area" align="center";>
@@ -132,14 +127,14 @@
    
    	<script>
         			function detailMem(e){
-        				//console.log(e);
+        				// console.log(e);
         				
         				$.ajax({
         					url : 'detailMember.do',
         					data : {memNo : e},
         					type : 'get',
         					success : function(result){
-        						//console.log(result);
+        						// console.log(result);
         						$('#name').text(result.memName);
         						$('#grade').text(result.gradeName);
         						$('#email').text(result.email);
@@ -154,6 +149,24 @@
         		
        </script>
        
+      <script>
+		  		function deleteMember(e){
+					console.log(e);
+				
+					$.ajax({
+						url : 'deleteMember.do',
+						data : {memNo : e},
+						type : 'get',
+						success : function(result){
+	
+						}
+						
+					});
+					
+				}
+
+      
+      </script>
        
        
        
