@@ -4,8 +4,6 @@
 <%@ page import="java.util.ArrayList" %>   
 <%
    ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
-
-
 %>   
   
 <!DOCTYPE html>
@@ -46,12 +44,6 @@
         border-bottom: 1px solid silver;
     }
     #reser_info, #reser_price{width: 100%;}
-    #reser_no{
-        padding-left: 50px;
-        height: 10%;
-        width: 100%;
-        font-size: 20px;
-    }
     #reser_hotel_img{
         width: 30%;
         height: 90%;
@@ -177,8 +169,6 @@
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No.663411</p></div>
-
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px"></div>
 
                 <div id="reser_detail">
@@ -204,6 +194,7 @@
                 </div>
  
             <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+            
                 <div id="reser_mem_info">
                     <br>
                     <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>

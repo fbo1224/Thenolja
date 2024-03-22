@@ -99,6 +99,43 @@ public class MemberDao {
 		return member;
 	}
 	
+	public Member selectMember(Connection conn, int MemNo) {
+		
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, MemNo);
+			
+			rset = pstmt.executeQuery();
+			//
+			if(rset.next()) {
+				member = new Member();
+				member.setMemName(rset.getString("MEM_NAME"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setMemPhone(rset.getString("MEM_PHONE"));
+				member.setBornDate(rset.getString("BORN_DATE"));
+				member.setGradeName(rset.getString("GRADE_NAME"));
+				member.setJoinDate(rset.getString("JOIN_DATE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return member;
+		
+	}
+	
 	
 	
 

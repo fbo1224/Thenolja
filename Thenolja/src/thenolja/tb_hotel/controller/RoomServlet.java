@@ -40,7 +40,8 @@ public class RoomServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "insert" : view =  rc.insert(request, response); break;
+			// insertRoom.jsp
+			case "insert" : view =  rc.insert(request, response); break;
 		
 		}
 		

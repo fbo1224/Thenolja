@@ -52,6 +52,17 @@ public class ReserService {
 		return reser;
 	}
 	
+	public int selectReserNo() {
+		
+		Connection conn = getConnection();
+		
+		int reserNo = new ReserDao().selectReserNo(conn);
+		
+		close(conn);
+		
+		return reserNo;
+	}
 	
+
 
 }

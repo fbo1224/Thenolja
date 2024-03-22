@@ -40,6 +40,8 @@ div {
 }
 #content-add-form{
 	width:100%;
+	display: flex;
+	justify-content: space-evenly;
 }
 #timeOptions{
 	display: flex;
@@ -51,13 +53,17 @@ div {
 }
 [class *= content-div]{
 	width: 30%;
-	height: 50%;
+	height: 60%;
 	padding: 5px;
-	margin: 3px;
-	box-shadow: 2px 2px 2px gray;
-	display:inline-block;
+	margin: auto;
+	border-radius: 8px;
+	box-shadow: 5px 3px 3px gray;
+	display: inline-block;
 }
-
+#btn-div{
+	float: right;
+	margin-top: 10px;
+}
 </style>
 </head>
 <body>
@@ -94,10 +100,9 @@ div {
 				</div>
 			</div>
 			
-			
-				
+			<div id="btn-div">
 				<button class="btn btn btn-info" >추가</button>
-				
+			</div>
 			</form>
 		</div>
 	</div>
@@ -124,13 +129,14 @@ div {
 		// 찾아낸 클래스명에서 증가한 숫자 붙이기
 		className = num.slice(0, -1);		
 		temp.attr('class', className+classNum);
-		// console.log(temp);
 		
-		console.log(temp.children().children('input').eq(0).attr('name','roomName'+classNum));
-		console.log(temp.children().children('input').eq(1).attr('name','maxPeople'+classNum));
-		console.log(temp.children().children('input').eq(2).attr('name','roomImg'+classNum));
-		console.log(temp.children().children('input').eq(3).attr('name','in_time'+classNum));
-		console.log(temp.children().children('input').eq(4).attr('name','out_time'+classNum));
+		// console.log(temp);
+		temp.children().children('input').eq(0).attr('name','roomName'+classNum);
+		temp.children().children('input').eq(1).attr('name','maxPeople'+classNum);
+		temp.children().children('input').eq(2).attr('name','roomImg'+classNum);
+		temp.children().children('input').eq(3).attr('name','in_time'+classNum);
+		temp.children().children('input').eq(4).attr('name','out_time'+classNum);
+		
 		// 요소 붙이기
 		$('#content-add-form').prepend(temp);
 		btnCnt++;
