@@ -48,7 +48,6 @@ public class ReservationInsertController extends HttpServlet {
 		
 		int result = new ReserService().insertReser(reser);
 		
-		
 		if(result > 0) {
 			
 			// DB하이 ~
