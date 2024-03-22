@@ -14,8 +14,9 @@
 		}
 		
 		#title{
-			font-weight="bolder";
+			font-weight: bold;
 		}
+
 		
 	</style>
 	
@@ -85,7 +86,7 @@
 					<td>비밀번호 확인</td>
 					<td><input type="password" maxlength="15" required class="pwdCheck"></td>
 					
-					<td><input type="button" onclick="pwdCheck()" value="비밀번호 일치여부확인"></td>
+					<td><button onclick="pwdCheck()" class="btn btn-sm btn-primary">일치확인</button></td>
 
 					<script>
 						function pwdCheck(){
