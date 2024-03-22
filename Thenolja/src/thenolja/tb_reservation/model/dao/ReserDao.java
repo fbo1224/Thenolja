@@ -98,8 +98,6 @@ public class ReserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, reserNo);
-			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -141,24 +139,11 @@ public class ReserDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			rset.next();
+			
+			reserNo = rset.getInt("RESER_NO");
 				
-				reser = new Reservation(rset.getInt("RESER_NO"),
-								 		rset.getDate("RESER_DATE"),
-								 		rset.getString("BICYCLE"),
-								 		rset.getString("CANCEL_YN"),
-								 		rset.getString("CHECKIN_TIME"),
-								 		rset.getString("CHECKOUT_TIME"),
-								 		rset.getInt("PEOPLE"),
-								 		rset.getInt("ROOM_NO"),
-								 		rset.getInt("RE_MEM_NO"),
-								 		rset.getString("PAYMENT"),
-								 		rset.getInt("PAYMENT_PRICE"),
-										rset.getString("RESER_PHONE"),
-										rset.getString("RESER_NAME"));
-				
-			}
-			reserNo = reser.getReserNo();
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

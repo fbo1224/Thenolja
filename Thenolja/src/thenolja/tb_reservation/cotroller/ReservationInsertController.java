@@ -53,8 +53,7 @@ public class ReservationInsertController extends HttpServlet {
 			
 			// DB하이 ~
 			int reserNo = new ReserService().selectReserNo();
-			
-			
+
 			response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reserNo);
 		} else {
 			request.setAttribute("errorMsg", "예약에 실패했습니다!");
