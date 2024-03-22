@@ -37,6 +37,9 @@ public class insertReservation extends HttpServlet {
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
 		request.setAttribute("insertReservation", list);
 		//System.out.println(list);
+		
+//		response.sendRedirect("/views/reservation/insertReservation.jsp");
+		
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		view.forward(request, response);
 	

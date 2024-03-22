@@ -90,7 +90,7 @@ public class ReserDao {
 
 	public Reservation selectReservation(Connection conn, int reserNo) {
 		
-		Reservation reser = null;
+		Reservation reser = new Reservation();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectReservation");
@@ -107,10 +107,10 @@ public class ReserDao {
 				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
-				reser.setPhone(rset.getString("RESER_PHoNE"));
+				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
 				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
@@ -127,5 +127,52 @@ public class ReserDao {
 		
 		return reser;
 	}
-
+	
+	public int selectReserNo(Connection conn) {
+		
+		int reserNo = 0;
+		Reservation reser = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReserNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				reser = new Reservation(rset.getInt("RESER_NO"),
+								 		rset.getDate("RESER_DATE"),
+								 		rset.getString("BICYCLE"),
+								 		rset.getString("CANCEL_YN"),
+								 		rset.getString("CHECKIN_TIME"),
+								 		rset.getString("CHECKOUT_TIME"),
+								 		rset.getInt("PEOPLE"),
+								 		rset.getInt("ROOM_NO"),
+								 		rset.getInt("RE_MEM_NO"),
+								 		rset.getString("PAYMENT"),
+								 		rset.getInt("PAYMENT_PRICE"),
+										rset.getString("RESER_PHONE"),
+										rset.getString("RESER_NAME"));
+				
+			}
+			reserNo = reser.getReserNo();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reserNo;
+	}
+	
+	
+	
+	
+	
+	
 }

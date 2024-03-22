@@ -79,7 +79,27 @@
 		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+		 
 			
+	</entry>
+	
+	<entry key="selectReserNo">
+		SELECT RESER_NO,
+		  		RESER_DATE,
+		  		RESER_NAME,
+		  		RESER_PHONE,
+		  		BICYCLE,
+		  		CANCEL_YN,
+		  		CHECKIN_TIME,
+		  		CHECKOUT_TIME,
+		  		PEOPLE,
+		  		ROOM_NO,
+		  		RE_MEM_NO,
+		  		PAYMENT,
+		  		PAYMENT_PRICE
+		  FROM 
+		  	  TB_RESERVATION
+	  ORDER BY RESER_NO DESC
 	</entry>
 	
 	

@@ -36,15 +36,16 @@ public class ReservationDetailController extends HttpServlet {
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		
 		// 4) Service호출~
 		
 			Reservation reser = new ReserService().selectReservation(reserNo);
 			
 			if(reser != null) {
 				request.setAttribute("reser", reser);
-				RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
-				view.forward(request, response);
+				request.setAttribute("reserNo", reserNo);
+//				RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+//				view.forward(request, response);
+				response.sendRedirect("views/reservation/detailReservation.jsp");
 				
 			} else {
 				request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
