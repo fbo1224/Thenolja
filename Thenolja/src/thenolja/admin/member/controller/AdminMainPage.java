@@ -1,7 +1,6 @@
 package thenolja.admin.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
-
 /**
- * Servlet implementation class selectMemberController
+ * Servlet implementation class adminMainPage
  */
-@WebServlet("/selectMember")
-public class SelectMemberController extends HttpServlet {
+@WebServlet("/adminMain")
+public class AdminMainPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMemberController() {
+    public AdminMainPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +29,8 @@ public class SelectMemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Member> list = new MemberService().selectMemberList();
-		request.setAttribute("selectMemberList", list);
-
-		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/common/adminMain.jsp");
 		view.forward(request, response);
-		
 	}
 
 	/**
