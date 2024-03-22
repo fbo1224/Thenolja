@@ -14,8 +14,9 @@
 		}
 		
 		#title{
-			font-weight="bolder";
+			font-weight: bold;
 		}
+
 		
 	</style>
 	
@@ -85,25 +86,24 @@
 					<td>비밀번호 확인</td>
 					<td><input type="password" maxlength="15" required class="pwdCheck"></td>
 					
-					<td><input type="button" onclick="pwdCheck()" value="비밀번호 일치여부확인"></td>
+					<td><button onclick="pwdCheck()" class="btn btn-sm btn-primary">일치확인</button></td>
 
 					<script>
 						function pwdCheck(){
 							const p1 = document.getElementsByClassName('pwdCheck')[0].value;
 							const p2 = document.getElementsByClassName('pwdCheck')[1].value;
-							// const join = document.getElementById('memJoin');
+							const memJoin = document.getElementById('memJoin');
+							const name = document.getElementById('name');
 							if(p1 != p2){
 								alert("비밀번호가 일치하지 않습니다!");
-								// p1 = "";
-								// p2 = "";								
-								
+									p1 = null;
+									p2 = null;	
 								return false;
 							}
 							else{
 								alert("비밀번호가 일치합니다.");
-								// p1.attr('readonly',true);
-								// p2.attr('readonly',true);
-								// join.removeAttr('disabled');
+								name.disabled = false;
+								memJoin.disabled = false;
 								return true;
 							}
 						}
@@ -113,7 +113,7 @@
 				
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="5" required name="memName"></td>
+					<td><input type="text" maxlength="5" required name="memName" disabled id="name"></td>
 					<td></td>
 				</tr>
 				

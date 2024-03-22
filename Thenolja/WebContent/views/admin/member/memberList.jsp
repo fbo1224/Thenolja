@@ -11,7 +11,6 @@
 <html lang="en">
 <head>
     <title>회원조회</title>
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
  	<link rel="stylesheet" href="resources/css/admin_select.css">
 </head>
 
@@ -91,17 +90,15 @@
                        	  </tr>
                        <% } else { %>
                        		<% for(Member m : list) { %>
-	                       	   <tr class="memNo" >
+	                       	   <tr class="memNo">
 	                       	   		<td><%= m.getMemNo() %></td>
 	                       	   		<td><%= m.getMemId() %></td>
 	                       	   		<td><%= m.getNickName() %></td>
 	                       	   		<td><%= m.getGradeName() %></td>
 	                       	   		
-		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem()">조회</button></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="return deleteMember()">삭제</button></td>
 		                            
-		                            
-		                            <input type="hidden" name="memNo" value="<%= m.getMemNo() %>" > 
 	                       	  </tr>
                        		<% } %>
                        <% } %>
@@ -111,21 +108,7 @@
                       </table>
                 </div>
         
-        		<script>
-        			function detailMem(){
-        				
-        				$.ajax({
-        					url : 'detailMember.do',
-        					data : {memNo : $('#mem_detail_List').val()},
-        					type : 'get',
-        					success : function(result){
-        						console.log('click');
-        					}
-        					
-        				});
-        			}
-        		
-        		</script>
+        	
         
         
         
@@ -147,7 +130,36 @@
 
     </div>
    
-   
+   	<script>
+        			function detailMem(e){
+        				//console.log(e);
+        				
+        				$.ajax({
+        					url : 'detailMember.do',
+        					data : {memNo : e},
+        					type : 'get',
+        					success : function(result){
+        						//console.log(result);
+        						$('#name').text(result.memName);
+        						$('#grade').text(result.gradeName);
+        						$('#email').text(result.email);
+        						$('#phone').text(result.memPhone);
+        						$('#bornDate').text(result.bornDate);
+        						$('#joinDate').text(result.joinDate);
+        					}
+        					
+        				});
+        				
+        			}
+        		
+       </script>
+       
+       
+       
+       
+       
+       
+       
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="memberModal">
@@ -164,11 +176,11 @@
         <!-- Modal body -->
         <div class="modal-body">
             <div id="detailList">
-                <table>
+                <table style="font-size: 14px;">
                     <tr>
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
-                        <td width="200">이름 : <%= contextPath %></td>
-                        <td width="200">등급 : 
+                        <td width="200">이름 :<span id="name"></span></td>
+                        <td width="200">등급 :<span id="grade"></span>
                             <select>
                                 <option>패밀리</option>
                                 <option>실버</option>
@@ -179,16 +191,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>이메일 : youuu@naver.com</td>
-                        <td>가입일 : 2024.03.16</td>
+                        <td>이메일 : <span id="email"></span></td>
+                        <td>가입일 : <span id="joinDate"></span></td>
                     </tr>
                     <tr>
-                        <td>전화번호 : 01045782088</td>
-                        <td>숙소 이용 횟수 : 1회</td>
+                        <td>전화번호 :<span id="phone"></span></td>
+                       <!-- <td>숙소 이용 횟수 : 1회</td> -->
                     </tr>
                     <tr>
-                        <td>생년월일 : 19970129</td>
-                        <td></td>
+                        <td>생년월일 : <span id="bornDate"></span></td>
                     </tr>
                   </table>
 
@@ -204,6 +215,7 @@
         
       </div>
     </div>
+  </div>
   </div>
   
 

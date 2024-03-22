@@ -1,11 +1,17 @@
 package thenolja.admin.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import thenolja.admin.member.model.service.MemberService;
+import thenolja.admin.member.model.vo.Member;
 
 /**
  * Servlet implementation class DetailMember
@@ -29,39 +35,19 @@ public class DetailMember extends HttpServlet {
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member member = new MemberService().selectMember(boardNo)
+		Member member = new MemberService().selectMember(memNo);
 	      
-		
-		// JSON
-		// 자바타입 객체 => JSON타입의 객체로 가공
+		response.setContentType("application/json; charset=UTF-8");
 		/*
-		JSONObject boardObj = new JSONObject();
-		boardObj.put("boardTitle", board.getBoardTitle());
-		boardObj.put("boardContent", board.getBoardContent());
-		boardObj.put("count", board.getCount());
+		JSONObject obj = new JSONObject();
+		obj.put("name",member.getMemName());
+		
+		response.getWriter().print(obj);
+		*?
+		*
 		*/
 		
-		
-		response.setContentType("application/json; charset=UTF-8");
-		// response.getWriter().print(boardObj); 
-		
-		// GSON : Google JSON 라이브러리
-		
-		// GSON객체 생성
-		Gson gson = new Gson();
-		
-		// gson.toJson()
-		// [ 표현법 ] gson.toJson(응답할객체, 응답할스트림);
-		gson.toJson(list, response.getWriter());
-		// => response.getWriter()라는 스트림으로 list라는 객체를 응답하겠다~~
-		
-		// 자동으로 키값이 전달하는 객체의 필드명이 됨!
-		
-		// VO객체 하나만 넘길 시 JSONObject{}형태로 만들어서 응답
-		// List객체 응답 시 JSONArray[]형태로 만들어서 응답
-		
-		
-		
+		new Gson().toJson(member, response.getWriter());
 		
 	}
 

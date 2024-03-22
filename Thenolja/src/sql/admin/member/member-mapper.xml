@@ -52,5 +52,28 @@
        	   MEM_ID = ?
    
    </entry>
+   
+   <entry key="selectMember">
+    SELECT
+           MEM_NAME,
+           EMAIL,
+           MEM_PHONE,
+           BORN_DATE,
+           GRADE_NAME,
+           TO_CHAR(JOIN_DATE ,'YYYY.MM.DD') "JOIN_DATE"
+     FROM
+           TB_NONMEM
+     JOIN
+           TB_MEMBER ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+     JOIN
+           TB_MY_GRADE ON (TB_NONMEM.MEM_NO = GR_MEM_NO)
+     JOIN
+           TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
+     WHERE
+           DELETE_YN = 'Y'
+       AND
+           TB_NONMEM.MEM_NO = ?
+
+   </entry>
 	
 </properties>

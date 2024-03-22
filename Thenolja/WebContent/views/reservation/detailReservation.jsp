@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
+	// Reservation reser = (Reservation)request.getAttribute("reser");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,7 +179,7 @@
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No. <%=reser.getReserNo() %></p></div>
+                <div id="reser_no"><p>No. 1</p></div>
 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
@@ -205,19 +205,18 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">결제금액 : <%= reser.getPaymentPrice() %></td>
+                            <td width="170x">결제금액 : 1</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
                             <td width="170x">할인 금액 : 0원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=reser.getPaymentPrice() %></td>
-                        </tr>
+                            <td>결제금액 : 1
                     </table>
                 </div>
 
                 <div id="reser_price_info">
                     <h3>결제 내역</h3>
                     <hr>
-                    <p><%=reser.getPayment() %></p>
+                    <p>1</p>
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
@@ -240,12 +239,12 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td><%=reser.getName() %></td>
+                            <td>1</td>
                             <td width="80px">전화번호</td> 
-                            <td><%=reser.getPhone() %></td>
+                            <td>1</td>
                         </tr>
                         <tr>
-                            <td><%=reser.getBicycle() %></td> 
+                            <td>1</td> 
                             <td colspan="3">차량</td>
                         </tr>
                     </table>

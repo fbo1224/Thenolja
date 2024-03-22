@@ -11,12 +11,12 @@ public class Member {
 	private String bornDate;
 	private String email;
 	private String deleteYn;
-	private Date joinDate;
+	private String joinDate;
 	private String memName;
 	private String memPhone;
 	private String memStatus;
 	private String gradeName;
-	
+
 
 	public String getMemName() {
 		return memName;
@@ -55,7 +55,7 @@ public class Member {
 	}
 
 	public Member(int memNo, String memId, String memPwd, String nickName, String bornDate, String email,
-			String deleteYn, Date joinDate) {
+			String deleteYn, String joinDate) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -123,11 +123,11 @@ public class Member {
 		this.deleteYn = deleteYn;
 	}
 
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
 
