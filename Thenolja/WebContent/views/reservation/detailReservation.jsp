@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
-	// Reservation reser = (Reservation)request.getAttribute("reser");
+	Reservation reser = (Reservation)request.getAttribute("reser");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,7 +179,7 @@
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No. 1</p></div>
+                <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
