@@ -68,7 +68,7 @@
 								}
 							},
 							error : function(){
-								console.log('AJAX통신실패~@!');
+								console.log('AJAX통신실패');
 							}
 						});
 					}
@@ -91,12 +91,19 @@
 						function pwdCheck(){
 							const p1 = document.getElementsByClassName('pwdCheck')[0].value;
 							const p2 = document.getElementsByClassName('pwdCheck')[1].value;
+							// const join = document.getElementById('memJoin');
 							if(p1 != p2){
 								alert("비밀번호가 일치하지 않습니다!");
+								// p1 = "";
+								// p2 = "";								
+								
 								return false;
 							}
 							else{
 								alert("비밀번호가 일치합니다.");
+								// p1.attr('readonly',true);
+								// p2.attr('readonly',true);
+								// join.removeAttr('disabled');
 								return true;
 							}
 						}
@@ -143,7 +150,7 @@
 
 			<div align="center">
 				<button type="reset" class="btn btn-sm btn-secondary">취소</button>
-				<button type="submit" class="btn btn-sm btn-primary" disabled>회원가입</button>
+				<button type="submit" class="btn btn-sm btn-primary" disabled id="memJoin">회원가입</button>
 			</div>
 
 			<br><br>
