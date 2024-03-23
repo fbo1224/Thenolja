@@ -1,13 +1,13 @@
-package com.kh.thenolja.tb_review.model.service;
+package thenolja.tb_review.model.service;
 
-import static com.kh.thenolja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.thenolja.common.model.vo.PageInfo;
-import com.kh.thenolja.tb_review.model.dao.ReviewDao;
-import com.kh.thenolja.tb_review.model.vo.Review;
+import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_review.model.dao.ReviewDao;
+import thenolja.tb_review.model.vo.Review;
 
 public class ReviewService {
 

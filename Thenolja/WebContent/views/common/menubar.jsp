@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>review</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -103,8 +104,7 @@ a{
             <% }%>
             
             <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-	            <li><a href="<%= contextPath %>/loginPage">마이페이지</a></li>
-	            
+	            <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
             <% } else { %> <!-- 로그인상태라면 -->
 	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
             <% }%>

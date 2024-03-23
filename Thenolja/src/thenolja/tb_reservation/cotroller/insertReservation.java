@@ -34,15 +34,17 @@ public class insertReservation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		
 		request.setAttribute("insertReservation", list);
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
+		
 		view.forward(request, response);
-	
 	}
 
 	/**
