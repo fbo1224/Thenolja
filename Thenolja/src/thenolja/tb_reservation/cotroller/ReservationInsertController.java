@@ -51,7 +51,7 @@ public class ReservationInsertController extends HttpServlet {
 		if(result > 0) {
 			
 			// DB하이 ~
-			int reserNo = new ReserService().selectReserNo();
+			int reserNo
 
 			response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reserNo);
 		} else {

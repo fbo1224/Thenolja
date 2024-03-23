@@ -42,8 +42,7 @@ public class ReservationDetailController extends HttpServlet {
 			
 			if(reser != null) {
 				request.setAttribute("reser", reser);
-				request.setAttribute("reserNo", reserNo);
-//				RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+ //				RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
 //				view.forward(request, response);
 				response.sendRedirect("views/reservation/detailReservation.jsp");
 				
