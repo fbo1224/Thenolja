@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("alertMsg", "로그인 성공!");
+			session.setAttribute("alertMsg", "환영합니다.");
 			
 			if(loginUser.getMemStatus().equals("Y")) {
 			

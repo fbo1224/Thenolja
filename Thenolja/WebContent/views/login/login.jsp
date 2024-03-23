@@ -114,12 +114,6 @@
 					<form action="<%= contextPath %>/login" method="post">
 						<div id="content1">
 							<input type="text" name="memId" id="id" class="input" placeholder="아이디" maxlength="12" required>
-
-
-							<script>
-
-							</script>
-
 							<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호" maxlength="15" required>
 						</div>
 
