@@ -29,6 +29,7 @@
 			width: 100%;
 			margin: auto;
 		}
+		
 
 
 		#loginword > span{
@@ -37,6 +38,9 @@
 			font-size: 40px;
 			font-weight: bold;
 		}
+		
+		
+		#loginword{margin-top : 60px}
 		#login-area{width: 100%; height: 100%;}
 		
 		#password{
@@ -53,6 +57,7 @@
 			text-decoration: none;
 			color: black;
 		}
+
 
 		#loginbutton{
 			border: none;
@@ -88,10 +93,10 @@
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/login" method="post">
 						<div id="contnet1">
-										<input type="text" name="memId" id="id" class="input" placeholder="아이디 입력" maxlength="12" required>
-										<br>아이디가 일치하지 않습니다.
-										<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호 입력" maxlength="15" required>
-										<br><a href="">비밀번호를 잊으셨나요?</a>
+							<input type="text" name="memId" id="id" class="input" placeholder="아이디 입력" maxlength="12" required>
+							<br>아이디가 일치하지 않습니다.
+							<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호 입력" maxlength="15" required>
+							<br><a href="">비밀번호를 잊으셨나요?</a>
 						</div>
 
 						<div id="content2" class="content">
