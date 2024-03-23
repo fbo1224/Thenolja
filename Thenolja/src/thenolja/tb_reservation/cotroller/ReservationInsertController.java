@@ -46,25 +46,33 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
 		// reser.setReMemNo(memNo);
-		//reser.setPayment(payment);
+		// reser.setPayment(payment);d
 		
 		int result = new ReserService().insertReser(reser);
 		
-		HttpSession session = request.getSession();
+		// 여기까지 INSERT는 정상적으로 됐음.
+		// 근데 detailReservation.jsp로 넘어갈 때 servlet을 통해서 유저 객체를 넘겨주어야함.
+		
+		
+		
 		
 		if(result > 0) {
 			
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
-
-			response.sendRedirect(request.getContextPath() + "/reserDetail");
+					
+			reser = new ReserService().selectLastReservation();
+			HttpSession session = request.getSession();
+			session.setAttribute("reser", reser);
+			
+//			response.sendRedirect(request.getContextPath() + "/reserDetail");
+			
+			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
+			
 		} else {
 			request.setAttribute("errorMsg", "예약에 실패했습니다!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
-	
 	
 	}
 
