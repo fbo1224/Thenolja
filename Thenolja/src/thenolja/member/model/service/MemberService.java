@@ -47,9 +47,23 @@ public class MemberService {
 		
 		return count;
 	}
-	
-	
-	
+//---------------------------------정보수정-----------------------------
+	public int updateMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().updateMember(conn, member);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 	
 	
 	

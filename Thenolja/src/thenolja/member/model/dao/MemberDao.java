@@ -123,7 +123,29 @@ public class MemberDao {
 		return count;
 	}
 	
-	
+//----------------------------- 정보수정----------------------------------
+	public int updateMember(Connection conn, Member member) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemName());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setString(3, member.getMemPwd());
+			pstmt.setString(4, member.getMemId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

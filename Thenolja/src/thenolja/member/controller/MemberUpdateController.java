@@ -14,55 +14,54 @@ import thenolja.member.model.service.MemberService;
 import thenolja.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MemberUpdateController
  */
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/update.me")
+public class MemberUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberUpdateController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
 		
-		String memId = request.getParameter("memId");
+		String memName = request.getParameter("memName");
+		String email = request.getParameter("email");
 		String memPwd = request.getParameter("memPwd");
 		
-		Member loginUser = new MemberService().login(memId, memPwd);
+		String memId = request.getParameter("memId");
 		
-		// System.out.println(loginUser);
+		Member member = new Member();
+		member.setMemName(memName);
+		member.setEmail(email);
+		member.setMemPwd(memPwd);
+		member.setMemId(memId);
 		
-		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인에 실패하였습니다!");
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		} else {
+		int result = new MemberService().updateMember(member);
+		
+		if(result > 0) {
 			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "변경되었습니다.");
 			
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("alertMsg", "환영합니다");
+			String updatePwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
+			Member updateMem = new MemberService().login(memId, memPwd);
 			
-			if(loginUser.getMemStatus().equals("Y")) {
-			
-				response.sendRedirect(request.getContextPath());
-			} else {
-				// response.sendRedirect(request.getContextPath()+"/views/common/adminMain.jsp");
-				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);;
-				
-			}
+			session.setAttribute("loginUser", updateMem);
+			response.sendRedirect(request.getContextPath() + "/myPage");
+		} else {
+			request.setAttribute("errorMsg", "정보수정에 실패하였습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
-		
 	}
 
 	/**
