@@ -131,7 +131,7 @@
 				
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email"></td>
+					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요."></td>
 					<!--
 					<td>@</td>
 					<td>
