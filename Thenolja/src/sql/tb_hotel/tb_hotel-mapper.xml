@@ -6,8 +6,22 @@
 		tb_hotel Mapper
 	</comment>
 	
-	<entry key="">
-		 하하호호흐흐
+	<entry key="insertHotel">
+		 INSERT
+		   INTO
+		       TB_HOTEL
+		 VALUES(
+		 		SEQ_HOTEL.NEXTVAL,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		DEFAULT,
+		 		?
+		 	   )    
 	</entry>
 	
 	

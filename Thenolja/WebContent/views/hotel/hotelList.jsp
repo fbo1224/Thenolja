@@ -72,58 +72,7 @@
 					<p>159,000</p>
   				</div>
 			</div>
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
 		
-			
 		</div>
 	</div>
 </body>

@@ -10,6 +10,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import thenolja.common.MyFileRenamePolicy;
+import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.Hotel;
 
 public class HotelController {
@@ -85,11 +87,22 @@ public class HotelController {
 			h.setHostName(ceoName);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
-				h.setHotelPath("/resources/hotelImage"+multiRequest.getFilesystemName("hotelImg"));
+				h.setHotelPath("/resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
 			
 			System.out.println(h);
-			view="/";
+			
+			int result = new HotelService().insertHotel(h);
+			
+			// 결과에 따른 응답페이지
+			if(result > 0) {
+				// hotelList로 이동
+				view="/";
+			} else {
+				request.setAttribute("errorMsg", "hotel 추가 실패...");
+				view="views/common/errorPage.jsp";
+			}
+			
 		}
 		return view;
 		
@@ -98,6 +111,57 @@ public class HotelController {
 	
 	public String hotelList(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		
+		int listCount;   // 현재 일반게시판의 게시글 총 개수 => BOARD테이블로 부터 COUNT(*)활용해서 조회
+		int currentPage; // 현재 페이지(사용자가 요청한 페이지) => request.getParameter("currentPage");
+		int pageLimit;   // 페이지 하단에 보여질 페이징바의 최대 개수 => 10개로 고정
+		int boardLimit;  // 한 페이지에 보여질 게시글의 최대 개수 => 10개로 고정
+		
+		int maxPage;   // 가장 마지막 페이지가 몇 번 페이지인지 (총 페이지의 개수)
+		int startPage; // 페이지 하단에 보여질 페이징바의 시작 수
+		int endPage;   // 페이지 하단에 보여질 페이징바의 끝 수
+		
+		// * listCount : 총 게시글의 수
+		// listCount = new BoardService().selectListCount();
+		
+		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// * pageList : 페이징바 최대 개수
+		pageLimit = 10;
+		
+		// * boardLimit : 한 페이지에 보여질 게시글의 최대 개수
+		boardLimit = 10;
+		
+		// * maxPage : 가장 마지막 페이지가 몇 번 페이지인지(총 페이지 개수)
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+	
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		// 3) VO로 가공
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
+								  maxPage, startPage, endPage);
+		// System.out.println(pi);
+		
+		// 4) Service 호출
+		// ArrayList<Board> boardList = new BoardService().selectList(pi);
+		
+		// System.out.println(boardList);
+		
+		// 5) 응답화면 지정
+		// request.setAttribute("boardList", boardList);
+		// request.setAttribute("pageInfo", pi);
+		
+		// views/board/boardList.jsp
+		// request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
 		
 		view = "views/hotel/hotelList.jsp";
 		return view;
