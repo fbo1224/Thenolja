@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 	<style>
 		div{border: 1px solid red;}
 		#wrap{
@@ -43,13 +42,27 @@
 		#loginword{margin-top : 60px}
 		#login-area{width: 100%; height: 100%;}
 		
-		#password{
+		#id, #password{
 			margin-top: 20px;
+		}
+
+		#id{
+			background-image: url('resources/login/person.png');
+			background-repeat: no-repeat;
+			background-size: 50px;
+			background-position: right;
+			
+		}
+
+		.input:focus{
+			border-color: rgb(70, 149, 151);
 		}
 
 		.input{
 			width: 400px;
 			height: 50px;
+			border-color: rgb(230, 230, 230);
+			border-radius: 10px;
 		}
 		#content{text-align: center;}
 
@@ -92,19 +105,24 @@
 				</div>
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/login" method="post">
-						<div id="contnet1">
-							<input type="text" name="memId" id="id" class="input" placeholder="아이디 입력" maxlength="12" required>
-							<br>아이디가 일치하지 않습니다.
-							<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호 입력" maxlength="15" required>
-							<br><a href="">비밀번호를 잊으셨나요?</a>
+						<div id="content1">
+							<input type="text" name="memId" id="id" class="input" placeholder="아이디" maxlength="12" required>
+
+							<br><div id="idword">아이디가 일치하지 않습니다.</div>
+
+							<script>
+
+							</script>
+
+							<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호" maxlength="15" required>
+							<br><div><a href="">비밀번호를 잊으셨나요?</a></div>
 						</div>
 
 						<div id="content2" class="content">
 							<br><br>
 							<a href="views\\member\\findId.jsp">아이디 찾기</a>
-							/
-							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-							<a href="views\\member\\memberJoin.jsp" >회원가입</a>
+							/&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">
