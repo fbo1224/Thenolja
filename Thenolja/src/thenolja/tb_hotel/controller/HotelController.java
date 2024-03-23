@@ -1,6 +1,7 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import thenolja.common.MyFileRenamePolicy;
 import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.HotelCard;
 
 public class HotelController {
 
@@ -23,8 +25,9 @@ public class HotelController {
 		return view;
 	}
 	
-	public String insert(HttpServletRequest request, HttpServletResponse response) {
+	public int insert(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		int result = 0;
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// letterNo 우편번호
 			// loadName 도로명주소
@@ -62,16 +65,9 @@ public class HotelController {
 			
 			// hotelImg 파일
 			
-//			System.out.println(letterNo);
-//			System.out.println(loadName);
-//			System.out.println(detailAddr);
-//			System.out.println(hotelCate);
-//			System.out.println(hotelName);
-//			System.out.println(phone1+phone2);
 			// System.out.println(String.join(",", serList)); 여기 옵션아님
-//			System.out.println(introText);
 			
-			// 지역뽑기
+			// 지역만뽑기
 			String location = loadName.substring(0, loadName.indexOf(" ")+1);
 			
 			// 지역을 제외한 
@@ -81,7 +77,7 @@ public class HotelController {
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
 			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(newlocation + detailAddr);
+			h.setHotelAddress(loadName + detailAddr);
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
@@ -92,19 +88,9 @@ public class HotelController {
 			
 			System.out.println(h);
 			
-			int result = new HotelService().insertHotel(h);
-			
-			// 결과에 따른 응답페이지
-			if(result > 0) {
-				// hotelList로 이동
-				view="/";
-			} else {
-				request.setAttribute("errorMsg", "hotel 추가 실패...");
-				view="views/common/errorPage.jsp";
-			}
-			
+			result = new HotelService().insertHotel(h);
 		}
-		return view;
+		return result;
 		
 	}
 	
@@ -122,16 +108,16 @@ public class HotelController {
 		int endPage;   // 페이지 하단에 보여질 페이징바의 끝 수
 		
 		// * listCount : 총 게시글의 수
-		// listCount = new BoardService().selectListCount();
+		listCount = new HotelService().selectListCount();
 		
 		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		
+		System.out.println(currentPage);
 		// * pageList : 페이징바 최대 개수
-		pageLimit = 10;
+		pageLimit = 5;
 		
 		// * boardLimit : 한 페이지에 보여질 게시글의 최대 개수
-		boardLimit = 10;
+		boardLimit = 6;
 		
 		// * maxPage : 가장 마지막 페이지가 몇 번 페이지인지(총 페이지 개수)
 		
@@ -152,17 +138,17 @@ public class HotelController {
 		// System.out.println(pi);
 		
 		// 4) Service 호출
-		// ArrayList<Board> boardList = new BoardService().selectList(pi);
+		ArrayList<HotelCard> hotelList = new HotelService().selectList(pi);
 		
-		// System.out.println(boardList);
+		// System.out.println(hotelList);
 		
 		// 5) 응답화면 지정
-		// request.setAttribute("boardList", boardList);
-		// request.setAttribute("pageInfo", pi);
+		request.setAttribute("hotelList", hotelList);
+		request.setAttribute("pageInfo", pi);
 		
-		// views/board/boardList.jsp
+		// views/hotel/hotelList.jsp
 		// request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
-		
+		// currentPage=1
 		view = "views/hotel/hotelList.jsp";
 		return view;
 	}

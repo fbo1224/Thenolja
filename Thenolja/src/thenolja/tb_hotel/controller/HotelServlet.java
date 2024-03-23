@@ -26,8 +26,7 @@ public class HotelServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("*.hotels");
-		
+		// System.out.println("*.hotels");
 		String uri = request.getRequestURI();
 		// 요청한 url 전부 보여줌
 		System.out.println(uri);
@@ -39,12 +38,24 @@ public class HotelServlet extends HttpServlet {
 		String view = "";
 		boolean flag = true;
 		request.setCharacterEncoding("UTF-8");
+		
 		switch(mapping) {
 			// insertHotel.jsp
-			case "insertForm" : view =  hc.insertForm(request, response); break;
+			case "insertForm" : view =  hc.insertForm(request, response); flag = false; break;
 			
 			//
-			case "insert" : view =  hc.insert(request, response); break;
+			case "insert" : int result =  hc.insert(request, response);
+							// hotelList로 이동
+							if(result > 0) {
+								view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+								flag = false;
+							}
+							// 실패시 에러페이지로.
+							else {
+								request.setAttribute("errorMsg", "hotel 추가 실패...");
+								view="views/common/errorPage.jsp";	
+							}
+							break;
 			
 			// hotelList.jsp
 			case "hotelList" : view =  hc.hotelList(request, response); break;
