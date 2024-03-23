@@ -32,7 +32,8 @@ public class MemberUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		/*
 		request.setCharacterEncoding("UTF-8");
 		
 		String memName = request.getParameter("memName");
@@ -53,7 +54,7 @@ public class MemberUpdateController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "변경되었습니다.");
 			
-			String memPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
+			// String memPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
 			Member updateMem = new MemberService().login(memId, memPwd);
 			
 			session.setAttribute("loginUser", updateMem);
@@ -61,7 +62,7 @@ public class MemberUpdateController extends HttpServlet {
 		} else {
 			request.setAttribute("errorMsg", "정보수정에 실패하였습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		}*/
 	}
 
 	/**
