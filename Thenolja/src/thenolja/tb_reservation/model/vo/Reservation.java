@@ -17,30 +17,13 @@ public class Reservation {
 	private int paymentPrice;
 	private String phone;
 	private String name;
+	private int memNo;
 	
 	public Reservation() {
 		super();
 	}
-	public Reservation(int reserNo, Date reserDate, String bicycle, String cancelYN, String checkIn, String checkOut,
-			int people, int roomNo, int reMemNo, String payment, int paymentPrice) {
-		super();
-		this.reserNo = reserNo;
-		this.reserDate = reserDate;
-		this.bicycle = bicycle;
-		this.cancelYN = cancelYN;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.people = people;
-		this.roomNo = roomNo;
-		this.reMemNo = reMemNo;
-		this.payment = payment;
-		this.paymentPrice = paymentPrice;
-	}
 	
-	
-	
-	
-	
+
 	public Reservation(int reserNo, Date reserDate, String bicycle, String cancelYN, String checkIn, String checkOut,
 			int people, int roomNo, int reMemNo, String payment, int paymentPrice, String phone, String name) {
 		super();
@@ -135,6 +118,13 @@ public class Reservation {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getMemNo() {
+		return memNo;
+	}
+	
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 	@Override
 	public int hashCode() {

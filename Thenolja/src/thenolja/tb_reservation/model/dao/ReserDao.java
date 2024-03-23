@@ -87,7 +87,26 @@ public class ReserDao {
 		}
 		return list;
 	}
-
+	public int selectReserNo(Connection conn, int reserNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectReserNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+				
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	public Reservation selectReservation(Connection conn, int reserNo) {
 		
 		Reservation reser = new Reservation();
@@ -98,6 +117,7 @@ public class ReserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, reserNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -114,7 +134,6 @@ public class ReserDao {
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
 				reser.setPayment(rset.getString("PAYMENT"));
 				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,38 +141,10 @@ public class ReserDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return reser;
 	}
 	
-	public int selectReserNo(Connection conn) {
-		
-		int reserNo = 0;
-		Reservation reser = new Reservation();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectReserNo");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			rset.next();
-			
-			reserNo = rset.getInt("RESER_NO");
-				
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return reserNo;
-	}
+
 	
 	
 	

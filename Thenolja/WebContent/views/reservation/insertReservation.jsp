@@ -199,6 +199,7 @@
                     <br>
                     <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
                     <br>
+                    <%--<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">  --%>
                     <div id="mem-name">
                         <h5>*예약자 이름</h5>
                         <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
@@ -218,7 +219,7 @@
                      <!--              
                     <script>
                     	function paybtn(){
-                    		const value = document.getElementByName('bicycle').value;
+                    		const value = document.getElementByName('bicycle').html;
                     		console.log(value);
                     	}
                     </script>-->   
@@ -242,7 +243,6 @@
                 </div>
                 <div id="reservation">
                     <button type="submit" id="reser-btn">?원 결제하기</button>
-
                     
                 </div>
             </form>
@@ -294,6 +294,15 @@
 	  
 	</div>
 
+	<script>
+		$('#reser-btn').click(function(){	
+			
+			const reserNo = $(this).children().eq(0).text();
+			
+			location.href = '<%=contextPath%>/reserDetail?noticeNo=' + noticeNo;
+			
+	     });
+	</script>
 
 </body>
 </html>
