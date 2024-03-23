@@ -158,7 +158,8 @@
 </head>
 <body>
     
-     <%@ include file="../common/menubar.jsp" %>
+    <%@ include file="../common/menubar.jsp" %>
+    
     <div id="content">
         <div id="content_title">
             <div id="left_img">
@@ -166,143 +167,142 @@
             </div>
             <div id="left_title"><h2>숙소 예약</h2></div>
         </div>
-        <div id="detail">
-            <div id="reser_info">
-
-                <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px"></div>
-
-                <div id="reser_detail">
-                    <h2>마리안느 호텔</h2>
-                    <p>슈페리어 더블(오션뷰)</p>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-02-28 ~ 2024-02-29</p>
-                </div>
-            </div>
-
-            <div id="price_info">
-                <div id="reser_price">
-                    <table>
-                        <tr>
-                            <td width="400px">결제금액 : 333,000원</td>
-                            <td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
-                            <td width="400px">할인 금액 : 0원</td>
-                            <td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
-                            <td width="400px">결제금액 : 333,000원</td>
-                        </tr>
-                    </table>
-                </div>
- 
-            <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
-            
-                <div id="reser_mem_info">
-                    <br>
-                    <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
-                    <br>
-                    <%--<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">  --%>
-                    <div id="mem-name">
-                        <h5>*예약자 이름</h5>
-                        <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
-                    </div>
-                    <div id="mem-phone">
-                        <h5>*전화 번호</h5>
-                        <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
-                    </div>
-                
-                    <div id="mem-bicycle">
-                        <br>
-                        <h5>*이동 방식</h5>
-                        <input type="checkbox" name="bicycle" id="car" value="car"> 차량
-                        <input type="checkbox" name="bicycle" id="walk" checked value="road"> 도보
-                    </div>
-                </div>
-                     <!--              
-                    <script>
-                    	function paybtn(){
-                    		const value = document.getElementByName('bicycle').html;
-                    		console.log(value);
-                    	}
-                    </script>-->   
-                <div id="reser-coupon">
-                    <br>
-                    <h3>할인</h3>
-                    <br>
-                    <h5>쿠폰</h5>
-                    <br>
-                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
-                    <!-- onclick="location.href='<%=contextPath%>/selectCoupon'" -->
-                </div>
-                <div id="reser_pay">
-                    <h3>결제 수단</h3>
-                    <br>
-                    <input type="button" id="payment" value="무통장 입금">
-                    <br><br>
-                    <h5>신한은행 110-424-432780 예금주((주)더놀자)</h5>
-                    <h5 style="color:red">"반드시 예약자 성함으로 입금해주세요"</h5>
-                </div>
-                <div id="reservation">
-                    <button type="submit" id="reser-btn">?원 결제하기</button>
-                    
-                </div>
-            </form>
-            </div>
-        </div>
-
-    </div>
-    <div class="container">
+        
+		<div id="detail">
+			<div id="reser_info">
 	
-	  <!-- The Modal -->
-	  <div class="modal fade" id="myModal">
-	    <div class="modal-dialog modal-dialog-centered">
-	      <div class="modal-content">
-	      
-	        <div class="modal-header">
-	          <h4 class="modal-title">내 쿠폰</h4>
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
+	    		<div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px"></div>
+	
+					<div id="reser_detail">
+				        <h2>마리안느 호텔</h2>
+				        <p>슈페리어 더블(오션뷰)</p>
+				        <p>2인</p>
+				        <p>117,000원</p>
+				        <p>2024-02-28 ~ 2024-02-29</p>
+	    			</div>
+			</div>
+	
+	        <div id="price_info">
+	        	<div id="reser_price">
+	        		<table>
+	        			<tr>
+	        				<td width="400px">결제금액 : 333,000원</td>
+							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
+							<td width="400px">할인 금액 : 0원</td>
+							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
+							<td width="400px">결제금액 : 333,000원</td>
+						</tr>
+	               </table>
+				</div>
+				
+				<form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+					<div id="reser_mem_info">
+		                <br>
+		                <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
+		                <br>
+		                <%--<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">  --%>
+	               		<div id="mem-name">
+		                    <h5>*예약자 이름</h5>
+		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+	           			</div>
+		                <div id="mem-phone">
+		                    <h5>*전화 번호</h5>
+		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                </div>
+		                <div id="mem-bicycle">
+							<br>
+						    <h5>*이동 방식</h5>
+						    <input type="checkbox" name="bicycle" id="car" value="car"> 차량
+						    <input type="checkbox" name="bicycle" id="walk" checked value="road"> 도보
+						</div>
+	                </div>
+					<!--              
+					<script>
+						function paybtn(){
+							const value = document.getElementByName('bicycle').html;
+							console.log(value);
+						}
+					</script>
+					-->   
+	                <div id="reser-coupon">
+	                    <br>
+	                    <h3>할인</h3>
+	                    <br>
+	                    <h5>쿠폰</h5>
+	                    <br>
+	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
+	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+	                    <!-- onclick="location.href='<%=contextPath%>/selectCoupon'" -->
+	                </div>
+	                
+	                <div id="reser_pay">
+	                    <h3>결제 수단</h3>
+	                    <br>
+	                    <input type="button" id="payment" value="무통장 입금">
+	                    <br><br>
+	                    <h5>신한은행 110-424-432780 예금주((주)더놀자)</h5>
+	                    <h5 style="color:red">"반드시 예약자 성함으로 입금해주세요"</h5>
+	                </div>
+	                
+	                <div id="reservation">
+	                    <button type="submit" id="reser-btn">?원 결제하기</button>
+	                </div>
+	            </form>
+			</div>
+		</div>
+    </div>
+    
+    <div class="container">
+    	<!-- The Modal -->
+	 	<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-dialog-centered">
+	      		<div class="modal-content">
+	        		<div class="modal-header">
+			        <h4 class="modal-title">내 쿠폰</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        		</div>
 	        
-	        <div class="modal-body">
-	        <table class="table table-hover">
-	        
-			<% if(list.isEmpty()) { %>
-                <tr>
-                   <th colspan="5">쿠폰이 존재하지 않습니다.</th>
-                </tr>
-             <% } else { %>
-               
-            <% for(Coupon c : list) { %>
-               <tr class="list">
-                  <td><%= c.getCouponNo() %></td>
-                  <td><%= c.getCouponContent() %></td>
-                  <td><%= c.getCouponDate() %></td>
-                  <td><%= c.getCouponCode() %></td>
-               </tr>            
-             	<% } %>
-             
-             <% } %>
-             </table>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-dismiss="modal">적용</button>
-	        </div>
-	        
-	      </div>
-	    </div>
-	  </div>
-	  
+			        <div class="modal-body">
+			        <table class="table table-hover">
+		        
+					<% if(list.isEmpty()) { %>
+		                <tr>
+		                   <th colspan="5">쿠폰이 존재하지 않습니다.</th>
+		                </tr>
+		             <% } else { %>
+		               
+			             <% for(Coupon c : list) { %>
+			             	<tr class="list">
+			                <td><%= c.getCouponNo() %></td>
+			                <td><%= c.getCouponContent() %></td>
+			                <td><%= c.getCouponDate() %></td>
+			                <td><%= c.getCouponCode() %></td>
+			                </tr>
+		                <% } %>
+	                <% } %>
+	                </table>
+					</div>
+				
+					<div class="modal-footer">
+		         	<button type="button" class="btn btn-secondary" data-dismiss="modal">적용</button>
+		       		</div>
+	     		</div>
+			</div>
+		</div>
 	</div>
-
+	<!-- 
 	<script>
-		$('#reser-btn').click(function(){	
+		$('#reser-btn').click(function(){
 			
 			const reserNo = $(this).children().eq(0).text();
 			
-			location.href = '<%=contextPath%>/reserDetail?noticeNo=' + noticeNo;
+			// location.href = '<%=contextPath%>/reserDetail?reserNo=' + reserNo;
+			location.href = '<%=contextPath%>/views/reservation/waitingPage.jsp';
+			
 			
 	     });
 	</script>
+	-->
 
 </body>
 </html>

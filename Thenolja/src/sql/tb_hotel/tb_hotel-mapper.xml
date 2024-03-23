@@ -24,5 +24,68 @@
 		 	   )    
 	</entry>
 	
+	<entry key="selectListCount">
+		SELECT
+			  COUNT(*)
+		  FROM
+		      TB_HOTEL
+		 WHERE
+		      HOTEL_YN = 'Y'
+	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+	    FROM(SELECT A.*, ROWNUM RNUM 
+	        FROM(
+	          SELECT
+	              DISTINCT
+	              HOTEL_NAME,
+	              HOTEL_LOCATION,
+	              HOTEL_CATEGORY,
+	              HOTEL_PATH,
+	              MIN(ROOM_PRICE) AS ROOM_PRICE
+	          FROM
+	              TB_HOTEL
+	         JOIN TB_ROOM
+	           ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+	        WHERE
+	             HOTEL_YN = 'Y'
+	        GROUP BY
+	                 HOTEL_NAME,
+	                 HOTEL_LOCATION,
+	                 HOTEL_CATEGORY,
+	                 HOTEL_PATH
+	        ORDER BY ROOM_PRICE DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+		
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </properties>

@@ -56,12 +56,16 @@
 		  JOIN
 		        TB_MEMBER ON(MEM_NO = CO_MEM_NO)
 	</entry>
+	
 	<entry key="selectReserNo">
 	SELECT RESER_NO
 		  FROM 
 		  	  TB_RESERVATION
 	  ORDER BY RESER_NO DESC
 	</entry>
+	
+	<!-- 
+	
 	<entry key="selectReservation">
 		SELECT
 		        RESER_NO,
@@ -89,7 +93,11 @@
 			
 	</entry>
 	
-
+ 	-->
+ 	
+ 	<entry key="selectLastReservation">
+ 		SELECT * FROM TB_RESERVATION ORDER BY RESER_NO DESC;
+ 	</entry>
 	
 	
 	

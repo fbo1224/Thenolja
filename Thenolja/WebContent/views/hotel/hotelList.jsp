@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.HotelCard, thenolja.common.model.vo.PageInfo" %>    
+<%
+	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	// 페이징바 만들 때 필요한 변수 미리 세팅
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,34 +33,38 @@
 		align-items: center;
 		justify-content: space-evenly;
 		flex-wrap: wrap;
-		padding: 50px;
+		padding: 10px;
 	}
 	
-	#card{
+	.cards{
 		width:	45%;
-		height: 30%;
 		margin: 10px;
 		box-shadow: 3px 3px 2px gray;
-		display: flex;
 		border-radius: 10px;
 	}
-	#card-imgDiv, #card-info{
+	.card-imgDiv, .card-info{
+		display: inline-block;
 		width: 50%;
 		height: 100%;
 	}
-	#card-img{
+	.card-img{
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
 	}
-
-	#card-info >h4 {
+	.card-info {
+		float:right;
+	}
+	.card-info >h4 {
 		text-align: center;
 	}
-	#card-info > p{
+	.card-info > p{
 		margin: 0px;
 		padding-left: 30px;
 		margin-bottom: 10px;
+	}
+	.paging-area {
+		float:
 	}
 </style>
 </head>
@@ -62,18 +78,49 @@
 		<%@ include file="./common/searchForm.jsp" %>
 		
 		<div id="content-2-lists">
-			<div id="card">
-  				<div id="card-imgDiv"><img id="card-img" src="resources/img/pepe2.jpeg"></div>
-  				<div id="card-info">
-					<h4>부산</h4>
-					<p>판다호텔</p>
-					<p>호텔<p>
-					<p><span>★</span><span>4.8</span></p>
-					<p>159,000</p>
-  				</div>
-			</div>
+			<%if(list.isEmpty()){ %>
+				<div class="cards">
+					<h3>조회된 호텔이 없습니다.</h3>
+				</div>	
+				<%} else { %>
+					<%for(HotelCard hc : list){ %>
+					<div class="cards">
+						<div class="card-imgDiv"><img class="card-img" src="<%= contextPath %><%= hc.getHotelPath() %>"></div>
+	  					<div class="card-info">
+							<h4><%= hc.getHotelLocation() %></h4>
+							<p>이름 : <%= hc.getHotelName() %></p>
+							<p>종류 : <%= hc.getHotelCategory() %><p>
+							<p><span>★</span><span>4.8</span></p>
+							<p>가격 : <%= hc.getRoomPrice() %></p>
+	  					</div>
+	  				</div>	
+					<%} %>
+  				<%} %>
 		
 		</div>
+		<div class="paging-area" align="center">
+	        	<%if(currentPage > 1){ %>
+	        		<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
+					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
+				<%} %>
+				
+	        	<%for(int i = startPage; i <= endPage; i++){ %>
+	        		<% if(currentPage != i) { %>
+	        			<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
+	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>' " ><%= i %></button>
+	        		<%} else { %>
+	        			<button
+	        			class="btn btn-sm btn-danger"
+	        			style="color: #ff52a0;" 
+	        			disabled ><%= i %></button>
+	        		<%} %>
+	        	<%} %>
+	        	
+	        	<%if(currentPage != maxPage){ %>
+	        		<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
+	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
+	        	<%} %>
+	     </div>
 	</div>
 </body>
 </html>

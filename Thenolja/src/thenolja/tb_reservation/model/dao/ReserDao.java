@@ -87,6 +87,7 @@ public class ReserDao {
 		}
 		return list;
 	}
+	
 	public int selectReserNo(Connection conn, int reserNo) {
 		
 		int result = 0;
@@ -107,6 +108,7 @@ public class ReserDao {
 		
 		return result;
 	}
+	/*
 	public Reservation selectReservation(Connection conn, int reserNo) {
 		
 		Reservation reser = new Reservation();
@@ -143,7 +145,36 @@ public class ReserDao {
 		}
 		return reser;
 	}
+	*/
 	
+	public Reservation selectLastReservation(Connection conn) {
+		
+		Reservation reser = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			reser.setReserNo(rset.getInt("RESER_NO"));
+			reser.setReserDate(rset.getDate("RESER_DATE"));
+			reser.setName(rset.getString("RESER_NAME"));
+			reser.setPhone(rset.getString("RESER_PHONE"));
+			reser.setBicycle(rset.getString("BICYCLE"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reser;
+	}
 
 	
 	

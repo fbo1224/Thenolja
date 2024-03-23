@@ -51,12 +51,25 @@ public class ReserService {
 		
 		return result;
 	}
-
+	
+	/*
 	public Reservation selectReservation(int reserNo) {
 		
 		Connection conn = getConnection();
 		
 		Reservation reser = new ReserDao().selectReservation(conn, reserNo);
+		
+		close(conn);
+		
+		return reser;
+	}
+	*/
+	
+	public Reservation selectLastReservation() {
+		
+		Connection conn = getConnection();
+		
+		Reservation reser = new ReserDao().selectLastReservation(conn);
 		
 		close(conn);
 		
