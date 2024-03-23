@@ -68,7 +68,7 @@
             <div class="content2"></div>
             <div class="content2">
                 <button class="btn" id="modify">정보수정</button>
-                <button class="btn" id="with">회원탈퇴</button>
+                <button class="btn" id="without">회원탈퇴</button>
             </div>
         </div>
         <div id="content3" class="content"><hr>

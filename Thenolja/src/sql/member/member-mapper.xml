@@ -75,7 +75,19 @@
 	
 	<entry key="updateMember">
 		UPDATE
+		       TB_MEMBER
+		   SET
+		       EMAIL = ?,
+		       MEM_PWD = ?
+		 WHERE
+		       MEM_ID = ?
 		      
+		UPDATE
+		       TB_NONMEM
+		   SET
+		       MEM_NAME = ?
+		 WHERE
+		       MEM_ID = ?
 	
 	</entry>
 	<entry key="selectMember">

@@ -53,7 +53,7 @@ public class MemberUpdateController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "변경되었습니다.");
 			
-			String updatePwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
+			String memPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
 			Member updateMem = new MemberService().login(memId, memPwd);
 			
 			session.setAttribute("loginUser", updateMem);
