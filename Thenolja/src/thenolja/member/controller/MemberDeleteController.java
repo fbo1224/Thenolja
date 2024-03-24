@@ -34,17 +34,25 @@ public class MemberDeleteController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String memPwd = request.getParameter("memPwd");
+		String pwdCheck = request.getParameter("pwdCheck");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		int result = new MemberService().delete(memPwd, memNo);
 		
+		int result = new MemberService().delete(memNo);
 		
-		if(result > 0) {
-			HttpSession session = request.getSession();
-			session.removeAttribute("loginUser");
-			response.sendRedirect(request.getContextPath());
+		if(pwdCheck.equals(memPwd)) {
+		
+			if(result > 0) {
+				HttpSession session = request.getSession();
+				session.removeAttribute("loginUser");
+				response.sendRedirect(request.getContextPath());
+			} else {
+				request.setAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			} 
+			
 		} else {
-			request.setAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
+			request.setAttribute("errorMsg", "비밀번호가 일치하지 않습니다!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}

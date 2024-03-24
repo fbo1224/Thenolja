@@ -148,7 +148,7 @@ public class MemberDao {
 		return result;
 	}
 //-------------------------회원 탈퇴------------------------------
-	public int delete(Connection conn, String memPwd, int memNo) {
+	public int delete(Connection conn, int memNo) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -157,8 +157,7 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, memPwd);
-			pstmt.setInt(2, memNo);
+			pstmt.setInt(1, memNo);
 			
 			result = pstmt.executeUpdate();
 			

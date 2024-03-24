@@ -64,10 +64,10 @@ public class MemberService {
 		return result;
 	}
 //-------------------------------회원탈퇴---------------------------------------
-	public int delete(String memPwd, int memNo) {
+	public int delete(int memNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().delete(conn, memPwd, memNo);
+		int result = new MemberDao().delete(conn, memNo);
 		
 		if(result > 0) JDBCTemplate.commit(conn);
 		else JDBCTemplate.rollback(conn);

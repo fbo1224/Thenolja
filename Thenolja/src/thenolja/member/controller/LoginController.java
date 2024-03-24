@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
 		
 		Member loginUser = new MemberService().login(memId, memPwd);
 		
-		// System.out.println(loginUser);
+		 System.out.println(loginUser);
 		
 		if(loginUser == null) {
 			request.setAttribute("errorMsg", "로그인에 실패하였습니다!");

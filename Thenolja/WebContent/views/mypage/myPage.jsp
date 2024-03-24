@@ -126,6 +126,7 @@
                 <button type="submit" onclick="return deleteMember();">회원 탈퇴</button>
 			</div>
 			 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
+			 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">
 			 	
 			  	
 			  	
