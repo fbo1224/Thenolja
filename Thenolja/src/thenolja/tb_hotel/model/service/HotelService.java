@@ -49,6 +49,14 @@ public class HotelService {
 		return list;
 	}
 	
+	// VO 타입.
+	// public selectHotel() {}
+	
+	
+	
+	
+	
+	
 	
 	
 	

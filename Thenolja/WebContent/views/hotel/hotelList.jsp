@@ -84,7 +84,7 @@
 				</div>	
 				<%} else { %>
 					<%for(HotelCard hc : list){ %>
-					<div class="cards">
+					<div class="cards" id="<%= hc.getHotelNo() %>" >
 						<div class="card-imgDiv"><img class="card-img" src="<%= contextPath %><%= hc.getHotelPath() %>"></div>
 	  					<div class="card-info">
 							<h4><%= hc.getHotelLocation() %></h4>
@@ -93,11 +93,16 @@
 							<p><span>★</span><span>4.8</span></p>
 							<p>가격 : <%= hc.getRoomPrice() %></p>
 	  					</div>
-	  				</div>	
+	  				</div>
 					<%} %>
   				<%} %>
 		
 		</div>
+		<script>
+			$('.cards').click(function(e){
+				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+			});
+		</script>
 		<div class="paging-area" align="center">
 	        	<%if(currentPage > 1){ %>
 	        		<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"

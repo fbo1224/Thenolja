@@ -74,7 +74,7 @@ public class HotelDao {
 			rset = pstmt.executeQuery();
 			rset.next();
 			
-			listCnt = rset.getInt("COUNT(*)");
+			listCnt = rset.getInt("CNTS");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -103,8 +103,10 @@ public class HotelDao {
 			
 			rset = pstmt.executeQuery();
 			
+			// 리뷰관련 컬럼 추가 해야함.
 			while(rset.next()) {
 				HotelCard hc = new HotelCard();
+				hc.setHotelNo(rset.getInt("HOTEL_NO"));
 				hc.setHotelName(rset.getString("HOTEL_NAME"));
 				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
 				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));

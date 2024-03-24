@@ -43,7 +43,9 @@ public class HotelController {
 			         .getRealPath("/resources/hotelImage");
 			
 			int maxSize = 1024 * 1024 * 10;
+			
 			MultipartRequest multiRequest = null;
+			
 			try {
 				multiRequest =
 						new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
@@ -52,7 +54,7 @@ public class HotelController {
 				e.printStackTrace();
 			}
 			
-			String letterNo = multiRequest.getParameter("letterNo");
+			String letterNo = multiRequest.getParameter("letterNo"); // 우편번호 제외
 			String loadName = multiRequest.getParameter("loadName");
 			String detailAddr = multiRequest.getParameter("detailAddr");
 			String hotelCate = multiRequest.getParameter("hotelCate");
@@ -86,7 +88,7 @@ public class HotelController {
 				h.setHotelPath("/resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
 			
-			System.out.println(h);
+			// System.out.println(h);
 			
 			result = new HotelService().insertHotel(h);
 		}
@@ -140,6 +142,7 @@ public class HotelController {
 		// 4) Service 호출
 		ArrayList<HotelCard> hotelList = new HotelService().selectList(pi);
 		
+		// 확인용 출력
 		// System.out.println(hotelList);
 		
 		// 5) 응답화면 지정
@@ -163,6 +166,12 @@ public class HotelController {
 	
 	public String select(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		// System.out.println(hotelNo);
+		
+		// new HotelService().selectHotel(hotelNo);
+		
+		
 		
 		view = "views/hotel/hotelDetail.jsp";
 		return view;
