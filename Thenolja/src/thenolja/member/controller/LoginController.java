@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
 				response.sendRedirect(request.getContextPath());
 				
 				
-			} else{
+			} else/* if(loginUser.getMemStatus().equals("A"))*/{
 				
 				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);
 				
