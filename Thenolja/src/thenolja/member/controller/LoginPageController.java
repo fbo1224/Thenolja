@@ -28,7 +28,7 @@ public class LoginPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.getRequestDispatcher("views\\login\\login.jsp").forward(request, response);
-		 System.out.println("로그인페이지서블릿");
+		// System.out.println("로그인페이지서블릿");
 	}
 
 	/**

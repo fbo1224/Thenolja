@@ -46,6 +46,9 @@ public class MemberDeleteController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.removeAttribute("loginUser");
 				response.sendRedirect(request.getContextPath());
+				
+				/*request.setAttribute("alertMsg", "그동안 더놀자를 이용해주셔서 감사합니다.");*/
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} else {
 				request.setAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

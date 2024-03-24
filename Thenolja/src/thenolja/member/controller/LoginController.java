@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
 		
 		Member loginUser = new MemberService().login(memId, memPwd);
 		
-		 System.out.println(loginUser);
+		// System.out.println(loginUser);
 		
 		if(loginUser == null) {
 			request.setAttribute("errorMsg", "로그인에 실패하였습니다!");
@@ -54,11 +54,16 @@ public class LoginController extends HttpServlet {
 			if(loginUser.getMemStatus().equals("Y")) {
 			
 				response.sendRedirect(request.getContextPath());
-			} else {
-				// response.sendRedirect(request.getContextPath()+"/views/common/adminMain.jsp");
-				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);;
 				
-			}
+				
+			} else{
+				
+				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);
+				
+			} /*else {
+				session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}*/
 		}
 		
 		

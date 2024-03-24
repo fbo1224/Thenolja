@@ -125,13 +125,13 @@
 				
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone"></td>
+					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" required></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요."></td>
+					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요." required></td>
 					<!--
 					<td>@</td>
 					<td>
@@ -147,7 +147,7 @@
 				
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="bornDate" placeholder="생년월일 8자리를 입력해주세요."></td>
+					<td><input type="text" name="bornDate" placeholder="생년월일 8자리를 입력해주세요." required></td>
 					<td></td>
 				</tr>
 

@@ -130,21 +130,23 @@
 			 	
 			  	
 			  	
-			  	
+			<!-- 
 			<script>
-			function deleteMember(){
-				
-				const value = prompt('탈퇴를 원하신다면 "어쩌고저쩌고"를 정확히 입력해주세요.');
-				
-				if(value === ('어쩌고저쩌고')){
-					return true;
+				function deleteMember(){
+					
+					const value = prompt('탈퇴를 원하신다면 "어쩌고저쩌고"를 정확히 입력해주세요.');
+					
+					if(value === ('어쩌고저쩌고')){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
-				else{
-					return false;
-				}
-			}
 			
-			</script>
+			</script> 
+			-->
+			
 			</form>
 		 	</div>
 			</div>

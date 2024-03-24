@@ -101,7 +101,7 @@
 	</entry>
 	
 	<entry key="deleteMember">
-	<!-- 
+	
 		UPDATE
 		       TB_NONMEM
 		   SET
@@ -109,7 +109,8 @@
 		 WHERE
 		       MEM_NO = ?
 		   AND
-		       MEM_STATUS = 'Y' -->
+		       MEM_STATUS = 'Y'
+	
 	</entry>
 	
 	
