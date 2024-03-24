@@ -121,10 +121,13 @@
 	padding: 3px;
 }
 .content-rooms-card div {
-	white-space: nowrap;
 	padding: 5px;
 	font-size: 14px;
 }
+.room-infos {
+	width: 40%;
+}
+
 </style>
 </head>
 <body>
@@ -169,18 +172,21 @@
 			
 			<div id="detail-content-rooms">
 				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
-				<div class="content-rooms-card">
-					<img src="<%= contextPath %><%= dh.getRoomImg() %>">
-					<div class="room-infos">
-						<h4><%= dh.getRoomName() %></h4>
-						<p>입실 16:00</p>
-						<p>퇴실 11:00</p>
-					</div>
-					<div>
-						<p>쿠폰적용가능</p>
-						<button class="btn btn-sm btn-info">객실 예약</button>
-					</div>
-				</div>			
+					<%for(RoomInfo ri : dh.getRoomList()) { %>
+					<div class="content-rooms-card">
+						<img src="<%= contextPath %><%= ri.getRoomImg() %>">
+						<div class="room-infos">
+							<h4><%= ri.getRoomName() %></h4>
+							<p>입실시간 : <%= ri.getCheckInTime() %></p>
+							<p>퇴실시간 : <%= ri.getCheckOutTime() %></p>
+							<p>가격 : <%= ri.getRoomPrice() %></p>
+						</div>
+						<div>
+							<p>쿠폰적용가능</p>
+							<button class="btn btn-sm btn-info">객실 예약</button>
+						</div>
+					</div>			
+					<%} %>
 			</div>
 			
 			<div id="detail-content-intro">

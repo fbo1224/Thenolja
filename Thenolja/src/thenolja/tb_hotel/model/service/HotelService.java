@@ -63,6 +63,7 @@ public class HotelService {
 			// 호텔정보를 정상적으로 가져왔다면
 		    // 서비스 리스트, 선택한 호텔 리뷰 가져오기
 			dh.setSerList(selectHotelInfos.hotelServiceList(conn, hotelNo));
+			dh.setRoomList(selectHotelInfos.hotelRoomList(conn, hotelNo));
 			dh.setReviewList(selectHotelInfos.hotelReviews(conn, hotelNo));
 		}
 		

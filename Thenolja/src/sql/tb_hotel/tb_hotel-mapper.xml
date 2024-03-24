@@ -69,21 +69,10 @@
 		      HOTEL_NAME,
 		      HOTEL_PATH,
 		      HOTEL_CATEGORY,
-		      HOTEL_INTRO,
-		      TB_ROOM.CHECKIN_TIME,
-		      TB_ROOM.CHECKOUT_TIME,
-		      ROOM_NUM,
-		      ROOM_PRICE,
-		      ROOM_IMG,
-		      ROOM_NAME
-	      FROM 
-	     	  TB_HOTEL  
-	    JOIN TB_ROOM
-	      ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
-	    JOIN TB_ROOM_IMG
-	      ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
-	    WHERE HOTEL_YN = 'Y'
-	     AND TB_HOTEL.HOTEL_NO = ?
+		      HOTEL_INTRO
+    	  FROM TB_HOTEL  
+         WHERE HOTEL_YN = 'Y'
+           AND HOTEL_NO = ?
 	</entry>
 	
 	<entry key="hotelServiceList">
@@ -101,6 +90,24 @@
 	       AND 
 	       	  TB_HOTEL.HOTEL_NO = ?
 	</entry>
+	
+	<entry key="hotelRoomList">
+		SELECT
+		      TB_ROOM.CHECKIN_TIME,
+		      TB_ROOM.CHECKOUT_TIME,
+		      ROOM_NUM,
+		      ROOM_PRICE,
+		      ROOM_IMG,
+		      ROOM_NAME
+  		 FROM TB_ROOM
+	     JOIN TB_HOTEL
+	       ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+	     JOIN TB_ROOM_IMG
+	       ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
+	    WHERE 
+	         TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
 	
 	<entry key="hotelReviews">
 	SELECT

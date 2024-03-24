@@ -3,6 +3,7 @@ package thenolja.tb_hotel.model.vo;
 import java.sql.Date;
 
 public class HotelReview {
+	
 	private int hotelNo;
 	private int roomNo;
 	private int reviewScore;
