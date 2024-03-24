@@ -9,8 +9,10 @@ import java.util.ArrayList;
 
 import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.dao.HotelDao;
+import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.ServiceList;
 
 public class HotelService {
 
@@ -22,7 +24,7 @@ public class HotelService {
 		
 		if(result > 0) {
 			commit(conn);
-		}
+		} 
 		
 		close(conn);
 				
@@ -49,8 +51,26 @@ public class HotelService {
 		return list;
 	}
 	
-	// VO 타입.
-	// public selectHotel() {}
+	
+	public DetailHotel selectHotel(int hotelNo) {
+		Connection conn = getConnection();
+		
+		HotelDao selectHotelInfos = new HotelDao();
+		
+		DetailHotel dh = selectHotelInfos.selectHotel(conn, hotelNo);
+		
+		if(dh != null) {
+			// 호텔정보를 정상적으로 가져왔다면
+		    // 서비스 리스트, 선택한 호텔 리뷰 가져오기
+			dh.setSerList(selectHotelInfos.hotelServiceList(conn, hotelNo));
+			dh.setReviewList(selectHotelInfos.hotelReviews(conn, hotelNo));
+		}
+		
+		close(conn);
+		
+		return dh;
+	}
+	
 	
 	
 	

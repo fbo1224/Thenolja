@@ -2,7 +2,6 @@ package thenolja.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,58 +10,51 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thenolja.member.model.service.MemberService;
-import thenolja.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MemberDeleteController
  */
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/delete.me")
+public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberDeleteController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
 		
-		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
+		String pwdCheck = request.getParameter("pwdCheck");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member loginUser = new MemberService().login(memId, memPwd);
 		
-		 System.out.println(loginUser);
+		int result = new MemberService().delete(memNo);
 		
-		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인에 실패하였습니다!");
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		} else {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("alertMsg", "환영합니다");
-			
-			if(loginUser.getMemStatus().equals("Y")) {
-			
+		if(pwdCheck.equals(memPwd)) {
+		
+			if(result > 0) {
+				HttpSession session = request.getSession();
+				session.removeAttribute("loginUser");
 				response.sendRedirect(request.getContextPath());
 			} else {
-				// response.sendRedirect(request.getContextPath()+"/views/common/adminMain.jsp");
-				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);;
-				
-			}
+				request.setAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			} 
+			
+		} else {
+			request.setAttribute("errorMsg", "비밀번호가 일치하지 않습니다!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
-		
 	}
 
 	/**

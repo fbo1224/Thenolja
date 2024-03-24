@@ -1,5 +1,7 @@
 package thenolja.tb_hotel.model.vo;
 
+import java.util.Arrays;
+
 public class Hotel {
 	private int hotelNo;
 	private String hotelName;
@@ -11,13 +13,15 @@ public class Hotel {
 	private String hotelIntro;
 	private String hotelYN;
 	private String hostName;
+	private String[] serList;
 	
 	public Hotel() {
 		super();
 	}
 
 	public Hotel(int hotelNo, String hotelName, String hotelPhone, String hotelLocation, String hotelAddress,
-			String hotelCategory, String hotelPath, String hotelIntro, String hotelYN, String hostName) {
+			String hotelCategory, String hotelPath, String hotelIntro, String hotelYN, String hostName,
+			String[] serList) {
 		super();
 		this.hotelNo = hotelNo;
 		this.hotelName = hotelName;
@@ -29,6 +33,15 @@ public class Hotel {
 		this.hotelIntro = hotelIntro;
 		this.hotelYN = hotelYN;
 		this.hostName = hostName;
+		this.serList = serList;
+	}
+
+	public String[] getSerList() {
+		return serList;
+	}
+
+	public void setSerList(String[] serList) {
+		this.serList = serList;
 	}
 
 	public int getHotelNo() {
@@ -116,8 +129,7 @@ public class Hotel {
 		return "Hotel [hotelNo=" + hotelNo + ", hotelName=" + hotelName + ", hotelPhone=" + hotelPhone
 				+ ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelCategory="
 				+ hotelCategory + ", hotelPath=" + hotelPath + ", hotelIntro=" + hotelIntro + ", hotelYN=" + hotelYN
-				+ ", hostName=" + hostName + "]";
+				+ ", hostName=" + hostName + ", serList=" + Arrays.toString(serList) + "]";
 	}
-
 	
 }

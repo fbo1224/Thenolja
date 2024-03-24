@@ -13,6 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import thenolja.common.MyFileRenamePolicy;
 import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.service.HotelService;
+import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
 
@@ -67,7 +68,7 @@ public class HotelController {
 			
 			// hotelImg 파일
 			
-			// System.out.println(String.join(",", serList)); 여기 옵션아님
+			System.out.println(String.join(",", serList));
 			
 			// 지역만뽑기
 			String location = loadName.substring(0, loadName.indexOf(" ")+1);
@@ -83,6 +84,8 @@ public class HotelController {
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
+			// 서비스 목록
+			h.setSerList(serList);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("/resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
@@ -169,11 +172,21 @@ public class HotelController {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		// System.out.println(hotelNo);
 		
-		// new HotelService().selectHotel(hotelNo);
+		// 선택한 호텔 정보 가져오기
+		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
+
+		System.out.println(dh);
+	
+		if(dh != null) {
+			// request에 가져온정보들 담기
+			request.setAttribute("hotelDetail", dh);
+			view = "views/hotel/hotelDetail.jsp";
+			
+		} else {
+			view = "";
+		}
 		
 		
-		
-		view = "views/hotel/hotelDetail.jsp";
 		return view;
 	}
 }

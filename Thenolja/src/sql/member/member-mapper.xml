@@ -101,7 +101,15 @@
 	</entry>
 	
 	<entry key="deleteMember">
-
+	<!-- 
+		UPDATE
+		       TB_NONMEM
+		   SET
+		       MEM_STATUS = 'N'
+		 WHERE
+		       MEM_NO = ?
+		   AND
+		       MEM_STATUS = 'Y' -->
 	</entry>
 	
 	
