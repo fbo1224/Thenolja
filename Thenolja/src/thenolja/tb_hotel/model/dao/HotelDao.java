@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.HotelReview;
+import thenolja.tb_hotel.model.vo.ServiceList;
 
 public class HotelDao {
 	private Properties prop = new Properties();
@@ -125,11 +128,105 @@ public class HotelDao {
 		return list;
 	}
 	
+	// 하나의 호텔정보 가져오기
+	public DetailHotel selectHotel(Connection conn, int hotelNo) {
+		DetailHotel dh = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				dh = new DetailHotel();
+				dh.setHotelName(rset.getString("HOTEL_NAME"));
+				dh.setHotelPath(rset.getString("HOTEL_PATH"));
+				dh.setHotelCate(rset.getString("HOTEL_CATEGORY"));
+				dh.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				dh.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				dh.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				dh.setRoomNum(rset.getInt("ROOM_NUM"));
+				dh.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				dh.setRoomImg(rset.getString("ROOM_IMG"));
+				dh.setRoomName(rset.getString("ROOM_NAME"));	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return dh;
+	}
 	
+	// 서비스리스트 가져오기
+	public ArrayList<ServiceList> hotelServiceList(Connection conn, int hotelNo) {
+		ArrayList<ServiceList> serList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("hotelServiceList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ServiceList sl= new ServiceList();
+				sl.setServiceNo(rset.getInt("SERVICE_NO"));
+				sl.setServiceName(rset.getString("SERVICE_NAME"));
+				serList.add(sl);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return serList;
+	}
 	
-	
-	
-	
+	// 해당 호텔의 리뷰 가져오기
+	public ArrayList<HotelReview> hotelReviews(Connection conn, int hotelNo){
+		ArrayList<HotelReview> hrList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("hotelReviews");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				HotelReview hr = new HotelReview();
+				
+				hr.setHotelNo(rset.getInt("HOTEL_NO"));
+				hr.setRoomNo(rset.getInt("ROOM_NO"));
+				hr.setReserName(rset.getString("RESER_NAME"));
+				hr.setCreateDate(rset.getDate("CREATE_DATE"));
+				hr.setReviewScore(rset.getInt("REVIEW_SCORE"));
+				hr.setReviewContent(rset.getString("REVIEW_CONTENT"));
+				
+				hrList.add(hr);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return hrList;
+	}
 	
 	
 	
