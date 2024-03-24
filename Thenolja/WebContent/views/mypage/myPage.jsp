@@ -101,9 +101,58 @@
             <div id="ct2_3"></div>
             <div id="ct2_4">
                 <button type="button" id="modify">정보수정</button>
-                <button type="button" id="without">회원탈퇴</button>
+                <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
+        
+        <!-- 회원탈퇴 모달 -->
+	<div class="modal" id="deleteForm">
+		<div class="modal-dialog">
+	 		<div class="modal-content">
+	
+	        <!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title" style="color:red">회원 탈퇴</h4>
+			 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+			<form action="<%=contextPath%>/delete.me" method="post">
+			       	
+			<div class="form-group">
+			   	<label for="memPwd" style="font-size:12px; color:red">탈퇴를 원하신다면 비밀번호를 입력해주세요.</label>
+			   	<input type="password" name="memPwd" class="form-control" placeholder="비밀번호를 입력해주세요." id="deletePwd" required>
+                <button type="submit" onclick="return deleteMember();">회원 탈퇴</button>
+			</div>
+			 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
+			 	
+			  	
+			  	
+			  	
+			<script>
+			function deleteMember(){
+				
+				const value = prompt('탈퇴를 원하신다면 "어쩌고저쩌고"를 정확히 입력해주세요.');
+				
+				if(value === ('어쩌고저쩌고')){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			
+			</script>
+			</form>
+		 	</div>
+			</div>
+		</div>
+	</div>
+        
+        
+        
+        
         
         <div id="content3" class="content">
             <div id="ct3_1"><a href="#"><img src="./resources/mypage/coupon.png" alt="쿠폰"><div class="link">쿠폰</div></a></div>
@@ -119,9 +168,6 @@
             <div id="ct4_4"><a href="#"><img src="./resources/mypage/qna.png" alt="qna"><div class="link">qna</div></a></div>
             
         </div>
-
-
-
 
 
     </div>

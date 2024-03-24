@@ -101,7 +101,21 @@
 	</entry>
 	
 	<entry key="deleteMember">
-
+		UPDATE
+		       TB_NONMEM
+		   SET
+		       MEM_STATUS = 'N'
+		 WHERE
+		       (
+		       SELECT
+		              distinct M.MEM_PWD
+		         FROM
+		              TB_MEMBER M
+		       ) = ?
+		   AND
+		       MEM_NO = ?
+		   AND
+		       MEM_STATUS = 'Y'
 	</entry>
 	
 	

@@ -63,7 +63,19 @@ public class MemberService {
 		
 		return result;
 	}
-
+//-------------------------------회원탈퇴---------------------------------------
+	public int delete(String memPwd, int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().delete(conn, memPwd, memNo);
+		
+		if(result > 0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 	
