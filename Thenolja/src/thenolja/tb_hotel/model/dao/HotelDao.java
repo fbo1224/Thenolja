@@ -16,6 +16,7 @@ import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
 import thenolja.tb_hotel.model.vo.HotelReview;
+import thenolja.tb_hotel.model.vo.RoomInfo;
 import thenolja.tb_hotel.model.vo.ServiceList;
 
 public class HotelDao {
@@ -65,7 +66,6 @@ public class HotelDao {
 	}
 	
 	// 현재등록된 호텔의 총 수 가져오기
-	
 	public int selectListCount(Connection conn) {
 		int listCnt = 0;
 		PreparedStatement pstmt = null;
@@ -146,12 +146,6 @@ public class HotelDao {
 				dh.setHotelPath(rset.getString("HOTEL_PATH"));
 				dh.setHotelCate(rset.getString("HOTEL_CATEGORY"));
 				dh.setHotelIntro(rset.getString("HOTEL_INTRO"));
-				dh.setCheckInTime(rset.getString("CHECKIN_TIME"));
-				dh.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
-				dh.setRoomNum(rset.getInt("ROOM_NUM"));
-				dh.setRoomPrice(rset.getInt("ROOM_PRICE"));
-				dh.setRoomImg(rset.getString("ROOM_IMG"));
-				dh.setRoomName(rset.getString("ROOM_NAME"));	
 			}
 			
 		} catch (SQLException e) {
@@ -193,6 +187,41 @@ public class HotelDao {
 		return serList;
 	}
 	
+	// 객실리스트 가져오기
+	public ArrayList<RoomInfo> hotelRoomList(Connection conn, int hotelNo){
+		ArrayList<RoomInfo> riList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("hotelRoomList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				RoomInfo ri = new RoomInfo();
+				
+				ri.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				ri.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				ri.setRoomNum(rset.getInt("ROOM_NUM"));
+				ri.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				ri.setRoomImg(rset.getString("ROOM_IMG"));
+				ri.setRoomName(rset.getString("ROOM_NAME"));
+				
+				riList.add(ri);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return riList;
+		
+	}
+	
 	// 해당 호텔의 리뷰 가져오기
 	public ArrayList<HotelReview> hotelReviews(Connection conn, int hotelNo){
 		ArrayList<HotelReview> hrList = new ArrayList();
@@ -226,6 +255,7 @@ public class HotelDao {
 			close(pstmt);
 		}
 		return hrList;
+		
 	}
 	
 	

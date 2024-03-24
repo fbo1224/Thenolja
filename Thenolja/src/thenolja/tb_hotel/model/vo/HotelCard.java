@@ -4,6 +4,7 @@ package thenolja.tb_hotel.model.vo;
 // card내용에 아직 리뷰 점수 관련 필드 없음
 
 public class HotelCard {
+	
 	private String hotelName;
 	private String hotelLocation;
 	private String hotelCategory;

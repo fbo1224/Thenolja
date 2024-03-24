@@ -3,57 +3,30 @@ package thenolja.tb_hotel.model.vo;
 import java.util.ArrayList;
 
 // hotel detail page 에서 보여줄 데이터 VO
-// 리뷰는 따로 만듬
 public class DetailHotel {
 	private String hotelName;
 	private String hotelPath; // 사진경로
 	private String hotelCate;
 	private String hotelIntro;
-	private String checkInTime;
-	private String checkOutTime;
-	private String roomName;
-	private String roomImg;
-	private int roomNum;
-	private int roomPrice;
+	
+	private ArrayList<RoomInfo> roomList;
 	private ArrayList<ServiceList> serList;
 	private ArrayList<HotelReview> reviewList;
-	
-	
+		
 	public DetailHotel() {
 		super();
 	}
 
-	public DetailHotel(String hotelName, String hotePath, String hoteCate, String hotelIntro, String checkInTime,
-			String checkOutTime, String roomName, int roomNum, int roomPrice, String roomImg) {
+	public DetailHotel(String hotelName, String hotelPath, String hotelCate, String hotelIntro,
+			ArrayList<RoomInfo> roomList, ArrayList<ServiceList> serList, ArrayList<HotelReview> reviewList) {
 		super();
 		this.hotelName = hotelName;
-		this.hotelPath = hotePath;
-		this.hotelCate = hoteCate;
+		this.hotelPath = hotelPath;
+		this.hotelCate = hotelCate;
 		this.hotelIntro = hotelIntro;
-		this.checkInTime = checkInTime;
-		this.checkOutTime = checkOutTime;
-		this.roomName = roomName;
-		this.roomNum = roomNum;
-		this.roomPrice = roomPrice;
-		this.roomImg = roomImg;
-	}
-	
-	
-	
-	public ArrayList<HotelReview> getReviewList() {
-		return reviewList;
-	}
-
-	public void setReviewList(ArrayList<HotelReview> reviewList) {
-		this.reviewList = reviewList;
-	}
-
-	public ArrayList<ServiceList> getSerList() {
-		return serList;
-	}
-
-	public void setSerList(ArrayList<ServiceList> serList) {
+		this.roomList = roomList;
 		this.serList = serList;
+		this.reviewList = reviewList;
 	}
 
 	public String getHotelName() {
@@ -68,16 +41,16 @@ public class DetailHotel {
 		return hotelPath;
 	}
 
-	public void setHotelPath(String hotePath) {
-		this.hotelPath = hotePath;
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
 	}
 
 	public String getHotelCate() {
 		return hotelCate;
 	}
 
-	public void setHotelCate(String hoteCate) {
-		this.hotelCate = hoteCate;
+	public void setHotelCate(String hotelCate) {
+		this.hotelCate = hotelCate;
 	}
 
 	public String getHotelIntro() {
@@ -88,60 +61,36 @@ public class DetailHotel {
 		this.hotelIntro = hotelIntro;
 	}
 
-	public String getCheckInTime() {
-		return checkInTime;
+	public ArrayList<RoomInfo> getRoomList() {
+		return roomList;
 	}
 
-	public void setCheckInTime(String checkInTime) {
-		this.checkInTime = checkInTime;
+	public void setRoomList(ArrayList<RoomInfo> roomList) {
+		this.roomList = roomList;
 	}
 
-	public String getCheckOutTime() {
-		return checkOutTime;
+	public ArrayList<ServiceList> getSerList() {
+		return serList;
 	}
 
-	public void setCheckOutTime(String checkOutTime) {
-		this.checkOutTime = checkOutTime;
+	public void setSerList(ArrayList<ServiceList> serList) {
+		this.serList = serList;
 	}
 
-	public String getRoomName() {
-		return roomName;
+	public ArrayList<HotelReview> getReviewList() {
+		return reviewList;
 	}
 
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-
-	public int getRoomNum() {
-		return roomNum;
-	}
-
-	public void setRoomNum(int roomNum) {
-		this.roomNum = roomNum;
-	}
-
-	public int getRoomPrice() {
-		return roomPrice;
-	}
-
-	public void setRoomPrice(int roomPrice) {
-		this.roomPrice = roomPrice;
-	}
-
-	public String getRoomImg() {
-		return roomImg;
-	}
-
-	public void setRoomImg(String roomImg) {
-		this.roomImg = roomImg;
+	public void setReviewList(ArrayList<HotelReview> reviewList) {
+		this.reviewList = reviewList;
 	}
 
 	@Override
 	public String toString() {
 		return "DetailHotel [hotelName=" + hotelName + ", hotelPath=" + hotelPath + ", hotelCate=" + hotelCate
-				+ ", hotelIntro=" + hotelIntro + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime
-				+ ", roomName=" + roomName + ", roomImg=" + roomImg + ", roomNum=" + roomNum + ", roomPrice="
-				+ roomPrice + ", serList=" + serList + ", reviewList=" + reviewList + "]";
+				+ ", hotelIntro=" + hotelIntro + ", roomList=" + roomList + ", serList=" + serList + ", reviewList="
+				+ reviewList + "]";
 	}
+
 	
 }

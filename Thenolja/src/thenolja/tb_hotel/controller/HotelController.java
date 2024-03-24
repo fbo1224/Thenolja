@@ -175,7 +175,7 @@ public class HotelController {
 		// 선택한 호텔 정보 가져오기
 		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
 
-		System.out.println(dh);
+		// System.out.println(dh);
 	
 		if(dh != null) {
 			// request에 가져온정보들 담기
