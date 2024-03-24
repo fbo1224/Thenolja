@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member" %>
+<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member, thenolja.common.PageInfo" %>
 <%
-	Member member = (Member)request.getAttribute("member");
-	
-	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("selectMemberList");
-	
+   Member member = (Member)request.getAttribute("member");
+   
+   ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("selectMemberList");
+   PageInfo pi = (PageInfo)request.getAttribute("pi");
+   
+   int currentPage = pi.getCurrentPage();
+   int startPage = pi.getStartPage();
+   int endPage = pi.getEndPage();
+   int maxPage = pi.getMaxPage();
+   
 %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>회원조회</title>
- 	<link rel="stylesheet" href="resources/css/admin_select.css">
+    <link rel="stylesheet" href="resources/css/admin_select.css">
 </head>
 
 <style>
@@ -85,22 +93,22 @@
                         <tbody>
                        
                        <% if(list.isEmpty()) { %>
-                       	   <tr>
-                       	   		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
-                       	  </tr>
+                             <tr>
+                                   <th colspan="6">회원이 존재하지 않습니다.</th>                             
+                            </tr>
                        <% } else { %>
-                       		<% for(Member m : list) { %>
-	                       	   <tr class="memNo">
-	                       	   		<td><%= m.getMemNo() %></td>
-	                       	   		<td><%= m.getMemId() %></td>
-	                       	   		<td><%= m.getNickName() %></td>
-	                       	   		<td><%= m.getGradeName() %></td>
-	                       	   		
-		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
-		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
-		                            
-	                       	  </tr>
-                       		<% } %>
+                             <% for(Member m : list) { %>
+                                <tr class="memNo">
+                                      <td><%= m.getMemNo() %></td>
+                                      <td><%= m.getMemId() %></td>
+                                      <td><%= m.getNickName() %></td>
+                                      <td><%= m.getGradeName() %></td>
+                                      
+                                  <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
+                                  <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
+                                  
+                               </tr>
+                             <% } %>
                        <% } %>
                           
                           
@@ -108,16 +116,27 @@
                       </table>
                 </div>
         
-        
-                <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
-                </div>
+                <div class="paging-area" align="center">
+                
+                   
+                   <% if(currentPage > 1) { %>
+                   <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
+                   <% } %>
+                   
+                   <% for(int i = startPage; i <= endPage; i++) { %>
+                      <%if(currentPage != i) { %>
+                          <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=i%>'"><%= i %></button>
+                        <% } else { %>
+                           <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>                       
+                       <% } %>
+                    <% } %>      
+                    
+                    <% if(currentPage != maxPage) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1 %>'">></button>
+                    <% } %>
+              </div>
+                   
+              
         
             </div>
         </div>
@@ -125,45 +144,46 @@
 
     </div>
    
-   	<script>
-        			function detailMem(e){
-        				// console.log(e);
-        				
-        				$.ajax({
-        					url : 'detailMember.do',
-        					data : {memNo : e},
-        					type : 'get',
-        					success : function(result){
-        						// console.log(result);
-        						$('#name').text(result.memName);
-        						$('#grade').text(result.gradeName);
-        						$('#email').text(result.email);
-        						$('#phone').text(result.memPhone);
-        						$('#bornDate').text(result.bornDate);
-        						$('#joinDate').text(result.joinDate);
-        					}
-        					
-        				});
-        				
-        			}
-        		
+      <script>
+                 function detailMem(e){
+                    // console.log(e);
+                    
+                    $.ajax({
+                       url : 'detailMember.do',
+                       data : {memNo : e},
+                       type : 'get',
+                       success : function(result){
+                          // console.log(result);
+                          $('#name').text(result.memName);
+                          $('#grade').text(result.gradeName);
+                          $('#email').text(result.email);
+                          $('#phone').text(result.memPhone);
+                          $('#bornDate').text(result.bornDate);
+                          $('#joinDate').text(result.joinDate);
+                          $('#totalPrice').text(result.paymentPrice);
+                       }
+                       
+                    });
+                    
+                 }
+              
        </script>
        
       <script>
-		  		function deleteMember(e){
-					console.log(e);
-				
-					$.ajax({
-						url : 'deleteMember.do',
-						data : {memNo : e},
-						type : 'get',
-						success : function(result){
-	
-						}
-						
-					});
-					
-				}
+              function deleteMember(e){
+               console.log(e);
+            
+               $.ajax({
+                  url : 'deleteMember.do',
+                  data : {memNo : e},
+                  type : 'get',
+                  success : function(result){
+                  alert(result.message);
+                  }
+                  
+               });
+               
+            }
 
       
       </script>
@@ -209,7 +229,8 @@
                     </tr>
                     <tr>
                         <td>전화번호 :<span id="phone"></span></td>
-                       <!-- <td>숙소 이용 횟수 : 1회</td> -->
+                        <td>총 이용 금액 : <span id="totalPrice"></span></td>
+                       
                     </tr>
                     <tr>
                         <td>생년월일 : <span id="bornDate"></span></td>
