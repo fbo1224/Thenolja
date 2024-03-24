@@ -176,14 +176,15 @@ public class HotelController {
 		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
 
 		// System.out.println(dh);
-	
+		
 		if(dh != null) {
 			// request에 가져온정보들 담기
 			request.setAttribute("hotelDetail", dh);
 			view = "views/hotel/hotelDetail.jsp";
 			
 		} else {
-			view = "";
+			request.setAttribute("errorMsg", "조회에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
 		}
 		
 		

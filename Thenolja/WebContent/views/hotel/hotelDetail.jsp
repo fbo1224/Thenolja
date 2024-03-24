@@ -82,10 +82,16 @@
 	margin-top: 10px;
 	padding: 10px;
 }
+.content-rooms-card:hover{
+	cursor: pointer;
+	scale: 105%;
+	border-color: skyblue;
+}
 .content-rooms-card img {
 	width: 30%;
 	height: 90%;
-	border-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 	box-shadow: 2px 2px 2px gray;
 }
 #detail-content-intro, #detail-content-cancel {
@@ -134,7 +140,7 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<div id="detail-wrap">
 		<%@ include file="./common/searchForm.jsp" %>
-		
+		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
 				<button class="btn btn-sm btn-primary" >예약하기</button>
@@ -218,7 +224,9 @@
 			</div>
 			
 		</div>
-		
+		<%} else{ %>
+			<h1>찾을 수 없습니다.</h1>
+		<%} %>
 	</div>
 </body>
 </html>
