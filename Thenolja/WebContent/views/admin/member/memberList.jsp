@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member, thenolja.common.PageInfo" %>
+<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
 <%
    Member member = (Member)request.getAttribute("member");
    
