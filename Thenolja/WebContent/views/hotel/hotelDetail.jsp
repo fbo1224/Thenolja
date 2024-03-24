@@ -153,7 +153,7 @@
 				</h3>
 			</div>
 			<div id="detail-content-img">
-				<img src="<%= contextPath %><%= dh.getHotelPath() %>" alt="pic">
+				<img src="<%= dh.getHotelPath() %>" alt="pic">
 			</div>
 			
 			<div id="detail-content-imgInfo">
@@ -180,7 +180,7 @@
 				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
 					<%for(RoomInfo ri : dh.getRoomList()) { %>
 					<div class="content-rooms-card">
-						<img src="<%= contextPath %><%= ri.getRoomImg() %>">
+						<img src="<%= ri.getRoomImg() %>">
 						<div class="room-infos">
 							<h4><%= ri.getRoomName() %></h4>
 							<p>입실시간 : <%= ri.getCheckInTime() %></p>

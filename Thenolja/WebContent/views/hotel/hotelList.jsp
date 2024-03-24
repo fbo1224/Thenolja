@@ -85,7 +85,7 @@
 				<%} else { %>
 					<%for(HotelCard hc : list){ %>
 					<div class="cards" id="<%= hc.getHotelNo() %>" >
-						<div class="card-imgDiv"><img class="card-img" src="<%= contextPath %><%= hc.getHotelPath() %>"></div>
+						<div class="card-imgDiv"><img class="card-img" src="<%= hc.getHotelPath() %>"></div>
 	  					<div class="card-info">
 							<h4><%= hc.getHotelLocation() %></h4>
 							<p>이름 : <%= hc.getHotelName() %></p>
@@ -98,31 +98,32 @@
   				<%} %>
 		
 		</div>
+		
 		<script>
 			$('.cards').click(function(e){
 				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
 			});
 		</script>
+		
 		<div class="paging-area" align="center">
 	        	<%if(currentPage > 1){ %>
-	        		<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
+	        		<button class="btn btn-lg btn-outline-danger"
 					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
 				<%} %>
 				
 	        	<%for(int i = startPage; i <= endPage; i++){ %>
 	        		<% if(currentPage != i) { %>
-	        			<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
-	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>' " ><%= i %></button>
+	        			<button class="btn btn-sm btn-outline-danger"
+	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
 	        		<%} else { %>
 	        			<button
-	        			class="btn btn-sm btn-danger"
-	        			style="color: #ff52a0;" 
+	        			class="btn btn btn-info"
 	        			disabled ><%= i %></button>
 	        		<%} %>
 	        	<%} %>
 	        	
 	        	<%if(currentPage != maxPage){ %>
-	        		<button class="btn btn-sm btn-outline-danger" style="color: #ff52a0;"
+	        		<button class="btn btn btn-outline-danger"
 	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
 	        	<%} %>
 	     </div>
