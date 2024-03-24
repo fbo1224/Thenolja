@@ -100,7 +100,7 @@
             </div>
             <div id="ct2_3"></div>
             <div id="ct2_4">
-                <button type="button" id="modify">정보수정</button>
+                <button type="button" id="modify" onclick="location.href='<%= contextPath %>/update.me'">정보수정</button>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
