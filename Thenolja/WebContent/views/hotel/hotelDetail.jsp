@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.tb_hotel.model.vo.*" %>    
     
     <%
-    
+     	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
     %>
 <!DOCTYPE html>
 <html>
@@ -55,6 +56,7 @@
 	margin: auto;
 	width: 80%;
 	height: 50px;
+	border-bottom: 1px solid gray;
 }
 #detail-content-services > ul {
 	margin: 0px;
@@ -66,7 +68,7 @@
 #detail-content-rooms {
 	margin: auto;
 	width: 80%;
-	height: 600px;
+	
 }
 .content-rooms-card{
 	width: 80%;
@@ -76,8 +78,9 @@
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	margin-top: 10px;
+	padding: 10px;
 }
 .content-rooms-card img {
 	width: 30%;
@@ -96,8 +99,8 @@
 }
 #detail-content-review {
 	width: 80%;
-	height: 250px;
 	margin: auto;
+	padding: 10px;
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 }
@@ -107,6 +110,7 @@
 	margin: auto;
 	margin-top: 15px;
 	border-radius: 12px;
+	padding: 10px;
 }
 .review-1-div {
 	display: flex;
@@ -116,7 +120,11 @@
 #detail-content-imgInfo span{
 	padding: 3px;
 }
-
+.content-rooms-card div {
+	white-space: nowrap;
+	padding: 5px;
+	font-size: 14px;
+}
 </style>
 </head>
 <body>
@@ -132,11 +140,11 @@
 			
 			<div id="detail-content-title">
 				<h3>
-					<span>마리안느</span> <span>호텔</span>
+					<span><%= dh.getHotelName() %></span> <span>호텔</span>
 				</h3>
 			</div>
 			<div id="detail-content-img">
-				<img src="resources/img/pepe4.jpg" alt="pic">
+				<img src="<%= contextPath %><%= dh.getHotelPath() %>" alt="pic">
 			</div>
 			
 			<div id="detail-content-imgInfo">
@@ -146,29 +154,25 @@
 					<span>리뷰조회</span>
 				</div>
 				<div>
-					<span>호텔/특급</span>
+					<span><%= dh.getHotelCate() %></span>
 				</div>
 			</div>
 			
 			<div id="detail-content-services">
 				<ul>
-					<li>WIFI</li>
-					<li>금연</li>
-					<li>헬스장</li>
-					<li>에어컨</li>
-					<li>주차장</li>
-					<li>반려견동반</li>
-					<li>엘레베이터</li>
-					<li>PC</li>				
+					<%for(ServiceList sl : dh.getSerList()) { %>
+						<li><%= sl.getServiceName() %></li>
+					<%} %>
+					
 				</ul>
 			</div>
 			
 			<div id="detail-content-rooms">
 				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
 				<div class="content-rooms-card">
-					<img src="resources/img/pepe3.jpg">
-					<div>
-						<h3>오션뷰 1호실</h3>
+					<img src="<%= contextPath %><%= dh.getRoomImg() %>">
+					<div class="room-infos">
+						<h4><%= dh.getRoomName() %></h4>
 						<p>입실 16:00</p>
 						<p>퇴실 11:00</p>
 					</div>
@@ -176,41 +180,12 @@
 						<p>쿠폰적용가능</p>
 						<button class="btn btn-sm btn-info">객실 예약</button>
 					</div>
-				</div>
-				
-				<div class="content-rooms-card">
-					<img src="resources/img/pepe4.jpg">
-					<div>
-						<h3>오션뷰 1호실</h3>
-						<p>입실 16:00</p>
-						<p>퇴실 11:00</p>
-					</div>
-					<div>
-						<p>쿠폰적용가능</p>
-						<button class="btn btn-sm btn-info">객실 예약</button>
-					</div>
-				</div>
-				
-				<div class="content-rooms-card">
-					<img src="resources/img/pepe5.jpg">
-					<div>
-						<h3>오션뷰 1호실</h3>
-						<p>입실 16:00</p>
-						<p>퇴실 11:00</p>
-					</div>
-					<div>
-						<p>쿠폰적용가능</p>
-						<button class="btn btn-sm btn-info">객실 예약</button>
-					</div>
-				</div>
+				</div>			
 			</div>
 			
 			<div id="detail-content-intro">
 				<h3>숙소소개</h3>
-				<p>
-				    강문해변 앞에 자리 잡아 객실에서 드넓고 아름다운 바다를 감상할 수 있습니다.<br>
-				    아름다운 대자연과 어우러지는 특별하고도 환상적인 경험을 느낄 수 있습니다.
-				</p>
+				<p><%= dh.getHotelIntro() %></p>
 			</div>
 			
 			<div id="detail-content-cancel">
@@ -223,22 +198,16 @@
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
+					<%for(HotelReview hr : dh.getReviewList() ){ %>
 					<div class="content-review-1 card">
 						<div class="review-1-div">
-							<span>user01</span><span>골드</span>
+							<span><%= hr.getReserName() %></span><span><%= hr.getCreateDate() %></span>
 						</div>
 						<div>
-							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
+							<span><%= hr.getReviewContent() %></span>
 						</div>
 					</div>
-					<div class="content-review-1 card">
-						<div class="review-1-div card-body">
-							<span>user02</span><span>실버</span>
-						</div>
-						<div >
-							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
-						</div>
-					</div>
+					<%} %>
 				</div>
 			</div>
 			
