@@ -4,6 +4,8 @@ import java.sql.Connection;
 
 import thenolja.tb_refund.model.dao.RefundDao;
 import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.vo.Reservation;
+
 import static thenolja.common.JDBCTemplate.*;
 
 public class RefundService {
@@ -30,6 +32,17 @@ public class RefundService {
 		Connection conn = getConnection();
 		
 		Refund refund = new RefundDao().selectRefund(conn);
+		
+		close(conn);
+		
+		return refund;
+	}
+
+	public Refund selectRefundNo(int reserNo) {
+
+		Connection conn = getConnection();
+		
+		Refund refund = new RefundDao().selectRefundNo(conn, reserNo);
 		
 		close(conn);
 		

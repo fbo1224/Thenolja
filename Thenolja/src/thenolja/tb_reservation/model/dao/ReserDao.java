@@ -99,7 +99,7 @@ public class ReserDao {
 			pstmt.setInt(1, reser.getReserNo());
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				reser = new Reservation();
 				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));

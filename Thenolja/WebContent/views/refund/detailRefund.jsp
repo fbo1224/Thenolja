@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation" %>  
+<%@ page import="thenolja.tb_refund.model.vo.Refund, thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
+	Refund refund = (Refund)request.getAttribute("refund");
+
 	Reservation reser = (Reservation)request.getAttribute("reser");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +24,7 @@
 
     #content{
         width: 1200px;
-        height: 840px;
+        height: 1200px;
         margin: auto;
     }
     
@@ -56,11 +59,11 @@
     
     #reser_info{
         width: 100%;
-        height: 35%;
+        height: 25%;
     }
     #price_info{
         width: 100%;
-        height: 65%;
+        height: 75%;
 
     }
 
@@ -103,9 +106,9 @@
         position: relative;
     }
 
-    #reser_btn > button{
-        width: 100px;
-        height: 100px;
+    #reser_btn > p{
+        width: 120px;
+        height: 40px;
         border-radius: 10px;
         position: absolute;
         top : 0px;
@@ -120,22 +123,40 @@
         width: 100%;
         height: 20%;
         padding-left: 120px;
-        padding-top: 5px;
+        padding-top: 20px;
     }
     
     #reser_price_info{
         width: 100%;
-        height: 50%;
+        height: 30%;
         padding-left: 120px;
         padding-top: 30px;
     }
 
     #reser_member {
         width: 100%;
+        height: 20%;
+        padding-left: 120px;
+        padding-top: 30px;
+    }
+
+    #refund_member{
+        width: 100%;
         height: 30%;
         padding-left: 120px;
         padding-top: 30px;
     }
+
+    #refund_title {
+        width: 20%;
+        height: 20%;
+        float: left;
+    }
+    #refund_update{
+        width: 40%;
+        height: 20%;
+    }
+
 
     table{
         width: 70%;
@@ -161,14 +182,13 @@
     }
 
 
+
 </style>
 
 
 </head>
 <body>
-	
-    <%@ include file="../common/menubar.jsp" %>
-      
+               
     <div id="content">
         <div id="content_title">
             <div id="left_img">
@@ -179,8 +199,8 @@
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
-                
+                <div id="reser_no"><p>No.<%= refund.getReserNo() %></p></div>
+
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
                 <div id="reser_detail">
@@ -192,7 +212,7 @@
                 </div>
 
                 <div id="reser_btn">
-                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>
+                    <p class="btn btn-secondary" >환불처리중</p>
                 </div>
             </div>
         
@@ -205,22 +225,23 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">예약금액 : <%= reser.getPaymentPrice() %></td>
+                            <td width="170x">결제금액 : <%=reser.getPaymentPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
+                            <td width="170x">할인 금액 : 0원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%= reser.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+                            <td>결제금액 : <%=reser.getPaymentPrice() %></td>
+                        </tr>
                     </table>
                 </div>
 
                 <div id="reser_price_info">
                     <h3>결제 내역</h3>
                     <hr>
-                    <p>무통장 입금</p>
+                    <p>무통장입금</p>
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
-                        <td>110-00000-0000</td>
+                        <td>110-424-432780</td>
                     </tr>
                     <tr>
                         <td>예금주</td> 
@@ -239,57 +260,47 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td><%= reser.getName() %></td>
+                            <td><%=reser.getName() %></td>
                             <td width="80px">전화번호</td> 
-                            <td><%= reser.getPhone() %></td>
+                            <td><%=reser.getPhone() %></td>
                         </tr>
                         <tr>
-                            <td>차량</td> 
-                            <td colspan="3"><%= reser.getBicycle() %></td>
+                            <td>이동방식</td> 
+                            <td colspan="3"><%=reser.getBicycle() %></td>
                         </tr>
                     </table>
                 </div>
+
+                <div id="refund_member">
+                    <div id="refund_title"><h3>환불 정보</h3></div>
+                    <div id="refund_update"><button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">수정하기</button></div>
+                    <hr>
+                    <table>
+                    <tr>
+                        <td width="80px">환불 수단</td> 
+                        <td>계좌이체</td>
+                    </tr>
+                    <tr>
+                        <td>결제 금액</td> 
+                        <td><%=refund.getRefundPrice() %></td>
+                    </tr>
+                    <tr>
+                        <td>예금주</td> 
+                        <td><%= refund.getRefundName() %></td>
+                    </tr>
+                    <tr>
+                        <td><%=refund.getBank() %></td> 
+                        <td><%=refund.getAccNo() %></td>
+                    </tr>
+                </table>
+                </div>
+
+
             </div>
         </div>
 
     </div>
-      <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">환불 계좌 입력</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"> 
-            <label for="text">예금주</label>
-            <input type="text" id="refund_name" required name="refundName"><br><br>
 
-            <label for="text">환불계좌</label>
-            <select id="bank_name" name="bankName">
-                <option>신한은행</option>
-                <option>국민은행</option>
-                <option>농협은행</option>
-                <option>우리은행</option>
-            </select>
-            <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
-            <div id="refund_btn">
-                <br>
-                <button type="submit" class="btn btn-dark" onclick="ajaxRefund()">확인</button>
-                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-                
-            </div>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-	
-	<br><br><br><br><br><br><br><br><br><br>
+
 </body>
 </html>

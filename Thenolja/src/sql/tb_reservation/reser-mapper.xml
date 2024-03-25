@@ -123,19 +123,7 @@
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 	  ORDER BY RESER_NO DESC
  	</entry>
-	<entry key="insertRefund">
-		INSERT
-		  INTO
-		  		TB_REFUND
-		VALUES
-				(
-				?,
-				170000,
-				?,
-				?,
-				?
-				)
-	</entry>
+
 	
 	
 	
