@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.admin.member.model.service.MemberService;
+
 /**
  * Servlet implementation class ReserMemberController
  */
@@ -29,6 +31,20 @@ public class ReserMemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int llistCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		new MemberService().selectReserCount();
+		
+		
+		
+		
 		
 		// 요청화면 만들기
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");

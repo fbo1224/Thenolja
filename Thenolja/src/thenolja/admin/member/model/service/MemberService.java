@@ -91,6 +91,21 @@ public class MemberService {
 		
 	}
 	
+	/**
+	 * RESER COUNT
+	 */
+	public int selectReserCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().selectReserCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	
 	
 	
 	
