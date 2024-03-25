@@ -103,13 +103,13 @@
 	<entry key="deleteMember">
 	
 		UPDATE
-		       TB_NONMEM
+		       TB_MEMBER
 		   SET
-		       MEM_STATUS = 'N'
+		       DELETE_YN = 'N'
 		 WHERE
 		       MEM_NO = ?
 		   AND
-		       MEM_STATUS = 'Y'
+		       DELETE_YN = 'Y'
 	
 	</entry>
 	
