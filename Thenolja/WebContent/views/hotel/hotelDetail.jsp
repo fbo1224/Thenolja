@@ -177,7 +177,7 @@
 			</div>
 			
 			<div id="detail-content-rooms">
-				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
+				<h3 style="text-align: center; margin-top: 5px;">객실</h3>
 					<%for(RoomInfo ri : dh.getRoomList()) { %>
 					<div class="content-rooms-card">
 						<img src="<%= ri.getRoomImg() %>">

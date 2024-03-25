@@ -109,8 +109,45 @@ public class HotelDao {
 		
 		return listCnt;
 	}
+	public ArrayList<HotelCard> selectAllList(Connection conn, PageInfo pi){
+		ArrayList<HotelCard> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			// 리뷰관련 컬럼 추가 해야함.
+			while(rset.next()) {
+				HotelCard hc = new HotelCard();
+				hc.setHotelNo(rset.getInt("HOTEL_NO"));
+				hc.setHotelName(rset.getString("HOTEL_NAME"));
+				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				hc.setHotelPath(rset.getString("HOTEL_PATH"));
+				list.add(hc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
-	// 모든 호텔정보 가져오기
+	// 객실이 등록된 호텔 가져오기
 	public ArrayList<HotelCard> selectList(Connection conn, PageInfo pi){
 		ArrayList<HotelCard> list = new ArrayList();
 		PreparedStatement pstmt = null;

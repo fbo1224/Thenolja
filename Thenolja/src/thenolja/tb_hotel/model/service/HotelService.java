@@ -45,6 +45,16 @@ public class HotelService {
 		return result;
 	}
 	
+	public ArrayList<HotelCard> selectAllList(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<HotelCard> list = new HotelDao().selectAllList(conn, pi); 
+		
+		close(conn);
+		
+		return list;
+	}
+	
 	public ArrayList<HotelCard> selectList(PageInfo pi){
 		Connection conn = getConnection();
 		

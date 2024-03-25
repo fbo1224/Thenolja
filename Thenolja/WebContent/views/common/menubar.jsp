@@ -70,6 +70,139 @@ a{
 	padding : 0px;
 }
 
+    #header{
+        width:1200px;
+        height: 180px;
+        margin: auto;
+    } 
+
+
+    #tnj_header{
+        width: 100%;
+        height: 50%;
+    }
+
+    #line{
+        width: 100%;
+        height: 10%;
+        border-bottom: 3px solid rgb(70, 149, 151);  
+    }
+
+    #tnj_menu{
+        width: 100%;
+        height: 40%;
+    }
+
+
+    #tnj_header > div{
+        height: 100%;
+    }
+
+    #tnj_icon{
+        width: 10%;
+        float: left;
+    }
+
+    #tnj_title{
+        width: 35%;
+        float: left;
+    }
+
+    #admin_login{
+        width: 55%;
+        float: left;
+    }
+
+    #tnj_icon > img{
+        width: 80px;
+        float: right;
+        padding-top: 25px;
+    }
+
+
+    #tnj_title > h2{
+        padding-top: 50px;
+        padding-left: 30px;
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    #tnj_title > h2 > a{
+        color: black;
+        text-decoration: none;
+    }
+
+    #admin_login > p{
+        padding-top: 60px;
+        font-size: 20px;
+        text-align: right;
+        padding-right: 50px;
+    }
+    
+
+    #admin_login > p > a{
+        color: black;
+        text-decoration: none;
+    }
+
+    #navi{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        padding-left: 200px;
+    }
+
+    #navi > li{
+        float: left;
+        width: 15%;
+        height: 100%;
+        text-align: center;
+    }
+    #navi a{
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: black;
+            display: block;
+            line-height: 38px;
+            font-size: 17px;
+            transform: scale(1);
+            position: relative;
+            z-index: 3;
+        }
+        
+        #navi > li > ul{
+            list-style: none;
+            padding: 0px;
+            display:none;
+        }
+
+        #navi > li > a:hover + ul{
+            display:block;
+        }
+
+        #navi > li > ul:hover{
+            display: block;
+        }
+
+        #navi a:hover{
+            font-size: 17px;
+            font-weight: 700;
+        }
+        
+        #navi > li > ul a{
+            font-size: 17px;
+            background-color: #E5E3E4;
+        }
+      	.form-control{
+			display: inline-block;
+			width: auto;
+		}
+		.form-check-input {
+			position:static;
+		}
+
     </style>
     
 </head>
@@ -89,37 +222,111 @@ a{
 				<% session.removeAttribute("alertMsg"); %>
 			}
 	</script>
-
-    <header id="header-navi">
-        <div>
-           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
-           <h2 id="header-title">더 놀자</h2>
-        <div id="menu-list">
-        <ul id="optionList" style="font-size: 20px;">
+<%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>	
+    <div id="header">
         
-       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
-            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
-            <% }%>
+        <div id="tnj_header">
             
-            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-	            <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
-            <% }%>
-            
-            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-	            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-              <li></li>
-            <% } %>
-	            <li><a href="#">고객센터</a></li>
-        </ul>
+
+            <div id="tnj_icon">
+                <img src="resources/img/logo.png" alt="logo">
+            </div>
+
+            <div id="tnj_title">
+                <h2><a href="<%= contextPath %>/adminMain">관리자</a></h2>
+            </div>
+
+            <div id="admin_login">
+                <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
+            </div>
+
         </div>
-    </header>
 
+        <div id="line"></div>
 
+        <div id="tnj_menu">
+            <ul id="navi">
+                <li>
+                    <a href="#">회원관리</a>
+                    <ul>
+                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
+                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
+                        <li><a href="#">탈퇴 회원 조회</a></li>
+                    </ul>
+                </li>
     
+                <li>
+                    <a href="#">비회원관리</a>
+                    <ul>
+                        <li><a href="<%= contextPath %>/selectNonMem">비회원 조회</a></li>
+                        <li><a href="#">비회원 예약 조회</a></li>
+                    </ul>
+                </li>
+    
+                <li>
+                    <a href="#">숙소관리</a>
+                    <ul>
+                    	<%if(loginUser.getMemStatus().equals("A")) { %>
+                    		<li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
+                    	<%} %>
+                        <li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#">결제관리</a>
+                    <ul>
+                        <li><a href="#">회원 환불 조회</a></li>
+                        <li><a href="#">비회원 환불 조회</a></li>
+                    </ul>
+    
+                </li>
+    
+                <li>
+                    <a href="#">고객센터관리</a>
+                    <ul>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">이벤트</a></li>
+                        <li><a href="#">쿠폰</a></li>
+                        <li><a href="#">리뷰</a></li>
+                    </ul>
+    
+                </li>
+    
+            </ul>
+
+        </div>
+
+    </div>
+<%} else { %>
+	<header id="header-navi">
+	        <div>
+	           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
+	           <h2 id="header-title">더 놀자</h2>
+	        <div id="menu-list">
+	        <ul id="optionList" style="font-size: 20px;">
+	        
+	       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
+	            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+		           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
+	            <% }%>
+	            
+	            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+		            <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+		            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
+	            <% }%>
+	            
+	            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+		            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+	              <li></li>
+	            <% } %>
+		            <li><a href="#">고객센터</a></li>
+	        </ul>
+	        </div>
+	    </header>
+<%} %> 
 </body>
 </html>
