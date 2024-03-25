@@ -106,7 +106,30 @@ public class NonMemDao {
 		
 	}
 	
-	
+	/**
+	 * 비회원 삭제
+	 */
+	public int deleteNonMember(Connection conn, int nonMemNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNonMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nonMemNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

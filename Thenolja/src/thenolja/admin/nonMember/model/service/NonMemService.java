@@ -39,5 +39,29 @@ public class NonMemService {
 		return list;
 	
 	}
-
+	
+	/**
+	 * 비회원 번호 가져오기
+	 */
+	public int deleteNonMember(int nonMemNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NonMemDao().deleteNonMember(conn, nonMemNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 }

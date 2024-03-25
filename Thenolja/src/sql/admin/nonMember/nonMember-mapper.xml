@@ -38,7 +38,7 @@
 	
 	</entry>
 	
-	<entry key="">
+	<entry key="deleteNonMember">
 		DELETE 
 		    FROM 
 				TB_NONMEM 
