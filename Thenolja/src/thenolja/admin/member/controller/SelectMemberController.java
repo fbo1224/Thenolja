@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.admin.member.model.vo.AdminMember;
 import thenolja.common.model.vo.PageInfo;
 
 /**
@@ -69,7 +69,7 @@ public class SelectMemberController extends HttpServlet {
 		
 		
 		 
-		ArrayList<Member> list = new MemberService().selectMemberList(pi);
+		ArrayList<AdminMember> list = new MemberService().selectMemberList(pi);
 		
 		// System.out.println(list);
 		

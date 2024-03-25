@@ -69,7 +69,7 @@ public class SelectNonMemController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		
-		System.out.println(pi);
+		// System.out.println(pi);
 		
 		
 		ArrayList<NonMember> list = new NonMemService().selectNonMemberList(pi);

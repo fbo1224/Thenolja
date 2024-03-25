@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import thenolja.admin.member.model.dao.MemberDao;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.admin.member.model.vo.AdminMember;
 import thenolja.common.JDBCTemplate;
 import thenolja.common.model.vo.PageInfo;
 
@@ -33,11 +33,11 @@ public class MemberService {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Member> selectMemberList(PageInfo pi) {
+	public ArrayList<AdminMember> selectMemberList(PageInfo pi) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn, pi);
+		ArrayList<AdminMember> list = new MemberDao().selectMemberList(conn, pi);
 		
 		JDBCTemplate.close(conn);
 		
@@ -57,11 +57,11 @@ public class MemberService {
 		
 	}*/
 	
-	public Member selectMember(int memNo) {
+	public AdminMember selectMember(int memNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		Member member = new MemberDao().selectMember(conn, memNo);
+		AdminMember member = new MemberDao().selectMember(conn, memNo);
 		
 		JDBCTemplate.close(conn);
 		
