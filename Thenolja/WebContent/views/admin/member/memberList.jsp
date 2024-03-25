@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
+<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo" %>
 <%
-	Member member = (Member)request.getAttribute("member");
+	AdminMember member = (AdminMember)request.getAttribute("member");
 	
-	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("selectMemberList");
+	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("selectMemberList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pageInfo.getCurrentPage();
@@ -96,7 +96,7 @@
                        	   		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
                        	  </tr>
                        <% } else { %>
-                       		<% for(Member m : list) { %>
+                       		<% for(AdminMember m : list) { %>
 	                       	   <tr class="memNo">
 	                       	   		<td><%= m.getMemNo() %></td>
 	                       	   		<td><%= m.getMemId() %></td>
@@ -119,7 +119,7 @@
                 <div class="paging-area" align="center";>
                 
                 	<%if(currentPage > 1) { %>
-                	<button disabled class="btn btn-sm btn-outline-secondary" onclick=" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>
@@ -131,7 +131,7 @@
                    <%} %>
                   
                   <% if(currentPage != maxPage) { %>
-                  <button disabled class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                 </div>
         

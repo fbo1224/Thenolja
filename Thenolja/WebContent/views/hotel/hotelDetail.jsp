@@ -143,8 +143,14 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-				<button class="btn btn-sm btn-primary" >예약하기</button>
-				<button class="btn btn-sm btn-primary" >비회원예약하기</button>
+				<%-- 객실예약 기능 없음 --%>
+				<%-- 버튼 A태그로 바꿀 수 있음 --%>
+				<%if(loginUser.getMemStatus().equals("A") && dh.getRoomList().size() <= 3){ %>
+					<a class="btn btn btn-primary" href="#">객실추가하기</a>
+				<%} else {%>
+					<button class="btn btn-sm btn-primary" >예약하기</button>
+					<button class="btn btn-sm btn-primary" >비회원예약하기</button>
+				 <%} %>
 			</div>
 			
 			<div id="detail-content-title">
@@ -177,7 +183,7 @@
 			</div>
 			
 			<div id="detail-content-rooms">
-				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
+				<h3 style="text-align: center; margin-top: 5px;">객실</h3>
 					<%for(RoomInfo ri : dh.getRoomList()) { %>
 					<div class="content-rooms-card">
 						<img src="<%= ri.getRoomImg() %>">
@@ -189,6 +195,7 @@
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
+							<%-- 객실예약 기능 없음 --%>
 							<button class="btn btn-sm btn-info">객실 예약</button>
 						</div>
 					</div>			

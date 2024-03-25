@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.admin.nonMember.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.admin.nonMember.model.service.NonMemService;
 
 /**
- * Servlet implementation class DetailMember
+ * Servlet implementation class DeleteNonMember
  */
-@WebServlet("/detailMember.do")
-public class DetailMember extends HttpServlet {
+@WebServlet("/deleteNonMember.do")
+public class DeleteNonMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailMember() {
+    public DeleteNonMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +32,19 @@ public class DetailMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int nonMemNo = Integer.parseInt(request.getParameter("nonMemNo"));
 		
-		AdminMember member = new MemberService().selectMember(memNo);
-	      
+		int result = new NonMemService().deleteNonMember(nonMemNo);
+		
+		JSONObject obj = new JSONObject();
+		
+		obj.put("message", "삭제 성공!");
+		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		new Gson().toJson(member, response.getWriter());
-
+		response.getWriter().print(obj.toString());
+		
+		
 	}
 
 	/**

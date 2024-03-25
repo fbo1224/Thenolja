@@ -2,7 +2,7 @@ package thenolja.admin.member.model.vo;
 
 import java.sql.Date;
 
-public class Member {
+public class AdminMember {
    
    private int memNo;
    private String memId;
@@ -59,11 +59,11 @@ public class Member {
       this.gradeName = gradeName;
    }
 
-   public Member() {
+   public AdminMember() {
       super();
    }
 
-   public Member(int memNo, String memId, String memPwd, String nickName, String bornDate, String email,
+   public AdminMember(int memNo, String memId, String memPwd, String nickName, String bornDate, String email,
          String deleteYn, String joinDate) {
       super();
       this.memNo = memNo;
@@ -163,7 +163,7 @@ public class Member {
          return false;
       if (getClass() != obj.getClass())
          return false;
-      Member other = (Member) obj;
+      AdminMember other = (AdminMember) obj;
       if (bornDate == null) {
          if (other.bornDate != null)
             return false;

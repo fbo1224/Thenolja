@@ -6,21 +6,44 @@
 		Member Mapper
 	</comment>
 	
+	<entry key="selectListCount">
+		SELECT
+	        COUNT(*)
+	  FROM
+	        TB_NONMEM
+	  WHERE
+	        MEM_STATUS = 'N'
+	</entry>
+	
 	
 	<entry key="selectNonMemberList">
 		
-		SELECT
-		        MEM_NO,
-		        MEM_NAME,
-		        MEM_PHONE
+		
+		SELECT *
 		  FROM
-		        TB_NONMEM
-		  WHERE
-		        MEM_STATUS = 'N'
-		 ORDER
-		  	BY
-		  		MEM_NO DESC
+		     (SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM( 		SELECT
+				        MEM_NO,
+				        MEM_NAME,
+				        MEM_PHONE
+				  FROM
+				        TB_NONMEM
+				  WHERE
+				        MEM_STATUS = 'N'
+				 ORDER
+				  	BY
+				  		MEM_NO DESC) A)
+		    WHERE RNUM BETWEEN ? AND ?
 	
+	</entry>
+	
+	<entry key="deleteNonMember">
+		DELETE 
+		    FROM 
+				TB_NONMEM 
+		 WHERE 
+		 		MEM_NO = ?
 	</entry>
 
 </properties>

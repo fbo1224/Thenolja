@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
+
 <%
     String contextPath = request.getContextPath();
 	
@@ -69,7 +70,6 @@ a{
 	min-height: 0px;
 	padding : 0px;
 }
-
     </style>
     
 </head>
@@ -89,37 +89,33 @@ a{
 				<% session.removeAttribute("alertMsg"); %>
 			}
 	</script>
-
-    <header id="header-navi">
-        <div>
-           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
-           <h2 id="header-title">더 놀자</h2>
-        <div id="menu-list">
-        <ul id="optionList" style="font-size: 20px;">
-        
-       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
-            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-	           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
-            <% }%>
-            
-            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-	            <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-	            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
-            <% }%>
-            
-            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-	            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
-            <% } else { %> <!-- 로그인상태라면 -->
-              <li></li>
-            <% } %>
-	            <li><a href="#">고객센터</a></li>
-        </ul>
-        </div>
-    </header>
-
-
-    
+	<header id="header-navi">
+	        <div>
+	           <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
+	           <h2 id="header-title">더 놀자</h2>
+	        <div id="menu-list">
+	        <ul id="optionList" style="font-size: 20px;">
+	        
+	       		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
+	            	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+		           	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
+	            <% }%>
+	            
+	            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+		            <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+		            <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
+	            <% }%>
+	            
+	            <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+		            <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
+	            <% } else { %> <!-- 로그인상태라면 -->
+	              <li></li>
+	            <% } %>
+		            <li><a href="#">고객센터</a></li>
+	        </ul>
+	        </div>
+	    </header>
 </body>
 </html>
