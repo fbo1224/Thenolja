@@ -56,13 +56,35 @@ public class HotelDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
 		
 		return result;
+	}
+	
+	// 추가한 호텔의 서비스 목록 추가
+	public int insertService(Connection conn, String[] serList) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertService");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < serList.length; i++) {
+				pstmt.setInt(1, Integer.parseInt(serList[i]));
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == serList.length ? 1 : 0;
 	}
 	
 	// 현재등록된 호텔의 총 수 가져오기
@@ -255,8 +277,62 @@ public class HotelDao {
 			close(pstmt);
 		}
 		return hrList;
-		
 	}
+	
+	// 호텔 리뷰갯수 가져옴
+	public int countReviews(Connection conn, int hotelNo){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("countReviews");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			result = rset.getShort("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

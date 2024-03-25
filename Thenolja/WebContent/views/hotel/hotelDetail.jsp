@@ -158,9 +158,9 @@
 			
 			<div id="detail-content-imgInfo">
 				<div>
-					<span>★</span>
-					<span>993개의 리뷰</span>
-					<span>리뷰조회</span>
+					 <span>★</span>
+					 <span><%= dh.getCountReviews() %>개의 리뷰</span>
+					 <span>리뷰조회</span>
 				</div>
 				<div>
 					<span><%= dh.getHotelCate() %></span>
