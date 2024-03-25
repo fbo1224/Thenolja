@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import thenolja.admin.member.model.vo.Member;
 import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 
 public class MemberDao {
 	
@@ -27,10 +28,45 @@ public class MemberDao {
 		}
 	}
 	
+	
+	
+	/**
+	 * 페이징
+	 */
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	
+	
+	
 	/**
 	 * 멤버 전체 조회 페이지
 	 */
-	public ArrayList<Member> selectMemberList(Connection conn){
+	public ArrayList<Member> selectMemberList(Connection conn, PageInfo pi){
 
 	      ArrayList<Member> list = new ArrayList();
 	      ResultSet rset = null;
@@ -41,6 +77,13 @@ public class MemberDao {
 	      try {
 	    	  
 			pstmt = conn.prepareStatement(sql);
+			
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 
