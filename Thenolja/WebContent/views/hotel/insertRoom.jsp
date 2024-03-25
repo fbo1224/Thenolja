@@ -44,8 +44,7 @@ div {
 }
 #content-add-form{
 	width:100%;
-	display: flex;
-	justify-content: space-evenly;
+	height: 80%;
 }
 #timeOptions{
 	display: flex;
@@ -56,7 +55,7 @@ div {
 	font-size: 12px;
 }
 [class *= content-div]{
-	width: 30%;
+	width: 32%;
 	height: 60%;
 	padding: 5px;
 	margin: auto;
@@ -64,10 +63,17 @@ div {
 	box-shadow: 5px 3px 3px gray;
 	display: inline-block;
 }
-#btn-div{
-	float: right;
-	margin-top: 10px;
+#content-add-sect{
+	display:flex;
+	align-items: center;
 }
+#btn-div{
+	margin-top: 20px;
+}
+.delBtn{
+	float: right;
+}
+
 </style>
 </head>
 <body>
@@ -78,33 +84,33 @@ div {
 			<button class="btn btn btn-info" id="addBtn">객실추가하기</button>
 		</div>
 		<div id="content-div">
-			<form id="content-add-form" action="/insert.rooms" enctype="multipart/form-data">
-			
-			<div class="content-div-1">
-				<div class="form-group">
-				  <label for="roomName">객실이름</label>
-				  <input type="text" class="form-control" id="roomName" name="roomName" >
+			<form id="content-add-form" action="/insert.rooms" enctype="multipart/form-data" method="post">
+			<section id="content-add-sect">
+				<div class="content-div-1">
+					<div class="form-group">
+					  <label for="roomName">객실이름</label>
+					  <input type="text" class="form-control" id="roomName" name="roomName" >
+					</div>
+					
+					<div class="form-group">
+					  <label for="maxPeople">최대인원</label>
+					  <input type="text" class="form-control" id="maxPeople" name="maxPeople" >
+					</div>
+					
+					<div class="form-group">
+					  <label for="roomImg">숙소사진</label>
+					  <input type="file" id="roomImg" name="roomImg">
+					</div>
+					
+					<div id="timeOptions">
+						<label>입실시간</label>
+						<input type="time" name="in_time">				
+						<label>퇴실시간</label>
+						<input type="time" name="out_time">
+					</div>
 				</div>
-				
-				<div class="form-group">
-				  <label for="maxPeople">최대인원</label>
-				  <input type="text" class="form-control" id="maxPeople" name="maxPeople" >
-				</div>
-				
-				<div class="form-group">
-				  <label for="roomImg">숙소사진</label>
-				  <input type="file" id="roomImg" name="roomImg">
-				</div>
-				
-				<div id="timeOptions">
-					<label>입실시간</label>
-					<input type="time" name="in_time">				
-					<label>퇴실시간</label>
-					<input type="time" name="out_time">
-				</div>
-			</div>
-			
-			<div id="btn-div">
+			</section>
+			<div id="btn-div" align="center">
 				<button class="btn btn btn-info" >추가</button>
 			</div>
 			</form>
@@ -112,13 +118,17 @@ div {
 	</div>
 	<script>
 	let btnCnt= 0;
+	
+	
 	$('#addBtn').click(function(){
-		//console.log('click');
-		if(btnCnt == 1){
+		if(btnCnt < 1){
+			$('#addBtn').attr('disabled', false);
+		}else {
 			$('#addBtn').attr('disabled', true);
 		}
 		
-		const temp = $('#content-add-form').children().filter('div').first().clone(false);
+		
+		const temp = $('#content-add-form').children().children().filter('div').first().clone();
 		
 		// 클래스명 찾기
 		let num = temp.attr('class');
@@ -141,11 +151,33 @@ div {
 		temp.children().children('input').eq(3).attr('name','in_time'+classNum);
 		temp.children().children('input').eq(4).attr('name','out_time'+classNum);
 		
+		
+		let elementNode = document.createElement('button');
+		elementNode.type='button';
+		elementNode.innerText='삭제';
+		elementNode.className = 'btn btn-sm btn-danger delBtn';
+		elementNode.onclick = delBtn;
+		
+		temp.prepend(elementNode);
+		
 		// 요소 붙이기
-		$('#content-add-form').prepend(temp);
+		$('#content-add-sect').prepend(temp);
 		btnCnt++;
 	});
+	
+	// 버튼 클릭시 객실정보 삭제
+	function delBtn(e) {
+		btnCnt--;
+		$('.'+e.target.parentNode.className).remove();
 		
+		if(btnCnt < 1){
+			$('#addBtn').attr('disabled', false);
+		}else {
+			$('#addBtn').attr('disabled', true);
+		}
+	};
+	
+	
 	</script>
 </body>
 </html>
