@@ -75,14 +75,6 @@
         margin-left: 100px;
     }
 
-    #update{
-        margin-top: 50px;
-        margin-left: 70px;
-        width: 100px;
-        height: 40px;
-        background-color: rgb(70, 149, 151);
-        font-size: 15px;
-    }
 
     #grade{
         font-size: 30px;
@@ -96,14 +88,17 @@
         width: 100px;
         height: 40px;
         color: white;
-        margin-top: 30px;
+        margin-top: 40px;
         margin-left: 70px;
+        border-radius: 10px;
     }
-    .link1{margin-left: 90px; margin-top: 10px; text-decoration: none; color: black;}
-    .link1:hover{text-decoration: none;}
+    #ct2_4 > button:hover{color: black;}
 
-    .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black;}
-    .link2:hover{text-decoration: none;}
+    .link1{margin-left: 90px; margin-top: 10px; color: black; font-weight: bold;}
+    .link1:hover{text-decoration: none; color: rgb(70, 149, 151);}
+
+    .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black; font-weight: bold;}
+    .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
 </style>
 
 </head>
@@ -132,7 +127,7 @@
                 <div id="grade">Gold회원</div>
             </div>
             <div id="ct2_4">
-                <div id="update"><a href="<%= contextPath %>/update.ck" style="color: white;">정보수정</a></div>
+                <button type="button" id="update" onclick="location.href='<%= contextPath %>/update.ck'">정보수정</button>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
@@ -161,7 +156,7 @@
 			 	
 			  	
 			  	
-			<!-- 
+			<!--
 			<script>
 				function deleteMember(){
 					
