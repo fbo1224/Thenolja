@@ -266,7 +266,8 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.update"> 
+        <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>"> 
+        <input type="hidden" name="paymentPrice">
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required><br><br>
 
@@ -283,25 +284,6 @@
                 <button type="submit" class="btn btn-dark" onclick="ajaxRefund()">확인</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
                 
-                <script>
-                	function ajaxRefund(){
-                		
-                		$.ajax({
-                			url : 'refund.insert',
-                			type : 'get',
-                			data : {
-                				refundName : $('#refund_name').val(),
-                				bankName : $('#bank_name').val(),
-                				accNo : $('#acc').val()
-                			},
-                			success : function(result){
-                				console.log(result);
-                			}
-                		})
-                		
-                		
-                	}
-                </script>
             </div>
         </form>
         </div>
