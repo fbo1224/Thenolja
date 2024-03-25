@@ -5,6 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	#changeBtn{
+			border: none;
+			background-color: rgb(70, 149, 151);
+			width: 100px;
+			height: 40px;
+			color: white;
+			margin-top: 30px;
+			margin-left: 70px;
+	}
+
+</style>
+
+
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %> 
@@ -44,7 +59,7 @@
 
 			<div align="center">
 				<button>취소</button>
-				<button type="submit" class="btn btn-sm btn-info">변경하기</button>
+				<button type="submit" id="changeBtn">변경하기</button>
 				<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
 				<input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
 			</div>
