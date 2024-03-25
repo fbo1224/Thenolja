@@ -88,10 +88,10 @@ public class HotelController {
 			h.setSerList(serList);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
-				h.setHotelPath("/resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
+				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
 			
-			// System.out.println(h);
+			System.out.println(h);
 			
 			result = new HotelService().insertHotel(h);
 		}

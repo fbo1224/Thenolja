@@ -1,8 +1,6 @@
 package thenolja.tb_hotel.model.service;
 
-import static thenolja.common.JDBCTemplate.close;
-import static thenolja.common.JDBCTemplate.commit;
-import static thenolja.common.JDBCTemplate.getConnection;
+import static thenolja.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -20,15 +18,21 @@ public class HotelService {
 	public int insertHotel(Hotel h) {
 		Connection conn = getConnection();
 		
-		int result = new HotelDao().insertHotel(conn, h);
+		int insertHotelResult = new HotelDao().insertHotel(conn, h);
 		
-		if(result > 0) {
+		// 서비스목록 추가
+		// h.getSerList() : String[]
+		int insertSerList = new HotelDao().insertService(conn, h.getSerList());
+		
+		if((insertHotelResult * insertSerList)> 0) {
 			commit(conn);
-		} 
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 				
-		return result;
+		return (insertHotelResult * insertSerList);
 	}
 	
 	public int selectListCount() {
@@ -58,13 +62,14 @@ public class HotelService {
 		HotelDao selectHotelInfos = new HotelDao();
 		
 		DetailHotel dh = selectHotelInfos.selectHotel(conn, hotelNo);
-		
+						
 		if(dh != null) {
 			// 호텔정보를 정상적으로 가져왔다면
-		    // 서비스 리스트, 선택한 호텔 리뷰 가져오기
+		    // 서비스 리스트, 선택한 호텔 리뷰 가져오기, 리뷰 갯수 가져오기
 			dh.setSerList(selectHotelInfos.hotelServiceList(conn, hotelNo));
 			dh.setRoomList(selectHotelInfos.hotelRoomList(conn, hotelNo));
 			dh.setReviewList(selectHotelInfos.hotelReviews(conn, hotelNo));
+			dh.setCountReviews(selectHotelInfos.countReviews(conn, hotelNo));
 		}
 		
 		close(conn);
