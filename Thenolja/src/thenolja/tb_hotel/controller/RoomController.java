@@ -5,8 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RoomController {
 
-	public String insert(HttpServletRequest request, HttpServletResponse response) {
+	public String insertForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		request.setAttribute("hotelNo", hotelNo);
 		
 		view= "views/hotel/insertRoom.jsp";
 		return view;
