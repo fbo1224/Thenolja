@@ -40,7 +40,7 @@ public class ReserService {
 		
 		return list;
 	}
-	
+	/*
 	public int selectReserNo(int reserNo) {
 		
 		Connection conn = getConnection();
@@ -52,24 +52,24 @@ public class ReserService {
 		return result;
 	}
 	
-	/*
-	public Reservation selectReservation(int reserNo) {
+	*/
+	public Reservation selectReservation() {
 		
 		Connection conn = getConnection();
 		
-		Reservation reser = new ReserDao().selectReservation(conn, reserNo);
+		Reservation reser = new ReserDao().selectReservation(conn);
 		
 		close(conn);
 		
 		return reser;
 	}
-	*/
 	
-	public Reservation selectLastReservation() {
+	
+	public Reservation selectReserNo(int reserNo) {
 		
 		Connection conn = getConnection();
 		
-		Reservation reser = new ReserDao().selectLastReservation(conn);
+		Reservation reser = new ReserDao().selectReserNo(conn, reserNo);
 		
 		close(conn);
 		

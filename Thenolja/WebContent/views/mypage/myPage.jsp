@@ -99,7 +99,7 @@
             </div>
             <div id="ct2_3"></div>
             <div id="ct2_4">
-                <a href="<%= contextPath %>/update.me">정보수정</a>
+                <a href="<%= contextPath %>/update.ck">정보수정</a>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>

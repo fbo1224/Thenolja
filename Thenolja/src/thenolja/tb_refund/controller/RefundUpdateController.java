@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.tb_refund.controller;
 
 import java.io.IOException;
 
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.tb_refund.model.service.RefundService;
+import thenolja.tb_refund.model.vo.Refund;
 
 /**
- * Servlet implementation class DetailMember
+ * Servlet implementation class RefundUpdateController
  */
-@WebServlet("/detailMember.do")
-public class DetailMember extends HttpServlet {
+@WebServlet("/refund.insert")
+public class RefundUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailMember() {
+    public RefundUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +32,27 @@ public class DetailMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
-		Member member = new MemberService().selectMember(memNo);
-	      
-		response.setContentType("application/json; charset=UTF-8");
-		
-		new Gson().toJson(member, response.getWriter());
 
+		int accNo = Integer.parseInt(request.getParameter("accNo"));
+		String refundName = request.getParameter("refundName");
+		String bankName = request.getParameter("bankName");
+		
+		Refund refund = new Refund();
+		refund.setAccNo(accNo);
+		refund.setRefundName(refundName);
+		refund.setBank(bankName);
+		
+		int result = new RefundService().insertRefund(refund);
+		
+		//response.setContentType("text/html); charset=UTF-8");
+		
+		//response.getWriter().print(accNo, refundName, bankName);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(refund, response.getWriter());
+	
+	
+	
 	}
 
 	/**
