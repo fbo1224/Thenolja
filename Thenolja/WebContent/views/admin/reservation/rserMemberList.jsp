@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo" %>    
+<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
-	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("selectReserMember");
+	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pageInfo.getCurrentPage();
@@ -76,13 +76,13 @@
                         		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
                         	</tr>
                         <% } else { %>
-                        	<% for (AdminMember adminMember : list) { %>
+                        	<% for (AdminReservation adminReser : list) { %>
                         	
                         	<tr>
-                        		<td><%=adminMember.getReserNo()%></td>
-                        		<td><%=adminMember.getMemId() %></td>
-                        		<td><%=adminMember.getReserName()%></td>
-                        		<td><%=adminMember.getMemPhone() %></td>
+                        		<td><%=adminReser.getReserNo()%></td>
+                        		<td><%=adminReser.getMemId() %></td>
+                        		<td><%=adminReser.getReserName()%></td>
+                        		<td><%=adminReser.getMemPhone() %></td>
 	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem()">조회</button></td>
 	                            <td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
                         </tr>

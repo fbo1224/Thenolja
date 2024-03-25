@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.admin.reservation.model.service.ReservatoinService;
+import thenolja.admin.reservation.model.vo.AdminReservation;
 import thenolja.common.model.vo.PageInfo;
 
 /**
@@ -43,7 +43,7 @@ public class ReserMemberController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectReserCount();
+		listCount = new ReservatoinService().selectReserCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -68,13 +68,13 @@ public class ReserMemberController extends HttpServlet {
 		
 		//  System.out.println(pi);
 		
-		ArrayList<AdminMember> list = new MemberService().selectReserMember(pi);
+		ArrayList<AdminReservation> list = new ReservatoinService().selectReserMember(pi);
 		
 		request.setAttribute("selectReserMember", list);
 		request.setAttribute("pageInfo", pi);
 		// System.out.println(list);
 		// 요청화면 만들기
-		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/reservation/rserMemberList.jsp");
 		view.forward(request, response);
 	}
 
