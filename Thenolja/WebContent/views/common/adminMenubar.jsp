@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.member.model.vo.Member"
+
+%>
 <%
 	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	
+	System.out.println(loginUser);
 %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -200,6 +206,9 @@
                 <li>
                     <a href="#">숙소관리</a>
                     <ul>
+                    	<%if(loginUser.getMemStatus().equals("A")) { %>
+                    		<li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
+                    	<%} %>
                         <li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
                     </ul>
                 </li>

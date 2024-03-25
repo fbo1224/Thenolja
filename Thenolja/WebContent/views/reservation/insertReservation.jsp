@@ -94,8 +94,9 @@
         margin-left: 10px;
         margin-top: 10px;
     }
-    #mem-bicycle > *{
+    #mem-bicycle > input{
         margin-top: 20px;
+        margin-left: 20px;
     }
     #reser-coupon{
         padding-left: 50px;
@@ -151,38 +152,54 @@
         font-weight: bold;
         margin-left: 300px;
     }
-
 </style>
-
-
 </head>
 <body>
     
     <%@ include file="../common/menubar.jsp" %>
     
+    <!-- 0. 전체 감싸는 div 시작 -->
     <div id="content">
+    
+    	<!-- 0-1. 왼쪽 상단 '<' 숙소예약 시작 -->
         <div id="content_title">
+        
             <div id="left_img">
                 <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
-            <div id="left_title"><h2>숙소 예약</h2></div>
+            
+            <div id="left_title">
+            	<h2>숙소 예약</h2>
+            </div>
         </div>
+        <!-- /0-1. 왼쪽 상단 '<' 숙소예약 끝 -->
         
+       <!-- 0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 시작 -->
 		<div id="detail">
+		
+			<!-- 0-2-1. 호텔 정보 -->
 			<div id="reser_info">
+				
+	    		<div id="reser_hotel_img">
+	    			<img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px">
+    			</div>
 	
-	    		<div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px"></div>
-	
-					<div id="reser_detail">
-				        <h2>마리안느 호텔</h2>
-				        <p>슈페리어 더블(오션뷰)</p>
-				        <p>2인</p>
-				        <p>117,000원</p>
-				        <p>2024-02-28 ~ 2024-02-29</p>
-	    			</div>
+				<div id="reser_detail">
+				
+			        <h2>마리안느 호텔</h2>
+			        <p>슈페리어 더블(오션뷰)</p>
+			        <p>2인</p>
+			        <p>117,000원</p>
+			        <p>2024-02-28 ~ 2024-02-29</p>
+			        
+    			</div>
 			</div>
-	
+			<!-- /0-2-1. 호텔 정보 끝 -->
+			
+			<!-- 0-2-2. 가격 & 예약자 & 쿠폰 & 결제 정보 시작 -->
 	        <div id="price_info">
+	        	
+	        	<!-- 0-2-2-1. 가격정보 시작 -->
 	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
@@ -194,13 +211,17 @@
 						</tr>
 	               </table>
 				</div>
+				<!-- /0-2-2-1. 가격정보 끝 -->
 				
 				<form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+				
+					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
+					
 		                <br>
-		                <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
-		                <br>
-		                <%--<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">  --%>
+						<h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
+						<br>
+		                
 	               		<div id="mem-name">
 		                    <h5>*예약자 이름</h5>
 		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
@@ -210,21 +231,17 @@
 		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
 		                </div>
 		                <div id="mem-bicycle">
-							<br>
-						    <h5>*이동 방식</h5>
-						    <input type="checkbox" name="bicycle" id="car" value="car"> 차량
-						    <input type="checkbox" name="bicycle" id="walk" checked value="road"> 도보
+							<br> <h5>*이동 방식</h5>
+						    <input type="radio" name="bicycle" id="car" value="차량"> 차량
+						    <input type="radio" name="bicycle" id="walk" checked value="도보"> 도보
 						</div>
+						
 	                </div>
-					<!--              
-					<script>
-						function paybtn(){
-							const value = document.getElementByName('bicycle').html;
-							console.log(value);
-						}
-					</script>
-					-->   
+	                <!-- /0-2-2-2. 예약자 정보 끝 -->
+	                
+	                <!-- 0-2-2-3. 쿠폰 정보 시작 -->
 	                <div id="reser-coupon">
+	                
 	                    <br>
 	                    <h3>할인</h3>
 	                    <br>
@@ -232,9 +249,10 @@
 	                    <br>
 	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
 	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
-	                    <!-- onclick="location.href='<%=contextPath%>/selectCoupon'" -->
 	                </div>
+	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
 	                
+	                <!-- 0-2-2-4. 결제 정보 시작 -->
 	                <div id="reser_pay">
 	                    <h3>결제 수단</h3>
 	                    <br>
@@ -243,14 +261,22 @@
 	                    <h5>신한은행 110-424-432780 예금주((주)더놀자)</h5>
 	                    <h5 style="color:red">"반드시 예약자 성함으로 입금해주세요"</h5>
 	                </div>
+	                <!-- /0-2-2-4. 결제 정보 끝 -->
 	                
+	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
 	                    <button type="submit" id="reser-btn">?원 결제하기</button>
 	                </div>
+	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
 	            </form>
 			</div>
+			<!-- /0-2-2. 가격 & 예약자 & 쿠폰 & 결제 정보 끝 -->
 		</div>
+		<!-- /0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 끝 -->
     </div>
+    <!-- /0. 전체 감싸는 div 끝 -->
+    
+    
     
     <div class="container">
     	<!-- The Modal -->
@@ -290,19 +316,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 
-	<script>
-		$('#reser-btn').click(function(){
-			
-			const reserNo = $(this).children().eq(0).text();
-			
-			// location.href = '<%=contextPath%>/reserDetail?reserNo=' + reserNo;
-			location.href = '<%=contextPath%>/views/reservation/waitingPage.jsp';
-			
-			
-	     });
-	</script>
-	-->
 
 </body>
 </html>

@@ -24,6 +24,17 @@
 		 	   )    
 	</entry>
 	
+	<entry key="insertService">
+		INSERT
+		  INTO
+		      TB_SERVICE
+	   VALUES(
+	   		  SEQ_HOTEL.CURRVAL,
+	   		  ?
+		     )    
+	</entry>
+	
+	
 	<entry key="selectListCount">
 		SELECT
       	 	  COUNT(DISTINCT TB_ROOM.HOTEL_NO) AS CNTS
@@ -137,7 +148,20 @@
          BY CREATE_DATE DESC    
 	</entry>
 	
-	
+	<entry key="countReviews">
+		SELECT
+      	      COUNT(*)
+  	      FROM
+      	      TB_REVIEW
+		  JOIN TB_RESERVATION
+		    ON TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO
+		  JOIN TB_ROOM
+		    ON TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO
+		  JOIN TB_HOTEL
+		    ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
+ 		 WHERE
+ 		      TB_HOTEL.HOTEL_NO = ?
+	</entry>
 	
 	
 	

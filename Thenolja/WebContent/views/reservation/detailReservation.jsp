@@ -180,7 +180,7 @@
             <div id="reser_info">
 
                 <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
-
+                
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
                 <div id="reser_detail">
@@ -205,18 +205,18 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">결제금액 : 1</td>
+                            <td width="170x">예약금액 : <%= reser.getPaymentPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : 0원</td>
+                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : 1
+                            <td>결제금액 : <%= reser.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
                     </table>
                 </div>
 
                 <div id="reser_price_info">
                     <h3>결제 내역</h3>
                     <hr>
-                    <p>1</p>
+                    <p>무통장 입금</p>
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
@@ -239,13 +239,13 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td>1</td>
+                            <td><%= reser.getName() %></td>
                             <td width="80px">전화번호</td> 
-                            <td>1</td>
+                            <td><%= reser.getPhone() %></td>
                         </tr>
                         <tr>
-                            <td>1</td> 
-                            <td colspan="3">차량</td>
+                            <td>차량</td> 
+                            <td colspan="3"><%= reser.getBicycle() %></td>
                         </tr>
                     </table>
                 </div>
@@ -253,7 +253,6 @@
         </div>
 
     </div>
-
       <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -267,27 +266,45 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="#"> 
+        <form action="<%= contextPath %>/refund.update"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required><br><br>
 
-            <label for="email">환불계좌</label>
+            <label for="text">환불계좌</label>
             <select id="bank_name">
                 <option>신한은행</option>
                 <option>국민은행</option>
                 <option>농협은행</option>
                 <option>우리은행</option>
             </select>
-            <input type="text" placeholder="계좌번호 입력" required>
+            <input id="acc" type="text" placeholder="계좌번호 입력" required>
             <div id="refund_btn">
                 <br>
-                <button type="submit" class="btn btn-dark">확인</button>
+                <button type="submit" class="btn btn-dark" onclick="ajaxRefund()">확인</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+                
+                <script>
+                	function ajaxRefund(){
+                		
+                		$.ajax({
+                			url : 'refund.insert',
+                			type : 'get',
+                			data : {
+                				refundName : $('#refund_name').val(),
+                				bankName : $('#bank_name').val(),
+                				accNo : $('#acc').val()
+                			},
+                			success : function(result){
+                				console.log(result);
+                			}
+                		})
+                		
+                		
+                	}
+                </script>
             </div>
-
         </form>
         </div>
-        
       </div>
     </div>
   </div>
