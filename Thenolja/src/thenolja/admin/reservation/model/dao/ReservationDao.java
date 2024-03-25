@@ -109,12 +109,12 @@ public class ReservationDao {
 	/**
 	 * 예약 상세 조회
 	 */
-	public AdminReservation selectReserMember(Connection conn, int reserNo){
+	public AdminReservation selectDetailReserMember(Connection conn, int reserNo){
 		
 		AdminReservation adminReser = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectReserMember");
+		String sql = prop.getProperty("selectDetailReserMember");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -124,6 +124,14 @@ public class ReservationDao {
 			while(rset.next()) {
 				
 				adminReser = new AdminReservation();
+				adminReser.setHotelName(rset.getString("HOTEL_NAME"));
+				adminReser.setHotelPath(rset.getString("HOTEL_PATH"));
+				adminReser.setReserDate(rset.getString("RESER_DATE"));
+				adminReser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				adminReser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				adminReser.setBicycle(rset.getString("BICYCLE"));
+				adminReser.setPeople(rset.getInt("PEOPLE"));
+				adminReser.setPayment(rset.getString("PAYMENT"));
 				
 			}
 			
@@ -131,6 +139,9 @@ public class ReservationDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return adminReser;
