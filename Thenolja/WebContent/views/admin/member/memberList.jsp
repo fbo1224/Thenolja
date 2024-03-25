@@ -119,7 +119,7 @@
                 <div class="paging-area" align="center";>
                 
                 	<%if(currentPage > 1) { %>
-                	<button disabled class="btn btn-sm btn-outline-secondaryonclick=" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button disabled class="btn btn-sm btn-outline-secondary" onclick=" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>

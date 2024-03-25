@@ -51,7 +51,7 @@ public class SelectMemberController extends HttpServlet {
 		// System.out.println(currentPage);
 		
 		pageLimit = 5;
-		boardLimit = 15;
+		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		
