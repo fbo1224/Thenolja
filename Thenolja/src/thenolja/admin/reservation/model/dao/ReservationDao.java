@@ -118,6 +118,7 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
 			
 			rset = pstmt.executeQuery();
 			

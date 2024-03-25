@@ -128,14 +128,14 @@
     
     <script>
     	function detailReserMem(e){
-    		// console.log(e);
+    		console.log(e);
     		
     		$.ajax({
     			url : 'detailReserMem.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
-    				// console.log(result);
+    				console.log(result);
     				$('#hotelName').text(result.hotelName);
     				$('#bicycle').text(result.bicycle);
     				$('#people').text(result.people);
