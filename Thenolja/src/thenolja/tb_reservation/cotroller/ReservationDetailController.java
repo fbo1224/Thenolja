@@ -32,34 +32,24 @@ public class ReservationDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		// 4) Service호출~
-		
-			int result = new ReserService().selectReserNo(reserNo);
+		Reservation reser = new ReserService().selectReserNo(reserNo);
 			
-			if(result > 0) {
-				Reservation reser = new ReserService().selectReservation(reserNo);
-				
-				if(reser != null) {
-					request.setAttribute("reser", reser);
-					RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
-					view.forward(request, response);
-					// response.sendRedirect("views/reservation/detailReservation.jsp");
-					
-				} else {
-					request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
-					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-					view.forward(request, response);
-				}
-			} else {
-				request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
-				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-				view.forward(request, response);
-			}
-	
+		if(reser != null) {
+			request.setAttribute("reser", reser);
+			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+			view.forward(request, response);
+			// response.sendRedirect("views/reservation/detailReservation.jsp");
+			
+		} else {
+			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
+		
 	}
 
 	/**

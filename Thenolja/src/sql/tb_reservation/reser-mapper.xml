@@ -10,21 +10,6 @@
 		INSERT
 		  INTO 
 		  		TB_RESERVATION
-		  		(
-		  		RESER_NO,
-		  		RESER_DATE,
-		  		RESER_NAME,
-		  		RESER_PHONE,
-		  		BICYCLE,
-		  		CANCEL_YN,
-		  		CHECKIN_TIME,
-		  		CHECKOUT_TIME,
-		  		PEOPLE,
-		  		ROOM_NO,
-		  		RE_MEM_NO,
-		  		PAYMENT,
-		  		PAYMENT_PRICE
-		  		)
 		VALUES
 		 		(
 		 		SEQ_RESERVATION.NEXTVAL,
@@ -38,8 +23,8 @@
 		 		2,
 		 		1,
 		 		1,
-		 		'1',
-		 		'1'
+		 		'계좌이체',
+		 		'330000'
 				)
 	</entry>
 	
@@ -57,11 +42,31 @@
 		        TB_MEMBER ON(MEM_NO = CO_MEM_NO)
 	</entry>
 	
-	<entry key="selectReserNo">
-	SELECT RESER_NO
-		  FROM 
-		  	  TB_RESERVATION
-	  ORDER BY RESER_NO DESC
+	<entry key="selectReservation">
+		SELECT
+		        RESER_NO,
+		        RESER_DATE,
+		        RESER_NAME,
+		        RESER_PHONE,
+		        BICYCLE,
+		        CANCEL_YN,
+		        TB_ROOM.CHECKIN_TIME,
+		        TB_ROOM.CHECKOUT_TIME,
+		        MAX_PEOPLE,	
+		        TB_ROOM.ROOM_NO,
+		        RE_MEM_NO,
+		        PAYMENT,
+		        PAYMENT_PRICE
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
+		  JOIN
+		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
+		  JOIN
+		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+		 WHERE
+		 		RESER_NO = ?
 	</entry>
 	
 	<!-- 
@@ -95,8 +100,29 @@
 	
  	-->
  	
- 	<entry key="selectLastReservation">
- 		SELECT * FROM TB_RESERVATION ORDER BY RESER_NO DESC;
+ 	<entry key="selectReserNo">
+ 		SELECT
+		        RESER_NO,
+		        RESER_DATE,
+		        RESER_NAME,
+		        RESER_PHONE,
+		        BICYCLE,
+		        TB_ROOM.CHECKIN_TIME,
+		        TB_ROOM.CHECKOUT_TIME,
+		        MAX_PEOPLE,
+		        TB_ROOM.ROOM_NO,
+		        RE_MEM_NO,
+		        PAYMENT,
+		        PAYMENT_PRICE
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
+		  JOIN
+		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
+		  JOIN
+		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+	  ORDER BY RESER_NO DESC
  	</entry>
 	
 	
