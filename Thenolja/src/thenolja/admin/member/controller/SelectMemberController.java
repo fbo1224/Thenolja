@@ -33,6 +33,28 @@ public class SelectMemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new MemberService().selectListCount();
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// System.out.println(listCount);
+		// System.out.println(currentPage);
+		
+		pageLimit = 5;
+		boardLimit = 15;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		
 		ArrayList<Member> list = new MemberService().selectMemberList();
 		request.setAttribute("selectMemberList", list);
 

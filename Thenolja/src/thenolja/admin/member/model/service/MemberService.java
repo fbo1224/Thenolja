@@ -10,8 +10,28 @@ import thenolja.common.JDBCTemplate;
 
 public class MemberService {
 	
+	/**
+	 * 페이징
+	 * @return
+	 */
 	
-
+	public int selectListCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().selectListCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Member> selectMemberList() {
 		
 		Connection conn = JDBCTemplate.getConnection();

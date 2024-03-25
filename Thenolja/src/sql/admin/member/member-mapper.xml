@@ -6,6 +6,19 @@
 		Member Mapper
 	</comment>
 	
+	<entry key="selectListCount">
+	SELECT
+        COUNT(*)
+  FROM
+        TB_MEMBER
+  JOIN
+        TB_NONMEM ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+  WHERE
+        MEM_STATUS NOT LIKE 'A'
+    AND
+        DELETE_YN = 'Y'
+	</entry>
+	
    <entry key="selectMemberList">
    SELECT
            TB_MEMBER.MEM_NO,
