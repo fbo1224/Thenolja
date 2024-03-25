@@ -2,22 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-   <comment>
-      Member Mapper
-   </comment>
-   
-   
-   <entry key="selectListCount">
-   SELECT
-         COUNT(*)
-     FROM
-           TB_MEMBER
-    WHERE
-          STATUS = 'Y'
-   
-   
-   </entry>
-   
+	<comment>
+		Member Mapper
+	</comment>
+	
+	<entry key="selectListCount">
+	SELECT
+        COUNT(*)
+  FROM
+        TB_MEMBER
+  JOIN
+        TB_NONMEM ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+  WHERE
+        MEM_STATUS NOT LIKE 'A'
+    AND
+        DELETE_YN = 'Y'
+	</entry>
+	
    <entry key="selectMemberList">
 SELECT *
   FROM
@@ -44,7 +45,6 @@ SELECT *
                      MEM_NO DESC) A)
     WHERE RNUM BETWEEN ? AND ?
          
-         
    
    </entry>
    
@@ -67,7 +67,7 @@ SELECT *
      WHERE
            DELETE_YN = 'Y'
        AND
-             MEM_ID = ?
+       	   MEM_ID = ?
    
    </entry>
    
@@ -96,18 +96,17 @@ SELECT
         TB_NONMEM.MEM_NO = ?
   GROUP
      BY
-         MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD');
-
+         MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD')
    </entry>
    
    <entry key="deleteMember">
-   UPDATE 
-           TB_MEMBER
-     SET
-          DELETE_YN = 'N'
-    WHERE
-         MEM_NO = ?
+   UPDATE
+        TB_MEMBER
+   SET
+        DELETE_YN = 'N'
+ WHERE
+        MEM_NO = ?
    
    </entry>
-   
-</properties
+	
+</properties>
