@@ -6,17 +6,38 @@ import java.util.ArrayList;
 import thenolja.admin.member.model.dao.MemberDao;
 import thenolja.admin.member.model.vo.Member;
 import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 
 
 public class MemberService {
 	
+	/**
+	 * 페이징
+	 * @return
+	 */
 	
-
-	public ArrayList<Member> selectMemberList() {
+	public int selectListCount() {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
+		int result = new MemberDao().selectListCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Member> selectMemberList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> list = new MemberDao().selectMemberList(conn, pi);
 		
 		JDBCTemplate.close(conn);
 		
