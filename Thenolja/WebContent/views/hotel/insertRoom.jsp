@@ -87,6 +87,7 @@ div {
 			<form id="content-add-form" action="/insert.rooms" enctype="multipart/form-data" method="post">
 			<section id="content-add-sect">
 				<div class="content-div-1">
+					<button type="button" class="btn btn-sm btn-danger delBtn" onclick="delBtn(this);" >삭제</button>
 					<div class="form-group">
 					  <label for="roomName">객실이름</label>
 					  <input type="text" class="form-control" id="roomName" name="roomName" >
@@ -128,7 +129,7 @@ div {
 		}
 		
 		
-		const temp = $('#content-add-form').children().children().filter('div').first().clone();
+		const temp = $('#content-add-form').children().children().filter('div').first().clone(true);
 		
 		// 클래스명 찾기
 		let num = temp.attr('class');
@@ -151,14 +152,9 @@ div {
 		temp.children().children('input').eq(3).attr('name','in_time'+classNum);
 		temp.children().children('input').eq(4).attr('name','out_time'+classNum);
 		
-		
-		let elementNode = document.createElement('button');
-		elementNode.type='button';
-		elementNode.innerText='삭제';
-		elementNode.className = 'btn btn-sm btn-danger delBtn';
-		elementNode.onclick = delBtn;
-		
-		temp.prepend(elementNode);
+		if(btnCnt < 1){
+			
+		}
 		
 		// 요소 붙이기
 		$('#content-add-sect').prepend(temp);
@@ -167,14 +163,15 @@ div {
 	
 	// 버튼 클릭시 객실정보 삭제
 	function delBtn(e) {
-		btnCnt--;
-		$('.'+e.target.parentNode.className).remove();
-		
+		console.log(e.target);
 		if(btnCnt < 1){
-			$('#addBtn').attr('disabled', false);
-		}else {
 			$('#addBtn').attr('disabled', true);
+		}else {
+			$('#addBtn').attr('disabled', false);
 		}
+		// $('.'+e.target.parentNode.className).remove();
+		// btnCnt--;
+		
 	};
 	
 	
