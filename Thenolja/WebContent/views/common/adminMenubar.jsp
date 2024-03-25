@@ -206,8 +206,8 @@
                 <li>
                     <a href="#">숙소관리</a>
                     <ul>
-                    	<%if(loginUser.getMemStatus().equals('A')) { %>
-                    		<li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1">호텔숙소추가</a></li>
+                    	<%if(loginUser.getMemStatus().equals("A")) { %>
+                    		<li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
                     	<%} %>
                         <li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
                     </ul>
