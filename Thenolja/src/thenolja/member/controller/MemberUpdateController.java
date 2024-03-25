@@ -38,18 +38,24 @@ public class MemberUpdateController extends HttpServlet {
 		String memName = request.getParameter("memName");
 		String email = request.getParameter("email");
 		String memPwd = request.getParameter("memPwd");
+		String memPhone = request.getParameter("memPhone");
 		
 		String memId = request.getParameter("memId");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 		Member member = new Member();
 		member.setMemName(memName);
 		member.setEmail(email);
 		member.setMemPwd(memPwd);
+		member.setMemNo(memNo);
 		member.setMemId(memId);
+		member.setMemPhone(memPhone);
 		
 		int result = new MemberService().updateMember(member);
 		
 		if(result > 0) {
+			// 1. db가서 memNo로 객체 하나 가져오기
+			// 2. 이 밑에 로그인 할 때 member.getMemId()
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "변경되었습니다.");
 			
@@ -62,8 +68,7 @@ public class MemberUpdateController extends HttpServlet {
 			request.setAttribute("errorMsg", "정보수정에 실패하였습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		System.out.println("정보수정2 서블릿");
-		request.getRequestDispatcher("views\\member\\memberUpdate.jsp").forward(request, response);
+
 	
 	
 	

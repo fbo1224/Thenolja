@@ -113,7 +113,7 @@
 
 						<div id="content3">
                             <button class="btn" onclick="pwdCheck()">비밀번호 확인</button>
-							<button type="submit" class="btn" id="next" disabled onclick="location.href='<%= contextPath%>/update.me'">다음</button>
+							<button type="submit" class="btn" id="next" disabled onclick="location.href='<%= contextPath%>/update.ck2'">다음</button>
 						</div>
                         
                         <script>

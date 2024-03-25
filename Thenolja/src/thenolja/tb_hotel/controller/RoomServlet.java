@@ -41,8 +41,8 @@ public class RoomServlet extends HttpServlet {
 		
 		switch(mapping) {
 			// insertRoom.jsp
-			case "insertForm" : view =  rc.insert(request, response); break;
-		
+			case "insertForm" : view =  rc.insertForm(request, response); break;
+			//case "insert" : view =  rc.insert(request, response); break;
 		}
 		
 		if(flag) {
