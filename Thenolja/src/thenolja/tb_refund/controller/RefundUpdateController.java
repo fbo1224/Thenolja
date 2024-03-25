@@ -2,16 +2,17 @@ package thenolja.tb_refund.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
+import javax.servlet.http.HttpSession;
 
 import thenolja.tb_refund.model.service.RefundService;
 import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.Service.ReserService;
 
 /**
  * Servlet implementation class RefundUpdateController
@@ -37,6 +38,7 @@ public class RefundUpdateController extends HttpServlet {
 		String refundName = request.getParameter("refundName");
 		String bankName = request.getParameter("bankName");
 		
+		// 3) 데이터 가공
 		Refund refund = new Refund();
 		refund.setAccNo(accNo);
 		refund.setRefundName(refundName);
@@ -44,12 +46,20 @@ public class RefundUpdateController extends HttpServlet {
 		
 		int result = new RefundService().insertRefund(refund);
 		
-		//response.setContentType("text/html); charset=UTF-8");
 		
-		//response.getWriter().print(accNo, refundName, bankName);
-		
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(refund, response.getWriter());
+		if(result > 0) {
+			
+			refund = new RefundService().selectRefund();
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("refund", refund);
+			
+			response.sendRedirect(request.getContextPath() + "/refundDetail?reserNo=" + refund.getReserNo());
+			
+		} else {
+			request.setAttribute("errorMsg", "예약에 실패했습니다!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	
 	
 	
