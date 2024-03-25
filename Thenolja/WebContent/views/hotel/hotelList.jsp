@@ -4,6 +4,7 @@
 <%
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	System.out.prinln(loginUser);
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -78,6 +79,8 @@
 		<%@ include file="./common/searchForm.jsp" %>
 		
 		<div id="content-2-lists">
+		<%if(loginUser.getMemStatus().equals('A')){ %>
+		<%} %>
 			<%if(list.isEmpty()){ %>
 				<div class="cards">
 					<h3>조회된 호텔이 없습니다.</h3>

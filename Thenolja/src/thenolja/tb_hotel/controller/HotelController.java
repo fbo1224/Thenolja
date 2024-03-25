@@ -96,9 +96,7 @@ public class HotelController {
 			result = new HotelService().insertHotel(h);
 		}
 		return result;
-		
 	}
-	
 	
 	public String hotelList(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
