@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import thenolja.admin.nonMember.model.vo.NonMember;
 import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 
 public class NonMemDao {
 	
@@ -29,7 +30,42 @@ public class NonMemDao {
 		}
 	}
 	
-	public ArrayList<NonMember> selectNonMemberList(Connection conn) {
+	
+	/**
+	 * 페이징
+	 */
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);		
+			rset = pstmt.executeQuery();
+		
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	
+	
+	/**
+	 * 비회원 전체 조회
+	 */
+	public ArrayList<NonMember> selectNonMemberList(Connection conn, PageInfo pi) {
 		
 		ArrayList<NonMember> list = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -39,6 +75,12 @@ public class NonMemDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			

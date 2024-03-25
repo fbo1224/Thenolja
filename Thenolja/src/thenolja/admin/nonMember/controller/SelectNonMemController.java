@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.nonMember.model.service.NonMemService;
 import thenolja.admin.nonMember.model.vo.NonMember;
+import thenolja.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class SelectNonMemController
@@ -33,20 +34,57 @@ public class SelectNonMemController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1) 인코딩
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
 		
-		// 2) 값뽑기
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		// 3) 가공
+		listCount = new NonMemService().selectListCount();
 		
-		// 4) Service호출
-		ArrayList<NonMember> list = new NonMemService().selectNonMemberList();
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// System.out.println(listCount);
+		// System.out.println(currentPage);
+		
+		pageLimit = 5;
+		
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		// System.out.println(maxPage);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		
+		System.out.println(pi);
+		
+		
+		ArrayList<NonMember> list = new NonMemService().selectNonMemberList(pi);
+		request.setAttribute("pageInfo", pi);
+		
 		request.setAttribute("selectNonMemberList", list);
 		
 		// 응답화면 띄우기
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/nonMember/nonMemberList.jsp");
 		view.forward(request, response);
+		
+		// System.out.println(list);
+		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
