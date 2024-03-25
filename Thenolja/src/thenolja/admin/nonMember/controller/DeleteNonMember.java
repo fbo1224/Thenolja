@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import thenolja.admin.nonMember.model.service.NonMemService;
 
 /**
@@ -32,7 +34,17 @@ public class DeleteNonMember extends HttpServlet {
 		
 		int nonMemNo = Integer.parseInt(request.getParameter("nonMemNo"));
 		
-		new NonMemService().deleteNonMember(nonMemNo);
+		int result = new NonMemService().deleteNonMember(nonMemNo);
+		
+		JSONObject obj = new JSONObject();
+		
+		obj.put("message", "삭제 성공!");
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		response.getWriter().print(obj.toString());
+		
+		
 	}
 
 	/**

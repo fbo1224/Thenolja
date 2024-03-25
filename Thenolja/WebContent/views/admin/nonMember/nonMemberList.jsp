@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.ArrayList,  thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
+<%@ page import="java.util.ArrayList,   thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
 <%
+	NonMember nonMember = (NonMember)request.getAttribute("nonMember");	
+
 	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -83,7 +85,7 @@
                             <td><%= n.getMemNo() %></td>
                             <td><%= n.getMemName() %></td>
                             <td><%= n.getMemPhone() %></td>
-                             <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember()">삭제</button></td>
+                             <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(<%=n.getMemNo()%>)">삭제</button></td>
                           </tr>
                          <% } %>
                         <% }  %>
@@ -126,7 +128,7 @@
     			data : {nonMemNo : e},
     			type : 'get',
     			success : function(result){
-    				
+    				alert(result.message);
     			}
     		});
     		
