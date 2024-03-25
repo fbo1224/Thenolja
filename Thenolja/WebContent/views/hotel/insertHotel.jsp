@@ -227,7 +227,7 @@
 							<div id="hotel-nameNImg">
 								<div id="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input type="file" name="hotelImg">
+									<input type="file" name="hotelImg" required>
 								</div>
 							</div>
 						</div>
@@ -251,16 +251,16 @@
 									<h3>숙소 이용 가능한 서비스 목록</h3>
 								</div>
 								<div id="serviceList-half1">
-									<label>wifi</label><input class="form-check-input" type="checkbox" value="wifi" name="serList">
-									<label>금연</label><input class="form-check-input" type="checkbox" value="금연" name="serList">
-									<label>헬스장</label><input class="form-check-input" type="checkbox" value="헬스장" name="serList">
-									<label>에어컨</label><input class="form-check-input" type="checkbox" value="에어컨" name="serList">
+									<label>wifi</label><input class="form-check-input" type="checkbox" value="1" name="serList">
+									<label>금연</label><input class="form-check-input" type="checkbox" value="2" name="serList">
+									<label>헬스장</label><input class="form-check-input" type="checkbox" value="3" name="serList">
+									<label>에어컨</label><input class="form-check-input" type="checkbox" value="4" name="serList">
 								</div>
 								<div id="serviceList-half2">
-									<label>주차장</label><input class="form-check-input" type="checkbox" value="주차장" name="serList">
-									<label>반려견동반</label><input class="form-check-input" type="checkbox" value="반려견동반" name="serList">
-									<label>엘레베이터</label><input class="form-check-input" type="checkbox" value="엘레베이터" name="serList">
-									<label>pc</label><input class="form-check-input" type="checkbox" value="pc" name="serList">
+									<label>주차장</label><input class="form-check-input" type="checkbox" value="5" name="serList">
+									<label>반려견동반</label><input class="form-check-input" type="checkbox" value="6" name="serList">
+									<label>엘레베이터</label><input class="form-check-input" type="checkbox" value="7" name="serList">
+									<label>pc</label><input class="form-check-input" type="checkbox" value="8" name="serList">
 								</div>
 
 							</div>
@@ -307,28 +307,12 @@
 	                if(data.buildingName !== '' && data.apartment === 'Y'){
 	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 	                }
-	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                /*
-	                if(extraRoadAddr !== ''){
-	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-	                }
-					*/
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	               
 	                document.getElementById('sample4_postcode').value = data.zonecode;
 	                document.getElementById("sample4_roadAddress").value = roadAddr;
-	                //document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-	                
-	                /*
-	                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-	                if(roadAddr !== ''){
-	                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-	                } else {
-	                    document.getElementById("sample4_extraAddress").value = '';
-	                }
-					*/
-					
+	             
 	                var guideTextBox = document.getElementById("guide");
-	                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+	              
 	                if(data.autoRoadAddress) {
 	                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
 	                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
