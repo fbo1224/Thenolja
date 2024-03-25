@@ -51,7 +51,6 @@ public class HotelController {
 				multiRequest =
 						new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -67,7 +66,6 @@ public class HotelController {
 			String introText = multiRequest.getParameter("introText");
 			
 			// hotelImg 파일
-			
 			System.out.println(String.join(",", serList));
 			
 			// 지역만뽑기
