@@ -70,138 +70,136 @@ a{
 	padding : 0px;
 }
 
-    #header{
-        width:1200px;
-        height: 180px;
-        margin: auto;
-    } 
+#header{
+    width:1200px;
+    height: 180px;
+    margin: auto;
+} 
+  #tnj_header{
+      width: 100%;
+      height: 50%;
+  }
+
+  #line{
+      width: 100%;
+      height: 10%;
+      border-bottom: 3px solid rgb(70, 149, 151);  
+  }
+
+  #tnj_menu{
+      width: 100%;
+      height: 40%;
+  }
 
 
-    #tnj_header{
-        width: 100%;
-        height: 50%;
-    }
+  #tnj_header > div{
+      height: 100%;
+  }
 
-    #line{
-        width: 100%;
-        height: 10%;
-        border-bottom: 3px solid rgb(70, 149, 151);  
-    }
+  #tnj_icon{
+      width: 10%;
+      float: left;
+  }
 
-    #tnj_menu{
-        width: 100%;
-        height: 40%;
-    }
+  #tnj_title{
+      width: 35%;
+      float: left;
+  }
 
+  #admin_login{
+      width: 55%;
+      float: left;
+  }
 
-    #tnj_header > div{
-        height: 100%;
-    }
-
-    #tnj_icon{
-        width: 10%;
-        float: left;
-    }
-
-    #tnj_title{
-        width: 35%;
-        float: left;
-    }
-
-    #admin_login{
-        width: 55%;
-        float: left;
-    }
-
-    #tnj_icon > img{
-        width: 80px;
-        float: right;
-        padding-top: 25px;
-    }
+  #tnj_icon > img{
+      width: 80px;
+      float: right;
+      padding-top: 25px;
+  }
 
 
-    #tnj_title > h2{
-        padding-top: 50px;
-        padding-left: 30px;
-        font-weight: 700;
-        font-size: 30px;
-    }
+  #tnj_title > h2{
+      padding-top: 50px;
+      padding-left: 30px;
+      font-weight: 700;
+      font-size: 30px;
+  }
 
-    #tnj_title > h2 > a{
-        color: black;
-        text-decoration: none;
-    }
+  #tnj_title > h2 > a{
+      color: black;
+      text-decoration: none;
+  }
 
-    #admin_login > p{
-        padding-top: 60px;
-        font-size: 20px;
-        text-align: right;
-        padding-right: 50px;
-    }
-    
+  #admin_login > p{
+      padding-top: 60px;
+      font-size: 20px;
+      text-align: right;
+      padding-right: 50px;
+  }
+  
 
-    #admin_login > p > a{
-        color: black;
-        text-decoration: none;
-    }
+  #admin_login > p > a{
+      color: black;
+      text-decoration: none;
+  }
 
-    #navi{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        padding-left: 200px;
-    }
+  #navi{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      padding-left: 200px;
+  }
 
-    #navi > li{
-        float: left;
-        width: 15%;
-        height: 100%;
-        text-align: center;
-    }
-    #navi a{
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-            color: black;
-            display: block;
-            line-height: 38px;
-            font-size: 17px;
-            transform: scale(1);
-            position: relative;
-            z-index: 3;
-        }
-        
-        #navi > li > ul{
-            list-style: none;
-            padding: 0px;
-            display:none;
-        }
+  #navi > li{
+      float: left;
+      width: 15%;
+      height: 100%;
+      text-align: center;
+  }
+  #navi a{
+          width: 100%;
+          height: 100%;
+          text-decoration: none;
+          color: black;
+          display: block;
+          line-height: 38px;
+          font-size: 17px;
+          transform: scale(1);
+          position: relative;
+          z-index: 3;
+      }
+      
+      #navi > li > ul{
+          list-style: none;
+          padding: 0px;
+          display:none;
+      }
 
-        #navi > li > a:hover + ul{
-            display:block;
-        }
+      #navi > li > a:hover + ul{
+          display:block;
+      }
 
-        #navi > li > ul:hover{
-            display: block;
-        }
+      #navi > li > ul:hover{
+          display: block;
+      }
 
-        #navi a:hover{
-            font-size: 17px;
-            font-weight: 700;
-        }
-        
-        #navi > li > ul a{
-            font-size: 17px;
-            background-color: #E5E3E4;
-        }
-      	.form-control{
-			display: inline-block;
-			width: auto;
-		}
-		.form-check-input {
-			position:static;
-		}
+      #navi a:hover{
+          font-size: 17px;
+          font-weight: 700;
+      }
+      
+      #navi > li > ul a{
+          font-size: 17px;
+          background-color: #E5E3E4;
+      }
+    	.form-control{
+	display: inline-block;
+	width: auto;
+}
+.form-check-input {
+	position:static;
+}
 
     </style>
     

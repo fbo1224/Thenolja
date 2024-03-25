@@ -143,6 +143,8 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
+				<%-- 객실예약 기능 없음 --%>
+				<%-- 버튼 A태그로 바꿀 수 있음 --%>
 				<button class="btn btn-sm btn-primary" >예약하기</button>
 				<button class="btn btn-sm btn-primary" >비회원예약하기</button>
 			</div>
@@ -189,6 +191,7 @@
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
+							<%-- 객실예약 기능 없음 --%>
 							<button class="btn btn-sm btn-info">객실 예약</button>
 						</div>
 					</div>			
