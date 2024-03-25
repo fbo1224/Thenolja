@@ -64,7 +64,7 @@ public class UpdateCheckController extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}*/
 		System.out.println("정보수정 서블릿");
-		request.getRequestDispatcher("views\\member\\memberUpdate.jsp").forward(request, response);
+		request.getRequestDispatcher("views\\member\\updateCheck1.jsp").forward(request, response);
 	}
 
 	/**
