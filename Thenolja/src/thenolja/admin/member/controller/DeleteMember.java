@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import thenolja.admin.member.model.service.MemberService;
 
 /**
@@ -36,7 +38,7 @@ public class DeleteMember extends HttpServlet {
       
       JSONObject obj = new JSONObject();
       
-      obj.put("message", "삭제 성공!")
+      obj.put("message", "삭제 성공!");
          
       response.setContentType("application/json; charset=UTF-8");
       
