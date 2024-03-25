@@ -38,6 +38,7 @@
 	
 	.cards{
 		width:	45%;
+		height: 250px;
 		margin: 10px;
 		box-shadow: 3px 3px 2px gray;
 		border-radius: 10px;
@@ -71,8 +72,7 @@
 <body>
 
 
-	<%@ include file="../common/menubar.jsp" %>
-	
+	<%@ include file="../common/menubar.jsp"%>
 	<div id="wrap">
 	
 		<%@ include file="./common/searchForm.jsp" %>
