@@ -18,7 +18,7 @@ public class AdminMember {
    private String gradeName;
    private int paymentPrice;
    private int reserNo;
-   private String rserName;
+   private String reserName;
    
    
 
@@ -30,12 +30,12 @@ public void setReserNo(int reserNo) {
 	this.reserNo = reserNo;
 }
 
-public String getRserName() {
-	return rserName;
+public String getReserName() {
+	return reserName;
 }
 
-public void setRserName(String rserName) {
-	this.rserName = rserName;
+public void setReserName(String reserName) {
+	this.reserName = reserName;
 }
 
 public int getPaymentPrice() {

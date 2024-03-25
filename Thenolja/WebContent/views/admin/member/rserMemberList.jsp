@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo" %>    
+<%
+	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("selectReserMember");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>관리자메인페이지</title>
+    <title>예약 회원 조회</title>
 
  	<link rel="stylesheet" href="resources/css/admin_select.css">
 
@@ -59,27 +70,51 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>3</td>
-                            <td>dlgPdls</td>
-                            <td>이혜인</td>
-                            <td>01020082008</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                            <td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
-                          </tr>
+                        
+                        <%if(list.isEmpty()) {  %>
+                        	<tr>
+                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
+                        	</tr>
+                        <% } else { %>
+                        	<% for (AdminMember adminMember : list) { %>
+                        	
+                        	<tr>
+                        		<td><%=adminMember.getReserNo()%></td>
+                        		<td><%=adminMember.getMemId() %></td>
+                        		<td><%=adminMember.getReserName()%></td>
+                        		<td><%=adminMember.getMemPhone() %></td>
+	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem()">조회</button></td>
+	                            <td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
+                        </tr>
+                        <% } %>
+                       <% } %>
+
                         </tbody>
                       </table>
 
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
+                    
+                    <% if(currentPage > 1) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% } %>
+                    
+                    <% for (int i = startPage; i <= endPage; i++) { %>
+                    	
+                    	<% if (currentPage != i) { %>
+                   
+                    		<button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=i%>'"><%=i %></button>
+
+                		<%} else { %>
+                		<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+	                <% } %>
+	               
+	              <% } %>
+	              
+	              <% if(currentPage != maxPage) { %>
+	              <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage + 1 %>'">></button>
+	               <% } %>
                 </div>
         
 
@@ -88,6 +123,30 @@
         <div id="footer"></div>
 
     </div>
+    
+    
+    <script>
+    	function detailReserMem(e){
+    		
+    		$.ajax({
+    			url : 'detailReserMem.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				
+    			}
+    		})
+    	}
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">

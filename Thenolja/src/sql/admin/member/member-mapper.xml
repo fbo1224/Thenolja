@@ -138,7 +138,10 @@ SELECT
 					  JOIN
 					        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
 					 WHERE
-					        MEM_STATUS = 'Y') A)
+					        MEM_STATUS = 'Y'
+					 ORDER
+		                BY
+		                     RESER_NO DESC) A)
 	    WHERE RNUM BETWEEN ? AND ?
    </entry>
 

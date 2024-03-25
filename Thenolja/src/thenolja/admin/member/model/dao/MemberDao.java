@@ -233,7 +233,7 @@ public class MemberDao {
 				AdminMember adminMember = new AdminMember();
 				adminMember.setReserNo(rset.getInt("RESER_NO"));
 				adminMember.setMemId(rset.getString("MEM_ID"));
-				adminMember.setRserName(rset.getString("RESER_NAME"));
+				adminMember.setReserName(rset.getString("RESER_NAME"));
 				adminMember.setMemPhone(rset.getString("MEM_PHONE"));
 				
 				list.add(adminMember);

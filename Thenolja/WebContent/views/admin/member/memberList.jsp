@@ -150,7 +150,7 @@
         					data : {memNo : e},
         					type : 'get',
         					success : function(result){
-        						console.log(result);
+        						// console.log(result);
         						$('#name').text(result.memName);
         						$('#grade').text(result.gradeName);
         						$('#email').text(result.email);

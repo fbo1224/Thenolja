@@ -70,7 +70,9 @@ public class ReserMemberController extends HttpServlet {
 		
 		ArrayList<AdminMember> list = new MemberService().selectReserMember(pi);
 		
-		System.out.println(list);
+		request.setAttribute("selectReserMember", list);
+		request.setAttribute("pageInfo", pi);
+		// System.out.println(list);
 		// 요청화면 만들기
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");
 		view.forward(request, response);
