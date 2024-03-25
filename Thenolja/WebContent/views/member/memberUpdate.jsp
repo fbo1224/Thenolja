@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-포함해서 입력해주세요." name="phone" value="<%= loginUser.getMemPhone() %>"></td>
+					<td><input type="text" placeholder="-포함해서 입력해주세요." name="memPhone" value="<%= loginUser.getMemPhone() %>"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -34,7 +34,7 @@
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="text" name="password" value="<%= loginUser.getMemPwd() %>"></td>
+					<td><input type="text" name="memPwd" value="<%= loginUser.getMemPwd() %>"></td>
 					<td></td>
 				</tr>
 
@@ -45,7 +45,8 @@
 			<div align="center">
 				<button>취소</button>
 				<button type="submit" class="btn btn-sm btn-info">변경하기</button>
-
+				<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
+				<input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
 			</div>
 
 			<br><br>

@@ -66,6 +66,7 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		int result = noMemberResult * memberResult;
+		
 		return result;
 	}
 //-------------------------------회원탈퇴---------------------------------------
