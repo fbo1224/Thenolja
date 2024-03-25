@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import thenolja.admin.reservation.model.service.ReservatoinService;
+import thenolja.admin.reservation.model.vo.AdminReservation;
 
 /**
  * Servlet implementation class detailReserMember
@@ -32,9 +35,11 @@ public class DetailReserMember extends HttpServlet {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		new ReservatoinService().selectReserMember(reserNo);
+		AdminReservation adminReser = new ReservatoinService().selectDetailReserMember(reserNo);
 		
+		response.setContentType("application/json; charset=UTF-8");
 		
+		new Gson().toJson(adminReser, response.getWriter());
 		
 	}
 
