@@ -56,14 +56,14 @@ public class LoginController extends HttpServlet {
 				response.sendRedirect(request.getContextPath());
 				
 				
-			} else/* if(loginUser.getMemStatus().equals("A"))*/{
+			} else if(loginUser.getMemStatus().equals("A")){
 				
 				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);
 				
-			} /*else {
+			} else {
 				session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}*/
+				request.getRequestDispatcher("/logout").forward(request, response);
+			}
 		}
 		
 		
