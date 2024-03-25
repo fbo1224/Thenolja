@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.admin.member.model.vo.AdminMember;
 
 /**
  * Servlet implementation class DetailMember
@@ -35,7 +35,7 @@ public class DetailMember extends HttpServlet {
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member member = new MemberService().selectMember(memNo);
+		AdminMember member = new MemberService().selectMember(memNo);
 	      
 		response.setContentType("application/json; charset=UTF-8");
 		

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import thenolja.admin.member.model.vo.Member;
+import thenolja.admin.member.model.vo.AdminMember;
 import thenolja.common.JDBCTemplate;
 import thenolja.common.model.vo.PageInfo;
 
@@ -66,9 +66,9 @@ public class MemberDao {
 	/**
 	 * 멤버 전체 조회 페이지
 	 */
-	public ArrayList<Member> selectMemberList(Connection conn, PageInfo pi){
+	public ArrayList<AdminMember> selectMemberList(Connection conn, PageInfo pi){
 
-	      ArrayList<Member> list = new ArrayList();
+	      ArrayList<AdminMember> list = new ArrayList();
 	      ResultSet rset = null;
 	      PreparedStatement pstmt = null;
 	      
@@ -88,7 +88,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				Member member = new Member();
+				AdminMember member = new AdminMember();
 	            member.setMemNo(rset.getInt("MEM_NO"));
 	            member.setMemId(rset.getString("MEM_ID"));
 	            member.setNickName(rset.getString("NICKNAME"));
@@ -108,9 +108,9 @@ public class MemberDao {
 	
 	
 	
-	public Member selectMember(Connection conn, int MemNo) {
+	public AdminMember selectMember(Connection conn, int MemNo) {
 		
-		Member member = null;
+		AdminMember member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -124,7 +124,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			//
 			if(rset.next()) {
-				member = new Member();
+				member = new AdminMember();
 				member.setMemName(rset.getString("MEM_NAME"));
 				member.setEmail(rset.getString("EMAIL"));
 				member.setMemPhone(rset.getString("MEM_PHONE"));
