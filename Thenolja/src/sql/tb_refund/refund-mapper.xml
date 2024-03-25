@@ -9,6 +9,13 @@
 		INSERT
 		  INTO
 		  		TB_REFUND
+		  		(
+		  		RF_RESER_NO.
+		  		REFUND_PRICE,
+		  		REFUND_ACC_NO,
+		  		REFUND_NAME,
+		  		BANK
+		  		)
 		VALUES
 				(
 				?,
