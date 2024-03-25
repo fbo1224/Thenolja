@@ -38,14 +38,6 @@ public class DetailMember extends HttpServlet {
 		Member member = new MemberService().selectMember(memNo);
 	      
 		response.setContentType("application/json; charset=UTF-8");
-		/*
-		JSONObject obj = new JSONObject();
-		obj.put("name",member.getMemName());
-		
-		response.getWriter().print(obj);
-		*?
-		*
-		*/
 		
 		new Gson().toJson(member, response.getWriter());
 		
