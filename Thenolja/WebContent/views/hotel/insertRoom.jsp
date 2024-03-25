@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%
     	int hotelNo = (int)request.getAttribute("hotelNo");
-    	System.out.println(hotelNo);
+    	System.out.println("hotelNo " + hotelNo);
     %>
 <!DOCTYPE html>
 <html>
@@ -84,30 +84,42 @@ div {
 			<button class="btn btn btn-info" id="addBtn">객실추가하기</button>
 		</div>
 		<div id="content-div">
-			<form id="content-add-form" action="/insert.rooms" enctype="multipart/form-data" method="post">
+			<form id="content-add-form" action="<%= contextPath %>/insert.rooms" enctype="multipart/form-data" method="post">
+			<input type="hidden" value="<%= hotelNo %>" name="hotelNo" >
 			<section id="content-add-sect">
 				<div class="content-div-1">
-					<button type="button" class="btn btn-sm btn-danger delBtn" onclick="delBtn(this);" >삭제</button>
+					<button type="button" id="deleteBtn" class="btn btn-sm btn-danger delBtn" onclick="delBtn(this);" >삭제</button>
+					
 					<div class="form-group">
-					  <label for="roomName">객실이름</label>
-					  <input type="text" class="form-control" id="roomName" name="roomName" >
+					  <label>객실이름</label>
+					  <input type="text" class="form-control" name="roomName" required >
 					</div>
 					
 					<div class="form-group">
-					  <label for="maxPeople">최대인원</label>
-					  <input type="text" class="form-control" id="maxPeople" name="maxPeople" >
+					  <label>최대인원</label>
+					  <input type="text" class="form-control"  name="maxPeople" required >
 					</div>
 					
 					<div class="form-group">
-					  <label for="roomImg">숙소사진</label>
-					  <input type="file" id="roomImg" name="roomImg">
+					  <label>객실 사진</label>
+					  <input type="file"  name="roomImg" >
 					</div>
 					
-					<div id="timeOptions">
+					<div class="form-grop">
 						<label>입실시간</label>
-						<input type="time" name="in_time">				
+						<input type="time" name="in_time" required><br>				
 						<label>퇴실시간</label>
-						<input type="time" name="out_time">
+						<input type="time" name="out_time" required>
+					</div>
+					
+					<div class="form-group">
+					  <label>객실 가격</label>
+					  <input type="text"  name="roomPrice" required>
+					</div>
+					
+					<div class="form-group">
+					  <label>객실 번호</label>
+					  <input type="text"  name="roomNum" required>
 					</div>
 				</div>
 			</section>
@@ -119,15 +131,19 @@ div {
 	</div>
 	<script>
 	let btnCnt= 0;
-	
+	// 객실추가는 최소 1개는 존재해야함
+	// 객실정보추가 창이 1개라면 삭제할 수 없음
+	// 처음으로 페이지에 오면 삭제못함
+	$('#deleteBtn').attr('disabled', true);
 	
 	$('#addBtn').click(function(){
-		if(btnCnt < 1){
+		btnCnt++;
+		if(btnCnt < 2){
 			$('#addBtn').attr('disabled', false);
+			$('#deleteBtn').attr('disabled', false);
 		}else {
 			$('#addBtn').attr('disabled', true);
 		}
-		
 		
 		const temp = $('#content-add-form').children().children().filter('div').first().clone(true);
 		
@@ -151,29 +167,30 @@ div {
 		temp.children().children('input').eq(2).attr('name','roomImg'+classNum);
 		temp.children().children('input').eq(3).attr('name','in_time'+classNum);
 		temp.children().children('input').eq(4).attr('name','out_time'+classNum);
-		
-		if(btnCnt < 1){
-			
-		}
+		temp.children().children('input').eq(5).attr('name','roomPrice'+classNum);
+		temp.children().children('input').eq(6).attr('name','roomNum'+classNum);
 		
 		// 요소 붙이기
 		$('#content-add-sect').prepend(temp);
-		btnCnt++;
+		if(btnCnt == 0){
+			$('#deleteBtn').attr('disabled', false);	
+		}
 	});
 	
 	// 버튼 클릭시 객실정보 삭제
 	function delBtn(e) {
-		console.log(e.target);
-		if(btnCnt < 1){
-			$('#addBtn').attr('disabled', true);
-		}else {
+		btnCnt--;
+		if(btnCnt < 2){
 			$('#addBtn').attr('disabled', false);
+		} else {
+			$('#addBtn').attr('disabled', true);
 		}
-		// $('.'+e.target.parentNode.className).remove();
-		// btnCnt--;
+		$('.'+e.parentNode.className).remove();
 		
+		if(btnCnt == 0){
+			$('#deleteBtn').attr('disabled', true);	
+		}
 	};
-	
 	
 	</script>
 </body>

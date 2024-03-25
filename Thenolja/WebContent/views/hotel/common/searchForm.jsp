@@ -65,7 +65,7 @@ $(function () {
         "endDate": new Date(),
         
 	    }, function (start, end, label) {
-        console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        console.log(start.format('YYYY-MM-DD') +' '+ end.format('YYYY-MM-DD'));
     
 		});
 	});
