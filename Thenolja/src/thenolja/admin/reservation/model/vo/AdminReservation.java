@@ -17,9 +17,27 @@ public class AdminReservation {
 	private int paymentPrice;
 	private String memId;
 	private String memPhone;
+	private String hotelName;
+	private String hotelPath;
 	
 	
 	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

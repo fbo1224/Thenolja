@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
+	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -76,14 +77,14 @@
                         		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
                         	</tr>
                         <% } else { %>
-                        	<% for (AdminReservation adminReser : list) { %>
+                        	<% for (AdminReservation adminReservation : list) { %>
                         	
                         	<tr>
-                        		<td><%=adminReser.getReserNo()%></td>
-                        		<td><%=adminReser.getMemId() %></td>
-                        		<td><%=adminReser.getReserName()%></td>
-                        		<td><%=adminReser.getMemPhone() %></td>
-	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem()">조회</button></td>
+                        		<td><%=adminReservation.getReserNo()%></td>
+                        		<td><%=adminReservation.getMemId() %></td>
+                        		<td><%=adminReservation.getReserName()%></td>
+                        		<td><%=adminReservation.getMemPhone() %></td>
+	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
 	                            <td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
                         </tr>
                         <% } %>
@@ -127,12 +128,15 @@
     
     <script>
     	function detailReserMem(e){
+    		// console.log(e);
     		
     		$.ajax({
     			url : 'detailReserMem.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
+    				// console.log(result);
+    				$('#hotelName').text(result.hotelName);
     				
     			}
     		})
@@ -165,7 +169,7 @@
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
-                    <td width="200">마리안느 호텔</td>
+                    <td width="200"><span id="hotelName"></span></td>
                     <td>이동방식 : 차량</td>
                 </tr>
                 <tr>

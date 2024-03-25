@@ -42,7 +42,8 @@
 	    WHERE RNUM BETWEEN ? AND ?
    </entry>
    
-   <entry key="selectReserMember">
+   
+   <entry key="selectDetailReserMember">
 	    SELECT 
 	        HOTEL_NAME,
 	        HOTEL_PATH,
@@ -71,6 +72,9 @@
 	      PAYMENT, PAYMENT_PRICE
    
    </entry>
+   
+   
+   
    
 	
 	

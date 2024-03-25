@@ -41,12 +41,22 @@ public class ReservatoinService {
 	
 	}
 	
-	public void selectReserMember(int reserNo) {
+	/**
+	 * 예약 회원 reserNo 가져오기
+	 */
+	public AdminReservation selectDetailReserMember(int reserNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		new ReservationDao().selectReserMember(conn, reserNo);
+		AdminReservation adminReser = new ReservationDao().selectDetailReserMember(conn, reserNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminReser;
+	
 	}
+	
+	
 	
 	
 	
