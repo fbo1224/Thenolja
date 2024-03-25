@@ -150,6 +150,7 @@ public class HotelController {
 		ArrayList<HotelCard> hotelList = null;
 		if(loginStatus.equals("A")) {
 			hotelList = new HotelService().selectAllList(pi);
+			request.setAttribute("loginStatus", loginStatus);
 		}else {
 			hotelList = new HotelService().selectList(pi);
 		}

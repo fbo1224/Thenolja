@@ -109,6 +109,7 @@ public class HotelDao {
 		
 		return listCnt;
 	}
+	
 	public ArrayList<HotelCard> selectAllList(Connection conn, PageInfo pi){
 		ArrayList<HotelCard> list = new ArrayList();
 		PreparedStatement pstmt = null;

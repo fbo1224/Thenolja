@@ -6,8 +6,6 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	
-	System.out.println(loginUser);
 %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,16 +20,14 @@
     
   div{
            
-            box-sizing: border-box;
-        }
+    box-sizing: border-box;
+  }
   
-   
-
-    #header{
+   #header{
         width:1200px;
         height: 180px;
         margin: auto;
-    } 
+   } 
 
 
     #tnj_header{
@@ -164,10 +160,7 @@
 </head>
 <body>
     <div id="header">
-        
         <div id="tnj_header">
-            
-
             <div id="tnj_icon">
                 <img src="resources/img/logo.png" alt="logo">
             </div>
@@ -179,11 +172,8 @@
             <div id="admin_login">
                 <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
             </div>
-
         </div>
-
         <div id="line"></div>
-
         <div id="tnj_menu">
             <ul id="navi">
                 <li>
