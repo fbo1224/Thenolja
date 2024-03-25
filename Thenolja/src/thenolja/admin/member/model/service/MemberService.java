@@ -7,7 +7,10 @@ import thenolja.admin.member.model.dao.MemberDao;
 import thenolja.admin.member.model.vo.Member;
 import thenolja.common.JDBCTemplate;
 
+
 public class MemberService {
+	
+	
 
 	public ArrayList<Member> selectMemberList() {
 		
@@ -45,6 +48,10 @@ public class MemberService {
 	}
 	
 	
+	/**
+	 * 
+	 *삭제
+	 */
 	public int deleteMember(int memNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
