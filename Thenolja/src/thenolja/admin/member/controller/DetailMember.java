@@ -40,7 +40,7 @@ public class DetailMember extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		new Gson().toJson(member, response.getWriter());
-		
+
 	}
 
 	/**
