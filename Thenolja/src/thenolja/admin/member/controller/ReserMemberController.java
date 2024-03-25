@@ -1,6 +1,7 @@
 package thenolja.admin.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.member.model.service.MemberService;
+import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class ReserMemberController
@@ -31,7 +34,7 @@ public class ReserMemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int llistCount;
+		int listCount;
 		int currentPage;
 		int pageLimit;
 		int boardLimit;
@@ -40,12 +43,36 @@ public class ReserMemberController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		new MemberService().selectReserCount();
+		listCount = new MemberService().selectReserCount();
 		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
+		// System.out.println(listCount);
+		// System.out.println(currentPage);
 		
+		pageLimit = 5;
 		
+		boardLimit = 10;
 		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		//  System.out.println(pi);
+		
+		ArrayList<AdminMember> list = new MemberService().selectReserMember(pi);
+		
+		request.setAttribute("selectReserMember", list);
+		request.setAttribute("pageInfo", pi);
+		// System.out.println(list);
 		// 요청화면 만들기
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/rserMemberList.jsp");
 		view.forward(request, response);

@@ -206,7 +206,49 @@ public class MemberDao {
 
 	
 	
+	/**
+	 * 예약 목록 조회
+	 */
 	
+	public ArrayList<AdminMember> selectReserMember(Connection conn, PageInfo pi) {
+		
+		ArrayList<AdminMember> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReserMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminMember adminMember = new AdminMember();
+				adminMember.setReserNo(rset.getInt("RESER_NO"));
+				adminMember.setMemId(rset.getString("MEM_ID"));
+				adminMember.setReserName(rset.getString("RESER_NAME"));
+				adminMember.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminMember);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 	
 	
 

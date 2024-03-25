@@ -121,8 +121,30 @@ SELECT
    </entry>
    
    
-   
-   
+   <entry key="selectReserMember">
+   	   SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+					        RESER_NO,
+					        MEM_ID,
+					        RESER_NAME,
+					        MEM_PHONE
+					  FROM
+					        TB_RESERVATION
+					  JOIN
+					        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+					  JOIN
+					        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+					 WHERE
+					        MEM_STATUS = 'Y'
+					 ORDER
+		                BY
+		                     RESER_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?
+   </entry>
+
    
 	
 </properties>

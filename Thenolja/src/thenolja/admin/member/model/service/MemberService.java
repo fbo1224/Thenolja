@@ -106,6 +106,21 @@ public class MemberService {
 		
 	}
 	
+	/**
+	 * 예약 회원 목록 조회
+	 */
+	public ArrayList<AdminMember> selectReserMember(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().selectReserMember(conn, pi);
+	
+		JDBCTemplate.close(conn);
+		
+		return list;
+	
+	}
+	
 	
 	
 	

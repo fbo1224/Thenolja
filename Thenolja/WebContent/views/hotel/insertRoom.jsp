@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	int hotelNo = (int)request.getAttribute("hotelNo");
+    	System.out.println(hotelNo);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +71,7 @@ div {
 </style>
 </head>
 <body>
-	<%@ include file="../common/adminMenubar.jsp" %>
+	<%@ include file="../common/menubar.jsp"%>
 	<div id="wrap">
 		<div id="title-div">
 			<h2>숙소추가하기</h2>
