@@ -143,14 +143,8 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-				<%-- 객실예약 기능 없음 --%>
-				<%-- 버튼 A태그로 바꿀 수 있음 --%>
-				<%if(loginUser.getMemStatus().equals("A") && dh.getRoomList().size() <= 3){ %>
-					<a class="btn btn btn-primary" href="#">객실추가하기</a>
-				<%} else {%>
-					<button class="btn btn-sm btn-primary" >예약하기</button>
-					<button class="btn btn-sm btn-primary" >비회원예약하기</button>
-				 <%} %>
+				<button class="btn btn-sm btn-primary" >예약하기</button>
+				<button class="btn btn-sm btn-primary" >비회원예약하기</button>
 			</div>
 			
 			<div id="detail-content-title">
