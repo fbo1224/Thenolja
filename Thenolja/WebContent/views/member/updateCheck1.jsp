@@ -48,11 +48,10 @@
 		}
 
         #pwdCheck2{
-            background-color: rgb(255, 218, 224);
-            color: red;
             margin: auto;
             margin-top: 10px;
-            height: 30px;
+            height: 25px;
+			display: none;
         }
 
 		#password{
@@ -125,11 +124,14 @@
                                 if('<%= loginUser.getMemPwd()%>' != pwd.value){
                                 	pwdCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
                                     pwd.value = '';
+									pwdCheck.style = "color:red; background-color:rgb(255, 218, 224); display:block;"
                                     return false;
                                 } 
                                 else{
-                                    pwdCheck.innerHTML = "비밀번호가 일치합니다.";
+                                    pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
                                     next.disabled = false;
+									pwdCheck.style = "color:green; background-color:lightgreen; display:block;";
+
                                     return true;
                                 }
                             }        
