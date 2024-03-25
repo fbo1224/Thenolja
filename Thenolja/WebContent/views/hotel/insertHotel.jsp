@@ -203,7 +203,6 @@
 								<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo">
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
 								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="loadName" required>
-								<%-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소"> --%>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="detailAddr" required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
