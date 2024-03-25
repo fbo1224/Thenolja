@@ -134,13 +134,15 @@
         					data : {memNo : e},
         					type : 'get',
         					success : function(result){
-        						// console.log(result);
+        						console.log(result);
         						$('#name').text(result.memName);
         						$('#grade').text(result.gradeName);
         						$('#email').text(result.email);
         						$('#phone').text(result.memPhone);
         						$('#bornDate').text(result.bornDate);
         						$('#joinDate').text(result.joinDate);
+        						$('#totalPrice').text(result.paymentPrice);
+
         					}
         					
         				});
@@ -150,20 +152,21 @@
        </script>
        
       <script>
-		  		function deleteMember(e){
-					console.log(e);
-				
-					$.ajax({
-						url : 'deleteMember.do',
-						data : {memNo : e},
-						type : 'get',
-						success : function(result){
-	
-						}
-						
-					});
-					
-				}
+			      function deleteMember(e){
+			          console.log(e);
+			       
+			          $.ajax({
+			             url : 'deleteMember.do',
+			             data : {memNo : e},
+			             type : 'get',
+			             success : function(result){
+			             alert(result.message);
+			             }
+			             
+			          });
+			          
+			       }
+
 
       
       </script>
@@ -209,7 +212,8 @@
                     </tr>
                     <tr>
                         <td>전화번호 :<span id="phone"></span></td>
-                       <!-- <td>숙소 이용 횟수 : 1회</td> -->
+                       <td>총 이용 금액 : <span id="totalPrice"></span>원</td>
+                     
                     </tr>
                     <tr>
                         <td>생년월일 : <span id="bornDate"></span></td>

@@ -63,41 +63,7 @@ public class MemberDao {
 	      return list;	
 	}
 	
-	public Member selectIdMember(Connection conn, String memId) {
-		
-		Member member = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectIdMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			pstmt.setString(1, memId);
-			
-			if(rset.next()) {
-				
-				member = new Member();
-				
-				member.setMemNo(rset.getInt("MEM_NO"));
-				member.setMemId(rset.getString("MEM_ID"));
-				member.setNickName(rset.getString("NICKNAME"));
-				member.setGradeName(rset.getString("GRADE_NAME"));
-				
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return member;
-	}
+	
 	
 	public Member selectMember(Connection conn, int MemNo) {
 		
@@ -122,6 +88,8 @@ public class MemberDao {
 				member.setBornDate(rset.getString("BORN_DATE"));
 				member.setGradeName(rset.getString("GRADE_NAME"));
 				member.setJoinDate(rset.getString("JOIN_DATE"));
+				member.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+			
 				
 			}
 			
@@ -136,14 +104,28 @@ public class MemberDao {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * 삭제
+	 */
 	public int deleteMember(Connection conn, int memNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteMember");
 		
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		
 		
 		

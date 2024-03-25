@@ -51,19 +51,15 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "환영합니다");
 			
-			if(loginUser.getMemStatus().equals("Y")) {
+			if(loginUser.getMemStatus().equals("Y")) { // nonmem테이블 status컬럼 회원
 			
 				response.sendRedirect(request.getContextPath());
 				
-				
-			} else/* if(loginUser.getMemStatus().equals("A"))*/{
+			} else if(loginUser.getMemStatus().equals("A")){ // nonmem테이블 status컬럼 관리자
 				
 				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);
-				
-			} /*else {
-				session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}*/
+			}
+			
 		}
 		
 		
