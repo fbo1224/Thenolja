@@ -7,7 +7,7 @@
 <title>마이페이지</title>
 
 <style>
-    div{border: 1px solid red; box-sizing: border-box;}
+    /*div{border: 1px solid red; box-sizing: border-box;}*/
 
     #wrap{
         width: 900px;
@@ -18,6 +18,7 @@
     .content{
         width: 100%;
         height: 200px;
+        border-bottom: 2px solid lightgray;
     }
     #content1 > div{
         float: left;
@@ -49,46 +50,59 @@
     .img1{
         width: 50px;
         height: 50px;
-        margin-top: 30px;
+        margin-top: 60px;
         margin-left: 87px;
     }
 
     .img2{
         width: 50px;
         height: 50px;
-        margin-top: 100px;
+        margin-top: 60px;
         margin-left: 87px;
     }
 
 
     #name{
-        font-size: 20px;
+        font-size: 30px;
         font-weight: bold;
-        margin-top: 135px;
+        margin-top: 50px;
     }
 
     #ct4_1 > div{
         font-size: 20px;
         font-weight: bold;
         margin-top: 30px;
-        margin-left: 150px;
+        margin-left: 100px;
     }
 
+    #update{
+        margin-top: 50px;
+        margin-left: 70px;
+        width: 100px;
+        height: 40px;
+        background-color: rgb(70, 149, 151);
+        font-size: 15px;
+    }
 
+    #grade{
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 50px;
+    }
 
-    #ct1_4 > button{
+    #ct2_4 > button{
         border: none;
         background-color: rgb(70, 149, 151);
         width: 100px;
         height: 40px;
         color: white;
-        margin-top: 150px;
-        margin-left: 50px;
+        margin-top: 30px;
+        margin-left: 70px;
     }
     .link1{margin-left: 90px; margin-top: 10px; text-decoration: none; color: black;}
     .link1:hover{text-decoration: none;}
 
-    .link2{margin-left: 90px; margin-top: 10px; text-decoration: none; color: black;}
+    .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black;}
     .link2:hover{text-decoration: none;}
 </style>
 
@@ -101,25 +115,25 @@
         <div id="content1" class="content">
             <div id="ct1_1">
                 <h3>마이페이지</h3>
-                <img class="img" src="./resources/mypage/profile.png" alt="프로필" style="width: 50px; height: 50px; margin-left: 150px; margin-top: 50px;">
             </div>
-            <div id="ct1_2">
-                <div id="name">
-                    Gold <br>
-                    <%= loginUser.getMemName() %>님
-                </div>
-            </div>
+            <div id="ct1_2"></div>
             <div id="ct1_3"></div>
             <div id="ct1_4">
-                <a href="<%= contextPath %>/update.ck">정보수정</a>
-                <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
         <div id="content2" class="content">
-            <div id="ct2_1"></div>
-            <div id="ct2_2"></div>
-            <div id="ct2_3"></div>
+            <div id="ct2_1">
+                <img class="img" src="./resources/mypage/profile.png" alt="프로필" style="width: 120px; height: 120px; margin-top: 40px; margin-left: 50px;">
+            </div>
+            <div id="ct2_2">
+                <div id="name"><%= loginUser.getMemName() %>님</div>
+            </div>
+            <div id="ct2_3">
+                <div id="grade">Gold회원</div>
+            </div>
             <div id="ct2_4">
+                <div id="update"><a href="<%= contextPath %>/update.ck" style="color: white;">정보수정</a></div>
+                <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
         <!-- 회원탈퇴 모달 -->
@@ -185,7 +199,7 @@
             <div id="ct4_1"><div>고객센터 >></div></div>
             <div id="ct4_2"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><div class="link2">이용내역</div></a></div>
             <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><div class="link2">공지사항</div></a></div>
-            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><div class="link2">자주묻는질문</div></a></div>
+            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><div class="link2" style="margin-left: 60px;">자주묻는질문</div></a></div>
             
         </div>
 
