@@ -55,14 +55,9 @@ public class LoginController extends HttpServlet {
 			
 				response.sendRedirect(request.getContextPath());
 				
-				
 			} else if(loginUser.getMemStatus().equals("A")){ // nonmem테이블 status컬럼 관리자
 				
 				request.getRequestDispatcher("views/common/adminMain.jsp").forward(request, response);
-				
-			} else if(loginUser.getDeleteYn().equals("N")){ // member테이블 deleteyn컬럼 탈퇴회원
-				session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
-				request.getRequestDispatcher("/logout").forward(request, response);
 			}
 			
 		}
