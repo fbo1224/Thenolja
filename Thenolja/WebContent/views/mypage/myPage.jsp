@@ -90,7 +90,6 @@
             <div id="ct1_3"></div>
             <div id="ct1_4"></div>
         </div>
-        
         <div id="content2" class="content">
             <div id="ct2_1">
                 <img src="./resources/mypage/profile.png" alt="프로필" style="width: 180px; height: 130px; margin-left: 60px; margin-top: 35px;">
@@ -100,11 +99,10 @@
             </div>
             <div id="ct2_3"></div>
             <div id="ct2_4">
-                <button type="button" id="modify" onclick="location.href='<%= contextPath %>/update.me'">정보수정</button>
+                <a href="<%= contextPath %>/update.me">정보수정</a>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
             </div>
         </div>
-        
         <!-- 회원탈퇴 모달 -->
 	<div class="modal" id="deleteForm">
 		<div class="modal-dialog">
