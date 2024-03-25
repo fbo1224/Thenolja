@@ -51,9 +51,13 @@ public class MemberService {
 	public int updateMember(Member member) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().updateMember(conn, member);
+		// nonmem테이블
+		int noMemberResult = new MemberDao().updateNoMember(conn, member);
 		
-		if(result > 0) {
+		// member테이블
+		int memberResult = new MemberDao().updateMember(conn, member);
+					
+		if(noMemberResult * memberResult > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
@@ -61,6 +65,7 @@ public class MemberService {
 		
 		JDBCTemplate.close(conn);
 		
+		int result = noMemberResult * memberResult;
 		return result;
 	}
 //-------------------------------회원탈퇴---------------------------------------

@@ -49,7 +49,6 @@
 		        RESER_NAME,
 		        RESER_PHONE,
 		        BICYCLE,
-		        CANCEL_YN,
 		        TB_ROOM.CHECKIN_TIME,
 		        TB_ROOM.CHECKOUT_TIME,
 		        MAX_PEOPLE,	
@@ -124,8 +123,19 @@
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 	  ORDER BY RESER_NO DESC
  	</entry>
-	
-	
+	<entry key="insertRefund">
+		INSERT
+		  INTO
+		  		TB_REFUND
+		VALUES
+				(
+				?,
+				170000,
+				?,
+				?,
+				?
+				)
+	</entry>
 	
 	
 	

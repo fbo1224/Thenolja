@@ -122,8 +122,28 @@ public class MemberDao {
 		}
 		return count;
 	}
+//----------------------------- 정보수정 비회원테이블--------------------------------
+	public int updateNoMember(Connection conn, Member member) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNoMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
-//----------------------------- 정보수정----------------------------------
+//----------------------------- 정보수정 회원테이블----------------------------------
 	public int updateMember(Connection conn, Member member) {
 		
 		int result = 0;
@@ -134,9 +154,6 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getEmail());
 			pstmt.setString(2, member.getMemPwd());
-			pstmt.setString(3, member.getMemId());
-			pstmt.setString(4, member.getMemName());
-			pstmt.setString(5, member.getMemId());
 			
 			result = pstmt.executeUpdate();
 			

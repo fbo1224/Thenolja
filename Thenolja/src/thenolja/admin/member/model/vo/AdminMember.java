@@ -17,9 +17,28 @@ public class AdminMember {
    private String memStatus;
    private String gradeName;
    private int paymentPrice;
+   private int reserNo;
+   private String reserName;
+   
+   
 
+   public int getReserNo() {
+	return reserNo;
+}
 
-   public int getPaymentPrice() {
+public void setReserNo(int reserNo) {
+	this.reserNo = reserNo;
+}
+
+public String getReserName() {
+	return reserName;
+}
+
+public void setReserName(String reserName) {
+	this.reserName = reserName;
+}
+
+public int getPaymentPrice() {
       return paymentPrice;
    }
 
