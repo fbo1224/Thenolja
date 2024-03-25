@@ -17,6 +17,15 @@
 			margin-left: 70px;
 	}
 
+	#word{
+		text-align: center; 
+		height: 100px;
+		font-size: 40px;
+		font-weight: bold;
+		margin-top: 10px; 
+		color: rgb(70, 149, 151);
+	}
+
 </style>
 
 
@@ -27,7 +36,10 @@
 	
 	<div class="outer">
 		<br>
-		<h2 align ="center">정보수정</h2>
+		<div id="word">
+			<span align ="center">정보수정</span>
+
+		</div>
 		
 		<form id="mypage-form" method="post" action="<%=contextPath%>/update.me">
 			<table align="center">

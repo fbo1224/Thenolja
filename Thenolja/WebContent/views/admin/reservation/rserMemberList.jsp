@@ -128,15 +128,22 @@
     
     <script>
     	function detailReserMem(e){
-    		// console.log(e);
+    		console.log(e);
     		
     		$.ajax({
     			url : 'detailReserMem.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
-    				// console.log(result);
+    				console.log(result);
     				$('#hotelName').text(result.hotelName);
+    				$('#bicycle').text(result.bicycle);
+    				$('#people').text(result.people);
+    				$('#reserDate').text(result.reserDate);
+    				$('#checkIn').text(result.checkInTime);
+    				$('#checkOut').text(result.checkOutTime);
+    				$('#payment').text(result.payment);
+    				$('#paymentPrice').text(result.paymentPrice);
     				
     			}
     		})
@@ -170,20 +177,20 @@
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
                     <td width="200"><span id="hotelName"></span></td>
-                    <td>이동방식 : 차량</td>
+                    <td>이동방식 :<span id="bicycle"></span></td>
                 </tr>
                 <tr>
-                    <td>인원수 : 2명</td>
-                    <td>예약일 : 2024.03.15</td>
+                    <td>인원수 : <span id="people"></span></td>
+                    <td>예약일 : <span id="reserDate"></span></td>
                 </tr>
                 <tr>
-                    <td>체크인 : 2024.03.23</td>
-                    <td>체크아웃 : 2024.03.25</td>
+                    <td>체크인 : <span id="checkIn"></span></td>
+                    <td>체크아웃 : <span id="checkOut"></span></td>
                 </tr>
     
                 <tr>
-                    <td>결제방식 : 계좌이체</td>
-                    <td>금액 : 100000</td>
+                    <td>결제방식 : <span id="payment"></span></td>
+                    <td>금액 : <span id="paymentPrice"></span></td>
                 </tr>
 
               </table>

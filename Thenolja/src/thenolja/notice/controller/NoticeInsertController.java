@@ -37,17 +37,17 @@ public class NoticeInsertController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 * ê³µì§€ì‚¬í•­ ë“±ë¡
+	 * °øÁö»çÇ× µî·Ï
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getContentType());
-		// ë“±ë¡ submission í†µì‹ 
-		// íŒŒë¼ë¯¸í„° í•œê¸€ ê¹¨ì§ ë°©ì§€ë¥¼ ìœ„í•œ ì¸ì½”ë”© ì„¤ì •
+		// µî·Ï submission Åë½Å
+		// ÆÄ¶ó¹ÌÅÍ ÇÑ±Û ±úÁü ¹æÁö¸¦ À§ÇÑ ÀÎÄÚµù ¼³Á¤
 		request.setCharacterEncoding("UTF-8");
 		
-		// í™”ë©´ì—ì„œ ë„˜ì–´ì˜¨ íŒŒë¼ë¯¸í„° ê°’ ì„¸íŒ…
-		// request.getParameterì— ì‘ì„±í•˜ëŠ” ë¬¸ìì—´ì€ > html íƒœê·¸ì— ì„ ì–¸í•œ nameê³¼ ì¼ì¹˜í•´ì•¼í•¨.
+		// È­¸é¿¡¼­ ³Ñ¾î¿Â ÆÄ¶ó¹ÌÅÍ °ª ¼¼ÆÃ
+		// request.getParameter¿¡ ÀÛ¼ºÇÏ´Â ¹®ÀÚ¿­Àº > html ÅÂ±×¿¡ ¼±¾ğÇÑ name°ú ÀÏÄ¡ÇØ¾ßÇÔ.
 		String title = "";
 		String content = "";
 		String status = "";
@@ -62,25 +62,27 @@ public class NoticeInsertController extends HttpServlet {
 		int svc = 0;
 		boolean rslt = false;
 		
-		// ê³µì§€ì‚¬í•­ ì €ì¥ ì„œë¹„ìŠ¤ í˜¸ì¶œ
+		// °øÁö»çÇ× ÀúÀå ¼­ºñ½º È£Ãâ
 		Notice notice = new Notice(title, content, status);
 		svc = new NoticeServiceImpl().insertNotice(notice);
 		
-		// ì •ìƒì²˜ë¦¬ ì‹œ ëª©ë¡ í™”ë©´ìœ¼ë¡œ sendRedirect
+		System.out.println("[svc] " + svc);
+		
+		// Á¤»óÃ³¸® ½Ã ¸ñ·Ï È­¸éÀ¸·Î sendRedirect
 		if(svc > 0) {
 			rslt = true;
-			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
-//			response.setContentType("text/html charset=UTF-8");
-//			request.setAttribute("rsp.success", rslt);
+			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
+			response.setContentType("text/html charset=UTF-8");
+			request.setAttribute("rsp.success", rslt);
 			
-			// ë“±ë¡ ì™„ë£Œ í›„ send Redirectì„¤ì • > ëª©ë¡ìœ¼ë¡œ ì´ë™
-//			response.sendRedirect("/TheNoleJa/noticeList");
+			// µî·Ï ¿Ï·á ÈÄ send Redirect¼³Á¤ > ¸ñ·ÏÀ¸·Î ÀÌµ¿
+			//response.sendRedirect("/TheNoleJa/noticeList");
 		}
 		
-		// ì €ì¥ ì‹¤íŒ¨ ì‹œ ë“±ë¡í™”ë©´ìœ¼ë¡œ sendRedirect
+		// ÀúÀå ½ÇÆĞ ½Ã µî·ÏÈ­¸éÀ¸·Î sendRedirect
 		else {
 			rslt = false;
-			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
+			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
 //			response.setContentType("text/html charset=UTF-8");
 //			request.setAttribute("rsp.success", rslt);
 //			response.sendRedirect("/TheNoleJa/noticeReg");
