@@ -32,17 +32,17 @@ public class NoticeUpdateController extends HttpServlet {
 		
 		
 		//POST방식
-		//인코딩
+		//
 		request.setCharacterEncoding("UTF-8");
 		
-		//2) 값뽑기
+		//2) 
 		
 		String noticeTitle = request.getParameter("Title");
 		String noticeContent = request.getParameter("Content");
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
 		
-		//가공
+		//
 		Notice notice = new  Notice();
 		
 		notice.setNoticeTitle(noticeTitle);
@@ -56,10 +56,10 @@ public class NoticeUpdateController extends HttpServlet {
 		
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/detail.notice=" + noticeNo);
+			response.sendRedirect(request.getContextPath() + "/detail.notice?notice=" + noticeNo);
 			
 		}else {
-			request.setAttribute("errorMsg", "공지사항 수정 실패했습니다.");
+			request.setAttribute("errorMsg", "공지사항수정실패했습니다.");
 			request.getRequestDispatcher("views.common/errorpage.jsp")
 			.forward(request, response);
 		}
