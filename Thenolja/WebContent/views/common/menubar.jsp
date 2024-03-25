@@ -308,21 +308,26 @@ a{
 		        <% }%>
 		        
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		         <li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
+		         	<li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
-		         <li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
-		        <% }%>
+		         	<li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
+		        <% } %>
 		        
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		         <li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
+		         	<li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
-		          <li></li>
+		          	<li></li>
 		        <% } %>
-		         <li><a href="#">고객센터</a></li>
+		        
+		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
+		        	<li><a href="#">비회원예약조회</a></li>
+		        <% } else { %> <!-- 로그인상태라면 -->
+		         	<li><a href="#">고객센터</a></li>
+	         	<% } %>
 		    </ul>
 		    </div>
 		</header>
-	<%} %>
+	<% } %>
 	    
 </body>
 </html>

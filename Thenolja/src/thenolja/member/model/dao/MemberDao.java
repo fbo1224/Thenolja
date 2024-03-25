@@ -132,6 +132,8 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemName());
+			pstmt.setString(2, member.getMemPhone());
+			pstmt.setInt(3, member.getMemNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -154,6 +156,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getEmail());
 			pstmt.setString(2, member.getMemPwd());
+			pstmt.setInt(3, member.getMemNo());
 			
 			result = pstmt.executeUpdate();
 			
