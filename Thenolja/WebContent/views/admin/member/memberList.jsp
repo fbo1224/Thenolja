@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member" %>
+<%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
 <%
 	Member member = (Member)request.getAttribute("member");
 	
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("selectMemberList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+	
 	
 %>
 <!DOCTYPE html>
@@ -110,13 +117,22 @@
         
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
+                
+                	<%if(currentPage > 1) { %>
+                	<button disabled class="btn btn-sm btn-outline-secondaryonclick=" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button disabled class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
                 </div>
         
             </div>
@@ -161,6 +177,7 @@
 			             type : 'get',
 			             success : function(result){
 			             alert(result.message);
+			             
 			             }
 			             
 			          });

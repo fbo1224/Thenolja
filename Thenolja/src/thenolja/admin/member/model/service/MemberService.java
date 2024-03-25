@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import thenolja.admin.member.model.dao.MemberDao;
 import thenolja.admin.member.model.vo.Member;
 import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 
 
 public class MemberService {
@@ -32,11 +33,11 @@ public class MemberService {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Member> selectMemberList() {
+	public ArrayList<Member> selectMemberList(PageInfo pi) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
+		ArrayList<Member> list = new MemberDao().selectMemberList(conn, pi);
 		
 		JDBCTemplate.close(conn);
 		

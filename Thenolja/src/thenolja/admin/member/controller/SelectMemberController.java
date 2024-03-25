@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.member.model.service.MemberService;
 import thenolja.admin.member.model.vo.Member;
+import thenolja.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class selectMemberController
@@ -54,10 +55,27 @@ public class SelectMemberController extends HttpServlet {
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		
+		// System.out.println(maxPage);
 		
-		ArrayList<Member> list = new MemberService().selectMemberList();
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		 if(endPage > maxPage) {
+			 endPage = maxPage;
+		 }
+		
+		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		
+		 
+		ArrayList<Member> list = new MemberService().selectMemberList(pi);
+		
+		// System.out.println(list);
+		
 		request.setAttribute("selectMemberList", list);
-
+		request.setAttribute("pageInfo", pi);
+		
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
 		view.forward(request, response);
 		
