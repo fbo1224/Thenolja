@@ -43,13 +43,16 @@
 		
 		#login-area{width: 100%; height: 100%;}
 		
-		#pwdCheck, #password{
+		#pwdCheck2, #password{
 			margin-top: 20px;
 		}
 
-        #pwdCheck{
+        #pwdCheck2{
             background-color: rgb(255, 218, 224);
             color: red;
+            margin: auto;
+            margin-top: 10px;
+            height: 30px;
         }
 
 		#password{
@@ -101,29 +104,39 @@
 					<span>비밀번호 확인</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/#" method="post">
+				
+					<!-- <form action="<%-- ><%= contextPath %>--%>/#" method="post"> -->
 						<div id="content1">
 							<input type="password" name="memPwd" id="password" class="input" placeholder="본인 확인을 위해 비밀번호를 입력해주세요." maxlength="15" required>
-							<input type="text" name="memId" id="pwdCheck" class="input">
+							<div id="pwdCheck2" class="input"></div>
 						</div>
-                        <script>
-                            const pwd = document.getElementById('password').value;
-                            const pwdCheck = document.getElementById('pwdCheck').value;
-							
-                            if(<%= loginUser.getMemPwd() %> != pwd){
-								pwdCheck == '비밀번호가 일치하지 않습니다.';
-                            } else{
-                            	pwdCheck == '비밀번호가 일치합니다.'
-                            }
 
+						<div id="content3">
+                            <button class="btn" onclick="pwdCheck()">비밀번호 확인</button>
+							<button type="submit" class="btn" id="next" disabled onclick="location.href='<%= contextPath%>/update.me'">다음</button>
+						</div>
+                        
+                        <script>
+                            function pwdCheck(){
+                                const pwd = document.getElementById('password');
+                                const pwdCheck = document.getElementById('pwdCheck2');
+                                const next = document.getElementById('next');
+                                
+                                if('<%= loginUser.getMemPwd()%>' != pwd.value){
+                                	pwdCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
+                                    pwd.value = '';
+                                    return false;
+                                } 
+                                else{
+                                    pwdCheck.innerHTML = "비밀번호가 일치합니다.";
+                                    next.disabled = false;
+                                    return true;
+                                }
+                            }        
 
                         </script>
 
-						<div id="content3">
-							<button type="submit" class="btn">확인</button>
-						</div>
-
-					</form>
+					<!-- </form> -->
 				
 				</div>
 			</div>
