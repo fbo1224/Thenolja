@@ -91,7 +91,7 @@
                         		<td><%=adminRefund.getMemId() %>
                         		<td><%=adminRefund.getReserName() %>
                         		<td><%=adminRefund.getMemPhone() %>
-                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
+                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember()">조회</button></td>
                         	</tr>
                         	
                         	
@@ -131,7 +131,20 @@
 
     </div>
     
+    <script>
+    	function selectRefundMember(e){
+    		
+    		$.ajax({
+    			url : 'refundMember.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				
+    			}
+    		});
+    	}
     
+    </script>
     
     
     
