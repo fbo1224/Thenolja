@@ -54,6 +54,7 @@
                             <th>숙소이름</th>
                             <th>아이디</th>
                             <th>닉네임</th>
+                            <th>작성일</th>
                             <th colspan="2"></th>
                           </tr>
                         </thead>
@@ -62,6 +63,7 @@
                             <td>마리안느 호텔</td>
                             <td>dlgPdls</td>
                             <td>이혜인</td>
+                            <td>2024.01.11</td>
                             <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
                           </tr>
                         </tbody>
