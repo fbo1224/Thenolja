@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>관리자메인페이지</title>
+    <title>비회원 예약 목록</title>
    	
  	<link rel="stylesheet" href="resources/css/admin_select.css">
+ 	
 </head>
 
 
@@ -13,7 +14,7 @@
     
     <div id="wrap">
         <div id="header">
-
+       		<%@ include file="../../common/adminMenubar.jsp" %> 
 
         </div>
                
