@@ -56,8 +56,25 @@ public class ReservatoinService {
 	
 	}
 	
-	
-	
+	/**
+	 * 환불처리
+	 */
+	public int refundReser(int reserNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().refundReser(conn, reserNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 
