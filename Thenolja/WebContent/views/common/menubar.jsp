@@ -162,16 +162,16 @@ a{
         text-align: center;
     }
     #navi a{
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-            color: black;
-            display: block;
-            line-height: 38px;
-            font-size: 17px;
-            transform: scale(1);
-            position: relative;
-            z-index: 3;
+	      width: 100%;
+	      height: 100%;
+	      text-decoration: none;
+	      color: black;
+	      display: block;
+	      line-height: 38px;
+	      font-size: 17px;
+	      transform: scale(1);
+	      position: relative;
+	      z-index: 3;
     }
         
     #navi > li > ul{
@@ -201,9 +201,9 @@ a{
 		display: inline-block;
 		width: auto;
 	}
-.form-check-input {
-	position:static;
-}
+	.form-check-input {
+		position:static;
+	}
 </style>
     
 </head>
@@ -261,10 +261,8 @@ a{
                 <li>
                     <a href="#">숙소관리</a>
                     <ul>
-                    	<%if(loginUser.getMemStatus().equals("A")) { %>
-                    		<li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
-                    	<%} %>
-                        <li><a href="<%= contextPath%>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
+                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
+                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
                     </ul>
                 </li>
                 

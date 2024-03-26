@@ -19,11 +19,11 @@
 	#content-1{
 		width: 100%;
 		height: 120px;
+		border-top: 1px solid gray;
 		border-bottom: 1px solid gray;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		
+		justify-content: center;		
 	}
 	#select-form {
 		width: 80%;

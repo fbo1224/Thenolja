@@ -68,7 +68,7 @@
 #detail-content-rooms {
 	margin: auto;
 	width: 80%;
-	
+	padding: 5px;
 }
 .content-rooms-card{
 	width: 80%;
@@ -93,6 +93,10 @@
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
 	box-shadow: 2px 2px 2px gray;
+
+}
+#detail-content-intro {
+	border-top: 1px solid gray;
 }
 #detail-content-intro, #detail-content-cancel {
 	width: 80%;
@@ -100,8 +104,8 @@
 	margin: auto;
 	border-bottom: 1px solid gray;
 }
-#detail-content-intro, #detail-content-cancel h3 {
-	margin-top: 10px;
+#detail-content-intro, #detail-content-cancel {
+	padding: 10px;
 }
 #detail-content-review {
 	width: 80%;
