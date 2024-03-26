@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList" %>  
+<%
+	Reservation reser = (Reservation)request.getAttribute("reser");
+
+	ArrayList<Reservation> boardList = (ArrayList<Reservation>)request.getAttribute("reserList");
+%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
