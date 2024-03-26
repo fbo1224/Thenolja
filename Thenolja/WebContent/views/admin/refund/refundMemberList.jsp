@@ -3,7 +3,8 @@
     
 <%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>    
 <%
-
+	AdminRefund adminRefund = (AdminRefund)request.getAttribute("adminRefund");
+	
 	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundMemberList");
 
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -85,13 +86,13 @@
                         	</tr>
                         <% } else { %>
                         
-                        	<% for(AdminRefund adminRefund : list) { %>
+                        	<% for(AdminRefund refundMem : list) { %>
                         	<tr>
-                        		<td><%=adminRefund.getReserNo() %></td>
-                        		<td><%=adminRefund.getMemId() %>
-                        		<td><%=adminRefund.getReserName() %>
-                        		<td><%=adminRefund.getMemPhone() %>
-                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember()">조회</button></td>
+                        		<td><%=refundMem.getReserNo() %></td>
+                        		<td><%=refundMem.getMemId() %>
+                        		<td><%=refundMem.getReserName() %>
+                        		<td><%=refundMem.getMemPhone() %>
+                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refundMem.getReserNo()%>)">조회</button></td>
                         	</tr>
                         	
                         	
@@ -133,13 +134,18 @@
     
     <script>
     	function selectRefundMember(e){
-    		
+    		console.log(e);
     		$.ajax({
     			url : 'refundMember.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
-    				
+    				$('#hotelName').text(result.hotelName);
+    				$('#refundName').text(result.refundName);
+    				$('#reserDate').text(result.reserDate);
+    				$('#bank').text(result.bank);
+    				$('#refundPrice').text(result.refundPrice);
+    				$('#refundAccNo').text(result.refundAccNo);
     			}
     		});
     	}
@@ -172,18 +178,18 @@
                     <td>환불자 정보</td>
                 </tr>
                 <tr>
-                    <td>마리안느 호텔</td>
-                    <td>예금주 : 이혜인</td>
+                    <td><span id="hotelName"></span></td>
+                    <td>예금주 : <span id="refundName"></span></td>
                 
                 </tr>
                 <tr>
-                    <td>예약일 : 2024.03.15</td>
-                    <td>은행 : 국민은행</td>
+                    <td>예약일 : <span id="reserDate"></span></td>
+                    <td>은행 : <span id="bank"></span></td>
                 </tr>
     
                 <tr>
-                    <td>환불 금액 : 300000</td>
-                    <td>계좌번호 : 3339191831</td>
+                    <td>환불 금액 : <span id="refundPrice"></span></td>
+                    <td>계좌번호 : <span id="refundAccNo"></span></td>
                 </tr>
 
               </table>
