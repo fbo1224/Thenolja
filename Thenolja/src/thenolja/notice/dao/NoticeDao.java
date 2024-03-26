@@ -1,4 +1,4 @@
-package thenoleja.notice.dao;
+package thenolja.notice.dao;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
-import static thenoleja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.*;
 
-import thenoleja.notice.model.vo.Notice;
+import thenolja.notice.model.vo.Notice;
 
 
 public class NoticeDao {
@@ -37,14 +37,14 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * 怨듭��궗�빆 紐⑸줉 議고쉶
+	 * 공지사항 목록 조회
 	 * 
 	 * */
-	public ArrayList<Notice> selectNoticeList(Connection conn){ //selectNoticeList �샇異�
+	public ArrayList<Notice> selectNoticeList(Connection conn){ //selectNoticeList 호출
 		
 		System.out.println("[NoticeDao conn] " + conn);
 		
-		ArrayList<Notice> list = new ArrayList(); // �옓 �쁺�뿭 怨듦컙 二쇱냼媛�
+		ArrayList<Notice> list = new ArrayList(); // 힙 영역 공간 주소값
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -54,16 +54,17 @@ public class NoticeDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery(); // �떎�젣 荑쇰━臾몄씠 �닔�뻾�릺�뒗 遺�遺�
+			rset = pstmt.executeQuery(); // 실제 쿼리문이 수행되는 부분
 			
 			while(rset.next()) {
-				//while 諛섎났臾� �븞�뿉 吏��뿭蹂��닔 
+				//while 반복문 안에 지역변수 
 				Notice notice = new Notice();
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));		
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setNoticeContent(rset.getString("NOTICE_CONTENT"));
 				notice.setWriter(rset.getString("WRITER"));
 				notice.setCreateDate(rset.getString("CREATE_DATE"));
+				notice.setViewCount(rset.getInt("VIEW_COUNT"));
 				notice.setStatus(rset.getString("STATUS"));
 				
 				list.add(notice);
@@ -83,7 +84,7 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * 怨듭��궗�빆 �긽�꽭�솕硫� 議고쉶 (�쉶�썝)
+	 * 공지사항 상세화면 조회 (회원)
 	 * 
 	 * */
 	public Notice selectNoticeOne(Connection conn, int noticeNo) {
@@ -121,6 +122,38 @@ public class NoticeDao {
 	
 	}//method
 	
+	
+	/*
+	 * 공지사항 상세페이지 진입 시 조회 수 업데이트
+	 * 
+	 * */
+	public int increaseViewCount(Connection conn, int noticeNo) {
+
+		System.out.println("[NoticeDao increaseViewCount] " + noticeNo);
+
+		int result = 0;
+		Notice notice = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNoticeViewCount");
+		System.out.println(sql);
+		
+		try {
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+			
+			System.out.println("[NoticeDao increaseViewCount] result " + result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		Notice notice = null;
@@ -130,8 +163,7 @@ public class NoticeDao {
 		
 		
 		try {
-			pstmt =conn.prepareStatement(sql);
-		
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, noticeNo);
 			
 			rset = pstmt.executeQuery();
@@ -156,7 +188,7 @@ public class NoticeDao {
 		
 		
 		return notice;
-	}//method          //諛섑솚 notice
+	}//method          //반환 notice
 	
 	
 	
@@ -166,7 +198,7 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertNotice");
 		System.out.println("[NoticeDao insert sql] " + sql);
-		//�뜲�씠�꽣 �엯�젰諛쏆쓣 �뙆�씪 NOtice�뙆�씪
+		//데이터 입력받을 파일 NOtice파일
 		System.out.println("[NOTICE DAO INSERT] " + notice.getNoticeTitle());
 		System.out.println("[NOTICE DAO INSERT] " + notice.getNoticeContent());
 		System.out.println("[NOTICE DAO INSERT] " + notice.getStatus());
@@ -192,36 +224,13 @@ public class NoticeDao {
 		return result;
 	}//method
 	
-public int increaseCount(Connection conn, int noticeNo) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("increaseCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, noticeNo);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}//method
-
-
-	public int update(Connection conn, Notice notice) {
+	public int selectNoticeInfo(Connection conn, Notice notice) {
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("update");
+		String sql = prop.getProperty("selectNoticeInfo");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -283,7 +292,7 @@ public int increaseCount(Connection conn, int noticeNo) {
 	
 	public ArrayList<NoticeVO> selectNoticeList(Connection conn){
 		
-		ArrayList<NoticeVO> list = new ArrayList(); // �옓 �쁺�뿭 怨듦컙 二쇱냼媛�
+		ArrayList<NoticeVO> list = new ArrayList(); // 힙 영역 공간 주소값
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -304,7 +313,7 @@ public int increaseCount(Connection conn, int noticeNo) {
 				notice.setCreateDate(rset.getDate("CREATE_DATE")); 
 				
 				list.add(notice);*/
-		//	}// while臾� �븞 吏��뿭蹂��닔
+		//	}// while문 안 지역변수
 			
 /*
 		} catch (SQLException e) {
@@ -357,4 +366,4 @@ public int increaseCount(Connection conn, int noticeNo) {
 
 
 
-}//DAO�쓽 �뿭�븷 : DB �쇅遺��뜲�씠�꽣瑜� "�엯�젰"�븯�뒗怨�
+}//DAO의 역할 : DB 외부데이터를 "입력"하는곳

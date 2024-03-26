@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.Member;
+import thenolja.member.model.vo.Member;
 
 /**
  * Servlet implementation class SelectMemberIdController

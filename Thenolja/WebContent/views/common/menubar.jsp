@@ -278,9 +278,9 @@ a{
                 <li>
                     <a href="#">고객센터관리</a>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
-                        <li><a href="#">쿠폰</a></li>
+                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
+                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
+                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
                         <li><a href="#">리뷰</a></li>
                     </ul>
     

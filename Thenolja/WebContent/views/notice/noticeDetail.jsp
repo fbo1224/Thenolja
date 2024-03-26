@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenoleja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
      <%
      Notice notice = (Notice)request.getAttribute("notice");
     

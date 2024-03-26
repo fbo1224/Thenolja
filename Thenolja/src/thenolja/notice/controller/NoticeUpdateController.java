@@ -1,19 +1,21 @@
-package thenoleja.notice.controller;
+package thenolja.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenoleja.notice.model.vo.Notice;
-import thenoleja.notice.service.NoticeServiceImpl;
+import thenolja.notice.model.vo.Notice;
+import thenolja.notice.service.NoticeServiceImpl;
 
 /**
  * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/update.notice")
+@WebServlet("/selectNoticeInfo")
 public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,46 +29,44 @@ public class NoticeUpdateController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 */  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("[NoticeUpdateController] param " + request.getParameter("noticeNo"));
 		
-		//POST���
-		//
+		//인코딩  POST방식
 		request.setCharacterEncoding("UTF-8");
 		
-		//2) 
-		
-		String noticeTitle = request.getParameter("Title");
-		String noticeContent = request.getParameter("Content");
+		// 1. 파라미터로 넘어온 noticeNo(공지사항 번호) 정수형으로 파싱(변환)하여 noticeNo변수에 저장
+		// 값 뽑기
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String noticeTitle = request.getParameter("noticetitle");
+		String noticeContent = request.getParameter("noticecontent");
 		
-		
-		//
-		Notice notice = new  Notice();
-		
+		//2. 가공
+		Notice notice = new Notice();
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
 		notice.setNoticeNo(noticeNo);
-
 		
-		//service ȣ��
+		// 3.ServiceImpl로 호출
+		Notice result = new Notice();
+		result = new NoticeServiceImpl().selectNoticeOne(noticeNo);
 		
-		int result = new NoticeServiceImpl().update(notice);
+		System.out.println("[NoticeUpdateController result] " + result);
 		
 		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/detail.notice?notice=" + noticeNo);
+		//3)응답화면지정 
+		if( noticeNo > 0) { 
 			
-		}else {
-			request.setAttribute("errorMsg", "�������׼��������߽��ϴ�.");
-			request.getRequestDispatcher("views.common/errorpage.jsp")
-			.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/selectNoticeInfo?noticeNo=" + noticeNo);
+			
+			
+		} else {
+			request.setAttribute("errorMsg", "공지사항 수정 실패~");
+			request.getRequestDispatcher("views/common/errorPage.jsp")
+				   .forward(request, response);
 		}
-		
-		
-		
-
 		
 		
 	}
