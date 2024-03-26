@@ -1,11 +1,15 @@
 package thenolja.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
 
 /**
  * Servlet implementation class FindIdController
@@ -27,6 +31,15 @@ public class FindIdController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		String memName = request.getParameter("name");
+		String bornDate = request.getParameter("bornDate");
+		String email = request.getParameter("email");
+		
+		Member findId = new MemberService().findId(memName, bornDate, email);
+		request.setAttribute("findId", findId);
+		
+		
 		request.getRequestDispatcher("views\\login\\findIdPrint.jsp").forward(request, response);
 	
 	

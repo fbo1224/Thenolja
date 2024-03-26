@@ -92,15 +92,6 @@
 		       MEM_NO = ?
 		      
 	</entry>
-	<entry key="selectMember">
-
-	
-	</entry>
-	
-	<entry key="updatePwd">
-
-	
-	</entry>
 	
 	<entry key="deleteMember">
 	
@@ -112,6 +103,24 @@
 		       MEM_NO = ?
 		   AND
 		       DELETE_YN = 'Y'
+	
+	</entry>
+	
+	<entry key="findID">
+		SELECT
+		       MEM_ID
+		  FROM
+		       TB_MEMBER
+		  JOIN
+		       TB_NONMEM
+		 USING
+		       (MEM_NO)
+		 WHERE
+		       MEM_NAME = ?
+		   AND
+		       BORN_DATE = ?
+		   AND
+		       EMAIL = ?
 	
 	</entry>
 	
