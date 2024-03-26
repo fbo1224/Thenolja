@@ -1,6 +1,7 @@
 package thenolja.admin.review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.review.model.service.ReviewService;
+import thenolja.admin.review.model.vo.AdminReview;
 import thenolja.common.model.vo.PageInfo;
 
 /**
@@ -59,7 +61,9 @@ public class ReviewListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		new ReviewService().selectReviewMemberList(pi);
+		ArrayList<AdminReview> list = new ReviewService().selectReviewMemberList(pi);
+		request.setAttribute("selectReviewMemberList", list);
+		request.setAttribute("pageInfo", pi);
 		
 		request.getRequestDispatcher("views/admin/review/reviewList.jsp").forward(request, response);
 	}
