@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
-import static thenoleja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.*;
 
-import thenoleja.notice.model.vo.Notice;
+import thenolja.notice.model.vo.Notice;
 
 
 public class NoticeDao {
