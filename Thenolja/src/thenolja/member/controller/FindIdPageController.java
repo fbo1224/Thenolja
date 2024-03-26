@@ -27,7 +27,6 @@ public class FindIdPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
 		// System.out.println("아이디찾기 서블릿");
 		request.getRequestDispatcher("views\\login\\findId.jsp").forward(request, response);
 	
