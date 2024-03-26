@@ -30,6 +30,9 @@ public class RefundMemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/admin/refund/refundMemberList.jsp");
 		
 		view.forward(request, response);
