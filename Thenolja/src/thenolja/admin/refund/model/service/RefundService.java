@@ -7,13 +7,19 @@ import thenolja.common.JDBCTemplate;
 
 public class RefundService {
 	
-	public void selectRefundMemCount() {
+	
+	/**
+	 * 페이징
+	 */
+	public int selectRefundMemCount() {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		new RefundDao().selectRefundMemCount(conn);
+		int result = new RefundDao().selectRefundMemCount(conn);
 		
+		JDBCTemplate.close(conn);
 		
+		return result;
 		
 		
 	}

@@ -6,6 +6,19 @@
 		Member Mapper
 	</comment>
 	
+	<entry key="selectRefundMemCount">
+		SELECT
+		        COUNT(*)
+		  FROM
+		        TB_REFUND
+		  JOIN
+		        TB_RESERVATION ON (RF_RESER_NO = RESER_NO)
+		  JOIN
+		        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		  WHERE
+		        MEM_STATUS = 'Y'
+	</entry>
+	
 
 	
 	

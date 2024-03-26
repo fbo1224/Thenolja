@@ -1,6 +1,7 @@
 package thenolja.admin.refund.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.refund.model.service.RefundService;
+import thenolja.admin.refund.model.vo.AdminRefund;
+import thenolja.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class RefundMemberController
@@ -40,7 +43,27 @@ public class RefundMemberController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		new RefundService().selectRefundMemCount();
+		listCount  = new RefundService().selectRefundMemCount();
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 5;
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		
+		ArrayList<AdminRefund> list = new RefundService().selectRefundMemberList(pi);
 		
 		
 		
