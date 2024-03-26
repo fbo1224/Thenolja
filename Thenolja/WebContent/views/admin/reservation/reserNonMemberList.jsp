@@ -1,30 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
+<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
 <%
 	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
-	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
+	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pageInfo.getCurrentPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int maxPage = pageInfo.getMaxPage();
-%>
 
+%>    
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>예약 회원 조회</title>
-
+    <title>비회원 예약 목록</title>
+   	
  	<link rel="stylesheet" href="resources/css/admin_select.css">
-
+ 	
 </head>
+
+
 <body>
     
     <div id="wrap">
         <div id="header">
        		<%@ include file="../../common/adminMenubar.jsp" %> 
+
         </div>
                
         <div id="content">
@@ -32,7 +37,7 @@
 
                 <form action="#" method="get" id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원  ID입력" name="memId">
+                        <input type="text" placeholder="예약자명 입력" name="memId">
                     </div>
         
                     <div id="search_btn">
@@ -46,7 +51,7 @@
                 <div id="mem_list_header">
 
                     <div id="mem_title">
-                        <h2>회원 예약 목록</h2>
+                        <h2>비회원 예약 목록</h2>
                     </div>
         
                     <div id="mem_sort">
@@ -64,31 +69,29 @@
                         <thead>
                           <tr>
                             <th>예약번호</th>
-                            <th>아이디</th>
                             <th>예약자명</th>
                             <th>전화번호</th>
                             <th colspan="2"></th>
                           </tr>
                         </thead>
                         <tbody>
+                        <tr>
                         
-                        <%if(list.isEmpty()) {  %>
+                        <%if(list.isEmpty()) { %>
                         	<tr>
-                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
+                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
-                        	<% for (AdminReservation adminReservation : list) { %>
-                        	
+                        	<% for (AdminReservation adminReserNon : list) { %>
                         	<tr>
-                        		<td><%=adminReservation.getReserNo()%></td>
-                        		<td><%=adminReservation.getMemId() %></td>
-                        		<td><%=adminReservation.getReserName()%></td>
-                        		<td><%=adminReservation.getMemPhone() %></td>
-	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
-	                            <td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
-                        </tr>
-                        <% } %>
-                       <% } %>
+                        		<td><%=adminReserNon.getReserNo() %></td>
+                        		<td><%=adminReserNon.getReserName() %></td>
+                        		<td><%=adminReserNon.getMemPhone() %></td>
+                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
+                            	<td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
+                        	</tr>
+                        	<% } %>
+                        <%} %>
 
                         </tbody>
                       </table>
@@ -96,26 +99,23 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                    
-                    <% if(currentPage > 1) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
-                    <% } %>
-                    
+                
+                	<% if(currentPage > 1) { %>
+                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage - 1%>'"><</button>
+                	<% } %>
+                	
                     <% for (int i = startPage; i <= endPage; i++) { %>
-                    	
-                    	<% if (currentPage != i) { %>
-                   
-                    		<button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=i%>'"><%=i %></button>
-
-                		<%} else { %>
-                		<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
-	                <% } %>
-	               
-	              <% } %>
-	              
-	              <% if(currentPage != maxPage) { %>
-	              <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage + 1 %>'">></button>
-	               <% } %>
+                    	<%if (currentPage != i) { %>
+                   		 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=i%>'"><%=i %></button>
+                   		<% } else { %>
+                   			<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                   	<% } %>
+                   	
+                   	<% } %>
+                   	
+                   	<% if(currentPage != maxPage) { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage + 1%>'">></button>
+                	<% } %>
                 </div>
         
 
@@ -125,17 +125,14 @@
 
     </div>
     
-    
     <script>
-    	function detailReserMem(e){
-    		console.log(e);
+    	function detailReserNonMem(e){
     		
     		$.ajax({
     			url : 'detailReserMem.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
-    				console.log(result);
     				$('#hotelName').text(result.hotelName);
     				$('#bicycle').text(result.bicycle);
     				$('#people').text(result.people);
@@ -148,24 +145,10 @@
     			}
     		})
     	}
-    </script>
-    
-    <script>
-    
-    	function refundReserMem(e){
-    		
-    		$.ajax({
-    			url : 'refundReser.do',
-    			data : {reserNo : e},
-    			type : 'get',
-    			success : function(result){
-    				alert(result.message);
-    			}
-    			
-    		});
-    	}
     
     </script>
+    
+    
     
     
     
@@ -193,7 +176,7 @@
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
                     <td width="200"><span id="hotelName"></span></td>
-                    <td>이동방식 :<span id="bicycle"></span></td>
+                    <td>이동방식 : <span id="bicycle"></span></td>
                 </tr>
                 <tr>
                     <td>인원수 : <span id="people"></span>명</td>
@@ -201,7 +184,7 @@
                 </tr>
                 <tr>
                     <td>체크인 : <span id="checkIn"></span></td>
-                    <td>체크아웃 : <span id="checkOut"></span></td>
+                    <td>체크아웃 :<span id="checkOut"></span></td>
                 </tr>
     
                 <tr>

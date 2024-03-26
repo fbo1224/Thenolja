@@ -1,14 +1,25 @@
 package thenolja.tb_hotel.model.service;
 
-import static thenolja.common.JDBCTemplate.close;
-import static thenolja.common.JDBCTemplate.commit;
-import static thenolja.common.JDBCTemplate.getConnection;
+import static thenolja.common.JDBCTemplate.*;
+
 
 import java.sql.Connection;
 
 import thenolja.tb_hotel.model.dao.RoomDao;
 import thenolja.tb_hotel.model.vo.Room;
 public class RoomService {
+	
+	public int countRoom(int hotelNo) {
+		int result = 0;
+		
+		Connection conn = getConnection();
+		
+		result = new RoomDao().countRoom(conn, hotelNo); 
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	public int insertRoom(Room r) {
 		int roomResult = 0;
