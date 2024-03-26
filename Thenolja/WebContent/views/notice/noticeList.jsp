@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenoleja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	//System.out.println("noticeList = " + list); 컴파일에러 발생
@@ -17,13 +17,15 @@
 	width : 1000px;
 	height : 800px;
 	margin : auto;
-	
 	}
 
 #btn_reg{
 	float:right;
 	background-color:#17a2b8;
 	margin:5px;
+}
+.align_center{
+	text-align:center;
 }  
 
 
@@ -34,10 +36,6 @@
 <body>
 
 <%@ include file="../common/menubar.jsp" %>
-
-<!--  \WebContent\view\notice\noticeList.jsp  경로-->
-<!-- \WebContent\view\common\menubar.jsp -->
-<!-- ../ 상위 폴더 -->
 
 <div class="">
 
@@ -57,7 +55,6 @@
           <tr>
             <th>no.</th>
             <th>제목</th>
-             <th>내용</th>
              <th>작성자</th>
             <th>작성일</th>
             <th>조회수</th>
@@ -68,7 +65,7 @@
 
          <!-- 공지사항이 있을수도있고 없을 수도 있음 -->
          <% if(list.isEmpty()) { %>   <!-- 비어있음    비어있는지 확인   위 상단 null값 이들어있고 list참조 null값이 들어있음 nullporinException 발생 -->
-         	<tr>
+         	<tr class="align_center">
          		<th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
          	</tr>
          <%}else{ %>
@@ -77,10 +74,9 @@
          		 <tr class="list">
          			<td><%= n.getNoticeNo() %></td>
          			<td><%= n.getNoticeTitle () %></td>
-         			<td><%= n.getNoticeContent() %></td>
          			<td><%= n.getWriter() %></td>
          			<td><%= n.getCreateDate() %></td>
-         			<td><%= n.getViews() %></td>
+         			<td><%= n.getViewCount() %></td>
          			<td><%= n.getStatus() %></td>
          		</tr>
          	<% } %>
@@ -98,8 +94,8 @@
 	      <li class="page-item"><a class="page-link" href="#">1</a></li>
 	      <li class="page-item"><a class="page-link" href="#">2</a></li>
 	      <li class="page-item"><a class="page-link" href="#">3</a></li>
-	       <li class="page-item"><a class="page-link" href="#">4</a></li>
-	        <li class="page-item"><a class="page-link" href="#">5</a></li>
+	      <li class="page-item"><a class="page-link" href="#">4</a></li>
+	      <li class="page-item"><a class="page-link" href="#">5</a></li>
 	      <li class="page-item">
 	        <a class="page-link" href="#"> > </a>
 	      </li>

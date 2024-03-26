@@ -217,16 +217,45 @@ public class MemberDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
-		
-		
-		
 		return findId;
+	}
+//---------------------------비밀번호 찾기(조회)-----------------------------------
+	public int findPwd(Connection conn, String memId, String bornDate, String memPhone) {
+		
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			pstmt.setString(2, bornDate);
+			pstmt.setString(3, memPhone);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		return count;
 	}
 	
 	
-	
-	
+//----------------------------비밀번호 찾기(재설정)----------------------------------
 	
 	
 	

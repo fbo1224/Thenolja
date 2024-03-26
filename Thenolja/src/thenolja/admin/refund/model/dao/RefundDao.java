@@ -6,9 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import thenolja.admin.refund.model.vo.AdminRefund;
 import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 
 
 public class RefundDao {
@@ -58,5 +61,95 @@ private Properties prop = new Properties();
 		return listCount;
 
 	}
+	
+	
+	
+	
+	/**
+	 * 환불 회원 목록
+	 */
+	public ArrayList<AdminRefund> selectRefundMemberList(Connection conn, PageInfo pi) {
+		
+		ArrayList<AdminRefund> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				AdminRefund adminRefund = new AdminRefund();
+				
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setMemId(rset.getString("MEM_ID"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminRefund);
+				
+			}
+			 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 
+	}
+	
+	/**
+	 * 회원 환불 상세 조회
+	 */
+	
+	public AdminRefund selectRefundMember (Connection conn, int reserNo) {
+		
+		AdminRefund adminRefund = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reserNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				adminRefund = new AdminRefund();
+				adminRefund.setHotelName(rset.getString("HOTEL_NAME"));
+				adminRefund.setHotelPath(rset.getString("HOTEL_PATH"));
+				adminRefund.setRefundName(rset.getString("REFUND_NAME"));
+				adminRefund.setBank(rset.getString("BANK"));
+				adminRefund.setRefundAccNo(rset.getString("REFUND_ACC_NO"));
+				adminRefund.setRefundPrice(rset.getInt("REFUND_PRICE"));
+				adminRefund.setReserDate(rset.getString("RESER_DATE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminRefund;
+		
+	}
+	
+
+	
 }

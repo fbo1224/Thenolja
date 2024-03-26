@@ -93,6 +93,24 @@ public class MemberService {
 		
 		return findId;
 	}
+//------------------------------------비밀번호 찾기(조회)----------------------
+	public int findPwd(String memId, String bornDate, String memPhone) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().findPwd(conn,  memId, bornDate, memPhone);
+		
+		
+		return count;
+	}
+	
+//------------------------------------비밀번호 찾기(재설정)---------------------------
+	
+	
+	
+	
+	
+	
 	
 	
 	

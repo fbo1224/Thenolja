@@ -49,7 +49,7 @@
 			margin-top: 20px;
 		}
 
-		#memId, #bornDate, #email{
+		#memId, #bornDate, #memPhone{
 			background-image: url('resources/mypage/input.png');
 		}
 
@@ -111,9 +111,9 @@
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/findPwd" method="post">
 						<div id="content1">
-							<input type="text" name="name" id="memId" class="input" placeholder="아이디" maxlength="12" required>
+							<input type="text" name="memId" id="memId" class="input" placeholder="아이디" maxlength="12" required>
 							<input type="text" name="bornDate" id="bornDate" class="input" placeholder="생년월일" maxlength="8" required>
-                            <input type="text" name="email" id="email" class="input" placeholder="이메일 @포함"required>
+                            <input type="text" name="memPhone" id="memPhone" class="input" placeholder="전화번호 -제외"required>
 						</div>
 
 						<div id="content2" class="content">

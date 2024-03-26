@@ -1,26 +1,26 @@
-package thenolja.notice.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
 
 /**
- * Servlet implementation class NoticeinsertFormController
+ * Servlet implementation class FindPwdController
  */
-@WebServlet("/insertForm.notice")
-public class NoticeinsertFormController extends HttpServlet {
+@WebServlet("/findPwd")
+public class FindPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeinsertFormController() {
+    public FindPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +29,17 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//관리자가 아닐경우에도 포워딩이 수행됨
+
+		request.setCharacterEncoding("UTF-8");
 		
-		HttpSession session = request.getSession();
-	//	Member loginUser = (Member)session.getAttribute("loginUser");
-			
-//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-		
-		//응답화면	
-		RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
-		view.forward(request, response);
+		String memId = request.getParameter("memId");
+		String bornDate = request.getParameter("bornDate");
+		String memPhone = request.getParameter("memPhone");
 	
-/*				
-		}else {
-			session.setAttribute("alertMsg", "관리자가 아닙니다. ");
-			response.sendRedirect(request.getContextPath());
-		}	
-		*/
+		int result = new MemberService().findPwd(memId, bornDate, memPhone);
+		
+		request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
+			
 	}
 
 	/**

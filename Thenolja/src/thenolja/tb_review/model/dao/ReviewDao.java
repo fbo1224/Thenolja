@@ -1,4 +1,4 @@
-package com.kh.thenolja.tb_review.model.dao;
+package thenolja.tb_review.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.kh.thenolja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.*;
 
 public class ReviewDao {
 	

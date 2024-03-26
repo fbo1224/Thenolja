@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>    
+<%
+	AdminRefund adminRefund = (AdminRefund)request.getAttribute("adminRefund");
+	
+	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundMemberList");
+
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+
+%>    
+    
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,26 +78,51 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>3</td>
-                            <td>dlgPdls</td>
-                            <td>이혜인</td>
-                            <td>01020082008</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                          </tr>
+                        
+                        
+                        <% if(list.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="4">환불 회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        
+                        	<% for(AdminRefund refundMem : list) { %>
+                        	<tr>
+                        		<td><%=refundMem.getReserNo() %></td>
+                        		<td><%=refundMem.getMemId() %>
+                        		<td><%=refundMem.getReserName() %>
+                        		<td><%=refundMem.getMemPhone() %>
+                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refundMem.getReserNo()%>)">조회</button></td>
+                        	</tr>
+                        	
+                        	
+                        	<% } %>
+                        <% } %>
+                        
+        
                         </tbody>
                       </table>
 
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
+                	
+                	<% if(currentPage > 1) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% } %>
+                    
+                    <% for(int i = startPage; i <= endPage; i++) { %>
+                    	<%if(currentPage != i) { %>
+                    		 
+                    		 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=i%>'"><%=i %></button>
+                    	<% } else { %>
+                    		 <button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                    	<% } %>
+                    <% } %>
+                    
+                   <% if(currentPage != maxPage) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage + 1%>'">></button>
+                   <% } %>
                 </div>
         
 
@@ -88,6 +131,31 @@
         <div id="footer"></div>
 
     </div>
+    
+    <script>
+    	function selectRefundMember(e){
+    		console.log(e);
+    		$.ajax({
+    			url : 'refundMember.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				$('#hotelName').text(result.hotelName);
+    				$('#refundName').text(result.refundName);
+    				$('#reserDate').text(result.reserDate);
+    				$('#bank').text(result.bank);
+    				$('#refundPrice').text(result.refundPrice);
+    				$('#refundAccNo').text(result.refundAccNo);
+    			}
+    		});
+    	}
+    
+    </script>
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
@@ -110,18 +178,18 @@
                     <td>환불자 정보</td>
                 </tr>
                 <tr>
-                    <td>마리안느 호텔</td>
-                    <td>예금주 : 이혜인</td>
+                    <td><span id="hotelName"></span></td>
+                    <td>예금주 : <span id="refundName"></span></td>
                 
                 </tr>
                 <tr>
-                    <td>예약일 : 2024.03.15</td>
-                    <td>은행 : 국민은행</td>
+                    <td>예약일 : <span id="reserDate"></span></td>
+                    <td>은행 : <span id="bank"></span></td>
                 </tr>
     
                 <tr>
-                    <td>환불 금액 : 300000</td>
-                    <td>계좌번호 : 3339191831</td>
+                    <td>환불 금액 : <span id="refundPrice"></span></td>
+                    <td>계좌번호 : <span id="refundAccNo"></span></td>
                 </tr>
 
               </table>
