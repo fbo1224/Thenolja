@@ -10,7 +10,7 @@
 		  INTO
 		  		TB_REFUND
 		  		(
-		  		RF_RESER_NO.
+		  		RF_RESER_NO,
 		  		REFUND_PRICE,
 		  		REFUND_ACC_NO,
 		  		REFUND_NAME,
@@ -35,10 +35,12 @@
 		  FROM
 		        TB_REFUND
 		  JOIN
-		  		ON (RE_RESER_NO = RESER_NO)      
+		  		TB_RESERVATION
+		  		ON (RF_RESER_NO = RESER_NO)      
 		 WHERE
-		 		RESER_NO = ?
+		 		RF_RESER_NO = ?
 	</entry>
+	<!--  
 	<entry key="selectRefundNo">
 		 SELECT
 				RF_RESER_NO,
@@ -53,11 +55,45 @@
 	   ORDER BY RESER_NO DESC
 				
 	</entry>
-	
-
-
-	
-	
+	-->
+	<entry key="selectReservation">
+	SELECT
+		        RESER_NO,
+		        RESER_DATE,
+		        RESER_NAME,
+		        RESER_PHONE,
+		        BICYCLE,
+		        TB_ROOM.CHECKIN_TIME,
+		        TB_ROOM.CHECKOUT_TIME,
+		        MAX_PEOPLE,	
+		        TB_ROOM.ROOM_NO,
+		        RE_MEM_NO,
+		        PAYMENT,
+		        PAYMENT_PRICE
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
+		  JOIN
+		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
+		  JOIN
+		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+		 WHERE
+		 		RESER_NO = ?
+		</entry>
+		
+		<entry key="updateRefund">
+			UPDATE
+					TB_REFUND
+			   SET
+			   		REFUND_ACC_NO = ?,
+			   		REFUND_NAME = ?,
+			   		BANK = ?
+			 WHERE
+			 		RF_RESER_NO = ?	
+		</entry>
+		
+		
 	
 	
 	

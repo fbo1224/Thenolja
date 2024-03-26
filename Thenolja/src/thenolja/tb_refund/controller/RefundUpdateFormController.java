@@ -1,28 +1,23 @@
 package thenolja.tb_refund.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_refund.model.service.RefundService;
-import thenolja.tb_refund.model.vo.Refund;
-
 /**
- * Servlet implementation class RefundDetailController
+ * Servlet implementation class RefundUpdateFormController
  */
-@WebServlet("/detail.refund")
-public class RefundDetailController extends HttpServlet {
+@WebServlet("/updateForm.refund")
+public class RefundUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundDetailController() {
+    public RefundUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +26,8 @@ public class RefundDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		
-		Refund refund = new RefundService().selectRefund(reserNo);
-		
-		if(refund != null) {
-			request.setAttribute("refund", refund);
-			request.getRequestDispatcher("views/refund/detailRefund.jsp").forward(request, response);
-			
-		} else {
-			request.setAttribute("errorMsg", "환불 내역이 없습니다!");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
-		
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

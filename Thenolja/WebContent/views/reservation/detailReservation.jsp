@@ -220,7 +220,7 @@
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
-                        <td>110-00000-0000</td>
+                        <td>110-404-432780</td>
                     </tr>
                     <tr>
                         <td>예금주</td> 
@@ -266,9 +266,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"> 
+        <form action="<%= contextPath %>/refund.insert"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
+            
+            <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
 
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
@@ -280,7 +282,7 @@
             <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
             <div id="refund_btn">
                 <br>
-                <button type="submit" class="btn btn-dark" onclick="ajaxRefund()">확인</button>
+                <button type="submit" class="btn btn-dark">확인</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
                 
             </div>
