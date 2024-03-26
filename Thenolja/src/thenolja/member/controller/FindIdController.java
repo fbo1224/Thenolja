@@ -40,7 +40,6 @@ public class FindIdController extends HttpServlet {
 		Member findId = new MemberService().findId(memName, bornDate, email);
 		request.setAttribute("findId", findId);
 		
-		System.out.println("findidprint서블릿");
 		request.getRequestDispatcher("views/login/findIdPrint.jsp").forward(request, response);
 	
 	
