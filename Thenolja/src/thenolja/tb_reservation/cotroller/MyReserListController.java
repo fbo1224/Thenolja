@@ -1,6 +1,7 @@
-package thenolja.tb_refund.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_refund.model.service.RefundService;
+import thenolja.tb_reservation.model.Service.ReserService;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class RefundDetailController
+ * Servlet implementation class MyReserListController
  */
-@WebServlet("/detail.refund")
-public class RefundDetailController extends HttpServlet {
+@WebServlet("/myReser.list")
+public class MyReserListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundDetailController() {
+    public MyReserListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +31,20 @@ public class RefundDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		int result = new RefundService().deleteReser(reserNo);
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		ArrayList<Reservation> reserList = new ReserService().selectList(memNo);
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "수정이 완료되었습니다");
-			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
+		if(reserList != null) {
+			request.setAttribute("reserList", reserList);
+			request.setAttribute("memNo", memNo);
+			
+			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 		} else {
-			request.setAttribute("errorMsg", "실행이 취소되었습니다");
+			request.setAttribute("errorMsg", "조회된 내역이 없습니다");
+			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
 	
 	
 	

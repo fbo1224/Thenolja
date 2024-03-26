@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.member.model.vo.Member;
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_reservation.model.Service.ReserService;
 
@@ -17,13 +18,13 @@ import thenolja.tb_reservation.model.Service.ReserService;
  * Servlet implementation class insertReservation
  */
 @WebServlet("/insertReservation")
-public class insertReservation extends HttpServlet {
+public class ReservationInserFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public insertReservation() {
+    public ReservationInserFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +42,6 @@ public class insertReservation extends HttpServlet {
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
-		
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		
 		view.forward(request, response);

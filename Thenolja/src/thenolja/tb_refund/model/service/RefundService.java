@@ -27,17 +27,17 @@ public class RefundService {
 		return result;
 	}
 
-	public Refund selectRefund() {
+	public Refund selectRefund(int reserNo) {
 		
 		Connection conn = getConnection();
 		
-		Refund refund = new RefundDao().selectRefund(conn);
+		Refund refund = new RefundDao().selectRefund(conn, reserNo);
 		
 		close(conn);
 		
 		return refund;
 	}
-
+/*
 	public Refund selectRefundNo(int reserNo) {
 
 		Connection conn = getConnection();
@@ -48,7 +48,50 @@ public class RefundService {
 		
 		return refund;
 	}
-	
+	*/
+
+	public Reservation selectReservation(int reserNo) {
+
+		Connection conn = getConnection();
+		
+		Reservation reser = new RefundDao().selectRervation(conn, reserNo);
+		
+		close(conn);
+		
+		return reser;
+	}
+
+	public int updateRefund(Refund refund) {
+		
+		Connection conn = getConnection();
+		
+		int result = new RefundDao().updateRefund(conn, refund);
+		
+		if(result > 0 ) {
+			commit(conn);
+		} else{
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteReser(int reserNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new RefundDao().deleteReser(conn, reserNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

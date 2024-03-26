@@ -3,7 +3,7 @@
 <properties>
 
 	<comment>
-		Member Mapper
+		reservation Mapper
 	</comment>
 	
 	   <entry key="selectReserCount">

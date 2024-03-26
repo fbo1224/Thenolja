@@ -1,26 +1,27 @@
-package thenolja.tb_refund.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import thenolja.tb_refund.model.service.RefundService;
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
 
 /**
- * Servlet implementation class RefundDetailController
+ * Servlet implementation class FindResetPwdController
  */
-@WebServlet("/detail.refund")
-public class RefundDetailController extends HttpServlet {
+@WebServlet("/find.resetPwd")
+public class FindResetPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundDetailController() {
+    public FindResetPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,22 @@ public class RefundDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		request.setCharacterEncoding("UTF-8");
 		
-		int result = new RefundService().deleteReser(reserNo);
+		String memId = request.getParameter("memId");
+		String memPwd = request.getParameter("password");
+		// System.out.println(memId);
+		int result = new MemberService().resetPwd(memId, memPwd);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "수정이 완료되었습니다");
-			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "비밀번호가 변경되었습니다.");
+			response.sendRedirect(request.getContextPath());
 		} else {
-			request.setAttribute("errorMsg", "실행이 취소되었습니다");
+			request.setAttribute("errorMsg", "입력하신 정보가 일치하지 않습니다."); 
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
-		
-	
 	
 	
 	}

@@ -20,7 +20,7 @@
 		FROM TB_NOTICE
 		
 		WHERE 1=1
-		AND STATUS = 'Y'
+		AND STATUS = 'N'
 		ORDER BY CREATE_DATE DESC
 	</entry>
 	

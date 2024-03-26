@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>숙소이용목록상세조회</title>
+    <title>환불 처리</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -181,6 +181,17 @@
         float: right;
     }
 
+    #my_btn{
+    	width: 200px;
+    	height: 50px;
+    	border: 1px solid black;
+    	margin: auto;
+		margin-top: 100px;	
+    }
+	#my_btn > button{
+		width: 200px;
+		height: 50px;
+	}
 
 
 </style>
@@ -188,7 +199,8 @@
 
 </head>
 <body>
-               
+    <%@ include file="../common/menubar.jsp" %> 
+    
     <div id="content">
         <div id="content_title">
             <div id="left_img">
@@ -273,7 +285,9 @@
 
                 <div id="refund_member">
                     <div id="refund_title"><h3>환불 정보</h3></div>
-                    <div id="refund_update"><button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">수정하기</button></div>
+                    <div id="refund_update">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">수정하기</button>
+                    </div>
                     <hr>
                     <table>
                     <tr>
@@ -294,12 +308,51 @@
                     </tr>
                 </table>
                 </div>
-
-
             </div>
         </div>
 
     </div>
+      <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">환불 계좌 입력</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <form action="<%= contextPath %>/update.refund"  method="post"> 
+            <label for="text">예금주</label>
+            <input type="text" id="refund_name" required name="refundName"><br><br>
+            
+            <input type="hidden" value="<%= refund.getReserNo() %>" name="reserNo"/>
+
+            <label for="text">환불계좌</label>
+            <select id="bank_name" name="bankName">
+                <option>신한은행</option>
+                <option>국민은행</option>
+                <option>농협은행</option>
+                <option>우리은행</option>
+            </select>
+            <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
+            <div id="refund_btn">
+                <br>
+                <button type="submit" class="btn btn-dark">수정</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    
+    <br><br><br><br><br><br><br><br><br><br>
+    
+    
 
 
 </body>

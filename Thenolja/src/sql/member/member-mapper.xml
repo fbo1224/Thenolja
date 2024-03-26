@@ -124,7 +124,33 @@
 	
 	</entry>
 	
+	<entry key="findPwd">
+		SELECT
+		       MEM_ID
+		  FROM
+		       TB_MEMBER
+		  JOIN
+		       TB_NONMEM
+		 USING
+		       (MEM_NO)
+		 WHERE
+		       MEM_ID = ?
+		   AND
+		       BORN_DATE = ?
+		   AND
+		       MEM_PHONE = ?
+	</entry>
 	
+	<entry key="resetPwd">
+		UPDATE
+               TB_MEMBER
+           SET
+               MEM_PWD = ?
+         WHERE
+               MEM_ID = ?
+	
+	
+	</entry>
 	
 	
 	

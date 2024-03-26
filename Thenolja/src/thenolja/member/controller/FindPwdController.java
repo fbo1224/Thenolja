@@ -35,11 +35,19 @@ public class FindPwdController extends HttpServlet {
 		String memId = request.getParameter("memId");
 		String bornDate = request.getParameter("bornDate");
 		String memPhone = request.getParameter("memPhone");
-	
-		int result = new MemberService().findPwd(memId, bornDate, memPhone);
 		
-		request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
+		int count = new MemberService().findPwd(memId, bornDate, memPhone);
+		
+		if(count == 0) {
+			request.setAttribute("errorMsg", "입력하신 정보가 일치하지 않습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
+		} else {
+			// System.out.println(memId);
+			request.setAttribute("memId", memId);
+			request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**
