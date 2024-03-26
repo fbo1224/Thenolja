@@ -54,16 +54,9 @@
 
 	#pwdCheck2{
             margin: auto;
-            margin-top: 10px;
-            height: 25px;
+            height: 20px;
 			display: none;
-			width: 400px;
-			height: 50px;
-			border-color: rgb(230, 230, 230);
 			border-radius: 10px;
-			background-repeat: no-repeat;
-			background-size: 30px;
-			background-position: right;
         }
 
 	.input:focus{
@@ -97,59 +90,61 @@
 				<tr></tr>
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-포함해서 입력해주세요." name="memPhone" value="<%= loginUser.getMemPhone() %>"></td>
+					<td><input type="text" placeholder="-포함해서 입력해주세요." name="memPhone" value="<%= loginUser.getMemPhone() %>" required></td>
 					<td></td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email" value="<%= loginUser.getEmail() %>"></td>
+					<td><input type="email" name="email" value="<%= loginUser.getEmail() %>" required></td>
 					<td></td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<td>새로운 비밀번호</td>
-					<td><input type="password" name="memPwd"></td>
+					<td><input type="password" name="memPwd" id="newPwd1" required></td>
 				</tr>
 				<tr>
 					<td>새로운 비밀번호 확인</td>
-					<td><input type="password" id="newPwd"></td>
-					<td><button id="pwdCheck1" onclick="pwdCheck()">비밀번호 확인</button></td>
+					<td><input type="password" id="newPwd2" required></td>
+					<td><button type="button" id="pwdCheck1" onclick="pwdCheck()">비밀번호 확인</button></td>
 				</tr>
 				<tr>
-					<div id="pwdCheck2"></div>
+					<td></td>
+					<td><div id="pwdCheck2"></div></td>
 				</tr>
 
 			</table>
-
+			
 			<script>
 				function pwdCheck(){
-					const pwd = document.getElementById('newPwd');
+					const pwd1 = document.getElementById('newPwd1');
+					const pwd2 = document.getElementById('newPwd2');
 					const pwdCheck = document.getElementById('pwdCheck2');
 					const next = document.getElementById('next');
 					
-					if('<%= loginUser.getMemPwd()%>' != pwd.value){
+					if(pwd1.value != pwd2.value){
 						pwdCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
-						pwd.value = '';
-						pwdCheck.style = "color:red; background-color:rgb(255, 218, 224); display:block;"
+						pwd1.value = '';
+						pwd2.value = '';
+						pwdCheck.style = "color:red;  display:block;"
+						
 						return false;
 					} 
 					else{
 						pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
-						next.disabled = false;
-						pwdCheck.style = "color:green; background-color:lightgreen; display:block;";
+						/*next.disabled = false;*/
+						pwdCheck.style = "color:green; display:block;";
 
 						return true;
 					}
 				}        
 
 			</script>
-			
-			
 
 			<div align="center">
 				<button type="reset" id="reset">초기화</button>
-				<button type="submit" id="changeBtn" disabled id="next">변경하기</button>
+				<button type="submit" id="changeBtn" id="next">변경하기</button>
 				<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
 				<input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
 			</div>
