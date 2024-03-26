@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>관리자메인페이지</title>
+    <title>비회원 목록</title>
 
  	<link rel="stylesheet" href="resources/css/admin_select.css">    
 
