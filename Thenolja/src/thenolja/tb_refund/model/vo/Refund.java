@@ -4,13 +4,13 @@ public class Refund {
 	
 	private int reserNo;
 	private int refundPrice;
-	private int accNo;
+	private String accNo;
 	private String refundName;
 	private String bank;
 	public Refund() {
 		super();
 	}
-	public Refund(int reserNo, int refundPrice, int accNo, String refundName, String bank) {
+	public Refund(int reserNo, int refundPrice, String accNo, String refundName, String bank) {
 		super();
 		this.reserNo = reserNo;
 		this.refundPrice = refundPrice;
@@ -30,10 +30,10 @@ public class Refund {
 	public void setRefundPrice(int refundPrice) {
 		this.refundPrice = refundPrice;
 	}
-	public int getAccNo() {
+	public String getAccNo() {
 		return accNo;
 	}
-	public void setAccNo(int accNo) {
+	public void setAccNo(String accNo) {
 		this.accNo = accNo;
 	}
 	public String getRefundName() {
@@ -52,7 +52,7 @@ public class Refund {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + accNo;
+		result = prime * result + ((accNo == null) ? 0 : accNo.hashCode());
 		result = prime * result + ((bank == null) ? 0 : bank.hashCode());
 		result = prime * result + ((refundName == null) ? 0 : refundName.hashCode());
 		result = prime * result + refundPrice;
@@ -68,7 +68,10 @@ public class Refund {
 		if (getClass() != obj.getClass())
 			return false;
 		Refund other = (Refund) obj;
-		if (accNo != other.accNo)
+		if (accNo == null) {
+			if (other.accNo != null)
+				return false;
+		} else if (!accNo.equals(other.accNo))
 			return false;
 		if (bank == null) {
 			if (other.bank != null)

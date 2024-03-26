@@ -105,7 +105,7 @@
 
     #reser_btn > button{
         width: 100px;
-        height: 100px;
+        height: 40px;
         border-radius: 10px;
         position: absolute;
         top : 0px;
@@ -113,7 +113,6 @@
         right: 0px;
         left: 0px;
         margin:auto;
-
     }
 
     #rser_price{
@@ -159,7 +158,17 @@
     #refund_btn > button{
         float: right;
     }
-
+    #my_btn{
+    	width: 200px;
+    	height: 50px;
+    	border: 1px solid black;
+    	margin: auto;
+		margin-top: 100px;	
+    }
+	#my_btn > button{
+		width: 200px;
+		height: 50px;
+	}
 
 </style>
 
@@ -172,7 +181,7 @@
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>상세조회</h3></div>
         </div>
@@ -220,7 +229,7 @@
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
-                        <td>110-00000-0000</td>
+                        <td>110-404-432780</td>
                     </tr>
                     <tr>
                         <td>예금주</td> 
@@ -253,6 +262,11 @@
         </div>
 
     </div>
+    <div id="my_btn">
+	    <a href="<%=contextPath%>/myReser.list">
+	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
+	    </a>
+    </div>
       <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -266,9 +280,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"> 
+        <form action="<%= contextPath %>/refund.insert"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
+            
+            <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
 
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
@@ -280,7 +296,7 @@
             <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
             <div id="refund_btn">
                 <br>
-                <button type="submit" class="btn btn-dark" onclick="ajaxRefund()">확인</button>
+                <button type="submit" class="btn btn-dark">확인</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
                 
             </div>

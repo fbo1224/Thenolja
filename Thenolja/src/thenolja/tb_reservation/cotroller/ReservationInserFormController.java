@@ -1,26 +1,30 @@
-package thenolja.tb_refund.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_refund.model.service.RefundService;
+import thenolja.member.model.vo.Member;
+import thenolja.tb_coupon.model.vo.Coupon;
+import thenolja.tb_reservation.model.Service.ReserService;
 
 /**
- * Servlet implementation class RefundDetailController
+ * Servlet implementation class insertReservation
  */
-@WebServlet("/detail.refund")
-public class RefundDetailController extends HttpServlet {
+@WebServlet("/insertReservation")
+public class ReservationInserFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundDetailController() {
+    public ReservationInserFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +34,17 @@ public class RefundDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		request.setCharacterEncoding("UTF-8");
 		
-		int result = new RefundService().deleteReser(reserNo);
+		ArrayList<Coupon> list = new ReserService().selectCoupon();
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "수정이 완료되었습니다");
-			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
-		} else {
-			request.setAttribute("errorMsg", "실행이 취소되었습니다");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		request.setAttribute("insertReservation", list);
+		//System.out.println(list);
 		
+		//response.sendRedirect("/views/reservation/insertReservation.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		
-	
-	
-	
+		view.forward(request, response);
 	}
 
 	/**

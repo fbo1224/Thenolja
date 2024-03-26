@@ -38,7 +38,7 @@ public class RefundDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, refund.getReserNo());
-			pstmt.setInt(2, refund.getAccNo());
+			pstmt.setString(2, refund.getAccNo());
 			pstmt.setString(3, refund.getRefundName());
 			pstmt.setString(4, refund.getBank());
 			
@@ -51,7 +51,7 @@ public class RefundDao {
 		}
 		return result;
 	}
-	public Refund selectRefund(Connection conn) {
+	public Refund selectRefund(Connection conn, int reserNo) {
 		
 		Refund refund = new Refund();
 		PreparedStatement pstmt = null;
@@ -60,14 +60,14 @@ public class RefundDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, refund.getReserNo());
+			pstmt.setInt(1, reserNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				refund = new Refund();
-				refund.setReserNo(rset.getInt("RE_RESER_NO"));
+				refund.setReserNo(rset.getInt("RF_RESER_NO"));
 				refund.setRefundPrice(rset.getInt("REFUND_PRICE"));
-				refund.setAccNo(rset.getInt("REFUND_ACC_NO"));
+				refund.setAccNo(rset.getString("REFUND_ACC_NO"));
 				refund.setRefundName(rset.getString("REFUND_NAME"));
 				refund.setBank(rset.getString("BANK"));
 			}
@@ -79,6 +79,7 @@ public class RefundDao {
 		}
 		return refund;
 	}
+	/*
 	public Refund selectRefundNo(Connection conn, int reserNo) {
 		
 		Refund refund = new Refund();
@@ -105,6 +106,82 @@ public class RefundDao {
 			close(pstmt);
 		}
 		return refund;
+	}
+	*/
+	public Reservation selectRervation(Connection conn, int reserNo) {
+		
+		Reservation reser = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reser = new Reservation();
+				reser.setReserNo(rset.getInt("RESER_NO"));
+				reser.setReserDate(rset.getDate("RESER_DATE"));
+				reser.setName(rset.getString("RESER_NAME"));
+				reser.setPhone(rset.getString("RESER_PHONE"));
+				reser.setBicycle(rset.getString("BICYCLE"));
+				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setPeople(rset.getInt("MAX_PEOPLE"));
+				reser.setRoomNo(rset.getInt("ROOM_NO"));
+				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
+				reser.setPayment(rset.getString("PAYMENT"));
+				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reser;
+	}
+	public int updateRefund(Connection conn, Refund refund) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateRefund");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, refund.getAccNo());
+			pstmt.setString(2, refund.getRefundName());
+			pstmt.setString(3, refund.getBank());
+			pstmt.setInt(4, refund.getReserNo());
+
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int deleteReser(Connection conn, int reserNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	
