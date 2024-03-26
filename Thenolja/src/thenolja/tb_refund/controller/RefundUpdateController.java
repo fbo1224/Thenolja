@@ -2,14 +2,17 @@ package thenolja.tb_refund.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.tb_refund.model.service.RefundService;
 import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class RefundUpdateController
@@ -34,7 +37,7 @@ public class RefundUpdateController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		int accNo = Integer.parseInt(request.getParameter("accNo"));
+		String accNo =request.getParameter("accNo");
 		String refundName = request.getParameter("refundName");
 		String bankName = request.getParameter("bankName");
 		
@@ -48,13 +51,26 @@ public class RefundUpdateController extends HttpServlet {
 		int result = new RefundService().updateRefund(refund);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/detail.refund?reserNo=" + reserNo);
-		
-			// request.getRequestDispatcher("views/refund/refundUpdateForm.jsp").forward(request, response);
+			
+			refund = new RefundService().selectRefund(reserNo);
+			Reservation reser = new RefundService().selectReservation(reserNo);
+			
+			if(refund != null && reser != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("refund", refund);
+				session.setAttribute("reser", reser);
+		// 		request.getRequestDispatcher("views/refund/detailRefund.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/detail.refund?reserNo=" + refund.getReserNo());
+				
+			} else {
+				request.setAttribute("errorMsg", "환불 수정에 실패하였습니다");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
+			
 		} else {
 		request.setAttribute("errorMsg", "환불 수정에 실패하였습니다");
 		request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-	}
+		}
 	}
 
 	/**

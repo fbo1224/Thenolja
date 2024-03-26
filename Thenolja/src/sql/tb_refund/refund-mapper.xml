@@ -93,6 +93,14 @@
 			 		RF_RESER_NO = ?	
 		</entry>
 		
+		<entry key="deleteReser">
+			UPDATE
+					TB_RESERVATION
+			   SET
+			   		CANCEL_YN = 'Y'
+			 WHERE
+			 		RESER_NO = ?
+		</entry>
 		
 	
 	

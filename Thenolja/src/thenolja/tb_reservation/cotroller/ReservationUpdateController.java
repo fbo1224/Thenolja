@@ -1,4 +1,4 @@
-package thenolja.tb_refund.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RefundUpdateFormController
+ * Servlet implementation class ReservationUpdateController
  */
-@WebServlet("/updateForm.refund")
-public class RefundUpdateFormController extends HttpServlet {
+@WebServlet("/update.reser")
+public class ReservationUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundUpdateFormController() {
+    public ReservationUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,15 @@ public class RefundUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
 	/**

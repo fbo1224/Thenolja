@@ -38,7 +38,7 @@ public class RefundDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, refund.getReserNo());
-			pstmt.setInt(2, refund.getAccNo());
+			pstmt.setString(2, refund.getAccNo());
 			pstmt.setString(3, refund.getRefundName());
 			pstmt.setString(4, refund.getBank());
 			
@@ -67,7 +67,7 @@ public class RefundDao {
 				refund = new Refund();
 				refund.setReserNo(rset.getInt("RF_RESER_NO"));
 				refund.setRefundPrice(rset.getInt("REFUND_PRICE"));
-				refund.setAccNo(rset.getInt("REFUND_ACC_NO"));
+				refund.setAccNo(rset.getString("REFUND_ACC_NO"));
 				refund.setRefundName(rset.getString("REFUND_NAME"));
 				refund.setBank(rset.getString("BANK"));
 			}
@@ -153,7 +153,7 @@ public class RefundDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, refund.getAccNo());
+			pstmt.setString(1, refund.getAccNo());
 			pstmt.setString(2, refund.getRefundName());
 			pstmt.setString(3, refund.getBank());
 			pstmt.setInt(4, refund.getReserNo());
@@ -162,6 +162,24 @@ public class RefundDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return result;
+	}
+	public int deleteReser(Connection conn, int reserNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return result;
 	}

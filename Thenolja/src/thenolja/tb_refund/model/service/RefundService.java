@@ -76,6 +76,22 @@ public class RefundService {
 		
 		return result;
 	}
+
+	public int deleteReser(int reserNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new RefundDao().deleteReser(conn, reserNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

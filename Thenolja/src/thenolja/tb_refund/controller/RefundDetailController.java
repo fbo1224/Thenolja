@@ -2,7 +2,6 @@ package thenolja.tb_refund.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.tb_refund.model.service.RefundService;
-import thenolja.tb_refund.model.vo.Refund;
 
 /**
  * Servlet implementation class RefundDetailController
@@ -32,21 +30,21 @@ public class RefundDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		Refund refund = new RefundService().selectRefund(reserNo);
+		int result = new RefundService().deleteReser(reserNo);
 		
-		if(refund != null) {
-			request.setAttribute("refund", refund);
-			request.getRequestDispatcher("views/refund/detailRefund.jsp").forward(request, response);
-			
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "수정이 완료되었습니다");
+			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
 		} else {
-			request.setAttribute("errorMsg", "환불 내역이 없습니다!");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			request.setAttribute("errorMsg", "실행이 취소되었습니다");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
+		
+	
+	
 	
 	}
 

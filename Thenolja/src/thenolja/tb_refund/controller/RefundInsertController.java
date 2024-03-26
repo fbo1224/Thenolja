@@ -37,7 +37,7 @@ public class RefundInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		int accNo = Integer.parseInt(request.getParameter("accNo"));
+		String accNo = request.getParameter("accNo");
 		String refundName = request.getParameter("refundName");
 		String bankName = request.getParameter("bankName");
 		
@@ -60,7 +60,7 @@ public class RefundInsertController extends HttpServlet {
 				request.setAttribute("refund", refund);
 				
 				request.setAttribute("reser", reser);
-				System.out.println(reser);
+				// System.out.println(reser);
 				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");
 				view.forward(request, response);
 	   			

@@ -4,6 +4,8 @@
 <%@ page import="java.util.ArrayList" %>   
 <%
    ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+
+
 %>   
   
 <!DOCTYPE html>
@@ -157,7 +159,6 @@
 <body>
     
     <%@ include file="../common/menubar.jsp" %>
-    
     <!-- 0. 전체 감싸는 div 시작 -->
     <div id="content">
     

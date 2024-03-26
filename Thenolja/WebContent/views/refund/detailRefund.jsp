@@ -329,7 +329,7 @@
             <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
             <div id="refund_btn">
                 <br>
-                <button type="submit" class="btn btn-dark" onclick="udpateRefund(<%=refund.getReserNo()%>)">수정</button>
+                <button type="submit" class="btn btn-dark">수정</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
             </div>
         </form>
@@ -337,26 +337,6 @@
       </div>
     </div>
   </div>
-    
-    
-    <script>
-    
-    function udpateRefund(e){
-    	$.ajax({
-    		
-    		url : 'updateForm.refund',
-    		data : {reserNo : e},
-    		type : 'post',
-    		success : function(){
-    			
-    		}
-    	})
-    }
-    	
-    </script>
-    
-    
-    
     
     
     
