@@ -1,7 +1,6 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +10,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import thenolja.common.MyFileRenamePolicy;
+import thenolja.tb_hotel.model.service.RoomService;
 import thenolja.tb_hotel.model.vo.Room;
 
 public class RoomController {
@@ -19,14 +19,19 @@ public class RoomController {
 		String view = "";
 		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		request.setAttribute("hotelNo", hotelNo);
 		
+		// 객실이 3개 이상이면 객실 추가 못함
+		int roomCnt = new RoomService().countRoom(hotelNo);
+		
+		request.setAttribute("hotelNo", hotelNo);
+		request.setAttribute("roomCnt", roomCnt);
 		view= "views/hotel/insertRoom.jsp";
 		return view;
 	}
 	
 	public String insert(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		int result = 0;
 		if(ServletFileUpload.isMultipartContent(request)) {
 			String savePath = request.getServletContext()
 			         .getRealPath("/resources/roomImage");
@@ -50,57 +55,34 @@ public class RoomController {
 			String inTime = multiRequest.getParameter("in_time");
 			String outTime = multiRequest.getParameter("out_time");
 			
-			int hotelNo2 = 0;
-			int maxPeople2 = 0;
-			int roomPrice2 = 0;
-			int roomNum2 = 0;
-			String roomName2 = "";
-			String inTime2 = "";
-			String outTime2 = "";
-			
-			if(multiRequest.getParameter("roomName2") != null) {
-				hotelNo2 = Integer.parseInt(multiRequest.getParameter("hotelNo"));
-				maxPeople2 = Integer.parseInt(multiRequest.getParameter("maxPeople2"));
-				roomPrice2 = Integer.parseInt(multiRequest.getParameter("roomPrice2"));
-				roomNum2 = Integer.parseInt(multiRequest.getParameter("roomNum2"));
-				roomName2 = multiRequest.getParameter("roomName2");
-				inTime2 = multiRequest.getParameter("in_time2");
-				outTime2 = multiRequest.getParameter("out_time2");
-			}
-			
-			System.out.println(maxPeople);
-			System.out.println(roomName);
-			System.out.println(roomName2);
-			System.out.println(maxPeople2);
 			// VO담기
-			ArrayList<Room> rList = new ArrayList();
-			for(int i = 0; i < rList.size(); i++) {
-				Room r = new Room();
-				r.setHotelNo(hotelNo);
-				r.setRoomName(roomName);
-				r.setMaxPeople(maxPeople);
-				r.setCheckInTime(inTime);
-				r.setCheckOutTime(outTime);
-				r.setRoomPrice(roomPrice);
-				r.setRoomNum(roomNum);
-				
-				rList.add(r);
-			}
-			
-			// System.out.println(rList);
-			
+			Room r = new Room();
+			r.setHotelNo(hotelNo);
+			r.setRoomName(roomName);
+			r.setMaxPeople(maxPeople);
+			r.setCheckInTime(inTime);
+			r.setCheckOutTime(outTime);
+			r.setRoomPrice(roomPrice);
+			r.setRoomNum(roomNum);
 			
 			// 사진 roomImg
-			//if(multiRequest.getOriginalFileName("roomImg") != null) {
-				//h.setHotelPath("resources/hotelImage/"+ multiRequest.getFilesystemName("roomImg"));
-			//}
+			if(multiRequest.getOriginalFileName("roomImg") != null) {
+				r.setRoomImgPath("resources/roomImage/"+ multiRequest.getFilesystemName("roomImg"));					
+			}
 			
+			// System.out.println(r);
+			
+			result = new RoomService().insertRoom(r);
 			
 		}
-	
 		
-		view="/";
-
+		if(result > 0) {
+			request.setAttribute("loginStatus", "A");
+			view="/hotelList.hotels?currentPage=1";
+		} else {
+			request.setAttribute("errorMsg", "객실 추가에 실패했습니다.");
+			view="views/common/errorPage.jsp";
+		}
 		return view;		
 	}
 }

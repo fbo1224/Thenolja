@@ -99,7 +99,7 @@ public class HotelDao {
 			rset = pstmt.executeQuery();
 			rset.next();
 			
-			listCnt = rset.getInt("CNTS");
+			listCnt = rset.getInt("COUNT(*)");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -109,6 +109,29 @@ public class HotelDao {
 		
 		return listCnt;
 	}
+	
+	public int selectListCountRoomIn(Connection conn) {
+		int listCnt = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCountRoomIn");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			rset.next();
+			
+			listCnt = rset.getInt("CNTS");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCnt;
+	}
+	
 	
 	public ArrayList<HotelCard> selectAllList(Connection conn, PageInfo pi){
 		ArrayList<HotelCard> list = new ArrayList();
@@ -330,7 +353,7 @@ public class HotelDao {
 			rset = pstmt.executeQuery();
 			
 			rset.next();
-			result = rset.getShort("COUNT(*)");
+			result = rset.getInt("COUNT(*)");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

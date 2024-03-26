@@ -72,43 +72,94 @@
    </entry>
    
    <entry key="selectMember">
-SELECT
-        MEM_NAME,
-        EMAIL,
-        MEM_PHONE,
-        BORN_DATE,
-        GRADE_NAME,
-        TO_CHAR(JOIN_DATE ,'YYYY.MM.DD') "JOIN_DATE",
-        NVL((SUM(PAYMENT_PRICE)),0)"PAYMENT_PRICE"
-        
-  FROM
-        TB_NONMEM
-   LEFT
-   JOIN
-        TB_RESERVATION ON (MEM_NO = RE_MEM_NO)
-   JOIN
-        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
-   JOIN
-        TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
-   JOIN
-        TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO) 
-  WHERE
-        TB_NONMEM.MEM_NO = ?
-  GROUP
-     BY
-         MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD')
+	SELECT
+	        MEM_NAME,
+	        EMAIL,
+	        MEM_PHONE,
+	        BORN_DATE,
+	        GRADE_NAME,
+	        TO_CHAR(JOIN_DATE ,'YYYY.MM.DD') "JOIN_DATE",
+	        NVL((SUM(PAYMENT_PRICE)),0)"PAYMENT_PRICE"
+	        
+	  FROM
+	        TB_NONMEM
+	   LEFT
+	   JOIN
+	        TB_RESERVATION ON (MEM_NO = RE_MEM_NO)
+	   JOIN
+	        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+	   JOIN
+	        TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
+	   JOIN
+	        TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO) 
+	  WHERE
+	        TB_NONMEM.MEM_NO = ?
+	  GROUP
+	     BY
+	         MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD')
    </entry>
    
    <entry key="deleteMember">
-   UPDATE
-        TB_MEMBER
-   SET
-        DELETE_YN = 'N'
- WHERE
-        MEM_NO = ?
+	   UPDATE
+	        TB_MEMBER
+	   SET
+	        DELETE_YN = 'N'
+	 WHERE
+	        MEM_NO = ?
    
    </entry>
    
+   <entry key="selectDeleteCount">
+	   	SELECT
+	        COUNT(*)
+	  FROM
+	        TB_MEMBER
+	  JOIN
+	        TB_NONMEM ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+	  WHERE
+	        MEM_STATUS NOT LIKE 'A'
+	    AND
+	        DELETE_YN = 'N'
+   </entry>
 
+	<entry key="selectDeleteMemberList">
+		SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+	                       TB_MEMBER.MEM_NO,
+	                       MEM_ID,
+	                       NICKNAME,
+	                       GRADE_NAME
+	              FROM
+	                    TB_NONMEM
+	               JOIN
+	                    TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+	               JOIN
+	                    TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
+	               JOIN
+	                    TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
+	            WHERE
+	                   DELETE_YN = 'N'    
+	                   
+	            ORDER
+	               BY
+	                     MEM_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?
+
+	</entry>
+	
+	<entry key="completeDelete">
+	 DELETE
+	 		FROM
+	   			 TB_MEMBER
+	   	WHERE
+	   			DELETE_YN = 'N'
+	   	AND
+	   			MEM_NO = ?
+	</entry>
+	
+	
 	
 </properties>

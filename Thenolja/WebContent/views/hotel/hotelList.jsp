@@ -5,6 +5,7 @@
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	String loginStatus = (String)request.getAttribute("loginStatus");
+	System.out.println(pi);
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -57,7 +58,7 @@
 	.card-info {
 		float:right;
 	}
-	.card-info >h4 {
+	.card-info > h4 {
 		text-align: center;
 	}
 	.card-info > p{
@@ -65,8 +66,9 @@
 		padding-left: 30px;
 		margin-bottom: 10px;
 	}
-	.paging-area {
-		float:
+	.option-btns{
+		margin: 3px 0px;
+		
 	}
 </style>
 </head>
@@ -95,7 +97,15 @@
 								<p><span>★</span><span>4.8</span></p>
 								<p>가격 : <%= hc.getRoomPrice() %></p>
 							<%} else if(loginStatus != null && loginStatus.equals("A")) {%>
-								<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가하기</a>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
+								</div>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-info" href="#">호텔정보수정</a>
+								</div>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-danger" href="#">호텔삭제</a>
+								</div>
 							<%} %>
 	  					</div>
 	  				</div>
@@ -111,26 +121,51 @@
 		</script>
 		
 		<div class="paging-area" align="center">
+			<%if(loginStatus != null && loginStatus.equals("A")){ %>
 	        	<%if(currentPage > 1){ %>
-	        		<button class="btn btn-lg btn-outline-danger"
-					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
+	        		<button class="btn btn btn-outline-info"
+					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>&loginStatus=A' " >이전</button>
 				<%} %>
 				
 	        	<%for(int i = startPage; i <= endPage; i++){ %>
 	        		<% if(currentPage != i) { %>
-	        			<button class="btn btn-sm btn-outline-danger"
-	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
+	        			<button class="btn btn btn-outline-info"
+	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>&loginStatus=A'" ><%= i %></button>
 	        		<%} else { %>
 	        			<button
-	        			class="btn btn btn-info"
+	        			class="btn btn btn-outline-info"
 	        			disabled ><%= i %></button>
 	        		<%} %>
 	        	<%} %>
 	        	
 	        	<%if(currentPage != maxPage){ %>
-	        		<button class="btn btn btn-outline-danger"
+	        		<button class="btn btn btn-outline-info"
+	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>&loginStatus=A' " >다음</button>
+	        	<%} %>
+	        	
+	        <%} else { %>	
+	        
+	        	<%if(currentPage > 1){ %>
+	        		<button class="btn btn btn-outline-info"
+					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
+				<%} %>
+				
+	        	<%for(int i = startPage; i <= endPage; i++){ %>
+	        		<% if(currentPage != i) { %>
+	        			<button class="btn btn btn-outline-info"
+	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
+	        		<%} else { %>
+	        			<button
+	        			class="btn btn btn-outline-info"
+	        			disabled ><%= i %></button>
+	        		<%} %>
+	        	<%} %>
+	        	
+	        	<%if(currentPage != maxPage){ %>
+	        		<button class="btn btn btn-outline-info"
 	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
 	        	<%} %>
+	        <%} %>	
 	     </div>
 	</div>
 </body>

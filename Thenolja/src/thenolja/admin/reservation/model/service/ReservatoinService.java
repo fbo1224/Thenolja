@@ -76,6 +76,34 @@ public class ReservatoinService {
 		return result;
 	}
 	
+	/**
+	 * 비회원 예약 수
+	 */
+	public int selectNonMemCount() {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().selectNonMemCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	
+	/**
+	 * 비회원 예약 목록
+	 */
+	public ArrayList<AdminReservation> selectReserNonMember(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().selectReserNonMember(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
 	
 
 }

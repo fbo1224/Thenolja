@@ -8,6 +8,7 @@ public class RoomInfo {
 	private String roomImg;
 	private int roomNum;
 	private int roomPrice;
+	 
 	
 	public RoomInfo() {
 		super();

@@ -82,7 +82,17 @@ public class MemberService {
 		
 		return result;
 	}
-	
+//-----------------------------------아이디 찾기-----------------------------
+	public Member findId(String memName, String bornDate, String email) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member findId = new MemberDao().findId(conn, memName, bornDate, email);
+		
+		JDBCTemplate.close(conn);
+		
+		return findId;
+	}
 	
 	
 	
