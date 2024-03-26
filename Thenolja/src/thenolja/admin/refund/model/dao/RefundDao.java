@@ -108,6 +108,47 @@ private Properties prop = new Properties();
 
 	}
 	
+	/**
+	 * 회원 환불 상세 조회
+	 */
+	
+	public AdminRefund selectRefundMember (Connection conn, int reserNo) {
+		
+		AdminRefund adminRefund = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reserNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				adminRefund = new AdminRefund();
+				adminRefund.setHotelName(rset.getString("HOTEL_NAME"));
+				adminRefund.setHotelPath(rset.getString("HOTEL_PATH"));
+				adminRefund.setRefundName(rset.getString("REFUND_NAME"));
+				adminRefund.setBank(rset.getString("BANK"));
+				adminRefund.setRefundAccNo(rset.getString("REFUND_ACC_NO"));
+				adminRefund.setRefundPrice(rset.getInt("REFUND_PRICE"));
+				adminRefund.setReserDate(rset.getString("RESER_DATE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminRefund;
+		
+	}
 	
 
 	

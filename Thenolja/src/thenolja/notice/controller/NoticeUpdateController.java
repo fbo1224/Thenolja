@@ -32,7 +32,9 @@ public class NoticeUpdateController extends HttpServlet {
 	 */  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("[NoticeUpdateController] param " + request.getParameter("noticeNo"));
+
+		
+	System.out.println("[NoticeUpdateController] param " + request.getParameter("noticeNo"));
 		
 		//인코딩  POST방식
 		request.setCharacterEncoding("UTF-8");
@@ -59,7 +61,7 @@ public class NoticeUpdateController extends HttpServlet {
 		//3)응답화면지정 
 		if( noticeNo > 0) { 
 			
-			response.sendRedirect(request.getContextPath() + "/selectNoticeInfo?noticeNo=" + noticeNo);
+			response.sendRedirect(request.getContextPath() + "/detail.notice?noticeNo=" + noticeNo);
 			
 			
 		} else {

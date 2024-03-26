@@ -10,9 +10,36 @@ public class AdminRefund {
 	private String memId;
 	private String reserName;
 	private String memPhone;
+	private String hotelName;
+	private String hotelPath;
+	private String reserDate;
 	
 	
 	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
+
+	public String getReserDate() {
+		return reserDate;
+	}
+
+	public void setReserDate(String reserDate) {
+		this.reserDate = reserDate;
+	}
+
 	public String getReserName() {
 		return reserName;
 	}

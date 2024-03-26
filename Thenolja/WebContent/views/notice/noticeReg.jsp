@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="../common/menubar.jsp" %>
+    
 <%
 	//String contextPaths = request.getContextPath();
 %>
@@ -10,10 +10,107 @@
 <meta charset="UTF-8">
 <title>공지사항 등록 화면</title>
 
+<style>
+#txtArea_content{
+	width:650px;
+	height:350px;
+}
+
+.td_left{
+    width:475px;
+}
+
+#spn_textcount{
+	float:right;
+}
+
+#td_status_left{
+	float:left;
+}
+
+#save{
+    background: #17a2b8;
+    color: #fff;
+    border: 1px solid #17a2b8;
+
+    /* background: cadetblue;
+    color: #fff;
+    border: 1px solid cadetblue; */
+}
+
+
+.radio-btn{
+    position: relative;
+    display: inline-block;
+    margin: 5px 3px;
+}
+
+/* 게시여부 라디오버튼 영역 스타일적용 START */
+.radio-btn-wrap{
+	margin:-5px -4px;
+	float:left;
+}
+
+.radio-btn{
+	margin: 5px 4px;
+}
+
+.radio-btn-wrap .radio-btn input[type="radio"] {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.radio-btn-wrap .radio-btn input[type="radio"]:checked + label{
+    
+    background: #17a2b8;
+    color: #fff;
+    border: 1px solid #17a2b8;
+    
+    /*background: cadetblue;
+    color: #fff;
+    border: 1px solid cadetblue;*/
+}
+
+.radio-btn-wrap .radio-btn label {
+    display: block;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: #636366;
+    line-height: 38px;
+    border: 1px solid #17a2b8;
+    /*border: 1px solid cadetblue;*/
+    border-radius: 24px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+	/* display: block;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: #636366;
+    line-height: 38px;
+    border: 1px solid #aeaeb2;
+    border-radius: 24px;
+    box-sizing: border-box;
+    cursor: pointer; */
+/* 게시여부 라디오버튼 영역 스타일적용 END */
+
+
+</style>
+
+ <%@ include file="../common/menubar.jsp" %>
+ 
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
-<script type="text/javascript" scr="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
-<script type="text/javascript" scr="http://code.jquery.com/jquery-1.9.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js" charset="utf-8"></script>
 <script type="text/javascript">
 /**************************
 * 함수설명 : 스마트에디터 기본 세팅
@@ -57,8 +154,7 @@ function regNotice(){
 	
 	var inptTitle   = $('#title').val();
 	var inptContent = $('#txtArea_content').val();
-	//var chkStatus   = $('#notice_status').val(); 
-	var chkStatus = "Y"; 
+	var chkStatus   = $('input[name="status"]:checked').val();
 	
 	// 유효성 검사 함수 호출
 	if(validation()){
@@ -86,19 +182,38 @@ function regNotice(){
 }
 
 /********************************* 
-* 함수설명 : 공지사항 등록 시 유효성 검사
+* 함수설명 : 공지사항 등록 시 유효성 검사(필수값)
 **********************************/
 function validation(){
+	
 	// 각 필드 필수값 체크
+	var content = $("#txtArea_content").val();
+	
+	// 공지사항 제목 체크
 	if($("#title").val() == ""){ 
 		alert("제목을 입력하세요.");
+		$("#title").focus();
 		return;
 	}
+	// 라디오버튼 (게시여부) 체크여부 확인
+	if( !$('input[name="status"]').is(':checked') ){
+		alert("게시여부를 선택해주세요.");
+		return;
+	}
+	
+	// 공지사항 내용 체크
 	if($("#txtArea_content").val() == ""){
-		alert("내용을 입력해주세요.");
+		alert("공지사항 내용을 입력해주세요.");
+		$("#txtArea_content").focus();
+		return;
+	}	
+	
+	// 공지사항 내용 글자수 체크
+	if(content.length > 400){
+		$("#txtArea_content").val($("#txtArea_content").val().substring(0, 400));
+		alert("공지사항은 400자까지만 입력 가능합니다.");
 		return;
 	}
-
 	return true;
 }
 
@@ -110,18 +225,19 @@ function countText(){
 	var content = $("#txtArea_content").val();
 	// 글자수 세기
 	if(content.length == 0 || content == ''){
-		$('#spn_textcount').text('0/1000');
+		$('#spn_textcount').text('0/400');
 	}else{
-		$('#spn_textcount').text(content.length + '/1000');
+		$('#spn_textcount').text(content.length + '/400');
 	}
 	
 	// 글자 수 제한
-	if(content.length > 1000){
-		$("#txtArea_content").val($("#txtArea_content").val().substring(0, 1000));
-		alert("공지사항은 1000자까지만 입력 가능합니다.");
+	if(content.length > 400){
+		$("#txtArea_content").val($("#txtArea_content").val().substring(0, 400));
+		alert("공지사항은 400자까지만 입력 가능합니다.");
 		return;
 	}
 }
+
 
 </script>
  
@@ -140,11 +256,32 @@ function countText(){
 	<form id="frm" action="<%=contextPath%>/regNotice" method="post">
 		<table class="table-light table-striped text-center" width="100%">
 			<tr>
-				<td>제목</td>
+				<td class="td_left">제목</td>
 				<td><input type="text" id="title" name="title" style="width:650px;"/></td>
 			</tr>
+			
        <tr>
-            <td>내용</td>
+       		<!-- 게시여부 영역  STRT -->
+            <td class="td_left">게시여부</td>
+				<td>
+					<div class="radio-btn-wrap" id="notice_rdo_wrap">
+						<span class="radio-btn">
+							<input type="radio" id="rdo_statusY" name="status" checked="" value="Y">	
+								<label for="rdo_statusY">게시</label>
+						</span>
+								
+						<span class="radio-btn">	
+							<input type="radio" id="rdo_statusN" name="status" value="N">	
+								<label for="rdo_statusN">미게시</label>
+						</span>
+					</div>
+	            </td>
+            <!-- 게시여부 영역  END -->
+            
+        </tr>			
+			
+       <tr>
+            <td class="td_left">내용</td>
             <td>
                 <textarea rows="10" cols="30" id="txtArea_content" name="content" onkeyup="countText();"></textarea>
             </td>
@@ -153,7 +290,7 @@ function countText(){
         <tr>  
         	<td></td>   
             <td>
-            	<span id="spn_textcount" style="float:right;margin-right:205px;" >0/1000</span>
+            	<span id="spn_textcount">0/400</span>
             </td>
             <td></td>
         </tr>

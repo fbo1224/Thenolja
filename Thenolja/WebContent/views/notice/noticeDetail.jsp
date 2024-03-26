@@ -12,8 +12,6 @@
 <title>공지사항 상세화면</title>
 <style>
 
-<style>
-
 #detail-area{
 	width:100%;
 	height:100%;
@@ -44,7 +42,9 @@
     font-size: 18px;
     line-height: 26px;
     white-space: break-spaces;
-    isplay:block;
+}
+.detail_content-area{
+	display:block;
 }
 
 .detail_title_name_td{
@@ -75,6 +75,7 @@
 }
 
 </style>
+
 </head>
 <body>
 <%@ include file="../common/menubar.jsp" %>

@@ -38,5 +38,20 @@ public class RefundService {
 		
 		return list;
 	}
-
+	
+	/**
+	 * 회원 상세 조회
+	 */
+	public AdminRefund selectRefundMember(int reserNo) {
+		
+		Connection conn  = JDBCTemplate.getConnection();
+		
+		AdminRefund adminRefund = new RefundDao().selectRefundMember(conn, reserNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminRefund;
+	}
+	
+	
 }
