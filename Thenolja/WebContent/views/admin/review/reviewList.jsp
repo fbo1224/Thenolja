@@ -64,13 +64,24 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>마리안느 호텔</td>
-                            <td>dlgPdls</td>
-                            <td>이혜인</td>
-                            <td>2024.01.11</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                          </tr>
+                        
+                        
+                        <% if(list.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="4">리뷰가 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        	<% for(AdminReview adminReview : list) { %>
+                        		<tr>
+                        			<td><%=adminReview.getHotelName() %></td>
+                        			<td><%=adminReview.getMemId() %></td>
+                        			<td><%=adminReview.getNickName() %></td>
+                        			<td><%=adminReview.getCreateDate() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
+                        		</tr>
+                        	<% } %>
+                        <% } %>
+                   
                         </tbody>
                       </table>
 
