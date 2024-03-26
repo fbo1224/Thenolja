@@ -181,6 +181,17 @@
         float: right;
     }
 
+    #my_btn{
+    	width: 200px;
+    	height: 50px;
+    	border: 1px solid black;
+    	margin: auto;
+		margin-top: 100px;	
+    }
+	#my_btn > button{
+		width: 200px;
+		height: 50px;
+	}
 
 
 </style>
@@ -339,6 +350,7 @@
   </div>
     
     
+    <br><br><br><br><br><br><br><br><br><br>
     
     
 
