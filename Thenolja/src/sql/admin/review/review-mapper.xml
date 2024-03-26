@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		review Mapper
+	</comment>
+	
+	<entry key="">
+		SELECT
+	        COUNT(*)
+	  FROM
+	        TB_REVIEW
+	  JOIN
+	        TB_RESERVATION ON (RESER_NO = RV_RESER_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	 WHERE
+	        MEM_STATUS = 'Y'
+	</entry>
+	
+	
+	
+</properties>

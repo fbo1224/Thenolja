@@ -9,8 +9,61 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 등록 화면</title>
+<style>
+#txtArea_content{
+	width:650px;
+	height:350px;
+}
+
+.th_left{
+    width:475px;
+}
+
+#spn_textcount{
+	float:right;
+}
+
+#td_status_left{
+	float:left;
+	border: 1px solid #17a2b8;
+}
+
+#save{
+    background: #17a2b8;
+    color: #fff;
+    border: 1px solid #17a2b8;
+
+    /* background: cadetblue;
+    color: #fff;
+    border: 1px solid cadetblue; */
+}
 
 
+.radio-btn{
+    position: relative;
+    display: inline-block;
+    margin: 5px 3px;
+}
+
+/* 게시여부 라디오버튼 영역 스타일적용 START */
+.radio-btn-wrap{
+	margin:-5px -4px;
+	float:left;
+}
+
+.radio-btn{
+	margin: 5px 4px;
+}
+
+.radio-btn-wrap .radio-btn input[type="radio"] {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
 
 .radio-btn-wrap .radio-btn input[type="radio"]:checked + label{
     
