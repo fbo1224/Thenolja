@@ -262,7 +262,7 @@ a{
 	                    <a href="#">숙소관리</a>
 	                    <ul>
 	                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
-	                    	<li><a href="<%= contextPath %>/insertForm.hotels">호텔숙소추가</a></li>
+	                    	<li><a href="<%= contextPath %>/insertForm.hotels">호텔추가</a></li>
 	                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
 	                    </ul>
 	                </li>
