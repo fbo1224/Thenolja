@@ -47,12 +47,12 @@ public class NoticeDetailController extends HttpServlet {
 		// noticeNo =>  내가 조회하고자 하는 
 		if(result != null) {
 			request.setAttribute("notice", result);
-			request.getRequestDispatcher("view/notice/noticeDetail.jsp").forward(request, response); //포워딩
+			request.getRequestDispatcher("views/notice/noticeDetail.jsp").forward(request, response); //포워딩
 			
 		}else { //실패 => 에러페이지 보내기
 			
 			request.setAttribute("errorMsg", "공지사항 상세 조회 실패");
-			RequestDispatcher view = request.getRequestDispatcher("view/common/error.Msg");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
 			view.forward(request,response);	
 		}
 		
