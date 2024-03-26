@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<html>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<head>
-		<meta charset="UTF-8">
-		<title>숙소 추가</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 <style>
 div {
 	box-sizing: border-box;
@@ -192,10 +194,10 @@ label{
 
 			<div id="wrap">
 				<div id="title-div">
-					<h2>숙소추가하기</h2>
+					<h2>숙소정보수정하기</h2>
 				</div>
 				<div id="content-div">
-					<form method="post" id="content-add-form" action="<%= contextPath %>/insert.hotels" 
+					<form method="post" id="content-add-form" action="<%= contextPath %>/update.hotels" 
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
@@ -322,5 +324,5 @@ label{
 	        }).open();
 	    }
 	</script>
-	</body>
-	</html>
+</body>
+</html>

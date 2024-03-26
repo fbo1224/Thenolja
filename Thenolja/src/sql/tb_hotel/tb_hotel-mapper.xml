@@ -37,15 +37,25 @@
 	
 	<entry key="selectListCount">
 		SELECT
-      	 	  COUNT(DISTINCT TB_ROOM.HOTEL_NO) AS CNTS
+      	 	  COUNT(*)
   		  FROM
-      		  TB_ROOM
-  	      JOIN
       		  TB_HOTEL
-    		ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
  		 WHERE
-      	      HOTEL_YN = 'Y'
+      	      HOTEL_YN = 'Y'  
 	</entry>
+	
+	
+	<entry key="selectListCountRoomIn">
+		SELECT
+		      COUNT(DISTINCT TB_HOTEL.HOTEL_NO) AS CNTS
+		  FROM
+		       TB_HOTEL
+		  JOIN TB_ROOM
+		    ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+		 WHERE
+		      HOTEL_YN = 'Y'
+	</entry>
+	
 	
 	<entry key="selectAllList">
 	SELECT            
@@ -73,8 +83,8 @@
                 	FROM
                     	TB_HOTEL
                    WHERE
-                        HOTEL_YN = 'Y')
-    		 ORDER BY HOTEL_NO DESC)
+                        HOTEL_YN = 'Y'
+    		 ORDER BY HOTEL_NO DESC))
        WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -101,7 +111,7 @@
 	                 HOTEL_LOCATION,
 	                 HOTEL_CATEGORY,
 	                 HOTEL_PATH
-	        ORDER BY ROOM_PRICE DESC) A)
+	        ORDER BY TB_HOTEL.HOTEL_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
 		
 	</entry>
@@ -192,6 +202,8 @@
 		    ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
  		 WHERE
  		      TB_HOTEL.HOTEL_NO = ?
+ 		   AND
+ 		      TB_HOTEL.HOTEL_YN = 'Y'   
 	</entry>
 	
 	

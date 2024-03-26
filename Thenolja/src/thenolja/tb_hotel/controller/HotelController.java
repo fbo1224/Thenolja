@@ -104,16 +104,27 @@ public class HotelController {
 		int pageLimit;   // 페이지 하단에 보여질 페이징바의 최대 개수 => 10개로 고정
 		int boardLimit;  // 한 페이지에 보여질 게시글의 최대 개수 => 10개로 고정
 		
-		int maxPage;   // 가장 마지막 페이지가 몇 번 페이지인지 (총 페이지의 개수)
-		int startPage; // 페이지 하단에 보여질 페이징바의 시작 수
-		int endPage;   // 페이지 하단에 보여질 페이징바의 끝 수
+		int maxPage;     // 가장 마지막 페이지가 몇 번 페이지인지 (총 페이지의 개수)
+		int startPage;   // 페이지 하단에 보여질 페이징바의 시작 수
+		int endPage;     // 페이지 하단에 보여질 페이징바의 끝 수
 		
-		// * listCount : 총 게시글의 수
-		listCount = new HotelService().selectListCount();
+		String loginStatus = "";
+		if(request.getParameter("loginStatus") != null) {
+			loginStatus = request.getParameter("loginStatus"); 
+		}
 		
+		if(loginStatus != null && loginStatus.equals("A")) {
+			// * listCount : 총 게시글의 수
+			listCount = new HotelService().selectListCount();
+		} else {
+			listCount = new HotelService().selectListCountRoomIn();
+		}
+		
+	
 		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		System.out.println(currentPage);
+		System.out.println("currentPage"+ currentPage);
+		
 		// * pageList : 페이징바 최대 개수
 		pageLimit = 5;
 		
@@ -132,24 +143,17 @@ public class HotelController {
 			endPage = maxPage;
 		}
 		
-		
 		// 3) VO로 가공
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
 								  maxPage, startPage, endPage);
 		// System.out.println(pi);
-		
-		String loginStatus = "";
-		if(request.getParameter("loginStatus") != null) {
-			loginStatus = request.getParameter("loginStatus"); 
-			// System.out.println(loginStatus);
-		}
 		
 		// 4) Service 호출
 		ArrayList<HotelCard> hotelList = null;
 		if(loginStatus.equals("A")) {
 			hotelList = new HotelService().selectAllList(pi);
 			request.setAttribute("loginStatus", loginStatus);
-		}else {
+		} else {
 			hotelList = new HotelService().selectList(pi);
 		}
 		
@@ -160,16 +164,20 @@ public class HotelController {
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("pageInfo", pi);
 		
-		// views/hotel/hotelList.jsp
-		// request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
-		// currentPage=1
 		view = "views/hotel/hotelList.jsp";
 		return view;
 	}
 	
+	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		view="views/hotel/updateHotel.jsp";
+		
+		return view;
+	}
+	
+	
 	public String update(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
-		
 		
 		return view;
 	}

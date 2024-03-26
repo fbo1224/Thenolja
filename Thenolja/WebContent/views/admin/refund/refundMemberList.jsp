@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>    
+<%
+
+	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundMemberList");
+
+
+%>    
+    
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,13 +71,28 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>3</td>
-                            <td>dlgPdls</td>
-                            <td>이혜인</td>
-                            <td>01020082008</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                          </tr>
+                        
+                        
+                        <% if(list.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="4">환불 회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        
+                        	<% for(AdminRefund adminRefund : list) { %>
+                        	<tr>
+                        		<td><%=adminRefund.getReserNo() %></td>
+                        		<td><%=adminRefund.getMemId() %>
+                        		<td><%=adminRefund.getReserName() %>
+                        		<td><%=adminRefund.getMemPhone() %>
+                        	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
+                        	</tr>
+                        	
+                        	
+                        	<% } %>
+                        <% } %>
+                        
+        
                         </tbody>
                       </table>
 
