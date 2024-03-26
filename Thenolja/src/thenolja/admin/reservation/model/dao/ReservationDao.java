@@ -148,6 +148,32 @@ public class ReservationDao {
 		return adminReser;
 	}
 
+	/**
+	 * 환불처리
+	 */
+	public int refundReser(Connection conn, int reserNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("refundReser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reserNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 	

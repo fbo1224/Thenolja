@@ -181,7 +181,7 @@
                     <ul>
                         <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
                         <li><a href="<%= contextPath %>/reserMember?currentPage=1">회원 예약 조회</a></li>
-                        <li><a href="#">탈퇴 회원 조회</a></li>
+                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
                     </ul>
                 </li>
     

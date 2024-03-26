@@ -36,6 +36,8 @@
 					        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
 					 WHERE
 					        MEM_STATUS = 'Y'
+					   AND
+					   		CANCEL_YN = 'N'
 					 ORDER
 		                BY
 		                     RESER_NO DESC) A)
@@ -75,7 +77,14 @@
    
    </entry>
    
-   
+   <entry key="refundReser">
+	    UPDATE
+	        TB_RESERVATION
+	  SET 
+	        CANCEL_YN = 'Y'
+	 WHERE
+	        RESER_NO = ?
+   </entry>
    
    
 	

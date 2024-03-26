@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class FindIdPageController
+ * Servlet implementation class FindIdController
  */
-@WebServlet("/findIdPage")
-public class FindIdPageController extends HttpServlet {
+@WebServlet("/findId")
+public class FindIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdPageController() {
+    public FindIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +26,8 @@ public class FindIdPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
-		// System.out.println("아이디찾기 서블릿");
-		request.getRequestDispatcher("views\\login\\findId.jsp").forward(request, response);
-	
+		request.getRequestDispatcher("views\\login\\findIdPrint.jsp").forward(request, response);
 	
 	
 	}
