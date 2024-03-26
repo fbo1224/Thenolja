@@ -141,7 +141,16 @@
 		       MEM_PHONE = ?
 	</entry>
 	
+	<entry key="resetPwd">
+		UPDATE
+               TB_MEMBER
+           SET
+               MEM_PWD = ?
+         WHERE
+               MEM_ID = ?
 	
+	
+	</entry>
 	
 	
 	
