@@ -22,7 +22,7 @@ label{
 
 
 <div class="outer">
-<h2 align="center">Ф─╗К⌠╜О©╫О©╫я▀О©╫О©╫ О©╫О©╫О©╫Й╧┼О©╫О©╫Ф╧╡О©╫</h2>
+<h2 align="center">╟ЬаЖ╩Ггв ╪Жа╓/╩Ха╕</h2>
 <br><br>
 
 <!-- 
@@ -48,19 +48,19 @@ label{
 	
 
     <div class="form-group">
-        <label for="usr">О©╫О©╫О╖▐О©╫</label>
+        <label for="usr">а╕╦Я</label>
         <input type="text" class="form-control" id="usr" name="title">
     </div>
 
     <div class="form-group">
-        <label for="comment">О©╫К▄│О©╫О©╫</label>
+        <label for="comment">Ё╩©К</label>
         <textarea class="form-control" name="content" rows="15" id="comment" style="resize: none;"></textarea>
     </div>
 
     <div align="center">
-        <button type="submit" class="btn btn-sm info">О©╫Й╧┘О©╫О©╫О©╫Ф╧╡О©╫</button>
+        <button type="submit" class="btn btn-sm info">╣Н╥ого╠Б</button>
         <button type="button" class="btn btn-sm btn-secondary" 
-        onclick="history.back();">О©╫Ц┘╩О©╫Е╙⌡О©╫Ф╧╡О©╫</button>
+        onclick="history.back();">╣з╥н╟║╠Б</button>
     </div>
 
 
