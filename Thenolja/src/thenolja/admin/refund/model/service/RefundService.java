@@ -53,5 +53,38 @@ public class RefundService {
 		return adminRefund;
 	}
 	
+	/**
+	 * 비회원 환불 수
+	 */
+	
+	public int selectRefundNonMemberCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new RefundDao().selectRefundNonMemberCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+	
+	/**
+	 * 비회원 목록
+	 */
+	public ArrayList<AdminRefund> selectRefundNonMemberList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminRefund> list = new RefundDao().selectRefundNonMemberList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+	
+	
+	
 	
 }

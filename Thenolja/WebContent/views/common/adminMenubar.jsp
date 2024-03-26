@@ -207,7 +207,7 @@
                     <a href="#">결제관리</a>
                     <ul>
                         <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
-                        <li><a href="#">비회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
                     </ul>
                 </li>
     
