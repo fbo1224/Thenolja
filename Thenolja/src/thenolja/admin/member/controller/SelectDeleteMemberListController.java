@@ -71,7 +71,7 @@ public class SelectDeleteMemberListController extends HttpServlet {
 		
 		request.setAttribute("deleteMemberList", list);
 		
-		request.setAttribute("PageInfo", pi);
+		request.setAttribute("pageInfo", pi);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/deletMemberList.jsp");
