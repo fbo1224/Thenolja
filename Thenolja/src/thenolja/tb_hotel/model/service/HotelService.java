@@ -98,7 +98,20 @@ public class HotelService {
 		return dh;
 	}
 	
-	
+	public int updateForm(int HotelNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		result = new HotelDao().updateForm(conn, HotelNo);
+		
+		if(result > 0) {
+			
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

@@ -365,7 +365,22 @@ public class HotelDao {
 		return result;
 	}
 	
-	
+	public int updateForm(Connection conn , int HotelNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateForm");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	
 	

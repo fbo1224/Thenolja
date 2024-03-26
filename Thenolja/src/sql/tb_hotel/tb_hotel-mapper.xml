@@ -206,7 +206,10 @@
  		      TB_HOTEL.HOTEL_YN = 'Y'   
 	</entry>
 	
-	
+	<!-- 업데이트시 가져갈데이터 -->
+	<entry key="updateForm">
+		
+	</entry>
 	
 	
 	

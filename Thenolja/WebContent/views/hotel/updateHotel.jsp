@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <style>
@@ -186,11 +187,10 @@ label{
 	width: 100%;
 	resize: false;
 }
-		
 </style>
 </head>
 	<body>
-		<%@ include file="../common/adminMenubar.jsp" %>
+		<%@ include file="../common/menubar.jsp" %>
 
 			<div id="wrap">
 				<div id="title-div">
@@ -201,7 +201,7 @@ label{
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
-								<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo">
+								<%--<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo"> --%>
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
 								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="loadName" required>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="detailAddr" required>
@@ -302,7 +302,7 @@ label{
 	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 	                }
 	               
-	                document.getElementById('sample4_postcode').value = data.zonecode;
+	                // document.getElementById('sample4_postcode').value = data.zonecode;
 	                document.getElementById("sample4_roadAddress").value = roadAddr;
 	             
 	                var guideTextBox = document.getElementById("guide");
