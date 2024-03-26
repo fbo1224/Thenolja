@@ -57,6 +57,12 @@
 		}
 		#content{text-align: center;}
 
+		#content2{
+			font-weight: bold;
+			font-size: 20px;
+
+		}
+
 		#content3{
 			margin-top: 30px;
 		}
@@ -92,7 +98,7 @@
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
-					<span>요청하신 아이디 찾기 결과입니다.</span>
+					<span>아이디 찾기 결과</span>
 				</div>
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/findId" method="post">

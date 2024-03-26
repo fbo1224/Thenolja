@@ -153,7 +153,7 @@ public class NoticeDao {
 		return result;
 	}
 	
-	
+	//공지사항 조회
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		Notice notice = null;
@@ -190,8 +190,8 @@ public class NoticeDao {
 		return notice;
 	}//method          //반환 notice
 	
-	
-	
+	 
+	// 공지사항 등록
 	public int insertNotice(Connection conn, Notice notice) {
 		
 		int result = 0;
@@ -224,6 +224,8 @@ public class NoticeDao {
 		return result;
 	}//method
 	
+	
+	// 수정
 	public int selectNoticeInfo(Connection conn, Notice notice) {
 		
 		int result = 0;

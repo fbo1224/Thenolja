@@ -31,23 +31,22 @@ public class NoticeinsertFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//관리자가 아닐경우에도 포워딩이 수행됨
 		
-				HttpSession session = request.getSession();
-			//	Member loginUser = (Member)session.getAttribute("loginUser");
-					
-	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-				
-				//응답화면	
-				RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
-				view.forward(request, response);
+		HttpSession session = request.getSession();
+	//	Member loginUser = (Member)session.getAttribute("loginUser");
 			
-		/*				
-				}else {
-					session.setAttribute("alertMsg", "관리자가 아닙니다. ");
-					response.sendRedirect(request.getContextPath());
-				}	
-				*/
-			}
+//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
+		
+		//응답화면	
+		RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
+		view.forward(request, response);
 	
+/*				
+		}else {
+			session.setAttribute("alertMsg", "관리자가 아닙니다. ");
+			response.sendRedirect(request.getContextPath());
+		}	
+		*/
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
