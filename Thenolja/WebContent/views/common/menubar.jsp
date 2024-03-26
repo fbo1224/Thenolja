@@ -224,73 +224,74 @@ a{
 			}
 	</script>
 	<%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
-	<div id="header">
-        <div id="tnj_header">
-            <div id="tnj_icon">
-                <img src="resources/img/logo.png" alt="logo">
-            </div>
-
-            <div id="tnj_title">
-                <h2><a href="<%= contextPath %>/adminMain">관리자</a></h2>
-            </div>
-
-            <div id="admin_login">
-                <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
-            </div>
-        </div>
-        <div id="line"></div>
-        <div id="tnj_menu">
-            <ul id="navi">
-                <li>
-                    <a href="#">회원관리</a>
-                    <ul>
-                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
-                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
-                        <li><a href="#">탈퇴 회원 조회</a></li>
-                    </ul>
-                </li>
-    
-                <li>
-                    <a href="#">비회원관리</a>
-                    <ul>
-                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-                        <li><a href="#">비회원 예약 조회</a></li>
-                    </ul>
-                </li>
-    
-                <li>
-                    <a href="#">숙소관리</a>
-                    <ul>
-                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
-                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#">결제관리</a>
-                    <ul>
-                        <li><a href="#">회원 환불 조회</a></li>
-                        <li><a href="#">비회원 환불 조회</a></li>
-                    </ul>
-    
-                </li>
-    
-                <li>
-                    <a href="#">고객센터관리</a>
-                    <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
-                        <li><a href="#">쿠폰</a></li>
-                        <li><a href="#">리뷰</a></li>
-                    </ul>
-    
-                </li>
-    
-            </ul>
-
-        </div>
-
-    </div>
+		<div id="header">
+	        <div id="tnj_header">
+	            <div id="tnj_icon">
+	                <img src="resources/img/logo.png" alt="logo">
+	            </div>
+	
+	            <div id="tnj_title">
+	                <h2><a href="<%= contextPath %>/adminMain">관리자</a></h2>
+	            </div>
+	
+	            <div id="admin_login">
+	                <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
+	            </div>
+	        </div>
+	        <div id="line"></div>
+	        <div id="tnj_menu">
+	            <ul id="navi">
+	                <li>
+	                    <a href="#">회원관리</a>
+	                    <ul>
+	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
+	                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
+	                        <li><a href="#">탈퇴 회원 조회</a></li>
+	                    </ul>
+	                </li>
+	    
+	                <li>
+	                    <a href="#">비회원관리</a>
+	                    <ul>
+	                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
+	                        <li><a href="#">비회원 예약 조회</a></li>
+	                    </ul>
+	                </li>
+	    
+	                <li>
+	                    <a href="#">숙소관리</a>
+	                    <ul>
+	                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
+	                    	<li><a href="<%= contextPath %>/insertForm.hotels">호텔숙소추가</a></li>
+	                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
+	                    </ul>
+	                </li>
+	                
+	                <li>
+	                    <a href="#">결제관리</a>
+	                    <ul>
+	                        <li><a href="#">회원 환불 조회</a></li>
+	                        <li><a href="#">비회원 환불 조회</a></li>
+	                    </ul>
+	    
+	                </li>
+	    
+	                <li>
+	                    <a href="#">고객센터관리</a>
+	                    <ul>
+	                        <li><a href="#">공지사항</a></li>
+	                        <li><a href="#">이벤트</a></li>
+	                        <li><a href="#">쿠폰</a></li>
+	                        <li><a href="#">리뷰</a></li>
+	                    </ul>
+	    
+	                </li>
+	    
+	            </ul>
+	
+	        </div>
+	
+	    </div>
 	<%} else { %>
 		<header id="header-navi">
 		    <div>

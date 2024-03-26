@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
     <%
     	int hotelNo = (int)request.getAttribute("hotelNo");
-    	System.out.println("hotelNo " + hotelNo);
+    	int roomCnt = (int)request.getAttribute("roomCnt");
+    	
+    	System.out.println("hotelNO " + hotelNo);
+    	System.out.println("roomCnt " + roomCnt);
+    	
     %>
 <!DOCTYPE html>
 <html>
@@ -79,6 +83,7 @@ div {
 <body>
 	<%@ include file="../common/menubar.jsp"%>
 	<div id="wrap">
+	<%if(roomCnt < 3){ %>
 		<div id="title-div">
 			<h2>숙소추가하기</h2>
 		</div>
@@ -125,6 +130,10 @@ div {
 			</div>
 			</form>
 		</div>
+	<%} else { %>
+		<h1>호텔 숙소 등록은 3개 이상 할 수 없습니다.</h1>
+		<button onclick="history.back();" >돌아가기</button>
+	<%} %>	
 	</div>
 </body>
 </html>
