@@ -62,6 +62,8 @@ public class ReviewListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		ArrayList<AdminReview> list = new ReviewService().selectReviewMemberList(pi);
+		request.setAttribute("selectReviewMemberList", list);
+		request.setAttribute("pageInfo", pi);
 		
 		request.getRequestDispatcher("views/admin/review/reviewList.jsp").forward(request, response);
 	}
