@@ -30,6 +30,7 @@ public class FindIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 아이디 찾은 것을 조회하는 2번째 화면 띄워주는 서블릿
 		request.setCharacterEncoding("UTF-8");
 		
 		String memName = request.getParameter("name");
@@ -39,8 +40,7 @@ public class FindIdController extends HttpServlet {
 		Member findId = new MemberService().findId(memName, bornDate, email);
 		request.setAttribute("findId", findId);
 		
-		
-		request.getRequestDispatcher("views\\login\\findIdPrint.jsp").forward(request, response);
+		request.getRequestDispatcher("views/login/findIdPrint.jsp").forward(request, response);
 	
 	
 	}

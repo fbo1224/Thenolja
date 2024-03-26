@@ -15,9 +15,6 @@
 
 %>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,14 +26,9 @@
     
     <div id="wrap">
         <div id="header">
-
-
+			<%@ include file="../../common/adminMenubar.jsp" %> 
         </div>
-        
-        <div id="header">
-        
-        <%@ include file="../../common/adminMenubar.jsp" %> </div>
-               
+
                
         <div id="content">
             <div id="content_1">

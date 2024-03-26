@@ -24,6 +24,12 @@ public class Member {
 	}
 	
 
+	public Member(String memId) {
+		super();
+		this.memId = memId;
+	}
+
+
 	public Member(int memNo, String memName, String memPhone, String memId, String memPwd, String nickname,
 			String email, String bornDate, Date joinDate, String memStatus, String deleteYn) {
 		super();

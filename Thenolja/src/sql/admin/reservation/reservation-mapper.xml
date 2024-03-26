@@ -65,8 +65,6 @@
 	  JOIN
 	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
 	WHERE
-	        MEM_STATUS = 'Y'
-	  AND
 	        CANCEL_YN = 'N'
 	  AND
 	  		RESER_NO = ?
@@ -86,6 +84,43 @@
 	        RESER_NO = ?
    </entry>
    
+   <entry key="selectNonMemCount">
+	   	SELECT
+		        COUNT(*)
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		  WHERE
+		        MEM_STATUS = 'N'
+   
+   </entry>
+   
+   <entry key="selectReserNonMember">
+      	   SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+					        RESER_NO,
+					        RESER_NAME,
+					        MEM_PHONE
+					  FROM
+					        TB_RESERVATION
+					  JOIN
+					        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+					 WHERE
+					        MEM_STATUS = 'N'
+					   AND
+					   		CANCEL_YN = 'N'
+					 ORDER
+		                BY
+		                     RESER_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?  
+   	 
+   
+   
+   </entry>
    
 	
 	

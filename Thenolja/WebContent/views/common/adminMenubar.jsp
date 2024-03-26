@@ -189,7 +189,7 @@
                     <a href="#">비회원관리</a>
                     <ul>
                         <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-                        <li><a href="<%= contextPath %>/reserNonMem">비회원 예약 조회</a></li>
+                        <li><a href="<%= contextPath %>/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
                     </ul>
                 </li>
     
@@ -206,10 +206,9 @@
                 <li>
                     <a href="#">결제관리</a>
                     <ul>
-                        <li><a href="#">회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundMem">회원 환불 조회</a></li>
                         <li><a href="#">비회원 환불 조회</a></li>
                     </ul>
-    
                 </li>
     
                 <li>

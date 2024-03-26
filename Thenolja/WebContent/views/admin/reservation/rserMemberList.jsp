@@ -196,7 +196,7 @@
                     <td>이동방식 :<span id="bicycle"></span></td>
                 </tr>
                 <tr>
-                    <td>인원수 : <span id="people"></span></td>
+                    <td>인원수 : <span id="people"></span>명</td>
                     <td>예약일 : <span id="reserDate"></span></td>
                 </tr>
                 <tr>
@@ -206,7 +206,7 @@
     
                 <tr>
                     <td>결제방식 : <span id="payment"></span></td>
-                    <td>금액 : <span id="paymentPrice"></span></td>
+                    <td>금액 : <span id="paymentPrice"></span>원</td>
                 </tr>
 
               </table>
