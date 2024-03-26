@@ -6,6 +6,12 @@
 
 	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundMemberList");
 
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
 
 %>    
     
@@ -99,13 +105,23 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
+                	
+                	<% if(currentPage > 1) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% } %>
+                    
+                    <% for(int i = startPage; i <= endPage; i++) { %>
+                    	<%if(currentPage != i) { %>
+                    		 
+                    		 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=i%>'"><%=i %></button>
+                    	<% } else { %>
+                    		 <button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                    	<% } %>
+                    <% } %>
+                    
+                   <% if(currentPage != maxPage) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage + 1%>'">></button>
+                   <% } %>
                 </div>
         
 
@@ -114,6 +130,13 @@
         <div id="footer"></div>
 
     </div>
+    
+    
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
