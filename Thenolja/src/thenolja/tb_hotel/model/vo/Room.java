@@ -1,14 +1,19 @@
 package thenolja.tb_hotel.model.vo;
 
+import java.util.ArrayList;
+
 public class Room {
 	private int roomNo;
 	private int hotelNo;
-	private String roomName;
-	private String checkInTime;
-	private String checkOutTime;
 	private int roomNum;
 	private int roomPrice;
 	private int maxPeople;
+	private String roomName;
+	private String checkInTime;
+	private String checkOutTime;
+	
+	private int roomImgNo;
+	private String roomImgPath;
 	
 	public Room() {
 		super();
@@ -25,6 +30,23 @@ public class Room {
 		this.roomNum = roomNum;
 		this.roomPrice = roomPrice;
 		this.maxPeople = maxPeople;
+	}
+	
+	
+	public int getRoomImgNo() {
+		return roomImgNo;
+	}
+
+	public void setRoomImgNo(int roomImgNo) {
+		this.roomImgNo = roomImgNo;
+	}
+
+	public String getRoomImgPath() {
+		return roomImgPath;
+	}
+
+	public void setRoomImgPath(String roomImgPath) {
+		this.roomImgPath = roomImgPath;
 	}
 
 	public int getRoomNo() {
@@ -93,9 +115,9 @@ public class Room {
 
 	@Override
 	public String toString() {
-		return "Room [roomNo=" + roomNo + ", hotelNo=" + hotelNo + ", roomName=" + roomName + ", checkInTime="
-				+ checkInTime + ", checkOutTime=" + checkOutTime + ", roomNum=" + roomNum + ", roomPrice=" + roomPrice
-				+ ", maxPeople=" + maxPeople + "]";
+		return "Room [roomNo=" + roomNo + ", hotelNo=" + hotelNo + ", roomNum=" + roomNum + ", roomPrice=" + roomPrice
+				+ ", maxPeople=" + maxPeople + ", roomImgNo=" + roomImgNo + ", roomName=" + roomName + ", checkInTime="
+				+ checkInTime + ", checkOutTime=" + checkOutTime + ", roomImgPath=" + roomImgPath + "]";
 	}
 	
 }

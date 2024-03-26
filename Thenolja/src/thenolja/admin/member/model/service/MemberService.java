@@ -91,7 +91,35 @@ public class MemberService {
 		
 	}
 	
-
+	/**
+	 * 탈퇴 회원 수
+	 */
+	
+	public int selectDeleteCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().selectDeleteCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
+	}
+	
+	/**
+	 * 탈퇴 회원 목록
+	 */
+	public ArrayList<AdminMember> selectDeleteMemberList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().selectDeleteMemberList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 	
 	
