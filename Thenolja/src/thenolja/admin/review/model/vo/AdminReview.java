@@ -8,7 +8,36 @@ public class AdminReview {
 	private int reviewScore;
 	private String createDate;
 	private String reviewYn;
+	private String hotelName;
+	private String memId;
+	private String nickName;
 	
+	
+	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	public AdminReview() {
 		super();
 	}
