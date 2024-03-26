@@ -100,6 +100,7 @@ public class MemberService {
 		
 		int count = new MemberDao().findPwd(conn,  memId, bornDate, memPhone);
 		
+		JDBCTemplate.close(conn);
 		
 		return count;
 	}
