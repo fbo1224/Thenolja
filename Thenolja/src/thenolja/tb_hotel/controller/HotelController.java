@@ -113,7 +113,8 @@ public class HotelController {
 		
 		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		System.out.println(currentPage);
+		System.out.println("currentPage"+ currentPage);
+		
 		// * pageList : 페이징바 최대 개수
 		pageLimit = 5;
 		
@@ -150,6 +151,7 @@ public class HotelController {
 			hotelList = new HotelService().selectAllList(pi);
 			request.setAttribute("loginStatus", loginStatus);
 		}else {
+			pi.setListCount(new HotelService().selectListCountRoomIn());
 			hotelList = new HotelService().selectList(pi);
 		}
 		
@@ -160,9 +162,6 @@ public class HotelController {
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("pageInfo", pi);
 		
-		// views/hotel/hotelList.jsp
-		// request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
-		// currentPage=1
 		view = "views/hotel/hotelList.jsp";
 		return view;
 	}

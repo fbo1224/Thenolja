@@ -45,6 +45,17 @@ public class HotelService {
 		return result;
 	}
 	
+	public int selectListCountRoomIn() {
+		Connection conn = getConnection();
+		
+		int result = new HotelDao().selectListCountRoomIn(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	public ArrayList<HotelCard> selectAllList(PageInfo pi){
 		Connection conn = getConnection();
 		
