@@ -10,60 +10,7 @@
 <meta charset="UTF-8">
 <title>공지사항 등록 화면</title>
 
-<style>
-#txtArea_content{
-	width:650px;
-	height:350px;
-}
 
-.td_left{
-    width:475px;
-}
-
-#spn_textcount{
-	float:right;
-}
-
-#td_status_left{
-	float:left;
-}
-
-#save{
-    background: #17a2b8;
-    color: #fff;
-    border: 1px solid #17a2b8;
-
-    /* background: cadetblue;
-    color: #fff;
-    border: 1px solid cadetblue; */
-}
-
-
-.radio-btn{
-    position: relative;
-    display: inline-block;
-    margin: 5px 3px;
-}
-
-/* 게시여부 라디오버튼 영역 스타일적용 START */
-.radio-btn-wrap{
-	margin:-5px -4px;
-	float:left;
-}
-
-.radio-btn{
-	margin: 5px 4px;
-}
-
-.radio-btn-wrap .radio-btn input[type="radio"] {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    opacity: 0;
-}
 
 .radio-btn-wrap .radio-btn input[type="radio"]:checked + label{
     
@@ -101,6 +48,71 @@
     box-sizing: border-box;
     cursor: pointer; */
 /* 게시여부 라디오버튼 영역 스타일적용 END */
+
+/* 첨부파일 영역 스타일적용 START */
+.filebox{
+	margin-top:8px;
+}
+
+.filebox label {
+	float:left;
+    display: inline-block;
+    width: 140px;
+    height: 48px;
+    padding: 0 12px;
+    color: #3a3a3d;
+    font-size: 18px;
+    line-height: 48px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #9ca0a1;
+    vertical-align: middle;
+    cursor: pointer;
+    text-align: center;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.filebox .upload-name {
+    display: inline-block;
+    padding: 0 32px 0 12px;
+    background: none;
+    vertical-align: middle;
+    border: 0;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 4px;
+    background-color: #fafafa;
+    color: #1a1d1d;
+    font-size: 18px;
+    line-height: 48px;
+    box-sizing: border-box;
+}
+
+/* 삭제버튼 */
+.btn-reset {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: url(../images/btn/btn_inp_reset.png) 0 0 no-repeat;
+}
+
+/* 첨부파일 영역 스타일적용 END */
+
 
 
 </style>
@@ -256,13 +268,13 @@ function countText(){
 	<form id="frm" action="<%=contextPath%>/regNotice" method="post">
 		<table class="table-light table-striped text-center" width="100%">
 			<tr>
-				<td class="td_left">제목</td>
+				<th class="th_left"><span>제목</span></th>
 				<td><input type="text" id="title" name="title" style="width:650px;"/></td>
 			</tr>
 			
        <tr>
        		<!-- 게시여부 영역  STRT -->
-            <td class="td_left">게시여부</td>
+           	<th class="th_left"><span>게시여부</span></th>
 				<td>
 					<div class="radio-btn-wrap" id="notice_rdo_wrap">
 						<span class="radio-btn">
@@ -281,7 +293,7 @@ function countText(){
         </tr>			
 			
        <tr>
-            <td class="td_left">내용</td>
+            <th><span>내용</span>	</th>
             <td>
                 <textarea rows="10" cols="30" id="txtArea_content" name="content" onkeyup="countText();"></textarea>
             </td>
@@ -294,6 +306,32 @@ function countText(){
             </td>
             <td></td>
         </tr>
+         
+        <!-- 첨부파일 전체영역 START -->         
+		<tr data-attr_seq="194" data-attr_disp_form_cd="FD" data-attr_calc_typ_cd="null" data-attr_mndt_inpt_yn="Y">	
+			<th><span>첨부파일</span></th>	
+			
+			<td>
+				<div class="filebox">	
+			
+					<label for="file_110" tabindex="0">파일찾기</label>	
+						<input type="file" id="file_110" name="fileUpload" data-file_id="110" tabindex="-1">	
+						<input type="hidden" id="apndFileId_110" data-attr_item_sno="" data-prod_id="">	
+					
+					<!-- 업로드 영역 START -->
+					<div class="upload-box">
+						<input type="text" id="fileName_110" class="upload-name inp" placeholder="선택된 파일 없음" title="선택된 파일 없음" readonly="">
+						<button type="button" class="btn-reset" id="fileReset"><span class="blind">삭제</span></button>	
+					</div>
+					<!-- 업로드 영역 END -->
+				
+				</div>
+					<ul class="list-text interval bullet">	
+						<!-- <li>허용 파일 형식 : pdf, jpg/jpeg, png, gif, doc/docx, hwp (15MB 미만)</li> -->
+					</ul>	
+			</td>
+		</tr> 
+		<!-- 첨부파일 전체영역 END -->                
                  
         <tr>
             <td colspan="2">

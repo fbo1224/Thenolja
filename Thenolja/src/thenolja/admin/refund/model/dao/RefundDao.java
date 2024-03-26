@@ -150,6 +150,68 @@ private Properties prop = new Properties();
 		
 	}
 	
+	/**
+	 * 비회원 환불 수
+	 */
+	public int selectRefundNonMemberCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundNonMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return listCount;
+	}
 
+	/**
+	 * 비회원 목록
+	 */
+	public ArrayList<AdminRefund> selectRefundNonMemberList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminRefund> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundNonMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminRefund adminRefund = new AdminRefund();
+				
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminRefund);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 	
 }
