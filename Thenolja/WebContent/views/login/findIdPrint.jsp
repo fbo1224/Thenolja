@@ -27,9 +27,6 @@
 			margin-top: 50px;
 		}
 
-		#content2{
-			color: lightgray;
-		}
 
 		#loginword{margin-top: 10px; color: rgb(70, 149, 151);}
 
@@ -45,15 +42,6 @@
 		
 		#id, #password{
 			margin-top: 20px;
-		}
-
-		#name, #bornDate, #email{
-			background-image: url('resources/mypage/input.png');
-		}
-
-
-		.input:focus{
-			border-color: rgb(70, 149, 151);
 		}
 
 		.input{
@@ -84,9 +72,11 @@
 			margin: 40px;
             border-radius: 10px;
 		}
+
+
 		img{
-			width: 100px;
-			height: 100px;
+			width: 200px;
+			height: 200px;
 		}
 
 	
@@ -107,25 +97,22 @@
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/findId" method="post">
 						<div id="content1">
-							<img src="../../resources/mypage/person.png" alt="프로필">
+							<img src="resources/mypage/person.png" alt="프로필">
 						</div>
 						<div id="content2" class="content">
-							 <%-- <% if() {  --%> 
-
-
-							<%--<% } else { %>--%> 
-							
-							<%--<% } %>--%> 
-
-
-						</div>
-
-						<div id="content3">
-							<button class="btn" onclick="location.href='#'">로그인</button>
-                            <button class="btn" onclick="location.href='#'">비밀번호 찾기</button>
+							<% if(findId == null) {  %>
+								<div>입력하신 정보로 조회된 아이디가 존재하지 않습니다.</div>
+							<% } else { %>
+								<div>입력하신 정보로 조회된 아이디는 <%= findId.getMemId() %>입니다.</div>
+							<% } %>
 						</div>
 
 					</form>
+						<div id="content3">
+							<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
+                            <button class="btn" onclick="location.href='#'">비밀번호 찾기</button>
+						</div>
+
 				
 				</div>
 			</div>
