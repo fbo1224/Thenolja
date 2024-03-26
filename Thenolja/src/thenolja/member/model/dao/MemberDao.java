@@ -195,7 +195,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		Member findId = null;
 		
-		String sql = prop.getProperty("findId");
+		String sql = prop.getProperty("findID");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -208,17 +208,8 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				
-			findId = new Member(rset.getInt("MEM_NO"),
-				                rset.getString("MEM_NAME"),
-				                rset.getString("MEM_PHONE"),
-				                rset.getString("MEM_ID"),
-				                rset.getString("MEM_PWD"),
-				                rset.getString("NICKNAME"),
-				                rset.getString("EMAIL"),
-				                rset.getString("BORN_DATE"),
-				                rset.getDate("JOIN_DATE"),
-				                rset.getString("MEM_STATUS"),
-				                rset.getString("DELETE_YN"));
+			findId = new Member(rset.getString("MEM_ID"));
+				                
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
