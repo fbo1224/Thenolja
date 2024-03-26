@@ -14,7 +14,7 @@ import thenolja.notice.model.vo.Notice;
 public class NoticeServiceImpl{
 
 	
-	public ArrayList<Notice> selectNoticeList(){
+public ArrayList<Notice> selectNoticeList(){
 		
 		Connection conn = getConnection(); // SQL-MAPPER작성된 SQL 받아담기
 
@@ -129,8 +129,6 @@ public class NoticeServiceImpl{
 		}
 		return result;
 	} // try ~ with ~ resource*/
-	
-	
 	
 	
 
