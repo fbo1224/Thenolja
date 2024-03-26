@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
+
 /**
  * Servlet implementation class FindPwdController
  */
@@ -27,10 +30,16 @@ public class FindPwdController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
 		
+		String memId = request.getParameter("memId");
+		String bornDate = request.getParameter("bornDate");
+		String memPhone = request.getParameter("memPhone");
 	
-	
-	
+		int result = new MemberService().findPwd(memId, bornDate, memPhone);
+		
+		request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
+			
 	}
 
 	/**
