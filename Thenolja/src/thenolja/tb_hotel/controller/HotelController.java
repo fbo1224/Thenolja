@@ -169,7 +169,7 @@ public class HotelController {
 	
 	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
-		view="views/hotel/updateHotel.jsp";
+		
 		// loadName 도로명주소
 		// detailAddr 상세주소
 		// hotelCate 숙소종류
@@ -181,9 +181,16 @@ public class HotelController {
 		// hotelImg 대표사진
 		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		Hotel h = new Hotel();
+		h = new HotelService().updateForm(hotelNo);
 		
-		int result = new HotelService().updateForm(hotelNo);
-		
+		if(h != null) {
+			request.setAttribute("hotelInfo", h);
+			view="views/hotel/updateHotel.jsp";
+		} else {
+			request.setAttribute("errorMsg", "조회에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
+		}
 		
 		return view;
 	}

@@ -365,23 +365,65 @@ public class HotelDao {
 		return result;
 	}
 	
-	public int updateForm(Connection conn , int HotelNo) {
-		int result = 0;
+	public Hotel updateForm(Connection conn , int hotelNo) {
+		Hotel h = new Hotel();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("updateForm");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
 			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				h.setHotelNo(Integer.parseInt(rset.getString("HOTEL_NO")));
+				h.setHotelName(rset.getString("HOTEL_NAME"));
+				h.setHotelPhone(rset.getString("HOTEL_PHONE"));
+				h.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				h.setHotelAddress(rset.getString("HOTEL_ADDRESS"));
+				h.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				h.setHotelPath(rset.getString("HOTEL_PATH"));
+				h.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				h.setHostName(rset.getString("HOST_NAME"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-		
-		return result;
+		return h;
 	}
 	
+	public String[] updateFormSerList(Connection conn, int hotelNo) {
+		String[] serList = new String[8];
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateFormSerList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			int cnt = 0;
+			while(rset.next()) {
+				serList[cnt] = rset.getString("SERVICE_NAME");
+				cnt++;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return serList;
+	}
 	
 	
 	

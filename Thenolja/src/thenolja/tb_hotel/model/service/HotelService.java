@@ -98,19 +98,19 @@ public class HotelService {
 		return dh;
 	}
 	
-	public int updateForm(int HotelNo) {
-		int result = 0;
+	public Hotel updateForm(int hotelNo) {
+		Hotel h = new Hotel();
 		Connection conn = getConnection();
 		
-		result = new HotelDao().updateForm(conn, HotelNo);
+		h = new HotelDao().updateForm(conn, hotelNo);
 		
-		if(result > 0) {
-			
+		if(h != null) {
+			h.setSerList(new HotelDao().updateFormSerList(conn, hotelNo));
 		}
 		
 		close(conn);
 		
-		return result;
+		return h;
 	}
 	
 	
