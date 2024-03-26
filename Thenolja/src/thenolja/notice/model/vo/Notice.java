@@ -1,4 +1,4 @@
-package thenoleja.notice.model.vo;
+package thenolja.notice.model.vo;
 
 import java.util.Date;
 
@@ -9,10 +9,11 @@ public class Notice {
 	private String createDate;
 	private String status;
 	private int writerNo;
-	private String writer; // 상세화면 조회 시 작성자명
-	private int views;	   // 조회 수
+	private String writer; 	   // 상세화면 조회 시 작성자명
+	private int viewCount;	   // 조회 수
 	
-	public Notice() {
+	// 생성자 
+	public Notice() { 
 		super();
 	}
 	// 저장 시 파라미터 처리를 위한 생성자 생성
@@ -95,14 +96,12 @@ public class Notice {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public int getViews() {
-		return views;
+	public int getViewCount() {
+		return viewCount;
 	}
-	public void setViews(int views) {
-		this.views = views;
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
-	
-	
 	
 	
 }

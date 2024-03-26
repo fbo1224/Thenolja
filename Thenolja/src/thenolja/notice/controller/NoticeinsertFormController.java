@@ -1,4 +1,4 @@
-package thenoleja.notice.controller;
+package thenolja.notice.controller;
 
 import java.io.IOException;
 
@@ -29,20 +29,20 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//°ü¸®ÀÚ°¡ ¾Æ´Ò°æ¿ì¿¡µµ Æ÷¿öµùÀÌ ¼öÇàµÊ
+		//ê´€ë¦¬ìê°€ ì•„ë‹ê²½ìš°ì—ë„ í¬ì›Œë”©ì´ ìˆ˜í–‰ë¨
 		
 				HttpSession session = request.getSession();
 			//	Member loginUser = (Member)session.getAttribute("loginUser");
 					
 	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
 				
-				//ÀÀ´äÈ­¸é	
+				//ì‘ë‹µí™”ë©´	
 				RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
 				view.forward(request, response);
 			
 		/*				
 				}else {
-					session.setAttribute("alertMsg", "°ü¸®ÀÚ°¡ ¾Æ´Õ´Ï´Ù. ");
+					session.setAttribute("alertMsg", "ê´€ë¦¬ìê°€ ì•„ë‹™ë‹ˆë‹¤. ");
 					response.sendRedirect(request.getContextPath());
 				}	
 				*/

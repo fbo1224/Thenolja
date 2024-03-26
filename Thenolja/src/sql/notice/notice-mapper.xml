@@ -15,31 +15,13 @@
  				(SELECT NICKNAME FROM TB_MEMBER
                                  WHERE WRITER_NO = MEM_NO) AS WRITER,   /* 작성자명 */		        
 		        TO_CHAR(CREATE_DATE, 'YYYY.MM.DD') as CREATE_DATE, 	   /* 공지사항 등록일 */
-		        STATUS   		     /* 공지사항 상태(=노출여부) */
+		        STATUS,   		     /* 공지사항 상태(=노출여부) */
+		        VIEW_COUNT			 /* 공지사항 조회수 */
 		FROM TB_NOTICE
 		
 		WHERE 1=1
-		AND STATUS = 'N'
+		AND STATUS = 'Y'
 		ORDER BY CREATE_DATE DESC
-	
-	</entry>
-	
-	<!-- 공지사항 상세조회 -->
-	<entry key="selectNoticeOne">
-	    SELECT
-                NOTICE_NO,   	 /* 공지사항 번호 */
-                NOTICE_TITLE,    /* 공지사항 제목*/
-                NOTICE_CONTENT,  /* 공지사항 내용 */
-                TO_CHAR(CREATE_DATE,'YYYY.MM.DD') AS CREATE_DATE,       /* 공지사항 등록일 */
-                (SELECT NICKNAME FROM TB_MEMBER
-                                 WHERE WRITER_NO = MEM_NO) AS WRITER   /* 작성자명 */
-          FROM TB_NOTICE
-               
-           WHERE  1=1 
-           AND NOTICE_NO = ?       
-                  
-	   
-	    		
 	</entry>
 	
 	<!-- 공지사항 등록 -->
@@ -64,7 +46,29 @@
 				?,
 				1	  -- 작성자 회원번호(수정필요)
 				)
+	</entry>	
+	
+	<!-- 공지사항 상세조회 -->
+	<entry key="selectNoticeOne">
+	    SELECT
+                NOTICE_NO,   	 /* 공지사항 번호 */
+                NOTICE_TITLE,    /* 공지사항 제목 */
+                NOTICE_CONTENT,  /* 공지사항 내용 */
+                TO_CHAR(CREATE_DATE,'YYYY.MM.DD') AS CREATE_DATE,       /* 공지사항 등록일 */
+                (SELECT NICKNAME FROM TB_MEMBER
+                                 WHERE WRITER_NO = MEM_NO) AS WRITER    /* 작성자명 */
+          FROM TB_NOTICE
+               
+           WHERE  1=1 
+           AND NOTICE_NO = ?       
 	</entry>
+	
+	<!-- 공지사항 상세 조회 시 조회 수 업데이트 -->
+	<entry key="updateNoticeViewCount">
+		UPDATE TB_NOTICE
+		SET    VIEW_COUNT = (VIEW_COUNT + 1)
+		WHERE NOTICE_NO = ?
+	</entry>	
 	
 	<entry key="update">
 		UPDATE
@@ -72,37 +76,14 @@
 			SET
 					NOTICE_TITLE = ?,
 					NOTICE_CONTENT = ?
-			WHERE
-					NOTICE_NO = ?
-			AND
-					STATUS = "Y"				
-	
-	
-	
-	       	
+			WHERE   NOTICE_NO = ?
+			AND     STATUS = 'Y'					
 	</entry>
-	
-	<!-- 공지사항 조회 수 -->
-	<entry key="increaseCount">
-		UPDATE
-		       NOTICE
-		   SET
-		       COUNT = COUNT + 1
-		 WHERE
-	           NOTICE_NO = ?
-	       AND
-	           STATUS = 'Y'
-	</entry>
-	
 		
 	<entry key="delete">
-			UPDATE
-					NOTICE
-			SET
-					STATUS = 'N'
-			WHERE
-					NOTICE_NO = ?				
-		
+			UPDATE  NOTICE
+			SET     STATUS = 'N'
+			WHERE   NOTICE_NO = ?				
 	</entry>
 	
 	

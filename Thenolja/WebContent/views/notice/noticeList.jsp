@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenoleja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	//System.out.println("noticeList = " + list); 컴파일에러 발생
@@ -80,7 +80,7 @@
          			<td><%= n.getNoticeContent() %></td>
          			<td><%= n.getWriter() %></td>
          			<td><%= n.getCreateDate() %></td>
-         			<td><%= n.getViews() %></td>
+         			<td><%= n.getViewCount() %></td>
          			<td><%= n.getStatus() %></td>
          		</tr>
          	<% } %>

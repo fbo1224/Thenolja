@@ -19,6 +19,37 @@
 		        MEM_STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectRefundMemberList">
+			SELECT *
+		  FROM
+		     (SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM( SELECT
+		               RF_RESER_NO,
+		               MEM_ID,
+		               RESER_NAME,
+		               MEM_PHONE
+		        FROM
+		                TB_REFUND
+		        JOIN
+		                TB_RESERVATION ON (RESER_NO = RF_RESER_NO)
+		        JOIN
+		                TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		        JOIN
+		                TB_MEMBER ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+		       WHERE
+		                MEM_STATUS = 'Y'
+		       GROUP
+		          BY
+		                RF_RESER_NO, MEM_ID, RESER_NAME, MEM_PHONE
+		       ORDER
+		          BY
+		                RF_RESER_NO DESC) A)
+		    WHERE RNUM BETWEEN ? AND ?
+    
+	
+	</entry>
+	
 
 	
 	

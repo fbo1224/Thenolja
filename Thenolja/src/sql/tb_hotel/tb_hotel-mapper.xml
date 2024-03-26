@@ -41,7 +41,7 @@
   		  FROM
       		  TB_HOTEL
  		 WHERE
-      	      HOTEL_YN = 'Y'
+      	      HOTEL_YN = 'Y'  
 	</entry>
 	
 	
@@ -83,8 +83,8 @@
                 	FROM
                     	TB_HOTEL
                    WHERE
-                        HOTEL_YN = 'Y')
-    		 ORDER BY HOTEL_NO DESC)
+                        HOTEL_YN = 'Y'
+    		 ORDER BY HOTEL_NO DESC))
        WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -111,7 +111,7 @@
 	                 HOTEL_LOCATION,
 	                 HOTEL_CATEGORY,
 	                 HOTEL_PATH
-	        ORDER BY ROOM_PRICE DESC) A)
+	        ORDER BY TB_HOTEL.HOTEL_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
 		
 	</entry>
