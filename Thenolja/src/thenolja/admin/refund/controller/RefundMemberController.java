@@ -62,6 +62,7 @@ public class RefundMemberController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
+		// System.out.println(pi);
 		
 		ArrayList<AdminRefund> list = new RefundService().selectRefundMemberList(pi);
 		
