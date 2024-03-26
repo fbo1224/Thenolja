@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>        
+<%
+	
+	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundNonMemberList");
+	
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+
+%>    
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,25 +74,46 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>3</td>
-                            <td>이혜인</td>
-                            <td>01020082008</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                          </tr>
+                        
+                        <% if(list.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="3">환불 비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        	<% for(AdminRefund refunNonMem : list) { %>
+                        		<tr>
+                        			<td><%=refunNonMem.getReserNo() %></td>
+                        			<td><%=refunNonMem.getReserName() %></td>
+                        			<td><%=refunNonMem.getMemPhone() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="">조회</button></td>
+                        		</tr>
+                        	<% } %>
+                        <% } %>
+    
+                   
                         </tbody>
                       </table>
 
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
+                	
+                	<%if(currentPage > 1) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% } %>
+                    
+                    <% for(int i = startPage; i <= endPage; i++) { %>
+                    	<% if(currentPage != i) {%>
+                    		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=i%>'"><%=i %></button>
+                    	<% } else { %>
+                    		<button  disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                    	<% } %>
+                    
+                    <% } %>
+                    
+                    <% if(currentPage != maxPage) { %>
                     <button class="btn btn-sm btn-outline-secondary">></button>
+                	<% } %>
                 </div>
         
 
