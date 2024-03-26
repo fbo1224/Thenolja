@@ -110,10 +110,12 @@
 							<img src="../../resources/mypage/person.png" alt="프로필">
 						</div>
 						<div id="content2" class="content">
-							<!-- <%= if() { %> -->
+							 <%-- <% if() {  --%> 
 
 
-
+							<%--<% } else { %>--%> 
+							
+							<%--<% } %>--%> 
 
 
 						</div>

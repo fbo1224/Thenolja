@@ -209,7 +209,6 @@
                         <li><a href="<%= contextPath %>/refundMem">회원 환불 조회</a></li>
                         <li><a href="#">비회원 환불 조회</a></li>
                     </ul>
-    
                 </li>
     
                 <li>
