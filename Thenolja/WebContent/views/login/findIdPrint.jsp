@@ -110,7 +110,7 @@
 					</form>
 						<div id="content3">
 							<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
-                            <button class="btn" onclick="location.href='<%= contextPath %>/findPwdPage'">비밀번호 찾기</button>
+                            <button class="btn" onclick="location.href='#'">비밀번호 찾기</button>
 						</div>
 
 				

@@ -121,7 +121,7 @@
 							<br><br>
 							<a href="<%= contextPath %>/findIdPage">아이디 찾기</a>
 							|&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>
+							<a href="<%= contextPath %>/findPwdPage">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">

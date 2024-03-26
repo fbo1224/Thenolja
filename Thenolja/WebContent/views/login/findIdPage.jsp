@@ -91,6 +91,8 @@
 			font-weight: bold;
 			margin-bottom: 30px;
             border-radius: 10px;
+			margin-left: 50px;
+			margin-right: 50px;
 		}
 
 	
@@ -118,7 +120,7 @@
 
 						<div id="content2" class="content">
 							<br>
-							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>
+							<a href="<%= contextPath %>/findPwdPage">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">
