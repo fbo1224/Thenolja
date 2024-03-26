@@ -55,38 +55,27 @@
           HOTEL_CATEGORY,
           HOTEL_PATH,
           ROWNUM RNUM
-     FROM(
-         SELECT HOTEL_NO,
-                HOTEL_NAME,
-                HOTEL_LOCATION,
-                HOTEL_CATEGORY,
-                HOTEL_PATH,
-                ROWNUM RNUM
-            FROM (SELECT
-                        TB_HOTEL.HOTEL_NO,
-                        HOTEL_NAME,
-                        HOTEL_LOCATION,
-                        HOTEL_CATEGORY,
-                        HOTEL_PATH,
-                        COUNT(TB_HOTEL.HOTEL_NO)
-                    FROM
-                        TB_HOTEL
-                        LEFT
-                        JOIN TB_ROOM   
-                          ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
-                       GROUP
-                          BY
-                            TB_HOTEL.HOTEL_NO,
-                            HOTEL_NAME,
-                            HOTEL_LOCATION,
-                            HOTEL_CATEGORY,
-                            HOTEL_PATH
-                      HAVING
-                            COUNT(TB_HOTEL.HOTEL_NO) &lt; 3)
-                      ORDER
-                         BY
-                           HOTEL_NO DESC)
-    WHERE RNUM BETWEEN ? AND ?
+	  FROM(
+	  		SELECT
+	  		      HOTEL_NO,
+                  HOTEL_NAME,
+                  HOTEL_LOCATION,
+                  HOTEL_CATEGORY,
+                  HOTEL_PATH,
+                  ROWNUM RNUM
+             FROM(
+                  SELECT
+                    	TB_HOTEL.HOTEL_NO,
+                    	HOTEL_NAME,
+                    	HOTEL_LOCATION,
+                    	HOTEL_CATEGORY,
+                    	HOTEL_PATH
+                	FROM
+                    	TB_HOTEL
+                   WHERE
+                        HOTEL_YN = 'Y')
+    		 ORDER BY HOTEL_NO DESC)
+       WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="selectList">

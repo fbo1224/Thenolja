@@ -1,15 +1,16 @@
 package thenolja.tb_hotel.model.dao;
 
+import static thenolja.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import thenolja.tb_hotel.model.vo.Room;
-
-import static thenolja.common.JDBCTemplate.*;
 
 public class RoomDao {
 	private Properties prop = new Properties();
@@ -23,6 +24,29 @@ public class RoomDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int countRoom(Connection conn, int hotelNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("countRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			rset.next();
+			result = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public int insertRoom(Connection conn, Room r) {

@@ -19,8 +19,12 @@ public class RoomController {
 		String view = "";
 		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		request.setAttribute("hotelNo", hotelNo);
 		
+		// 객실이 3개 이상이면 객실 추가 못함
+		int roomCnt = new RoomService().countRoom(hotelNo);
+		
+		request.setAttribute("hotelNo", hotelNo);
+		request.setAttribute("roomCnt", roomCnt);
 		view= "views/hotel/insertRoom.jsp";
 		return view;
 	}

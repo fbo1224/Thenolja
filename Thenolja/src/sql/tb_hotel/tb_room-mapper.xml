@@ -42,6 +42,14 @@
           )
 	</entry>
 	
+	<entry key="countRoom">
+	SELECT
+    	  COUNT(*)
+  	  FROM
+      	  TB_ROOM
+  	 WHERE
+       	  HOTEL_NO = ?
+	</entry>
 	
 	
 	

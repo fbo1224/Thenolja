@@ -330,7 +330,7 @@ public class HotelDao {
 			rset = pstmt.executeQuery();
 			
 			rset.next();
-			result = rset.getShort("COUNT(*)");
+			result = rset.getInt("COUNT(*)");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
