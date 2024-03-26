@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Member findId =(Member)request.getAttribute("findId");
-%>
+<%@ page import="thenolja.member.model.vo.Member" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사용자 ID 조회</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>아이디 찾기 페이지</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -21,10 +20,15 @@
 		}
 
 		#content{
-			width: 60%;
+			width: 50%;
 			margin: auto;
 			border: 1px solid lightgray;
 			margin-top: 50px;
+		}
+
+		.content{
+			width: 100%;
+			margin: auto;
 		}
 
 		#content2{
@@ -69,24 +73,24 @@
 		}
 		#content{text-align: center;}
 
+		#content2 > a{
+			text-decoration: none;
+			color: rgb(99, 99, 99);
+		}
+
 		#content3{
 			margin-top: 30px;
 		}
 
 		div > .btn{
-			width: 150px;
+			width: 100px;
 			height: 40px;
 			background-color: rgb(70, 149, 151);
 			color: white;
 			font-size: 15px;
 			font-weight: bold;
 			margin-bottom: 30px;
-			margin: 40px;
             border-radius: 10px;
-		}
-		img{
-			width: 100px;
-			height: 100px;
 		}
 
 	
@@ -102,27 +106,24 @@
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
-					<span>요청하신 아이디 찾기 결과입니다.</span>
+					<span>아이디 찾기</span>
 				</div>
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/findId" method="post">
 						<div id="content1">
-							<img src="../../resources/mypage/person.png" alt="프로필">
+							<input type="text" name="name" id="name" class="input" placeholder="이름" maxlength="15" required>
+							<input type="text" name="bornDate" id="bornDate" class="input" placeholder="생년월일" maxlength="8" required>
+                            <input type="text" name="email" id="email" class="input" placeholder="이메일 @포함"required>
 						</div>
+
 						<div id="content2" class="content">
-							 <%-- <% if() {  --%> 
-
-
-							<%--<% } else { %>--%> 
-							
-							<%--<% } %>--%> 
-
-
+							<br>
+							<a href="views\\member\\findPwd.jsp">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">
-							<button class="btn" onclick="location.href='#'">로그인</button>
-                            <button class="btn" onclick="location.href='#'">비밀번호 찾기</button>
+							<button type="reset" class="btn">취소</button>
+                            <button type="submit" class="btn">확인</button>
 						</div>
 
 					</form>
