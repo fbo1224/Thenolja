@@ -37,13 +37,9 @@
 		
 		#login-area{width: 100%; height: 100%;}
 		
-		#id, #password{
-			margin-top: 20px;
-		}
-
 		.input{
-			width: 400px;
-			height: 50px;
+			width: 250px;
+			height: 40px;
 			border-color: rgb(230, 230, 230);
 			border-radius: 10px;
 			background-repeat: no-repeat;
@@ -70,11 +66,29 @@
             border-radius: 10px;
 		}
 
+		#checkBtn{
+			width: 120px;
+			height: 30px;
+			background-color: #BBC6C8;
+			color: black;
+			font-size: 15px;
+			border-radius: 10px;
+			border: none;
+		}
+
 
 		img{
 			width: 200px;
 			height: 200px;
 		}
+
+		#newPwd1{
+			margin-right: 120px;
+		}
+		#newPwd2{
+			margin-left: 20px;
+		}
+
 
 	
 	
@@ -89,24 +103,54 @@
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
-					<span>새로운 비밀번호를 입력해주세요.</span>
+					<span>비밀번호 재설정</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/findPwd" method="post">
+					<form action="<%= contextPath %>/find.resetPwd" method="post">
 						<div id="content1">
 							<img src="resources/mypage/person.png" alt="프로필">
 						</div>
 						<div id="content2" class="content">
-
+                            <span>새로운 비밀번호</span>
+                            <input type="password" id="newPwd1" required class="input">
 						</div>
+						<div>
+                            <span>비밀번호 확인</span>
+                            <input type="password" id="newPwd2" required class="input" name="password">
+                            <button type="button" onclick="pwdCheck()" id="checkBtn">비밀번호 확인</button>
+						</div>
+						<div id="checkPrint"></div>
+                        <input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
+
+						<script>
+							function pwdCheck() {
+								const newPwd1 = document.getElementById('newPwd1');
+								const newPwd2 = document.getElementById('newPwd2');
+								const checkPrint = document.getElementById('checkPrint');
+								const next = document.getElementById('next');
+								
+
+								if(newPwd1.value != newPwd2.value){
+									checkPrint.innerHTML = '비밀번호가 일치하지 않습니다.';
+									checkPrint.style ="color: red;"
+									newPwd1.value = '';
+									newPwd2.value = '';
+
+								}
+								else {
+									checkPrint.innerHTML = '비밀번호가 일치합니다. ✓';
+									checkPrint.style ="color: green;"
+								}
+
+							}
+						</script>
 
 						<div id="content3">
                             <button class="btn" type="reset">취소</button>
-                            <button class="btn" type="submit">변경하기</button>
+                            <button class="btn" type="submit" id="next">변경하기</button>
 						</div>
-                    </form>
-
-				
+                        <div id="pwdCheck2"></div>
+					</form>
 				</div>
 			</div>
 		
