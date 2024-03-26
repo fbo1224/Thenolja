@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.admin.refund.model.service.RefundService;
+
 /**
  * Servlet implementation class RefundMemberController
  */
@@ -29,7 +31,16 @@ public class RefundMemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
 		
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		new RefundService().selectRefundMemCount();
 		
 		
 		
