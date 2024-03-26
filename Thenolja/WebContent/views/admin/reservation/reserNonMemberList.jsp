@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
+<%
+	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
+	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+
+%>    
+    
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,26 +75,47 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>3</td>
-                            <td>이혜인</td>
-                            <td>01020082008</td>
-                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                            <td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
-                          </tr>
+                        <tr>
+                        
+                        <%if(list.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        	<% for (AdminReservation adminReserNon : list) { %>
+                        	<tr>
+                        		<td><%=adminReserNon.getReserNo() %></td>
+                        		<td><%=adminReserNon.getReserName() %></td>
+                        		<td><%=adminReserNon.getMemPhone() %></td>
+                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
+                            	<td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
+                        	</tr>
+                        	<% } %>
+                        <%} %>
+
                         </tbody>
                       </table>
 
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
+                
+                	<% if(currentPage > 1) { %>
+                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage - 1%>'"><</button>
+                	<% } %>
+                	
+                    <% for (int i = startPage; i <= endPage; i++) { %>
+                    	<%if (currentPage != i) { %>
+                   		 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=i%>'"><%=i %></button>
+                   		<% } else { %>
+                   			<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                   	<% } %>
+                   	
+                   	<% } %>
+                   	
+                   	<% if(currentPage != maxPage) { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage + 1%>'">></button>
+                	<% } %>
                 </div>
         
 
@@ -89,6 +124,39 @@
         <div id="footer"></div>
 
     </div>
+    
+    <script>
+    	function detailReserNonMem(e){
+    		
+    		$.ajax({
+    			url : 'detailReserMem.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				$('#hotelName').text(result.hotelName);
+    				$('#bicycle').text(result.bicycle);
+    				$('#people').text(result.people);
+    				$('#reserDate').text(result.reserDate);
+    				$('#checkIn').text(result.checkInTime);
+    				$('#checkOut').text(result.checkOutTime);
+    				$('#payment').text(result.payment);
+    				$('#paymentPrice').text(result.paymentPrice);
+    				
+    			}
+    		})
+    	}
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
@@ -107,21 +175,21 @@
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
-                    <td width="200">마리안느 호텔</td>
-                    <td>이동방식 : 차량</td>
+                    <td width="200"><span id="hotelName"></span></td>
+                    <td>이동방식 : <span id="bicycle"></span></td>
                 </tr>
                 <tr>
-                    <td>인원수 : 2명</td>
-                    <td>예약일 : 2024.03.15</td>
+                    <td>인원수 : <span id="people"></span>명</td>
+                    <td>예약일 : <span id="reserDate"></span></td>
                 </tr>
                 <tr>
-                    <td>체크인 : 2024.03.23</td>
-                    <td>체크아웃 : 2024.03.25</td>
+                    <td>체크인 : <span id="checkIn"></span></td>
+                    <td>체크아웃 :<span id="checkOut"></span></td>
                 </tr>
     
                 <tr>
-                    <td>결제방식 : 계좌이체</td>
-                    <td>금액 : 100000</td>
+                    <td>결제방식 : <span id="payment"></span></td>
+                    <td>금액 : <span id="paymentPrice"></span>원</td>
                 </tr>
 
               </table>

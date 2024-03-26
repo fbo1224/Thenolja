@@ -133,6 +133,7 @@ public class ReservationDao {
 				adminReser.setBicycle(rset.getString("BICYCLE"));
 				adminReser.setPeople(rset.getInt("PEOPLE"));
 				adminReser.setPayment(rset.getString("PAYMENT"));
+				adminReser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
 				
 			}
 			

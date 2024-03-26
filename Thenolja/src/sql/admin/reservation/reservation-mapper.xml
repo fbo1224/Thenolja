@@ -65,8 +65,6 @@
 	  JOIN
 	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
 	WHERE
-	        MEM_STATUS = 'Y'
-	  AND
 	        CANCEL_YN = 'N'
 	  AND
 	  		RESER_NO = ?
