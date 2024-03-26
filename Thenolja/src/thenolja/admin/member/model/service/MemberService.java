@@ -121,6 +121,26 @@ public class MemberService {
 		return list;
 	}
 	
+	/**
+	 * 탈퇴 회원 삭제
+	 */
+	public int completeDelete(int memNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().completeDelete(conn, memNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
 	
 	
 	

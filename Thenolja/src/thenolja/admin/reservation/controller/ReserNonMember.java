@@ -1,27 +1,25 @@
-package thenolja.member.controller;
+package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.member.model.service.MemberService;
-import thenolja.member.model.vo.Member;
-
 /**
- * Servlet implementation class FindIdController
+ * Servlet implementation class ReserNonMember
  */
-@WebServlet("/findId")
-public class FindIdController extends HttpServlet {
+@WebServlet("/reserNonMem")
+public class ReserNonMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdController() {
+    public ReserNonMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +28,10 @@ public class FindIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String memName = request.getParameter("name");
-		String bornDate = request.getParameter("bornDate");
-		String email = request.getParameter("email");
+		RequestDispatcher view = request.getRequestDispatcher("/view/admin/reservation/reserNonMemberList.jsp");
 		
-		Member findId = new MemberService().findId(memName, bornDate, email);
-		request.setAttribute("findId", findId);
-		
-		
-		request.getRequestDispatcher("views\\login\\findIdPrint.jsp").forward(request, response);
-	
-	
+		view.forward(request, response);
 	}
 
 	/**

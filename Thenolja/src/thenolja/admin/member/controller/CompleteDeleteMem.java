@@ -1,4 +1,4 @@
-package thenolja.member.controller;
+package thenolja.admin.member.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.member.model.service.MemberService;
-import thenolja.member.model.vo.Member;
+import org.json.simple.JSONObject;
+
+import thenolja.admin.member.model.service.MemberService;
 
 /**
- * Servlet implementation class FindIdController
+ * Servlet implementation class CompleteDeleteMem
  */
-@WebServlet("/findId")
-public class FindIdController extends HttpServlet {
+@WebServlet("/deleteCompelete.do")
+public class CompleteDeleteMem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdController() {
+    public CompleteDeleteMem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,19 @@ public class FindIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String memName = request.getParameter("name");
-		String bornDate = request.getParameter("bornDate");
-		String email = request.getParameter("email");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member findId = new MemberService().findId(memName, bornDate, email);
-		request.setAttribute("findId", findId);
+		int result = new MemberService().completeDelete(memNo);
 		
+		JSONObject obj = new JSONObject();
 		
-		request.getRequestDispatcher("views\\login\\findIdPrint.jsp").forward(request, response);
-	
-	
+		obj.put("message", "삭제가 완료 되었습니다!");
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		response.getWriter().print(obj.toString());
+		
 	}
 
 	/**

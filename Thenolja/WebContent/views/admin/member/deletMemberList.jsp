@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo"%>
 
 <%
+	AdminMember member = (AdminMember)request.getAttribute("member");
+
 	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("deleteMemberList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -91,8 +93,8 @@
                         			<td><%= m.getMemId() %></td>
                         			<td><%= m.getNickName() %></td>
                         			<td><%= m.getGradeName() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
-                            		<td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(<%= m.getMemNo() %>)">조회</button></td>
+                            		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(<%= m.getMemNo() %>)">삭제</button></td>
                         		</tr>
                         	<% }  %>
                         <% } %>
@@ -117,7 +119,7 @@
                     	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=<%=i%>'"><%= i %></button>
                     
 	                    <% } else { %>
-	                    <button disalbed class="btn btn-sm btn-outline-secondary"><%= i %></button>
+	                    <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
 	                    <% } %>
                     		
                     <% } %>
@@ -134,6 +136,55 @@
         <div id="footer"></div>
 
     </div>
+    
+    <script>
+    	function detailDeleteMem(e){
+    		console.log(e);
+    		$.ajax({
+    			url : 'detailMember.do',
+    			data : {memNo : e},
+    			type : 'get',
+    			success : function(result){
+    				$('#name').text(result.memName);
+    				$('#grade').text(result.gradeName);
+    				$('#email').text(result.email);
+    				$('#joinDate').text(result.joinDate);
+    				$('#phone').text(result.memPhone);
+    				$('#totalPrice').text(result.paymentPrice);
+    				$('#bornDate').text(result.bornDate);
+    				
+    				
+    			}
+    			
+    		});
+    	}
+    
+    </script>
+    
+    <script>
+    	function completeDeleteMem(e){
+    		console.log(e);
+    		$.ajax({
+    			url : 'deleteCompelete.do',
+    			data : {memNo : e},
+    			type : 'get',
+    			success : function(result){
+    				alert(result.message);
+    			}
+    			
+    		});
+    		
+    	}
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
@@ -152,19 +203,19 @@
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
-                    <td width="200">이름 : 안유진</td>
-                    <td width="200">등급 : 패밀리</td>
+                    <td width="200">이름 : <span id="name"></span></td>
+                    <td width="200">등급 : <span id="grade"></span></td>
                 </tr>
                 <tr>
-                    <td>이메일 : youuu@naver.com</td>
-                    <td>가입일 : 2024.03.16</td>
+                    <td>이메일 : <span id="email"></span></td>
+                    <td>가입일 : <span id="joinDate"></span></td>
                 </tr>
                 <tr>
-                    <td>전화번호 : 01045782088</td>
-                    <td>숙소 이용 횟수 : 1회</td>
+                    <td>전화번호 : <spna id="phone"></spna></td>
+                    <td>총 이용 금액 : <span id="totalPrice"></span></td>
                 </tr>
                 <tr>
-                    <td>생년월일 : 19970129</td>
+                    <td>생년월일 : <span id="bornDate"></span></td>
                     <td></td>
                 </tr>
               </table>
