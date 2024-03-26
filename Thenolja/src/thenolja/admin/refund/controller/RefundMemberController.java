@@ -66,7 +66,8 @@ public class RefundMemberController extends HttpServlet {
 		
 		ArrayList<AdminRefund> list = new RefundService().selectRefundMemberList(pi);
 		
-		
+		request.setAttribute("selectRefundMemberList", list);
+		request.setAttribute("pageInfo", pi);
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/admin/refund/refundMemberList.jsp");
 		

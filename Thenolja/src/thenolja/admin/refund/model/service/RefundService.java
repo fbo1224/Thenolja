@@ -37,8 +37,6 @@ public class RefundService {
 		JDBCTemplate.close(conn);
 		
 		return list;
-		
-		
 	}
 
 }
