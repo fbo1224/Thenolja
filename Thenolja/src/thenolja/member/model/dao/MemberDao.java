@@ -208,7 +208,7 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				
-			findId = new Member(rset.getString("MEM_ID"));
+				findId = new Member(rset.getString("MEM_ID"));
 				                
 			}
 		} catch (SQLException e) {
@@ -234,23 +234,19 @@ public class MemberDao {
 			pstmt.setString(2, bornDate);
 			pstmt.setString(3, memPhone);
 			
-			
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			
-			count = rset.getInt("COUNT(*)");
-			
-			
-			
+			if(rset.next()) {
+				count = 1;
+			} else {
+				count = 0;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
-		
-		
-		
-		
-		
 		return count;
 	}
 	
