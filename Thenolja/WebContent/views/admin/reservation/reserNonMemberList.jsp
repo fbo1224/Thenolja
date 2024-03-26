@@ -88,7 +88,7 @@
                         		<td><%=adminReserNon.getReserName() %></td>
                         		<td><%=adminReserNon.getMemPhone() %></td>
                         		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
-                            	<td><button class="btn btn-sm btn-outline-secondary">환불처리</button></td>
+                            	<td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
                         	</tr>
                         	<% } %>
                         <%} %>
@@ -148,7 +148,21 @@
     
     </script>
     
+    <script>
+    	function refundReserNonMem(e){
+    		
+    		$.ajax({
+    			url :  'refundReser.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				alert(result.message);
+    			}
+    		})
+    		
+    	}
     
+    </script>
     
     
     
