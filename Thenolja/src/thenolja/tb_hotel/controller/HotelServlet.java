@@ -41,7 +41,7 @@ public class HotelServlet extends HttpServlet {
 		
 		switch(mapping) {
 			// insertHotel.jsp
-			case "insertForm" : view =  hc.insertForm(request, response); flag = false; break;
+			case "insertForm" : view =  hc.insertForm(request, response); break;
 			
 			//
 			case "insert" : int result =  hc.insert(request, response);
@@ -61,7 +61,10 @@ public class HotelServlet extends HttpServlet {
 			case "hotelList" : view =  hc.hotelList(request, response); break;
 			
 			// 
-			case "update" : view =  hc.update(request, response); flag = false; break;
+			case "updateForm" : view =  hc.updateForm(request, response);  break;
+			
+			// 
+			case "update" : view =  hc.update(request, response); break;
 
 			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;

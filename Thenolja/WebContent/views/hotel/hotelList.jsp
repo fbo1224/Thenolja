@@ -5,7 +5,6 @@
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	String loginStatus = (String)request.getAttribute("loginStatus");
-	System.out.println(pi);
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -101,7 +100,7 @@
 									<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
 								</div>
 								<div class="option-btns" align="center">
-									<a class="btn btn btn-info" href="#">호텔정보수정</a>
+									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">호텔정보수정</a>
 								</div>
 								<div class="option-btns" align="center">
 									<a class="btn btn btn-danger" href="#">호텔삭제</a>

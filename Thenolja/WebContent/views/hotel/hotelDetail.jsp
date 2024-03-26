@@ -163,7 +163,7 @@
 			<div id="detail-content-imgInfo">
 				<div>
 					 <span>★</span>
-					 <span><%= dh.getCountReviews() %>개의 리뷰</span>
+					 <span><%= dh.getCountReviews() %> 개의 리뷰</span>
 					 <span>리뷰조회</span>
 				</div>
 				<div>
