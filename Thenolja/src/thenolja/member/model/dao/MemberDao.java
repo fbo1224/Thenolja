@@ -188,7 +188,50 @@ public class MemberDao {
 		}
 		return result;
 	}
-	
+//----------------------------------아이디 찾기-------------------------------
+	public Member findId(Connection conn, String memName, String bornDate, String email) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member findId = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memName);
+			pstmt.setString(2, bornDate);
+			pstmt.setString(3, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+			findId = new Member(rset.getInt("MEM_NO"),
+				                rset.getString("MEM_NAME"),
+				                rset.getString("MEM_PHONE"),
+				                rset.getString("MEM_ID"),
+				                rset.getString("MEM_PWD"),
+				                rset.getString("NICKNAME"),
+				                rset.getString("EMAIL"),
+				                rset.getString("BORN_DATE"),
+				                rset.getDate("JOIN_DATE"),
+				                rset.getString("MEM_STATUS"),
+				                rset.getString("DELETE_YN"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		
+		return findId;
+	}
 	
 	
 	

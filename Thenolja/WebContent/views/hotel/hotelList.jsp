@@ -57,7 +57,7 @@
 	.card-info {
 		float:right;
 	}
-	.card-info >h4 {
+	.card-info > h4 {
 		text-align: center;
 	}
 	.card-info > p{
@@ -65,8 +65,9 @@
 		padding-left: 30px;
 		margin-bottom: 10px;
 	}
-	.paging-area {
-		float:
+	.option-btns{
+		margin: 3px 0px;
+		
 	}
 </style>
 </head>
@@ -95,7 +96,15 @@
 								<p><span>★</span><span>4.8</span></p>
 								<p>가격 : <%= hc.getRoomPrice() %></p>
 							<%} else if(loginStatus != null && loginStatus.equals("A")) {%>
-								<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가하기</a>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
+								</div>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-info" href="#">호텔정보수정</a>
+								</div>
+								<div class="option-btns" align="center">
+									<a class="btn btn btn-danger" href="#">호텔삭제</a>
+								</div>
 							<%} %>
 	  					</div>
 	  				</div>

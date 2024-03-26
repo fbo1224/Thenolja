@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		tb_hotel Mapper
+	</comment>
+	
+	<entry key="insertRoom">
+	INSERT
+  INTO
+      TB_ROOM(
+              ROOM_NO,
+              HOTEL_NO,
+              ROOM_NAME,
+              CHECKIN_TIME,
+              CHECKOUT_TIME,
+              ROOM_NUM,
+              ROOM_PRICE,
+              MAX_PEOPLE
+              )
+       VALUES(
+              SEQ_ROOM.NEXTVAL,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?
+             )
+	</entry>
+	
+	<entry key="insertRoomImg">
+	INSERT
+  	  INTO
+      	  TB_ROOM_IMG
+   VALUES(
+          SEQ_ROOM_IMG.NEXTVAL,
+          SEQ_ROOM.CURRVAL,
+          ?
+          )
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</properties>
