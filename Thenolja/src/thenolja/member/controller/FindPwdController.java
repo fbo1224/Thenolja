@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
+
 /**
- * Servlet implementation class FindIdPageController
+ * Servlet implementation class FindPwdController
  */
-@WebServlet("/findIdPage")
-public class FindIdPageController extends HttpServlet {
+@WebServlet("/findPwd")
+public class FindPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdPageController() {
+    public FindPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +30,16 @@ public class FindIdPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// System.out.println("아이디찾기 서블릿");
-		request.getRequestDispatcher("views\\login\\findIdPage.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		String memId = request.getParameter("memId");
+		String bornDate = request.getParameter("bornDate");
+		String memPhone = request.getParameter("memPhone");
 	
-	
-	
+		int result = new MemberService().findPwd(memId, bornDate, memPhone);
+		
+		request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
+			
 	}
 
 	/**

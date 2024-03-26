@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Member findId =(Member)request.getAttribute("findId");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사용자 ID 조회</title>
+<title>비밀번호 찾기</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -21,12 +18,20 @@
 		}
 
 		#content{
-			width: 60%;
+			width: 50%;
 			margin: auto;
 			border: 1px solid lightgray;
 			margin-top: 50px;
 		}
 
+		.content{
+			width: 100%;
+			margin: auto;
+		}
+
+		#content2{
+			color: lightgray;
+		}
 
 		#loginword{margin-top: 10px; color: rgb(70, 149, 151);}
 
@@ -44,6 +49,15 @@
 			margin-top: 20px;
 		}
 
+		#memId, #bornDate, #memPhone{
+			background-image: url('resources/mypage/input.png');
+		}
+
+
+		.input:focus{
+			border-color: rgb(70, 149, 151);
+		}
+
 		.input{
 			width: 400px;
 			height: 50px;
@@ -57,10 +71,9 @@
 		}
 		#content{text-align: center;}
 
-		#content2{
-			font-weight: bold;
-			font-size: 20px;
-
+		#content2 > a{
+			text-decoration: none;
+			color: rgb(99, 99, 99);
 		}
 
 		#content3{
@@ -68,21 +81,16 @@
 		}
 
 		div > .btn{
-			width: 150px;
+			width: 100px;
 			height: 40px;
 			background-color: rgb(70, 149, 151);
 			color: white;
 			font-size: 15px;
 			font-weight: bold;
 			margin-bottom: 30px;
-			margin: 40px;
             border-radius: 10px;
-		}
-
-
-		img{
-			width: 200px;
-			height: 200px;
+			margin-left: 50px;
+			margin-right: 50px;
 		}
 
 	
@@ -98,27 +106,27 @@
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
-					<span>아이디 찾기 결과</span>
+					<span>비밀번호 찾기</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/findId" method="post">
+					<form action="<%= contextPath %>/findPwd" method="post">
 						<div id="content1">
-							<img src="resources/mypage/person.png" alt="프로필">
+							<input type="text" name="memId" id="memId" class="input" placeholder="아이디" maxlength="12" required>
+							<input type="text" name="bornDate" id="bornDate" class="input" placeholder="생년월일" maxlength="8" required>
+                            <input type="text" name="memPhone" id="memPhone" class="input" placeholder="전화번호 -제외"required>
 						</div>
+
 						<div id="content2" class="content">
-							<% if(findId == null) {  %>
-								<div>입력하신 정보로 조회된 아이디가 존재하지 않습니다.</div>
-							<% } else { %>
-								<div>입력하신 정보로 조회된 아이디는 <%= findId.getMemId() %>입니다.</div>
-							<% } %>
+							<br>
+							<a href="<%= contextPath %>/findIdPage">아이디 찾기</a>
+						</div>
+
+						<div id="content3">
+							<button type="reset" class="btn">취소</button>
+                            <button type="submit" class="btn">확인</button>
 						</div>
 
 					</form>
-						<div id="content3">
-							<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
-                            <button class="btn" onclick="location.href='<%= contextPath %>/findPwdPage'">비밀번호 찾기</button>
-						</div>
-
 				
 				</div>
 			</div>

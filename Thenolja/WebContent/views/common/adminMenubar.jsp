@@ -206,15 +206,15 @@
                 <li>
                     <a href="#">결제관리</a>
                     <ul>
-                        <li><a href="<%= contextPath %>/refundMem">회원 환불 조회</a></li>
-                        <li><a href="#">비회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
                     </ul>
                 </li>
     
                 <li>
                     <a href="#">고객센터관리</a>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="#">쿠폰</a></li>
                         <li><a href="#">리뷰</a></li>
