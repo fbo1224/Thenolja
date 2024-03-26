@@ -106,7 +106,7 @@
 					<span>비밀번호 재설정</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/findPwd" method="post">
+					<form action="<%= contextPath %>/find.resetPwd" method="post">
 						<div id="content1">
 							<img src="resources/mypage/person.png" alt="프로필">
 						</div>
@@ -116,10 +116,11 @@
 						</div>
 						<div>
                             <span>비밀번호 확인</span>
-                            <input type="password" id="newPwd2" required class="input">
+                            <input type="password" id="newPwd2" required class="input" name="password">
                             <button type="button" onclick="pwdCheck()" id="checkBtn">비밀번호 확인</button>
 						</div>
 						<div id="checkPrint"></div>
+                        <input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
 
 						<script>
 							function pwdCheck() {

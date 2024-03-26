@@ -106,7 +106,22 @@ public class MemberService {
 	}
 	
 //------------------------------------비밀번호 찾기(재설정)---------------------------
-	
+	public int resetPwd(String memId, String memPwd ) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().resetPwd(conn, memId, memPwd);
+					
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 	

@@ -252,8 +252,26 @@ public class MemberDao {
 	
 	
 //----------------------------비밀번호 찾기(재설정)----------------------------------
-	
-	
+	public int resetPwd(Connection conn, String memId, String memPwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("resetPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memPwd);
+			pstmt.setString(2, memId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
