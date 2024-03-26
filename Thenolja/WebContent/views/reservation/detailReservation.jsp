@@ -105,7 +105,7 @@
 
     #reser_btn > button{
         width: 100px;
-        height: 100px;
+        height: 40px;
         border-radius: 10px;
         position: absolute;
         top : 0px;
@@ -113,7 +113,6 @@
         right: 0px;
         left: 0px;
         margin:auto;
-
     }
 
     #rser_price{
@@ -159,7 +158,17 @@
     #refund_btn > button{
         float: right;
     }
-
+    #my_btn{
+    	width: 200px;
+    	height: 50px;
+    	border: 1px solid black;
+    	margin: auto;
+		margin-top: 100px;	
+    }
+	#my_btn > button{
+		width: 200px;
+		height: 50px;
+	}
 
 </style>
 
@@ -172,7 +181,7 @@
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>상세조회</h3></div>
         </div>
@@ -252,6 +261,11 @@
             </div>
         </div>
 
+    </div>
+    <div id="my_btn">
+	    <a href="<%=contextPath%>/myReser.list">
+	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
+	    </a>
     </div>
       <!-- The Modal -->
   <div class="modal" id="myModal">
