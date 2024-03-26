@@ -175,8 +175,80 @@ public class MemberDao {
 		return result;
 	}
 	
-
+	/**
+	 * 회원 탈퇴 수
+	 */
+	public int selectDeleteCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDeleteCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return listCount;
+	}
 	
+	/**
+	 * 탈퇴 회원 목록 조회
+	 */
+	public ArrayList<AdminMember> selectDeleteMemberList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminMember> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDeleteMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminMember adminMember = new AdminMember();
+				
+				adminMember.setMemNo(rset.getInt("MEM_NO"));
+				adminMember.setMemId(rset.getString("MEM_ID"));
+				adminMember.setNickName(rset.getString("NICKNAME"));
+				adminMember.setGradeName(rset.getString("GRADE_NAME"));
+				
+				list.add(adminMember);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 	
 
 }
