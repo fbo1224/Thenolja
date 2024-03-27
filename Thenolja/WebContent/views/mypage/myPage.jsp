@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String gradeName = (String)session.getAttribute("gradeName");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,12 +130,11 @@
             <div id="ct2_1">
                 <img class="img" src="./resources/mypage/profile.png" alt="프로필" style="width: 120px; height: 120px; margin-top: 40px; margin-left: 50px;">
             </div>
-            <div id="ct2_2">
-                <div id="name"><%= loginUser.getMemName() %>님</div>
-            </div>
+            <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
-                <div id="grade">Gold회원</div>
+                    <div id="grade" style="color: goldenrod;"><%= gradeName %></div>
             </div>
+
             <div id="ct2_4">
                 <button type="button" id="update" onclick="location.href='<%= contextPath %>/update.ck'">정보수정</button>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
