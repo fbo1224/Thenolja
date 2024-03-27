@@ -98,5 +98,40 @@ public class ReviewDao {
 		 return list;
 	 }
 	 
+	 /**
+	  * 리뷰 상세 조회
+	  */
+	 public AdminReview detailMemberReview(Connection conn, int reserNo) {
+		 
+		 PreparedStatement pstmt = null;
+		 AdminReview adminReview = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("detailMemberReview");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				adminReview = new AdminReview();
+				adminReview.setHotelName(rset.getString("HOTEL_NAME"));
+				adminReview.setRoomName(rset.getString("ROOM_NAME"));
+				adminReview.setReviewScore(rset.getString("REVIEW_SCORE"));
+				adminReview.setReviewContent(rset.getString("REVIEW_CONTENT"));
+				adminReview.setImgPath(rset.getString("IMG_PATH"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		 
+		 return adminReview;
+	 }
 	 
 }
