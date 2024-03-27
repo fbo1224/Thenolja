@@ -162,6 +162,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
+    				location.href = '<%=contextPath%>/accountCancellation?currentPage=1';
     			}
     			
     		});

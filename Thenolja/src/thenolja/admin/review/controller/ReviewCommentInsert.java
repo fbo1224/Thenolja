@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.admin.review.model.service.ReviewService;
 import thenolja.admin.review.model.vo.AdminComment;
 
 /**
@@ -38,6 +39,14 @@ public class ReviewCommentInsert extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		AdminComment adminComment = new AdminComment();
+		adminComment.setCommentReserNo(reserNo);
+		adminComment.setCommentMemNo(String.valueOf(memNo));
+		adminComment.setCommentContent(content);
+		
+		int result = new ReviewService().insertComment(adminComment);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result > 0 ?  "success" : "fail");
 		
 	}
 

@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.review.model.vo.AdminReview, thenolja.common.model.vo.PageInfo" %>   
 <%
-
-	AdminReview adminReview = (AdminReview)request.getAttribute("adminReview");
-
 	ArrayList<AdminReview> list = (ArrayList<AdminReview>)request.getAttribute("selectReviewMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -221,51 +218,25 @@
       </div>
     </div>
   </div>
-  
-<script>
-	function insertComment(){
-		$.ajax({
+
+
+
+	<script>
+		function insertComment(){
 			
-			url : 'commentInsert.do',
-			type : 'post',
-			data : {
-				content : $('#comment').val(),
-				reserNo : <%=adminReview.getReserNo()%>,
-				memNo : <%= loginUser.getMemNo()%>
-			},
-			success : function(result){
-				console.log(result);
-			}
-				
-		});
-	}
-
-</script>
-
-<script>
-	function insertComment(){
-		$.ajax({
+			$.ajax({
+				url : 'commentInsert.do',
+				type : 'post',
+				data : {
+					content : $('#contentMessage').val(),
+					memNo : <%= loginUser.getMemNo() %>
+				}
+			});
 			
-			url : 'commentInsert.do',
-			type : 'post',
-			data : {
-				content : $('#comment').val(),
-				reserNo : <%=adminReview.getReserNo()%>,
-				memNo : <%= loginUser.getMemNo()%>
-			},
-			success : function(result){
-				console.log(result);
-			}
-				
-		});
-	}
-
-</script>
-
-
-
-
-
+		}
+	
+	
+	</script>
 
 
 

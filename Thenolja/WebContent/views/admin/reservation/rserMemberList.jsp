@@ -85,7 +85,7 @@
                         		<td><%=adminReservation.getReserName()%></td>
                         		<td><%=adminReservation.getMemPhone() %></td>
 	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
-	                            <td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
+	                            <td><button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
                         </tr>
                         <% } %>
                        <% } %>
@@ -150,6 +150,7 @@
     	}
     </script>
     
+  
     <script>
     
     	function refundReserMem(e){
@@ -160,6 +161,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
+    				location.href = '<%=contextPath%>/reserMember?currentPage=1';
     			}
     			
     		});
@@ -167,7 +169,9 @@
     
     </script>
     
-    
+
+
+<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
     
     
     
