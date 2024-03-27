@@ -5,7 +5,7 @@
     <%
     
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
-    	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf(" ") +1);
+    	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") +1);
     	String phoneNum = h.getHotelPhone().substring(4);
     	System.out.println(phoneNum);
     	System.out.println(detailAddr);
