@@ -34,7 +34,6 @@
 		     )    
 	</entry>
 	
-	
 	<entry key="selectListCount">
 		SELECT
       	 	  COUNT(*)
@@ -241,10 +240,41 @@
       	      TB_HOTEL.HOTEL_NO = ?
 	</entry>
 	
+	<entry key="updateHotel">
+		UPDATE
+		      TB_HOTEL
+		   SET
+		      HOTEL_NAME = ?,
+		      HOTEL_PHONE = ?,
+		      HOTEL_LOCATION = ?,
+		      HOTEL_ADDRESS = ?,
+		      HOTEL_CATEGORY = ?,
+		      HOTEL_INTRO = ?,
+		      HOST_NAME = ?,
+		      HOTEL_PATH = ?
+		WHERE 
+		     HOTEL_NO = ? 
+		  AND
+		     HOTEL_YN = 'Y'
+	</entry>
 	
-	
-	
-	
+	<entry key="deleteAllServiceList">
+		DELETE
+		  FROM
+		      TB_SERVICE
+		 WHERE
+		      HOTEL_NO = ?
+	</entry>
+		
+	<entry key="updateService">
+		INSERT
+		  INTO
+		      TB_SERVICE
+	   VALUES(
+	   		  ?,
+	   		  ?
+		     )
+	</entry>
 	
 	
 	
