@@ -469,6 +469,25 @@ public class HotelDao {
 		return result;
 	}
 	
+	public int updateService(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateService");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for(int i = 0; i < h.getSerList().length; i++) {
+				pstmt.setInt(1, h.getHotelNo());
+				pstmt.setInt(2, Integer.parseInt(h.getSerList()[i]));
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

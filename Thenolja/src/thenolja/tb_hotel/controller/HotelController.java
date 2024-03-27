@@ -251,7 +251,13 @@ public class HotelController {
 		
 		int result = new HotelService().updateHotel(h);
 		
-		view = "";
+		if(result > 0) {
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+		} else {
+			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
+		}
+		
 		return view;
 	}
 	
