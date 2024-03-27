@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세화면</title>
+<title>더놀자 > 공지사항 > 상세</title>
 <style>
 
 #detail-area{

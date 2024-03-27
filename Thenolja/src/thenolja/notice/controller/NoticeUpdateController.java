@@ -15,7 +15,7 @@ import thenolja.notice.service.NoticeServiceImpl;
 /**
  * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/selectNoticeInfo")
+@WebServlet("/update.notice")
 public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,52 +24,38 @@ public class NoticeUpdateController extends HttpServlet {
      */
     public NoticeUpdateController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */  
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		
-	System.out.println("[NoticeUpdateController] param " + request.getParameter("noticeNo"));
-		
-		//인코딩  POST방식
-		request.setCharacterEncoding("UTF-8");
-		
-		// 1. 파라미터로 넘어온 noticeNo(공지사항 번호) 정수형으로 파싱(변환)하여 noticeNo변수에 저장
-		// 값 뽑기
+		// TODO Auto-generated method stub
+		// 상세페이지 조회 시 파라미터 받기
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		String noticeTitle = request.getParameter("noticetitle");
-		String noticeContent = request.getParameter("noticecontent");
+		String flag  = request.getParameter("flag");
 		
-		//2. 가공
-		Notice notice = new Notice();
-		notice.setNoticeTitle(noticeTitle);
-		notice.setNoticeContent(noticeContent);
-		notice.setNoticeNo(noticeNo);
+		System.out.println(request.getParameter("noticeNo"));
+		System.out.println(request.getParameter("flag"));
 		
-		// 3.ServiceImpl로 호출
+		System.out.println("[NoticeDetailController noticeNo] " + noticeNo);  
+		System.out.println("[NoticeDetailController flag] " 	+ flag);  
+
 		Notice result = new Notice();
-		result = new NoticeServiceImpl().selectNoticeOne(noticeNo);
+		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
 		
-		System.out.println("[NoticeUpdateController result] " + result);
+		System.out.println("[NoticeDetailController result] " + result);
 		
-		
-		//3)응답화면지정 
-		if( noticeNo > 0) { 
+		if(result != null) {
+			request.setAttribute("notice", result);
+			request.getRequestDispatcher("views/notice/noticeUpd.jsp").forward(request, response); //포워딩
 			
-			response.sendRedirect(request.getContextPath() + "/detail.notice?noticeNo=" + noticeNo);
+		}else { //실패 => 에러페이지 보내기
 			
-			
-		} else {
-			request.setAttribute("errorMsg", "공지사항 수정 실패~");
-			request.getRequestDispatcher("views/common/errorPage.jsp")
-				   .forward(request, response);
-		}
-		
+			request.setAttribute("errorMsg", "공지사항 상세 조회 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
+			view.forward(request,response);	
+		}		
 		
 	}
 

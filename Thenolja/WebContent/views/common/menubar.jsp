@@ -42,11 +42,11 @@ div {
     justify-content: space-evenly;
     padding-top: 30px;
 }
-#header-navi li{
+#header-navi li {
     list-style: none;
     float: left;
 }
-#header-navi a{
+#header-navi a {
     text-decoration: none;
     color: black;
     padding-right: 20px;
@@ -294,7 +294,6 @@ div {
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
-	                        <li><a href="#">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>

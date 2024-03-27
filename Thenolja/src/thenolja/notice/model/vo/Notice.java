@@ -9,19 +9,18 @@ public class Notice {
 	private String createDate;
 	private String status;
 	private int writerNo;
-	private String writer; 	   // ìƒì„¸í™”ë©´ ì¡°íšŒ ì‹œ ì‘ì„±ìëª…
-	private int viewCount;	   // ì¡°íšŒ ìˆ˜
+	private String writer; 	   // »ó¼¼È­¸é Á¶È¸ ½Ã ÀÛ¼ºÀÚ¸í
+	private int viewCount;	   // Á¶È¸ ¼ö
 	
-	// ìƒì„±ì 
-	public Notice() { 
+	public Notice() {
 		super();
 	}
-	// ì €ì¥ ì‹œ íŒŒë¼ë¯¸í„° ì²˜ë¦¬ë¥¼ ìœ„í•œ ìƒì„±ì ìƒì„±
+	// ÀúÀå ½Ã ÆÄ¶ó¹ÌÅÍ Ã³¸®¸¦ À§ÇÑ »ı¼ºÀÚ »ı¼º
 	public Notice(String title, String content) {
 		this.noticeTitle   = title;
 		this.noticeContent = content;
 	}	
-	// ì €ì¥ ì‹œ íŒŒë¼ë¯¸í„° ì²˜ë¦¬ë¥¼ ìœ„í•œ ìƒì„±ì ìƒì„±
+	// ÀúÀå ½Ã ÆÄ¶ó¹ÌÅÍ Ã³¸®¸¦ À§ÇÑ »ı¼ºÀÚ »ı¼º
 	public Notice(String title, String content, String status) {
 		this.noticeTitle   = title;
 		this.noticeContent = content;
@@ -102,6 +101,7 @@ public class Notice {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
+	
 	
 	
 }

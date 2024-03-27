@@ -4,7 +4,7 @@
 <%
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	// String loginStatus = (String)request.getAttribute("loginStatus");
+	String loginStatus = (String)request.getAttribute("loginStatus");
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
