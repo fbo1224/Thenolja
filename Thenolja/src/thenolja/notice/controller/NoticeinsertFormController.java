@@ -29,24 +29,25 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ê´€ë¦¬ìê°€ ì•„ë‹ê²½ìš°ì—ë„ í¬ì›Œë”©ì´ ìˆ˜í–‰ë¨
+		//°ü¸®ÀÚ°¡ ¾Æ´Ò°æ¿ì¿¡µµ Æ÷¿öµùÀÌ ¼öÇàµÊ
 		
-		HttpSession session = request.getSession();
-	//	Member loginUser = (Member)session.getAttribute("loginUser");
+				HttpSession session = request.getSession();
+			//	Member loginUser = (Member)session.getAttribute("loginUser");
+					
+	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
+				
+				//ÀÀ´äÈ­¸é	
+				RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
+				view.forward(request, response);
 			
-//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-		
-		//ì‘ë‹µí™”ë©´	
-		RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp");
-		view.forward(request, response);
+		/*				
+				}else {
+					session.setAttribute("alertMsg", "°ü¸®ÀÚ°¡ ¾Æ´Õ´Ï´Ù. ");
+					response.sendRedirect(request.getContextPath());
+				}	
+				*/
+			}
 	
-/*				
-		}else {
-			session.setAttribute("alertMsg", "ê´€ë¦¬ìê°€ ì•„ë‹™ë‹ˆë‹¤. ");
-			response.sendRedirect(request.getContextPath());
-		}	
-		*/
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,11 +1,14 @@
 package thenolja.admin.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import thenolja.admin.review.model.vo.AdminComment;
 
 /**
  * Servlet implementation class ReviewCommentInsert
@@ -34,7 +37,7 @@ public class ReviewCommentInsert extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String content = request.getParameter("content");
 		
-		
+		AdminComment adminComment = new AdminComment();
 		
 	}
 

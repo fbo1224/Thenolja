@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-		<comment>
+	<comment>
 		Notice Mapper
 	</comment>
 	
@@ -85,5 +85,6 @@
 			SET     STATUS = 'N'
 			WHERE   NOTICE_NO = ?				
 	</entry>
+	
 	
 </properties>
