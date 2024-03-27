@@ -28,7 +28,8 @@
 		        HOTEL_NAME,
 		        MEM_ID,
 		        NICKNAME,
-		        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE"
+		        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE",
+		        RV_RESER_NO
 		  FROM
 		        TB_MEMBER
 		  JOIN
@@ -47,7 +48,7 @@
 		       REVIEW_YN = 'Y'
 		  GROUP
 		    BY
-		            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')
+		            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD'),RV_RESER_NO
 		ORDER
 		  BY
 		        CREATE_DATE DESC) A)

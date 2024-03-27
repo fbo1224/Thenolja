@@ -77,7 +77,8 @@
                         			<td><%=adminReview.getMemId() %></td>
                         			<td><%=adminReview.getNickName() %></td>
                         			<td><%=adminReview.getCreateDate() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=adminReview.getReserNo()%>)">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
                         		</tr>
                         	<% } %>
                         <% } %>
@@ -103,6 +104,40 @@
         <div id="footer"></div>
 
     </div>
+    
+    
+    <script>
+    	function detailReview(e){
+    		console.log(e);
+    		$.ajax({
+    			url : 'detailReview.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				
+    			}
+    		});
+    	}
+    
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">

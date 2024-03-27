@@ -84,7 +84,7 @@ public class ReviewDao {
 				adminReview.setMemId(rset.getString("MEM_ID"));
 				adminReview.setNickName(rset.getString("NICKNAME"));
 				adminReview.setCreateDate(rset.getString("CREATE_DATE"));
-				
+				adminReview.setReserNo(rset.getInt("RV_RESER_NO"));
 				list.add(adminReview);
 
 			}
