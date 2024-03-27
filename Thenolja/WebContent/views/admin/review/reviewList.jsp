@@ -224,7 +224,25 @@
   
 
 
+<script>
+	function insertComment(){
+		$.ajax({
+			
+			url : 'commentInsert.do',
+			type : 'post',
+			data : {
+				content : $('#comment').val(),
+				reserNo : <%=adminReview.getReserNo()%>,
+				memNo : <%= loginUser.getMemNo()%>
+			},
+			success : function(result){
+				console.log(result);
+			}
+				
+		});
+	}
 
+</script>
 
 
 
