@@ -1,10 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="thenolja.tb_hotel.model.vo.*" %>
+    <%
+    
+     	Hotel h = (Hotel)request.getAttribute("hotelInfo");
+    	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf(" ") +1);
+    	String phoneNum = h.getHotelPhone().substring(4);
+    	System.out.println(phoneNum);
+    	System.out.println(detailAddr);
+    	ArrayList<String> list = new ArrayList();
+    	
+    	for(int i = 0; i < h.getSerList().length; i++){
+	    	if(h.getSerList()[i] != null){
+	    		list.add(h.getSerList()[i]);
+	    	}
+    	}
+    	System.out.println(list);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <style>
@@ -186,25 +205,29 @@ label{
 	width: 100%;
 	resize: false;
 }
-		
 </style>
 </head>
 	<body>
-		<%@ include file="../common/adminMenubar.jsp" %>
+		<%@ include file="../common/menubar.jsp" %>
 
 			<div id="wrap">
 				<div id="title-div">
 					<h2>숙소정보수정하기</h2>
 				</div>
+				<%if(h != null){ %>
 				<div id="content-div">
 					<form method="post" id="content-add-form" action="<%= contextPath %>/update.hotels" 
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
-								<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo">
+								<%--<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo"> --%>
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
-								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="loadName" required>
-								<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="detailAddr" required>
+								<input type="text" id="sample4_roadAddress"
+								 placeholder="도로명주소" name="loadName" value="<%= h.getHotelAddress() %>"
+								 required readonly>
+								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
+								 name="detailAddr" value="<%= detailAddr %>"
+								 required readonly>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
 
@@ -212,15 +235,15 @@ label{
 								<div class="hotel-cate-div" >
 								<label>숙소종류</label>
 									<select class="form-control" name="hotelCate">
-										<option>호텔</option>
-										<option>모텔</option>
-										<option>게스트하우스</option>
-										<option>캠핑/글림핑</option>
+										<option >호텔</option>
+										<option >모텔</option>
+										<option >게스트하우스</option>
+										<option >캠핑/글림핑</option>
 									</select>
 								</div>
 								<div class="hotel-cate-div">
 									<label>숙소명</label>
-									<input class="form-control" type="text" name="hotelName">
+									<input class="form-control" type="text" name="hotelName" value="<%= h.getHotelName() %>">
 								</div>
 							</div>
 
@@ -236,13 +259,15 @@ label{
 							<div id="nameNPhone">
 								<div id="nameNPhone-div-1">
 									<label>대표자명</label>
-									<input type="text" required class="form-control" name="ceoName">
+									<input type="text" required class="form-control" name="ceoName" value="<%= h.getHostName() %>" >
 								</div>
 
 								<label id="phone-label">전화번호</label>
 								<div id="nameNPhone-div-2">
 									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" id="Phone-div-2" type="text" name="phone2" placeholder="-제외한 숫자만 입력해주세요.">
+									<input class="form-control" id="Phone-div-2" type="text" name="phone2"
+									 value="<%= phoneNum %>"
+									 placeholder="-제외한 숫자만 입력해주세요.">
 								</div>
 							</div>
 
@@ -251,7 +276,7 @@ label{
 									<h3>숙소 이용 가능한 서비스 목록</h3>
 								</div>
 								<div id="serviceList-half1">
-									<label>wifi</label><input class="form-check-input" type="checkbox" value="1" name="serList">
+									<label>WIFI</label><input class="form-check-input" type="checkbox" value="1" name="serList">
 									<label>금연</label><input class="form-check-input" type="checkbox" value="2" name="serList">
 									<label>헬스장</label><input class="form-check-input" type="checkbox" value="3" name="serList">
 									<label>에어컨</label><input class="form-check-input" type="checkbox" value="4" name="serList">
@@ -260,9 +285,9 @@ label{
 									<label>주차장</label><input class="form-check-input" type="checkbox" value="5" name="serList">
 									<label>반려견동반</label><input class="form-check-input" type="checkbox" value="6" name="serList">
 									<label>엘레베이터</label><input class="form-check-input" type="checkbox" value="7" name="serList">
-									<label>pc</label><input class="form-check-input" type="checkbox" value="8" name="serList">
+									<label>PC</label><input class="form-check-input" type="checkbox" value="8" name="serList">
 								</div>
-
+								
 							</div>
 
 						</div>
@@ -270,7 +295,7 @@ label{
 						<div id="intro-text-area">
 							<label for="intro">소개말을 적어주세요</label>
 							<div>
-								<textarea required class="form-control" rows="5" id="intro" name="introText"></textarea>
+								<textarea required class="form-control" rows="5" id="intro" name="introText" ><%= h.getHotelIntro() %></textarea>
 							</div>
 						</div>
 						
@@ -280,6 +305,10 @@ label{
 					</form>
 
 				</div>
+				<%} else { %>
+					<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
+					<button onclick="history.back();" >돌아가기</button>
+				<%} %>
 			</div>
 				
 		<script>
@@ -302,7 +331,7 @@ label{
 	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 	                }
 	               
-	                document.getElementById('sample4_postcode').value = data.zonecode;
+	                // document.getElementById('sample4_postcode').value = data.zonecode;
 	                document.getElementById("sample4_roadAddress").value = roadAddr;
 	             
 	                var guideTextBox = document.getElementById("guide");
@@ -323,6 +352,25 @@ label{
 	            }
 	        }).open();
 	    }
+	    
+	    $('option').each(function(){
+	    	if('<%= h.getHotelCategory() %>' == $(this).text().trim()){
+	    		$(this).attr('selected', 'true');
+	    	}
+	    });
+	    
 	</script>
+	
+	<script>
+	 	$('input[type=checkbox]').each(function(){
+	 		<%for(int i = 0; i < list.size(); i++) {%>
+	 		if('<%= list.get(i) %>' == $(this).prev().text()){
+				$(this).attr('checked', 'true');
+	 			console.log($(this).prev().text());
+	 		}
+	 		<%} %>
+	   	});
+	</script>
+	
 </body>
 </html>
