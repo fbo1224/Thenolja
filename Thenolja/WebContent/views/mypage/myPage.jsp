@@ -99,6 +99,14 @@
 
     .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black; font-weight: bold;}
     .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
+<<<<<<< HEAD
+
+    #ct4_2 > div{
+        width: 70px;
+        margin-left: 20px;
+    }
+=======
+>>>>>>> 40e3cc741f8cfa9dd48c1f68a7d4d4d7adb6234a
 </style>
 
 </head>
