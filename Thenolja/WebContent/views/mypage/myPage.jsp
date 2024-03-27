@@ -100,7 +100,8 @@
     .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
 
     #ct4_2 > div{
-        width: 100px;
+        width: 70px;
+        margin-left: 20px;
     }
 </style>
 
