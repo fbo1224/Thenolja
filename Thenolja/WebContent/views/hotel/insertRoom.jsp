@@ -4,8 +4,8 @@
     	int hotelNo = (int)request.getAttribute("hotelNo");
     	int roomCnt = (int)request.getAttribute("roomCnt");
     	
-    	System.out.println("hotelNO " + hotelNo);
-    	System.out.println("roomCnt " + roomCnt);
+    	// System.out.println("hotelNo " + hotelNo);
+    	// System.out.println("roomCnt " + roomCnt);
     	
     %>
 <!DOCTYPE html>
