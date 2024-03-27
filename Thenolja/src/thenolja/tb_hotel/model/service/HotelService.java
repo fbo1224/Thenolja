@@ -113,7 +113,20 @@ public class HotelService {
 		return h;
 	}
 	
-	
+	public int updateHotel(Hotel h) {
+		Connection conn = getConnection();
+		HotelDao hd = new HotelDao();
+		int resultHotel = hd.updateHotel(conn, h);
+		int resultSerList = hd.deleteAllServiceList(conn, h);
+		
+		if((resultHotel * resultSerList) > 0) {
+			
+		}
+		
+		close(conn);
+		
+		return ;
+	}
 	
 	
 	
