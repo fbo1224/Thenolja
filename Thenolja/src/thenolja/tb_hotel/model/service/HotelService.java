@@ -113,7 +113,24 @@ public class HotelService {
 		return h;
 	}
 	
-	
+	public int updateHotel(Hotel h) {
+		Connection conn = getConnection();
+		HotelDao hd = new HotelDao();
+		int resultHotel = hd.updateHotel(conn, h);
+		int resultSerListDel = hd.deleteAllServiceList(conn, h);
+		int resultSerList = 0;
+		
+		if((resultHotel * resultSerListDel) > 0) {
+			resultSerList = hd.updateService(conn, h);
+		}
+		
+		if((resultHotel * resultSerListDel * resultSerList) > 0) {
+			commit(conn);
+		}
+		close(conn);
+		
+		return (resultHotel * resultSerListDel * resultSerList);
+	}
 	
 	
 	

@@ -425,6 +425,69 @@ public class HotelDao {
 		return serList;
 	}
 	
+	public int updateHotel(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, h.getHotelName());
+			pstmt.setString(2, h.getHotelPhone());
+			pstmt.setString(3, h.getHotelLocation());
+			pstmt.setString(4, h.getHotelAddress());
+			pstmt.setString(5, h.getHotelCategory());
+			pstmt.setString(6, h.getHotelIntro());
+			pstmt.setString(7, h.getHostName());
+			pstmt.setString(8, h.getHotelPath());
+			pstmt.setInt(9, h.getHotelNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteAllServiceList(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAllServiceList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, h.getHotelNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateService(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateService");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for(int i = 0; i < h.getSerList().length; i++) {
+				pstmt.setInt(1, h.getHotelNo());
+				pstmt.setInt(2, Integer.parseInt(h.getSerList()[i]));
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

@@ -35,6 +35,7 @@ public class HotelServlet extends HttpServlet {
 		// System.out.println(mapping);
 		
 		HotelController hc = new HotelController();
+		
 		String view = "";
 		boolean flag = true;
 		request.setCharacterEncoding("UTF-8");
