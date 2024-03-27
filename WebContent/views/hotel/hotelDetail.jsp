@@ -141,7 +141,6 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
 	<div id="detail-wrap">
 		<%@ include file="./common/searchForm.jsp" %>
 		<%if(dh != null) { %>
