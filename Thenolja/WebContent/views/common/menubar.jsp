@@ -369,6 +369,5 @@ div {
 	    </div>
 	  </div>
 	</div>
-	<script>window.onload = () => {location.href = location.href}</script>
 </body>
 </html>
