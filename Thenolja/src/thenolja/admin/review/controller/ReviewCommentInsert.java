@@ -34,7 +34,7 @@ public class ReviewCommentInsert extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String content = request.getParameter("content");
 		

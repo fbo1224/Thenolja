@@ -134,7 +134,6 @@
     
     <script>
     	function detailReview(e){
-    		console.log(e);
     		$.ajax({
     			url : 'detailReview.do',
     			data : {reserNo : e},
