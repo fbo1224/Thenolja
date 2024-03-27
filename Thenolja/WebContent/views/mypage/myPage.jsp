@@ -179,7 +179,7 @@
         <div id="content4" class="content">
             
             <div id="ct4_1"><span>고객센터 >></span></div>
-            <div id="ct4_2" style="position: relative;"><div style="position: absolute;"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><span class="link2">이용내역</span></a></div></div>
+            <div id="ct4_2" style="position: relative;"><div style="position: absolute;"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><span style="border:1px solid black;" class="link2">이용내역</span></a></div></div>
             <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><span class="link2">공지사항</span></a></div>
             <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><span class="link2" >자주묻는질문</span></a></div>
             
