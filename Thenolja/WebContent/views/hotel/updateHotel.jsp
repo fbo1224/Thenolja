@@ -305,8 +305,8 @@ label{
 						</div>
 						
 						<div align="center">
-							<button class="btn btn btn-outline-info" type="submit">추가</button>
-							<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
+							<button class="btn btn btn-outline-info" type="submit">수정하기</button>
+							<button class="btn btn btn-outline-info" type="button" onclick="history.back();" >돌아가기</button>
 						</div>
 					</form>
 				<%} else { %>
