@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
     
 <%
-	//String contextPaths = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 등록 화면</title>
+<title>더놀자 > 공지사항 > 등록</title>
+
 <style>
 #txtArea_content{
 	width:650px;
@@ -308,7 +308,6 @@ function countText(){
  
 </head>
 <body>
-
 	<div class="container">
 	
 	<!-- logo START -->

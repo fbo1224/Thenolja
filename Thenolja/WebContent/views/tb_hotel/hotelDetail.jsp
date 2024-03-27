@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_hotel.model.vo.*" %>    
-    
-    <%
-     	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
-    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +10,8 @@
 #detail-content{
 	width: 100%;
 	height: 100%;
-	padding-bottom: 50px;
+	border: 1px solid red;
+	padding-bottom: 100px;
 }
 #detail-wrap {
 	width: 1200px;
@@ -34,11 +30,13 @@
 	margin: auto;
 	margin-top: 30px;
 	width: 80%;
+	border: 1px solid red;
+	
 }
 #detail-content-img{
 	margin: auto;
 	width: 80%;
-	box-shadow: 2px 2px 2px gray;
+	border: 1px solid red;
 }
 #detail-content-img > img{
 	width:100%;
@@ -47,16 +45,16 @@
 #detail-content-imgInfo{
 	margin: auto;
 	width: 80%;
+	border: 1px solid red;
 	display: flex;
 	justify-content: space-between;
 	height: 50px;
-	border-bottom: 1px solid gray;
 }
 #detail-content-services{
 	margin: auto;
 	width: 80%;
 	height: 50px;
-	border-bottom: 1px solid gray;
+	border: 1px solid red;
 }
 #detail-content-services > ul {
 	margin: 0px;
@@ -68,35 +66,24 @@
 #detail-content-rooms {
 	margin: auto;
 	width: 80%;
-	padding: 5px;
+	height: 600px;
+	border: 1px solid red;
 }
 .content-rooms-card{
 	width: 80%;
 	height: 28%;
+	border: 1px solid red;
 	margin: auto;
-	border: 1px solid gray;
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	margin-top: 10px;
-	padding: 10px;
-}
-.content-rooms-card:hover{
-	cursor: pointer;
-	scale: 105%;
-	border-color: skyblue;
 }
 .content-rooms-card img {
 	width: 30%;
 	height: 90%;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	box-shadow: 2px 2px 2px gray;
-
-}
-#detail-content-intro {
-	border-top: 1px solid gray;
+	border-radius: 10px;
 }
 #detail-content-intro, #detail-content-cancel {
 	width: 80%;
@@ -104,47 +91,35 @@
 	margin: auto;
 	border-bottom: 1px solid gray;
 }
-#detail-content-intro, #detail-content-cancel {
-	padding: 10px;
+#detail-content-intro, #detail-content-cancel h3 {
+	margin-top: 10px;
 }
 #detail-content-review {
 	width: 80%;
+	height: 250px;
 	margin: auto;
-	padding: 10px;
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
 }
 .content-review-1 {
 	width: 60%;
 	height: 40%;
+	border: 1px solid red;
 	margin: auto;
 	margin-top: 15px;
 	border-radius: 12px;
-	padding: 10px;
 }
 .review-1-div {
 	display: flex;
-	justify-content: space-between;
-	margin: 0px 3px;	
+	justify-content: space-between;	
 }
-#detail-content-imgInfo span{
-	padding: 3px;
-}
-.content-rooms-card div {
-	padding: 5px;
-	font-size: 14px;
-}
-.room-infos {
-	width: 40%;
-}
-
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../views/common/menubar.jsp" %>
 	<div id="detail-wrap">
 		<%@ include file="./common/searchForm.jsp" %>
-		<%if(dh != null) { %>
+		
 		<div id="detail-content">
 			<div id="detail-content-btns">
 				<button class="btn btn-sm btn-primary" >예약하기</button>
@@ -153,56 +128,79 @@
 			
 			<div id="detail-content-title">
 				<h3>
-					<span><%= dh.getHotelName() %></span> <span>호텔</span>
+					<span>마리안느</span> <span>호텔</span>
 				</h3>
 			</div>
 			<div id="detail-content-img">
-				<img src="<%= dh.getHotelPath() %>" alt="pic">
+				<img src="views\tb_hotel\css\pepe5.jpg">
 			</div>
 			
 			<div id="detail-content-imgInfo">
-				<div>
-					 <span>★</span>
-					 <span><%= dh.getCountReviews() %> 개의 리뷰</span>
-					 <span>리뷰조회</span>
-				</div>
-				<div>
-					<span><%= dh.getHotelCate() %></span>
-				</div>
+				<div><span>★</span><span>993개의 리뷰</span><span>리뷰조회</span></div>
+				<div><span>호텔/특급</span></div>
 			</div>
 			
 			<div id="detail-content-services">
 				<ul>
-					<%for(ServiceList sl : dh.getSerList()) { %>
-						<li><%= sl.getServiceName() %></li>
-					<%} %>
-					
+					<li>WIFI</li>
+					<li>금연</li>
+					<li>헬스장</li>
+					<li>에어컨</li>
+					<li>주차장</li>
+					<li>반려견동반</li>
+					<li>엘레베이터</li>
+					<li>PC</li>				
 				</ul>
 			</div>
 			
 			<div id="detail-content-rooms">
-				<h3 style="text-align: center; margin-top: 5px;">객실</h3>
-					<%for(RoomInfo ri : dh.getRoomList()) { %>
-					<div class="content-rooms-card">
-						<img src="<%= ri.getRoomImg() %>">
-						<div class="room-infos">
-							<h4><%= ri.getRoomName() %></h4>
-							<p>입실시간 : <%= ri.getCheckInTime() %></p>
-							<p>퇴실시간 : <%= ri.getCheckOutTime() %></p>
-							<p>가격 : <%= ri.getRoomPrice() %></p>
-						</div>
-						<div>
-							<p>쿠폰적용가능</p>
-							<%-- 객실예약 기능 없음 --%>
-							<button class="btn btn-sm btn-info">객실 예약</button>
-						</div>
-					</div>			
-					<%} %>
+				<h3 style="text-align: center; margin-top: 5px;">객실 선택</h3>
+				<div class="content-rooms-card">
+					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<div>
+						<h3>오션뷰 1호실</h3>
+						<p>입실 16:00</p>
+						<p>퇴실 11:00</p>
+					</div>
+					<div>
+						<p>쿠폰적용가능</p>
+						<button class="btn btn-sm btn-info">객실 예약</button>
+					</div>
+				</div>
+				
+				<div class="content-rooms-card">
+					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<div>
+						<h3>오션뷰 1호실</h3>
+						<p>입실 16:00</p>
+						<p>퇴실 11:00</p>
+					</div>
+					<div>
+						<p>쿠폰적용가능</p>
+						<button class="btn btn-sm btn-info">객실 예약</button>
+					</div>
+				</div>
+				
+				<div class="content-rooms-card">
+					<img src="views\tb_hotel\css\pepe2.jpeg">
+					<div>
+						<h3>오션뷰 1호실</h3>
+						<p>입실 16:00</p>
+						<p>퇴실 11:00</p>
+					</div>
+					<div>
+						<p>쿠폰적용가능</p>
+						<button class="btn btn-sm btn-info">객실 예약</button>
+					</div>
+				</div>
 			</div>
 			
 			<div id="detail-content-intro">
 				<h3>숙소소개</h3>
-				<p><%= dh.getHotelIntro() %></p>
+				<p>
+				    강문해변 앞에 자리 잡아 객실에서 드넓고 아름다운 바다를 감상할 수 있습니다.<br>
+				    아름다운 대자연과 어우러지는 특별하고도 환상적인 경험을 느낄 수 있습니다.
+				</p>
 			</div>
 			
 			<div id="detail-content-cancel">
@@ -215,23 +213,27 @@
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
-					<%for(HotelReview hr : dh.getReviewList() ){ %>
-					<div class="content-review-1 card">
+					<div class="content-review-1">
 						<div class="review-1-div">
-							<span><%= hr.getReserName() %></span><span><%= hr.getCreateDate() %></span>
+							<span>user01</span><span>골드</span>
 						</div>
 						<div>
-							<span><%= hr.getReviewContent() %></span>
+							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
 						</div>
 					</div>
-					<%} %>
+					<div class="content-review-1">
+						<div class="review-1-div">
+							<span>user02</span><span>실버</span>
+						</div>
+						<div>
+							<span>청결하고 사장님이 친절하셔서 부담없이 이용했습니다!</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			
 		</div>
-		<%} else { %>
-			<h1>찾을 수 없습니다.</h1>
-		<%} %>
+		
 	</div>
 </body>
 </html>
