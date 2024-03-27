@@ -39,7 +39,7 @@ public class ReviewCommentInsert extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		AdminComment adminComment = new AdminComment();
-		adminComment.setCommentReserNo(reserNo);
+		// adminComment.setCommentReserNo(reserNo);
 		adminComment.setCommentMemNo(String.valueOf(memNo));
 		adminComment.setCommentContent(content);
 		
