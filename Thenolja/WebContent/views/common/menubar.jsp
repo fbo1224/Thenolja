@@ -294,7 +294,6 @@ div {
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
-	                        <li><a href="#">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>
