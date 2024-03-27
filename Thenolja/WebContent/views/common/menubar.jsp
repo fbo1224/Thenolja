@@ -321,7 +321,6 @@ div {
 		         	<li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
 		         	<li><a href="<%= contextPath %>/myPage">마이페이지
-		        	<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
 		         	</a></li>
 		        <% } %>
 		        

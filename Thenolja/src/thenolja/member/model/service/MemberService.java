@@ -123,7 +123,16 @@ public class MemberService {
 		return result;
 	}
 	
-	
+//----------------------------------------회원등급 조회-------------------------------
+	public String selectGrade(int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new MemberDao().selectGrade(conn, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 	
