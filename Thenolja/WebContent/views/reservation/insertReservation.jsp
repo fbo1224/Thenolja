@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
-<%@ page import="java.util.ArrayList" %>   
+<%@ page import="java.util.ArrayList, thenolja.tb_reservation.model.vo.Reservation" %> 
 <%
-   ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+    ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+
+	Reservation reser = (Reservation)request.getAttribute("reser");
 
 
 %>   
@@ -168,9 +170,93 @@
             <div id="left_img">
                 <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
+<<<<<<< Updated upstream
             
             <div id="left_title">
             	<h2>숙소 예약</h2>
+=======
+            <div id="left_title"><h2>숙소 예약</h2></div>
+        </div>
+        <div id="detail">
+            <div id="reser_info">
+
+                <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px"></div>
+
+                <div id="reser_detail">
+                    <h2>마리안느 호텔</h2>
+                    <p>슈페리어 더블(오션뷰)</p>
+                    <p>2인</p>
+                    <p>117,000원</p>
+                    <p>2024-02-28 ~ 2024-02-29</p>
+                </div>
+            </div>
+
+            <div id="price_info">
+                <div id="reser_price">
+                    <table>
+                        <tr>
+                            <td width="400px">결제금액 : 333,000원</td>
+                            <td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
+                            <td width="400px">할인 금액 : 0원</td>
+                            <td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
+                            <td width="400px">결제금액 : 333,000원</td>
+                        </tr>
+                    </table>
+                </div>
+ 
+            <form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+                <div id="reser_mem_info">
+                    <br>
+                    <h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
+                    <br>
+                    <div id="mem-name">
+                        <h5>*예약자 이름</h5>
+                        <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                    </div>
+                    <div id="mem-phone">
+                        <h5>*전화 번호</h5>
+                        <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+                    </div>
+                
+                    <div id="mem-bicycle">
+                        <br>
+                        <h5>*이동 방식</h5>
+                        <input type="checkbox" name="bicycle" id="car" value="car"> 차량
+                        <input type="checkbox" name="bicycle" id="walk" checked value="road"> 도보
+                    </div>
+                </div>
+                     <!--              
+                    <script>
+                    	function paybtn(){
+                    		const value = document.getElementByName('bicycle').value;
+                    		console.log(value);
+                    	}
+                    </script>-->   
+                <div id="reser-coupon">
+                    <br>
+                    <h3>할인</h3>
+                    <br>
+                    <h5>쿠폰</h5>
+                    <br>
+                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
+                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+                    <!-- onclick="location.href='<%=contextPath%>/selectCoupon'" -->
+                </div>
+                <div id="reser_pay">
+                    <h3>결제 수단</h3>
+                    <br>
+                    <input type="button" id="payment" value="무통장 입금">
+                    <br><br>
+                    <h5>신한은행 110-424-432780 예금주((주)더놀자)</h5>
+                    <h5 style="color:red">"반드시 예약자 성함으로 입금해주세요"</h5>
+                </div>
+                <div id="reservation">
+                    <button type="submit" id="reser-btn">?원 결제하기</button>
+
+                    
+                </div>
+            </form>
+>>>>>>> Stashed changes
             </div>
         </div>
         <!-- /0-1. 왼쪽 상단 '<' 숙소예약 끝 -->
@@ -242,14 +328,13 @@
 	                
 	                <!-- 0-2-2-3. 쿠폰 정보 시작 -->
 	                <div id="reser-coupon">
-	                
 	                    <br>
 	                    <h3>할인</h3>
 	                    <br>
 	                    <h5>쿠폰</h5>
 	                    <br>
 	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="noLogin()">쿠폰 적용</button>
 	                </div>
 	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
 	                

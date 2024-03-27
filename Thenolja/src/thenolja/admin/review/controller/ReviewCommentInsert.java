@@ -1,31 +1,23 @@
-package thenolja.tb_reservation.cotroller;
+package thenolja.admin.review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.member.model.vo.Member;
-import thenolja.tb_coupon.model.vo.Coupon;
-import thenolja.tb_reservation.model.Service.ReserService;
-import thenolja.tb_reservation.model.vo.Reservation;
-
 /**
- * Servlet implementation class insertReservation
+ * Servlet implementation class ReviewCommentInsert
  */
-@WebServlet("/insertReservation")
-public class ReservationInserFormController extends HttpServlet {
+@WebServlet("/commentInsert.do")
+public class ReviewCommentInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationInserFormController() {
+    public ReviewCommentInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +26,16 @@ public class ReservationInserFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		String content = request.getParameter("content");
 		
-		request.setAttribute("insertReservation", list);
-		Reservation reser = new Reservation();
-		request.setAttribute("reser", reser);
-		//System.out.println(list);
 		
-		//response.sendRedirect("/views/reservation/insertReservation.jsp");
-		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		
-		view.forward(request, response);
 	}
 
 	/**
