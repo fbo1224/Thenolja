@@ -26,5 +26,9 @@ replay_pid*
 
 /Servers
 
+<<<<<<< Updated upstream
 /driver.properties
 
+=======
+Thenolja/sql/driver/driver.properties
+>>>>>>> Stashed changes
