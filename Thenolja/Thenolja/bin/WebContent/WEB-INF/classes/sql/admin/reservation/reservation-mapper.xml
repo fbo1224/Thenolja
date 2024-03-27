@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		reservation Mapper
+	</comment>
+	
+	   <entry key="selectReserCount">
+	   SELECT
+	        COUNT(*)
+	  FROM
+	        TB_RESERVATION
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	  WHERE
+	        MEM_STATUS = 'Y'
+   </entry>
+   
+   
+   <entry key="selectReserMember">
+   	   SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+					        RESER_NO,
+					        MEM_ID,
+					        RESER_NAME,
+					        MEM_PHONE
+					  FROM
+					        TB_RESERVATION
+					  JOIN
+					        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+					  JOIN
+					        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+					 WHERE
+					        MEM_STATUS = 'Y'
+					   AND
+					   		CANCEL_YN = 'N'
+					 ORDER
+		                BY
+		                     RESER_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   
+   
+   <entry key="selectDetailReserMember">
+	    SELECT 
+	        HOTEL_NAME,
+	        HOTEL_PATH,
+	        TO_CHAR(RESER_DATE,'YYYY.MM.DD')"RESER_DATE",
+	        TO_CHAR(TB_RESERVATION.CHECKIN_TIME,'YYYY.MM.DD') "CHECKIN_TIME",
+	        TO_CHAR(TB_RESERVATION.CHECKOUT_TIME,'YYYY.MM.DD')"CHECKOUT_TIME",
+	        BICYCLE,
+	        PEOPLE,
+	        PAYMENT,
+	        PAYMENT_PRICE
+	  FROM
+	        TB_RESERVATION
+	  JOIN
+	        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
+	  JOIN
+	        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	WHERE
+	        CANCEL_YN = 'N'
+	  AND
+	  		RESER_NO = ?
+	GROUP
+	  BY
+	      HOTEL_NAME, HOTEL_PATH, RESER_DATE, TB_RESERVATION.CHECKIN_TIME, TB_RESERVATION.CHECKOUT_TIME, BICYCLE, PEOPLE, 
+	      PAYMENT, PAYMENT_PRICE
+   
+   </entry>
+   
+   <entry key="refundReser">
+	    UPDATE
+	        TB_RESERVATION
+	  SET 
+	        CANCEL_YN = 'Y'
+	 WHERE
+	        RESER_NO = ?
+   </entry>
+   
+   <entry key="selectNonMemCount">
+	   	SELECT
+		        COUNT(*)
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		  WHERE
+		        MEM_STATUS = 'N'
+   
+   </entry>
+   
+   <entry key="selectReserNonMember">
+      	   SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+					        RESER_NO,
+					        RESER_NAME,
+					        MEM_PHONE
+					  FROM
+					        TB_RESERVATION
+					  JOIN
+					        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+					 WHERE
+					        MEM_STATUS = 'N'
+					   AND
+					   		CANCEL_YN = 'N'
+					 ORDER
+		                BY
+		                     RESER_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?  
+   	 
+   
+   
+   </entry>
+   
+	
+	
+	
+</properties>

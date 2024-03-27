@@ -5,18 +5,23 @@
     <%
     
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
-    	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf(" ") +1);
-    	String phoneNum = h.getHotelPhone().substring(4);
-    	System.out.println(phoneNum);
-    	System.out.println(detailAddr);
-    	ArrayList<String> list = new ArrayList();
-    	
-    	for(int i = 0; i < h.getSerList().length; i++){
-	    	if(h.getSerList()[i] != null){
-	    		list.add(h.getSerList()[i]);
+    	ArrayList<String> list = null;
+    	String detailAddr = "";
+    	String phoneNum = "";
+    	String BeforeImgName = "";
+    	if(h != null){
+	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") + 1);
+	    	phoneNum = h.getHotelPhone().substring(4);
+	    	BeforeImgName = h.getHotelPath().substring(h.getHotelPath().lastIndexOf("/") + 1);
+	    	list = new ArrayList();
+	    	
+	    	for(int i = 0; i < h.getSerList().length; i++){
+		    	if(h.getSerList()[i] != null){
+		    		list.add(h.getSerList()[i]);
+		    	}
 	    	}
     	}
-    	System.out.println(list);
+    	System.out.println(BeforeImgName);
     %>
 <!DOCTYPE html>
 <html>
@@ -141,18 +146,16 @@ div {
 #Phone-div-2{
 	width: 60%;
 }
-#nameNimg-div{
-	width:80%;
-	margin:auto;
+.nameNimg-div{
+	width:50%;
+	height: 100%;
+	display:inline-block;
 	padding: 10px;
 	text-align: center;
+	float:left;
 }
 #nameNimg-div label {
 	display: blick;
-	padding: 10px;
-}
-
-#nameNimg-div input {
 	padding: 10px;
 }
 #hotel-serviceList h3{
@@ -214,8 +217,8 @@ label{
 				<div id="title-div">
 					<h2>숙소정보수정하기</h2>
 				</div>
-				<%if(h != null){ %>
 				<div id="content-div">
+				<%if(h != null){ %>
 					<form method="post" id="content-add-form" action="<%= contextPath %>/update.hotels" 
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
@@ -227,7 +230,7 @@ label{
 								 required readonly>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
 								 name="detailAddr" value="<%= detailAddr %>"
-								 required readonly>
+								 required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
 
@@ -248,9 +251,12 @@ label{
 							</div>
 
 							<div id="hotel-nameNImg">
-								<div id="nameNimg-div">
+								<div class="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input type="file" name="hotelImg" required>
+									<input width="50%" type="file" name="hotelImg">
+								</div>
+								<div class="nameNimg-div">
+									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
 								</div>
 							</div>
 						</div>
@@ -301,14 +307,14 @@ label{
 						
 						<div align="center">
 							<button class="btn btn btn-outline-info" type="submit">추가</button>
+							<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
 						</div>
 					</form>
-
-				</div>
 				<%} else { %>
 					<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
-					<button onclick="history.back();" >돌아가기</button>
+					<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
 				<%} %>
+				</div>	
 			</div>
 				
 		<script>
@@ -349,6 +355,7 @@ label{
 	                    guideTextBox.innerHTML = '';
 	                    guideTextBox.style.display = 'none';
 	                }
+	                $('#sample4_detailAddress').val('');
 	            }
 	        }).open();
 	    }
