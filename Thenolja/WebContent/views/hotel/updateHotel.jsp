@@ -7,8 +7,8 @@
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
     	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") +1);
     	String phoneNum = h.getHotelPhone().substring(4);
-    	System.out.println(phoneNum);
-    	System.out.println(detailAddr);
+    	// System.out.println(phoneNum);
+    	// System.out.println(detailAddr);
     	ArrayList<String> list = new ArrayList();
     	
     	for(int i = 0; i < h.getSerList().length; i++){
@@ -16,7 +16,7 @@
 	    		list.add(h.getSerList()[i]);
 	    	}
     	}
-    	System.out.println(list);
+    	// System.out.println(list);
     %>
 <!DOCTYPE html>
 <html>
@@ -141,18 +141,16 @@ div {
 #Phone-div-2{
 	width: 60%;
 }
-#nameNimg-div{
-	width:80%;
-	margin:auto;
+.nameNimg-div{
+	width:50%;
+	height: 100%;
+	display:inline-block;
 	padding: 10px;
 	text-align: center;
+	float:left;
 }
 #nameNimg-div label {
 	display: blick;
-	padding: 10px;
-}
-
-#nameNimg-div input {
 	padding: 10px;
 }
 #hotel-serviceList h3{
@@ -248,10 +246,12 @@ label{
 							</div>
 
 							<div id="hotel-nameNImg">
-								<div id="nameNimg-div">
+								<div class="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input type="file" name="hotelImg" required>
-									<img src="<%= h.getHotelPath() %>" alt="등록된이미지">
+									<input width="50%" type="file" name="hotelImg" required>
+								</div>
+								<div class="nameNimg-div">
+									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
 								</div>
 							</div>
 						</div>
@@ -302,11 +302,12 @@ label{
 						
 						<div align="center">
 							<button class="btn btn btn-outline-info" type="submit">추가</button>
+							<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
 						</div>
 					</form>
 				<%} else { %>
 					<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
-					<button onclick="history.back();" >돌아가기</button>
+					<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
 				<%} %>
 				</div>	
 			</div>
