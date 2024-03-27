@@ -42,11 +42,11 @@ div {
     justify-content: space-evenly;
     padding-top: 30px;
 }
-#header-navi li{
+#header-navi li {
     list-style: none;
     float: left;
 }
-#header-navi a{
+#header-navi a {
     text-decoration: none;
     color: black;
     padding-right: 20px;
