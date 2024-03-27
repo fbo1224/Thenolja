@@ -174,8 +174,7 @@ public class HotelController {
 	}
 	
 	
-	public String update(HttpServletRequest request, HttpServletResponse response) {
-		String view = "";
+	public int update(HttpServletRequest request, HttpServletResponse response) {
 		Hotel h = null;
 		// 업데이트 데이터 가지고 업데이트 수행
 		if(ServletFileUpload.isMultipartContent(request)) {
@@ -224,6 +223,7 @@ public class HotelController {
 			System.out.println(h);
 			
 			String beforeImgName = beforeImgPath.substring(h.getHotelPath().lastIndexOf("/") + 1);
+			System.out.println(beforeImgName);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
@@ -234,14 +234,8 @@ public class HotelController {
 		
 		int result = new HotelService().updateHotel(h);
 		
-		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
-		} else {
-			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
-			view = "views/common/errorPage.jsp";
-		}
 		
-		return view;
+		return result;
 	}
 	
 	
