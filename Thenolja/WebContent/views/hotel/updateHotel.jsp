@@ -5,12 +5,10 @@
     <%
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
     	ArrayList<String> list = null;
-    	String detailAddr = "";
     	String phoneNum = "";
     	String BeforeImgName = "";
     	
     	if(h != null){
-	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") + 1);
 	    	phoneNum = h.getHotelPhone().substring(4);
 	    	
 	    	list = new ArrayList();
@@ -229,7 +227,7 @@ label{
 								 placeholder="도로명주소" name="loadName" value="<%= h.getHotelAddress() %>"
 								 required readonly>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
-								 name="detailAddr" value="<%= detailAddr %>"
+								 name="detailAddr" value="<%= h.getHotelDetail() %>"
 								 required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
@@ -272,7 +270,7 @@ label{
 								<label id="phone-label">전화번호</label>
 								<div id="nameNPhone-div-2">
 									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" id="Phone-div-2" type="text" name="phone2"
+									<input class="form-control" id="Phone-div-2" type="text" name="phone2" readonly
 									 value="<%= phoneNum %>"
 									 placeholder="-제외한 숫자만 입력해주세요.">
 								</div>
@@ -307,8 +305,8 @@ label{
 						</div>
 						
 						<div align="center">
-							<button class="btn btn btn-outline-info" type="submit">추가</button>
-							<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
+							<button class="btn btn btn-outline-info" type="submit">수정하기</button>
+							<button class="btn btn btn-outline-info" type="button" onclick="history.back();" >돌아가기</button>
 						</div>
 					</form>
 				<%} else { %>

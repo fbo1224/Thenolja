@@ -5,13 +5,13 @@ public class AdminComment {
 	private int commentReserNo;
 	private String commentContent;
 	private String creaeteDate;
-	private int commentMemNo;
+	private String commentMemNo;
 	
 	public AdminComment() {
 		super();
 	}
 
-	public AdminComment(int commentReserNo, String commentContent, String creaeteDate, int commentMemNo) {
+	public AdminComment(int commentReserNo, String commentContent, String creaeteDate, String commentMemNo) {
 		super();
 		this.commentReserNo = commentReserNo;
 		this.commentContent = commentContent;
@@ -43,11 +43,11 @@ public class AdminComment {
 		this.creaeteDate = creaeteDate;
 	}
 
-	public int getCommentMemNo() {
+	public String getCommentMemNo() {
 		return commentMemNo;
 	}
 
-	public void setCommentMemNo(int commentMemNo) {
+	public void setCommentMemNo(String commentMemNo) {
 		this.commentMemNo = commentMemNo;
 	}
 
@@ -56,7 +56,7 @@ public class AdminComment {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
-		result = prime * result + commentMemNo;
+		result = prime * result + ((commentMemNo == null) ? 0 : commentMemNo.hashCode());
 		result = prime * result + commentReserNo;
 		result = prime * result + ((creaeteDate == null) ? 0 : creaeteDate.hashCode());
 		return result;
@@ -76,7 +76,10 @@ public class AdminComment {
 				return false;
 		} else if (!commentContent.equals(other.commentContent))
 			return false;
-		if (commentMemNo != other.commentMemNo)
+		if (commentMemNo == null) {
+			if (other.commentMemNo != null)
+				return false;
+		} else if (!commentMemNo.equals(other.commentMemNo))
 			return false;
 		if (commentReserNo != other.commentReserNo)
 			return false;
@@ -93,7 +96,8 @@ public class AdminComment {
 		return "AdminComment [commentReserNo=" + commentReserNo + ", commentContent=" + commentContent
 				+ ", creaeteDate=" + creaeteDate + ", commentMemNo=" + commentMemNo + "]";
 	}
-	
+
+
 	
 	
 

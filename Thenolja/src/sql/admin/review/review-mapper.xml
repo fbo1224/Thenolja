@@ -100,4 +100,32 @@
 			   RV_RESER_NO = ?
 	</entry>
 	
+	<entry key="insertComment">
+	
+		INSERT 
+		  INTO 
+		      TB_COMMENT
+		      (
+		      CO_RESER_NO,
+		      COMMENT_CONTENT,
+		      CREATE_DATE,
+		      COMMENT_MEM_NO
+		      )
+		VALUES
+			  (
+			  ?,
+			  ?,
+			  SYSDATE,
+			  ?
+			  )
+	
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
 </properties>

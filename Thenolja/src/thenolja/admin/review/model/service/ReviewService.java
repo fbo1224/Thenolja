@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import thenolja.admin.review.model.dao.ReviewDao;
+import thenolja.admin.review.model.vo.AdminComment;
 import thenolja.admin.review.model.vo.AdminReview;
 import thenolja.common.JDBCTemplate;
 import thenolja.common.model.vo.PageInfo;
@@ -74,5 +75,24 @@ public class ReviewService {
 		return result;
 		
 	}
+	
+	/**
+	 * 대댓글 추가
+	 */
+	public int insertComment(AdminComment adminComment) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReviewDao().insertComment(conn, adminComment);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
+	}
+	
 
 }

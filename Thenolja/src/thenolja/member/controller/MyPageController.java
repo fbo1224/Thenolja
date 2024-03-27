@@ -27,6 +27,11 @@ public class MyPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String memNo = request.getParameter("memNo");
+		System.out.println(memNo);
+		
+		
+		
 		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
 	
 	

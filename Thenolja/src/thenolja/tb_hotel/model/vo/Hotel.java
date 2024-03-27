@@ -7,7 +7,8 @@ public class Hotel {
 	private String hotelName;
 	private String hotelPhone;
 	private String hotelLocation; // 지역
-	private String hotelAddress;  // 상세 주소
+	private String hotelAddress;  // 주소
+	private String hotelDetail;
 	private String hotelCategory;
 	private String hotelPath; // 숙소사진
 	private String hotelIntro;
@@ -34,6 +35,14 @@ public class Hotel {
 		this.hotelYN = hotelYN;
 		this.hostName = hostName;
 		this.serList = serList;
+	}
+	
+	public String getHotelDetail() {
+		return hotelDetail;
+	}
+
+	public void setHotelDetail(String hotelDetail) {
+		this.hotelDetail = hotelDetail;
 	}
 
 	public String[] getSerList() {

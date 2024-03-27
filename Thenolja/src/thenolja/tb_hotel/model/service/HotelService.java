@@ -116,6 +116,7 @@ public class HotelService {
 	public int updateHotel(Hotel h) {
 		Connection conn = getConnection();
 		HotelDao hd = new HotelDao();
+		
 		int resultHotel = hd.updateHotel(conn, h);
 		int resultSerListDel = hd.deleteAllServiceList(conn, h);
 		int resultSerList = 0;
@@ -126,6 +127,8 @@ public class HotelService {
 		
 		if((resultHotel * resultSerListDel * resultSerList) > 0) {
 			commit(conn);
+		} else {
+			rollback(conn);
 		}
 		close(conn);
 		
