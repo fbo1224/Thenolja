@@ -34,12 +34,12 @@ public class ReviewCommentInsert extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String content = request.getParameter("content");
 		
 		AdminComment adminComment = new AdminComment();
-		adminComment.setCommentReserNo(reserNo);
+		// adminComment.setCommentReserNo(reserNo);
 		adminComment.setCommentMemNo(String.valueOf(memNo));
 		adminComment.setCommentContent(content);
 		
