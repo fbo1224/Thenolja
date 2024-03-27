@@ -6,7 +6,7 @@
 		review Mapper
 	</comment>
 	
-	<entry key="selectReviewCount">
+	<entry key="">
 		SELECT
 	        COUNT(*)
 	  FROM
@@ -28,8 +28,7 @@
 		        HOTEL_NAME,
 		        MEM_ID,
 		        NICKNAME,
-		        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE",
-		        RV_RESER_NO
+		        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE"
 		  FROM
 		        TB_MEMBER
 		  JOIN
@@ -48,56 +47,12 @@
 		       REVIEW_YN = 'Y'
 		  GROUP
 		    BY
-		            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD'),RV_RESER_NO
+		            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')
 		ORDER
 		  BY
 		        CREATE_DATE DESC) A)
 		    WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="detailMemberReview">
-	
-		SELECT
-	        HOTEL_NAME,
-	        ROOM_NAME,
-	        CASE WHEN REVIEW_SCORE = 1 THEN '★' 
-	             WHEN REVIEW_SCORE = 2 THEN '★★'
-	             WHEN REVIEW_SCORE = 3 THEN '★★★'
-	             WHEN REVIEW_SCORE = 4 THEN '★★★★'
-	        ELSE '★★★★★'
-	        END AS "REVIEW_SCORE",
-	        REVIEW_CONTENT,
-	        IMG_PATH
-	  FROM
-	        TB_REVIEW
-	  JOIN
-	        TB_RESERVATION ON (RESER_NO = RV_RESER_NO)
-	  JOIN
-	        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
-	  JOIN
-	        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
-	  JOIN
-	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
-	 WHERE
-	        REVIEW_YN = 'Y'
-	  AND
-	        MEM_STATUS = 'Y'
-	  AND
-	        RV_RESER_NO = ?
-	 GROUP
-	   BY
-	       HOTEL_NAME, ROOM_NAME,REVIEW_SCORE,REVIEW_CONTENT,IMG_PATH
-	
-	</entry>
-	
-	<entry key="deleteMemberReview">
-	
-		UPDATE
-			  TB_REVIEW
-		  SET
-		      REVIEW_YN = 'N'
-		WHERE
-			   RV_RESER_NO = ?
-	</entry>
 	
 </properties>

@@ -24,7 +24,7 @@
 
 #detail_title-area{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;  
     align-items: flex-start;
     justify-content: space-between;
     padding: 20px 60px;

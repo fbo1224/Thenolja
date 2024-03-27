@@ -56,8 +56,7 @@
     
     <div id="wrap">
         <div id="header">
-	        <%--<%@ include file="adminMenubar.jsp" %> --%>
-	        <%@ include file="menubar.jsp" %> 
+	        <%@ include file="adminMenubar.jsp" %> 
         </div>
                
         <div id="content">

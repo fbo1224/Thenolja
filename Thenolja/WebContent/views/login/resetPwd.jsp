@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-	String memId = (String)request.getAttribute("memId");
-	// System.out.println(memId);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,8 +78,8 @@
 
 
 		img{
-			width: 150px;
-			height: 150px;
+			width: 200px;
+			height: 200px;
 		}
 
 		#newPwd1{
@@ -112,9 +107,8 @@
 				</div>
 				<div id="login-area" class="content">
 					<form action="<%= contextPath %>/find.resetPwd" method="post">
-						<input type="hidden" name="memId" value="<%= memId %>">
 						<div id="content1">
-							<img src="resources/login/password.png" alt="프로필">
+							<img src="resources/mypage/person.png" alt="프로필">
 						</div>
 						<div id="content2" class="content">
                             <span>새로운 비밀번호</span>
@@ -126,6 +120,7 @@
                             <button type="button" onclick="pwdCheck()" id="checkBtn">비밀번호 확인</button>
 						</div>
 						<div id="checkPrint"></div>
+                        <input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
 
 						<script>
 							function pwdCheck() {
@@ -149,7 +144,7 @@
 
 							}
 						</script>
-						
+
 						<div id="content3">
                             <button class="btn" type="reset">취소</button>
                             <button class="btn" type="submit" id="next">변경하기</button>

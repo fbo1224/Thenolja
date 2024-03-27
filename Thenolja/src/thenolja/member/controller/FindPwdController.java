@@ -43,8 +43,6 @@ public class FindPwdController extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
 		} else {
-			// System.out.println(memId);
-			request.setAttribute("memId", memId);
 			request.getRequestDispatcher("views/login/resetPwd.jsp").forward(request, response);
 		}
 	

@@ -2,18 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.review.model.vo.AdminReview, thenolja.common.model.vo.PageInfo" %>   
 <%
-
-	AdminReview adminReview = (AdminReview)request.getAttribute("adminReview");
-
 	ArrayList<AdminReview> list = (ArrayList<AdminReview>)request.getAttribute("selectReviewMemberList");
-	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-
 %>    
     
 <!DOCTYPE html>
@@ -22,15 +11,6 @@
     <title>리뷰 목록</title>
  	<link rel="stylesheet" href="resources/css/admin_select.css">   
 </head>
-
-<style>
-#contentMessage > td {
-	text-align : left;
-	padding-left : 10px;
-}
-
-</style>
-
 <body>
     
     <div id="wrap">
@@ -91,14 +71,13 @@
                         		<th colspan="4">리뷰가 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
-                        	<% for(AdminReview review : list) { %>
+                        	<% for(AdminReview adminReview : list) { %>
                         		<tr>
-                        			<td><%=review.getHotelName() %></td>
-                        			<td><%=review.getMemId() %></td>
-                        			<td><%=review.getNickName() %></td>
-                        			<td><%=review.getCreateDate() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=review.getReserNo()%>)">조회</button></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(<%=review.getReserNo()%>)">삭제</button></td>
+                        			<td><%=adminReview.getHotelName() %></td>
+                        			<td><%=adminReview.getMemId() %></td>
+                        			<td><%=adminReview.getNickName() %></td>
+                        			<td><%=adminReview.getCreateDate() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">조회</button></td>
                         		</tr>
                         	<% } %>
                         <% } %>
@@ -109,23 +88,14 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                
-                	<%if(currentPage > 1) {%>
-                    <button class="btn btn-sm btn-outline-secondary"  onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage - 1%>'"><</button>
-                    <% } %>
-                    
-                    <% for(int i = startPage; i <= endPage; i++) { %>
-                    	<% if(currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=i%>'"><%=i %></button>
-                    	<% } else { %>
-							<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                		<% } %>
-                		<% } %>
-                		
-                		<% if(currentPage != maxPage) { %>
-                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage + 1%>'">></button>
-                		<% } %>
-                	</div>
+                    <button class="btn btn-sm btn-outline-secondary"><</button>
+                    <button class="btn btn-sm btn-outline-secondary">1</button>
+                    <button class="btn btn-sm btn-outline-secondary">2</button>
+                    <button class="btn btn-sm btn-outline-secondary">3</button>
+                    <button class="btn btn-sm btn-outline-secondary">4</button>
+                    <button class="btn btn-sm btn-outline-secondary">5</button>
+                    <button class="btn btn-sm btn-outline-secondary">></button>
+                </div>
         
 
             </div>
@@ -133,48 +103,6 @@
         <div id="footer"></div>
 
     </div>
-    
-    
-    <script>
-    	function detailReview(e){
-    		$.ajax({
-    			url : 'detailReview.do',
-    			data : {reserNo : e},
-    			type : 'get',
-    			success : function(result){
-    				// console.log(result);
-    				$('#hotelName').text(result.hotelName);
-    				$('#roomName').text(result.roomName);
-    				$('#reviewScore').text(result.reviewScore);
-    				$('#reviewContent').text(result.reviewContent);
-    				
-    			}
-    		});
-    	}
-    
-    
-    </script>
-    
-    <script>
-    	function deleteReview(e){
-    		
-    		$.ajax({
-    			
-    			url : 'deleteReview.do',
-    			data : {reserNo : e},
-    			type : 'get',
-    			success : function(result){
-    				alert(result.message);
-    			}
-    			
-    		});
-    	}
-    
-    </script>
-    
-    
-    
-
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
@@ -194,12 +122,12 @@
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
-                    <td width="120"><span id="hotelName"></span></td>
-                    <td><span id="roomName"></span></td>
-                    <td><span id="reviewScore"></span></td>
+                    <td width="90">마리안느 호텔</td>
+                    <td>오션뷰 1호실</td>
+                    <td>⭐︎⭐︎⭐︎⭐︎⭐︎</td>
                 </tr>
-                <tr id="contentMessage">
-                    <td colspan="3" width="300"><span id="reviewContent"></span></td>
+                <tr>
+                    <td colspan="3">너무너무 좋았고 청결하고 바퀴벌레가 한마리 나오긴 했지만 발로 밟아 죽여버리니 상쾌한 기분으로 아침을 맞이할  수 있어 좋았어용 ^^.</td>
                 </tr>
 
               </table>
@@ -208,9 +136,9 @@
                 <form action="/action_page.php">
                   <div class="form-group">
                     <div><p>답글 작성</p></div>
-                    <textarea class="form-control" rows="5" id="comment" name="text" cols="53"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="text" cols="50"></textarea>
                   </div>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="insertComment()">등록하기</button>
+                  <button type="submit" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
                 </form>
               </div>
 
@@ -224,25 +152,6 @@
   
 
 
-<script>
-	function insertComment(){
-		$.ajax({
-			
-			url : 'commentInsert.do',
-			type : 'post',
-			data : {
-				content : $('#comment').val(),
-				reserNo : <%=adminReview.getReserNo()%>,
-				memNo : <%= loginUser.getMemNo()%>
-			},
-			success : function(result){
-				console.log(result);
-			}
-				
-		});
-	}
-
-</script>
 
 
 
