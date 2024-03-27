@@ -214,8 +214,8 @@ label{
 				<div id="title-div">
 					<h2>숙소정보수정하기</h2>
 				</div>
-				<%if(h != null){ %>
 				<div id="content-div">
+				<%if(h != null){ %>
 					<form method="post" id="content-add-form" action="<%= contextPath %>/update.hotels" 
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
@@ -251,6 +251,7 @@ label{
 								<div id="nameNimg-div">
 									<label>숙소대표사진</label>
 									<input type="file" name="hotelImg" required>
+									<img src="<%= h.getHotelPath() %>" alt="등록된이미지">
 								</div>
 							</div>
 						</div>
@@ -303,12 +304,11 @@ label{
 							<button class="btn btn btn-outline-info" type="submit">추가</button>
 						</div>
 					</form>
-
-				</div>
 				<%} else { %>
 					<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
 					<button onclick="history.back();" >돌아가기</button>
 				<%} %>
+				</div>	
 			</div>
 				
 		<script>

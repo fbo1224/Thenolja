@@ -132,7 +132,7 @@ div {
 		</div>
 	<%} else { %>
 		<h1>호텔 숙소 등록은 3개 이상 할 수 없습니다.</h1>
-		<button onclick="history.back();" >돌아가기</button>
+		<button class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
 	<%} %>	
 	</div>
 </body>
