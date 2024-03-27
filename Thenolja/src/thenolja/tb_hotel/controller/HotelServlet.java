@@ -60,7 +60,7 @@ public class HotelServlet extends HttpServlet {
 			// hotelList.jsp
 			case "hotelList" : view =  hc.hotelList(request, response); break;
 			
-			// 
+			// updateHotel.jsp
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			// 

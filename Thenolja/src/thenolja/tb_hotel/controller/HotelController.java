@@ -27,7 +27,6 @@ public class HotelController {
 	}
 	
 	public int insert(HttpServletRequest request, HttpServletResponse response) {
-		String view = "";
 		int result = 0;
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// loadName 도로명주소
@@ -199,6 +198,59 @@ public class HotelController {
 	public String update(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		// 업데이트 데이터 가지고 업데이트 수행
+		if(ServletFileUpload.isMultipartContent(request)) {
+			String savePath = request.getServletContext()
+			         .getRealPath("/resources/hotelImage");
+			
+			int maxSize = 1024 * 1024 * 10;
+			
+			MultipartRequest multiRequest = null;
+			
+			try {
+				multiRequest =
+						new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			String loadName = multiRequest.getParameter("loadName");
+			String detailAddr = multiRequest.getParameter("detailAddr");
+			String hotelCate = multiRequest.getParameter("hotelCate");
+			String hotelName = multiRequest.getParameter("hotelName");
+			String ceoName = multiRequest.getParameter("ceoName");
+			String phone1 = multiRequest.getParameter("phone1");
+			String phone2 = multiRequest.getParameter("phone2");
+			String[] serList = multiRequest.getParameterValues("serList");
+			String introText = multiRequest.getParameter("introText");
+			
+			// 지역만뽑기
+			String location = loadName.substring(0, loadName.indexOf(" ")+1);
+			
+			// 지역을 제외한 
+			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
+			
+			if(loadName.lastIndexOf("/") != -1 ) {
+				loadName = loadName.substring(0, loadName.lastIndexOf("/"));
+			}
+			
+			System.out.println(loadName);
+			
+			Hotel h = new Hotel();
+			h.setHotelName(hotelName);
+			h.setHotelPhone(phone1+phone2);
+			h.setHotelLocation(location); // 지역
+			h.setHotelAddress(loadName +"/"+ detailAddr);
+			h.setHotelCategory(hotelCate);
+			h.setHotelIntro(introText);
+			h.setHostName(ceoName);
+			// 서비스 목록
+			h.setSerList(serList);
+			System.out.println(h);
+			
+//			if(multiRequest.getOriginalFileName("hotelImg") != null) {
+//				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
+//			}
+		}
 		
 		view = "";
 		return view;

@@ -5,18 +5,21 @@
     <%
     
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
-    	String detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") +1);
-    	String phoneNum = h.getHotelPhone().substring(4);
-    	// System.out.println(phoneNum);
-    	// System.out.println(detailAddr);
-    	ArrayList<String> list = new ArrayList();
-    	
-    	for(int i = 0; i < h.getSerList().length; i++){
-	    	if(h.getSerList()[i] != null){
-	    		list.add(h.getSerList()[i]);
+    	ArrayList<String> list = null;
+    	String detailAddr = "";
+    	String phoneNum = "";
+    	if(h != null){
+	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") +1);
+	    	phoneNum = h.getHotelPhone().substring(4);
+			
+	    	list = new ArrayList();
+	    	
+	    	for(int i = 0; i < h.getSerList().length; i++){
+		    	if(h.getSerList()[i] != null){
+		    		list.add(h.getSerList()[i]);
+		    	}
 	    	}
     	}
-    	// System.out.println(list);
     %>
 <!DOCTYPE html>
 <html>
@@ -225,7 +228,7 @@ label{
 								 required readonly>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
 								 name="detailAddr" value="<%= detailAddr %>"
-								 required readonly>
+								 required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
 
@@ -248,7 +251,7 @@ label{
 							<div id="hotel-nameNImg">
 								<div class="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input width="50%" type="file" name="hotelImg" required>
+									<input width="50%" type="file" name="hotelImg">
 								</div>
 								<div class="nameNimg-div">
 									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
@@ -350,6 +353,7 @@ label{
 	                    guideTextBox.innerHTML = '';
 	                    guideTextBox.style.display = 'none';
 	                }
+	                $('#sample4_detailAddress').val('');
 	            }
 	        }).open();
 	    }
