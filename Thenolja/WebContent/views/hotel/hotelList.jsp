@@ -70,7 +70,7 @@
 		
 	}
 	.cards:hover{
-		scale: 105%;
+		scale: 103%;
 	}
 </style>
 </head>
@@ -90,7 +90,9 @@
 				<%} else { %>
 					<%for(HotelCard hc : list){ %>
 					<div class="cards">
-						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>"><img class="card-img" src="<%= hc.getHotelPath() %>"></div>
+						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
+							<img class="card-img" src="<%= hc.getHotelPath() %>">
+						</div>
 	  					<div class="card-info">
 							<h4><%= hc.getHotelLocation() %></h4>
 							<p>숙소명 : <%= hc.getHotelName() %></p>
@@ -106,7 +108,7 @@
 									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">호텔정보수정</a>
 								</div>
 								<div class="option-btns" align="center">
-									<a class="btn btn btn-danger" data-toggle="modal" data-target="#myModal" >호텔삭제</a>
+									<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal" >호텔삭제</a>
 								</div>
 							<%} %>
 	  					</div>
@@ -122,23 +124,46 @@
 		
 		      <!-- Modal Header -->
 		      <div class="modal-header">
-		        <h4 class="modal-title">Modal Heading</h4>
+		        <h4 class="modal-title">삭제 하기</h4>
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		      </div>
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
-		        Modal body..
+		        	정말로 삭제하시겠습니까?
 		      </div>
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      	<button id="deleteBtn" type="button" class="btn btn-danger" data-dismiss="modal">삭제</button>
+		        <button type="button" class="btn btn-success" data-dismiss="modal">닫기</button>
 		      </div>
 		
 		    </div>
 		  </div>
 		</div>
+		
+		<script>
+			let hotelNo;
+			$('.hotelBtn').click(function(e){
+				hotelNo = $(this).parent().parent().prev().attr('id');
+			});
+		
+			$('#deleteBtn').click(function(e){
+				// console.log(hotelNo);
+				$.ajax({
+					url: 'jqAjax.do',
+					data: {
+						hotelNo : hotelNo,
+					},
+					type: 'get',
+					success : function(result){
+						alert(result);
+					},
+				});
+				location.reload();
+			})
+		</script>
 		
 		<script>
 			$('.card-imgDiv').click(function(e){
