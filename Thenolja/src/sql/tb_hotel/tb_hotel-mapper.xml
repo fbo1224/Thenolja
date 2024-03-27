@@ -206,9 +206,40 @@
  		      TB_HOTEL.HOTEL_YN = 'Y'   
 	</entry>
 	
+	<!-- 업데이트시 가져갈데이터 -->
+	<entry key="updateForm">
+		SELECT
+	          TB_HOTEL.HOTEL_NO,
+	          HOTEL_NAME,
+	          HOTEL_PHONE,
+	          HOTEL_LOCATION,
+	          HOTEL_ADDRESS,
+	          HOTEL_CATEGORY,
+	          HOTEL_PATH,
+	          HOTEL_INTRO,
+	          HOST_NAME
+          FROM
+        	  TB_HOTEL
+  	     WHERE
+       	      HOTEL_YN = 'Y'
+    	   AND
+              TB_HOTEL.HOTEL_NO = ?
+	</entry>
 	
-	
-	
+	<entry key="updateFormSerList">
+		SELECT
+      		  SERVICE_NAME
+  	      FROM
+      	      TB_SERVICE_LIST
+    	  JOIN TB_SERVICE
+     		ON TB_SERVICE.SERVICE_NO = TB_SERVICE_LIST.SERVICE_NO
+  		  JOIN TB_HOTEL
+    		ON TB_HOTEL.HOTEL_NO = TB_SERVICE.HOTEL_NO
+ 	     WHERE
+       		  TB_HOTEL.HOTEl_YN = 'Y'
+   		   AND 
+      	      TB_HOTEL.HOTEL_NO = ?
+	</entry>
 	
 	
 	
