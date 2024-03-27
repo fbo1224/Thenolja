@@ -4,7 +4,7 @@
 <%
 	Reservation reser = (Reservation)request.getAttribute("reser");
 
-	ArrayList<Reservation> boardList = (ArrayList<Reservation>)request.getAttribute("reserList");
+	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -109,11 +109,6 @@
         
 	</div>
 	
-	    <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?memNo=<%=reser.getReMemNo()%>">
-	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
-	    </a>
-    </div>
 	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
