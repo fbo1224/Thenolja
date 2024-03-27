@@ -108,12 +108,16 @@
     
     <script>
     	function detailReview(e){
-    		console.log(e);
     		$.ajax({
     			url : 'detailReview.do',
     			data : {reserNo : e},
     			type : 'get',
     			success : function(result){
+    				// console.log(result);
+    				$('#hotelName').text(result.hotelName);
+    				$('#roomName').text(result.roomName);
+    				$('#reviewScore').text(result.reviewScore);
+    				$('#reviewContent').text(result.reviewContent);
     				
     			}
     		});
@@ -125,19 +129,7 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
  <!-- 회원 상세 조회 모달 -->
  <div class="modal" id="myModal">
@@ -157,12 +149,12 @@
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
-                    <td width="90">마리안느 호텔</td>
-                    <td>오션뷰 1호실</td>
-                    <td>⭐︎⭐︎⭐︎⭐︎⭐︎</td>
+                    <td width="120"><span id="hotelName"></span></td>
+                    <td><span id="roomName"></span></td>
+                    <td><span id="reviewScore"></span></td>
                 </tr>
                 <tr>
-                    <td colspan="3">너무너무 좋았고 청결하고 바퀴벌레가 한마리 나오긴 했지만 발로 밟아 죽여버리니 상쾌한 기분으로 아침을 맞이할  수 있어 좋았어용 ^^.</td>
+                    <td colspan="3" width="300"><span id="reviewContent"></span></td>
                 </tr>
 
               </table>
