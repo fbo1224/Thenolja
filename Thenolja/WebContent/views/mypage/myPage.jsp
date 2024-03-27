@@ -7,7 +7,7 @@
 <title>마이페이지</title>
 
 <style>
-    div{border: 1px solid red; box-sizing: border-box;}
+    /*div{border: 1px solid red; box-sizing: border-box;}*/
 
     #wrap{
         width: 900px;
@@ -50,15 +50,11 @@
     .img1{
         width: 50px;
         height: 50px;
-        margin-top: 60px;
-        margin-left: 87px;
     }
 
     .img2{
         width: 50px;
         height: 50px;
-        /*margin-top: 60px;*/
-        /*margin-left: 87px;*/
     }
 
 
@@ -68,7 +64,7 @@
         margin-top: 50px;
     }
 
-    #ct4_1 > span{
+    #customer{
         font-size: 20px;
         font-weight: bold;
         margin-left: 100px;
@@ -93,15 +89,23 @@
     }
     #ct2_4 > button:hover{color: black;}
 
-    .link1{margin-left: 90px; margin-top: 10px; color: black; font-weight: bold;}
-    .link1:hover{text-decoration: none; color: rgb(70, 149, 151);}
-
-    .link2{/*margin-left: 80px; margin-top: 10px;*/ text-decoration: none; color: black; font-weight: bold;}
-    .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
-
-    #ct4_2 > div{
-        width: 100px;
+    .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    .iconImg{
+        width: auto;
+    }
+    .iconImg > a > span {
+        display: block;
+        color: black;
+    }
+    .iconImg > a > span:hover{
+        text-decoration: none;
+    }
+
+    
 </style>
 
 </head>
@@ -157,31 +161,25 @@
 			 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
 			 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">
 			 	
-			  	
-			
-			
 			</form>
 		 	</div>
 			</div>
 		</div>
 	</div>
         
-        
-        
-        
-        
         <div id="content3" class="content">
-            <div id="ct3_1"><a href="#"><img class="img1" src="./resources/mypage/coupon.png" alt="쿠폰"><span class="link1">쿠폰</span></a></div>
-            <div id="ct3_2"><a href="#"><img class="img1" src="./resources/mypage/heart.png" alt="찜목록"><span class="link1">찜목록</span></a></div>
-            <div id="ct3_3"><a href="#"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"><span class="link1">리뷰</span></a></div>
-            <div id="ct3_4"><a href="#"><img class="img1" src="./resources/mypage/event.png" alt="이벤트"><span class="link1">이벤트</span></a></div>
+
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/coupon.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/heart.png" alt="찜목록"><span>찜목록</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/event.png" alt="이벤트"><span>이벤트</span></a></div></div>
         </div>
         <div id="content4" class="content">
             
-            <div id="ct4_1"><span>고객센터 >></span></div>
-            <div id="ct4_2" style="position: relative;"><div style="position: absolute;"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><span class="link2">이용내역</span></a></div></div>
-            <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><span class="link2">공지사항</span></a></div>
-            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><span class="link2" >자주묻는질문</span></a></div>
+            <div><span id="customer">고객센터 >></span></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/actions.png" alt="이용내역"></div><span>이용내역</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/notice.png" alt="공지사항"></div><span>공지사항</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/qna.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
             
         </div>
 

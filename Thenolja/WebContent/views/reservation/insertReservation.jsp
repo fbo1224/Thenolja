@@ -162,7 +162,7 @@
 	<% if(loginUser == null) { %>
 	<script>
 		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
-		location.href = 'views/login/login.jsp';
+		location.href = '<%=contextPath%>/loginPage';
 	 </script>
 	<% } else {%>
     <!-- 0. 전체 감싸는 div 시작 -->

@@ -32,21 +32,23 @@ public class MyReserListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		ArrayList<Reservation> reserList = new ReserService().selectList(memNo);
+		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
+		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
 		
 		if(reserList != null) {
+			Reservation reser = new ReserService().selectReservation();
 			request.setAttribute("reserList", reserList);
-			request.setAttribute("memNo", memNo);
+			request.setAttribute("reser", reser);
 			
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
+			
 		} else {
 			request.setAttribute("errorMsg", "조회된 내역이 없습니다");
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	
-	
+		
 	
 	}
 

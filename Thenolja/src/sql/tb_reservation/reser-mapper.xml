@@ -146,7 +146,7 @@
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
-		        RE_MEM_NO = ?
+		 		RE_MEM_NO = ?       
 		ORDER BY RESER_NO DESC
 	</entry>
 	
