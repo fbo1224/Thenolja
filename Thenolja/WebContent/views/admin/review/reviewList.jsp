@@ -2,7 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.review.model.vo.AdminReview, thenolja.common.model.vo.PageInfo" %>   
 <%
+
+	AdminReview adminReview = (AdminReview)request.getAttribute("adminReview");
+
 	ArrayList<AdminReview> list = (ArrayList<AdminReview>)request.getAttribute("selectReviewMemberList");
+	
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+
 %>    
     
 <!DOCTYPE html>
@@ -80,14 +91,14 @@
                         		<th colspan="4">리뷰가 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
-                        	<% for(AdminReview adminReview : list) { %>
+                        	<% for(AdminReview review : list) { %>
                         		<tr>
-                        			<td><%=adminReview.getHotelName() %></td>
-                        			<td><%=adminReview.getMemId() %></td>
-                        			<td><%=adminReview.getNickName() %></td>
-                        			<td><%=adminReview.getCreateDate() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=adminReview.getReserNo()%>)">조회</button></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary">삭제</button></td>
+                        			<td><%=review.getHotelName() %></td>
+                        			<td><%=review.getMemId() %></td>
+                        			<td><%=review.getNickName() %></td>
+                        			<td><%=review.getCreateDate() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=review.getReserNo()%>)">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(<%=review.getReserNo()%>)">삭제</button></td>
                         		</tr>
                         	<% } %>
                         <% } %>
@@ -98,14 +109,23 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                    <button class="btn btn-sm btn-outline-secondary"><</button>
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">></button>
-                </div>
+                
+                	<%if(currentPage > 1) {%>
+                    <button class="btn btn-sm btn-outline-secondary"  onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% } %>
+                    
+                    <% for(int i = startPage; i <= endPage; i++) { %>
+                    	<% if(currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=i%>'"><%=i %></button>
+                    	<% } else { %>
+							<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                		<% } %>
+                		<% } %>
+                		
+                		<% if(currentPage != maxPage) { %>
+                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage + 1%>'">></button>
+                		<% } %>
+                	</div>
         
 
             </div>
@@ -135,6 +155,22 @@
     
     </script>
     
+    <script>
+    	function deleteReview(e){
+    		
+    		$.ajax({
+    			
+    			url : 'deleteReview.do',
+    			data : {reserNo : e},
+    			type : 'get',
+    			success : function(result){
+    				alert(result.message);
+    			}
+    			
+    		});
+    	}
+    
+    </script>
     
     
     
@@ -174,7 +210,7 @@
                     <div><p>답글 작성</p></div>
                     <textarea class="form-control" rows="5" id="comment" name="text" cols="53"></textarea>
                   </div>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="insertComment()">등록하기</button>
                 </form>
               </div>
 
@@ -188,6 +224,25 @@
   
 
 
+<script>
+	function insertComment(){
+		$.ajax({
+			
+			url : 'commentInsert.do',
+			type : 'post',
+			data : {
+				content : $('#comment').val(),
+				reserNo : <%=adminReview.getReserNo()%>,
+				memNo : <%= loginUser.getMemNo()%>
+			},
+			success : function(result){
+				console.log(result);
+			}
+				
+		});
+	}
+
+</script>
 
 
 
