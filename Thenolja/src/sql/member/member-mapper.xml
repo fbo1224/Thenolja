@@ -148,10 +148,26 @@
                MEM_PWD = ?
          WHERE
                MEM_ID = ?
-	
-	
 	</entry>
 	
+	<entry key="selectGrade">
+		SELECT
+		       GRADE_NAME
+		  FROM
+		       TB_MEMBER
+		  JOIN
+		       TB_MY_GRADE
+		    ON
+		       (MEM_NO = GR_MEM_NO)
+		  JOIN
+		       TB_MEM_GRADE
+		 USING
+		       (GRADE_NO)
+		 WHERE
+		       MEM_NO = ?
+		       
+	
+	</entry>	
 	
 	
 </properties>
