@@ -18,6 +18,7 @@
 
     div{
         box-sizing : border-box;
+        border : 1px solid black;
     }
 
     #content{
@@ -38,9 +39,10 @@
         margin-left: 60px;
     }
     #reser_info{
-        width: 80%;
+        width: 1000px;
         height: 80%;
         margin: auto;
+        margin-top: 30px;
     }
     #reser_hotel_img{
         width: 25%;
@@ -84,13 +86,29 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-    <div id="content">
+		<% if(loginUser == null) { %>
+		<script>
+			alert("로그인 페이지로 이동합니다.")
+			location.href = '<%=contextPath%>/loginPage';
+		</script>
+	<% } %>
+	<div id="content">
         <div id="content_title">
             <div id="left_img">
                 <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>내 예약 내역</h3></div>
         </div>
+    </div>
+	<% if(reserList.isEmpty()) { %>
+	<table>
+	<tr>
+	   <th colspan="5">내역이 존재하지 않습니다.</th>
+	</tr>
+	</table>
+	<% } else { %>
+	
+		<% for(Reservation c : reserList) { %>
         <div id="reser_info">
             <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
@@ -106,9 +124,9 @@
                 <button id="reser_btn" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">리뷰작성</button>
             </div>
         </div>
-        
-	</div>
-	
+
+	<% } %>
+<% } %>	
 	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>

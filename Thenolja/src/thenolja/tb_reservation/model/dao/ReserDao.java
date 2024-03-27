@@ -197,7 +197,7 @@ public class ReserDao {
 	}
 	*/
 
-	public ArrayList<Reservation> selectList(Connection conn, int memNo) {
+	public ArrayList<Reservation> selectList(Connection conn, int reMemNo) {
 		
 		ArrayList<Reservation> list = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -206,9 +206,7 @@ public class ReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, memNo);
-			
+			pstmt.setInt(1, reMemNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
