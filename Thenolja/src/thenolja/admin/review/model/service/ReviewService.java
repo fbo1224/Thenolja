@@ -39,5 +39,20 @@ public class ReviewService {
 		return list;
 		
 	}
+	
+	/**
+	 * 리뷰 상세 조회
+	 */
+	public AdminReview detailMemberReview(int reserNo) {
+		
+		Connection conn  = JDBCTemplate.getConnection();
+		
+		AdminReview adminReview = new ReviewDao().detailMemberReview(conn, reserNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminReview;
+		
+	}
 
 }
