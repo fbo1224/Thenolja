@@ -54,25 +54,5 @@ public class ReviewService {
 		return adminReview;
 		
 	}
-	
-	/**
-	 * 리뷰 삭제
-	 */
-	
-	public int deleteMemberReview(int reserNo) {
-		
-		Connection conn = JDBCTemplate.getConnection();
-		
-		int result = new ReviewDao().deleteMemberReview(conn, reserNo);
-		
-		if(result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		
-		return result;
-		
-	}
 
 }

@@ -134,30 +134,4 @@ public class ReviewDao {
 		 return adminReview;
 	 }
 	 
-	 /**
-	  * 리뷰 삭제
-	  */
-	 public int deleteMemberReview(Connection conn, int reserNo) {
-		 
-		 int result = 0;
-		 PreparedStatement pstmt = null;
-		 ResultSet rset = null;
-		 String sql = prop.getProperty("deleteMemberReview");
-		 
-		 try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, reserNo);
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		 
-		 return result;
-	 }
 }
