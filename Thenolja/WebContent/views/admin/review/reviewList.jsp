@@ -172,9 +172,9 @@
                 <form action="/action_page.php">
                   <div class="form-group">
                     <div><p>답글 작성</p></div>
-                    <textarea class="form-control" rows="5" id="comment" name="text" cols="50"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="text" cols="53"></textarea>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
                 </form>
               </div>
 
