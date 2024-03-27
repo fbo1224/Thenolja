@@ -35,6 +35,7 @@ public class HotelServlet extends HttpServlet {
 		// System.out.println(mapping);
 		
 		HotelController hc = new HotelController();
+		
 		String view = "";
 		boolean flag = true;
 		request.setCharacterEncoding("UTF-8");
@@ -64,7 +65,7 @@ public class HotelServlet extends HttpServlet {
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			// 
-			case "update" : view =  hc.update(request, response); break;
+			case "update" : view =  hc.update(request, response); flag = false; break;
 
 			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;

@@ -3,16 +3,14 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="thenolja.tb_hotel.model.vo.*" %>
     <%
-    
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
     	ArrayList<String> list = null;
-    	String detailAddr = "";
     	String phoneNum = "";
     	String BeforeImgName = "";
+    	
     	if(h != null){
-	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") + 1);
 	    	phoneNum = h.getHotelPhone().substring(4);
-	    	BeforeImgName = h.getHotelPath().substring(h.getHotelPath().lastIndexOf("/") + 1);
+	    	
 	    	list = new ArrayList();
 	    	
 	    	for(int i = 0; i < h.getSerList().length; i++){
@@ -21,7 +19,7 @@
 		    	}
 	    	}
     	}
-    	System.out.println(BeforeImgName);
+    	// System.out.println(h);
     %>
 <!DOCTYPE html>
 <html>
@@ -223,13 +221,13 @@ label{
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
-								<%--<input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo"> --%>
+								<input type="hidden" value="<%= h.getHotelNo() %>" name="hotelNo" >
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
 								<input type="text" id="sample4_roadAddress"
 								 placeholder="도로명주소" name="loadName" value="<%= h.getHotelAddress() %>"
 								 required readonly>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
-								 name="detailAddr" value="<%= detailAddr %>"
+								 name="detailAddr" value="<%= h.getHotelDetail() %>"
 								 required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
@@ -259,6 +257,7 @@ label{
 									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
 								</div>
 							</div>
+							<input type="hidden" name="beforeImgPath" value="<%= h.getHotelPath() %>" >
 						</div>
 
 						<div id="content-div-half2">
@@ -271,7 +270,7 @@ label{
 								<label id="phone-label">전화번호</label>
 								<div id="nameNPhone-div-2">
 									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" id="Phone-div-2" type="text" name="phone2"
+									<input class="form-control" id="Phone-div-2" type="text" name="phone2" readonly
 									 value="<%= phoneNum %>"
 									 placeholder="-제외한 숫자만 입력해주세요.">
 								</div>
@@ -355,7 +354,9 @@ label{
 	                    guideTextBox.innerHTML = '';
 	                    guideTextBox.style.display = 'none';
 	                }
+	                
 	                $('#sample4_detailAddress').val('');
+	                
 	            }
 	        }).open();
 	    }

@@ -1,26 +1,23 @@
-package thenolja.notice.controller;
+package thenolja.tb_review.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class NoticeinsertFormController
+ * Servlet implementation class ReviewInsertController
  */
-@WebServlet("/insertForm.notice")
-public class NoticeinsertFormController extends HttpServlet {
+@WebServlet("/review.insert")
+public class ReviewInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeinsertFormController() {
+    public ReviewInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,25 +26,10 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//관리자가 아닐경우에도 포워딩이 수행됨
-		
-				HttpSession session = request.getSession();
-			//	Member loginUser = (Member)session.getAttribute("loginUser");
-					
-	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-				
-				//응답화면	
-				RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp");
-				view.forward(request, response);
-			
-		/*				
-				}else {
-					session.setAttribute("alertMsg", "관리자가 아닙니다. ");
-					response.sendRedirect(request.getContextPath());
-				}	
-				*/
-			}
 	
+		request.getRequestDispatcher("views/review/reviewList.jsp").forward(request, response);
+	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

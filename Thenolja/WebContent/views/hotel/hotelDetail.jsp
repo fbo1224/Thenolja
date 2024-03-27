@@ -59,16 +59,18 @@
 	border-bottom: 1px solid gray;
 }
 #detail-content-services > ul {
+	list-style: none;
 	margin: 0px;
 }
 
 #detail-content-services li {
 	padding: 10px;
+	float: left;
 }
 #detail-content-rooms {
 	margin: auto;
 	width: 80%;
-	padding: 5px;
+	padding: 10px;
 }
 .content-rooms-card{
 	width: 80%;

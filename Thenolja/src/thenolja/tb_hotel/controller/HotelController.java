@@ -1,5 +1,6 @@
 package thenolja.tb_hotel.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -52,7 +53,6 @@ public class HotelController {
 				e.printStackTrace();
 			}
 			
-			// String letterNo = multiRequest.getParameter("letterNo"); // 우편번호 제외
 			String loadName = multiRequest.getParameter("loadName");
 			String detailAddr = multiRequest.getParameter("detailAddr");
 			String hotelCate = multiRequest.getParameter("hotelCate");
@@ -63,20 +63,15 @@ public class HotelController {
 			String[] serList = multiRequest.getParameterValues("serList");
 			String introText = multiRequest.getParameter("introText");
 			
-			// hotelImg 파일
-			System.out.println(String.join(",", serList));
-			
 			// 지역만뽑기
-			String location = loadName.substring(0, loadName.indexOf(" ")+1);
-			
-			// 지역을 제외한 
-			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
+			String location = loadName.substring(0, loadName.indexOf(" ") + 1);
 			
 			Hotel h = new Hotel();
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
-			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(loadName +"/"+ detailAddr);
+			h.setHotelLocation(location);  // 지역
+			h.setHotelAddress(loadName);   // 주소
+			h.setHotelDetail(detailAddr);  // 상세주소
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
@@ -86,8 +81,7 @@ public class HotelController {
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
-			
-			// System.out.println(h);
+			System.out.println(h);
 			
 			result = new HotelService().insertHotel(h);
 		}
@@ -121,7 +115,6 @@ public class HotelController {
 	
 		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		System.out.println("currentPage"+ currentPage);
 		
 		// * pageList : 페이징바 최대 개수
 		pageLimit = 5;
@@ -155,9 +148,6 @@ public class HotelController {
 			hotelList = new HotelService().selectList(pi);
 		}
 		
-		// 확인용 출력
-		// System.out.println(hotelList);
-		
 		// 5) 응답화면 지정
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("pageInfo", pi);
@@ -168,17 +158,6 @@ public class HotelController {
 	
 	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
-		
-		// loadName 도로명주소
-		// detailAddr 상세주소
-		// hotelCate 숙소종류
-		// hotelName 호텔이름
-		// phone1 == 010 /전화번호
-		// phone2 == xxxxxxxx
-		// serList 서비스 리스트 
-		// introText 소개말
-		// hotelImg 대표사진
-		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		Hotel h = new Hotel();
 		h = new HotelService().updateForm(hotelNo);
@@ -197,6 +176,7 @@ public class HotelController {
 	
 	public String update(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		Hotel h = null;
 		// 업데이트 데이터 가지고 업데이트 수행
 		if(ServletFileUpload.isMultipartContent(request)) {
 			String savePath = request.getServletContext()
@@ -213,6 +193,7 @@ public class HotelController {
 				e.printStackTrace();
 			}
 			
+			int hotelNo = Integer.parseInt(multiRequest.getParameter("hotelNo"));
 			String loadName = multiRequest.getParameter("loadName");
 			String detailAddr = multiRequest.getParameter("detailAddr");
 			String hotelCate = multiRequest.getParameter("hotelCate");
@@ -222,37 +203,44 @@ public class HotelController {
 			String phone2 = multiRequest.getParameter("phone2");
 			String[] serList = multiRequest.getParameterValues("serList");
 			String introText = multiRequest.getParameter("introText");
+			String beforeImgPath = multiRequest.getParameter("beforeImgPath");
 			
 			// 지역만뽑기
 			String location = loadName.substring(0, loadName.indexOf(" ")+1);
 			
-			// 지역을 제외한 
-			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
-			
-			if(loadName.lastIndexOf("/") != -1 ) {
-				loadName = loadName.substring(0, loadName.lastIndexOf("/"));
-			}
-			
-			System.out.println(loadName);
-			
-			Hotel h = new Hotel();
+			h = new Hotel();
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
 			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(loadName +"/"+ detailAddr);
+			h.setHotelAddress(loadName);
+			h.setHotelDetail(detailAddr);
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
+			h.setHotelPath(beforeImgPath);
+			h.setHotelNo(hotelNo);
 			// 서비스 목록
 			h.setSerList(serList);
 			System.out.println(h);
 			
+			String beforeImgName = beforeImgPath.substring(h.getHotelPath().lastIndexOf("/") + 1);
+			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
+				new File(savePath + "/" + beforeImgName).delete();
 			}
+			
 		}
 		
-		view = "";
+		int result = new HotelService().updateHotel(h);
+		
+		if(result > 0) {
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+		} else {
+			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
+		}
+		
 		return view;
 	}
 	
