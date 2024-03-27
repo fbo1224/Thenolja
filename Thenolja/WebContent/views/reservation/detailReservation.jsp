@@ -263,7 +263,7 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?memNo=<%=reser.getReMemNo()%>">
+	    <a href="<%=contextPath%>/myReser.list">
 	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
 	    </a>
     </div>

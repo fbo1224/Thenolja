@@ -4,7 +4,7 @@
 <%
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	// String loginStatus = (String)request.getAttribute("loginStatus");
+	String loginStatus = (String)request.getAttribute("loginStatus");
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -69,9 +69,6 @@
 		margin: 3px 0px;
 		
 	}
-	.cards:hover{
-		scale: 105%;
-	}
 </style>
 </head>
 <body>
@@ -93,7 +90,7 @@
 						<div class="card-imgDiv"><img class="card-img" src="<%= hc.getHotelPath() %>"></div>
 	  					<div class="card-info">
 							<h4><%= hc.getHotelLocation() %></h4>
-							<p>숙소명 : <%= hc.getHotelName() %></p>
+							<p>이름 : <%= hc.getHotelName() %></p>
 							<p>종류 : <%= hc.getHotelCategory() %><p>
 							<%if(loginUser != null && loginUser.getMemStatus().equals("Y")){ %>
 								<p><span>★</span><span>4.8</span></p>

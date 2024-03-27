@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.member.model.vo.Member;
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_reservation.model.Service.ReserService;
-import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class insertReservation
@@ -40,8 +39,6 @@ public class ReservationInserFormController extends HttpServlet {
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
 		
 		request.setAttribute("insertReservation", list);
-		Reservation reser = new Reservation();
-		request.setAttribute("reser", reser);
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");

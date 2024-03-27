@@ -42,11 +42,11 @@ div {
     justify-content: space-evenly;
     padding-top: 30px;
 }
-#header-navi li{
+#header li{
     list-style: none;
     float: left;
 }
-#header-navi a{
+#header a{
     text-decoration: none;
     color: black;
     padding-right: 20px;
@@ -204,17 +204,6 @@ div {
 	.form-check-input {
 		position:static;
 	}
-
-	#nonmemBtn{
-		border: none;
-		border-radius: 10px;
-		background-color: white;
-	}
-
-	#nonmemBtn:hover{
-		color: rgb(48, 56, 208);
-	}
-
 </style>
     
 </head>
@@ -331,10 +320,7 @@ div {
 		        <% } %>
 		        
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		        	<li>
-		        	<button type="button" id="nonmemBtn" data-toggle="modal" data-target="#nonmemReser">
-						비회원 예약조회
-					</button></li>
+		        	<li><a href="#">비회원예약조회</a></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
 		         	<li><a href="#">고객센터</a></li>
 	         	<% } %>
@@ -342,33 +328,6 @@ div {
 		    </div>
 		</header>
 	<% } %>
-	    <!-- Button to Open the Modal -->
-
-	
-	<!-- The Modal -->
-	<div class="modal" id="nonmemReser">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	
-	      <!-- Modal Header -->
-	      <div class="modal-header">
-	        <h4 class="modal-title">비회원 예약조회</h4>
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	      </div>
-	
-	      <!-- Modal body -->
-	      <div class="modal-body">
-	        	비회원 이름<input type="text" maxlength="15" required>
-	        	비회원 전화번호<input type="text" maxlength="11" required>
-	      </div>
-	
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-	      </div>
-	
-	    </div>
-	  </div>
-	</div>
+	    
 </body>
 </html>

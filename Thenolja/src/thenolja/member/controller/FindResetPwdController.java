@@ -35,15 +35,15 @@ public class FindResetPwdController extends HttpServlet {
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("password");
-		// System.out.println(memId);
+		
 		int result = new MemberService().resetPwd(memId, memPwd);
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "비밀번호가 변경되었습니다.");
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/login");
 		} else {
-			request.setAttribute("errorMsg", "입력하신 정보가 일치하지 않습니다."); 
+			request.setAttribute("errorMsg", "입력하신 정보가 일치하지 않습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		

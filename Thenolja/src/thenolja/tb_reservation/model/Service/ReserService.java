@@ -77,17 +77,6 @@ public class ReserService {
 		return reser;
 	}
 
-	public ArrayList<Reservation> selectList(int memNo) {
-		
-		Connection conn = getConnection();
-		
-		ArrayList<Reservation> list = new ReserDao().selectList(conn, memNo);
-		
-		close(conn);
-		
-		return list;
-	}
-
 	
 
 	

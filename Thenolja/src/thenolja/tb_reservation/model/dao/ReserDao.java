@@ -196,48 +196,6 @@ public class ReserDao {
 		return reser;
 	}
 	*/
-
-	public ArrayList<Reservation> selectList(Connection conn, int memNo) {
-		
-		ArrayList<Reservation> list = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, memNo);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				Reservation reser = new Reservation();
-				reser.setReserNo(rset.getInt("RESER_NO"));
-				reser.setReserDate(rset.getDate("RESER_DATE"));
-				reser.setName(rset.getString("RESER_NAME"));
-				reser.setPhone(rset.getString("RESER_PHONE"));
-				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
-				reser.setPeople(rset.getInt("MAX_PEOPLE"));
-				reser.setRoomNo(rset.getInt("ROOM_NO"));
-				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
-				reser.setPayment(rset.getString("PAYMENT"));
-				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));	
-				
-				list.add(reser);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
 	
 
 	
