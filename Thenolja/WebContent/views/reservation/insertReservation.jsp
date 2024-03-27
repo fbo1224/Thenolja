@@ -159,6 +159,12 @@
 <body>
     
     <%@ include file="../common/menubar.jsp" %>
+	<% if(loginUser == null) { %>
+	<script>
+		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
+		location.href = '<%=contextPath%>/loginPage';
+	 </script>
+	<% } else {%>
     <!-- 0. 전체 감싸는 div 시작 -->
     <div id="content">
     
@@ -213,7 +219,7 @@
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
-				
+
 				<form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
@@ -249,7 +255,9 @@
 	                    <h5>쿠폰</h5>
 	                    <br>
 	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
+	                    
 	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+	           
 	                </div>
 	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
 	                
@@ -268,6 +276,7 @@
 	                <div id="reservation">
 	                    <button type="submit" id="reser-btn">?원 결제하기</button>
 	                </div>
+
 	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
 	            </form>
 			</div>
@@ -276,7 +285,6 @@
 		<!-- /0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 끝 -->
     </div>
     <!-- /0. 전체 감싸는 div 끝 -->
-    
     
     
     <div class="container">
@@ -317,6 +325,6 @@
 			</div>
 		</div>
 	</div>
-
+<% } %>
 </body>
 </html>

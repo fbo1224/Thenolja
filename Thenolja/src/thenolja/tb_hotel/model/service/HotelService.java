@@ -1,6 +1,9 @@
 package thenolja.tb_hotel.model.service;
 
-import static thenolja.common.JDBCTemplate.*;
+import static thenolja.common.JDBCTemplate.close;
+import static thenolja.common.JDBCTemplate.commit;
+import static thenolja.common.JDBCTemplate.getConnection;
+import static thenolja.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -10,7 +13,6 @@ import thenolja.tb_hotel.model.dao.HotelDao;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
-import thenolja.tb_hotel.model.vo.ServiceList;
 
 public class HotelService {
 
@@ -98,11 +100,56 @@ public class HotelService {
 		return dh;
 	}
 	
+	public Hotel updateForm(int hotelNo) {
+		Hotel h = new Hotel();
+		Connection conn = getConnection();
+		
+		h = new HotelDao().updateForm(conn, hotelNo);
+		
+		if(h != null) {
+			h.setSerList(new HotelDao().updateFormSerList(conn, hotelNo));
+		}
+		
+		close(conn);
+		
+		return h;
+	}
 	
+	public int updateHotel(Hotel h) {
+		Connection conn = getConnection();
+		HotelDao hd = new HotelDao();
+		
+		int resultHotel = hd.updateHotel(conn, h);
+		int resultSerListDel = hd.deleteAllServiceList(conn, h);
+		int resultSerList = 0;
+		
+		if((resultHotel * resultSerListDel) > 0) {
+			resultSerList = hd.updateService(conn, h);
+		}
+		
+		if((resultHotel * resultSerListDel * resultSerList) > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return (resultHotel * resultSerListDel * resultSerList);
+	}
 	
-	
-	
-	
+	public int deleteHotel(int hotelNo) {
+		Connection conn = getConnection();
+		
+		int result = new HotelDao().deleteHotel(conn, hotelNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

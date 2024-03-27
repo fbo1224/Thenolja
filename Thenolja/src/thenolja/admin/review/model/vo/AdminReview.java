@@ -5,12 +5,14 @@ public class AdminReview {
 	private int reserNo;
 	private String imgPath;
 	private String reviewContent;
-	private int reviewScore;
+	private String reviewScore;
 	private String createDate;
 	private String reviewYn;
 	private String hotelName;
 	private String memId;
 	private String nickName;
+	private String roomName;
+	
 	
 	
 	
@@ -38,11 +40,19 @@ public class AdminReview {
 		this.nickName = nickName;
 	}
 
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
 	public AdminReview() {
 		super();
 	}
 
-	public AdminReview(int reserNo, String imgPath, String reviewContent, int reviewScore, String createDate,
+	public AdminReview(int reserNo, String imgPath, String reviewContent, String reviewScore, String createDate,
 			String reviewYn) {
 		super();
 		this.reserNo = reserNo;
@@ -77,11 +87,11 @@ public class AdminReview {
 		this.reviewContent = reviewContent;
 	}
 
-	public int getReviewScore() {
+	public String getReviewScore() {
 		return reviewScore;
 	}
 
-	public void setReviewScore(int reviewScore) {
+	public void setReviewScore(String reviewScore) {
 		this.reviewScore = reviewScore;
 	}
 
@@ -109,7 +119,7 @@ public class AdminReview {
 		result = prime * result + ((imgPath == null) ? 0 : imgPath.hashCode());
 		result = prime * result + reserNo;
 		result = prime * result + ((reviewContent == null) ? 0 : reviewContent.hashCode());
-		result = prime * result + reviewScore;
+		result = prime * result + ((reviewScore == null) ? 0 : reviewScore.hashCode());
 		result = prime * result + ((reviewYn == null) ? 0 : reviewYn.hashCode());
 		return result;
 	}
@@ -140,7 +150,10 @@ public class AdminReview {
 				return false;
 		} else if (!reviewContent.equals(other.reviewContent))
 			return false;
-		if (reviewScore != other.reviewScore)
+		if (reviewScore == null) {
+			if (other.reviewScore != null)
+				return false;
+		} else if (!reviewScore.equals(other.reviewScore))
 			return false;
 		if (reviewYn == null) {
 			if (other.reviewYn != null)
@@ -155,6 +168,8 @@ public class AdminReview {
 		return "AdminReview [reserNo=" + reserNo + ", imgPath=" + imgPath + ", reviewContent=" + reviewContent
 				+ ", reviewScore=" + reviewScore + ", createDate=" + createDate + ", reviewYn=" + reviewYn + "]";
 	}
+
+	
 	
 	
 	

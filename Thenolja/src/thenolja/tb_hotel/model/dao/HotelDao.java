@@ -52,6 +52,7 @@ public class HotelDao {
 			pstmt.setString(6, h.getHotelPath());
 			pstmt.setString(7, h.getHotelIntro());
 			pstmt.setString(8, h.getHostName());
+			pstmt.setString(9, h.getHotelDetail());
 			
 			result = pstmt.executeUpdate();
 			
@@ -365,11 +366,153 @@ public class HotelDao {
 		return result;
 	}
 	
+	public Hotel updateForm(Connection conn , int hotelNo) {
+		Hotel h = new Hotel();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateForm");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				h.setHotelNo(Integer.parseInt(rset.getString("HOTEL_NO")));
+				h.setHotelName(rset.getString("HOTEL_NAME"));
+				h.setHotelPhone(rset.getString("HOTEL_PHONE"));
+				h.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				h.setHotelAddress(rset.getString("HOTEL_ADDRESS"));
+				h.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				h.setHotelPath(rset.getString("HOTEL_PATH"));
+				h.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				h.setHostName(rset.getString("HOST_NAME"));
+				h.setHotelDetail(rset.getString("DETAILLOCATION"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return h;
+	}
 	
+	public String[] updateFormSerList(Connection conn, int hotelNo) {
+		String[] serList = new String[8];
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateFormSerList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			int cnt = 0;
+			while(rset.next()) {
+				serList[cnt] = rset.getString("SERVICE_NAME");
+				cnt++;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return serList;
+	}
 	
+	public int updateHotel(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, h.getHotelName());
+			pstmt.setString(2, h.getHotelLocation());
+			pstmt.setString(3, h.getHotelAddress());
+			pstmt.setString(4, h.getHotelCategory());
+			pstmt.setString(5, h.getHotelIntro());
+			pstmt.setString(6, h.getHostName());
+			pstmt.setString(7, h.getHotelPath());
+			pstmt.setString(8, h.getHotelDetail());
+			pstmt.setInt(9, h.getHotelNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int deleteAllServiceList(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAllServiceList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, h.getHotelNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int updateService(Connection conn, Hotel h) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateService");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(h.getSerList() != null) {
+				for(int i = 0; i < h.getSerList().length; i++) {
+					pstmt.setInt(1, h.getHotelNo());
+					pstmt.setInt(2, Integer.parseInt(h.getSerList()[i]));
+					result += pstmt.executeUpdate();
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int deleteHotel(Connection conn, int hotelNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteHotel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

@@ -42,11 +42,11 @@ div {
     justify-content: space-evenly;
     padding-top: 30px;
 }
-li{
+#header-navi li {
     list-style: none;
     float: left;
 }
-a{
+#header-navi a {
     text-decoration: none;
     color: black;
     padding-right: 20px;
@@ -204,6 +204,17 @@ a{
 	.form-check-input {
 		position:static;
 	}
+
+	#nonmemBtn{
+		border: none;
+		border-radius: 10px;
+		background-color: white;
+	}
+
+	#nonmemBtn:hover{
+		color: rgb(48, 56, 208);
+	}
+
 </style>
     
 </head>
@@ -283,7 +294,6 @@ a{
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
-	                        <li><a href="#">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -310,7 +320,8 @@ a{
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
 		         	<li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
-		         	<li><a href="<%= contextPath %>/myPage">마이페이지</a></li>
+		         	<li><a href="<%= contextPath %>/myPage">마이페이지
+		         	</a></li>
 		        <% } %>
 		        
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
@@ -320,7 +331,10 @@ a{
 		        <% } %>
 		        
 		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		        	<li><a href="#">비회원예약조회</a></li>
+		        	<li>
+		        	<button type="button" id="nonmemBtn" data-toggle="modal" data-target="#nonmemReser">
+						비회원 예약조회
+					</button></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
 		         	<li><a href="#">고객센터</a></li>
 	         	<% } %>
@@ -328,6 +342,33 @@ a{
 		    </div>
 		</header>
 	<% } %>
-	    
+	    <!-- Button to Open the Modal -->
+
+	
+	<!-- The Modal -->
+	<div class="modal" id="nonmemReser">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">비회원 예약조회</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        	비회원 이름<input type="text" maxlength="15" required>
+	        	비회원 전화번호<input type="text" maxlength="11" required>
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 #insert-form{
@@ -22,7 +22,7 @@ label{
 
 
 <div class="outer">
-<h2 align="center">°øÁö»çÇ× ¼öÁ¤/»èÁ¦</h2>
+<h2 align="center">ê³µì§€ì‚¬í•­ ìˆ˜ì •/ì‚­ì œ</h2>
 <br><br>
 
 <!-- 
@@ -42,25 +42,25 @@ label{
 
 
 
-<form action="<%= contextPath %>/insert.notice" method="post" id="insert-form">
+<form action="<%= contextPath %>/regNotice" method="post" id="insert-form">
 	
 <!--	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">  --> 
 	
 
     <div class="form-group">
-        <label for="usr">Á¦¸ñ</label>
+        <label for="usr">ì œëª©</label>
         <input type="text" class="form-control" id="usr" name="title">
     </div>
 
     <div class="form-group">
-        <label for="comment">³»¿ë</label>
+        <label for="comment">ë‚´ìš©</label>
         <textarea class="form-control" name="content" rows="15" id="comment" style="resize: none;"></textarea>
     </div>
 
     <div align="center">
-        <button type="submit" class="btn btn-sm info">µî·ÏÇÏ±â</button>
+        <button type="submit" class="btn btn-sm info">ë“±ë¡í•˜ê¸°</button>
         <button type="button" class="btn btn-sm btn-secondary" 
-        onclick="history.back();">µÚ·Î°¡±â</button>
+        onclick="history.back();">ë’¤ë¡œê°€ê¸°</button>
     </div>
 
 

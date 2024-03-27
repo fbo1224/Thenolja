@@ -27,29 +27,28 @@
     
     /*********************/
 
-    #content_title, #detail{width: 100%;}
+   #content_title, #detail{width: 100%;}
 
     #content_title{height: 10%;}
 
     #left_img{
-        width: 15%;
+        width: 5%;
         height: 100%;
         float: left;
     }
 
     #left_img > a > img{
-        margin-left: 120px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     #left_title{
-        width: 85%;
+        width: 95%;
         height: 100%;
         float: left;
     }
     
     #left_title > h3 {
-        margin-top: 35px;
+        margin-top: 25px;
     }
 
     #detail{height: 90%;}
@@ -177,7 +176,6 @@
 <body>
 	
     <%@ include file="../common/menubar.jsp" %>
-      
     <div id="content">
         <div id="content_title">
             <div id="left_img">
@@ -263,7 +261,7 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list">
+	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>">
 	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
 	    </a>
     </div>

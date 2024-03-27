@@ -49,8 +49,9 @@
 	width: 80%;
 	display: flex;
 	justify-content: space-between;
-	height: 50px;
+	height: 40px;
 	border-bottom: 1px solid gray;
+	padding: 10px;
 }
 #detail-content-services{
 	margin: auto;
@@ -59,16 +60,18 @@
 	border-bottom: 1px solid gray;
 }
 #detail-content-services > ul {
+	list-style: none;
 	margin: 0px;
 }
 
 #detail-content-services li {
 	padding: 10px;
+	float: left;
 }
 #detail-content-rooms {
 	margin: auto;
 	width: 80%;
-	padding: 5px;
+	padding: 10px;
 }
 .content-rooms-card{
 	width: 80%;
@@ -229,7 +232,7 @@
 			</div>
 			
 		</div>
-		<%} else{ %>
+		<%} else { %>
 			<h1>찾을 수 없습니다.</h1>
 		<%} %>
 	</div>

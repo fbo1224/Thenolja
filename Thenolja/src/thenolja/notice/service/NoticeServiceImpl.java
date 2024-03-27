@@ -16,12 +16,12 @@ public class NoticeServiceImpl{
 	
 public ArrayList<Notice> selectNoticeList(){
 		
-		Connection conn = getConnection(); // SQL-MAPPERì‘ì„±ëœ SQL ë°›ì•„ë‹´ê¸°
+		Connection conn = getConnection(); // SQL-MAPPERÀÛ¼ºµÈ SQL ¹Ş¾Æ´ã±â
 
-		// daoì—ì„œ db connection ìƒì„±í•˜ê³  ë°ì´í„° ì¡°íšŒí•´ì„œ listì— ë‹´ì•„ì„œ ë°˜í™˜
+		// dao¿¡¼­ db connection »ı¼ºÇÏ°í µ¥ÀÌÅÍ Á¶È¸ÇØ¼­ list¿¡ ´ã¾Æ¼­ ¹İÈ¯
 		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
 		
-		// DBì—°ê²°ì •ë³´ ì¢…ë£Œ
+		// DB¿¬°áÁ¤º¸ Á¾·á
 		close(conn);
 		
 		return list;
@@ -29,23 +29,25 @@ public ArrayList<Notice> selectNoticeList(){
 
 	
 	/*
-	 * ê³µì§€ì‚¬í•­ ìƒì„¸í™”ë©´ ì¡°íšŒ (íšŒì›)
+	 * °øÁö»çÇ× »ó¼¼È­¸é Á¶È¸ (È¸¿ø)
 	 * 
 	 * */
-	public Notice selectNoticeOne(int noticeNo) {
+	public Notice selectNoticeOne(int noticeNo, String flag) {
 		
 		System.out.println("[NoticeServiceimpl selectNoticeOne noticeNo] " + noticeNo);  
+		System.out.println("[NoticeServiceimpl selectNoticeOne flag] " 	   + flag);  
 		Connection conn = getConnection();
 		Notice result = null;
 		int viewCount = 0;
 
 		try {
 			
-			// 1. ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸
-			viewCount = new NoticeDao().increaseViewCount(conn, noticeNo);
+			// 1. °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ® (»ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã¿¡¸¸)
+			if("N".equals(flag)) viewCount = new NoticeDao().increaseViewCount(conn, noticeNo);
+			else viewCount = 1; // °øÁö»çÇ× ¼öÁ¤/»èÁ¦ ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö count ÀÓÀÇ °ª ¼³Á¤
 			
 			if(viewCount > 0) {
-				// 2. ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì¡°íšŒ
+				// 2. °øÁö»çÇ× »ó¼¼ÆäÀÌÁö Á¶È¸
 				result = new NoticeDao().selectNoticeOne(conn,noticeNo);
 				close(conn);
 			}else {
@@ -62,13 +64,13 @@ public ArrayList<Notice> selectNoticeList(){
 	}//method
 
 	/*
-	 * ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸
+	 * °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ®
 	 * 
 	 * */
 	public int increaseViewCount(int noticeNo) {
 		
 		System.out.println("[NoticeService increaseViewCount] " + noticeNo);
-		Connection conn = getConnection(); // SQL-MAPPERì‘ì„±ëœ SQL ë°›ì•„ë‹´ê¸°
+		Connection conn = getConnection(); // SQL-MAPPERÀÛ¼ºµÈ SQL ¹Ş¾Æ´ã±â
 		int result = 0;
 		
 		result = new NoticeDao().increaseViewCount(conn, noticeNo);
@@ -77,7 +79,7 @@ public ArrayList<Notice> selectNoticeList(){
 	}
 	
 	/*
-	 * ê³µì§€ì‚¬í•­ ë“±ë¡
+	 * °øÁö»çÇ× µî·Ï
 	 * 
 	 * */
 	public int insertNotice(Notice notice) {
@@ -95,7 +97,7 @@ public ArrayList<Notice> selectNoticeList(){
 		
 	}//method
 	
-	//ìˆ˜ì •
+	
 	public int selectNoticeInfo(Notice notice) {
 		
 		
@@ -113,23 +115,6 @@ public ArrayList<Notice> selectNoticeList(){
 		
 		
 	}
-	/*
-	public int delete(Connection conn, String userNo) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("delete");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(userNo));
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	} // try ~ with ~ resource*/
-	
 	
 
 }

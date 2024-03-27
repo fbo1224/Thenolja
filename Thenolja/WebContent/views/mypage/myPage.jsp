@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String gradeName = (String)session.getAttribute("gradeName");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +20,7 @@
 
     .content{
         width: 100%;
-        height: 200px;
+        height: 230px;
         border-bottom: 2px solid lightgray;
     }
     #content1 > div{
@@ -42,7 +45,7 @@
     }
 
     #ct1_1 > h3{
-        margin-top: 50px;
+        margin-top: 35px;
         margin-left: 50px;
         font-weight: bold;
     }
@@ -50,35 +53,26 @@
     .img1{
         width: 50px;
         height: 50px;
-        margin-top: 60px;
-        margin-left: 87px;
     }
 
     .img2{
         width: 50px;
         height: 50px;
-        margin-top: 60px;
-        margin-left: 87px;
     }
 
 
     #name{
-        font-size: 30px;
+        font-size: 35px;
         font-weight: bold;
         margin-top: 50px;
     }
 
-    #ct4_1 > div{
-        font-size: 20px;
+    #grade{
+        font-size: 35px;
         font-weight: bold;
-        margin-top: 30px;
-        margin-left: 100px;
     }
 
-
-    #grade{
-        font-size: 30px;
-        font-weight: bold;
+    #gradeIcon{
         margin-top: 50px;
     }
 
@@ -94,11 +88,23 @@
     }
     #ct2_4 > button:hover{color: black;}
 
-    .link1{margin-left: 90px; margin-top: 10px; color: black; font-weight: bold;}
-    .link1:hover{text-decoration: none; color: rgb(70, 149, 151);}
+    .icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .iconImg{
+        width: auto;
+    }
+    .iconImg > a > span {
+        display: block;
+        color: black;
+    }
+    .iconImg > a > span:hover{
+        text-decoration: none;
+    }
 
-    .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black; font-weight: bold;}
-    .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
+    
 </style>
 
 </head>
@@ -107,9 +113,9 @@
 		<%@ include file="../common/menubar.jsp" %>
 	
     <div id="wrap">
-        <div id="content1" class="content">
+        <div id="content1" class="content" style="height: 100px;">
             <div id="ct1_1">
-                <h3>마이페이지</h3>
+                <h3>내 정보</h3>
             </div>
             <div id="ct1_2"></div>
             <div id="ct1_3"></div>
@@ -118,14 +124,16 @@
         </div>
         <div id="content2" class="content">
             <div id="ct2_1">
-                <img class="img" src="./resources/mypage/profile.png" alt="프로필" style="width: 120px; height: 120px; margin-top: 40px; margin-left: 50px;">
+                <img class="img" src="./resources/mypage/user.png" alt="프로필" style="width: 150px; height: 150px; margin-top: 40px; margin-left: 40px;">
             </div>
-            <div id="ct2_2">
-                <div id="name"><%= loginUser.getMemName() %>님</div>
-            </div>
+            <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
-                <div id="grade">Gold회원</div>
+                <div id="gradeIcon">
+                    <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
+                    <span id="grade" style="color: goldenrod;"><%= gradeName %></span>
+                </div>
             </div>
+
             <div id="ct2_4">
                 <button type="button" id="update" onclick="location.href='<%= contextPath %>/update.ck'">정보수정</button>
                 <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
@@ -154,47 +162,25 @@
 			 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
 			 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">
 			 	
-			  	
-			  	
-			<!--
-			<script>
-				function deleteMember(){
-					
-					const value = prompt('탈퇴를 원하신다면 "어쩌고저쩌고"를 정확히 입력해주세요.');
-					
-					if(value === ('어쩌고저쩌고')){
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
-			
-			</script> 
-			-->
-			
 			</form>
 		 	</div>
 			</div>
 		</div>
 	</div>
         
-        
-        
-        
-        
         <div id="content3" class="content">
-            <div id="ct3_1"><a href="#"><img class="img1" src="./resources/mypage/coupon.png" alt="쿠폰"><div class="link1">쿠폰</div></a></div>
-            <div id="ct3_2"><a href="#"><img class="img1" src="./resources/mypage/heart.png" alt="찜목록"><div class="link1">찜목록</div></a></div>
-            <div id="ct3_3"><a href="#"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"><div class="link1">리뷰</div></a></div>
-            <div id="ct3_4"><a href="#"><img class="img1" src="./resources/mypage/event.png" alt="이벤트"><div class="link1">이벤트</div></a></div>
+
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
         </div>
         <div id="content4" class="content">
             
-            <div id="ct4_1"><div>고객센터 >></div></div>
-            <div id="ct4_2"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><div class="link2">이용내역</div></a></div>
-            <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><div class="link2">공지사항</div></a></div>
-            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><div class="link2" style="margin-left: 60px;">자주묻는질문</div></a></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/reservation.png" alt="예약내역"></div><span>예약내역</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/action.png" alt="이용내역"></div><span>이용내역</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/bell.png" alt="공지사항"></div><span>공지사항</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/question.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
             
         </div>
 

@@ -1,26 +1,28 @@
-package thenolja.notice.controller;
+package thenolja.admin.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.notice.model.vo.Notice;
-import thenolja.notice.service.NoticeServiceImpl;
+import org.json.simple.JSONObject;
+
+import thenolja.admin.review.model.service.ReviewService;
 
 /**
- * Servlet implementation class NoticeUpdateFormController
+ * Servlet implementation class DeleteReview
  */
-@WebServlet("/updateForm.notice")
-public class NoticeUpdateFormController extends HttpServlet {
+@WebServlet("/deleteReview.do")
+public class DeleteReview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateFormController() {
+    public DeleteReview() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +33,17 @@ public class NoticeUpdateFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-	// GET방식
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		// 값뽑기
-		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		int result = new ReviewService().deleteMemberReview(reserNo);
 		
-		// 가공
+		JSONObject obj = new JSONObject();
 		
-		// 서비스 호출
-		Notice notice = new NoticeServiceImpl().selectNoticeOne(noticeNo);
+		obj.put("message", "리뷰 삭제 완료!");
 		
-		request.setAttribute("notice", notice);
+		response.setContentType("application/json; charset=UTF-8");
 		
-		// 응답 뷰 지정
-		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);
-		
-		
+		response.getWriter().print(obj.toString());
 		
 	}
 

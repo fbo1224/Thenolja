@@ -10,7 +10,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>공지사항 목록 화면</title>
+<title>더놀자 > 공지사항 > 목록</title>
 <style>
 
 .outer{
@@ -94,8 +94,6 @@
 	      <li class="page-item"><a class="page-link" href="#">1</a></li>
 	      <li class="page-item"><a class="page-link" href="#">2</a></li>
 	      <li class="page-item"><a class="page-link" href="#">3</a></li>
-	      <li class="page-item"><a class="page-link" href="#">4</a></li>
-	      <li class="page-item"><a class="page-link" href="#">5</a></li>
 	      <li class="page-item">
 	        <a class="page-link" href="#"> > </a>
 	      </li>
@@ -108,13 +106,20 @@
 </div>
 	<script>
 
-        // view
-        $('tbody > tr.list').click(function(){
+		// 수정화면 진입 (관리자전용URL)   관리자 로그인 시 공지사항 게시여부 'Y','N' 둘다 볼 수 있도록 하기
+		$('tbody > tr.list').click(function(){
+	        //location.href='<%=contextPath%>/detail.notice';  
+	        const noticeNo = $(this).children().eq(0).text();
+	        location.href= '<%= contextPath %>/update.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+	      });
+		
+        // 상세화면 진입 (회원전용URL)			회원(사용자)로그인일 경우 공지사항 게시여부 'N'만 보이도록 하기
+        /* $('tbody > tr.list').click(function(){
           //location.href='<%=contextPath%>/detail.notice';  
-          const noticeNo = $(this).children().eq(0).text();
-          location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo;
+           const noticeNo = $(this).children().eq(0).text();
+           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
 
-        });
+        }); */
 	</script>
 
 </head>
