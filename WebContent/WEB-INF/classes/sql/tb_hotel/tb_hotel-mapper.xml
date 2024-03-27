@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		tb_hotel Mapper
+	</comment>
+	
+	<entry key="insertHotel">
+		 INSERT
+		   INTO
+		       TB_HOTEL
+		 VALUES(
+		 		SEQ_HOTEL.NEXTVAL,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		DEFAULT,
+		 		?
+		 	   )    
+	</entry>
+	
+	<entry key="insertService">
+		INSERT
+		  INTO
+		      TB_SERVICE
+	   VALUES(
+	   		  SEQ_HOTEL.CURRVAL,
+	   		  ?
+		     )    
+	</entry>
+	
+	
+	<entry key="selectListCount">
+		SELECT
+      	 	  COUNT(*)
+  		  FROM
+      		  TB_HOTEL
+ 		 WHERE
+      	      HOTEL_YN = 'Y'  
+	</entry>
+	
+	
+	<entry key="selectListCountRoomIn">
+		SELECT
+		      COUNT(DISTINCT TB_HOTEL.HOTEL_NO) AS CNTS
+		  FROM
+		       TB_HOTEL
+		  JOIN TB_ROOM
+		    ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+		 WHERE
+		      HOTEL_YN = 'Y'
+	</entry>
+	
+	
+	<entry key="selectAllList">
+	SELECT            
+          HOTEL_NO,
+          HOTEL_NAME,
+          HOTEL_LOCATION,
+          HOTEL_CATEGORY,
+          HOTEL_PATH,
+          ROWNUM RNUM
+	  FROM(
+	  		SELECT
+	  		      HOTEL_NO,
+                  HOTEL_NAME,
+                  HOTEL_LOCATION,
+                  HOTEL_CATEGORY,
+                  HOTEL_PATH,
+                  ROWNUM RNUM
+             FROM(
+                  SELECT
+                    	TB_HOTEL.HOTEL_NO,
+                    	HOTEL_NAME,
+                    	HOTEL_LOCATION,
+                    	HOTEL_CATEGORY,
+                    	HOTEL_PATH
+                	FROM
+                    	TB_HOTEL
+                   WHERE
+                        HOTEL_YN = 'Y'
+    		 ORDER BY HOTEL_NO DESC))
+       WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+	    FROM(SELECT A.*, ROWNUM RNUM 
+	        FROM(
+	          SELECT
+	          		TB_HOTEL.HOTEL_NO,
+	              	HOTEL_NAME,
+	              	HOTEL_LOCATION,
+	              	HOTEL_CATEGORY,
+	              	HOTEL_PATH,
+	              	MIN(ROOM_PRICE) AS ROOM_PRICE
+	          	FROM
+	                TB_HOTEL
+	           JOIN TB_ROOM
+	             ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+	          WHERE
+	               HOTEL_YN = 'Y'
+	        GROUP BY
+	        		 TB_HOTEL.HOTEL_NO,
+	                 HOTEL_NAME,
+	                 HOTEL_LOCATION,
+	                 HOTEL_CATEGORY,
+	                 HOTEL_PATH
+	        ORDER BY TB_HOTEL.HOTEL_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+		
+	</entry>
+	
+	<entry key="selectHotel">
+		SELECT
+		      HOTEL_NAME,
+		      HOTEL_PATH,
+		      HOTEL_CATEGORY,
+		      HOTEL_INTRO
+    	  FROM TB_HOTEL  
+         WHERE HOTEL_YN = 'Y'
+           AND HOTEL_NO = ?
+	</entry>
+	
+	<entry key="hotelServiceList">
+		SELECT
+	      	  TB_SERVICE.SERVICE_NO,
+	      	  SERVICE_NAME
+	  	  FROM    
+	      	  TB_HOTEL
+	  	  JOIN TB_SERVICE
+	        ON TB_HOTEL.HOTEL_NO = TB_SERVICE.HOTEL_NO
+	  	  JOIN TB_SERVICE_LIST
+	    	ON TB_SERVICE_LIST.SERVICE_NO = TB_SERVICE.SERVICE_NO
+	     WHERE
+	       	  HOTEL_YN = 'Y'
+	       AND 
+	       	  TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
+	<entry key="hotelRoomList">
+		SELECT
+		      TB_ROOM.CHECKIN_TIME,
+		      TB_ROOM.CHECKOUT_TIME,
+		      ROOM_NUM,
+		      ROOM_PRICE,
+		      ROOM_IMG,
+		      ROOM_NAME
+  		 FROM TB_ROOM
+	     JOIN TB_HOTEL
+	       ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+	     JOIN TB_ROOM_IMG
+	       ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
+	    WHERE 
+	         TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
+	
+	<entry key="hotelReviews">
+	SELECT
+	      TB_HOTEL.HOTEL_NO,
+	      TB_RESERVATION.ROOM_NO,
+	      RESER_NAME,
+	      CREATE_DATE,
+	      REVIEW_SCORE,
+	      REVIEW_CONTENT
+  	  FROM
+          TB_RESERVATION
+  	  JOIN TB_ROOM  
+        ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO
+      JOIN TB_HOTEL
+        ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
+      JOIN TB_REVIEW
+        ON TB_RESERVATION.RESER_NO = TB_REVIEW.RV_RESER_NO
+     WHERE
+          TB_HOTEL.HOTEL_YN = 'Y'
+       AND
+          CANCEl_YN = 'N'
+       AND
+          REVIEW_YN = 'Y'
+       AND
+          TB_HOTEL.HOTEL_NO = ?
+      ORDER
+         BY CREATE_DATE DESC    
+	</entry>
+	
+	<entry key="countReviews">
+		SELECT
+      	      COUNT(*)
+  	      FROM
+      	      TB_REVIEW
+		  JOIN TB_RESERVATION
+		    ON TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO
+		  JOIN TB_ROOM
+		    ON TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO
+		  JOIN TB_HOTEL
+		    ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
+ 		 WHERE
+ 		      TB_HOTEL.HOTEL_NO = ?
+ 		   AND
+ 		      TB_HOTEL.HOTEL_YN = 'Y'   
+	</entry>
+	
+	<!-- 업데이트시 가져갈데이터 -->
+	<entry key="updateForm">
+		SELECT
+	          TB_HOTEL.HOTEL_NO,
+	          HOTEL_NAME,
+	          HOTEL_PHONE,
+	          HOTEL_LOCATION,
+	          HOTEL_ADDRESS,
+	          HOTEL_CATEGORY,
+	          HOTEL_PATH,
+	          HOTEL_INTRO,
+	          HOST_NAME
+          FROM
+        	  TB_HOTEL
+  	     WHERE
+       	      HOTEL_YN = 'Y'
+    	   AND
+              TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
+	<entry key="updateFormSerList">
+		SELECT
+      		  SERVICE_NAME
+  	      FROM
+      	      TB_SERVICE_LIST
+    	  JOIN TB_SERVICE
+     		ON TB_SERVICE.SERVICE_NO = TB_SERVICE_LIST.SERVICE_NO
+  		  JOIN TB_HOTEL
+    		ON TB_HOTEL.HOTEL_NO = TB_SERVICE.HOTEL_NO
+ 	     WHERE
+       		  TB_HOTEL.HOTEl_YN = 'Y'
+   		   AND 
+      	      TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</properties>
