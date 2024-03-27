@@ -50,7 +50,7 @@ public class NoticeController extends HttpServlet {
 		
 		//응답화면 띄우기
 		request.setAttribute("noticeList", list);
-		RequestDispatcher view = request.getRequestDispatcher("/view/notice/noticeList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/notice/noticeList.jsp");
 		view.forward(request, response);
 		
 	}
