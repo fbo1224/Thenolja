@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import thenolja.admin.review.model.vo.AdminComment;
 import thenolja.admin.review.model.vo.AdminReview;
 import thenolja.common.JDBCTemplate;
 import thenolja.common.model.vo.PageInfo;
@@ -160,4 +161,36 @@ public class ReviewDao {
 		 
 		 return result;
 	 }
+	 
+	 
+	 /**
+	  * 대댓글 추가
+	  */
+	 public int insertComment(Connection conn, AdminComment adminComment) {
+		 
+		 int result = 0;
+		 PreparedStatement pstmt = null;
+		 String sql = prop.getProperty("insertComment");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, adminComment.getCommentReserNo());
+			pstmt.setString(2, adminComment.getCommentContent());
+			pstmt.setInt(3, Integer.parseInt(adminComment.getCommentMemNo()));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		 
+		 return result;
+
+	 }
+	 
+	 
+	 
 }
