@@ -37,15 +37,16 @@ public class HotelServlet extends HttpServlet {
 		HotelController hc = new HotelController();
 		
 		String view = "";
+		int result = 0;
 		boolean flag = true;
 		request.setCharacterEncoding("UTF-8");
-		
+	
 		switch(mapping) {
 			// insertHotel.jsp
 			case "insertForm" : view =  hc.insertForm(request, response); break;
 			
 			//
-			case "insert" : int result =  hc.insert(request, response);
+			case "insert" : result =  hc.insert(request, response);
 							// hotelList로 이동
 							if(result > 0) {
 								view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
@@ -65,7 +66,15 @@ public class HotelServlet extends HttpServlet {
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			// 
-			case "update" : view =  hc.update(request, response); flag = false; break;
+			case "update" : result =  hc.update(request, response);
+							if(result > 0) {
+								view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+								flag = false;
+							} else {
+								request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
+								view = "views/common/errorPage.jsp";
+							}
+							break;
 
 			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;
