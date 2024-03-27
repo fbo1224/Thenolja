@@ -247,9 +247,9 @@ public class HotelController {
 			h.setSerList(serList);
 			System.out.println(h);
 			
-//			if(multiRequest.getOriginalFileName("hotelImg") != null) {
-//				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
-//			}
+			if(multiRequest.getOriginalFileName("hotelImg") != null) {
+				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
+			}
 		}
 		
 		view = "";

@@ -8,10 +8,11 @@
     	ArrayList<String> list = null;
     	String detailAddr = "";
     	String phoneNum = "";
+    	String BeforeImgName = "";
     	if(h != null){
-	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") +1);
+	    	detailAddr = h.getHotelAddress().substring(h.getHotelAddress().lastIndexOf("/") + 1);
 	    	phoneNum = h.getHotelPhone().substring(4);
-			
+	    	BeforeImgName = h.getHotelPath().substring(h.getHotelPath().lastIndexOf("/") + 1);
 	    	list = new ArrayList();
 	    	
 	    	for(int i = 0; i < h.getSerList().length; i++){
@@ -20,6 +21,7 @@
 		    	}
 	    	}
     	}
+    	System.out.println(BeforeImgName);
     %>
 <!DOCTYPE html>
 <html>
