@@ -242,14 +242,13 @@
 	                
 	                <!-- 0-2-2-3. 쿠폰 정보 시작 -->
 	                <div id="reser-coupon">
-	                
 	                    <br>
 	                    <h3>할인</h3>
 	                    <br>
 	                    <h5>쿠폰</h5>
 	                    <br>
 	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="noLogin()">쿠폰 적용</button>
 	                </div>
 	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
 	                
