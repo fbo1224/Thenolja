@@ -165,8 +165,6 @@
 		       (GRADE_NO)
 		 WHERE
 		       MEM_NO = ?
-		       
-	
 	</entry>	
 	
 	
