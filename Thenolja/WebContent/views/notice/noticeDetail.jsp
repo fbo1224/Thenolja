@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세화면</title>
+<title>더놀자 > 공지사항 > 상세</title>
 <style>
 
 #detail-area{
@@ -24,7 +24,7 @@
 
 #detail_title-area{
     display: flex;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     padding: 20px 60px;

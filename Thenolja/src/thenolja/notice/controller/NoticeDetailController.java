@@ -29,34 +29,30 @@ public class NoticeDetailController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * ê³µì§€ì‚¬í•­ ìƒì„¸í™”ë©´ ì¡°íšŒ
+	 * °øÁö»çÇ× »ó¼¼È­¸é Á¶È¸
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// ìƒì„¸í˜ì´ì§€ ì¡°íšŒ ì‹œ íŒŒë¼ë¯¸í„° ë°›ê¸°
+		// »ó¼¼ÆäÀÌÁö Á¶È¸ ½Ã ÆÄ¶ó¹ÌÅÍ ¹Ş±â
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String flag  = request.getParameter("flag"); // ¼öÁ¤, »èÁ¦ / »ó¼¼ ÆäÀÌÁö ±¸ºĞÀ» À§ÇÑ °ª Ãß°¡
 		
 		System.out.println("[NoticeDetailController noticeNo] " + noticeNo);  
 
 		Notice result = new Notice();
-		result = new NoticeServiceImpl().selectNoticeOne(noticeNo);
+		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
 		System.out.println("[NoticeDetailController result] " + result);
 		
-		// NOTICE íƒ€ì…ìœ¼ë¡œ result ë³€ìˆ˜ëª… ì„ ì–¸
-		// result ë³€ìˆ˜ëª…ì— NoticeServiceImpl()ë¼ëŠ” ê³³ì— í˜¸ì¶œ ì°¸ì¡°í•˜ì—¬ .selectOne(noticeNo);
-		// noticeNo =>  ë‚´ê°€ ì¡°íšŒí•˜ê³ ì í•˜ëŠ” 
 		if(result != null) {
 			request.setAttribute("notice", result);
-			request.getRequestDispatcher("views/notice/noticeDetail.jsp").forward(request, response); //í¬ì›Œë”©
+			request.getRequestDispatcher("view/notice/noticeDetail.jsp").forward(request, response); //Æ÷¿öµù
 			
-		}else { //ì‹¤íŒ¨ => ì—ëŸ¬í˜ì´ì§€ ë³´ë‚´ê¸°
+		}else { //½ÇÆĞ => ¿¡·¯ÆäÀÌÁö º¸³»±â
 			
-			request.setAttribute("errorMsg", "ê³µì§€ì‚¬í•­ ìƒì„¸ ì¡°íšŒ ì‹¤íŒ¨");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
+			request.setAttribute("errorMsg", "°øÁö»çÇ× »ó¼¼ Á¶È¸ ½ÇÆĞ");
+			RequestDispatcher view = request.getRequestDispatcher("view/common/error.Msg");
 			view.forward(request,response);	
 		}
-		
-		
 		
 	}
 		
