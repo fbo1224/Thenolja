@@ -1,2 +1,0 @@
-# Thenolja
-semi
