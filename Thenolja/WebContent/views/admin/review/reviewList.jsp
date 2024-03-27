@@ -11,6 +11,15 @@
     <title>리뷰 목록</title>
  	<link rel="stylesheet" href="resources/css/admin_select.css">   
 </head>
+
+<style>
+#contentMessage > td {
+	text-align : left;
+	padding-left : 10px;
+}
+
+</style>
+
 <body>
     
     <div id="wrap">
@@ -153,7 +162,7 @@
                     <td><span id="roomName"></span></td>
                     <td><span id="reviewScore"></span></td>
                 </tr>
-                <tr>
+                <tr id="contentMessage">
                     <td colspan="3" width="300"><span id="reviewContent"></span></td>
                 </tr>
 
