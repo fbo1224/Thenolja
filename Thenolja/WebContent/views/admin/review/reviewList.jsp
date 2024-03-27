@@ -11,6 +11,15 @@
     <title>리뷰 목록</title>
  	<link rel="stylesheet" href="resources/css/admin_select.css">   
 </head>
+
+<style>
+#contentMessage > td {
+	text-align : left;
+	padding-left : 10px;
+}
+
+</style>
+
 <body>
     
     <div id="wrap">
@@ -153,7 +162,7 @@
                     <td><span id="roomName"></span></td>
                     <td><span id="reviewScore"></span></td>
                 </tr>
-                <tr>
+                <tr id="contentMessage">
                     <td colspan="3" width="300"><span id="reviewContent"></span></td>
                 </tr>
 
@@ -163,9 +172,9 @@
                 <form action="/action_page.php">
                   <div class="form-group">
                     <div><p>답글 작성</p></div>
-                    <textarea class="form-control" rows="5" id="comment" name="text" cols="50"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="text" cols="53"></textarea>
                   </div>
-                  <button type="submit" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;">등록하기</button>
                 </form>
               </div>
 
