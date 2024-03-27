@@ -20,6 +20,7 @@
 		 		?,
 		 		?,
 		 		DEFAULT,
+		 		?,
 		 		?
 		 	   )    
 	</entry>
@@ -216,7 +217,8 @@
 	          HOTEL_CATEGORY,
 	          HOTEL_PATH,
 	          HOTEL_INTRO,
-	          HOST_NAME
+	          HOST_NAME,
+	          DETAILLOCATION
           FROM
         	  TB_HOTEL
   	     WHERE
@@ -245,13 +247,13 @@
 		      TB_HOTEL
 		   SET
 		      HOTEL_NAME = ?,
-		      HOTEL_PHONE = ?,
 		      HOTEL_LOCATION = ?,
 		      HOTEL_ADDRESS = ?,
 		      HOTEL_CATEGORY = ?,
 		      HOTEL_INTRO = ?,
 		      HOST_NAME = ?,
-		      HOTEL_PATH = ?
+		      HOTEL_PATH = ?,
+		      DETAILLOCATION = ?
 		WHERE 
 		     HOTEL_NO = ? 
 		  AND

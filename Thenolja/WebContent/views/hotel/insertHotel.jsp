@@ -199,7 +199,6 @@ label{
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
-								<%-- <input type="text" id="sample4_postcode" placeholder="우편번호" name="letterNo">--%>
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
 								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="loadName" required>
 								<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="detailAddr" required>
@@ -240,7 +239,7 @@ label{
 								<label id="phone-label">전화번호</label>
 								<div id="nameNPhone-div-2">
 									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" id="Phone-div-2" type="text" name="phone2" placeholder="-제외한 숫자만 입력해주세요.">
+									<input class="form-control" maxlength="8" id="Phone-div-2" type="text" name="phone2" placeholder="-제외한 숫자만 입력해주세요.">
 								</div>
 							</div>
 

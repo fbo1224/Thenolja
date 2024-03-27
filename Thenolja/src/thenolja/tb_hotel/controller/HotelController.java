@@ -53,7 +53,6 @@ public class HotelController {
 				e.printStackTrace();
 			}
 			
-			// String letterNo = multiRequest.getParameter("letterNo"); // 우편번호 제외
 			String loadName = multiRequest.getParameter("loadName");
 			String detailAddr = multiRequest.getParameter("detailAddr");
 			String hotelCate = multiRequest.getParameter("hotelCate");
@@ -64,20 +63,15 @@ public class HotelController {
 			String[] serList = multiRequest.getParameterValues("serList");
 			String introText = multiRequest.getParameter("introText");
 			
-			// hotelImg 파일
-			System.out.println(String.join(",", serList));
-			
 			// 지역만뽑기
-			String location = loadName.substring(0, loadName.indexOf(" ")+1);
-			
-			// 지역을 제외한 
-			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
+			String location = loadName.substring(0, loadName.indexOf(" ") + 1);
 			
 			Hotel h = new Hotel();
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
-			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(loadName +"/"+ detailAddr);
+			h.setHotelLocation(location);  // 지역
+			h.setHotelAddress(loadName);   // 주소
+			h.setHotelDetail(detailAddr);  // 상세주소
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
@@ -87,8 +81,7 @@ public class HotelController {
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
-			
-			// System.out.println(h);
+			System.out.println(h);
 			
 			result = new HotelService().insertHotel(h);
 		}
@@ -155,9 +148,6 @@ public class HotelController {
 			hotelList = new HotelService().selectList(pi);
 		}
 		
-		// 확인용 출력
-		// System.out.println(hotelList);
-		
 		// 5) 응답화면 지정
 		request.setAttribute("hotelList", hotelList);
 		request.setAttribute("pageInfo", pi);
@@ -213,25 +203,17 @@ public class HotelController {
 			String phone2 = multiRequest.getParameter("phone2");
 			String[] serList = multiRequest.getParameterValues("serList");
 			String introText = multiRequest.getParameter("introText");
-			String beforeImgPath = multiRequest.getParameter("beforeImg");
+			String beforeImgPath = multiRequest.getParameter("beforeImgPath");
 			
 			// 지역만뽑기
 			String location = loadName.substring(0, loadName.indexOf(" ")+1);
-			
-			// 지역을 제외한 
-			String newlocation = loadName.substring(loadName.indexOf(" ")+1);
-			
-			if(loadName.lastIndexOf("/") != -1 ) {
-				loadName = loadName.substring(0, loadName.lastIndexOf("/"));
-			}
-			
-			System.out.println(loadName);
 			
 			h = new Hotel();
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
 			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(loadName +"/"+ detailAddr);
+			h.setHotelAddress(loadName);
+			h.setHotelDetail(detailAddr);
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
@@ -247,6 +229,7 @@ public class HotelController {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
 				new File(savePath + "/" + beforeImgName).delete();
 			}
+			
 		}
 		
 		int result = new HotelService().updateHotel(h);

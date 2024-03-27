@@ -65,7 +65,7 @@ public class HotelServlet extends HttpServlet {
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			// 
-			case "update" : view =  hc.update(request, response); break;
+			case "update" : view =  hc.update(request, response); flag = false; break;
 
 			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;

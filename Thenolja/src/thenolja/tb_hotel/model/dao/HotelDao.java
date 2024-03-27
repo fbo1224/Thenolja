@@ -52,6 +52,7 @@ public class HotelDao {
 			pstmt.setString(6, h.getHotelPath());
 			pstmt.setString(7, h.getHotelIntro());
 			pstmt.setString(8, h.getHostName());
+			pstmt.setString(9, h.getHotelDetail());
 			
 			result = pstmt.executeUpdate();
 			
@@ -387,6 +388,7 @@ public class HotelDao {
 				h.setHotelPath(rset.getString("HOTEL_PATH"));
 				h.setHotelIntro(rset.getString("HOTEL_INTRO"));
 				h.setHostName(rset.getString("HOST_NAME"));
+				h.setHotelDetail(rset.getString("DETAILLOCATION"));
 			}
 			
 		} catch (SQLException e) {
@@ -433,15 +435,17 @@ public class HotelDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, h.getHotelName());
-			pstmt.setString(2, h.getHotelPhone());
-			pstmt.setString(3, h.getHotelLocation());
-			pstmt.setString(4, h.getHotelAddress());
-			pstmt.setString(5, h.getHotelCategory());
-			pstmt.setString(6, h.getHotelIntro());
-			pstmt.setString(7, h.getHostName());
-			pstmt.setString(8, h.getHotelPath());
+			pstmt.setString(2, h.getHotelLocation());
+			pstmt.setString(3, h.getHotelAddress());
+			pstmt.setString(4, h.getHotelCategory());
+			pstmt.setString(5, h.getHotelIntro());
+			pstmt.setString(6, h.getHostName());
+			pstmt.setString(7, h.getHotelPath());
+			pstmt.setString(8, h.getHotelDetail());
 			pstmt.setInt(9, h.getHotelNo());
+			
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
