@@ -6,7 +6,7 @@
 		review Mapper
 	</comment>
 	
-	<entry key="">
+	<entry key="selectReviewCount">
 		SELECT
 	        COUNT(*)
 	  FROM
@@ -90,5 +90,14 @@
 	
 	</entry>
 	
+	<entry key="deleteMemberReview">
+	
+		UPDATE
+			  TB_REVIEW
+		  SET
+		      REVIEW_YN = 'N'
+		WHERE
+			   RV_RESER_NO = ?
+	</entry>
 	
 </properties>

@@ -7,7 +7,7 @@
 <title>마이페이지</title>
 
 <style>
-    /*div{border: 1px solid red; box-sizing: border-box;}*/
+    div{border: 1px solid red; box-sizing: border-box;}
 
     #wrap{
         width: 900px;
@@ -42,7 +42,7 @@
     }
 
     #ct1_1 > h3{
-        margin-top: 50px;
+        margin-top: 120px;
         margin-left: 50px;
         font-weight: bold;
     }
@@ -57,8 +57,8 @@
     .img2{
         width: 50px;
         height: 50px;
-        margin-top: 60px;
-        margin-left: 87px;
+        /*margin-top: 60px;*/
+        /*margin-left: 87px;*/
     }
 
 
@@ -68,10 +68,9 @@
         margin-top: 50px;
     }
 
-    #ct4_1 > div{
+    #ct4_1 > span{
         font-size: 20px;
         font-weight: bold;
-        margin-top: 30px;
         margin-left: 100px;
     }
 
@@ -97,8 +96,12 @@
     .link1{margin-left: 90px; margin-top: 10px; color: black; font-weight: bold;}
     .link1:hover{text-decoration: none; color: rgb(70, 149, 151);}
 
-    .link2{margin-left: 80px; margin-top: 10px; text-decoration: none; color: black; font-weight: bold;}
+    .link2{/*margin-left: 80px; margin-top: 10px;*/ text-decoration: none; color: black; font-weight: bold;}
     .link2:hover{text-decoration: none; color: rgb(70, 149, 151);}
+
+    #ct4_2 > div{
+        width: 100px;
+    }
 </style>
 
 </head>
@@ -109,7 +112,7 @@
     <div id="wrap">
         <div id="content1" class="content">
             <div id="ct1_1">
-                <h3>마이페이지</h3>
+                <h3>내 정보</h3>
             </div>
             <div id="ct1_2"></div>
             <div id="ct1_3"></div>
@@ -155,23 +158,7 @@
 			 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">
 			 	
 			  	
-			  	
-			<!--
-			<script>
-				function deleteMember(){
-					
-					const value = prompt('탈퇴를 원하신다면 "어쩌고저쩌고"를 정확히 입력해주세요.');
-					
-					if(value === ('어쩌고저쩌고')){
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
 			
-			</script> 
-			-->
 			
 			</form>
 		 	</div>
@@ -184,17 +171,17 @@
         
         
         <div id="content3" class="content">
-            <div id="ct3_1"><a href="#"><img class="img1" src="./resources/mypage/coupon.png" alt="쿠폰"><div class="link1">쿠폰</div></a></div>
-            <div id="ct3_2"><a href="#"><img class="img1" src="./resources/mypage/heart.png" alt="찜목록"><div class="link1">찜목록</div></a></div>
-            <div id="ct3_3"><a href="#"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"><div class="link1">리뷰</div></a></div>
-            <div id="ct3_4"><a href="#"><img class="img1" src="./resources/mypage/event.png" alt="이벤트"><div class="link1">이벤트</div></a></div>
+            <div id="ct3_1"><a href="#"><img class="img1" src="./resources/mypage/coupon.png" alt="쿠폰"><span class="link1">쿠폰</span></a></div>
+            <div id="ct3_2"><a href="#"><img class="img1" src="./resources/mypage/heart.png" alt="찜목록"><span class="link1">찜목록</span></a></div>
+            <div id="ct3_3"><a href="#"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"><span class="link1">리뷰</span></a></div>
+            <div id="ct3_4"><a href="#"><img class="img1" src="./resources/mypage/event.png" alt="이벤트"><span class="link1">이벤트</span></a></div>
         </div>
         <div id="content4" class="content">
             
-            <div id="ct4_1"><div>고객센터 >></div></div>
-            <div id="ct4_2"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><div class="link2">이용내역</div></a></div>
-            <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><div class="link2">공지사항</div></a></div>
-            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><div class="link2" style="margin-left: 60px;">자주묻는질문</div></a></div>
+            <div id="ct4_1"><span>고객센터 >></span></div>
+            <div id="ct4_2" style="position: relative;"><div style="position: absolute;"><a href="#"><img class="img2" src="./resources/mypage/actions.png" alt="이용내역"><span style="border:1px solid black;" class="link2">이용내역</span></a></div></div>
+            <div id="ct4_3"><a href="#"><img class="img2" src="./resources/mypage/notice.png" alt="공지사항"><span class="link2">공지사항</span></a></div>
+            <div id="ct4_4"><a href="#"><img class="img2" src="./resources/mypage/qna.png" alt="qna"><span class="link2" >자주묻는질문</span></a></div>
             
         </div>
 

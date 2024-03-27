@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Refund Mapper
+	</comment>
+	<entry key="insertRefund">	
+		INSERT
+		  INTO
+		  		TB_REFUND
+		  		(
+		  		RF_RESER_NO.
+		  		REFUND_PRICE,
+		  		REFUND_ACC_NO,
+		  		REFUND_NAME,
+		  		BANK
+		  		)
+		VALUES
+				(
+				?,
+				170000,
+				?,
+				?,
+				?
+				)
+	</entry>
+	<entry key="selectRefund">
+		 SELECT
+				RF_RESER_NO,
+				REFUND_PRICE,
+				REFUND_ACC_NO,
+				REFUND_NAME,
+				BANK
+		  FROM
+		        TB_REFUND
+		  JOIN
+		  		ON (RE_RESER_NO = RESER_NO)      
+		 WHERE
+		 		RESER_NO = ?
+	</entry>
+	<entry key="selectRefundNo">
+		 SELECT
+				RF_RESER_NO,
+				REFUND_PRICE,
+				REFUND_ACC_NO,
+				REFUND_NAME,
+				BANK
+		  FROM
+		        TB_REFUND
+		  JOIN
+		  		ON (RE_RESER_NO = RESER_NO)
+	   ORDER BY RESER_NO DESC
+				
+	</entry>
+	
+
+
+	
+	
+	
+	
+	
+	
+</properties>
