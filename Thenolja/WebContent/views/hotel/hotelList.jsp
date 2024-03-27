@@ -150,7 +150,6 @@
 			});
 		
 			$('#deleteBtn').click(function(e){
-				// console.log(hotelNo);
 				$.ajax({
 					url: 'jqAjax.do',
 					data: {
