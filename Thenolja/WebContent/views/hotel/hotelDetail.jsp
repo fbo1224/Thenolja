@@ -49,8 +49,9 @@
 	width: 80%;
 	display: flex;
 	justify-content: space-between;
-	height: 50px;
+	height: 40px;
 	border-bottom: 1px solid gray;
+	padding: 10px;
 }
 #detail-content-services{
 	margin: auto;

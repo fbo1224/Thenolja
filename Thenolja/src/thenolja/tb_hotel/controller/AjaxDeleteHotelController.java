@@ -1,4 +1,4 @@
-package thenolja.admin.review.controller;
+package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.review.model.service.ReviewService;
-import thenolja.admin.review.model.vo.AdminComment;
+import thenolja.tb_hotel.model.service.HotelService;
 
 /**
- * Servlet implementation class ReviewCommentInsert
+ * Servlet implementation class AjaxController
  */
-@WebServlet("/commentInsert.do")
-public class ReviewCommentInsert extends HttpServlet {
+@WebServlet("/jqAjax.do")
+public class AjaxDeleteHotelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewCommentInsert() {
+    public AjaxDeleteHotelController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +29,17 @@ public class ReviewCommentInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
+		// System.out.println(hotelNo);
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		String content = request.getParameter("content");
-		
-		AdminComment adminComment = new AdminComment();
-		// adminComment.setCommentReserNo(reserNo);
-		adminComment.setCommentMemNo(String.valueOf(memNo));
-		adminComment.setCommentContent(content);
-		
-		int result = new ReviewService().insertComment(adminComment);
-		
+		int result = new HotelService().deleteHotel(hotelNo);
+		String str = "삭제 실패";
+		if(result > 0) {
+			str = "삭제 성공";
+		}
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(result > 0 ?  "success" : "fail");
+		response.getWriter().print(str);
 		
 	}
 
