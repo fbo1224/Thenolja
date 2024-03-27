@@ -42,11 +42,11 @@ div {
     justify-content: space-evenly;
     padding-top: 30px;
 }
-li{
+#header li{
     list-style: none;
     float: left;
 }
-a{
+#header a{
     text-decoration: none;
     color: black;
     padding-right: 20px;
