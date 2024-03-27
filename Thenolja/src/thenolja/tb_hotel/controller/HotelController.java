@@ -77,7 +77,7 @@ public class HotelController {
 			h.setHotelName(hotelName);
 			h.setHotelPhone(phone1+phone2);
 			h.setHotelLocation(location); // 지역
-			h.setHotelAddress(loadName +' '+ detailAddr);
+			h.setHotelAddress(loadName +"/"+ detailAddr);
 			h.setHotelCategory(hotelCate);
 			h.setHotelIntro(introText);
 			h.setHostName(ceoName);
