@@ -258,7 +258,7 @@ div {
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
 	                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
-	                        <li><a href="#">탈퇴 회원 조회</a></li>
+	                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
 	                    </ul>
 	                </li>
 	    
@@ -266,7 +266,7 @@ div {
 	                    <a href="#">비회원관리</a>
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-	                        <li><a href="#">비회원 예약 조회</a></li>
+	                         <li><a href="<%= contextPath %>/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
 	                    </ul>
 	                </li>
 	    
@@ -282,8 +282,8 @@ div {
 	                <li>
 	                    <a href="#">결제관리</a>
 	                    <ul>
-	                        <li><a href="#">회원 환불 조회</a></li>
-	                        <li><a href="#">비회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -294,6 +294,7 @@ div {
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
+	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>
