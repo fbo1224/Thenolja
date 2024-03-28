@@ -185,7 +185,16 @@ public class RoomController {
 		return view;
 	}
 	
+	public String deleteListForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "";
+	}
 	
+	public String deleteRoom(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "";
+	}
 	
 	
 	
