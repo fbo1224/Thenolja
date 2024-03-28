@@ -84,7 +84,7 @@ div {
 	<div id="content-div">
 		<section id="content-add-sect">
 		<%for(Room r: rooms){ %>
-			<div class="content-div-1">
+			<div class="content-div-1" id="<%= r.getRoomNo() %>">
 				<div class="form-group">
 				  <label>객실이름</label>
 				  <input type="text" class="form-control" name="roomName" readonly value="<%= r.getRoomName() %>" >
@@ -117,7 +117,7 @@ div {
 				  <input type="text"  name="roomNum" readonly  value="<%= r.getRoomNum() %>">
 				</div>
 				<div id="btn-div" align="center">
-					<button type="button" class="btn btn-sm btn-danger" onclick="">객실삭제</button>
+					<button type="button" class="btn btn-sm btn-danger roomBtn" data-toggle="modal" data-target="#myModal" onclick="">객실삭제</button>
 				</div>
 			</div>
 			<%} %>
@@ -132,7 +132,7 @@ div {
 		    <div class="modal-content">
 		      <!-- Modal Header -->
 		      <div class="modal-header">
-		        <h4 class="modal-title"></h4>
+		        <h4 class="modal-title">객실삭제</h4>
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		      </div>
 		
@@ -143,7 +143,7 @@ div {
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer .hr-footer">
-		      	<button type="button" class="btn btn-danger deleteHotelBtn" data-dismiss="modal">삭제</button>
+		      	<button type="button" class="btn btn-danger deleteRoomBtn" data-dismiss="modal">삭제</button>
 		        <button type="button" class="btn btn-success" data-dismiss="modal">닫기</button>
 		      </div>
 		
@@ -152,7 +152,30 @@ div {
 		</div>
 		
 	<script>
-		
-	</script>
+			let roomNo;
+			$('.roomBtn').click(function(e){
+				roomNo = $(this).parent().parent().attr('id');
+			});
+			
+			$('.deleteRoomBtn').click(function(e){
+				$.ajax({
+					url: 'deleteRoom.jqAjax',
+					data: {
+						roomNo : roomNo,
+					},
+					type: 'get',
+					success : function(result){
+						
+					},
+					error: function(error){
+						
+					},
+					async: false
+				});
+				
+				location.reload();
+			})
+			
+		</script>
 </body>
 </html>

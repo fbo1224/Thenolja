@@ -83,7 +83,18 @@ public class RoomService {
 		return result;
 	}
 	
-	
+	public int deleteRoom(int roomNo) {
+		Connection conn = getConnection();
+		
+		int result = new RoomDao().deleteRoom(conn, roomNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

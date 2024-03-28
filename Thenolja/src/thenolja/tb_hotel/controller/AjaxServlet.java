@@ -34,9 +34,11 @@ public class AjaxServlet extends HttpServlet {
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		AjaxController ac = new AjaxController();
+		System.out.println(mapping);
 		
 		switch(mapping) {
-			case "deleteHotel" : ac.deleteHotel(request, response); break; 
+			case "deleteHotel" : ac.deleteHotel(request, response); break;
+			case "deleteRoom"  : ac.deleteRoom(request, response); break;
 		}
 		
 	}

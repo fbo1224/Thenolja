@@ -125,6 +125,14 @@
 	  	      ROOM_NO = ?    
 	</entry>
 	
+	<entry key="deleteRoom">
+		UPDATE
+		      TB_ROOM
+		   SET
+		      ROOM_YN = 'N'
+		 WHERE
+		      ROOM_NO = ?
+	</entry>
 	
 	
 	
