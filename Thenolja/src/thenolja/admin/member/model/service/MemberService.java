@@ -141,6 +141,26 @@ public class MemberService {
 		return result;
 	}
 	
+	/**
+	 * 등급 수정
+	 */
+	public int updateGrade(int memNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().updateGrade(conn, memNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
 	
 	
 	
