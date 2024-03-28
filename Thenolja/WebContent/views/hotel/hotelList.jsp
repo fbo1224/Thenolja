@@ -114,7 +114,7 @@
 								<div class="option-btns-room" align="center">
 									<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
 									<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실정보수정</a>
-									<a class="btn btn-sm btn-danger" href="#">객실삭제</a>
+									<a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo=<%= hc.getHotelNo() %>" >객실삭제</a>
 								</div>
 								<div class="option-btns" align="center">
 									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">숙소정보수정</a>
@@ -131,10 +131,9 @@
 		<div class="modal" id="myModal">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
-		
 		      <!-- Modal Header -->
 		      <div class="modal-header">
-		        <h4 class="modal-title">삭제</h4>
+		        <h4 class="modal-title"></h4>
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		      </div>
 		
@@ -144,8 +143,8 @@
 		      </div>
 		
 		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		      	<button id="deleteBtn" type="button" class="btn btn-danger" data-dismiss="modal">삭제</button>
+		      <div class="modal-footer .hr-footer">
+		      	<button type="button" class="btn btn-danger deleteHotelBtn" data-dismiss="modal">삭제</button>
 		        <button type="button" class="btn btn-success" data-dismiss="modal">닫기</button>
 		      </div>
 		
@@ -158,8 +157,8 @@
 			$('.hotelBtn').click(function(e){
 				hotelNo = $(this).parent().parent().prev().attr('id');
 			});
-		
-			$('#deleteBtn').click(function(e){
+			
+			$('.deleteHotelBtn').click(function(e){
 				$.ajax({
 					url: 'jqAjax.do',
 					data: {
@@ -174,9 +173,9 @@
 					},
 					async: false
 				});
-				
 				location.reload();
 			})
+			
 		</script>
 		
 		<script>
