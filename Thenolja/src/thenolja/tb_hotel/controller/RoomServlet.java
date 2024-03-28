@@ -30,10 +30,10 @@ public class RoomServlet extends HttpServlet {
 		
 		String uri = request.getRequestURI();
 		// 요청한 url 전부 보여줌
-		System.out.println(uri);
+		// System.out.println(uri);
 		
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		System.out.println(mapping);
+		// System.out.println(mapping);
 		
 		RoomController rc = new RoomController();
 		String view = "";
@@ -43,6 +43,7 @@ public class RoomServlet extends HttpServlet {
 			// insertRoom.jsp
 			case "insertForm" : view =  rc.insertForm(request, response); break;
 			case "insert" : view =  rc.insert(request, response); break;
+			case "updateListForm" : view =  rc.updateForm(request, response); flag = false; break;
 		}
 		
 		if(flag) {
