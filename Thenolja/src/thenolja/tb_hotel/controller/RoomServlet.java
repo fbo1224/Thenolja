@@ -26,8 +26,6 @@ public class RoomServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("*.rooms");
-		
 		String uri = request.getRequestURI();
 		// 요청한 url 전부 보여줌
 		// System.out.println(uri);
@@ -43,7 +41,7 @@ public class RoomServlet extends HttpServlet {
 			// insertRoom.jsp
 			case "insertForm" : view =  rc.insertForm(request, response); break;
 			case "insert" : view =  rc.insert(request, response); break;
-			case "updateListForm" : view =  rc.updateForm(request, response); flag = false; break;
+			case "updateListForm" : view =  rc.updateForm(request, response); break;
 		}
 		
 		if(flag) {
