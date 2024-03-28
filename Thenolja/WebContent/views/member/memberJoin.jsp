@@ -7,15 +7,62 @@
 <title>회원가입</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<style>
-		#enroll-form input{
-			margin : 8px;
-			width: 300px;
+
+	#changeBtn, #reset{
+			border: none;
+			background-color: rgb(70, 149, 151);
+			width: 100px;
 			height: 40px;
-		}
-		
-		#title{
-			font-weight: bold;
-		}
+			color: white;
+			margin-top: 30px;
+			margin-left: 70px;
+			border-radius: 10px;
+	}
+
+	#changeBtn:hover, #reset:hover, #pwdCheck1:hover{
+		color: black;
+	}
+
+	#pwdCheck1{
+		border: none;
+		background-color: rgb(202, 202, 161);
+		width: 100px;
+		height: 40px;
+		color: white;
+		font-size: 13px;
+		border-radius: 10px;
+	}
+
+	#word{
+		text-align: center; 
+		height: 100px;
+		font-size: 40px;
+		font-weight: bold;
+		margin-top: 10px; 
+		color: rgb(70, 149, 151);
+	}
+
+	input{
+		width: 400px;
+		height: 50px;
+		border-color: rgb(230, 230, 230);
+		border-radius: 10px;
+		background-repeat: no-repeat;
+		background-size: 30px;
+		background-position: right;
+		padding: 10px;
+	}
+
+	#pwdCheck2{
+            margin: auto;
+            height: 20px;
+			display: none;
+			border-radius: 10px;
+        }
+
+	.input:focus{
+		border-color: rgb(70, 149, 151);
+	}
 
 		
 	</style>
@@ -34,7 +81,7 @@
 			<table align="center" id="table">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" maxlength="12" required name="memId"></td>
+					<td><input type="text" maxlength="12" required name="memId" autofocus></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck();">중복확인</button></td>
 				</tr>
 				
