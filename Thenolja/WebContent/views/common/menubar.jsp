@@ -377,7 +377,7 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-		  	<form action="<%= contextPath %>/nonmemSelect" method="get">
+		  	<form action="<%= contextPath %>/selectNonmem" method="get">
 	      		<div class="modal-body">
 					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
 					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>
