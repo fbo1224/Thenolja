@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation" %>  
+<%
+	Reservation reser = (Reservation)request.getAttribute("reser");
+%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,26 +16,54 @@
         width: 1200px;
         height: 1500px;
         margin-top: 20px;
-        border: 1px solid black;
         margin: auto;
     }
     #content_title{
         width: 100%;
-        height: 100%;
+        height: 5%;
         margin-top : 20px;
     }
     #left_img{
         float: left;
-		
     }
     #left_title{
         margin-left: 60px;
+        margin-top : 20px;
     }
-    #reser_info{
-        width: 1000px;
-        height: 80%;
+    #content > div{
+    	margin: auto;
+    }
+    #content_1{
+	    width: 80%;
+	    height: 20%;
+	    margin: auto;
+	}
+	#content_2{
+		width: 80%;
+		height: 8%;
+        text-align: center;
+        font-size: 50px;
+    }
+    #starList{
+        width: 100%;
+        height: 100%;
+        margin-left:0px;
+    }
+	#content_3{
+		width: 80%;
+		height: 5%;
+	}
+    #content_4{
+        width: 80%;
+        height: 45%;
         margin: auto;
-        margin-top: 30px;
+        padding-top: 70px;
+    }
+   	#hotel-no{
+        font-size:18px;
+        margin-top:20px;
+        margin-left: 20px;
+        width: 100%;
     }
     #reser_hotel_img{
         width: 25%;
@@ -50,15 +82,51 @@
         width: 60%;
         height: 100%;
         float: left;
+        margin-left: 30px;
     }
-    #content > div{
-    	margin: auto;
+   	#insert-img{
+        width: 80%;
+        height: 80%;
+        margin-left: 95px;
+        margin-top : 10px;
+        background-color: silver;
+        text-align: center;
+        line-height: 60px;
+        border: 0;
+        color : white;
+        font-size: 25px;
+        font-weight: 700;
+        border-radius: 10px;
     }
-    #content_1{
-	    width: 80%;
-	    height: 25%;
-	    margin: auto;
-	}
+    #insert-img:hover{
+        font-size: 26px;
+        background-color: gray;
+    }
+    #review-content{
+        font-size:25px;
+        margin-left: 40px;
+    }
+    #footer{
+        width: 80%;
+        height: 17%;
+        margin: auto;
+        padding-left: 180px;
+        
+    }
+    #add{
+        border: 0;
+        border-radius: 30px;
+        text-align: center;
+        width: 80%;
+        height: 80px;
+        font-size: 30px;
+        color:white;
+        background-color: rgb(29, 146, 97);
+    }
+    #add:hover{
+    	font-size: 32px;
+    	background-color: rgb(50, 146, 97);
+    }
 	</style>
 	
 </head>
@@ -66,6 +134,7 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<form action="<%=contextPath %>/reser.insert">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
@@ -75,7 +144,7 @@
 		</div>
 	<div id="content_1">
 	    <div id="hotel-no">
-	        No.845209342
+	        No.<%=reser.getReserNo() %>
 	    </div>
 	    <div>
            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
@@ -87,7 +156,7 @@
                 <p>117,000원</p>
                 <p>2024-02-28 ~ 2024-02-29</p>
             </div>
-    </div>
+    	</div>
     </div>
     <div id="content_2">
         <div id="starList">
@@ -104,15 +173,15 @@
 	</div>
             
     <div id="content_4">
-        <textarea name="review" id="review-content" cols="50" rows="20" style="resize:none;"></textarea>
+        <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;"></textarea>
     </div>
         
     <div id="footer">
-        <button id="add" type="submit">등록하기</button>
+        <button id="add" type="submit" onclick="insertReview()">등록하기</button>
     </div>
 
-    </div>
-    
+</div>
+</form>    
      <script>
         $(function(){
             let starScore = 0;
@@ -141,6 +210,37 @@
                 $('#file-up').click();
             });
         });
+        
+        function insertReview(){
+        	$.ajax({
+        		url : 'reviewInsert.do',
+        		type : 'post',
+        		data : {
+        			reserNo : <%=reser.getReserNo()%>,
+        			imgPath : $('#file-up').val(),
+        			content : $('#review-content').val(),
+        			score : $('.star').val()
+        		},
+        		success : function(result){
+        			console.log(result);
+        		}
+        	})
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </script>
 </body>
 </html>

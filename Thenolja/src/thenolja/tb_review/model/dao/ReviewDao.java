@@ -1,5 +1,7 @@
 package thenolja.tb_review.model.dao;
 
+import static thenolja.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static thenolja.common.JDBCTemplate.*;
+import thenolja.tb_review.model.vo.Review;
 
 public class ReviewDao {
 	
@@ -51,6 +53,29 @@ public class ReviewDao {
 	      }
 	      
 	      return listCount;
+	}
+	public int insertReview(Connection conn, Review review) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, review.getReserNo());
+			pstmt.setString(2, review.getImgPath());
+			pstmt.setString(3, review.getContent());
+			pstmt.setInt(4, review.getScore());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
