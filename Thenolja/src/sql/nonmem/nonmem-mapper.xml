@@ -30,21 +30,26 @@
 	
 	<entry key="selectNonmemReser">
 		SELECT
-		       MEM_NO, <!-- Member 객체에 담기 -->
+		       MEM_NO,
 		       MEM_NAME,
 		       MEM_PHONE,
 		       MEM_STATUS,
-		       RESER_NO, <!-- Reservation객체에 담기 -->
+		       RESER_NO,
 		       RESER_NAME,
 		       R.CHECKIN_TIME,
 		       R.CHECKOUT_TIME,
 		       BICYCLE,
 		       PEOPLE,
-		       ROOM_NAME, <!-- Room객체에 담기 -->
+		       PAYMENT_PRICE,
+		       ROOM_NAME,
 		       ROOM_NUM,
 		       MAX_PEOPLE,
 		       M.CHECKIN_TIME,
 		       M.CHECKOUT_TIME,
+		       HOTEL_NAME,
+		       HOTEL_LOCATION,
+		       HOTEL_ADDRESS,
+		       HOTEL_PATH,
 		       ROOM_IMG
 		  FROM
 		       TB_NONMEM
@@ -57,16 +62,17 @@
 		 USING
 		       (ROOM_NO)
 		  JOIN
+		       TB_HOTEL
+		 USING
+		       (HOTEL_NO)
+		  JOIN
 		       TB_ROOM_IMG
 		 USING
 		       (ROOM_NO)
 		 WHERE
 		       MEM_NAME = ?
 		   AND
-		       MEM_PHONE = ?  
-			
-	<!-- 필요한거 -->
-	<!-- 뺄거 -->
+		       MEM_PHONE = ?
 	
 	
 	
