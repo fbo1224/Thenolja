@@ -160,7 +160,7 @@
 			
 			$('.deleteHotelBtn').click(function(e){
 				$.ajax({
-					url: 'jqAjax.do',
+					url: 'deleteHotel.jqAjax',
 					data: {
 						hotelNo : hotelNo,
 					},
