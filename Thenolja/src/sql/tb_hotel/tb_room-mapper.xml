@@ -87,7 +87,8 @@
 	      ROOM_PRICE,
 	      MAX_PEOPLE,
 	      ROOM_IMG,
-	      TB_HOTEL.HOTEL_NO
+	      TB_HOTEL.HOTEL_NO,
+	      ROOM_IMG_NO
  	  FROM   
           TB_ROOM
   	  JOIN TB_HOTEL

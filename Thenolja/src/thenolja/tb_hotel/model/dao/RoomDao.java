@@ -153,6 +153,7 @@ public class RoomDao {
 				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));
 				r.setRoomImgPath(rset.getString("ROOM_IMG"));
 				r.setHotelNo(rset.getInt("HOTEL_NO"));
+				r.setRoomImgNo(rset.getInt("ROOM_IMG_NO"));
 			}
 			
 		} catch (SQLException e) {
