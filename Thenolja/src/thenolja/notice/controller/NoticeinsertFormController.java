@@ -38,7 +38,7 @@ public class NoticeinsertFormController extends HttpServlet {
 	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
 				
 				//응답화면	
-				RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("view/notice/noticeEnrollForm.jsp");
 				view.forward(request, response);
 			
 		/*				
@@ -46,7 +46,7 @@ public class NoticeinsertFormController extends HttpServlet {
 					session.setAttribute("alertMsg", "관리자가 아닙니다. ");
 					response.sendRedirect(request.getContextPath());
 				}	
-				*/
+		*/
 			}
 	
 
