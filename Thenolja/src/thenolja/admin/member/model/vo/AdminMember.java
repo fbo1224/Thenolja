@@ -15,7 +15,6 @@ public class AdminMember {
    private String memName;
    private String memPhone;
    private String memStatus;
-   private String gradeName;
    private int paymentPrice;
    private int reserNo;
    private String reserName;
@@ -23,6 +22,14 @@ public class AdminMember {
 
 
    
+	public String getGradeNo() {
+	return gradeNo;
+}
+
+public void setGradeNo(String gradeNo) {
+	this.gradeNo = gradeNo;
+}
+
 	public int getReserNo() {
 		return reserNo;
 	}
@@ -71,13 +78,7 @@ public class AdminMember {
       this.memStatus = memStatus;
    }
 
-   public String getGradeName() {
-      return gradeName;
-   }
 
-   public void setGradeName(String gradeName) {
-      this.gradeName = gradeName;
-   }
 
    public AdminMember() {
       super();

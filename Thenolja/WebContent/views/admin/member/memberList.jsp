@@ -100,7 +100,7 @@
 	                       	   		<td><%= m.getMemNo() %></td>
 	                       	   		<td><%= m.getMemId() %></td>
 	                       	   		<td><%= m.getNickName() %></td>
-	                       	   		<td><%= m.getGradeName() %></td>
+	                       	   		<td><%= m.getGradeNo() %></td>
 	                       	   		
 		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
@@ -151,7 +151,7 @@
         					success : function(result){
         						// console.log(result);
         						$('#name').text(result.memName);
-        						$('#grade').text(result.gradeName);
+        						$('#grade').text(result.gradeNo);
         						$('#email').text(result.email);
         						$('#phone').text(result.memPhone);
         						$('#bornDate').text(result.bornDate);
@@ -218,7 +218,7 @@
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
                         <td width="200">이름 :<span id="name"></span></td>
                         <td width="200">등급 :
-                            <select name="grade">
+                            <select id="gradeSelect" name="grade">
                                 <option value="1">FAMILY</option>
                                 <option value="2">SILVER</option>
                                 <option value="3">GOLD</option>
@@ -263,7 +263,8 @@
   			
   			url : 'gradeUpdate.do',
   			type : 'get',
-  			data : {memNo : $('#updateMemNo').val()
+  			data : {memNo : $('#updateMemNo').val(),
+  					gradeNo : $('#gradeSelect').val()
   					},
   			success : function(result) {
   				consloe.log(result);
