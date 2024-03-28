@@ -186,16 +186,18 @@ public class RoomController {
 	}
 	
 	public String deleteListForm(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
-		return "";
+		// 등록된 객실 보여주는것 update와 동일해서 재활용 
+		ArrayList<Room> rooms = new RoomService().updateRoomList(hotelNo);
+		
+		request.setAttribute("hotelNo", hotelNo);
+		request.setAttribute("rooms", rooms);
+		
+		view = "views/hotel/deleteListForm.jsp";
+		return view;
 	}
-	
-	public String deleteRoom(HttpServletRequest request, HttpServletResponse response) {
-		
-		
-		return "";
-	}
-	
 	
 	
 	
