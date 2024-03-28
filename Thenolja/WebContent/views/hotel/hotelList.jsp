@@ -113,7 +113,7 @@
 							<%} else if(loginStatus != null && loginStatus.equals("A")) {%>
 								<div class="option-btns-room" align="center">
 									<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
-									<a class="btn btn-sm btn-info" href="#">객실정보수정</a>
+									<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실정보수정</a>
 									<a class="btn btn-sm btn-danger" href="#">객실삭제</a>
 								</div>
 								<div class="option-btns" align="center">

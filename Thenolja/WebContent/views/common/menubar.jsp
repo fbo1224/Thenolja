@@ -20,11 +20,20 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <style>
+*{
+	font-family: "Noto Sans KR", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 400;
+  	font-style: normal;
+}
 div {
     box-sizing: border-box;
 }
+
 #header-navi{
     width: 1200px;
     height: 100px;
@@ -274,7 +283,7 @@ div {
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
 	                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
-	                        <li><a href="#">탈퇴 회원 조회</a></li>
+	                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
 	                    </ul>
 	                </li>
 	    
@@ -282,7 +291,7 @@ div {
 	                    <a href="#">비회원관리</a>
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-	                        <li><a href="#">비회원 예약 조회</a></li>
+	                         <li><a href="<%= contextPath %>/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
 	                    </ul>
 	                </li>
 	    
@@ -298,8 +307,8 @@ div {
 	                <li>
 	                    <a href="#">결제관리</a>
 	                    <ul>
-	                        <li><a href="#">회원 환불 조회</a></li>
-	                        <li><a href="#">비회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -310,6 +319,7 @@ div {
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
+	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>

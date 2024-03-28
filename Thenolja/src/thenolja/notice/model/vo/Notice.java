@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Notice {
 	
+	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
 	private String createDate;
@@ -26,33 +27,7 @@ public class Notice {
 		this.noticeContent = content;
 		this.status = status;
 	}	
-	
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-	}
-	private int noticeNo;
+
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -101,7 +76,6 @@ public class Notice {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	
 	
 	
 }

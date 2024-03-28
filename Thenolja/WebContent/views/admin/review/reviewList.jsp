@@ -140,11 +140,12 @@
     			type : 'get',
     			success : function(result){
     				console.log(result);
+    				 // alert(e);
     				$('#hotelName').text(result.hotelName);
     				$('#roomName').text(result.roomName);
     				$('#reviewScore').text(result.reviewScore);
     				$('#reviewContent').text(result.reviewContent);
-    				$('#reserNo').text(result.reserNo);
+    				$('#reserNo22').val(e);
     			}
     		});
     	}
@@ -188,12 +189,12 @@
         <!-- Modal body -->
         <div class="modal-body">
         
-		<input type="hidden" id="reserNo" name="reser_No"/>
+			<input type="hidden" id="reserNo22" name="reser_No" value=""/>
 		
 		
             <table>
                 <tr>
-                    <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
+                    <td colspan="5" rowspan="5" width="120" height="120" ><img src="" alt="" width="120px"></td>
                     <td width="120"><span id="hotelName"></span></td>
                     <td><span id="roomName"></span></td>
                     <td><span id="reviewScore"></span></td>
@@ -223,13 +224,48 @@
 
 
 	<script>
+		
+		function selectReplyList(){
+			
+			$.ajax({
+				
+				url : 'commentList.do',
+				data : {reserNo : $('#reserNo22').val()},
+				success : function(result){
+					console.log(result);
+				},
+				error : function(e){
+					console.log(e);
+				}
+				
+			});
+		}
+	
+	
+		$(function(){
+			
+			
+		});
+	
+	
+	
+	
+	
 		function insertComment(){
 			$.ajax({
 				url : 'commentInsert.do',
 				type : 'post',
 				data : {
-					content : $('#contentMessage').val(),
+					content : $('#comment').val(),
+					reserNo : $('#reserNo22').val(),
 					memNo : <%= loginUser.getMemNo() %>
+				},
+				success : function(result){
+					// console.log(result);	
+					
+					if(result == 'success'){
+						$('#comment').val('');
+					}
 				}
 			});
 			

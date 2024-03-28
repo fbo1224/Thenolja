@@ -58,7 +58,7 @@ div {
 #timeOptions label{
 	font-size: 12px;
 }
-[class *= content-div]{
+.content-div-1{
 	width: 32%;
 	height: 60%;
 	padding: 5px;

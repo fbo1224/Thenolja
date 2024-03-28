@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인페이지</title>
+<title>hotel List Form</title>
 </head>
-
 <body>
-	<%@ include file="views/common/menubar.jsp" %>
-	 
+	<h1>hotel List Form</h1>
 </body>
 </html>
