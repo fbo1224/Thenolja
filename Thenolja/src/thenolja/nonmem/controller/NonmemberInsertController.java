@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.member.model.vo.Member;
 import thenolja.tb_refund.model.vo.Refund;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -36,9 +37,11 @@ public class NonmemberInsertController extends HttpServlet {
 		String phone = request.getParameter("memPhone");
 		
 		// 3) 데이터 가공
-		Reservation reser = new Reservation();
-		reser.setName(name);
-		reser.setPhone(phone);
+		Member nonmem = new Member();
+		nonmem.setMemName(name);
+		nonmem.setMemPhone(phone);
+		
+		int result = new NonmemService().insertNonMem();
 	}
 
 	/**
