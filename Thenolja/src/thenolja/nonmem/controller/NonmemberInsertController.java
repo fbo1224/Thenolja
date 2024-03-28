@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.member.model.vo.Member;
+import thenolja.nonmem.service.NonmemService;
 import thenolja.tb_refund.model.vo.Refund;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -41,7 +42,7 @@ public class NonmemberInsertController extends HttpServlet {
 		nonmem.setMemName(name);
 		nonmem.setMemPhone(phone);
 		
-		int result = new NonmemService().insertNonMem();
+		int result = new NonmemService().insertNonMem(nonmem);
 	}
 
 	/**
