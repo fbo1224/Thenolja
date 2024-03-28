@@ -121,12 +121,8 @@
 	     	  TB_ROOM_IMG
 	  	   SET
 	  	   	  ROOM_IMG = ?
-	  	  JOIN TB_ROOM
-	  	    ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
-	  	  WHERE
-	  	       ROOM_NO = ?
-	  	    AND
-	  	       ROOM_YN = 'Y'    
+	  	 WHERE     
+	  	      ROOM_NO = ?    
 	</entry>
 	
 	
