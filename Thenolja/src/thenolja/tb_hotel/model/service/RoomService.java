@@ -53,16 +53,35 @@ public class RoomService {
 	}
 	
 	// 수정할 room 하나 가져오기
-	public Room updateRoom(int roomNo) {
+	public Room updateRoomForm(int roomNo) {
 		Connection conn = getConnection();
 		
-		Room r = new RoomDao().updateRoom(conn, roomNo);
+		Room r = new RoomDao().updateRoomForm(conn, roomNo);
 		
 		close(conn);
 		
 		return r;
 	}
 	
+	public int updateRoom(Room r) {
+		Connection conn = getConnection();
+		
+		int result = new RoomDao().updateRoom(conn, r);
+		int imgResult = 0;
+		
+		// 이미경로도 수정
+		if(result > 0) {
+			imgResult = new RoomDao().updateRoomImg(conn, r);
+		}
+		
+		if((result * imgResult ) > 0) {
+			commit(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	
