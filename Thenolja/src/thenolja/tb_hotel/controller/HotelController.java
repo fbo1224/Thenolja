@@ -218,12 +218,13 @@ public class HotelController {
 			h.setHostName(ceoName);
 			h.setHotelPath(beforeImgPath);
 			h.setHotelNo(hotelNo);
+			
 			// 서비스 목록
 			h.setSerList(serList);
-			System.out.println(h);
+			// System.out.println(h);
 			
 			String beforeImgName = beforeImgPath.substring(h.getHotelPath().lastIndexOf("/") + 1);
-			System.out.println(beforeImgName);
+			// System.out.println(beforeImgName);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));

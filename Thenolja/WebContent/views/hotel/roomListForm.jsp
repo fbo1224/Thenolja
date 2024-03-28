@@ -127,7 +127,7 @@ div {
 	</div>
 	<script>
 		function updateRoom(e, roomNo){
-			// console.log(roomNo);
+			console.log(roomNo);
 			location.href= "<%= contextPath %>/updateRoomForm.rooms?roomNo=" + roomNo;
 		}
 	</script>
