@@ -61,7 +61,7 @@ public class NonReservationInsertController extends HttpServlet {
 				session.setAttribute("reser", reser);
 				session.setAttribute("member", member);
 				
-				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
+				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo());
 				
 			} else {
 				request.setAttribute("errorMsg", "예약에 실패했습니다!");

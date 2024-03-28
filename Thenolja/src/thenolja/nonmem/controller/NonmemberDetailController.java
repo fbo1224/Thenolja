@@ -38,10 +38,9 @@ public class NonmemberDetailController extends HttpServlet {
 			
 		if(member != null) {
 			
-			
 			request.setAttribute("member", member);
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/selectNonmemReser.jsp");
 			view.forward(request, response);
 			
 		} else {
