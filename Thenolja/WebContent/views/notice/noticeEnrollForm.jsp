@@ -22,15 +22,15 @@ label{
 
 
 <div class="outer">
-<h2 align="center">공지사항 수정/삭제</h2>
+<h2 align="center">공지사항 작성하기</h2>
 <br><br>
 
 <!-- 
-    �� select    get
+    ⁕ select    get
      
-    �� insert    post
+    ⁕ insert    post
 
-    �� 
+    ⁕ 
 
 
     get / post
@@ -42,7 +42,7 @@ label{
 
 
 
-<form action="<%= contextPath %>/regNotice" method="post" id="insert-form">
+<form action="<%= contextPath %>/insert.notice" method="post" id="insert-form">
 	
 <!--	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">  --> 
 	
@@ -64,9 +64,9 @@ label{
     </div>
 
 
+      
 
-
-
+  
 </form>
 
 

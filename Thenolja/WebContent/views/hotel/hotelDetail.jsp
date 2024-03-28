@@ -86,8 +86,8 @@
 	padding: 10px;
 }
 .content-rooms-card:hover{
+	scale: 102%;
 	cursor: pointer;
-	scale: 105%;
 	border-color: skyblue;
 }
 .content-rooms-card img {

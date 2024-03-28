@@ -15,14 +15,14 @@ import thenolja.notice.service.NoticeServiceImpl;
 /**
  * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/update.notice")
-public class NoticeUpdateController extends HttpServlet {
+@WebServlet("/updateInfo.notice")
+public class NoticeUpdateInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateController() {
+    public NoticeUpdateInfoController() {
         super();
     }
 
@@ -31,16 +31,37 @@ public class NoticeUpdateController extends HttpServlet {
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// »ó¼¼ÆäÀÌÁö Á¶È¸ ½Ã ÆÄ¶ó¹ÌÅÍ ¹Ş±â
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String flag  = request.getParameter("flag");
+		
+		System.out.println("[NoticeDetailController noticeNo] " + noticeNo);  
+		System.out.println("[NoticeDetailController flag] " 	+ flag);  
+
+		Notice result = new Notice();
+		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
+		
+		System.out.println("[NoticeDetailController result] " + result);
+		
+		if(result != null) {
+			request.setAttribute("notice", result);
+			request.getRequestDispatcher("views/notice/noticeUpd.jsp").forward(request, response); //Æ÷¿öµù
+			
+		}else { //½ÇÆĞ => ¿¡·¯ÆäÀÌÁö º¸³»±â
+			
+			request.setAttribute("errorMsg", "°øÁö»çÇ× »ó¼¼ Á¶È¸ ½ÇÆĞ");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
+			view.forward(request,response);	
+		}		
 		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 * ê³µì§€ì‚¬í•­ ìˆ˜ì •í•˜ê¸°ì—ì„œ ë‚´ìš© ìˆ˜ì • ì‹œ ì²˜ë¦¬
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

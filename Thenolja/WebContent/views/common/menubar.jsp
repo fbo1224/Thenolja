@@ -20,11 +20,20 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <style>
+*{
+	font-family: "Noto Sans KR", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 400;
+  	font-style: normal;
+}
 div {
     box-sizing: border-box;
 }
+
 #header-navi{
     width: 1200px;
     height: 100px;
@@ -215,6 +224,22 @@ div {
 		color: rgb(48, 56, 208);
 	}
 
+	#modal-body > li{
+        list-style: none;
+        padding: 0px;
+        display:none;
+	}
+
+	table {
+		width: 100%;
+		border-top: 1px solid #444444;
+		border-collapse: collapse;
+  	}
+  	th, td {
+		border-bottom: 1px solid #444444;
+    	padding: 10px;
+  	}
+
 </style>
     
 </head>
@@ -258,7 +283,7 @@ div {
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
 	                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
-	                        <li><a href="#">탈퇴 회원 조회</a></li>
+	                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
 	                    </ul>
 	                </li>
 	    
@@ -266,15 +291,15 @@ div {
 	                    <a href="#">비회원관리</a>
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-	                        <li><a href="#">비회원 예약 조회</a></li>
+	                         <li><a href="<%= contextPath %>/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
 	                    </ul>
 	                </li>
 	    
 	                <li>
 	                    <a href="#">숙소관리</a>
 	                    <ul>
-	                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">호텔숙소추가</a></li>
-	                    	<li><a href="<%= contextPath %>/insertForm.hotels">호텔추가</a></li>
+	                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">숙소 관리</a></li>
+	                    	<li><a href="<%= contextPath %>/insertForm.hotels">숙소 추가</a></li>
 	                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
 	                    </ul>
 	                </li>
@@ -282,8 +307,8 @@ div {
 	                <li>
 	                    <a href="#">결제관리</a>
 	                    <ul>
-	                        <li><a href="#">회원 환불 조회</a></li>
-	                        <li><a href="#">비회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
+                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -294,6 +319,7 @@ div {
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
 	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
+	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -357,18 +383,68 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-	      <div class="modal-body">
-	        	비회원 이름<input type="text" maxlength="15" required>
-	        	비회원 전화번호<input type="text" maxlength="11" required>
-	      </div>
-	
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-	      </div>
+		  	<form action="<%= contextPath %>/nonmemSelect" method="get">
+	      		<div class="modal-body">
+					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
+					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				</div>
+
+				
+			</form>
+
 	
 	    </div>
 	  </div>
+	</div>
+
+	<!-- The Modal2 -->
+	<div class="modal" id="reser">
+		<div class="modal-dialog">
+			<div class="modal-content">
+		
+			<!-- Modal2 Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">조회 결과</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+		
+			<!-- Modal2 body -->
+			<div class="modal-body">
+				<table>
+					<th>예약번호</th>
+					<th>1</th>
+					<tr>
+						<td>예약자 성함</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>예약날짜</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>예약자숙소</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>객실정보</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+		
+			<!-- Modal2 footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+			</div>
+		
+			</div>
+		</div>
 	</div>
 </body>
 </html>

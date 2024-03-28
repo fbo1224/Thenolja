@@ -175,9 +175,9 @@ public class ReviewDao {
 		 try {
 			pstmt = conn.prepareStatement(sql);
 			
-			// pstmt.setInt(1, adminComment.getCommentReserNo());
-			pstmt.setString(1, adminComment.getCommentContent());
-			pstmt.setInt(2, Integer.parseInt(adminComment.getCommentMemNo()));
+			pstmt.setInt(1, adminComment.getCommentReserNo());
+			pstmt.setString(2, adminComment.getCommentContent());
+			pstmt.setInt(3, Integer.parseInt(adminComment.getCommentMemNo()));
 			
 			result = pstmt.executeUpdate();
 			
@@ -191,6 +191,19 @@ public class ReviewDao {
 
 	 }
 	 
+	 /**
+	  * 대댓글 조회
+	  */
+	 public AdminComment selectCommentList(Connection conn, int reserNo) {
+		 
+		 AdminComment adminComment = null;
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("selectCommentList");
+		 
+		 
+		 return adminComment;
+	 }
 	 
 	 
 }

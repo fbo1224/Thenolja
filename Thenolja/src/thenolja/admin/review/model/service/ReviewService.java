@@ -94,5 +94,17 @@ public class ReviewService {
 		return result;
 	}
 	
+	
+	/**
+	 * 대댓글 조회
+	 */
+	public AdminComment selectCommentList(int reserNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		new ReviewDao().selectCommentList(conn, reserNo);
+		
+		
+	}
 
 }

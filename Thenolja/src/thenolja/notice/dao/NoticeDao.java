@@ -95,6 +95,7 @@ public class NoticeDao {
 		ResultSet rset = null;
 		Notice notice  = null;
 		String sql = prop.getProperty("selectNoticeOne");
+		System.out.println("[NoticeDao selectNoticeOne] " + sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -107,6 +108,7 @@ public class NoticeDao {
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setNoticeContent(rset.getString("NOTICE_CONTENT"));
+				notice.setStatus(rset.getString("STATUS"));
 				notice.setCreateDate(rset.getString("CREATE_DATE"));
 				notice.setWriter(rset.getString("WRITER"));
 			}	
@@ -153,7 +155,7 @@ public class NoticeDao {
 		return result;
 	}
 	
-	//공지사항 조회
+	
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		Notice notice = null;
@@ -190,8 +192,8 @@ public class NoticeDao {
 		return notice;
 	}//method          //반환 notice
 	
-	 
-	// 공지사항 등록
+	
+	
 	public int insertNotice(Connection conn, Notice notice) {
 		
 		int result = 0;
@@ -224,15 +226,13 @@ public class NoticeDao {
 		return result;
 	}//method
 	
-	
-	// 수정
-	public int selectNoticeInfo(Connection conn, Notice notice) {
+	public int update(Connection conn, Notice notice) {
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("selectNoticeInfo");
+		String sql = prop.getProperty("update");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

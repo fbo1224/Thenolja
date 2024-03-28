@@ -58,7 +58,7 @@ div {
 #timeOptions label{
 	font-size: 12px;
 }
-[class *= content-div]{
+.content-div-1{
 	width: 32%;
 	height: 60%;
 	padding: 5px;
@@ -73,9 +73,6 @@ div {
 }
 #btn-div{
 	margin-top: 20px;
-}
-.delBtn{
-	float: right;
 }
 
 </style>
@@ -132,7 +129,7 @@ div {
 		</div>
 	<%} else { %>
 		<h1>호텔 숙소 등록은 3개 이상 할 수 없습니다.</h1>
-		<button class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
+		<button type="button" class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
 	<%} %>	
 	</div>
 </body>
