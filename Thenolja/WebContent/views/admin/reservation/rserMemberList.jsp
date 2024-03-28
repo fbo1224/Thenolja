@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
-	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -166,6 +165,12 @@
     			
     		});
     	}
+    	
+    	
+    	
+    	
+    	
+    	var checkInDate = "<%="
     
     </script>
     
