@@ -146,6 +146,7 @@
     				$('#reviewScore').text(result.reviewScore);
     				$('#reviewContent').text(result.reviewContent);
     				$('#reserNo22').val(e);
+    				selectCommentList();
     			}
     		});
     	}
@@ -228,11 +229,16 @@
 		function selectCommentList(){
 			
 			$.ajax({
-				
 				url : 'commentList.do',
 				data : {reserNo : $('#reserNo22').val()},
 				success : function(result){
-					console.log(result);
+					if(result == null){
+						$('#comment').val('');
+						$('#comment').attr('readonly', false);	
+					}else {
+						$('#comment').val(result['commentContent']);
+						$('#comment').attr('readonly', true);	
+					}
 				},
 				error : function(e){
 					console.log(e);
@@ -241,14 +247,7 @@
 			});
 		}
 	
-	
-		$(function(){
-			selectCommentList();
-			
-		});
-	
-	
-	
+
 	
 	
 		function insertComment(){
@@ -261,10 +260,9 @@
 					memNo : <%= loginUser.getMemNo() %>
 				},
 				success : function(result){
-					// console.log(result);	
+					console.log(result);	
 					
 					if(result == 'success'){
-						$('#comment').val('');
 						selectCommentList();
 					}
 				}

@@ -38,6 +38,7 @@ public class AdminCommentList extends HttpServlet {
 		AdminComment adminComment = new ReviewService().selectCommentList(reserNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
+		
 		new Gson().toJson(adminComment, response.getWriter());
 	}
 

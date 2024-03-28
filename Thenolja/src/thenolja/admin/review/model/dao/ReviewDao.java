@@ -204,6 +204,8 @@ public class ReviewDao {
 		 try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, reserNo);
+			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
