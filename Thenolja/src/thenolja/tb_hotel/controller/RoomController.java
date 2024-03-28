@@ -108,6 +108,7 @@ public class RoomController {
 		
 		if(r != null) {
 			request.setAttribute("roomNo", roomNo);
+			request.setAttribute("room", r);
 			view = "views/hotel/updateRoomForm.jsp";
 		} else {
 			request.setAttribute("errorMsg", "객실 수정 실패...");

@@ -49,6 +49,8 @@
       	  TB_ROOM
   	 WHERE
        	  HOTEL_NO = ?
+       AND
+          ROOM_YN = 'Y'	  
 	</entry>
 	
 	<entry key="updateRoomList">
@@ -71,6 +73,8 @@
           TB_HOTEL.HOTEL_YN = 'Y'
        AND
           TB_HOTEL.HOTEL_NO = ?
+       AND
+          ROOM_YN = 'Y'   
 	</entry>
 	
 	<entry key="updateRoom">
