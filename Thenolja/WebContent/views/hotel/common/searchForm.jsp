@@ -68,6 +68,8 @@ $(function () {
         console.log(start.format('YYYY-MM-DD') +' '+ end.format('YYYY-MM-DD'));
     
 		});
+    
+    
 	});
     </script>
     
@@ -78,7 +80,7 @@ $(function () {
 		</div>
 		
 		<input class="form-control" id="people-input" type="number" name="people" value="" placeholder="인원수를 입력해주세요.">
-		<input class="form-control" id="search-input" type="text" name="search" required value="" placeholder="검색어를 입력해주세요.">
+		<input class="form-control" id="search-input" type="text" name="search" required value="" placeholder="원하시는 지역을 입력해주세요.">
 		<input class="btn btn btn-info" type="submit" value="서치">
 	</form>
 </div>
