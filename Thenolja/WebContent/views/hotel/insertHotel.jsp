@@ -296,9 +296,9 @@ label{
 	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 	                
 	                // 건물명이 있고, 공동주택일 경우 추가한다.
-	                if(data.buildingName !== '' && data.apartment === 'Y'){
-	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                }
+	                // if(data.buildingName !== '' && data.apartment === 'Y'){
+	                   //extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                //}
 	               
 	                // document.getElementById('sample4_postcode').value = data.zonecode;
 	                document.getElementById("sample4_roadAddress").value = roadAddr;

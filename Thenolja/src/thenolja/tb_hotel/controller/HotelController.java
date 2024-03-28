@@ -64,7 +64,7 @@ public class HotelController {
 			String introText = multiRequest.getParameter("introText");
 			
 			// 지역만뽑기
-			String location = loadName.substring(0, loadName.indexOf(" ") + 1);
+			String location = loadName.substring(0, loadName.indexOf(" ") + 1).trim();
 			
 			Hotel h = new Hotel();
 			h.setHotelName(hotelName);
@@ -205,7 +205,7 @@ public class HotelController {
 			String beforeImgPath = multiRequest.getParameter("beforeImgPath");
 			
 			// 지역만뽑기
-			String location = loadName.substring(0, loadName.indexOf(" ")+1);
+			String location = loadName.substring(0, loadName.indexOf(" ")+1).trim();
 			
 			h = new Hotel();
 			h.setHotelName(hotelName);
