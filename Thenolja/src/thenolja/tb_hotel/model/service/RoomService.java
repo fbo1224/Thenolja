@@ -4,6 +4,7 @@ import static thenolja.common.JDBCTemplate.*;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import thenolja.tb_hotel.model.dao.RoomDao;
 import thenolja.tb_hotel.model.vo.Room;
@@ -39,4 +40,47 @@ public class RoomService {
 		
 		return (roomResult * imgResult);
 	}
+	
+	// 수정할 room 목록 가져오기 
+	public  ArrayList<Room> updateRoomList(int hotelNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Room> result = new RoomDao().updateRoomList(conn, hotelNo);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

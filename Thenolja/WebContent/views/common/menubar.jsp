@@ -20,9 +20,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+	
 <style>
 *{
 	font-family: "Noto Sans KR", sans-serif;
@@ -230,6 +232,7 @@ div {
         display:none;
 	}
 
+	input{outline-color: rgb(70, 149, 151);}
 
 </style>
     
@@ -394,48 +397,6 @@ div {
 	  </div>
 	</div>
 
-	<!-- The Modal2 -->
-	<div class="modal" id="reser">
-		<div class="modal-dialog">
-			<div class="modal-content">
-		
-			<!-- Modal2 Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">조회 결과</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-		
-			<!-- Modal2 body -->
-			<div class="modal-body">
-				<table>
-					<th>예약번호</th>
-					<th>1</th>
-					<tr>
-						<td>예약자 성함</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>예약날짜</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>예약자숙소</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>객실정보</td>
-						<td></td>
-					</tr>
-				</table>
-			</div>
-		
-			<!-- Modal2 footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			</div>
-		
-			</div>
-		</div>
-	</div>
+	
 </body>
 </html>

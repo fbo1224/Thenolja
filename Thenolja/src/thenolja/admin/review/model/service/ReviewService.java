@@ -102,8 +102,11 @@ public class ReviewService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		new ReviewDao().selectCommentList(conn, reserNo);
+		AdminComment adminComment = new ReviewDao().selectCommentList(conn, reserNo);
 		
+		JDBCTemplate.close(conn);
+		
+		return adminComment;
 		
 	}
 

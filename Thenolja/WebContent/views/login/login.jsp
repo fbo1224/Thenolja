@@ -61,8 +61,8 @@
 			background-image: url('resources/login/password.png');
 		}
 
-		.input:focus{
-			border-color: rgb(70, 149, 151);
+		.input{
+			outline-color: rgb(70, 149, 151);
 		}
 
 		.input{
@@ -95,6 +95,7 @@
 			margin-bottom: 30px;
 		}
 
+
 	
 	
 	</style>
@@ -120,7 +121,7 @@
 						<div id="content2" class="content">
 							<br><br>
 							<a href="<%= contextPath %>/findIdPage">아이디 찾기</a>
-							|&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="<%= contextPath %>/findPwdPage">비밀번호 찾기</a>
 						</div>
 

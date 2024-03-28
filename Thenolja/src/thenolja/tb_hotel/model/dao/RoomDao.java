@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import thenolja.tb_hotel.model.vo.Room;
@@ -95,7 +96,41 @@ public class RoomDao {
 		return result;
 	}
 	
-	
+	public ArrayList<Room>updateRoomList(Connection conn, int hotelNo) {
+		ArrayList<Room> rooms = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateRoomList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Room r = new Room();
+				r.setHotelNo(hotelNo);
+				r.setRoomNo(rset.getInt("ROOM_NO"));
+				r.setRoomName(rset.getString("ROOM_NAME"));
+				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				r.setRoomNum(rset.getInt("ROOM_NUM"));
+				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));
+				r.setRoomImgPath(rset.getString("ROOM_IMG"));
+				rooms.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return rooms;
+	}
 	
 	
 	

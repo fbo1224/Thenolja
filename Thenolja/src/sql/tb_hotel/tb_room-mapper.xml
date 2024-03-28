@@ -51,7 +51,27 @@
        	  HOTEL_NO = ?
 	</entry>
 	
-	
+	<entry key="updateRoomList">
+	SELECT
+	      TB_ROOM.ROOM_NO,
+	      ROOM_NAME,
+	      CHECKIN_TIME,
+	      CHECKOUT_TIME,
+	      ROOM_NUM,
+	      ROOM_PRICE,
+	      MAX_PEOPLE,
+	      ROOM_IMG
+  	  FROM
+      	  TB_ROOM
+  	  JOIN TB_ROOM_IMG
+        ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
+  	  JOIN TB_HOTEL
+        ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+  	 WHERE
+          TB_HOTEL.HOTEL_YN = 'Y'
+       AND
+          TB_HOTEL.HOTEL_NO = ?
+	</entry>
 	
 	
 	

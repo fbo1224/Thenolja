@@ -136,6 +136,8 @@
 		        TB_REVIEW ON (RV_RESER_NO = CO_RESER_NO)
 		  WHERE
 		        REVIEW_YN = 'Y'
+		    AND
+		    	CO_RESER_NO = ?
 	
 	</entry>
 	
