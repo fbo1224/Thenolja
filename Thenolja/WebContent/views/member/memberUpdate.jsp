@@ -84,7 +84,7 @@
 
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="5" required name="memName" value="<%= loginUser.getMemName() %>"></td>
+					<td><input type="text" maxlength="5" required name="memName" value="<%= loginUser.getMemName() %>" autofocus></td>
 					<td></td>
 				</tr>
 				<tr></tr>
