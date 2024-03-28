@@ -3,7 +3,7 @@
 <properties>
 
 	<comment>
-		nonmem Mapper
+		Nonmem Mapper
 	</comment>
 	
 	<entry key="insertNonMem">
@@ -27,8 +27,6 @@
 		  FROM
 		  		TB_NONMEM
 	</entry>
-	
-	
 	
 	<entry key="selectNonmemReser">
 		SELECT

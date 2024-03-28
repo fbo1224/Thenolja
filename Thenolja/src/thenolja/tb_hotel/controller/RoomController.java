@@ -113,7 +113,7 @@ public class RoomController {
 			request.setAttribute("room", r);
 			view = "views/hotel/updateRoomForm.jsp";
 		} else {
-			request.setAttribute("errorMsg", "객실 수정 실패...");
+			request.setAttribute("errorMsg", "객실 정보 가져오기 실패...");
 			view = "views/common/errorPage.jsp";
 		}
 		
@@ -125,6 +125,7 @@ public class RoomController {
 		int result = 0;
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
+			
 			String savePath = request.getServletContext()
 			         .getRealPath("/resources/roomImage");
 			
@@ -149,6 +150,8 @@ public class RoomController {
 			String outTime = multiRequest.getParameter("out_time");
 			String roomImgBefore = multiRequest.getParameter("roomImgBefore"); 
 			
+			System.out.println("roomImgBefore : " + roomImgBefore);
+			
 			// VO담기
 			Room r = new Room();
 			r.setRoomNo(roomNo);
@@ -161,8 +164,7 @@ public class RoomController {
 			r.setRoomImgPath(roomImgBefore);
 			r.setRoomImgNo(roomImgNo);
 			
-			String beforeImgName = roomImgBefore.substring(roomImgBefore.lastIndexOf("/") + 1);
-			System.out.println(beforeImgName);
+			String beforeImgName = roomImgBefore.substring(r.getRoomImgPath().lastIndexOf("/") + 1);
 			
 			// 사진 roomImg
 			if(multiRequest.getOriginalFileName("roomImg") != null) {
@@ -170,13 +172,16 @@ public class RoomController {
 				new File(savePath + "/" + beforeImgName).delete();
 			}
 			
-			// System.out.println(r);
-			
 			result = new RoomService().updateRoom(r);
 		}
 		
-		//
-		view = "/hotelList.hotels?currentPage=1";
+		if(result > 0) {
+			view = "/hotelList.hotels?currentPage=1";
+		} else {
+			request.setAttribute("errorMsg", "객실정보 수정에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
+		}
+		
 		return view;
 	}
 	
