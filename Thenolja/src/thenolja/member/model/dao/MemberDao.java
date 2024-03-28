@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import thenolja.common.JDBCTemplate;
 import thenolja.member.model.vo.Member;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 public class MemberDao {
 
@@ -298,6 +299,33 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public Member selectMember(Connection conn, int memNo) {
+		
+		Member member = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				member = new Member();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return member;
 	}
 	
 	
