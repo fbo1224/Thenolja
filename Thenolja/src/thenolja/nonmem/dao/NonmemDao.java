@@ -59,11 +59,16 @@ public class NonmemDao {
 						                            rset.getString("CHECKOUT_TIME"),
 								                 	rset.getString("BICYCLE"),
 								                 	rset.getInt("PEOPLE"),
+								                 	rset.getString("PAYMENT_PRICE"),
 								                 	rset.getString("ROOM_NAME"),
 								                 	rset.getInt("ROOM_NUM"),
 								                 	rset.getInt("MAX_PEOPLE"),
 								                 	rset.getString("CHECKIN_TIME"),
 								                 	rset.getString("CHECKOUT_TIME"),
+								                 	rset.getString("HOTEL_NAME"),
+								                 	rset.getString("HOTEL_LOCATION"),
+								                 	rset.getString("HOTEL_ADDRESS"),
+								                 	rset.getString("HOTEL_PATH"),
 								                 	rset.getString("ROOM_IMG"));
 				list.add(nonmemReser);
 			}

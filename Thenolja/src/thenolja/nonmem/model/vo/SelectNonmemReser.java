@@ -16,19 +16,18 @@ public class SelectNonmemReser {
 	private int people;
 	private String paymentPrice;
 	
-	// hotel
-	private String hotelName;
-	private String hotelLocation;
-	private String hotelAddress;
-	private String hotelPath;
-	private String detailLocation;
-	
 	// room
 	private String roomName;
 	private int roomNum;
 	private int maxPeople;
 	private String checkInTime;
 	private String checkOutTime;
+	
+	// hotel
+	private String hotelName;
+	private String hotelLocation;
+	private String hotelAddress;
+	private String hotelPath;
 	
 	// roomimg
 	private String roomImg;
@@ -39,8 +38,8 @@ public class SelectNonmemReser {
 
 	public SelectNonmemReser(int memNo, String memName, String memPhone, String memStatus, int reserNo,
 			String reserName, String checkInDate, String checkOutDate, String bicycle, int people, String paymentPrice,
-			String hotelName, String hotelLocation, String hotelAddress, String hotelPath, String detailLocation,
-			String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime, String roomImg) {
+			String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime, String hotelName,
+			String hotelLocation, String hotelAddress, String hotelPath, String roomImg) {
 		super();
 		this.memNo = memNo;
 		this.memName = memName;
@@ -53,16 +52,15 @@ public class SelectNonmemReser {
 		this.bicycle = bicycle;
 		this.people = people;
 		this.paymentPrice = paymentPrice;
-		this.hotelName = hotelName;
-		this.hotelLocation = hotelLocation;
-		this.hotelAddress = hotelAddress;
-		this.hotelPath = hotelPath;
-		this.detailLocation = detailLocation;
 		this.roomName = roomName;
 		this.roomNum = roomNum;
 		this.maxPeople = maxPeople;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
+		this.hotelName = hotelName;
+		this.hotelLocation = hotelLocation;
+		this.hotelAddress = hotelAddress;
+		this.hotelPath = hotelPath;
 		this.roomImg = roomImg;
 	}
 
@@ -154,46 +152,6 @@ public class SelectNonmemReser {
 		this.paymentPrice = paymentPrice;
 	}
 
-	public String getHotelName() {
-		return hotelName;
-	}
-
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public String getHotelLocation() {
-		return hotelLocation;
-	}
-
-	public void setHotelLocation(String hotelLocation) {
-		this.hotelLocation = hotelLocation;
-	}
-
-	public String getHotelAddress() {
-		return hotelAddress;
-	}
-
-	public void setHotelAddress(String hotelAddress) {
-		this.hotelAddress = hotelAddress;
-	}
-
-	public String getHotelPath() {
-		return hotelPath;
-	}
-
-	public void setHotelPath(String hotelPath) {
-		this.hotelPath = hotelPath;
-	}
-
-	public String getDetailLocation() {
-		return detailLocation;
-	}
-
-	public void setDetailLocation(String detailLocation) {
-		this.detailLocation = detailLocation;
-	}
-
 	public String getRoomName() {
 		return roomName;
 	}
@@ -234,6 +192,38 @@ public class SelectNonmemReser {
 		this.checkOutTime = checkOutTime;
 	}
 
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getHotelLocation() {
+		return hotelLocation;
+	}
+
+	public void setHotelLocation(String hotelLocation) {
+		this.hotelLocation = hotelLocation;
+	}
+
+	public String getHotelAddress() {
+		return hotelAddress;
+	}
+
+	public void setHotelAddress(String hotelAddress) {
+		this.hotelAddress = hotelAddress;
+	}
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
+
 	public String getRoomImg() {
 		return roomImg;
 	}
@@ -247,12 +237,12 @@ public class SelectNonmemReser {
 		return "SelectNonmemReser [memNo=" + memNo + ", memName=" + memName + ", memPhone=" + memPhone + ", memStatus="
 				+ memStatus + ", reserNo=" + reserNo + ", reserName=" + reserName + ", checkInDate=" + checkInDate
 				+ ", checkOutDate=" + checkOutDate + ", bicycle=" + bicycle + ", people=" + people + ", paymentPrice="
-				+ paymentPrice + ", hotelName=" + hotelName + ", hotelLocation=" + hotelLocation + ", hotelAddress="
-				+ hotelAddress + ", hotelPath=" + hotelPath + ", detailLocation=" + detailLocation + ", roomName="
-				+ roomName + ", roomNum=" + roomNum + ", maxPeople=" + maxPeople + ", checkInTime=" + checkInTime
-				+ ", checkOutTime=" + checkOutTime + ", roomImg=" + roomImg + "]";
+				+ paymentPrice + ", roomName=" + roomName + ", roomNum=" + roomNum + ", maxPeople=" + maxPeople
+				+ ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", hotelName=" + hotelName
+				+ ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelPath=" + hotelPath
+				+ ", roomImg=" + roomImg + "]";
 	}
-	
+
 	
 	
 }
