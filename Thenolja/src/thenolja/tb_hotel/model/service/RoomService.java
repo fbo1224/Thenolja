@@ -42,7 +42,7 @@ public class RoomService {
 	}
 	
 	// 수정할 room 목록 가져오기 
-	public  ArrayList<Room> updateRoomList(int hotelNo) {
+	public ArrayList<Room> updateRoomList(int hotelNo) {
 		Connection conn = getConnection();
 		
 		ArrayList<Room> result = new RoomDao().updateRoomList(conn, hotelNo);
@@ -52,7 +52,16 @@ public class RoomService {
 		return result;
 	}
 	
-	
+	// 수정할 room 하나 가져오기
+	public Room updateRoom(int roomNo) {
+		Connection conn = getConnection();
+		
+		Room r = new RoomDao().updateRoom(conn, roomNo);
+		
+		close(conn);
+		
+		return r;
+	}
 	
 	
 	
