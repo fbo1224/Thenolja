@@ -6,9 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.member.model.vo.Member;
+import thenolja.nonmem.service.NonmemService;
 import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
@@ -33,15 +36,27 @@ public class NonmemberInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		String name = request.getParameter("memName");
-		String phone = request.getParameter("memPhone");
+		String name = request.getParameter("nonMemName");
+		String phone = request.getParameter("nonMemPhone");
 		
-		// 3) 데이터 가공
 		Member nonmem = new Member();
 		nonmem.setMemName(name);
 		nonmem.setMemPhone(phone);
 		
-		int result = new NonmemService().insertNonMem();
+		int result = new NonmemService().insertNonMem(nonmem);
+		if(result > 0) {
+			
+					
+			HttpSession session = request.getSession();
+			session.setAttribute("nonmem", nonmem);
+			
+			response.sendRedirect(request.getContextPath() + "/nonmemDetail?memNo=" + nonmem.getMemNo());
+			
+		} else {
+			request.setAttribute("errorMsg", "예약에 실패했습니다!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**

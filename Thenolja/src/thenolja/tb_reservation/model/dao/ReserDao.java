@@ -153,9 +153,9 @@ public class ReserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
-		
 		return reser;
 	}
 	/*

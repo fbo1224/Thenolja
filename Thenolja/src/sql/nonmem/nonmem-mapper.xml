@@ -3,6 +3,37 @@
 <properties>
 
 	<comment>
+<<<<<<< HEAD
+		nonmem Mapper
+	</comment>
+	
+	<entry key="insertNonMem">
+		INSERT
+		  INTO 
+		  		TB_NONMEM
+		VALUES
+		 		(
+				SEQ_MNO.NEXTVAL,
+				?,
+				?,
+				DEFAULT
+				)
+	</entry>
+	
+	<entry key="selectNonMem">
+		SELECT
+				MEM_NO,
+				MEM_NAME,
+				MEM_PHONE
+		  FROM
+		  		TB_NONMEM
+	</entry>
+	
+	
+	
+	
+</properties>
+=======
 		Nonmem Mapper
 	</comment>
 	
@@ -48,3 +79,4 @@
 	</entry>
 	
 </properties>
+>>>>>>> 2be948c4e561aa2b3291af17841d6397db889afd
