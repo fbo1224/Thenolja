@@ -84,7 +84,7 @@
 
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="5" required name="memName" value="<%= loginUser.getMemName() %>"></td>
+					<td><input type="text" maxlength="5" required name="memName" value="<%= loginUser.getMemName() %>" autofocus></td>
 					<td></td>
 				</tr>
 				<tr></tr>
@@ -128,13 +128,13 @@
 						pwd1.value = '';
 						pwd2.value = '';
 						pwdCheck.style = "color:red;  display:block;"
-						
+						/*next.disabled = true;*/
 						return false;
-					} 
+					}
 					else{
 						pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
-						/*next.disabled = false;*/
 						pwdCheck.style = "color:green; display:block;";
+						/*next.disabled = false;*/
 
 						return true;
 					}
