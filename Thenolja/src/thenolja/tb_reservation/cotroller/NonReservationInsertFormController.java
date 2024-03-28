@@ -1,23 +1,27 @@
-package thenolja.nonmem.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.tb_reservation.model.vo.Reservation;
+
 /**
- * Servlet implementation class NonmemberSelectController
+ * Servlet implementation class NonReservationInsertFormController
  */
-@WebServlet("/nonmemSelect")
-public class NonmemberSelectController extends HttpServlet {
+@WebServlet("/nonInsertReservation")
+public class NonReservationInsertFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NonmemberSelectController() {
+    public NonReservationInsertFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,19 +31,16 @@ public class NonmemberSelectController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String nonmemName = request.getParameter("nonmemName");
-		String nonmemPhone = request.getParameter("nonmemPhone");
-	
-		System.out.println(nonmemName);
-		System.out.println(nonmemPhone);
+		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("views\\nonmem\\selectNonmem.jsp").forward(request, response);
-		/*if(result > 0) {
-		} else {
-			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");
-		}*/
+		Reservation reser = new Reservation();
+		request.setAttribute("reser", reser);
+		//System.out.println(list);
 		
-	
+		//response.sendRedirect("/views/reservation/insertReservation.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/nonInsertReservation.jsp");
+		
+		view.forward(request, response);
 	}
 
 	/**

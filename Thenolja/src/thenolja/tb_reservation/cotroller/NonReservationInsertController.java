@@ -1,4 +1,4 @@
-package thenolja.nonmem.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NonmemberSelectController
+ * Servlet implementation class NonReservationInsertController
  */
-@WebServlet("/nonmemSelect")
-public class NonmemberSelectController extends HttpServlet {
+@WebServlet("/insertNon.reser")
+public class NonReservationInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NonmemberSelectController() {
+    public NonReservationInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,20 +26,6 @@ public class NonmemberSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String nonmemName = request.getParameter("nonmemName");
-		String nonmemPhone = request.getParameter("nonmemPhone");
-	
-		System.out.println(nonmemName);
-		System.out.println(nonmemPhone);
-		
-		request.getRequestDispatcher("views\\nonmem\\selectNonmem.jsp").forward(request, response);
-		/*if(result > 0) {
-		} else {
-			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");
-		}*/
-		
-	
 	}
 
 	/**

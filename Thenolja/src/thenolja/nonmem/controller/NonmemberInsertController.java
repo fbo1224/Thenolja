@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.vo.Reservation;
+
 /**
- * Servlet implementation class NonmemberSelectController
+ * Servlet implementation class NonmemberInsertController
  */
-@WebServlet("/nonmemSelect")
-public class NonmemberSelectController extends HttpServlet {
+@WebServlet("/insert.nonMem")
+public class NonmemberInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NonmemberSelectController() {
+    public NonmemberInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,19 +30,15 @@ public class NonmemberSelectController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String nonmemName = request.getParameter("nonmemName");
-		String nonmemPhone = request.getParameter("nonmemPhone");
-	
-		System.out.println(nonmemName);
-		System.out.println(nonmemPhone);
+		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("views\\nonmem\\selectNonmem.jsp").forward(request, response);
-		/*if(result > 0) {
-		} else {
-			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");
-		}*/
+		String name = request.getParameter("memName");
+		String phone = request.getParameter("memPhone");
 		
-	
+		// 3) 데이터 가공
+		Reservation reser = new Reservation();
+		reser.setName(name);
+		reser.setPhone(phone);
 	}
 
 	/**
