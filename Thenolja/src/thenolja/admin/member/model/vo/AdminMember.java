@@ -19,10 +19,10 @@ public class AdminMember {
    private int paymentPrice;
    private int reserNo;
    private String reserName;
+   private String gradeNo;
 
 
    
-
 	public int getReserNo() {
 		return reserNo;
 	}

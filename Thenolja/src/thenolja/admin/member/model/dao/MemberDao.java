@@ -285,7 +285,8 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+			// pstmt.setInt(1, gradeNo);
+			pstmt.setInt(2, memNo);
 	
 		} catch (SQLException e) {
 			e.printStackTrace();

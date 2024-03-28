@@ -66,12 +66,7 @@
 		       MEM_PHONE = ?  
 			
 	<!-- 필요한거 -->
-	<!-- tb_reservation.payment_Price 
-	tb_hotel.hotel_name // 
-	HOTEL_LOCATION // 
-	HOTEL_ADDRESS // 
-	HOTEL_PATH //
-	DETAILLOCATION-->
+<<<<<<< HEAD
 	<!-- 뺄거 -->
 	
 	

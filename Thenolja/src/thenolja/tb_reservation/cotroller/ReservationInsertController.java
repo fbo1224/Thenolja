@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thenolja.member.model.service.MemberService;
+import thenolja.member.model.vo.Member;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -34,6 +36,7 @@ public class ReservationInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String name = request.getParameter("memName");
 		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
@@ -42,6 +45,7 @@ public class ReservationInsertController extends HttpServlet {
 		
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
+		reser.setMemNo(memNo);
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
@@ -57,7 +61,7 @@ public class ReservationInsertController extends HttpServlet {
 			
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
-					
+			Member member = new MemberService().selectMember(memNo);
 			reser = new ReserService().selectReservation();
 			
 			HttpSession session = request.getSession();

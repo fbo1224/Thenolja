@@ -127,7 +127,7 @@
 	            <div id="reser_hotel_img"><img src="<%=c.getRoomImg() %>" alt="" width="220px" height="220px"></div>
 	
 	            <div id="reser_detail">
-	                <h3><%=c.getRoomImg() %></h3>
+	                <h3><%=c.getHotelNa() %></h3>
 	                <p><%=c.getRoomName() %></p>
 	                <p><%=c.getPeople() %></p>
 	                <p>117,000원</p>

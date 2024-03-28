@@ -218,12 +218,12 @@
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
                         <td width="200">이름 :<span id="name"></span></td>
                         <td width="200">등급 :
-                            <select>
-                                <option>FAMILY</option>
-                                <option>SILVER</option>
-                                <option>GOLD</option>
-                                <option>VIP</option>
-                                <option>VVIP</option>
+                            <select name="grade">
+                                <option value="1">FAMILY</option>
+                                <option value="2">SILVER</option>
+                                <option value="3">GOLD</option>
+                                <option value="4">VIP</option>
+                                <option value="5">VVIP</option>
                             </select>
                         </td>
                     </tr>
@@ -263,7 +263,8 @@
   			
   			url : 'gradeUpdate.do',
   			type : 'get',
-  			data : {memNo : $('#updateMemNo').val()},
+  			data : {memNo : $('#updateMemNo').val()
+  					},
   			success : function(result) {
   				consloe.log(result);
   				
