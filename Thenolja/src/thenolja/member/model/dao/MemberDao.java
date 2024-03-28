@@ -318,6 +318,7 @@ public class MemberDao {
 			while(rset.next()) {
 				member = new Member();
 				
+				member.setMemNo(memNo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
