@@ -38,7 +38,7 @@ public class NonmemberSelectController extends HttpServlet {
 		System.out.println(nonmemName);
 		System.out.println(nonmemPhone);
 		
-		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
+		ArrayList<SelectNonmemReser list = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
 		
 		System.out.println(list);
 		
