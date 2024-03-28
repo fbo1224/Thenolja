@@ -191,6 +191,19 @@ public class ReviewDao {
 
 	 }
 	 
+	 /**
+	  * 대댓글 조회
+	  */
+	 public AdminComment selectCommentList(Connection conn, int reserNo) {
+		 
+		 AdminComment adminComment = null;
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("selectCommentList");
+		 
+		 
+		 return adminComment;
+	 }
 	 
 	 
 }
