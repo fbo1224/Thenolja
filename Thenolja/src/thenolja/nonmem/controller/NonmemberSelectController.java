@@ -1,6 +1,7 @@
 package thenolja.nonmem.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,9 +38,9 @@ public class NonmemberSelectController extends HttpServlet {
 		System.out.println(nonmemName);
 		System.out.println(nonmemPhone);
 		
-		SelectNonmemReser nonmemReser = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
+		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
 		
-		
+		System.out.println(list);
 		
 		request.getRequestDispatcher("views\\nonmem\\selectNonmemReser.jsp").forward(request, response);
 		/*if(result > 0) {

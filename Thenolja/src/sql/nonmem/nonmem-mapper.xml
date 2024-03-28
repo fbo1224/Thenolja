@@ -6,13 +6,34 @@
 		Nonmem Mapper
 	</comment>
 	
-
+	<entry key="insertNonMem">
+		INSERT
+		  INTO 
+		  		TB_NONMEM
+		VALUES
+		 		(
+				SEQ_MNO.NEXTVAL,
+				?,
+				?,
+				DEFAULT
+				)
+	</entry>
+	
+	<entry key="selectNonMem">
+		SELECT
+				MEM_NO,
+				MEM_NAME,
+				MEM_PHONE
+		  FROM
+		  		TB_NONMEM
+	</entry>
+	
 	<entry key="selectNonmemReser">
 		SELECT
 		       MEM_NO, <!-- Member 객체에 담기 -->
 		       MEM_NAME,
 		       MEM_PHONE,
-		       MEM_STATUS 
+		       MEM_STATUS,
 		       RESER_NO, <!-- Reservation객체에 담기 -->
 		       RESER_NAME,
 		       R.CHECKIN_TIME,
@@ -35,9 +56,9 @@
 		       TB_ROOM M
 		 USING
 		       (ROOM_NO)
-		   JOIN
+		  JOIN
 		       TB_ROOM_IMG
-		  USING
+		 USING
 		       (ROOM_NO)
 		 WHERE
 		       MEM_NAME = ?

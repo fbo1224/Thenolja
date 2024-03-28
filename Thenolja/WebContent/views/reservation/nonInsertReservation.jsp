@@ -193,7 +193,7 @@
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insert.nonMem" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insertNon.reser" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
