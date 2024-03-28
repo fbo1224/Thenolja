@@ -133,6 +133,17 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public Member selectMember(int memNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member member = new MemberDao().selectMember(conn, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return member;
+	}
 	
 	
 	
