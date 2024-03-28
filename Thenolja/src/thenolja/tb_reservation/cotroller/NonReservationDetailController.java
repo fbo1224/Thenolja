@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.member.model.vo.Member;
-import thenolja.nonmem.service.NonmemService;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class ReservationDetailController
+ * Servlet implementation class NonReservationDetailController
  */
-@WebServlet("/reserDetail")
-public class ReservationDetailController extends HttpServlet {
+@WebServlet("/nonReserDetail")
+public class NonReservationDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationDetailController() {
+    public NonReservationDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +31,15 @@ public class ReservationDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//		request.setCharacterEncoding("UTF-8");
-
+	
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
-		// int memNo = Integer.parseInt(request.getParameter("memNo"));
-		// Member member = new NonmemService().selectNonMemNo(memNo);
 			
 		if(reser != null) {
 			request.setAttribute("reser", reser);
-		//	request.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/reservation/nonDetailReservation.jsp");
 			view.forward(request, response);
-			// response.sendRedirect("views/reservation/detailReservation.jsp");
 			
 		} else {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");

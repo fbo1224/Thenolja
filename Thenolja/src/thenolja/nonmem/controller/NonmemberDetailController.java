@@ -1,4 +1,4 @@
-package thenolja.tb_reservation.cotroller;
+package thenolja.nonmem.controller;
 
 import java.io.IOException;
 
@@ -15,16 +15,16 @@ import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class ReservationDetailController
+ * Servlet implementation class NonmemberDetailController
  */
-@WebServlet("/reserDetail")
-public class ReservationDetailController extends HttpServlet {
+@WebServlet("/nonmemDetail")
+public class NonmemberDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationDetailController() {
+    public NonmemberDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +34,27 @@ public class ReservationDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//		request.setCharacterEncoding("UTF-8");
-
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		Reservation reser = new ReserService().selectReserNo(reserNo);
-		// int memNo = Integer.parseInt(request.getParameter("memNo"));
-		// Member member = new NonmemService().selectNonMemNo(memNo);
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		Member member = new NonmemService().SelectNonmem(memNo);
 			
-		if(reser != null) {
-			request.setAttribute("reser", reser);
-		//	request.setAttribute("member", member);
+		if(member != null) {
+			
+			
+			request.setAttribute("member", member);
+			
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
 			view.forward(request, response);
-			// response.sendRedirect("views/reservation/detailReservation.jsp");
 			
 		} else {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
+	
+	
+	
+	
 	}
 
 	/**

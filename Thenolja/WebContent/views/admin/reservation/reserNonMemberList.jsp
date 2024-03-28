@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>       
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
 <%
-	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -10,6 +10,11 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int maxPage = pageInfo.getMaxPage();
+	
+	
+	Date date = new Date();
+    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
+	String today = simpleDate.format(date);
 
 %>    
     
@@ -88,8 +93,16 @@
                         		<td><%=adminReserNon.getReserName() %></td>
                         		<td><%=adminReserNon.getMemPhone() %></td>
                         		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
+                            	
+                            	<%if(today.compareTo(adminReserNon.getCheckInTime()) < 0) {%>
                             	<td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
+                        	 	<% } else { %>
+                        	 	<td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
+                        		<%} %>
                         	</tr>
+                        	
+                        	
+                        	
                         	<% } %>
                         <%} %>
 
