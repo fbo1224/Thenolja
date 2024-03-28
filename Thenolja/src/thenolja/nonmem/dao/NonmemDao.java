@@ -1,7 +1,5 @@
 package thenolja.nonmem.dao;
 
-import static thenolja.common.JDBCTemplate.close;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import thenolja.common.JDBCTemplate;
+import thenolja.member.model.dao.MemberDao;
+import thenolja.nonmem.model.vo.SelectNonmemReser;
 
 
 public class NonmemDao {

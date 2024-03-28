@@ -3,8 +3,7 @@
 <properties>
 
 	<comment>
-<<<<<<< HEAD
-		nonmem Mapper
+		Nonmem Mapper
 	</comment>
 	
 	<entry key="insertNonMem">
@@ -30,14 +29,6 @@
 	</entry>
 	
 	
-	
-	
-</properties>
-=======
-		Nonmem Mapper
-	</comment>
-	
-
 	<entry key="selectNonmemReser">
 		SELECT
 		       MEM_NO, <!-- Member 객체에 담기 -->
@@ -79,4 +70,3 @@
 	</entry>
 	
 </properties>
->>>>>>> 2be948c4e561aa2b3291af17841d6397db889afd

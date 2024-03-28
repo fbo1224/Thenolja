@@ -1,20 +1,20 @@
 package thenolja.nonmem.service;
 
-<<<<<<< HEAD
 import static thenolja.common.JDBCTemplate.close;
 import static thenolja.common.JDBCTemplate.commit;
 import static thenolja.common.JDBCTemplate.getConnection;
 import static thenolja.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import thenolja.common.JDBCTemplate;
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.dao.NonmemDao;
-import thenolja.tb_reservation.model.dao.ReserDao;
-import thenolja.tb_reservation.model.vo.Reservation;
+import thenolja.nonmem.model.vo.SelectNonmemReser;
 
 public class NonmemService {
-
+	/*
 	public int insertNonMem(Member nonmem) {
 		
 		Connection conn = getConnection();
@@ -30,7 +30,7 @@ public class NonmemService {
 		
 		return result;
 	}
-
+	
 	public Member SelectNonmem() {
 		
 		Connection conn = getConnection();
@@ -41,7 +41,7 @@ public class NonmemService {
 		
 		return member;
 	}
-	/*
+	
 	public Member selectNonMemNo(int memNo) {
 		
 		Connection conn = getConnection();
@@ -54,15 +54,7 @@ public class NonmemService {
 	}
 	*/
 
-=======
-import java.sql.Connection;
-import java.util.ArrayList;
 
-import thenolja.common.JDBCTemplate;
-import thenolja.nonmem.dao.NonmemDao;
-import thenolja.nonmem.model.vo.SelectNonmemReser;
-
-public class NonmemService {
 	
 	public ArrayList<SelectNonmemReser> selectNonmemReser(String nonmemName, String nonmemPhone) {
 		
@@ -80,5 +72,4 @@ public class NonmemService {
 	
 	
 	
->>>>>>> 2be948c4e561aa2b3291af17841d6397db889afd
 }
