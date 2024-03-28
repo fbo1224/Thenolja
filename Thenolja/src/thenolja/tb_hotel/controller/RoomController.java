@@ -85,4 +85,54 @@ public class RoomController {
 		}
 		return view;		
 	}
+	
+	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
+		String view = "views/hotel/roomListForm.jsp";
+		
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		
+		System.out.println(hotelNo);
+		
+		
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -3,7 +3,6 @@
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-	//System.out.println("noticeList = " + list); 컴파일에러 발생
 %>
 <!DOCTYPE html>
 <html>
@@ -44,8 +43,8 @@
     <br>
     
     <!-- 등록 버튼 영역 START -->
-   	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
 	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
+
    	<!-- 등록 버튼 영역 END -->
    	
     <br>
@@ -77,7 +76,8 @@
          			<td><%= n.getWriter() %></td>
          			<td><%= n.getCreateDate() %></td>
          			<td><%= n.getViewCount() %></td>
-         			<td><%= n.getStatus() %></td>
+         			<td><%= n.getStatus() %></td> <%-- 수정할 부분 --%>
+         			
          		</tr>
          	<% } %>
 
@@ -106,20 +106,20 @@
 </div>
 	<script>
 
-		// 수정화면 진입 (관리자전용URL)   관리자 로그인 시 공지사항 게시여부 'Y','N' 둘다 볼 수 있도록 하기
+		// 수정화면 진입 (관리자전용URL)
 		$('tbody > tr.list').click(function(){
 	        //location.href='<%=contextPath%>/detail.notice';  
 	        const noticeNo = $(this).children().eq(0).text();
-	        location.href= '<%= contextPath %>/update.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+	        location.href= '<%= contextPath %>/updateInfo.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
 	      });
 		
-        // 상세화면 진입 (회원전용URL)			회원(사용자)로그인일 경우 공지사항 게시여부 'N'만 보이도록 하기
-        /* $('tbody > tr.list').click(function(){
+        // 상세화면 진입 (회원전용URL)
+         $('tbody > tr.list').click(function(){
           //location.href='<%=contextPath%>/detail.notice';  
            const noticeNo = $(this).children().eq(0).text();
            location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
 
-        }); */
+        }); 
 	</script>
 
 </head>
