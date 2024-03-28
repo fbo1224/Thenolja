@@ -373,16 +373,21 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-	      <div class="modal-body">
-	        	비회원 이름<input type="text" maxlength="15" required><br>
-	        	비회원 전화번호<input type="text" maxlength="11" required>
-	      </div>
-	
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-			<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#reser">조회</button>
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-	      </div>
+		  	<form action="<%= contextPath %>/nonmemSelect" method="get">
+	      		<div class="modal-body">
+					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
+					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				</div>
+
+				
+			</form>
+
 	
 	    </div>
 	  </div>
