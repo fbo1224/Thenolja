@@ -27,7 +27,8 @@
 					        RESER_NO,
 					        MEM_ID,
 					        RESER_NAME,
-					        MEM_PHONE
+					        MEM_PHONE,
+					        TO_CHAR(CHECKIN_TIME ,'YYYY.MM.DD') "CHECKIN_TIME"
 					  FROM
 					        TB_RESERVATION
 					  JOIN
