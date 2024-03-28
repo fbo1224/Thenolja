@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
 <%
-	Notice notice = (Notice)request.getAttribute("notice");
-	String status = notice.getStatus();
+	Notice notice   = (Notice)request.getAttribute("notice");
+	String status   = notice.getStatus();
+	int noticeNo 	= notice.getNoticeNo();
 %>
 <!DOCTYPE html>
 <html>
@@ -172,79 +173,84 @@ input[type="text"], input[type="password"] {
 <%@ include file="../common/menubar.jsp" %>
 
 <script type="text/javascript">
-/*************************** 
+/**************************************************** 
 * 함수설명 : 수정/삭제 클릭 이벤트
-* 수정일자 : 24.03.27
-* 수정내용 : 수정, 삭제 버튼 클릭 
-*          이벤트 발생 구분 값 추가 및 처리
-****************************/ 
+* 수정일자 : 2024.03.28
+* 수정내용 : 수정,삭제 버튼 클릭 시 노출메시지 구분 값 및 변수 추가
+*         유효성검사(validation함수 파라미터 추가)
+*         수정 / 삭제인 경우 호출 URL 분리
+*****************************************************/ 
 function updNotice(eventStatus){
-	
-	console.log("eventStatus : ", eventStatus);
 	
 	var inptTitle   = $('#title').val();
 	var inptContent = $('#txtArea_content').val();
 	var chkStatus   = $('input[name="status"]:checked').val();
-	var confirmMsg;	// 수정, 삭제 버튼 클릭 시 메시지
+	var confirmMsg;	// 수정, 삭제 버튼 클릭 시 확인 메시지
 	
-	if(eventStatus == "UPD") confirmMsg = "게시글을 수정하시겠습니까?";
-	if(eventStatus == "DEL") confirmMsg = "게시글을 삭제하시겠습니까?"; 
+	if(typeof eventStatus != "undefined"){
+		if(eventStatus == "UPD") confirmMsg = "게시글을 수정하시겠습니까?";
+		if(eventStatus == "DEL") confirmMsg = "게시글을 삭제하시겠습니까?";
+	}
 	
-	// 유효성 검사 함수 호출(validation)
+	// 유효성 검사 함수 호출
 	if(validation(eventStatus)){
 		// confirm 함수는 확인창 결과값으로 TRUE와 FALSE 값을 RETURN 하게 됨.
-		if(confirm( confirmMsg )){   // confirm -->  문구: 네-true   | 아니오-false
+		if(confirm(confirmMsg)){
+		
+		// 수정, 삭제부분 공통적인 부분 변수처리
+		var noticeNo = <%=noticeNo%>;
+		var mappingUrl;
+		var dataObj;
+		var rsltMsg;
+		
+		// 수정, 삭제인 경우 각각 데이터 세팅
+		if(eventStatus == "UPD"){
+			mappingUrl  = "/updNotice";
+			dataObj 	= {title : inptTitle, content : inptContent, status : chkStatus, noticeNo : noticeNo}
+			rsltMsg     = "게시글이 정상적으로 수정되었습니다.";
+		}
+		if(eventStatus == "DEL"){
+			mappingUrl  = "/delNotice";
+			dataObj 	= {noticeNo : noticeNo}
+			rsltMsg     = "게시글이 정상적으로 삭제되었습니다.";
+		}
+		
 		// 게시글 저장 submission 정보 세팅
-		
 		$.ajax({
-			type: "POST",
-			url : "<%=contextPath%>/regNotice",
-			data : {title : inptTitle, content : inptContent, status : chkStatus},
-			success:function(res){
-				alert("게시글이 정상적으로 수정되었습니다.");
-				location.href= "<%= contextPath %>/noticeList"
-			},
-			error:function(e){
-				alert("게시글 수정중 오류가 발생하였습니다.");
-				return;
-			}
+			type : "POST",
+			url  : "<%=contextPath%>" + mappingUrl,
+			data : dataObj,
 			
-		});	
-		
-		
-		
-		$.ajax({
-			type: "POST",
-			url : "<%=contextPath%>/regNotice",
-			data : {title : inptTitle, content : inptContent, status : chkStatus},
+			// 정상적으로 처리되면 공지사항 목록으로 이동
 			success:function(res){
-				alert("게시글이 정상적으로 삭제되었습니다.");
-				location.href= "<%= contextPath %>/noticeList"
+				
+				if(res == "SUCCESS"){
+					location.href= "<%= contextPath %>/noticeList"
+					alert(rsltMsg);
+				}else{
+					alert("게시글 수정/삭제 중 오류가 발생하였습니다.");
+					return;					
+				}
 			},
 			error:function(e){
-				alert("게시글 삭제중 오류가 발생하였습니다.");
+				alert("게시글 수정/삭제 중 오류가 발생하였습니다.");
 				return;
 			}
 			
 		});		
 		
-		
-		
 	    }
 	}
 }
 
-/********************************* 
+/************************************* 
 * 함수설명 : 공지사항 등록 시 유효성 검사(필수값)
-* 수정일자 : 24.03.28
-* 수정내용 : 유효성검사 함수 파라미터 추가
-**********************************/
+* 수정내용 : 삭제버튼 클릭 시 유효성 검사 skip처리
+**************************************/
 function validation(eventStatus){
-
-	console.log("validation evt : " , eventStatus)
 	
-	// 삭제버튼 클릭인 경우 validation skip처리함
-	if(eventStatus == "DEL") return true;
+	// 삭제버튼 클릭 시 skip 처리 함
+	if(typeof eventStatus != "undefined" && eventStatus == "DEL") return true;
 	
 	// 각 필드 필수값 체크
 	var content = $("#txtArea_content").val();
@@ -265,6 +271,13 @@ function validation(eventStatus){
 	if($("#txtArea_content").val() == ""){
 		alert("공지사항 내용을 입력해주세요.");
 		$("#txtArea_content").focus();
+		return;
+	}	
+	
+	// 공지사항 제목 글자수 체크
+	if($("#title").val().length > 30){ 
+		alert("공지사항 제목은 최대 30자까지만 입력 가능합니다.");
+		$("#title").focus();
 		return;
 	}	
 	
@@ -314,7 +327,7 @@ function countText(){
 		<table class="table-light table-striped text-center" width="100%">
 			<tr>
 				<th class="th_left"><span>제목</span></th>
-				<td><input type="text" id="title" name="title" value="<%=notice.getNoticeTitle()%>" style="width:650px;"/></td>
+				<td><input type="text" id="title" name="title" maxlength="26" value="<%=notice.getNoticeTitle()%>" style="width:650px;"/></td>
 			</tr>
 			
        <tr>
@@ -327,9 +340,10 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 								
 									<% if("Y".equals(status)) { %>
-										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status%> ">
+										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status %> ">
 									<% } else { %>
-										<input type="radio" id="rdo_statusY" name="status"  value="Y">
+									<input type="radio" id="rdo_statusY" name="status" checked="" value="Y">
+									
 									<% } %>
 								
 								<% } %>
@@ -342,11 +356,10 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 									
 									<% if("N".equals(status)) { %>
-										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status%> ">
+										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status %> ">
 									<% } else { %>
-										<input type="radio" id="rdo_statusN" name="status" value="N">
+									<input type="radio" id="rdo_statusN" name="status" checked="" value="N">
 									<% } %>
-								
 								<% } %>
 								
 								<label for="rdo_statusN">미게시</label>

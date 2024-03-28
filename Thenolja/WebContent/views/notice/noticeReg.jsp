@@ -165,14 +165,16 @@ input[type="text"], input[type="password"] {
 
 /* 첨부파일 영역 스타일적용 END */
 
+
+
 </style>
 
  <%@ include file="../common/menubar.jsp" %>
- 
+
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
-<script type="text/javascript" src="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<%-- <script type="text/javascript" src="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script> --%>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js" charset="utf-8"></script> -->
 <script type="text/javascript">
 /**************************
 * 함수설명 : 스마트에디터 기본 세팅
@@ -229,11 +231,17 @@ function regNotice(){
 			url : "<%=contextPath%>/regNotice",
 			data : {title : inptTitle, content : inptContent, status : chkStatus},
 			success:function(res){
-				alert("게시글이 정상적으로 등록되었습니다.");
-				location.href= "<%= contextPath %>/noticeList"
+
+				if(res == "SUCCESS"){
+					alert("게시글이 정상적으로 등록되었습니다.");
+					location.href= "<%= contextPath %>/noticeList"
+				}else{
+					alert("게시글 등록 중 오류가 발생하였습니다.");
+					return;
+				}
 			},
 			error:function(e){
-				alert("게시글 등록중 오류가 발생하였습니다.");
+				alert("게시글 등록 중 오류가 발생하였습니다.");
 				return;
 			}
 			
@@ -269,6 +277,13 @@ function validation(){
 		$("#txtArea_content").focus();
 		return;
 	}	
+	
+	// 공지사항 제목 글자수 체크
+	if($("#title").val().length > 30){ 
+		alert("공지사항 제목은 최대 30자까지만 입력 가능합니다.");
+		$("#title").focus();
+		return;
+	}
 	
 	// 공지사항 내용 글자수 체크
 	if(content.length > 400){
@@ -318,7 +333,7 @@ function countText(){
 		<table class="table-light table-striped text-center" width="100%">
 			<tr>
 				<th class="th_left"><span>제목</span></th>
-				<td><input type="text" id="title" name="title" style="width:650px;"/></td>
+				<td><input type="text" id="title" name="title" maxlength="26" style="width:650px;"/></td>
 			</tr>
 			
        <tr>
