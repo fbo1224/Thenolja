@@ -13,7 +13,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 div {
 	box-sizing: border-box;
@@ -82,7 +81,7 @@ div {
 	<div id="wrap">
 	<%if(roomCnt < 3){ %>
 		<div id="title-div">
-			<h2>숙소추가하기</h2>
+			<h2>객실추가</h2>
 		</div>
 		<div id="content-div">
 			<form id="content-add-form" action="<%= contextPath %>/insert.rooms" enctype="multipart/form-data" method="post">

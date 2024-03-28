@@ -1,7 +1,7 @@
 package thenolja.tb_hotel.model.vo;
 
 import java.util.ArrayList;
-
+// 하나의 객실 정보 담을 VO
 public class Room {
 	private int roomNo;
 	private int hotelNo;
