@@ -75,6 +75,53 @@ public class NonmemDao {
 		return list;
 	}
 	
-	
+	/*
+	public int insertNonMem(Connection conn, Member nonmem) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNonMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nonmem.getMemName());
+			pstmt.setString(2, nonmem.getMemPhone());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public Member selectNonMem(Connection conn) {
+		
+		Member member = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNonMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				member = new Member();
+				member.setMemNo(rset.getInt("MEM_NO"));
+				member.setMemName(rset.getString("MEM_NAME"));
+				member.setMemPhone(rset.getString("MEM_PHONE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return member;
+	}
+	*/
 	
 }

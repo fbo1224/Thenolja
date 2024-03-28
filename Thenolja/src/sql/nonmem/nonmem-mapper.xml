@@ -28,7 +28,6 @@
 		  		TB_NONMEM
 	</entry>
 	
-	
 	<entry key="selectNonmemReser">
 		SELECT
 		       MEM_NO, <!-- Member 객체에 담기 -->
