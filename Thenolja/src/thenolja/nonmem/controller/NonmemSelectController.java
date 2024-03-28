@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.nonmem.model.vo.SelectNonmemReser;
 import thenolja.nonmem.service.NonmemService;
@@ -41,6 +42,9 @@ public class NonmemSelectController extends HttpServlet {
 		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
 		
 		System.out.println(list);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("nonmemReser", list);
 		
 		request.getRequestDispatcher("views\\nonmem\\selectNonmemReser.jsp").forward(request, response);
 		/*if(result > 0) {

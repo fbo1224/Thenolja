@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="thenolja.nonmem.model.vo.SelectNonmemReser"%>
+    <%@ page import="java.util.ArrayList;" %>
+<%
+	ArrayList<SelectNonmemReser> nonmemReser = (ArrayList) session.getAttribute("nonmemReser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +15,8 @@
 
 	<%@ include file="../common/menubar.jsp" %>
 	<h1>비회원 예약조회 페이지</h1>
+	<%= nonmemReser.getMemNo() %>
+	
 	<pre>
 		비회원테이블에서 시작, 예약테이블 조인(회원번호)
 		1. 예약번호

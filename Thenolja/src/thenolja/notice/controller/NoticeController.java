@@ -51,7 +51,7 @@ public class NoticeController extends HttpServlet {
 		//¿¿¥‰»≠∏È ∂ÁøÏ±‚ (list∞¥√º, ∆‰¿Ã¬° ∞¥√º setAttribute)
 		request.setAttribute("noticeList", list);
 		//request.setAttribute("pagingVo", pagingVo);
-		RequestDispatcher view = request.getRequestDispatcher("/view/notice/noticeList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/notice/noticeList.jsp");
 		view.forward(request, response);
 		
 	}

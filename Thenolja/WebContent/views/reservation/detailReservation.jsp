@@ -283,7 +283,6 @@
             <input type="text" id="refund_name" required name="refundName"><br><br>
             
             <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
-
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
                 <option>신한은행</option>

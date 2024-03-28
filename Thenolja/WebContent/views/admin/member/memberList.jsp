@@ -157,6 +157,7 @@
         						$('#bornDate').text(result.bornDate);
         						$('#joinDate').text(result.joinDate);
         						$('#totalPrice').text(result.paymentPrice);
+        						$('#updateMemNo').val(e);
 
         					}
         					
@@ -209,6 +210,9 @@
         <!-- Modal body -->
         <div class="modal-body">
             <div id="detailList">
+            
+            	<input type="hidden" id="updateMemNo" name="member_No" value=""/>
+            
                 <table style="font-size: 14px;">
                     <tr>
                         <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
@@ -238,7 +242,7 @@
                   </table>
 
                 <div id="mem_update">
-                    <button class="btn btn-sm btn-outline-secondary">수정</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="updateGrade()">수정</button>
                 </div>
 
 
@@ -251,6 +255,25 @@
     </div>
   </div>
   </div>
+  
+  <script>
+  	function updateGrade(){
+  		
+  		$.ajax({
+  			
+  			url : 'gradeUpdate.do',
+  			type : 'get',
+  			data : {memNo : $('#updateMemNo').val()},
+  			success : function(result) {
+  				consloe.log(result);
+  				
+  			}
+  			
+  		});
+  		
+  	}
+  
+  </script>
   
 
 
