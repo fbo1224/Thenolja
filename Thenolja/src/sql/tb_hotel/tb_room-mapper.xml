@@ -87,7 +87,8 @@
 	      ROOM_PRICE,
 	      MAX_PEOPLE,
 	      ROOM_IMG,
-	      TB_HOTEL.HOTEL_NO
+	      TB_HOTEL.HOTEL_NO,
+	      ROOM_IMG_NO
  	  FROM   
           TB_ROOM
   	  JOIN TB_HOTEL
@@ -100,9 +101,33 @@
 	</entry>
 	
 	<entry key="updateRoom">
-	
+		UPDATE
+	     	  TB_ROOM
+	  	   SET
+	     	  ROOM_NAME = ?,
+	     	  MAX_PEOPLE = ?,
+	     	  CHECKIN_TIME = ?,
+	     	  CHECKOUT_TIME = ?,
+	     	  ROOM_PRICE = ?,
+	     	  ROOM_NUM = ?
+		 WHERE
+		      ROOM_NO = ?
+		   AND
+		   	  ROOM_YN = 'Y'
 	</entry>
 	
+	<entry key="updateRoomImg">
+		UPDATE
+	     	  TB_ROOM_IMG
+	  	   SET
+	  	   	  ROOM_IMG = ?
+	  	  JOIN TB_ROOM
+	  	    ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
+	  	  WHERE
+	  	       ROOM_NO = ?
+	  	    AND
+	  	       ROOM_YN = 'Y'    
+	</entry>
 	
 	
 	

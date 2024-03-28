@@ -123,6 +123,7 @@ public class RoomController {
 	public String updateRoom(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int result = 0;
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			String savePath = request.getServletContext()
 			         .getRealPath("/resources/roomImage");
@@ -160,15 +161,18 @@ public class RoomController {
 			r.setRoomImgPath(roomImgBefore);
 			r.setRoomImgNo(roomImgNo);
 			
+			String beforeImgName = roomImgBefore.substring(roomImgBefore.lastIndexOf("/") + 1);
+			System.out.println(beforeImgName);
+			
 			// 사진 roomImg
 			if(multiRequest.getOriginalFileName("roomImg") != null) {
 				r.setRoomImgPath("resources/roomImage/"+ multiRequest.getFilesystemName("roomImg"));
-				new File(savePath + "/" + roomImgBefore).delete();
+				new File(savePath + "/" + beforeImgName).delete();
 			}
 			
-			System.out.println(r);
+			// System.out.println(r);
 			
-			// result = new RoomService().updateRoom(roomNo);
+			result = new RoomService().updateRoom(r);
 		}
 		
 		//

@@ -63,12 +63,18 @@ public class RoomService {
 		return r;
 	}
 	
-	public int updateRoom(int roomNo) {
+	public int updateRoom(Room r) {
 		Connection conn = getConnection();
 		
-		int result = new RoomDao().updateRoom(conn, roomNo);
+		int result = new RoomDao().updateRoom(conn, r);
+		int imgResult = 0;
 		
+		// 이미경로도 수정
 		if(result > 0) {
+			imgResult = new RoomDao().updateRoomImg(conn, r);
+		}
+		
+		if((result * imgResult ) > 0) {
 			commit(conn);
 		}
 		
