@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
@@ -9,6 +10,10 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int maxPage = pageInfo.getMaxPage();
+	
+	Date date = new Date();
+    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
+	String today = simpleDate.format(date);
 %>
 
 <!DOCTYPE html>
@@ -57,7 +62,8 @@
                     </div>
         
                 </div>
-        
+                
+
                 <div id="mem_list">
                     <table class="table table-hover">
                         <thead>
@@ -84,7 +90,17 @@
                         		<td><%=adminReservation.getReserName()%></td>
                         		<td><%=adminReservation.getMemPhone() %></td>
 	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
+	                        	
+
+	                        	<%if(today.compareTo(adminReservation.getCheckInTime()) < 0) {%>
 	                            <td><button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
+	                      		<% } else { %>
+	                      		<td><button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
+	                      		<% } %>
+	                      
+	                      
+	                      
+	                            
                         </tr>
                         <% } %>
                        <% } %>
@@ -167,35 +183,7 @@
     	}
     	
     	<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
-    	
-    	var checkInDate = $('#checkIn').text();
-    	
-    	console.log(checkInDate);
-    	
-    	const today = new Date();
-    	
-    	const year = today.getFullYear();
-    	
-    	const month = today.getMonth() + 1;
-    	
-    	const day = today.getDate();
-    	
-    	const currentDate = year + '.' + (month < 10 ? '0' :"") + month + '.' + (day < 10 ? '0' : "") + day;
-    	
-    	console.log(currentDate);
-    	
-    	const refundBtn = document.getElementById("refundBtn");
-    	
-    	if(currentDate > checkInDate) {
-    		refundBtn.disabled = true;
-    	}
-    	
-    	
-    	
 
-    	
-    
-    	
     </script>
     
 
