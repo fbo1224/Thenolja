@@ -144,7 +144,7 @@ div {
 		      <!-- Modal footer -->
 		      <div class="modal-footer .hr-footer">
 		      	<button type="button" class="btn btn-danger deleteRoomBtn" data-dismiss="modal">삭제</button>
-		        <button type="button" class="btn btn-success" data-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">닫기</button>
 		      </div>
 		
 		    </div>
@@ -152,13 +152,14 @@ div {
 		</div>
 		
 	<script>
+	
 			let roomNo;
 			$('.roomBtn').click(function(e){
 				roomNo = $(this).parent().parent().attr('id');
 			});
 			
 			$('.deleteRoomBtn').click(function(e){
-				$.ajax({
+			$.ajax({
 					url: 'deleteRoom.jqAjax',
 					data: {
 						roomNo : roomNo,
