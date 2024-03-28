@@ -43,14 +43,13 @@
 	}
 
 	input{
-		width: 400px;
-		height: 50px;
+		width: 300px;
+		height: 40px;
 		border-color: rgb(230, 230, 230);
 		border-radius: 10px;
 		background-repeat: no-repeat;
 		background-size: 30px;
 		background-position: right;
-		padding: 10px;
 	}
 
 	#pwdCheck2{
@@ -63,7 +62,10 @@
 	.input:focus{
 		border-color: rgb(70, 149, 151);
 	}
-
+	td{
+		border-bottom: 1px solid lightgray;
+		margin-bottom: 10px;
+	}
 		
 	</style>
 	
@@ -179,6 +181,7 @@
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요." required></td>
+					<td></td>
 					<!--
 					<td>@</td>
 					<td>
