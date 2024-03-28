@@ -272,7 +272,33 @@ public class MemberDao {
 		}
 		return result;
 	}
-	
+//-----------------------------------회원등급 조회  ------------------------------
+	public String selectGrade(Connection conn, int memNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset= null;
+		String result = "";
+		
+		String sql = prop.getProperty("selectGrade");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+				
+			result = rset.getString("GRADE_NAME");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

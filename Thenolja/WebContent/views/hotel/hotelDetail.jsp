@@ -49,8 +49,9 @@
 	width: 80%;
 	display: flex;
 	justify-content: space-between;
-	height: 50px;
+	height: 40px;
 	border-bottom: 1px solid gray;
+	padding: 10px;
 }
 #detail-content-services{
 	margin: auto;
@@ -85,8 +86,8 @@
 	padding: 10px;
 }
 .content-rooms-card:hover{
+	scale: 102%;
 	cursor: pointer;
-	scale: 105%;
 	border-color: skyblue;
 }
 .content-rooms-card img {

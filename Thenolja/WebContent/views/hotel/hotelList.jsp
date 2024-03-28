@@ -41,8 +41,7 @@
 		width:	45%;
 		height: 250px;
 		margin: 10px;
-		box-shadow: 3px 3px 2px gray;
-		border-radius: 10px;
+		
 	}
 	.card-imgDiv, .card-info{
 		display: inline-block;
@@ -53,6 +52,7 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
+		cursor: pointer;
 	}
 	.card-info {
 		float:right;
@@ -65,12 +65,22 @@
 		padding-left: 30px;
 		margin-bottom: 10px;
 	}
+	.option-btns-room{
+		margin: 20px 0px;
+	}
 	.option-btns{
 		margin: 3px 0px;
-		
 	}
 	.cards:hover{
-		scale: 105%;
+		scale: 103%;
+		box-shadow: 3px 3px 2px gray;
+		border-radius: 10px;
+	}
+	.paging-area{
+		padding: 10px;
+		margin : 5px;
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
 	}
 </style>
 </head>
@@ -90,7 +100,9 @@
 				<%} else { %>
 					<%for(HotelCard hc : list){ %>
 					<div class="cards">
-						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>"><img class="card-img" src="<%= hc.getHotelPath() %>"></div>
+						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
+							<img class="card-img" src="<%= hc.getHotelPath() %>">
+						</div>
 	  					<div class="card-info">
 							<h4><%= hc.getHotelLocation() %></h4>
 							<p>숙소명 : <%= hc.getHotelName() %></p>
@@ -99,14 +111,14 @@
 								<p><span>★</span><span>4.8</span></p>
 								<p>가격 : <%= hc.getRoomPrice() %></p>
 							<%} else if(loginStatus != null && loginStatus.equals("A")) {%>
-								<div class="option-btns" align="center">
-									<a class="btn btn btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
+								<div class="option-btns-room" align="center">
+									<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
+									<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실정보수정</a>
+									<a class="btn btn-sm btn-danger" href="#">객실삭제</a>
 								</div>
 								<div class="option-btns" align="center">
-									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">호텔정보수정</a>
-								</div>
-								<div class="option-btns" align="center">
-									<a class="btn btn btn-danger" data-toggle="modal" data-target="#myModal" >호텔삭제</a>
+									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">숙소정보수정</a>
+									<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal" >숙소삭제</a>
 								</div>
 							<%} %>
 	  					</div>
@@ -122,23 +134,50 @@
 		
 		      <!-- Modal Header -->
 		      <div class="modal-header">
-		        <h4 class="modal-title">Modal Heading</h4>
+		        <h4 class="modal-title">삭제</h4>
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		      </div>
 		
 		      <!-- Modal body -->
-		      <div class="modal-body">
-		        Modal body..
+		      <div class="modal-body" align="center">
+		        	정말로 삭제하시겠습니까?
 		      </div>
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		      	<button id="deleteBtn" type="button" class="btn btn-danger" data-dismiss="modal">삭제</button>
+		        <button type="button" class="btn btn-success" data-dismiss="modal">닫기</button>
 		      </div>
 		
 		    </div>
 		  </div>
 		</div>
+		
+		<script>
+			let hotelNo;
+			$('.hotelBtn').click(function(e){
+				hotelNo = $(this).parent().parent().prev().attr('id');
+			});
+		
+			$('#deleteBtn').click(function(e){
+				$.ajax({
+					url: 'jqAjax.do',
+					data: {
+						hotelNo : hotelNo,
+					},
+					type: 'get',
+					success : function(result){
+						alert(result);
+					},
+					error: function(error){
+						alert(error);
+					},
+					async: false
+				});
+				
+				location.reload();
+			})
+		</script>
 		
 		<script>
 			$('.card-imgDiv').click(function(e){

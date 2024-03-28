@@ -18,18 +18,21 @@
 
     div{
         box-sizing : border-box;
-        border : 1px solid black;
     }
-
+    #output{
+    	width: 1200px;
+        height: auto;
+        margin: auto;
+    }
     #content{
         width: 1200px;
         height: 300px;
-        margin: auto;
         margin-top: 20px;
     }
     #content_title{
         width: 100%;
-        height: 20%;
+        height: 100%;
+        margin-top : 20px;
     }
     #left_img{
         float: left;
@@ -79,6 +82,22 @@
         left: 0px;
         margin:auto;
     }
+    #homeBtn {
+    	text-align:center;
+    }
+    #goHome{
+    	width : 300px;
+    	height: 50px;
+    	border-radius : 10px;
+    	background-color: #5BA199;
+    	border : 0;
+    	margin-bottom: 100px;
+    	font-size: 22px;
+    }
+    #goHome:hover{
+    	font-size:23px;
+    }
+
     /*********************/
 </style>
 
@@ -86,20 +105,20 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-		<% if(loginUser == null) { %>
+	<% if(loginUser == null) { %>
 		<script>
 			alert("로그인 페이지로 이동합니다.")
 			location.href = '<%=contextPath%>/loginPage';
 		</script>
 	<% } %>
-	<div id="content">
+	<div id="output">
         <div id="content_title">
             <div id="left_img">
                 <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>내 예약 내역</h3></div>
-        </div>
-    </div>
+		</div>
+    
 	<% if(reserList.isEmpty()) { %>
 	<table>
 	<tr>
@@ -107,26 +126,32 @@
 	</tr>
 	</table>
 	<% } else { %>
-	
+		
 		<% for(Reservation c : reserList) { %>
-        <div id="reser_info">
-            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
-
-            <div id="reser_detail">
-                <h3>마리안느 호텔</h3>
-                <p>슈페리어 더블(오션뷰)</p>
-                <p>2인</p>
-                <p>117,000원</p>
-                <p>2024-02-28 ~ 2024-02-29</p>
-            </div>
+		<div id="content">
+	        <div id="reser_info">
+	            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
+	
+	            <div id="reser_detail">
+	                <h3>마리안느 호텔</h3>
+	                <p>슈페리어 더블(오션뷰)</p>
+	                <p>2인</p>
+	                <p>117,000원</p>
+	                <p>2024-02-28 ~ 2024-02-29</p>
+	            </div>
 
             <div id="review_in">
-                <button id="reser_btn" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">리뷰작성</button>
+                <a href="<%=contextPath %>/review.insert?reserNo=<%=reser.getReserNo() %>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
             </div>
         </div>
-
+	</div>
 	<% } %>
-<% } %>	
-	<br><br><br><br><br><br><br><br><br><br>
+<% } %>
+<div id="homeBtn">
+	<a href="<%=contextPath %>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	
+</div>
+</div>
+
 </body>
 </html>
