@@ -201,6 +201,25 @@ public class ReviewDao {
 		 ResultSet rset = null;
 		 String sql = prop.getProperty("selectCommentList");
 		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				adminComment = new AdminComment();
+				adminComment.setCommentReserNo(rset.getInt("CO_RESER_NO"));
+				adminComment.setCommentContent(rset.getString("COMMENT_CONTENT"));
+				adminComment.setCreaeteDate(rset.getString("CREATE_DATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 
+		 
+		 
+		 
 		 
 		 return adminComment;
 	 }
