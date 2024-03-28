@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.service.NonmemService;
-import thenolja.tb_reservation.model.Service.ReserService;
-import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class NonmemberDetailController
@@ -36,14 +34,13 @@ public class NonmemberDetailController extends HttpServlet {
 
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member member = new NonmemService().SelectNonmem(memNo);
+		Member member = new NonmemService().selectNonMemNo(memNo);
 			
 		if(member != null) {
 			
-			
 			request.setAttribute("member", member);
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/selectNonmemReser.jsp");
 			view.forward(request, response);
 			
 		} else {

@@ -145,6 +145,7 @@
     				$('#roomName').text(result.roomName);
     				$('#reviewScore').text(result.reviewScore);
     				$('#reviewContent').text(result.reviewContent);
+    				$('#imgPath').attr("src", result.imgPath);
     				$('#reserNo22').val(e);
     				selectCommentList();
     			}
@@ -195,7 +196,7 @@
 		
             <table>
                 <tr>
-                    <td colspan="5" rowspan="5" width="120" height="120" id="hotelPath"><img src="" alt="" width="120px"></td>
+                    <td colspan="5" rowspan="5" width="120" height="120" id="hotelPath"><img id="imgPath" src="" alt="" width="120px"></td>
                     <td width="120"><span id="hotelName"></span></td>
                     <td><span id="roomName"></span></td>
                     <td><span id="reviewScore"></span></td>

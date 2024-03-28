@@ -274,4 +274,26 @@ public class MemberDao {
 	}
 	
 	
+	/**
+	 * 등급 수정
+	 */
+	public int updateGrade(Connection conn, int memNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateGrade");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
+	
 }

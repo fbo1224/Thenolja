@@ -15,26 +15,28 @@ import thenolja.notice.service.NoticeServiceImpl;
 /**
  * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/updateInfo.notice")
-public class NoticeUpdateInfoController extends HttpServlet {
+@WebServlet("/selectUpdate.notice")
+public class NoticeSelectUpdateInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateInfoController() {
+    public NoticeSelectUpdateInfoController() {
         super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// »ó¼¼ÆäÀÌÁö Á¶È¸ ½Ã ÆÄ¶ó¹ÌÅÍ ¹Ş±â
+		// ìƒì„¸í˜ì´ì§€ ì¡°íšŒ ì‹œ íŒŒë¼ë¯¸í„° ë°›ê¸°
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		String flag  = request.getParameter("flag");
+		
+		System.out.println(request.getParameter("noticeNo"));
+		System.out.println(request.getParameter("flag"));
 		
 		System.out.println("[NoticeDetailController noticeNo] " + noticeNo);  
 		System.out.println("[NoticeDetailController flag] " 	+ flag);  
@@ -42,15 +44,13 @@ public class NoticeUpdateInfoController extends HttpServlet {
 		Notice result = new Notice();
 		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
 		
-		System.out.println("[NoticeDetailController result] " + result);
-		
 		if(result != null) {
 			request.setAttribute("notice", result);
-			request.getRequestDispatcher("views/notice/noticeUpd.jsp").forward(request, response); //Æ÷¿öµù
+			request.getRequestDispatcher("views/notice/noticeUpd.jsp").forward(request, response); //í¬ì›Œë”©
 			
-		}else { //½ÇÆĞ => ¿¡·¯ÆäÀÌÁö º¸³»±â
+		}else { //ì‹¤íŒ¨ => ì—ëŸ¬í˜ì´ì§€ ë³´ë‚´ê¸°
 			
-			request.setAttribute("errorMsg", "°øÁö»çÇ× »ó¼¼ Á¶È¸ ½ÇÆĞ");
+			request.setAttribute("errorMsg", "ê³µì§€ì‚¬í•­ ìƒì„¸ ì¡°íšŒ ì‹¤íŒ¨");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
 			view.forward(request,response);	
 		}		

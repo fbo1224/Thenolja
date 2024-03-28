@@ -160,6 +160,15 @@
 	   			MEM_NO = ?
 	</entry>
 	
+	<entry key="updateGrade">
+		 UPDATE
+		       TB_MY_GRADE
+		  SET
+		        GRADE_NO = ?
+		 WHERE
+		        GR_MEM_NO = ?			
+	</entry>
+	
 	
 	
 </properties>

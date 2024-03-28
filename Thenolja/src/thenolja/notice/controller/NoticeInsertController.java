@@ -73,19 +73,15 @@ public class NoticeInsertController extends HttpServlet {
 			rslt = true;
 			// 등록완료 후 response 객체에 contentType 설정
 			response.setContentType("text/html charset=UTF-8");
-			request.setAttribute("rsp.success", rslt);
-			
-			// 등록 완료 후 send Redirect설정 > 목록으로 이동
-			//response.sendRedirect("/TheNoleJa/noticeList");
+			response.getWriter().write("SUCCESS");
 		}
 		
 		// 저장 실패 시 등록화면으로 sendRedirect
 		else {
 			rslt = false;
 			// 등록완료 후 response 객체에 contentType 설정
-//			response.setContentType("text/html charset=UTF-8");
-//			request.setAttribute("rsp.success", rslt);
-//			response.sendRedirect("/TheNoleJa/noticeReg");
+			response.setContentType("text/html charset=UTF-8");
+			response.getWriter().write("FAIL");
 		}	
 	}
 

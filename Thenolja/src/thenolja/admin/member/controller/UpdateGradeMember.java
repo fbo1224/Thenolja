@@ -1,23 +1,26 @@
-package thenolja.member.controller;
+package thenolja.admin.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.admin.member.model.service.MemberService;
+
 /**
- * Servlet implementation class MemberGradeController
+ * Servlet implementation class UpdateGradeMember
  */
-@WebServlet("/grade.me")
-public class MemberGradeController extends HttpServlet {
+@WebServlet("/gradeUpdate.do")
+public class UpdateGradeMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberGradeController() {
+    public UpdateGradeMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +29,13 @@ public class MemberGradeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-	
-	
-	
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		new MemberService().updateGrade(memNo);
+		
+		
+		
 	}
 
 	/**
