@@ -1,16 +1,20 @@
 package thenolja.nonmem.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.nonmem.model.vo.SelectNonmemReser;
+import thenolja.nonmem.service.NonmemService;
+
 /**
  * Servlet implementation class NonmemberSelectController
  */
-@WebServlet("/nonmemSelect")
+@WebServlet("/selectNonmem")
 public class NonmemberSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +37,11 @@ public class NonmemberSelectController extends HttpServlet {
 		System.out.println(nonmemName);
 		System.out.println(nonmemPhone);
 		
-		request.getRequestDispatcher("views\\nonmem\\selectNonmem.jsp").forward(request, response);
+		SelectNonmemReser nonmemReser = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
+		
+		
+		
+		request.getRequestDispatcher("views\\nonmem\\selectNonmemReser.jsp").forward(request, response);
 		/*if(result > 0) {
 		} else {
 			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");
