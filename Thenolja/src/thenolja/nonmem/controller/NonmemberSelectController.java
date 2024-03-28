@@ -33,7 +33,7 @@ public class NonmemberSelectController extends HttpServlet {
 		System.out.println(nonmemName);
 		System.out.println(nonmemPhone);
 		
-		request.getRequestDispatcher("views/nonmem/selectNonmem/.jsp").forward(request, response);
+		request.getRequestDispatcher("views\\nonmem\\selectNonmem.jsp").forward(request, response);
 		/*if(result > 0) {
 		} else {
 			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");

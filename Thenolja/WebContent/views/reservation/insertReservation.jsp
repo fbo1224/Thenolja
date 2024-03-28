@@ -24,7 +24,7 @@
     }
     #content{
     	padding-top: 20px;
-        width: 1200px;
+        width: 900px;
         height: 1500px;
         margin: auto;
     }
@@ -54,12 +54,17 @@
     }
     #reser_hotel_img > img{
         border-radius: 10px;
+        width: 250px;
+        height: 250px;
+        margin-left: 20px;
+        margin-top: 20px;
     }
     #reser_detail{
         width: 70%;
         height: 90%;
-        padding-top: 20px;
-        font-size: 23px;
+        padding-top: 40px;
+        font-size: 20px;
+        margin-left: 400px;
     }
     #price_info{
         width:100%;
@@ -93,7 +98,6 @@
         padding-left: 50px;
         height: 30%;
         padding-bottom: 20px;
-        margin-left: 10px;
         margin-top: 10px;
     }
     #mem-bicycle > input{
@@ -115,9 +119,10 @@
         border: 0;
         background-color: #5BA199;
         color: white;
-        font-size: 20px;
+        font-size: 17px;
         font-weight: bold;
     }
+    #in-coupon:hover{font-size: 18px;}
     #reser_pay{
         width: 100%;
         height: 28%;
@@ -131,13 +136,13 @@
         border: 0;
         background-color: #5BA199;
         color: white;
-        font-size: 30px;
+        font-size: 23px;
         font-weight: bold;
-        width: 500px;
+        width: 300px;
         height: 50px;
     } 
-    #payment:hover{
-        font-size: 31px;
+    #payment:hover, #reser-btn:hover{
+        font-size: 24px;
     }
     #reservation{
         width: 100%;
@@ -150,10 +155,11 @@
         border: 0;
         background-color: #5BA199;
         color: white;
-        font-size: 30px;
+        font-size: 23px;
         font-weight: bold;
         margin-left: 300px;
     }
+    td{border: 1px solid red;}
 </style>
 </head>
 <body>
@@ -211,9 +217,9 @@
 	        		<table>
 	        			<tr>
 	        				<td width="400px">결제금액 : 333,000원</td>
-							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
+							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
-							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
+							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
 							<td width="400px">결제금액 : 333,000원</td>
 						</tr>
 	               </table>
@@ -230,15 +236,15 @@
 						<br>
 		                
 	               		<div id="mem-name">
-		                    <h5>*예약자 이름</h5>
+		                    <h5>예약자 이름</h5>
 		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
 	           			</div>
 		                <div id="mem-phone">
-		                    <h5>*전화 번호</h5>
+		                    <h5>전화 번호</h5>
 		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
 		                </div>
 		                <div id="mem-bicycle">
-							<br> <h5>*이동 방식</h5>
+							<br> <h5>이동 방식</h5>
 						    <input type="radio" name="bicycle" id="car" value="차량"> 차량
 						    <input type="radio" name="bicycle" id="walk" checked value="도보"> 도보
 						</div>
