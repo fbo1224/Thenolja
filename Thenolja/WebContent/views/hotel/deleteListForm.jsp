@@ -165,10 +165,10 @@ div {
 					},
 					type: 'get',
 					success : function(result){
-						
+						alert(result);
 					},
 					error: function(error){
-						
+						alert(result);
 					},
 					async: false
 				});

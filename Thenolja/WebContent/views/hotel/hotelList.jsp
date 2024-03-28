@@ -173,6 +173,7 @@
 					},
 					async: false
 				});
+				
 				location.reload();
 			})
 			
