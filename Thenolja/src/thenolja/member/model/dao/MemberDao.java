@@ -317,15 +317,20 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				member = new Member();
-				
-				member.setMemNo(memNo);
+				member.setMemNo(rset.getInt("MEM_NO"));
+				member.setMemId(rset.getString("MEM_ID"));
+				member.setMemPwd(rset.getString("MEM_PWD"));
+				member.setNickname(rset.getString("NICKNAME"));
+				member.setBornDate(rset.getString("BORN_DATE"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setJoinDate(rset.getDate("JOIN_DATE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
-		
-		
-		
 		return member;
 	}
 	

@@ -1,4 +1,4 @@
-package thenolja.tb_reservation.cotroller;
+  package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 
@@ -62,13 +62,18 @@ public class ReservationInsertController extends HttpServlet {
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
 			Member member = new MemberService().selectMember(memNo);
-			reser = new ReserService().selectReservation();
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("reser", reser);
-			
-			response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
-			
+				if(member != null) {
+				reser = new ReserService().selectReservation();
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("reser", reser);
+				session.setAttribute("member", member);
+				
+				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
+			} else {
+				request.setAttribute("errorMsg", "예약에 실패했습니다!");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
 			
 		} else {
