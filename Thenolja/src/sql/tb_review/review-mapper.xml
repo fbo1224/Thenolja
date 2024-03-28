@@ -6,7 +6,20 @@
 		Review Mapper
 	</comment>
 	
-	
+	<entry key="insertReview">
+		INSERT
+		  INTO
+		  		TB_REVIEW
+		VALUES
+				(
+				?,
+				?,
+				?,
+				?,
+				SYSDATE,
+				DEFAULT
+				)
+	</entry>
 
 	
 	

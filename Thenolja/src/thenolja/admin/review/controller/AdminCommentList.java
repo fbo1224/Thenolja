@@ -1,26 +1,29 @@
-package thenolja.notice.controller;
+package thenolja.admin.review.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
+import thenolja.admin.review.model.service.ReviewService;
+import thenolja.admin.review.model.vo.AdminComment;
 
 /**
- * Servlet implementation class NoticeinsertFormController
+ * Servlet implementation class AdminCommentList
  */
-@WebServlet("/insertForm.notice")
-public class NoticeinsertFormController extends HttpServlet {
+@WebServlet("/commentList.do")
+public class AdminCommentList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeinsertFormController() {
+    public AdminCommentList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,26 +32,14 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//관리자가 아닐경우에도 포워딩이 수행됨
 		
-				HttpSession session = request.getSession();
-//				session.setAttribute("loginUser", loginUser);
-				//Member loginUser = (Member)session.getAttribute("loginUser");
-					
-	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-				
-				//응답화면	
-				RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp");
-				view.forward(request, response);
-			
-		/*				
-				}else {
-					session.setAttribute("alertMsg", "관리자가 아닙니다. ");
-					response.sendRedirect(request.getContextPath());
-				}	
-				*/
-			}
-	
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		
+		AdminComment adminComment = new ReviewService().selectCommentList(reserNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(adminComment, response.getWriter());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

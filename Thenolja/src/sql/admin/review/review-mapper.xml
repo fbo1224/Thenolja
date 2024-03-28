@@ -122,7 +122,22 @@
 	</entry>
 	
 	
+	<entry key="selectCommentList">
+		 SELECT 
+		        CO_RESER_NO,
+		        COMMENT_CONTENT,
+		        TO_CHAR(TB_COMMENT.CREATE_DATE, 'YY.MM/DD') "CREATE_DATE",
+		        NICKNAME
+		  FROM
+		        TB_COMMENT
+		  JOIN
+		        TB_MEMBER ON (MEM_NO = COMMENT_MEM_NO)
+		  JOIN
+		        TB_REVIEW ON (RV_RESER_NO = CO_RESER_NO)
+		  WHERE
+		        REVIEW_YN = 'Y'
 	
+	</entry>
 	
 	
 	

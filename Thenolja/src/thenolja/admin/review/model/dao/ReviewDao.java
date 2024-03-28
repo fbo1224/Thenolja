@@ -191,6 +191,38 @@ public class ReviewDao {
 
 	 }
 	 
+	 /**
+	  * 대댓글 조회
+	  */
+	 public AdminComment selectCommentList(Connection conn, int reserNo) {
+		 
+		 AdminComment adminComment = null;
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("selectCommentList");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				adminComment = new AdminComment();
+				adminComment.setCommentReserNo(rset.getInt("CO_RESER_NO"));
+				adminComment.setCommentContent(rset.getString("COMMENT_CONTENT"));
+				adminComment.setCreaeteDate(rset.getString("CREATE_DATE"));
+				adminComment.setNickName(rset.getString("NICKNAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		 
+		 return adminComment;
+	 }
 	 
 	 
 }

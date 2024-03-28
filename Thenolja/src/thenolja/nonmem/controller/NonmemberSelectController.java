@@ -1,26 +1,23 @@
-package thenolja.notice.controller;
+package thenolja.nonmem.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class NoticeinsertFormController
+ * Servlet implementation class NonmemberSelectController
  */
-@WebServlet("/insertForm.notice")
-public class NoticeinsertFormController extends HttpServlet {
+@WebServlet("/nonmemSelect")
+public class NonmemberSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeinsertFormController() {
+    public NonmemberSelectController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,26 +26,21 @@ public class NoticeinsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//°ü¸®ÀÚ°¡ ¾Æ´Ò°æ¿ì¿¡µµ Æ÷¿öµùÀÌ ¼öÇàµÊ
-		
-				HttpSession session = request.getSession();
-//				session.setAttribute("loginUser", loginUser);
-				//Member loginUser = (Member)session.getAttribute("loginUser");
-					
-	//			if(loginUser != null && loginUser.getUserId().equals("admin")) {
-				
-				//ÀÀ´äÈ­¸é	
-				RequestDispatcher view = request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp");
-				view.forward(request, response);
-			
-		/*				
-				}else {
-					session.setAttribute("alertMsg", "°ü¸®ÀÚ°¡ ¾Æ´Õ´Ï´Ù. ");
-					response.sendRedirect(request.getContextPath());
-				}	
-				*/
-			}
+
+		String nonmemName = request.getParameter("nonmemName");
+		String nonmemPhone = request.getParameter("nonmemPhone");
 	
+		System.out.println(nonmemName);
+		System.out.println(nonmemPhone);
+		
+		request.getRequestDispatcher("views/nonmem/selectNonmem/.jsp").forward(request, response);
+		/*if(result > 0) {
+		} else {
+			request.setAttribute("errorMsg", "ì¡°íšŒëœ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		}*/
+		
+	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

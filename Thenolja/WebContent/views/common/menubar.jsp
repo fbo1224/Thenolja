@@ -232,15 +232,6 @@ div {
         display:none;
 	}
 
-	table {
-		width: 100%;
-		border-top: 1px solid #444444;
-		border-collapse: collapse;
-  	}
-  	th, td {
-		border-bottom: 1px solid #444444;
-    	padding: 10px;
-  	}
 
 </style>
     
@@ -385,63 +376,26 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-	      <div class="modal-body">
-	        	비회원 이름<input type="text" maxlength="15" required><br>
-	        	비회원 전화번호<input type="text" maxlength="11" required>
-	      </div>
-	
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-			<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#reser">조회</button>
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-	      </div>
+		  	<form action="<%= contextPath %>/nonmemSelect" method="get">
+	      		<div class="modal-body">
+					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
+					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				</div>
+
+				
+			</form>
+
 	
 	    </div>
 	  </div>
 	</div>
 
-	<!-- The Modal2 -->
-	<div class="modal" id="reser">
-		<div class="modal-dialog">
-			<div class="modal-content">
-		
-			<!-- Modal2 Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">조회 결과</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-		
-			<!-- Modal2 body -->
-			<div class="modal-body">
-				<table>
-					<th>예약번호</th>
-					<th>1</th>
-					<tr>
-						<td>예약자 성함</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>예약날짜</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>예약자숙소</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>객실정보</td>
-						<td></td>
-					</tr>
-				</table>
-			</div>
-		
-			<!-- Modal2 footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			</div>
-		
-			</div>
-		</div>
-	</div>
+	
 </body>
 </html>

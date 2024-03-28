@@ -63,5 +63,4 @@ public class NoticeController extends HttpServlet {
 		doGet(request, response);
 	}
 
-
 }

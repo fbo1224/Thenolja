@@ -88,4 +88,5 @@ public class NoticeInsertController extends HttpServlet {
 //			response.sendRedirect("/TheNoleJa/noticeReg");
 		}	
 	}
+
 }

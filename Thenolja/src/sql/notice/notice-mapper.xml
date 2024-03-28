@@ -20,7 +20,7 @@
 		FROM TB_NOTICE
 		
 		WHERE 1=1
-		AND STATUS = 'N'
+		/* AND STATUS = 'Y' */
 		ORDER BY CREATE_DATE DESC
 	</entry>
 	
@@ -54,6 +54,7 @@
                 NOTICE_NO,   	 /* 공지사항 번호 */
                 NOTICE_TITLE,    /* 공지사항 제목 */
                 NOTICE_CONTENT,  /* 공지사항 내용 */
+                STATUS, 		 /* 공지사항 게시여부 */
                 TO_CHAR(CREATE_DATE,'YYYY.MM.DD') AS CREATE_DATE,       /* 공지사항 등록일 */
                 (SELECT NICKNAME FROM TB_MEMBER
                                  WHERE WRITER_NO = MEM_NO) AS WRITER    /* 작성자명 */

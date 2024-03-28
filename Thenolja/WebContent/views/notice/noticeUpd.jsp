@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
-    <%
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
+<%
 	Notice notice = (Notice)request.getAttribute("notice");
-	%>
+	String status = notice.getStatus();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,19 +172,28 @@ input[type="text"], input[type="password"] {
 <%@ include file="../common/menubar.jsp" %>
 
 <script type="text/javascript">
-/************************ 
+/*************************** 
 * 함수설명 : 수정/삭제 클릭 이벤트
-*************************/ 
-function updNotice(){
+* 수정일자 : 24.03.27
+* 수정내용 : 수정, 삭제 버튼 클릭 
+*          이벤트 발생 구분 값 추가 및 처리
+****************************/ 
+function updNotice(eventStatus){
+	
+	console.log("eventStatus : ", eventStatus);
 	
 	var inptTitle   = $('#title').val();
 	var inptContent = $('#txtArea_content').val();
 	var chkStatus   = $('input[name="status"]:checked').val();
+	var confirmMsg;	// 수정, 삭제 버튼 클릭 시 메시지
 	
-	// 유효성 검사 함수 호출
-	if(validation()){
+	if(eventStatus == "UPD") confirmMsg = "게시글을 수정하시겠습니까?";
+	if(eventStatus == "DEL") confirmMsg = "게시글을 삭제하시겠습니까?"; 
+	
+	// 유효성 검사 함수 호출(validation)
+	if(validation(eventStatus)){
 		// confirm 함수는 확인창 결과값으로 TRUE와 FALSE 값을 RETURN 하게 됨.
-		if(confirm("게시글을 등록하시겠습니까?")){	
+		if(confirm( confirmMsg )){   // confirm -->  문구: 네-true   | 아니오-false
 		// 게시글 저장 submission 정보 세팅
 		
 		$.ajax({
@@ -191,15 +201,34 @@ function updNotice(){
 			url : "<%=contextPath%>/regNotice",
 			data : {title : inptTitle, content : inptContent, status : chkStatus},
 			success:function(res){
-				alert("게시글이 정상적으로 등록되었습니다.");
+				alert("게시글이 정상적으로 수정되었습니다.");
 				location.href= "<%= contextPath %>/noticeList"
 			},
 			error:function(e){
-				alert("게시글 등록중 오류가 발생하였습니다.");
+				alert("게시글 수정중 오류가 발생하였습니다.");
+				return;
+			}
+			
+		});	
+		
+		
+		
+		$.ajax({
+			type: "POST",
+			url : "<%=contextPath%>/regNotice",
+			data : {title : inptTitle, content : inptContent, status : chkStatus},
+			success:function(res){
+				alert("게시글이 정상적으로 삭제되었습니다.");
+				location.href= "<%= contextPath %>/noticeList"
+			},
+			error:function(e){
+				alert("게시글 삭제중 오류가 발생하였습니다.");
 				return;
 			}
 			
 		});		
+		
+		
 		
 	    }
 	}
@@ -207,8 +236,15 @@ function updNotice(){
 
 /********************************* 
 * 함수설명 : 공지사항 등록 시 유효성 검사(필수값)
+* 수정일자 : 24.03.28
+* 수정내용 : 유효성검사 함수 파라미터 추가
 **********************************/
-function validation(){
+function validation(eventStatus){
+
+	console.log("validation evt : " , eventStatus)
+	
+	// 삭제버튼 클릭인 경우 validation skip처리함
+	if(eventStatus == "DEL") return true;
 	
 	// 각 필드 필수값 체크
 	var content = $("#txtArea_content").val();
@@ -288,11 +324,14 @@ function countText(){
 					<div class="radio-btn-wrap" id="notice_rdo_wrap">
 						<span class="radio-btn">
 								<!-- 조회 데이터 유무에 따른 처리  -->
+								<% if(!"".equals(status)) { %>
 								
-								<% if(!"".equals(notice.getStatus())) {%>
-									<%-- <input type="radio" id="rdo_statusN" name="status" value="<%notice.getStatus()%>"> --%>									
-								<%} else { %>
-									<input type="radio" id="rdo_statusY" name="status" checked="" value="Y">
+									<% if("Y".equals(status)) { %>
+										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status%> ">
+									<% } else { %>
+										<input type="radio" id="rdo_statusY" name="status"  value="Y">
+									<% } %>
+								
 								<% } %>
 								
 								<label for="rdo_statusY">게시</label>
@@ -300,11 +339,16 @@ function countText(){
 								
 						<span class="radio-btn">
 								<!-- 조회 데이터 유무에 따른 처리  -->
-								<% if(!"".equals(notice.getStatus())) {%>
-									<%-- <input type="radio" id="rdo_statusN" name="status" value="<%notice.getStatus()%>"> --%>									
-								<%} else { %>
-									<input type="radio" id="rdo_statusN" name="status" value="N">
+								<% if(!"".equals(status)) { %>
+									
+									<% if("N".equals(status)) { %>
+										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status%> ">
+									<% } else { %>
+										<input type="radio" id="rdo_statusN" name="status" value="N">
+									<% } %>
+								
 								<% } %>
+								
 								<label for="rdo_statusN">미게시</label>
 						</span>
 					</div>
@@ -356,8 +400,8 @@ function countText(){
                  
         <tr>
             <td colspan="2">
-                <input type="button" id="save"   class="btn btn-primary" value="수정" onclick="updNotice();"/>
-                <input type="button" id="save"   class="btn btn-primary" value="삭제" onclick="updNotice()" />
+                <input type="button" id="save"   class="btn btn-primary" value="수정" onclick="updNotice('UPD');"/>
+                <input type="button" id="save"   class="btn btn-primary" style="background-color:#eb008b; border-color:#eb008b;" value="삭제" onclick="updNotice('DEL')" />
                 <input type="button" id="cancle" class="btn btn-light"   value="취소" onclick="history.back();"/>
             </td>
         </tr>		

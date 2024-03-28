@@ -225,7 +225,7 @@
 
 	<script>
 		
-		function selectReplyList(){
+		function selectCommentList(){
 			
 			$.ajax({
 				
@@ -243,7 +243,7 @@
 	
 	
 		$(function(){
-			
+			selectCommentList();
 			
 		});
 	
@@ -265,6 +265,7 @@
 					
 					if(result == 'success'){
 						$('#comment').val('');
+						selectCommentList();
 					}
 				}
 			});

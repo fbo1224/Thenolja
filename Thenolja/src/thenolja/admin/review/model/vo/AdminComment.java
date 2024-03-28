@@ -6,7 +6,18 @@ public class AdminComment {
 	private String commentContent;
 	private String creaeteDate;
 	private String commentMemNo;
+	private String nickName;
 	
+	
+	
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	public AdminComment() {
 		super();
 	}

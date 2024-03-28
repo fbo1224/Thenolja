@@ -2,7 +2,6 @@ package thenolja.notice.service;
 
 import static thenolja.common.JDBCTemplate.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ import thenolja.notice.model.vo.Notice;
 public class NoticeServiceImpl{
 
 	
-public ArrayList<Notice> selectNoticeList(){
+	public ArrayList<Notice> selectNoticeList(){
 		
 		Connection conn = getConnection(); // SQL-MAPPER작성된 SQL 받아담기
 
@@ -97,13 +96,13 @@ public ArrayList<Notice> selectNoticeList(){
 		
 	}//method
 	
-	
-	public int selectNoticeInfo(Notice notice) {
+	//공지사항 수정
+	public int update(Notice notice) {
 		
 		
 		Connection conn = getConnection();
 		
-		int result = new NoticeDao().selectNoticeInfo(conn,notice);
+		int result = new NoticeDao().update(conn,notice);
 		
 		if(result > 0)
 			commit(conn);
