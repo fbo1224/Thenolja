@@ -140,6 +140,20 @@ public class RoomDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, roomNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r.setRoomName(rset.getString("ROOM_NAME"));
+				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				r.setRoomNum(rset.getInt("ROOM_NUM"));
+				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));
+				r.setRoomImgPath(rset.getString("ROOM_IMG"));
+				r.setHotelNo(rset.getInt("HOTEL_NO"));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
