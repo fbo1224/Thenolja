@@ -73,6 +73,10 @@
           TB_HOTEL.HOTEL_NO = ?
 	</entry>
 	
+	<entry key="updateRoom">
+	
+	
+	</entry>
 	
 	
 	

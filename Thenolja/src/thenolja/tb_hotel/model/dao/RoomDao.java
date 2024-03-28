@@ -132,6 +132,23 @@ public class RoomDao {
 		return rooms;
 	}
 	
+	public Room updateRoom(Connection conn, int roomNo) {
+		Room r = new Room();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
+	}
 	
 	
 	
