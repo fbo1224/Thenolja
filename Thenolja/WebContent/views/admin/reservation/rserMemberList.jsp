@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
-	AdminReservation adminReser = (AdminReservation)request.getAttribute("adminReser");
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -166,7 +165,36 @@
     			
     		});
     	}
+    	
+    	
+    	const checkInDate = $('#checkIn').text();
+    	
+    	console.log(checkInDate);
+    	
+    	const today = new Date();
+    	
+    	const year = today.getFullYear();
+    	
+    	const month = today.getMonth() + 1;
+    	
+    	const day = today.getDate();
+    	
+    	const currentDate = year + '.' + (month < 10 ? '0' :"") + month + '.' + (day < 10 ? '0' : "") + day;
+    	
+    	console.log(currentDate);
+    	
+    	const refundBtn = document.getElementById("refundBtn");
+    	
+    	if(currentDate > checkInDate) {
+    		refundBtn.disabled = true;
+    	} 
+    	
+    	
+    	
+
+    	
     
+    	
     </script>
     
 

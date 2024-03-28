@@ -42,6 +42,8 @@ public class RoomServlet extends HttpServlet {
 			case "insertForm" : view =  rc.insertForm(request, response); break;
 			case "insert" : view =  rc.insert(request, response); break;
 			case "updateListForm" : view =  rc.updateForm(request, response); break;
+			case "updateRoomForm" : view =  rc.updateRoomForm(request, response); break;
+			case "updateRoom" : view =  rc.updateRoom(request, response); break;
 		}
 		
 		if(flag) {

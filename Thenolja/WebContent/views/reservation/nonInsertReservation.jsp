@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
+<%@ page import="thenolja.member.model.vo.Member" %>
 <%@ page import="java.util.ArrayList" %>   
 <%
-	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
 %>   
   
 <!DOCTYPE html>
@@ -11,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>숙소이용목록상세조회</title>
+<title>비회원 숙소 예약</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -22,7 +21,7 @@
     }
     #content{
     	padding-top: 20px;
-        width: 900px;
+        width: 1200px;
         height: 1500px;
         margin: auto;
     }
@@ -52,17 +51,12 @@
     }
     #reser_hotel_img > img{
         border-radius: 10px;
-        width: 250px;
-        height: 250px;
-        margin-left: 20px;
-        margin-top: 20px;
     }
     #reser_detail{
         width: 70%;
         height: 90%;
-        padding-top: 40px;
-        font-size: 20px;
-        margin-left: 400px;
+        padding-top: 20px;
+        font-size: 23px;
     }
     #price_info{
         width:100%;
@@ -71,8 +65,8 @@
     #reser_price{
         width:100%;
         height: 10%;
-        font-size: 23px;
-        padding-top: 40px;
+        font-size: 25px;
+        padding-top: 35px;
         border-bottom: 1px solid silver;
         text-align: center;
     }
@@ -96,31 +90,13 @@
         padding-left: 50px;
         height: 30%;
         padding-bottom: 20px;
+        margin-left: 10px;
         margin-top: 10px;
     }
     #mem-bicycle > input{
         margin-top: 20px;
         margin-left: 20px;
     }
-    #reser-coupon{
-        padding-left: 50px;
-        width: 100%;
-        height: 27%;
-        margin-top: 20px;
-        margin-bottom: 50px;
-    }
-    #in-coupon{
-        width: 100px;
-        height: 40px;
-        margin-left: 3px;
-        border-radius: 5px;
-        border: 0;
-        background-color: #5BA199;
-        color: white;
-        font-size: 17px;
-        font-weight: bold;
-    }
-    #in-coupon:hover{font-size: 18px;}
     #reser_pay{
         width: 100%;
         height: 28%;
@@ -134,13 +110,13 @@
         border: 0;
         background-color: #5BA199;
         color: white;
-        font-size: 23px;
+        font-size: 30px;
         font-weight: bold;
-        width: 300px;
+        width: 500px;
         height: 50px;
     } 
-    #payment:hover, #reser-btn:hover{
-        font-size: 24px;
+    #payment:hover{
+        font-size: 31px;
     }
     #reservation{
         width: 100%;
@@ -153,7 +129,7 @@
         border: 0;
         background-color: #5BA199;
         color: white;
-        font-size: 23px;
+        font-size: 30px;
         font-weight: bold;
         margin-left: 300px;
     }
@@ -162,12 +138,6 @@
 <body>
     
     <%@ include file="../common/menubar.jsp" %>
-	<% if(loginUser == null) { %>
-	<script>
-		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
-		location.href = '<%=contextPath%>/loginPage';
-	 </script>
-	<% } else {%>
     <!-- 0. 전체 감싸는 div 시작 -->
     <div id="content">
     
@@ -179,7 +149,7 @@
             </div>
             
             <div id="left_title">
-            	<h2>숙소 예약</h2>
+            	<h2>비회원 숙소 예약</h2>
             </div>
         </div>
         <!-- /0-1. 왼쪽 상단 '<' 숙소예약 끝 -->
@@ -214,16 +184,16 @@
 	        		<table>
 	        			<tr>
 	        				<td width="400px">결제금액 : 333,000원</td>
-							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
+							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
 							<td width="400px">할인 금액 : 0원</td>
-							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;">결제금액 : 333,000원</td>
+							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
+							<td width="400px">결제금액 : 333,000원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insert.nonMem" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
@@ -233,36 +203,21 @@
 						<br>
 		                
 	               		<div id="mem-name">
-		                    <h5>예약자 이름</h5>
-		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <h5>*예약자 이름</h5>
+		                    <input type="text" id="reser-name" name="nonMemName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
 	           			</div>
 		                <div id="mem-phone">
-		                    <h5>전화 번호</h5>
-		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <h5>*전화 번호</h5>
+		                    <input type="text" id="reser-phone" name="nonMemPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
 		                </div>
 		                <div id="mem-bicycle">
-							<br> <h5>이동 방식</h5>
+							<br> <h5>*이동 방식</h5>
 						    <input type="radio" name="bicycle" id="car" value="차량"> 차량
 						    <input type="radio" name="bicycle" id="walk" checked value="도보"> 도보
 						</div>
 						
 	                </div>
 	                <!-- /0-2-2-2. 예약자 정보 끝 -->
-	                
-	                <!-- 0-2-2-3. 쿠폰 정보 시작 -->
-	                <div id="reser-coupon">
-	                
-	                    <br>
-	                    <h3>할인</h3>
-	                    <br>
-	                    <h5>쿠폰</h5>
-	                    <br>
-	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
-	                    
-	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
-	           
-	                </div>
-	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
 	                
 	                <!-- 0-2-2-4. 결제 정보 시작 -->
 	                <div id="reser_pay">
@@ -290,44 +245,7 @@
     <!-- /0. 전체 감싸는 div 끝 -->
     
     
-    <div class="container">
-    	<!-- The Modal -->
-	 	<div class="modal fade" id="myModal">
-			<div class="modal-dialog modal-dialog-centered">
-	      		<div class="modal-content">
-	        		<div class="modal-header">
-			        <h4 class="modal-title">내 쿠폰</h4>
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        		</div>
-	        
-			        <div class="modal-body">
-			        <table class="table table-hover">
-		        
-					<% if(list.isEmpty()) { %>
-		                <tr>
-		                   <th colspan="5">쿠폰이 존재하지 않습니다.</th>
-		                </tr>
-		             <% } else { %>
-		               
-			             <% for(Coupon c : list) { %>
-			             	<tr class="list">
-			                <td><%= c.getCouponNo() %></td>
-			                <td><%= c.getCouponContent() %></td>
-			                <td><%= c.getCouponDate() %></td>
-			                <td><%= c.getCouponCode() %></td>
-			                </tr>
-		                <% } %>
-	                <% } %>
-	                </table>
-					</div>
+   
 				
-					<div class="modal-footer">
-		         	<button type="button" class="btn btn-secondary" data-dismiss="modal">적용</button>
-		       		</div>
-	     		</div>
-			</div>
-		</div>
-	</div>
-<% } %>
 </body>
 </html>

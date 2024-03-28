@@ -100,6 +100,29 @@ public class RoomController {
 		return view;
 	}
 	
+	public String updateRoomForm(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		
+		Room r = new RoomService().updateRoom(roomNo);
+		
+		if(r != null) {
+			request.setAttribute("roomNo", roomNo);
+			request.setAttribute("room", r);
+			view = "views/hotel/updateRoomForm.jsp";
+		} else {
+			request.setAttribute("errorMsg", "객실 수정 실패...");
+			view = "views/common/errorPage.jsp";
+		}
+		
+		return view;
+	}
+	
+	public String updateRoom(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		return view;
+	}
 	
 	
 	
