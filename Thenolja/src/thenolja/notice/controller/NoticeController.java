@@ -48,9 +48,10 @@ public class NoticeController extends HttpServlet {
 		// serviceImpl에서 selectNoticeList메소드 호출(공지사항 조회 메소드임)
 		list = serviceImpl.selectNoticeList();
 		
-		//응답화면 띄우기
+		//응답화면 띄우기 (list객체, 페이징 객체 setAttribute)
 		request.setAttribute("noticeList", list);
-		RequestDispatcher view = request.getRequestDispatcher("/views/notice/noticeList.jsp");
+		//request.setAttribute("pagingVo", pagingVo);
+		RequestDispatcher view = request.getRequestDispatcher("/view/notice/noticeList.jsp");
 		view.forward(request, response);
 		
 	}

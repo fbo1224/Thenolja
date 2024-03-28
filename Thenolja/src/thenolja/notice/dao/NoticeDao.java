@@ -12,6 +12,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import static thenolja.common.JDBCTemplate.*;
 
+//import thenoleja.common.PagingVO;
 import thenolja.notice.model.vo.Notice;
 
 
@@ -155,7 +156,10 @@ public class NoticeDao {
 		return result;
 	}
 	
-	
+	/*
+	 * 공지사항 상세페이지 진입 시 조회 수 업데이트
+	 * 
+	 * */	
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		Notice notice = null;
@@ -192,8 +196,10 @@ public class NoticeDao {
 		return notice;
 	}//method          //반환 notice
 	
-	
-	
+	/*
+	 * 공지사항 등록
+	 * 
+	 * */	
 	public int insertNotice(Connection conn, Notice notice) {
 		
 		int result = 0;
@@ -226,31 +232,77 @@ public class NoticeDao {
 		return result;
 	}//method
 	
-	public int update(Connection conn, Notice notice) {
+	/*
+	 * 공지사항 수정
+	 * 
+	 * */		
+	public int updateNoticeOne(Connection conn, Notice notice) {
+		
+		System.out.println("[NOTICEDAO PARAM 확인]");
+		System.out.println(notice.getNoticeTitle());
+		System.out.println(notice.getNoticeContent());
+		System.out.println(notice.getStatus());
+		System.out.println(notice.getNoticeNo());
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("update");
+		String sql = prop.getProperty("updateNoticeOne");
+		System.out.println("[NoticeDao updateNoticeOne] " + sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-		
+			
 			pstmt.setString(1, notice.getNoticeTitle());
 			pstmt.setString(2, notice.getNoticeContent());
-			pstmt.setInt(3, notice.getNoticeNo());
+			pstmt.setString(3, notice.getStatus());
+			pstmt.setInt   (4, notice.getNoticeNo());
 			
 			result = pstmt.executeUpdate();
+			
+			System.out.println("[NoticeDao updateNoticeOne] " + result);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
+			close(conn);
 		}
 		
 		return result;
-	
+		
 	}//method
+	
+	/*
+	 * 공지사항 삭제
+	 * 
+	 * */	
+	public int deleteNoticeOne(Connection conn, int noticeNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNoticeOne");
+		System.out.println("[NoticeDao delete sql] " + sql);
+		System.out.println("[NOTICE DAO DELETE] " + noticeNo);
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+
+			result = pstmt.executeUpdate();	
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+		
+	}//method	
+	
 	
 	public int delete(Connection conn, String userNo) {
 		
@@ -262,8 +314,9 @@ public class NoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
-		pstmt.setInt(1, Integer.parseInt(userNo));
-		result = pstmt.executeUpdate();
+			pstmt.setInt(1, Integer.parseInt(userNo));
+			result = pstmt.executeUpdate();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -272,22 +325,16 @@ public class NoticeDao {
 			return result;
 			
 		}//method   try~ with ~ 
-		
-		
-		
-		
-		
 	
 	
-
-
-
-
-
-
-
-	
-	
+	// 전체 게시글 수
+	public int getTotal(Connection conn) {
+		int result = 0;
+		
+		
+		
+		return result;
+	}
 	
 /*
 	private Properties prop = new Properties();
