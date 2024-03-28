@@ -166,8 +166,9 @@
     		});
     	}
     	
+    	<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
     	
-    	const checkInDate = $('#checkIn').text();
+    	var checkInDate = $('#checkIn').text();
     	
     	console.log(checkInDate);
     	
@@ -187,7 +188,7 @@
     	
     	if(currentDate > checkInDate) {
     		refundBtn.disabled = true;
-    	} 
+    	}
     	
     	
     	
@@ -199,7 +200,7 @@
     
 
 
-<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
+
     
     
     
@@ -221,6 +222,9 @@
         
         <!-- Modal body -->
         <div class="modal-body">
+        	
+        	<input type="hidden" id="reserNo22" name="reser_No" value=""/>
+        
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
