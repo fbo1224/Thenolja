@@ -1,5 +1,6 @@
 package thenolja.tb_hotel.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -87,8 +88,8 @@ public class RoomController {
 		return view;		
 	}
 	
-	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
-		String view = "views/hotel/roomListForm.jsp";
+	public String updateListForm(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
 		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
@@ -97,14 +98,15 @@ public class RoomController {
 		request.setAttribute("hotelNo", hotelNo);
 		request.setAttribute("rooms", rooms);
 		
+		view = "views/hotel/roomListForm.jsp";
 		return view;
 	}
 	
 	public String updateRoomForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-		
-		Room r = new RoomService().updateRoom(roomNo);
+		System.out.println(roomNo);
+		Room r = new RoomService().updateRoomForm(roomNo);
 		
 		if(r != null) {
 			request.setAttribute("roomNo", roomNo);
@@ -120,7 +122,57 @@ public class RoomController {
 	
 	public String updateRoom(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		int result = 0;
+		if(ServletFileUpload.isMultipartContent(request)) {
+			String savePath = request.getServletContext()
+			         .getRealPath("/resources/roomImage");
+			
+			int maxSize = 1024 * 1024 * 10;
+			
+			MultipartRequest multiRequest = null;
+			
+			try {
+				multiRequest =
+						new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			int roomNo = Integer.parseInt(multiRequest.getParameter("roomNo"));
+			int maxPeople = Integer.parseInt(multiRequest.getParameter("maxPeople"));
+			int roomPrice = Integer.parseInt(multiRequest.getParameter("roomPrice"));
+			int roomNum = Integer.parseInt(multiRequest.getParameter("roomNum"));
+			int roomImgNo = Integer.parseInt(multiRequest.getParameter("roomImgNo"));
+			String roomName = multiRequest.getParameter("roomName");
+			String inTime = multiRequest.getParameter("in_time");
+			String outTime = multiRequest.getParameter("out_time");
+			String roomImgBefore = multiRequest.getParameter("roomImgBefore"); 
+			
+			// VO담기
+			Room r = new Room();
+			r.setRoomNo(roomNo);
+			r.setRoomName(roomName);
+			r.setMaxPeople(maxPeople);
+			r.setCheckInTime(inTime);
+			r.setCheckOutTime(outTime);
+			r.setRoomPrice(roomPrice);
+			r.setRoomNum(roomNum);
+			r.setRoomImgPath(roomImgBefore);
+			r.setRoomImgNo(roomImgNo);
+			
+			// 사진 roomImg
+			if(multiRequest.getOriginalFileName("roomImg") != null) {
+				r.setRoomImgPath("resources/roomImage/"+ multiRequest.getFilesystemName("roomImg"));
+				new File(savePath + "/" + roomImgBefore).delete();
+			}
+			
+			System.out.println(r);
+			
+			// result = new RoomService().updateRoom(roomNo);
+		}
 		
+		//
+		view = "/hotelList.hotels?currentPage=1";
 		return view;
 	}
 	

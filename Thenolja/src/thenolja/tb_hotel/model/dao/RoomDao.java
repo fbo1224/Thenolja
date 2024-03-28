@@ -119,6 +119,7 @@ public class RoomDao {
 				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));
 				r.setRoomImgPath(rset.getString("ROOM_IMG"));
+				r.setRoomImgNo(rset.getInt("ROOM_IMG_NO"));
 				rooms.add(r);
 			}
 			
@@ -132,11 +133,11 @@ public class RoomDao {
 		return rooms;
 	}
 	
-	public Room updateRoom(Connection conn, int roomNo) {
+	public Room updateRoomForm(Connection conn, int roomNo) {
 		Room r = new Room();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("updateRoom");
+		String sql = prop.getProperty("updateRoomForm");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -162,6 +163,23 @@ public class RoomDao {
 		}
 		
 		return r;
+	}
+	
+	public int updateRoom(Connection conn, int roomNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

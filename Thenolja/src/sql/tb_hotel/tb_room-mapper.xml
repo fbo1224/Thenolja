@@ -62,7 +62,8 @@
 	      ROOM_NUM,
 	      ROOM_PRICE,
 	      MAX_PEOPLE,
-	      ROOM_IMG
+	      ROOM_IMG,
+	      ROOM_IMG_NO
   	  FROM
       	  TB_ROOM
   	  JOIN TB_ROOM_IMG
@@ -72,12 +73,12 @@
   	 WHERE
           TB_HOTEL.HOTEL_YN = 'Y'
        AND
-          TB_HOTEL.HOTEL_NO = ?
+          ROOM_YN = 'Y'
        AND
-          ROOM_YN = 'Y'   
+          TB_HOTEL.HOTEL_NO = ?  
 	</entry>
 	
-	<entry key="updateRoom">
+	<entry key="updateRoomForm">
 	SELECT
 	      ROOM_NAME,
 	      CHECKIN_TIME,
@@ -96,9 +97,11 @@
      WHERE TB_HOTEL.HOTEL_YN = 'Y'
        AND TB_ROOM.ROOM_YN = 'Y'  
        AND TB_ROOM.ROOM_NO = ? 
-	
 	</entry>
 	
+	<entry key="updateRoom">
+	
+	</entry>
 	
 	
 	

@@ -71,8 +71,8 @@
     #reser_price{
         width:100%;
         height: 10%;
-        font-size: 25px;
-        padding-top: 35px;
+        font-size: 23px;
+        padding-top: 40px;
         border-bottom: 1px solid silver;
         text-align: center;
     }
@@ -157,7 +157,6 @@
         font-weight: bold;
         margin-left: 300px;
     }
-    td{border: 1px solid red;}
 </style>
 </head>
 <body>
@@ -218,7 +217,7 @@
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px">결제금액 : 333,000원</td>
+							<td width="400px" style="font-weight: bold;">결제금액 : 333,000원</td>
 						</tr>
 	               </table>
 				</div>

@@ -80,8 +80,8 @@ div {
 			<h2>객실정보수정</h2>
 		</div>
 		<div id="content-div">
-			<form id="content-add-form" action="#" enctype="multipart/form-data" method="post">
-			<input type="hidden" value="<%= roomNo %>" name="roomNo" >
+			<form id="content-add-form" action="<%= contextPath %>/updateRoom.rooms" enctype="multipart/form-data" method="post">
+			<input type="hidden" name="roomNo" value="<%= roomNo %>" >
 			<section id="content-add-sect">
 				<div class="content-div-1">
 					<div class="form-group">
@@ -98,6 +98,8 @@ div {
 					  <label>객실 사진</label>
 					  <input type="file"  name="roomImg" >
 					  <img width="100px" height="100px" src="<%= room.getRoomImgPath() %>" >
+					  <input type="hidden" name="roomImgBefore" value="<%= room.getRoomImgPath() %>">
+					  <input type="hidden" name="roomImgNo" value="<%= room.getRoomImgNo() %>">
 					</div>
 					
 					<div class="form-grop">
@@ -119,7 +121,7 @@ div {
 				</div>
 				</section>
 				<div id="btn-div" align="center">
-					<button class="btn btn btn-info">객실 수정</button>
+					<button type="submit" class="btn btn btn-info">객실 수정</button>
 				</div>
 			</form>
 		</div>
