@@ -210,10 +210,8 @@ public class ReviewDao {
 			
 			if(rset.next()) {
 				adminComment = new AdminComment();
-				adminComment.setCommentReserNo(rset.getInt("CO_RESER_NO"));
+
 				adminComment.setCommentContent(rset.getString("COMMENT_CONTENT"));
-				adminComment.setCreaeteDate(rset.getString("CREATE_DATE"));
-				adminComment.setNickName(rset.getString("NICKNAME"));
 			}
 			
 		} catch (SQLException e) {
