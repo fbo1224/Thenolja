@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*" %>    
     <%
     	int roomNo = (int)request.getAttribute("roomNo");
+    	Room room = (Room)request.getAttribute("room");
     %>
 <!DOCTYPE html>
 <html>
@@ -78,45 +80,48 @@ div {
 			<h2>객실정보수정</h2>
 		</div>
 		<div id="content-div">
-			<form id="content-add-form" action="" enctype="multipart/form-data" method="post">
-			<input type="hidden" value="" name="hotelNo" >
+			<form id="content-add-form" action="<%= contextPath %>/updateRoom.rooms" enctype="multipart/form-data" method="post">
+			<input type="hidden" name="roomNo" value="<%= roomNo %>" >
 			<section id="content-add-sect">
 				<div class="content-div-1">
 					<div class="form-group">
 					  <label>객실이름</label>
-					  <input type="text" class="form-control" name="roomName" required >
+					  <input type="text" class="form-control" name="roomName" required value="<%= room.getRoomName() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="text" class="form-control"  name="maxPeople" required >
+					  <input type="text" class="form-control"  name="maxPeople" required value="<%= room.getMaxPeople() %>" >
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
 					  <input type="file"  name="roomImg" >
+					  <img width="100px" height="100px" src="<%= room.getRoomImgPath() %>" >
+					  <input type="hidden" name="roomImgBefore" value="<%= room.getRoomImgPath() %>">
+					  <input type="hidden" name="roomImgNo" value="<%= room.getRoomImgNo() %>">
 					</div>
 					
 					<div class="form-grop">
 						<label>입실시간</label>
-						<input type="time" name="in_time" required><br>				
+						<input type="time" name="in_time" required value="<%= room.getCheckInTime() %>"><br>				
 						<label>퇴실시간</label>
-						<input type="time" name="out_time" required>
+						<input type="time" name="out_time" required value="<%= room.getCheckOutTime() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" required>
+					  <input type="text"  name="roomPrice" required value="<%= room.getRoomPrice() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" required>
+					  <input type="text"  name="roomNum" required value="<%= room.getRoomNum() %>">
 					</div>
 				</div>
 				</section>
 				<div id="btn-div" align="center">
-					<button class="btn btn btn-info">객실 추가</button>
+					<button type="submit" class="btn btn btn-info">객실 수정</button>
 				</div>
 			</form>
 		</div>

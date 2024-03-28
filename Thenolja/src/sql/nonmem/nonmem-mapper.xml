@@ -3,6 +3,7 @@
 <properties>
 
 	<comment>
+<<<<<<< HEAD
 		nonmem Mapper
 	</comment>
 	
@@ -32,3 +33,50 @@
 	
 	
 </properties>
+=======
+		Nonmem Mapper
+	</comment>
+	
+
+	<entry key="selectNonmemReser">
+		SELECT
+		       MEM_NO, <!-- Member 객체에 담기 -->
+		       MEM_NAME,
+		       MEM_PHONE,
+		       MEM_STATUS 
+		       RESER_NO, <!-- Reservation객체에 담기 -->
+		       RESER_NAME,
+		       R.CHECKIN_TIME,
+		       R.CHECKOUT_TIME,
+		       BICYCLE,
+		       PEOPLE,
+		       ROOM_NAME, <!-- Room객체에 담기 -->
+		       ROOM_NUM,
+		       MAX_PEOPLE,
+		       M.CHECKIN_TIME,
+		       M.CHECKOUT_TIME,
+		       ROOM_IMG
+		  FROM
+		       TB_NONMEM
+		  JOIN
+		       TB_RESERVATION R
+		    ON
+		       (MEM_NO = RE_MEM_NO)
+		  JOIN
+		       TB_ROOM M
+		 USING
+		       (ROOM_NO)
+		   JOIN
+		       TB_ROOM_IMG
+		  USING
+		       (ROOM_NO)
+		 WHERE
+		       MEM_NAME = ?
+		   AND
+		       MEM_PHONE = ?  
+			
+	
+	</entry>
+	
+</properties>
+>>>>>>> 2be948c4e561aa2b3291af17841d6397db889afd

@@ -276,7 +276,7 @@ div {
 	                    <a href="#">회원관리</a>
 	                    <ul>
 	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
-	                        <li><a href="<%= contextPath %>/reserMember">회원 예약 조회</a></li>
+	                        <li><a href="<%= contextPath %>/reserMember?currentPage=1">회원 예약 조회</a></li>
 	                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
 	                    </ul>
 	                </li>
@@ -377,7 +377,7 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-		  	<form action="<%= contextPath %>/nonmemSelect" method="get">
+		  	<form action="<%= contextPath %>/selectNonmem" method="get">
 	      		<div class="modal-body">
 					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
 					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>

@@ -166,17 +166,41 @@
     		});
     	}
     	
+    	<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
+    	
+    	var checkInDate = $('#checkIn').text();
+    	
+    	console.log(checkInDate);
+    	
+    	const today = new Date();
+    	
+    	const year = today.getFullYear();
+    	
+    	const month = today.getMonth() + 1;
+    	
+    	const day = today.getDate();
+    	
+    	const currentDate = year + '.' + (month < 10 ? '0' :"") + month + '.' + (day < 10 ? '0' : "") + day;
+    	
+    	console.log(currentDate);
+    	
+    	const refundBtn = document.getElementById("refundBtn");
+    	
+    	if(currentDate > checkInDate) {
+    		refundBtn.disabled = true;
+    	}
     	
     	
     	
+
     	
-    	var checkInDate = "<%="
     
+    	
     </script>
     
 
 
-<%--현재 날짜가 체크인 날짜 보다 크면 disabled하는 거 해야 됨  --%>
+
     
     
     
@@ -198,6 +222,9 @@
         
         <!-- Modal body -->
         <div class="modal-body">
+        	
+        	<input type="hidden" id="reserNo22" name="reser_No" value=""/>
+        
             <table>
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>

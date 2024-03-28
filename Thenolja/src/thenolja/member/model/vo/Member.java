@@ -30,6 +30,15 @@ public class Member {
 	}
 
 
+	public Member(int memNo, String memName, String memPhone, String memStatus) {
+		super();
+		this.memNo = memNo;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memStatus = memStatus;
+	}
+
+
 	public Member(int memNo, String memName, String memPhone, String memId, String memPwd, String nickname,
 			String email, String bornDate, Date joinDate, String memStatus, String deleteYn) {
 		super();
