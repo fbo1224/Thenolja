@@ -43,7 +43,7 @@
     <br>
     
     <!-- 등록 버튼 영역 START -->
-	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/view/notice/noticeReg.jsp" role="button" style=>등록하기</a>
+	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
 
    	<!-- 등록 버튼 영역 END -->
    	
