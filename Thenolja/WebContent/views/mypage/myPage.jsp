@@ -55,6 +55,9 @@
         height: 50px;
     }
 
+    .img1:hover{transform: scale(1.1);}
+    .img2:hover{transform: scale(1.1);}
+
     .img2{
         width: 50px;
         height: 50px;
@@ -103,6 +106,7 @@
     .iconImg > a > span:hover{
         text-decoration: none;
     }
+    a:hover{text-decoration: black;}
 
     
 </style>
@@ -129,8 +133,8 @@
             <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
                 <div id="gradeIcon">
-                    <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                     <span id="grade" style="color: goldenrod;"><%= gradeName %></span>
+                    <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
             </div>
 
@@ -153,11 +157,11 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 			<form action="<%=contextPath%>/delete.me" method="post">
-			       	
+			
 			<div class="form-group">
-			   	<label for="memPwd" style="font-size:12px; color:red">탈퇴를 원하신다면 비밀번호를 입력해주세요.</label>
+			   	<label for="memPwd" style="font-size:20px; color:orangered">회원탈퇴시 회원혜택을 이용할 수 없습니다.</label><br>
 			   	<input type="password" name="memPwd" class="form-control" placeholder="비밀번호를 입력해주세요." id="deletePwd" required>
-                <button type="submit" class="btn btn-sm btn-primary" onclick="return deleteMember();">회원 탈퇴</button>
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();" style="float: right;">탈퇴하기</button>
 			</div>
 			 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
 			 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Member Mapper
+	</comment>
+	
+	<entry key="selectRefundMemCount">
+		SELECT
+		        COUNT(*)
+		  FROM
+		        TB_REFUND
+		  JOIN
+		        TB_RESERVATION ON (RF_RESER_NO = RESER_NO)
+		  JOIN
+		        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		  WHERE
+		        MEM_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectRefundMemberList">
+			SELECT *
+		  FROM
+		     (SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM( SELECT
+		               RF_RESER_NO,
+		               MEM_ID,
+		               RESER_NAME,
+		               MEM_PHONE
+		        FROM
+		                TB_REFUND
+		        JOIN
+		                TB_RESERVATION ON (RESER_NO = RF_RESER_NO)
+		        JOIN
+		                TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+		        JOIN
+		                TB_MEMBER ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+		       WHERE
+		                MEM_STATUS = 'Y'
+		       GROUP
+		          BY
+		                RF_RESER_NO, MEM_ID, RESER_NAME, MEM_PHONE
+		       ORDER
+		          BY
+		                RF_RESER_NO DESC) A)
+		    WHERE RNUM BETWEEN ? AND ?
+
+	</entry>
+	
+	<entry key="selectRefundMember">
+		SELECT
+	        HOTEL_NAME,
+	        HOTEL_PATH,
+	        REFUND_NAME,
+	        BANK,
+	        REFUND_ACC_NO,
+	        REFUND_PRICE,
+	        TO_CHAR(RESER_DATE ,'YYYY.MM.DD')"RESER_DATE"
+	  FROM
+	        TB_REFUND
+	  JOIN
+	        TB_RESERVATION ON (RF_RESER_NO = RESER_NO)
+	  JOIN
+	        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
+	  JOIN
+	        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	  WHERE
+	  		RESER_NO = ?
+	  GROUP
+	     BY
+	        HOTEL_NAME, HOTEL_PATH, REFUND_NAME, BANK, REFUND_ACC_NO, REFUND_PRICE,  TO_CHAR(RESER_DATE ,'YYYY.MM.DD')
+	
+	</entry>
+	
+	<entry key="selectRefundNonMemberCount">
+		SELECT
+	        COUNT(*)
+	  FROM
+	        TB_REFUND
+	  JOIN
+	        TB_RESERVATION ON (RF_RESER_NO = RESER_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	  WHERE
+	        MEM_STATUS = 'N'
+
+	</entry>
+	
+	<entry key="selectRefundNonMemberList">
+	
+		SELECT
+	       RF_RESER_NO,
+	       RESER_NAME,
+	       MEM_PHONE
+	  FROM
+	        TB_REFUND
+	  JOIN
+	        TB_RESERVATION ON (RESER_NO = RF_RESER_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	  WHERE
+	        MEM_STATUS = 'N'
+	
+	
+	</entry>
+	
+	
+	
+</properties>
