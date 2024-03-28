@@ -1,29 +1,27 @@
-package thenolja.admin.review.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import thenolja.admin.review.model.service.ReviewService;
-import thenolja.admin.review.model.vo.AdminComment;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class AdminCommentList
+ * Servlet implementation class NonReservationInsertFormController
  */
-@WebServlet("/commentList.do")
-public class AdminCommentList extends HttpServlet {
+@WebServlet("/nonInsertReservation")
+public class NonReservationInsertFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommentList() {
+    public NonReservationInsertFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +30,17 @@ public class AdminCommentList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
 		
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		Reservation reser = new Reservation();
+		request.setAttribute("reser", reser);
+		//System.out.println(list);
 		
-		AdminComment adminComment = new ReviewService().selectCommentList(reserNo);
+		//response.sendRedirect("/views/reservation/insertReservation.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/nonInsertReservation.jsp");
 		
-		response.setContentType("application/json; charset=UTF-8");
-		
-		new Gson().toJson(adminComment, response.getWriter());
+		view.forward(request, response);
 	}
 
 	/**

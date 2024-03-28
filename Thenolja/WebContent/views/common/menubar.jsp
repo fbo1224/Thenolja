@@ -232,6 +232,7 @@ div {
         display:none;
 	}
 
+	input{outline-color: rgb(70, 149, 151);}
 
 </style>
     

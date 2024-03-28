@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<style>
+<style>
+
 
 	#changeBtn, #reset{
 			border: none;
@@ -62,12 +63,30 @@
 	.input:focus{
 		border-color: rgb(70, 149, 151);
 	}
+
 	td{
 		border-bottom: 1px solid lightgray;
 		margin-bottom: 10px;
 	}
+
+	#title{
+		margin-top: 30px; 
+		color: rgb(70, 149, 151);
+		height: 100px;
+	}
+
+	#title > span{
+		text-align: center;
+		font-weight: bold;
+		font-size: 40px;
+	}
 		
-	</style>
+	#table{
+		margin-top: 30px;
+		border-collapse: separate;
+		border-spacing : 15px;
+	}
+</style>
 	
 	
 </head>
@@ -77,8 +96,9 @@
 
 	<div class="outer">
 		<br>
-		<h1 align ="center" id="title">회원가입</h2><br><br><br>
-		
+		<div id="title" align="center">
+			<span>회원가입</span>
+		</div>
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
 			<table align="center" id="table">
 				<tr>
@@ -177,7 +197,6 @@
 					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" required></td>
 					<td></td>
 				</tr>
-				
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요." required></td>
