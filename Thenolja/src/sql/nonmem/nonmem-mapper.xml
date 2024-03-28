@@ -9,26 +9,24 @@
 	<entry key="insertNonMem">
 		INSERT
 		  INTO 
-		  		TB_RESERVATION
+		  		TB_NONMEM
 		VALUES
 		 		(
-		 		SEQ_RESERVATION.NEXTVAL,
-		 		SYSDATE,
-		 		?,
-		 		?,
-		 		?,
-		 		DEFAULT,
-		 		'12/12/12',
-		 		'10/10/10',
-		 		2,
-		 		1,
-		 		1,
-		 		'계좌이체',
-		 		'330000'
+				SEQ_MNO.NEXTVAL,
+				?,
+				?,
+				DEFAULT
 				)
 	</entry>
 	
-	
+	<entry key="selectNonMem">
+		SELECT
+				MEM_NO,
+				MEM_NAME,
+				MEM_PHONE
+		  FROM
+		  		TB_NONMEM
+	</entry>
 	
 	
 	
