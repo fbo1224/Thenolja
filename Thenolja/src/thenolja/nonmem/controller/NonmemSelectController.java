@@ -16,13 +16,13 @@ import thenolja.nonmem.service.NonmemService;
  * Servlet implementation class NonmemberSelectController
  */
 @WebServlet("/selectNonmem")
-public class NonmemberSelectController extends HttpServlet {
+public class NonmemSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NonmemberSelectController() {
+    public NonmemSelectController() {
         super();
         // TODO Auto-generated constructor stub
     }

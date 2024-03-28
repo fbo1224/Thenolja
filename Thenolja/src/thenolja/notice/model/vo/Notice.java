@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Notice {
 	
-	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
 	private String createDate;
@@ -12,6 +11,7 @@ public class Notice {
 	private int writerNo;
 	private String writer; 	   // 상세화면 조회 시 작성자명
 	private int viewCount;	   // 조회 수
+	private int noticeNo;
 	
 	public Notice() {
 		super();
@@ -23,10 +23,18 @@ public class Notice {
 	}	
 	// 저장 시 파라미터 처리를 위한 생성자 생성
 	public Notice(String title, String content, String status) {
-		this.noticeTitle   = title;
-		this.noticeContent = content;
-		this.status = status;
-	}	
+		this.noticeTitle    = title;
+		this.noticeContent  = content;
+		this.status 		= status;
+	}
+	
+	// 수정시 파라미터 처리를 위한 생성자 생성
+	public Notice(String title, String content, String status, int noticeNo) {
+		this.noticeTitle    = title;
+		this.noticeContent  = content;
+		this.status 		= status;
+		this.noticeNo 		= noticeNo;
+	}		
 
 	public int getNoticeNo() {
 		return noticeNo;

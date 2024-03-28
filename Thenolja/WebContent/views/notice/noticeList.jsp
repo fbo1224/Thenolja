@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
+	String loginId = list.get(0).getNoticeTitle();
+	//System.out.println("noticeList = " + list); 컴파일에러 발생
 %>
 <!DOCTYPE html>
 <html>
@@ -43,8 +45,8 @@
     <br>
     
     <!-- 등록 버튼 영역 START -->
+   	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
 	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
-
    	<!-- 등록 버튼 영역 END -->
    	
     <br>
@@ -76,8 +78,7 @@
          			<td><%= n.getWriter() %></td>
          			<td><%= n.getCreateDate() %></td>
          			<td><%= n.getViewCount() %></td>
-         			<td><%= n.getStatus() %></td> <%-- 수정할 부분 --%>
-         			
+         			<td><%= n.getStatus() %></td>
          		</tr>
          	<% } %>
 
@@ -105,21 +106,27 @@
 <br><br><br>
 </div>
 	<script>
-
-		// 수정화면 진입 (관리자전용URL)
-		$('tbody > tr.list').click(function(){
-	        //location.href='<%=contextPath%>/detail.notice';  
-	        const noticeNo = $(this).children().eq(0).text();
-	        location.href= '<%= contextPath %>/updateInfo.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
-	      });
+		// loginId null 체크
+		<%-- <% if("".equals(loginId)){ %> --%>
+			// 수정화면 진입 (관리자전용URL)
+			<%-- <% if("admin".contains(loginId)){  %> --%>
+				$('tbody > tr.list').click(function(){
+			        //location.href='<%=contextPath%>/detail.notice';  
+			        const noticeNo = $(this).children().eq(0).text();
+			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+			      });
+			<%-- <% } else{ %> --%>
+	        // 상세화면 진입 (회원전용URL)
+		        /* $('tbody > tr.list').click(function(){
+		          //location.href='<%=contextPath%>/detail.notice';  
+		           const noticeNo = $(this).children().eq(0).text();
+		           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
 		
-        // 상세화면 진입 (회원전용URL)
-         $('tbody > tr.list').click(function(){
-          //location.href='<%=contextPath%>/detail.notice';  
-           const noticeNo = $(this).children().eq(0).text();
-           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
-
-        }); 
+		        }); */
+			<%-- <% } %> --%>
+		<%-- <% } %> --%>
+		
+		
 	</script>
 
 </head>

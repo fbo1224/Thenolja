@@ -202,13 +202,13 @@ public class RoomDao {
 			pstmt.setString(1, r.getRoomImgPath());
 			pstmt.setInt(2, r.getRoomNo());
 			
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-		}
-		
-		
+		}	
 		return result;
 	}
 	
