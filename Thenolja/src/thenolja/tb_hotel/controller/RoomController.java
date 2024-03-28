@@ -1,6 +1,7 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,8 +92,10 @@ public class RoomController {
 		
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
-		System.out.println(hotelNo);
+		ArrayList<Room> rooms = new RoomService().updateRoomList(hotelNo);
 		
+		request.setAttribute("hotelNo", hotelNo);
+		request.setAttribute("rooms", rooms);
 		
 		return view;
 	}
