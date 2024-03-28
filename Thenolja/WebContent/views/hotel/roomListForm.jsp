@@ -79,13 +79,12 @@ div {
 		<h3>등록된 객실이 없습니다.</h3>
 	<%} else { %>
 	<div id="title-div">
-		<h2>객실정보수정</h2>
+		<h2>등록된 객실들</h2>
 	</div>
 	<div id="content-div">
 		<section id="content-add-sect">
 		<%for(Room r: rooms){ %>
 			<div class="content-div-1">
-				<input type="hidden" value="<%= r.getRoomNo() %>" name="roomNo">
 				<div class="form-group">
 				  <label>객실이름</label>
 				  <input type="text" class="form-control" name="roomName" readonly value="<%= r.getRoomName() %>" >
@@ -118,7 +117,7 @@ div {
 				  <input type="text"  name="roomNum" readonly  value="<%= r.getRoomNum() %>">
 				</div>
 				<div id="btn-div" align="center">
-					<button type="button" class="btn btn btn-info" onclick="updateRoom(this);">객실정보수정</button>
+					<button type="button" class="btn btn btn-info" onclick="updateRoom(this,<%= r.getRoomNo() %>);">객실정보수정</button>
 				</div>
 			</div>
 			<%} %>
@@ -127,8 +126,9 @@ div {
 	<%} %>
 	</div>
 	<script>
-		function updateRoom(e){
-			console.log($(e).parent().siblings('input[type=hidden]').val());
+		function updateRoom(e, roomNo){
+			// console.log(roomNo);
+			location.href= "<%= contextPath %>/updateRoomForm.rooms?roomNo=" + roomNo;
 		}
 	</script>
 </body>
