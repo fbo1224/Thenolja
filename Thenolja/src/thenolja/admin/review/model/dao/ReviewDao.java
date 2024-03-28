@@ -211,15 +211,15 @@ public class ReviewDao {
 				adminComment.setCommentReserNo(rset.getInt("CO_RESER_NO"));
 				adminComment.setCommentContent(rset.getString("COMMENT_CONTENT"));
 				adminComment.setCreaeteDate(rset.getString("CREATE_DATE"));
+				adminComment.setNickName(rset.getString("NICKNAME"));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
-		 
-		 
-		 
-		 
 		 
 		 return adminComment;
 	 }

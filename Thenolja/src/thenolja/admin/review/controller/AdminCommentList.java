@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import thenolja.admin.review.model.service.ReviewService;
+import thenolja.admin.review.model.vo.AdminComment;
 
 /**
  * Servlet implementation class AdminCommentList
@@ -32,12 +35,10 @@ public class AdminCommentList extends HttpServlet {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		new ReviewService().selectCommentList(reserNo);
+		AdminComment adminComment = new ReviewService().selectCommentList(reserNo);
 		
-		
-		
-		
-		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(adminComment, response.getWriter());
 	}
 
 	/**
