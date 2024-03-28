@@ -13,14 +13,14 @@ import thenolja.tb_hotel.model.service.HotelService;
 /**
  * Servlet implementation class AjaxController
  */
-@WebServlet("/jqAjax.do")
-public class AjaxDeleteHotelController extends HttpServlet {
+@WebServlet("*.jqAjax")
+public class AjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxDeleteHotelController() {
+    public AjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +29,16 @@ public class AjaxDeleteHotelController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		String uri = request.getRequestURI();
+
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
-		// System.out.println(hotelNo);
+		AjaxController ac = new AjaxController();
 		
-		int result = new HotelService().deleteHotel(hotelNo);
-		String str = "삭제 실패";
-		if(result > 0) {
-			str = "삭제 성공";
+		switch(mapping) {
+			case "deleteHotel" : ac.deleteHotel(request, response); break;
+			case "deleteRoom"  : ac.deleteRoom(request, response); break;
 		}
-		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(str);
 		
 	}
 

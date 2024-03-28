@@ -223,7 +223,7 @@
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insert.reser" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
@@ -231,7 +231,6 @@
 		                <br>
 						<h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
 						<br>
-		                
 	               		<div id="mem-name">
 		                    <h5>예약자 이름</h5>
 		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">

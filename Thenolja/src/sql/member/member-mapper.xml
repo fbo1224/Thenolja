@@ -165,6 +165,21 @@
 		       (GRADE_NO)
 		 WHERE
 		       MEM_NO = ?
-	</entry>	
+	</entry>
+	
+	<entry key="selectMember">
+		SELECT
+				MEM_NO,
+				MEM_ID,
+				MEM_PWD,
+				NICKNAME,
+				BORN_DATE,
+				EMAIL,
+				JOIN_DATE
+		  FROM
+		  		TB_MEMBER
+		 WHERE
+		 		MEM_NO = ?
+	</entry>
 	
 </properties>
