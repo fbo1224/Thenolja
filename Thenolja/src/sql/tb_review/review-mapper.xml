@@ -29,6 +29,22 @@
 				DEFAULT
 				)
 	</entry>
+	
+	<entry key="selectList">
+		SELECT
+		        NICKNAME,
+		        RV_RESER_NO,
+		        IMG_PATH,
+		        REVIEW_CONTENT,
+		        REVIEW_SCORE,
+		        CREATE_DATE
+		  FROM
+		        TB_REVIEW
+		  JOIN
+		        TB_RESERVATION ON (TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO)
+		  JOIN
+		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+	</entry>
 
 	
 	

@@ -34,7 +34,7 @@
         <div id="content">
             <div id="content_1">
 
-                <form action="#" method="get" id="search_member">
+                <div id="search_member">
                     <div id="search_id">
                         <input type="text" placeholder="예약자명 입력" name="nonMemId">
                     </div>
@@ -42,7 +42,7 @@
                     <div id="search_btn">
                         <button type="submit" class="btn btn-outline-info">검색</button>
                     </div>
-                </form>
+                </div>
 
             </div>
             <div id="content_2">
