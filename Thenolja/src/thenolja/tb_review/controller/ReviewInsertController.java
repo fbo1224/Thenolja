@@ -32,6 +32,9 @@ public class ReviewInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		// int score = Integer.parseInt(request.getParameter("starScore"));
+		
+		// System.out.println(score);
 		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
 		
