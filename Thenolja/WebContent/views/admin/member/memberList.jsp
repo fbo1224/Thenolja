@@ -304,8 +304,9 @@
   			data : {memNo : $('#updateMemNo').val(),
   					gradeNo : $('#gradeSelect').val()},
   			success : function(result) {
-  				console.log(result);
-	             location.href = '<%=contextPath%>/selectMember?currentPage=1';
+  				// console.log(result);
+  				alert('등급 수정이 완료되었습니다!');
+  				location.reload(true);
   			}
   			
   		});
