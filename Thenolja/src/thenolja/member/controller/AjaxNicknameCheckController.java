@@ -1,4 +1,4 @@
-package thenolja.tb_review.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_reservation.model.Service.ReserService;
-import thenolja.tb_reservation.model.vo.Reservation;
+import thenolja.member.model.service.MemberService;
 
 /**
- * Servlet implementation class ReviewInsertController
+ * Servlet implementation class AjaxNicknameCheckController
  */
-@WebServlet("/review.insert")
-public class ReviewInsertController extends HttpServlet {
+@WebServlet("/nickNameCheck.do")
+public class AjaxNicknameCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewInsertController() {
+    public AjaxNicknameCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +29,15 @@ public class ReviewInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String checkNickname = request.getParameter("checkNickname");
 		
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		// int score = Integer.parseInt(request.getParameter("starScore"));
+		int count = new MemberService().nickNameCheck(checkNickname);
 		
-		// System.out.println(score);
+		response.setContentType("text/html; charset=UTF-8");
 		
-		Reservation reser = new ReserService().selectReserNo(reserNo);
-		
-		if(reser != null) {
-			request.setAttribute("reser", reser);
-			request.getRequestDispatcher("views/review/insertReview.jsp").forward(request, response);
-		} else {
-			request.setAttribute("errorMsg", "작성할 수 없습니다");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		response.getWriter().print(count > 0 ? "NNNNN" : "NNNNY");
+	
 	}
 
 	/**
