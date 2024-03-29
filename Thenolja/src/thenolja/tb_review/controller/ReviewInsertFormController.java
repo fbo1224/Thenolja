@@ -51,16 +51,17 @@ public class ReviewInsertFormController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			
-		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		String imgPath = request.getParameter("upfile");
-		String content = request.getParameter("content");
-		int score = Integer.parseInt(request.getParameter("starScore"));
+		int reserNo = Integer.parseInt(multiRequest.getParameter("reserNo"));
+		String imgPath = multiRequest.getParameter("upfile");
+		String content = multiRequest.getParameter("reviewContent");
+		int score = Integer.parseInt(multiRequest.getParameter("starScore"));
 		
 		Review review = new Review();
 		review.setReserNo(reserNo);
 		review.setImgPath(imgPath);
 		review.setContent(content);
 		review.setScore(score);
+		System.out.println(content);
 		
 		if(multiRequest.getOriginalFileName("upfile") != null) {
 			review.setImgPath(multiRequest.getOriginalFileName("upfile"));
@@ -72,13 +73,14 @@ public class ReviewInsertFormController extends HttpServlet {
 		
 		if(result > 0) {
        	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
-    	 
-       	 response.sendRedirect(request.getContextPath() + "/reviewList?currentPage=1");
-       	 
+		//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+	       	 response.sendRedirect(request.getContextPath() + "/reviewList?currentPage=1&hotelNo=" + hotelNo);
+	       	 
        	} else {
         
-       	 request.setAttribute("errorMsg", "게시글 작성 실패");
-       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
+	       	 request.setAttribute("errorMsg", "게시글 작성 실패");
+	       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
         }         
      }
 		

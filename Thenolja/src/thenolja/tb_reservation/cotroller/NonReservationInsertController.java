@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.service.NonmemService;
+import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -55,13 +56,16 @@ public class NonReservationInsertController extends HttpServlet {
 			
 			reser = new ReserService().selectReservation();
 			member = new NonmemService().SelectNonmem();
+			Hotel hotel = new ReserService().selectHotel();
 			
-			if(reser != null) {
+			if(reser != null && hotel != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
 				session.setAttribute("member", member);
+				session.setAttribute("hotel", hotel);
+
 				
-				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo());
+				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo());
 				
 			} else {
 				request.setAttribute("errorMsg", "예약에 실패했습니다!");

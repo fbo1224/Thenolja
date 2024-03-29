@@ -33,6 +33,7 @@ public class ReviewListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -46,7 +47,7 @@ public class ReviewListController extends HttpServlet {
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		pageLimit = 0;
+		pageLimit = 10;
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
@@ -59,8 +60,10 @@ public class ReviewListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
-		ArrayList<Review> reviewList = new ReviewService().selectList(pi);
+		ArrayList<Review> reviewList = new ReviewService().selectList(pi, hotelNo);
+	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		
 		request.setAttribute("reviewList", reviewList);
 		request.setAttribute("pageInfo", pi);

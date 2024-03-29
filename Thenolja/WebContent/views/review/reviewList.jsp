@@ -34,7 +34,7 @@
     }
     #content{
         width: 1200px;
-        height: 300px;
+        height: 200px;
         margin-top: 20px;
         border: 1px solid black;
     }
@@ -57,13 +57,13 @@
 	
 	<%@ include file="../common/menubar.jsp" %>
 	
-		<div id="output">
-        <div id="content_title">
-            <div id="left_img">
-                <a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
-            </div>
-            <div id="left_title"><h3>내 예약 내역</h3></div>
-		</div>
+    <div id="output">
+    <div id="content_title">
+        <div id="left_img">
+            <a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+        </div>
+        <div id="left_title"><h3>REVIEW</h3></div>
+    </div>
 	<% if(reviewList.isEmpty()) { %>
 	<table>
 	<tr>
@@ -71,15 +71,14 @@
 	</tr>
 	</table>
 	<% } else { %>
-	</div>
-	<% for(Review r : reviewList) { %>
-		<div id="content">
-	
-	            <div id="review_detail">
-	            </div>
+        <% for(Review r : reviewList) { %>
+            <div id="content">
+                <div id="review_detail">
+                </div>
 			</div>
-	<% } %>
-	<% } %>
+            <% } %>
+            <% } %>
+    </div>
 	
 	
 	

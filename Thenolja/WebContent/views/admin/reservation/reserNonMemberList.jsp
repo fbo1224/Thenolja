@@ -46,7 +46,7 @@
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info">검색</button>
                     </div>
                 </div>
 

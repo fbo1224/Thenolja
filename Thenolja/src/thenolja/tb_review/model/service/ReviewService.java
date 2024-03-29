@@ -17,16 +17,20 @@ public class ReviewService {
       
       int result = new ReviewDao().selectListCount(conn);
       
+      if(result > 0) {commit(conn);
+      } else {
+    	  rollback(conn);
+      }
       close(conn);
       
       return result;
 	}
 
-	public ArrayList<Review> selectList(PageInfo pi) {
+	public ArrayList<Review> selectList(PageInfo pi, int hotelNo) {
 		
 		Connection conn = getConnection();
 		  
-		ArrayList<Review> reviewList = new ReviewDao().selectList(conn, pi);
+		ArrayList<Review> reviewList = new ReviewDao().selectList(conn, pi, hotelNo);
 		  
 		close(conn);
 		

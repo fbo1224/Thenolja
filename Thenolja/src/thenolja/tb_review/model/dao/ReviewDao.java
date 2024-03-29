@@ -39,7 +39,7 @@ public class ReviewDao {
 	      
 	      try {
 	         pstmt = conn.prepareStatement(sql);
-	         
+	     //    pstmt.setInt(1, roomNo);
 	         rset = pstmt.executeQuery();
 	         
 	         rset.next();
@@ -57,7 +57,7 @@ public class ReviewDao {
 	      return listCount;
 	}
 	
-	public ArrayList<Review> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Review> selectList(Connection conn, PageInfo pi, int hotelNo){
 		
 		ArrayList<Review> reviewList = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -69,9 +69,10 @@ public class ReviewDao {
 			
 	        int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 	        int endRow = startRow + pi.getBoardLimit() - 1;
-	         
-	        pstmt.setInt(1, startRow);
-	        pstmt.setInt(2, endRow);
+	        
+	        pstmt.setInt(1, hotelNo);
+	        pstmt.setInt(2, startRow);
+	        pstmt.setInt(3, endRow);
 	         
 	        rset = pstmt.executeQuery();		
 	        while(rset.next()) {
@@ -80,7 +81,7 @@ public class ReviewDao {
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
 	        	r.setContent(rset.getString("REVIEW_CONTENT"));
-	        	r.setScore(rset.getInt("RIVIEW_SCORE"));
+	        	r.setScore(rset.getInt("REVIEW_SCORE"));
 	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
 	        	
 	        	reviewList.add(r);
@@ -116,5 +117,7 @@ public class ReviewDao {
 		}
 		return result;
 	}
+	
+	
 
 }
