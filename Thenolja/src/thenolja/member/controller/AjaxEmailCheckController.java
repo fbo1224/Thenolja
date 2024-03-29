@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.member.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.member.model.service.MemberService;
 
 /**
- * Servlet implementation class UpdateGradeMember
+ * Servlet implementation class AjaxEmailCheckController
  */
-@WebServlet("/gradeUpdate.do")
-public class UpdateGradeMember extends HttpServlet {
+@WebServlet("/emailCheck.do")
+public class AjaxEmailCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateGradeMember() {
+    public AjaxEmailCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +29,15 @@ public class UpdateGradeMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String checkEmail = request.getParameter("checkEmail");
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		int gradeNo = Integer.parseInt(request.getParameter("gradeNo"));
-		
-		AdminMember adminMember = new AdminMember();
-		adminMember.setMemNo(memNo);
-		adminMember.setGradeNo(gradeNo);
-		
-		int result = new MemberService().updateGrade(adminMember);
+		int count = new MemberService().emailCheck(checkEmail);
 		
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(result > 0 ?  "success" : "fail");
 		
+		response.getWriter().print(count > 0 ? "NNNNN" : "NNNNY");
+	
 	}
 
 	/**

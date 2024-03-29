@@ -12,8 +12,8 @@
 	#changeBtn, #reset{
 			border: none;
 			background-color: rgb(70, 149, 151);
-			width: 100px;
-			height: 40px;
+			width: 120px;
+			height: 50px;
 			color: white;
 			margin-top: 30px;
 			margin-left: 70px;
@@ -67,22 +67,25 @@
 	td{
 		border-bottom: 1px solid lightgray;
 		margin-bottom: 10px;
+		font-size: 16px;
+		padding-left: 10px;
 	}
 
 	#title{
-		margin-top: 30px; 
+		margin-top: 20px; 
 		color: rgb(70, 149, 151);
 		height: 100px;
+		border-bottom: 1px solid lightgray;
 	}
 
 	#title > span{
 		text-align: center;
 		font-weight: bold;
-		font-size: 40px;
+		font-size: 45px;
 	}
 		
 	#table{
-		margin-top: 30px;
+		margin-top: 20px;
 		border-collapse: separate;
 		border-spacing : 15px;
 	}
@@ -130,7 +133,7 @@
 										$memId.attr('readonly', true);
 										
 										// 중복확인 전 막아두었던 submit버튼 활성화
-										$('#enroll-form button[type=submit]').removeAttr('disabled');
+										//$('#enroll-form button[type=submit]').removeAttr('disabled');
 									}
 									else{
 										$memId.focus();
@@ -189,30 +192,107 @@
 				<tr>
 					<td>닉네임</td>
 					<td><input type="text" maxlength="30" required name="nickname"></td>
-					<td></td>
+					<td><button class="btn btn-sm btn-primary" type="button" onclick="nickNameCheck();">중복확인</button></td>
 				</tr>
+
+				<script>
+					function nickNameCheck(){
+						
+						const $nickname = $('#enroll-form input[name=nickname]');
+						// console.log($nickname);
+						$.ajax({ 
+							url : 'nickNameCheck.do',
+							data : {checkNickname : $nickname.val()},
+							success : function(result){
+								
+								if(result =='NNNNN'){ // 중복된 닉네임
+									alert('중복되는 닉네임입니다.');
+								
+									$nickname.val('').focus();
+								
+								} else { // 중복 X == 사용 가능
+									
+									if(confirm('사용 가능한 닉네임입니다. 사용하시겠습니까?')){
+										$nickname.attr('readonly', true);
+									}
+									else{
+										$nickname.focus();
+									}
+								}
+							},
+							error : function(){
+								console.log('AJAX통신실패');
+							}
+						});
+					}
+				
+				</script>
 				
 				<tr>
 					<td>전화번호</td>
 					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" required></td>
-					<td></td>
+					<td id="phoneMent"></td>
 				</tr>
+				<!--
+				<script>
+					function phoneCheck(){
+						const checkPhone = document.getElementsByName('memPhone').value;
+						const phoneMent = document.getElementById('phoneMent').innerHTML;
+
+						console.log(checkPhone);
+						let phoneReg = /^010?([0-9]{3})?([0-9]{4})$/;
+
+						if(phoneReg.test(checkPhone)){
+							phoneMent = '';
+						} else {
+							phoneMent = '형식에 맞지 않습니다';
+							checkPhone = '';
+						}
+					}
+				</script>
+				-->
+
 				<tr>
 					<td>이메일</td>
 					<td><input type="email" name="email" placeholder="@포함하여 입력해주세요." required></td>
-					<td></td>
-					<!--
-					<td>@</td>
-					<td>
-						<select>
-							<option value="직접입력">직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-							<option value="gmail.com">gmail.com</option>
-						</select>
-					</td>
-					-->
+					<td><button class="btn btn-sm btn-primary" type="button" onclick="emailCheck();">중복확인</button></td>
 				</tr>
+
+				<script>
+					function emailCheck(){
+						
+						const $email = $('#enroll-form input[name=email]');
+						// console.log($nickname);
+						$.ajax({ 
+							url : 'emailCheck.do',
+							data : {checkEmail : $email.val()},
+							success : function(result){
+								
+								if(result =='NNNNN'){ // 중복된 닉네임
+									alert('중복되는 이메일입니다.');
+								
+									$email.val('').focus();
+								
+								} else { // 중복 X == 사용 가능
+									
+									if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
+										$email.attr('readonly', true);
+										
+										// 중복확인 전 막아두었던 submit버튼 활성화
+										$('#enroll-form button[type=submit]').removeAttr('disabled');
+									}
+									else{
+										$email.focus();
+									}
+								}
+							},
+							error : function(){
+								console.log('AJAX통신실패');
+							}
+						});
+					}
+				
+				</script>
 				
 				<tr>
 					<td>생년월일</td>

@@ -182,4 +182,24 @@
 		 		MEM_NO = ?
 	</entry>
 	
+	<entry key="nicknameCheck"><!-- 닉네임 체크 -->
+		SELECT
+		       COUNT(*)
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       NICKNAME = ?
+	
+	</entry>
+	
+		<entry key="emailCheck"><!-- 이메일 체크 -->
+		SELECT
+		       COUNT(*)
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       EMAIL = ?
+	
+	</entry>
+	
 </properties>
