@@ -17,7 +17,7 @@
 	}
 	#wrap{
 		width: 1200px;
-		height: 800px;
+		height: 1000px;
 		margin: auto;
 	}
 	
@@ -38,9 +38,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-    .swiper-wrapper {
-    	width: 80%;
     }
     .card-imgDiv, .card-info{
 		display: inline-block;
@@ -69,6 +66,13 @@
 		height: 250px;
 		margin: 10px;	
 	}
+	.mainPage-title-div {
+		margin: 10px auto;
+		border-bottom: 1px solid gray;
+	}
+	.mainPage-title-div > h3 {
+		margin: 3px;
+	}
 </style>
 </head>
 
@@ -77,15 +81,21 @@
 	<%@ include file="views/hotel/common/searchForm.jsp" %>
 	
 	<div id="wrap">
-	<h3>요즘 인기있는 숙소</h3>
-	 <div class="swiper mySwiper">
-	    <div class="swiper-wrapper"></div>
-	    
-    	<div class="swiper-pagination"></div>
-	    <div class="swiper-button-next"></div>
-	    <div class="swiper-button-prev"></div>
-	    <div class="swiper-pagination"></div>
-  	</div>
+		<div class="mainPage-title-div">
+			<h3>요즘 인기있는 숙소</h3>
+		</div>
+		 <div class="swiper mySwiper">
+		    <div class="swiper-wrapper"></div>
+		    
+	    	<div class="swiper-pagination"></div>
+		    <div class="swiper-button-next"></div>
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-pagination"></div>
+	  	</div>
+  	
+		<div class="mainPage-title-div">
+			<h3>지역별 추천숙소</h3>
+		</div>	
 		
 		
 	</div>
