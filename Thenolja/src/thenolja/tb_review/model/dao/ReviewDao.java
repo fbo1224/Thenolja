@@ -59,8 +59,39 @@ public class ReviewDao {
 	
 	public ArrayList<Review> selectList(Connection conn, PageInfo pi){
 		
- 
-		return ;
+		ArrayList<Review> reviewList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+	        int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+	        int endRow = startRow + pi.getBoardLimit() - 1;
+	         
+	        pstmt.setInt(1, startRow);
+	        pstmt.setInt(2, endRow);
+	         
+	        rset = pstmt.executeQuery();		
+	        while(rset.next()) {
+	        	
+	        	Review r = new Review();
+	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
+	        	r.setImgPath(rset.getString("IMG_PATH"));
+	        	r.setContent(rset.getString("REVIEW_CONTENT"));
+	        	r.setScore(rset.getInt("RIVIEW_SCORE"));
+	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
+	        	
+	        	reviewList.add(r);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reviewList;
 	}
 	public int insertReview(Connection conn, Review review) {
 		

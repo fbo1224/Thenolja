@@ -169,7 +169,7 @@
     </div>
 	<div id="content_3">
 	    <input type="file" name="upfile" id="file-up">
-	    <button id="insert-img">사진추가</button>
+	    <button type="button" id="insert-img">사진추가</button>
 	</div>
             
     <div id="content_4">
