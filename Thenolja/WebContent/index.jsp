@@ -18,7 +18,6 @@
 	#wrap{
 		width: 1200px;
 		height: 800px;
-		border: 1px solid red;
 		margin: auto;
 	}
 	
@@ -40,8 +39,9 @@
       height: 100%;
       object-fit: cover;
     }
-    
-    
+    .swiper-wrapper {
+    	width: 80%;
+    }
     .card-imgDiv, .card-info{
 		display: inline-block;
 		width: 50%;
@@ -79,9 +79,12 @@
 	<div id="wrap">
 	<h3>요즘 인기있는 숙소</h3>
 	 <div class="swiper mySwiper">
-	    <div class="swiper-wrapper">
-	    </div>
+	    <div class="swiper-wrapper"></div>
+	    
     	<div class="swiper-pagination"></div>
+	    <div class="swiper-button-next"></div>
+	    <div class="swiper-button-prev"></div>
+	    <div class="swiper-pagination"></div>
   	</div>
 		
 		
@@ -89,12 +92,11 @@
 	
 	<script>
 	$(function (){
+		
 		$.ajax({
 			url:"favoriteData.jqAjax",
 			type: 'post',
 			success: function(result){
-				console.log(result);
-				console.log(result[0].hotelPath);
 				for(let i = 0; i < result.length; i++){
 					$('.swiper-wrapper').append('<div class="swiper-slide">'
 							+'<div class="cards">'
@@ -124,7 +126,13 @@
 		        el: ".swiper-pagination",
 		        clickable: true,
 		      },
+		      navigation: {
+		          nextEl: ".swiper-button-next",
+		          prevEl: ".swiper-button-prev",
+		      },
 		});
+		
+	
 	})
 	</script>
 </body>
