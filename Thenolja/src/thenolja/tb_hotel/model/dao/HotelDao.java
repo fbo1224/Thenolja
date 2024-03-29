@@ -525,7 +525,9 @@ public class HotelDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(rset.getString("HOTEL_LOCATION"));
+				String empty = "";
+				empty = rset.getString("HOTEL_LOCATION");
+				list.add(empty);
 			}
 			
 		} catch (SQLException e) {

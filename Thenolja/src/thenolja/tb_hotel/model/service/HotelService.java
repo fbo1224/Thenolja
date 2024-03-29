@@ -161,7 +161,9 @@ public class HotelService {
 		return result;
 	}
 	
-	
+	public ArrayList<HotelCard> selectFavorite() {
+		
+	}
 	
 	
 	

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
+import thenolja.tb_hotel.model.vo.HotelCard;
 
 public class AjaxController {
 	
@@ -50,17 +51,15 @@ public class AjaxController {
 	}
 	
 	
-	public void searchData(HttpServletRequest request, HttpServletResponse response) {
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
-		String location = request.getParameter("location");
-		int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+	public void favoriteData(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<HotelCard> hotelList = new HotelService().selectFavorite();
 		
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(location);
-		System.out.println(maxPeople);
 		
+		
+		
+	}
+	
+	public void locRecomData(HttpServletRequest request, HttpServletResponse response) {
 		
 	}
 	

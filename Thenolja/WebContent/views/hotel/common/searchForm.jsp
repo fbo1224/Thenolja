@@ -50,20 +50,17 @@
 
 
 <div id="content-1">
-	<div id="select-form">
+	<form id="select-form" action="#">
 		<div style="display: inline-block;">
 			<input class="form-control" type="text" name="daterange" value="" readonly/>
 		</div>
 		<span id="date"></span>
 		<input class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
-		<%if(){ %>
-			<select>
-			</select>
-		<%} %>
+		
+		<select id="locations" name="loc">
+		</select>
 		<input class="btn btn btn-info" id="search" type="button" value="서치">
-	</div>
-	
-	
+	</form>
 	
 </div>
 
@@ -71,6 +68,7 @@
 const toDay = new Date();
 	let startDate;
 	let endDate;
+	let locations;
 	
 	$(function () {
 	    $('input[name="daterange"]').daterangepicker({
@@ -106,7 +104,14 @@ const toDay = new Date();
 	    	url: "searchLocation.jqAjax",
 	    	type: 'get',
 	    	success: function(result){
-	    		console.log(result);
+	    		result = result.replaceAll("[","");
+	    		result = result.replaceAll("]","");
+	    		
+	    		result = result.split(",")
+	    		// console.log(result);
+	    		for(let i = 0; i < result.length; i++){
+	    			$('#locations').append('<option value="'+ result[i] +'">'+result[i]+'</option>');
+	    		}
 	    	},
 	    	error: function(result){
 	    		console.log(result);
@@ -115,15 +120,16 @@ const toDay = new Date();
 	    
 	});
 	
-	$('#search').click(function(){
+	// ajax 보류
+	$('').click(function(){
 		
 		$.ajax({
 			url: "searchData.jqAjax",
 			data: {
 				startDate : startDate,
 				endDate : endDate,
-				maxPeople : $('#people-input').val(),
-				location : $('#search-input').val(),
+				maxPeople : $('#people-input').val().trim(),
+				location : $('#locations[name=loc] option:selected').text().trim(),
 			},
 			type: 'post',
 			success: function(result){
