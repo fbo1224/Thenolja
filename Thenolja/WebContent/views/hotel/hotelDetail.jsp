@@ -93,8 +93,7 @@
 .content-rooms-card img {
 	width: 30%;
 	height: 90%;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-radius: 10px;
 	box-shadow: 2px 2px 2px gray;
 
 }

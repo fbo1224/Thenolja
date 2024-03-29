@@ -79,7 +79,7 @@ $(function () {
 			<input class="form-control" type="text" name="daterange" value="" readonly/>
 		</div>
 		
-		<input class="form-control" id="people-input" type="number" name="people" value="" placeholder="인원수를 입력해주세요.">
+		<input class="form-control" min="1" max="99" id="people-input" type="number" name="people" value="" placeholder="인원수를 입력해주세요.">
 		<input class="form-control" id="search-input" type="text" name="search" required value="" placeholder="원하시는 지역을 입력해주세요.">
 		<input class="btn btn btn-info" type="submit" value="서치">
 	</form>
