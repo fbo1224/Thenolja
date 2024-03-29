@@ -92,7 +92,7 @@ public class MemberDao {
 	            member.setMemNo(rset.getInt("MEM_NO"));
 	            member.setMemId(rset.getString("MEM_ID"));
 	            member.setNickName(rset.getString("NICKNAME"));
-	            member.setGradeNo(rset.getString("GRADE_NAME"));
+	            member.setGradeName(rset.getString("GRADE_NAME"));
 	            list.add(member);
 			}
 			
@@ -129,7 +129,7 @@ public class MemberDao {
 				member.setEmail(rset.getString("EMAIL"));
 				member.setMemPhone(rset.getString("MEM_PHONE"));
 				member.setBornDate(rset.getString("BORN_DATE"));
-				member.setGradeNo(rset.getString("GRADE_NAME"));
+				member.setGradeName(rset.getString("GRADE_NAME"));
 				member.setJoinDate(rset.getString("JOIN_DATE"));
 				member.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
 			
@@ -234,7 +234,7 @@ public class MemberDao {
 				adminMember.setMemNo(rset.getInt("MEM_NO"));
 				adminMember.setMemId(rset.getString("MEM_ID"));
 				adminMember.setNickName(rset.getString("NICKNAME"));
-				adminMember.setGradeNo(rset.getString("GRADE_NAME"));
+				adminMember.setGradeName(rset.getString("GRADE_NAME"));
 				
 				list.add(adminMember);
 				
@@ -277,7 +277,7 @@ public class MemberDao {
 	/**
 	 * 등급 수정
 	 */
-	public int updateGrade(Connection conn, int memNo) {
+	public int updateGrade(Connection conn, AdminMember adminMember) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -285,11 +285,15 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			// pstmt.setInt(1, gradeNo);
-			pstmt.setInt(2, memNo);
+			pstmt.setInt(1, adminMember.getGradeNo());
+			pstmt.setInt(2, adminMember.getMemNo());
+			
+			result = pstmt.executeUpdate();
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;

@@ -36,19 +36,19 @@ public class ReservationInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String name = request.getParameter("memName");
 		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// String payment = request.getParameter("payment");
 		
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
-		reser.setMemNo(memNo);
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
+		reser.setMemNo(memNo);
 		// reser.setReMemNo(memNo);
 		// reser.setPayment(payment);d
 		
@@ -61,19 +61,12 @@ public class ReservationInsertController extends HttpServlet {
 			
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
-			Member member = new MemberService().selectMember(memNo);
-				if(member != null) {
 				reser = new ReserService().selectReservation();
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
-				session.setAttribute("member", member);
 				
 				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
-			} else {
-				request.setAttribute("errorMsg", "예약에 실패했습니다!");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			}
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
 			
 		} else {

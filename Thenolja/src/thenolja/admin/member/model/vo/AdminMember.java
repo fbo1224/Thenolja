@@ -15,20 +15,20 @@ public class AdminMember {
    private String memName;
    private String memPhone;
    private String memStatus;
+   private String gradeName;
    private int paymentPrice;
    private int reserNo;
    private String reserName;
-   private String gradeNo;
+   private int gradeNo;
 
 
-   
-	public String getGradeNo() {
-	return gradeNo;
-}
-
-public void setGradeNo(String gradeNo) {
-	this.gradeNo = gradeNo;
-}
+	public int getGradeNo() {
+		return gradeNo;
+	}
+	
+	public void setGradeNo(int gradeNo) {
+		this.gradeNo = gradeNo;
+	}
 
 	public int getReserNo() {
 		return reserNo;
@@ -78,7 +78,13 @@ public void setGradeNo(String gradeNo) {
       this.memStatus = memStatus;
    }
 
+   public String getGradeName() {
+      return gradeName;
+   }
 
+   public void setGradeName(String gradeName) {
+      this.gradeName = gradeName;
+   }
 
    public AdminMember() {
       super();
@@ -225,11 +231,15 @@ public void setGradeNo(String gradeNo) {
       return true;
    }
 
-   @Override
-   public String toString() {
-      return "Member [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", nickName=" + nickName
-            + ", bornDate=" + bornDate + ", email=" + email + ", deleteYn=" + deleteYn + ", joinDate=" + joinDate
-            + "]";
-   }
+@Override
+public String toString() {
+	return "AdminMember [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", nickName=" + nickName
+			+ ", bornDate=" + bornDate + ", email=" + email + ", deleteYn=" + deleteYn + ", joinDate=" + joinDate
+			+ ", memName=" + memName + ", memPhone=" + memPhone + ", memStatus=" + memStatus + ", gradeName="
+			+ gradeName + ", paymentPrice=" + paymentPrice + ", reserNo=" + reserNo + ", reserName=" + reserName
+			+ ", gradeNo=" + gradeNo + "]";
+}
+
+
    
 }

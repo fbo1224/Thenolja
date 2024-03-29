@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_review.model.vo.Review;
 
 public class ReviewDao {
@@ -53,6 +55,12 @@ public class ReviewDao {
 	      }
 	      
 	      return listCount;
+	}
+	
+	public ArrayList<Review> selectList(Connection conn, PageInfo pi){
+		
+ 
+		return ;
 	}
 	public int insertReview(Connection conn, Review review) {
 		

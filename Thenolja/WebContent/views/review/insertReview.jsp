@@ -134,7 +134,7 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reser.insert">
+	<form action="<%=contextPath %>/reviewInsert.do?reserNo=<%=reser.getReserNo()%>">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
@@ -148,8 +148,8 @@
 	    </div>
 	    <div>
            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
-
-            <div id="reser_detail">
+			<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
+	            <div id="reser_detail">
                 <h3>마리안느 호텔</h3>
                 <p>슈페리어 더블(오션뷰)</p>
                 <p>2인</p>
@@ -168,7 +168,7 @@
         </div>
     </div>
 	<div id="content_3">
-	    <input type="file" name="up-file" id="file-up">
+	    <input type="file" name="upfile" id="file-up">
 	    <button id="insert-img">사진추가</button>
 	</div>
             
@@ -177,9 +177,9 @@
     </div>
         
     <div id="footer">
-        <button id="add" type="submit" onclick="insertReview()">등록하기</button>
+        <button id="add" type="submit">등록하기</button>
     </div>
-
+	<input id="starScore" type="hidden" name="starScore" value="">
 </div>
 </form>    
      <script>
@@ -202,6 +202,7 @@
                 }
                 starScore = parseInt($(e.target).attr('value')) + 1;
                 console.log(starScore);
+                $('#starScore').val(starScore);
              });
 
 

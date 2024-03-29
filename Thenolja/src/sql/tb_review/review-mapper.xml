@@ -6,6 +6,15 @@
 		Review Mapper
 	</comment>
 	
+	<entry key="selectListCount">
+   	SELECT 
+        	COUNT(*)
+     FROM
+          	REVIEW
+    WHERE
+         	REVIEW_YN = 'Y'
+   	</entry>
+	
 	<entry key="insertReview">
 		INSERT
 		  INTO

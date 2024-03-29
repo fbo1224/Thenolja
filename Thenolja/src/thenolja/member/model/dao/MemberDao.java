@@ -333,8 +333,60 @@ public class MemberDao {
 		}
 		return member;
 	}
-	
-	
+//----------------------------닉네임 중복확인-----------------------------------------
+	public int nickNameCheck(Connection conn, String checkNickname) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("nicknameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkNickname);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return count;
+	}
+//----------------------------------이메일 중복확인-------------------------------------
+	public int emailCheck(Connection conn, String checkEmail) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("emailCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkEmail);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return count;
+	}
 	
 	
 	

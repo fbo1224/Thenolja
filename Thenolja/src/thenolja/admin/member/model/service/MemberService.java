@@ -144,11 +144,13 @@ public class MemberService {
 	/**
 	 * 등급 수정
 	 */
-	public int updateGrade(int memNo) {
+	public int updateGrade(AdminMember adminMember) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().updateGrade(conn, memNo);
+		int result = new MemberDao().updateGrade(conn, adminMember);
+		
+		System.out.println(adminMember);
 		
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
@@ -159,6 +161,7 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+		
 	}
 	
 	
