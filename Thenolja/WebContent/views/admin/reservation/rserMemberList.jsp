@@ -36,11 +36,11 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원  ID입력" name="memId">
+                        <input type="text" placeholder="회원  ID입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info" onclick="searchMemId()">검색</button>
                     </div>
                 </div>
 
@@ -142,6 +142,61 @@
     
     
     <script>
+    
+    	function searchMemId(){
+    		
+    		$.ajax({
+    			
+    			url : 'reserSearchMemId.do',
+    			type : 'post',
+    			data : { keyword : $('#keyword').val()},
+    			success : function(result){
+    				if(result == null){
+    					alert('예약 회원이 존재하지 않습니다.');
+    					location.href = '<%=contextPath%>/reserMember?currentPage=1';
+    				} else{
+    					
+    					
+    					const date = new Date();
+    					
+    					const year = date.getFullYear();
+    					
+    					const month = date.getMonth() + 1;
+    					
+    					const day = date.getDate();
+    					
+    					var currentDate = year + '.' + (month < 10 ? '0' : "") + month + '.' + (day < 10 ? '0' : "") + day;
+    					
+    					let resultStr = '';
+
+      					resultStr += '<tr>'
+      							   + '<td>' + result.reserNo + '</td>'
+      							   + '<td>' + result.memId + '</td>'
+      							   + '<td>' + result.reserName + '</td>'
+      							   + '<td>' + result.memPhone + '</td>'
+	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>'
+	                        	
+						
+		                            if(currentDate > result.getCheckInTime) { '<td>' +
+		                        		'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
+		                      	    } else {
+		                      	    '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
+		                      	    }
+	      						   '</tr>'
+      			
+      				$('#mem_list tbody').html(resultStr);
+    				}
+    			}
+    			
+    		});
+    		
+    	}
+    
+    
+    
+    
+    
+    
     	function detailReserMem(e){
     		console.log(e);
     		

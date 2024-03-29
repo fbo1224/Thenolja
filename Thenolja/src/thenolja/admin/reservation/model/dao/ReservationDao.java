@@ -249,7 +249,43 @@ public class ReservationDao {
 	}
 	
 	
-	
+	/**
+	 * 예약 회원 검색
+	 */
+	public AdminReservation searchReserMember(Connection conn, String keyword) {
+		
+		AdminReservation adminReservation = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchReserMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				adminReservation = new AdminReservation();
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setMemId(rset.getString("MEM_ID"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("RESER_NAME"));
+				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminReservation;
+		
+	}
 	
 	
 	
