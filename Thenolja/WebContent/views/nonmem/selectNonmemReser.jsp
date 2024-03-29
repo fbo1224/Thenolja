@@ -137,8 +137,7 @@
 
                 </div>
             </a>
-
-	</div>
+		</div>
 	<% } %>
 <% } %>
 <div id="homeBtn">
