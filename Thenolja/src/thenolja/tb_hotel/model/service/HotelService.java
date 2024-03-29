@@ -161,7 +161,11 @@ public class HotelService {
 		return result;
 	}
 	
-	public ArrayList<HotelCard> selectFavorite() {
+	public ArrayList<HotelCard> selectPopular() {
+		Connection conn = getConnection();
+		
+		
+		
 		
 	}
 	
