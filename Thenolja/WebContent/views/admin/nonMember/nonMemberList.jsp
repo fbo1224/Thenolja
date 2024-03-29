@@ -36,11 +36,11 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="예약자명 입력" name="nonMemId">
+                        <input type="text" placeholder="예약자명 입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="submit" class="btn btn-outline-info" onclick="searchNonMemName()">검색</button>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                             <td><%= n.getMemNo() %></td>
                             <td><%= n.getMemName() %></td>
                             <td><%= n.getMemPhone() %></td>
-                             <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(<%=n.getMemNo()%>)">삭제</button></td>
+                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(<%=n.getMemNo()%>)">삭제</button></td>
                           </tr>
                          <% } %>
                         <% }  %>
@@ -97,19 +97,19 @@
      <div class="paging-area" align="center";>
                 
                 	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>
                     	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=i%>'"><%= i %></button>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=i%>'"><%= i %></button>
                   		<% } else { %>
                     	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
                     <% } %>
                    <%} %>
                   
                   <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                 </div>
         
@@ -121,6 +121,45 @@
     </div>
     
     <script>
+    
+    	function searchNonMemName(){
+    		
+    		$.ajax({
+    			
+    			url : 'searchNonMemName.do',
+    			type : 'post',
+    			data : {keyword : $('#keyword').val()},
+    			success : function(result){
+    				if(result == null){
+      					alert('회원이 존재하지 않습니다.');
+      					location.href = '<%=contextPath%>/selectNonMem?currentPage=1';
+      					
+      				} else {
+      						let resultStr = '';
+
+      					resultStr += '<tr>'
+      							   + '<td>' + result.memNo + '</td>'
+      							   + '<td>' + result.memName + '</td>'
+      							   + '<td>' + result.memPhone + '</td>'
+      							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember('+ result.memNo+')">' + '삭제' + '</button>' + '</td>'
+      							   + '</tr>'
+      			
+      				$('#mem_list tbody').html(resultStr);
+      				}
+    				
+    			}
+    			
+    			
+    		});
+    		
+    		
+    		
+    	}
+    
+    	
+    	
+    	
+    	
     	function deleteNonMember(e){
     		
     		$.ajax({
