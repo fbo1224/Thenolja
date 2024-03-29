@@ -287,9 +287,13 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, adminMember.getGradeNo());
 			pstmt.setInt(2, adminMember.getMemNo());
+			
+			result = pstmt.executeUpdate();
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;

@@ -150,6 +150,8 @@ public class MemberService {
 		
 		int result = new MemberDao().updateGrade(conn, adminMember);
 		
+		System.out.println(adminMember);
+		
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -159,6 +161,7 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+		
 	}
 	
 	

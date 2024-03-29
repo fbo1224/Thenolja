@@ -264,11 +264,10 @@
   			url : 'gradeUpdate.do',
   			type : 'get',
   			data : {memNo : $('#updateMemNo').val(),
-  					gradeNo :$('#gradeSelect').val()},
+  					gradeNo : $('#gradeSelect').val()},
   			success : function(result) {
-  				consloe.log(result);
-  				
-  				
+  				console.log(result);
+	             location.href = '<%=contextPath%>/selectMember?currentPage=1';
   			}
   			
   		});
