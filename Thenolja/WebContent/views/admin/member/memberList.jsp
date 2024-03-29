@@ -286,7 +286,8 @@
   			data : { keyword : $('#keyword').val()},
   			success : function(result){
   				console.log(result);
-  			
+  				$('.memNo').text(result);
+  				
   			}
   		});
   		
