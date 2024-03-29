@@ -10,7 +10,7 @@
    	SELECT 
         	COUNT(*)
      FROM
-          	REVIEW
+          	TB_REVIEW
     WHERE
          	REVIEW_YN = 'Y'
    	</entry>
@@ -31,20 +31,44 @@
 	</entry>
 	
 	<entry key="selectList">
-		SELECT
+		SELECT * 
+          FROM (
+        SELECT A.*, ROWNUM RNUM
+          FROM (		
+        SELECT
 		        NICKNAME,
-		        RV_RESER_NO,
+		        RESER_NO,
 		        IMG_PATH,
 		        REVIEW_CONTENT,
 		        REVIEW_SCORE,
-		        CREATE_DATE
+		        CREATE_DATE,
+                HOTEL_NAME,
+                HOTEL_PATH,
+                RESER_DATE,
+                PEOPLE,
+                PAYMENT_PRICE
 		  FROM
 		        TB_REVIEW
 		  JOIN
 		        TB_RESERVATION ON (TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO)
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+          JOIN
+		        TB_ROOM ON (TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO)
+		  JOIN
+		        TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
+           AND
+              	REVIEW_YN = 'Y'
+           AND
+                TB_HOTEL.HOTEL_NO = ?
+         ORDER
+            BY
+                CREATE_DATE DESC) A)
+      WHERE RNUM BETWEEN ? AND ?
+	
 	</entry>
+	
+	
 
 	
 	
