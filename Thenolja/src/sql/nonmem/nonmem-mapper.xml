@@ -38,16 +38,16 @@
 		       MEM_STATUS,
 		       RESER_NO,
 		       RESER_NAME,
-		       R.CHECKIN_TIME,
-		       R.CHECKOUT_TIME,
+		       TO_CHAR(R.CHECKIN_TIME,'YY/MM/DD, HH24:MI') AS CHECKIN_DATE,
+		       TO_CHAR(R.CHECKOUT_TIME,'YY/MM/DD, HH24:MI') AS CHECKOUT_DATE,
 		       BICYCLE,
 		       PEOPLE,
 		       PAYMENT_PRICE,
 		       ROOM_NAME,
 		       ROOM_NUM,
 		       MAX_PEOPLE,
-		       M.CHECKIN_TIME,
-		       M.CHECKOUT_TIME,
+		       M.CHECKIN_TIME AS CHECKIN_TIME,
+		       M.CHECKOUT_TIME AS CHECKOUT_TIME,
 		       HOTEL_NAME,
 		       HOTEL_LOCATION,
 		       HOTEL_ADDRESS,
@@ -74,7 +74,9 @@
 		 WHERE
 		       MEM_NAME = ?
 		   AND
-		       MEM_PHONE = ?
+		       MEM_NO = ?
+		   AND
+		       MEM_STATUS = 'N'
 	
 	</entry>
 	

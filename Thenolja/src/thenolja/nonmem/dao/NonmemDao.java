@@ -30,7 +30,7 @@ public class NonmemDao {
 		
 	}
 
-	public ArrayList<SelectNonmemReser> selectNonmemReser(Connection conn, String nonmemName, String nonmemPhone) {
+	public ArrayList<SelectNonmemReser> selectNonmemReser(Connection conn, String nonmemName, int nonmemNo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -43,7 +43,7 @@ public class NonmemDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, nonmemName);
-			pstmt.setString(2, nonmemPhone);
+			pstmt.setInt(2, nonmemNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -55,8 +55,8 @@ public class NonmemDao {
 						                            rset.getString("MEM_STATUS"),
 						                            rset.getInt("RESER_NO"),
 						                            rset.getString("RESER_NAME"),
-						                            rset.getString("CHECKIN_TIME"),
-						                            rset.getString("CHECKOUT_TIME"),
+						                            rset.getString("CHECKIN_DATE"),
+						                            rset.getString("CHECKOUT_DATE"),
 								                 	rset.getString("BICYCLE"),
 								                 	rset.getInt("PEOPLE"),
 								                 	rset.getString("PAYMENT_PRICE"),

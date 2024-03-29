@@ -553,7 +553,7 @@ public class HotelDao {
 			while(rset.next()){
 				HotelCard hc = new HotelCard();
 				hc.setHotelName(rset.getString("HOTEL_NAME"));
-				hc.setHotelCategory("HOTEL_CATEGORY");
+				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
 				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
 				hc.setHotelPath(rset.getString("HOTEL_PATH"));
 			    plist.add(hc);
