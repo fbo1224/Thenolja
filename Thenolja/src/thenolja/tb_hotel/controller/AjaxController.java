@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
 import thenolja.tb_hotel.model.vo.HotelCard;
@@ -52,11 +55,17 @@ public class AjaxController {
 	
 	
 	public void selectPopular(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<HotelCard> hotelList = new HotelService().selectPopular();
+		ArrayList<HotelCard> pList = new HotelService().selectPopular();
+		// System.out.println(pList);
 		
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
 		
-		
-		
+		try {
+			gson.toJson(pList, response.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void locRecomData(HttpServletRequest request, HttpServletResponse response) {

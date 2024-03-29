@@ -96,7 +96,7 @@ div {
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
-					  <input type="file"  name="roomImg" >
+					  <input type="file"  name="roomImg" required>
 					</div>
 					
 					<div class="form-grop">
