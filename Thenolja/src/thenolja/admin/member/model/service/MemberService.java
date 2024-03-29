@@ -45,17 +45,6 @@ public class MemberService {
 		
 	}
 	
-	/*public Member selectIdMember(String memId) {
-		
-		Connection conn = JDBCTemplate.getConnection();
-		
-		Member member = new MemberDao().selectIdMember(conn, memId);
-		
-		JDBCTemplate.close(conn);
-		
-		return member;
-		
-	}*/
 	
 	public AdminMember selectMember(int memNo) {
 		
@@ -161,6 +150,21 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+		
+	}
+	
+	/**
+	 * 멤버 아이디로 검색
+	 */
+	public AdminMember selectMemberId(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		AdminMember adminMember = new MemberDao().selectMemberId(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminMember;
 		
 	}
 	
