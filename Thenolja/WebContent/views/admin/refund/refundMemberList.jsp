@@ -39,11 +39,11 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원  ID입력" name="memId">
+                        <input type="text" placeholder="회원  ID입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info" onclick="searchRefundMem()">검색</button>
                     </div>
                 </div>
 
@@ -133,6 +133,27 @@
     </div>
     
     <script>
+    
+    	function searchRefundMem(){
+    		
+    		url : 'searchRefundMem.do',
+    		type : 'post',
+    		data : { keyword : $('#keyword').val()},
+    		success : function(result){
+    			
+    		}
+    		
+    		
+    	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
     	function selectRefundMember(e){
     		console.log(e);
     		$.ajax({

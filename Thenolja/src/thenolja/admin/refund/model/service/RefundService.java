@@ -84,6 +84,21 @@ public class RefundService {
 		
 	}
 	
+	/**
+	 * 회원 환불
+	 */
+	public AdminRefund selectRefundeMemberId(String keyword) {
+		
+		Connection conn =JDBCTemplate.getConnection();
+		
+		AdminRefund adminRefund = new RefundDao().selectRefundeMemberId(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminRefund;
+		
+	}
+	
 	
 	
 	
