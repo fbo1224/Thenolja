@@ -40,7 +40,7 @@ public class ReserDao {
 			pstmt.setString(1, reser.getName());
 			pstmt.setString(2, reser.getPhone());
 			pstmt.setString(3, reser.getBicycle());
-			pstmt.setInt(4, reser.getReMemNo());
+			pstmt.setInt(4, reser.getMemNo());
 			// pstmt.setString(4, reser.getCheckIn());
 			// pstmt.setString(5, reser.getCheckOut());
 			// pstmt.setInt(4, reser.getPeople());

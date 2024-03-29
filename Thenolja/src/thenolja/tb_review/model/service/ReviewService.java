@@ -24,8 +24,13 @@ public class ReviewService {
 
 	public ArrayList<Review> selectList(PageInfo pi) {
 		
+		Connection conn = getConnection();
+		  
+		ArrayList<Review> reviewList = new ReviewDao().selectList(conn, pi);
+		  
+		close(conn);
 		
-		return null;
+		return reviewList;
 	}
 
 	public int insertReview(Review review) {
