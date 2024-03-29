@@ -144,7 +144,7 @@
     <script>
     
     	function searchMemId(){
-    		
+			
     		$.ajax({
     			
     			url : 'reserSearchMemId.do',
@@ -165,9 +165,15 @@
     					
     					const day = date.getDate();
     					
-    					var currentDate = year + '.' + (month < 10 ? '0' : "") + month + '.' + (day < 10 ? '0' : "") + day;
+    					const currentDate = year + '.' + (month < 10 ? '0' : "") + month + '.' + (day < 10 ? '0' : "") + day;
+    		    		
+    					console.log(currentDate);
+    					
     					
     					let resultStr = '';
+    					
+    					
+    					
 
       					resultStr += '<tr>'
       							   + '<td>' + result.reserNo + '</td>'
@@ -175,9 +181,8 @@
       							   + '<td>' + result.reserName + '</td>'
       							   + '<td>' + result.memPhone + '</td>'
 	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>'
-	                        	
 						
-		                            if(currentDate > result.getCheckInTime) { '<td>' +
+		                            if(currentDate < result.getCheckInTime) { '<td>' +
 		                        		'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
 		                      	    } else {
 		                      	    '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
