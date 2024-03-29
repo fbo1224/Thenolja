@@ -164,9 +164,11 @@ public class HotelService {
 	public ArrayList<HotelCard> selectPopular() {
 		Connection conn = getConnection();
 		
+		ArrayList<HotelCard> plist = new HotelDao().selectPopular(conn);
 		
+		close(conn);
 		
-		
+		return plist;
 	}
 	
 	

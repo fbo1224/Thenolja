@@ -540,7 +540,34 @@ public class HotelDao {
 		return list;
 	}
 	
-	
+	public ArrayList<HotelCard> selectPopular(Connection conn){
+		ArrayList<HotelCard> plist = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPopular");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				HotelCard hc = new HotelCard();
+				hc.setHotelName(rset.getString("HOTEL_NAME"));
+				hc.setHotelCategory("HOTEL_CATEGORY");
+				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				hc.setHotelPath(rset.getString("HOTEL_PATH"));
+			    plist.add(hc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return plist;
+	}
 	
 	
 	
