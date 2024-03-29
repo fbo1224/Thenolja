@@ -84,7 +84,7 @@
                         			<td><%= m.getMemNo() %></td>
                         			<td><%= m.getMemId() %></td>
                         			<td><%= m.getNickName() %></td>
-                        			<td><%= m.getGradeName() %></td>
+                        			<td><%= m.getGradeNo() %></td>
                         			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(<%= m.getMemNo() %>)">조회</button></td>
                             		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(<%= m.getMemNo() %>)">삭제</button></td>
                         		</tr>
@@ -138,7 +138,7 @@
     			type : 'get',
     			success : function(result){
     				$('#name').text(result.memName);
-    				$('#grade').text(result.gradeName);
+    				$('#grade').text(result.gradeNo);
     				$('#email').text(result.email);
     				$('#joinDate').text(result.joinDate);
     				$('#phone').text(result.memPhone);

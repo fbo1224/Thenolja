@@ -92,7 +92,7 @@ public class MemberDao {
 	            member.setMemNo(rset.getInt("MEM_NO"));
 	            member.setMemId(rset.getString("MEM_ID"));
 	            member.setNickName(rset.getString("NICKNAME"));
-	            member.setGradeName(rset.getString("GRADE_NAME"));
+	            member.setGradeNo(rset.getString("GRADE_NAME"));
 	            list.add(member);
 			}
 			
@@ -129,7 +129,7 @@ public class MemberDao {
 				member.setEmail(rset.getString("EMAIL"));
 				member.setMemPhone(rset.getString("MEM_PHONE"));
 				member.setBornDate(rset.getString("BORN_DATE"));
-				member.setGradeName(rset.getString("GRADE_NAME"));
+				member.setGradeNo(rset.getString("GRADE_NAME"));
 				member.setJoinDate(rset.getString("JOIN_DATE"));
 				member.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
 			
@@ -234,7 +234,7 @@ public class MemberDao {
 				adminMember.setMemNo(rset.getInt("MEM_NO"));
 				adminMember.setMemId(rset.getString("MEM_ID"));
 				adminMember.setNickName(rset.getString("NICKNAME"));
-				adminMember.setGradeName(rset.getString("GRADE_NAME"));
+				adminMember.setGradeNo(rset.getString("GRADE_NAME"));
 				
 				list.add(adminMember);
 				
