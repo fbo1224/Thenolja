@@ -214,4 +214,36 @@ private Properties prop = new Properties();
 		return list;
 	}
 	
+	
+	/**
+	 * 회원 환불 조회 검색
+	 */
+	public AdminRefund selectRefundeMemberId(Connection conn, String keyword) {
+		
+		AdminRefund adminRefund = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundeMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminRefund;
+	}
+	
 }
