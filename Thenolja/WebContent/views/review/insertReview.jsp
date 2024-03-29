@@ -134,7 +134,7 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reviewInsert.do?reserNo=<%=reser.getReserNo()%>">
+	<form action="<%=contextPath %>/reviewInsert.do?reserNo=<%=reser.getReserNo()%>" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
@@ -165,6 +165,7 @@
             <span class="star" value="2">☆</span>
             <span class="star" value="3">☆</span>
             <span class="star" value="4">☆</span>
+	<input id="starScore" type="hidden" name="starScore" value="">
         </div>
     </div>
 	<div id="content_3">
@@ -179,7 +180,6 @@
     <div id="footer">
         <button id="add" type="submit">등록하기</button>
     </div>
-	<input id="starScore" type="hidden" name="starScore" value="">
 </div>
 </form>    
      <script>
