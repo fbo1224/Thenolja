@@ -151,7 +151,15 @@ public class HotelService {
 		return result;
 	}
 	
-	
+	public ArrayList<String> selectLocation() {
+		Connection conn = getConnection();
+		
+		ArrayList<String> result = new HotelDao().selectLocation(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

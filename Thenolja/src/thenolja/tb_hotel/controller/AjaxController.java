@@ -1,6 +1,7 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,5 +49,30 @@ public class AjaxController {
 		
 	}
 	
+	
+	public void searchData(HttpServletRequest request, HttpServletResponse response) {
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		String location = request.getParameter("location");
+		int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+		
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(location);
+		System.out.println(maxPeople);
+		
+		
+	}
+	
+	public void searchLocation(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<String> locList = new HotelService().selectLocation();
+		
+		response.setContentType("text/html; charset=UTF-8");
+		try {
+			response.getWriter().print(locList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
