@@ -24,6 +24,7 @@ public class SelectNonmemReser {
 	private String checkOutTime;
 	
 	// hotel
+	private int hotelNo;
 	private String hotelName;
 	private String hotelLocation;
 	private String hotelAddress;
@@ -38,8 +39,8 @@ public class SelectNonmemReser {
 
 	public SelectNonmemReser(int memNo, String memName, String memPhone, String memStatus, int reserNo,
 			String reserName, String checkInDate, String checkOutDate, String bicycle, int people, String paymentPrice,
-			String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime, String hotelName,
-			String hotelLocation, String hotelAddress, String hotelPath, String roomImg) {
+			String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime, int hotelNo,
+			String hotelName, String hotelLocation, String hotelAddress, String hotelPath, String roomImg) {
 		super();
 		this.memNo = memNo;
 		this.memName = memName;
@@ -57,6 +58,7 @@ public class SelectNonmemReser {
 		this.maxPeople = maxPeople;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
+		this.hotelNo = hotelNo;
 		this.hotelName = hotelName;
 		this.hotelLocation = hotelLocation;
 		this.hotelAddress = hotelAddress;
@@ -192,6 +194,14 @@ public class SelectNonmemReser {
 		this.checkOutTime = checkOutTime;
 	}
 
+	public int getHotelNo() {
+		return hotelNo;
+	}
+
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
+	}
+
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -238,9 +248,9 @@ public class SelectNonmemReser {
 				+ memStatus + ", reserNo=" + reserNo + ", reserName=" + reserName + ", checkInDate=" + checkInDate
 				+ ", checkOutDate=" + checkOutDate + ", bicycle=" + bicycle + ", people=" + people + ", paymentPrice="
 				+ paymentPrice + ", roomName=" + roomName + ", roomNum=" + roomNum + ", maxPeople=" + maxPeople
-				+ ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", hotelName=" + hotelName
-				+ ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelPath=" + hotelPath
-				+ ", roomImg=" + roomImg + "]";
+				+ ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", hotelNo=" + hotelNo
+				+ ", hotelName=" + hotelName + ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress
+				+ ", hotelPath=" + hotelPath + ", roomImg=" + roomImg + "]";
 	}
 
 	

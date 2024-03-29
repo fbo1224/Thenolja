@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.tb_hotel.model.service.HotelService;
+import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -32,14 +34,17 @@ public class ReviewInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		// int score = Integer.parseInt(request.getParameter("starScore"));
 		
 		// System.out.println(score);
 		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 		
-		if(reser != null) {
+		if(reser != null && hotel != null) {
 			request.setAttribute("reser", reser);
+			request.setAttribute("hotel", hotel);
 			request.getRequestDispatcher("views/review/insertReview.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMsg", "작성할 수 없습니다");

@@ -147,10 +147,41 @@
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
 		 		RE_MEM_NO = ?       
-		ORDER BY RESER_NO DESC
+		 ORDER BY RESER_NO DESC
 	</entry>
 	
-	
+	<entry key="selectHotelNo">
+	SELECT
+	        HOTEL_NO,
+	        HOTEL_NAME,
+	        HOTEL_PHONE,
+	        HOTEL_LOCATION,
+	        HOTEL_ADDRESS,
+	        HOTEL_CATEGORY,
+	        HOTEL_PATH,
+	        HOTEL_INTRO,
+	        HOST_NAME
+	  FROM
+	        TB_HOTEL
+	  ORDER BY HOTEL_NO DESC
+	</entry>
+		
+	<entry key="selectHotel">
+	SELECT
+	        HOTEL_NO,
+	        HOTEL_NAME,
+	        HOTEL_PHONE,
+	        HOTEL_LOCATION,
+	        HOTEL_ADDRESS,
+	        HOTEL_CATEGORY,
+	        HOTEL_PATH,
+	        HOTEL_INTRO,
+	        HOST_NAME
+	  FROM
+	        TB_HOTEL
+	 WHERE
+	        HOTEL_NO = ?
+	</entry>
 	
 	
 </properties>

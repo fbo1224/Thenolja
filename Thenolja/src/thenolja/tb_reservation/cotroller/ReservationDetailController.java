@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.member.model.service.MemberService;
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.service.NonmemService;
+import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -39,13 +40,16 @@ public class ReservationDetailController extends HttpServlet {
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 	//	int memNo = Integer.parseInt(request.getParameter("memNo"));
 	//d	Member member = new MemberService().selectMember (memNo);
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// Member member = new NonmemService().selectNonMemNo(memNo);
 			
-		if(reser != null) {
+		if(reser != null && hotel != null) {
 			request.setAttribute("reser", reser);
+			request.setAttribute("hotel", hotel);
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
 			view.forward(request, response);
 			// response.sendRedirect("views/reservation/detailReservation.jsp");

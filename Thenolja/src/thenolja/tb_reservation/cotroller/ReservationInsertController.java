@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import thenolja.member.model.service.MemberService;
 import thenolja.member.model.vo.Member;
+import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -62,11 +63,13 @@ public class ReservationInsertController extends HttpServlet {
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
 				reser = new ReserService().selectReservation();
-				
+				Hotel hotel = new ReserService().selectHotel();
+
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
-				
-				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
+				session.setAttribute("hotel", hotel);
+
+				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo());
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
 			
 		} else {
