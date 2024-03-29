@@ -180,17 +180,20 @@
       							   + '<td>' + result.memId + '</td>'
       							   + '<td>' + result.reserName + '</td>'
       							   + '<td>' + result.memPhone + '</td>'
-	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>'
-						
-		                            if(currentDate < result.getCheckInTime) { '<td>' +
-		                        		'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
+	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>';
+									
+		                            if(currentDate > result.getCheckInTime) { 
+		                            	resultStr += '<td>' +
+		                        		+'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
 		                      	    } else {
-		                      	    '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>'
+		                      	    	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
 		                      	    }
-	      						   '</tr>'
+		                            resultStr += '</tr>'
       			
       				$('#mem_list tbody').html(resultStr);
+	      						   console.log(resultStr);
     				}
+    				
     			}
     			
     		});
