@@ -138,9 +138,50 @@
         <div id="footer"></div>
 
     </div>
-   
-   	<script>
-        			function detailMem(e){
+    
+    
+      <script>
+  	function searchMemId(){
+  	
+  		$.ajax({
+  			
+  			url : 'searchMemberId.do',
+  			type : 'post',
+  			data : { keyword : $('#keyword').val()},
+  			success : function(result){
+  				console.log(result);
+  				//$('.memNo').text(result);
+  				if(result == null){
+  					alert('회원이 존재하지 않습니다.');
+  					location.href = '<%=contextPath%>/selectMember?currentPage=1';
+  					
+  				} else {
+  						let resultStr = '';
+
+  					resultStr += '<tr>'
+  							   + '<td>' + result.memNo + '</td>'
+  							   + '<td>' + result.memId + '</td>'
+  							   + '<td>' + result.nickName + '</td>'
+  							   + '<td>' + result.gradeName + '</td>'
+  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem('+ result.memNo+')">' + '조회' + '</button>' + '</td>'
+	                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteMember('+ result.memNo+')">' + '삭제' + '</button>' + '</td>'
+  							   + '</tr>'
+  			
+  				$('#mem_list tbody').html(resultStr);
+  				}
+
+  				
+  			
+  			}
+  		});
+  		
+  	}
+ 
+  	
+  	
+  	
+  	
+  	function detailMem(e){
         				// console.log(e);
         				
         				$.ajax({
@@ -164,9 +205,7 @@
         				
         			}
         		
-       </script>
-       
-      <script>
+  
 			      function deleteMember(e){
 			          console.log(e);
 			       
@@ -265,8 +304,9 @@
   			data : {memNo : $('#updateMemNo').val(),
   					gradeNo : $('#gradeSelect').val()},
   			success : function(result) {
-  				console.log(result);
-	             location.href = '<%=contextPath%>/selectMember?currentPage=1';
+  				// console.log(result);
+  				alert('등급 수정이 완료되었습니다!');
+  				location.reload(true);
   			}
   			
   		});
@@ -276,23 +316,6 @@
   </script>
   
   
-  <script>
-  	function searchMemId(){
-  	
-  		$.ajax({
-  			
-  			url : 'searchMemberId.do',
-  			type : 'post',
-  			data : { keyword : $('#keyword').val()},
-  			success : function(result){
-  				console.log(result);
-  				$('.memNo').text(result);
-  				
-  			}
-  		});
-  		
-  	}
-  </script>
 
 
 
