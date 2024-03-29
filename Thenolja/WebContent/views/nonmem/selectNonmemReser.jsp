@@ -123,19 +123,21 @@
 		
 		<% for(SelectNonmemReser c : nonmemReser) { %>
 		<div id="content">
-	        <div id="reser_info">
-	            <div id="reser_hotel_img"><img src="<%=c.getRoomImg() %>" alt="" width="220px" height="220px"></div>
-	
-	            <div id="reser_detail">
-	                <h3><%=c.getHotelName() %></h3>
-	                <p><%=c.getRoomName() %></p>
-	                <p><%=c.getPeople() %>명</p>
-	                <p><%=c.getPaymentPrice() %>원</p>
-	                <p><%=c.getCheckInDate() %> ~ <%=c.getCheckOutDate() %></p>
-	            </div>
+            <a href="#">
+                <div id="reser_info">
+                    <div id="reser_hotel_img"><img src="<%=c.getRoomImg() %>" alt="" width="220px" height="220px"></div>
+        
+                    <div id="reser_detail">
+                        <h3><%=c.getHotelName() %></h3>
+                        <p><%=c.getRoomName() %></p>
+                        <p><%=c.getPeople() %>명</p>
+                        <p><%=c.getPaymentPrice() %>원</p>
+                        <p><%=c.getCheckInDate() %> ~ <%=c.getCheckOutDate() %></p>
+                    </div>
 
-        </div>
-	</div>
+                </div>
+            </a>
+		</div>
 	<% } %>
 <% } %>
 <div id="homeBtn">

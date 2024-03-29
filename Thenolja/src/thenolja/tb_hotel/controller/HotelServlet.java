@@ -78,6 +78,9 @@ public class HotelServlet extends HttpServlet {
 
 			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;
+			
+			// searchList
+			// 
 		}
 		
 		if(flag) {

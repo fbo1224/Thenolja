@@ -287,14 +287,65 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, adminMember.getGradeNo());
 			pstmt.setInt(2, adminMember.getMemNo());
+			
+			result = pstmt.executeUpdate();
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
 		
 	}
+	
+	
+	/**
+	 * 멤버 아이디로 검색
+	 */
+	public AdminMember selectMemberId(Connection conn, String keyword) {
+		
+		AdminMember adminMember = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+			
+				adminMember = new AdminMember();
+				adminMember.setMemNo(rset.getInt("MEM_NO"));
+				adminMember.setMemId(rset.getString("MEM_ID"));
+				adminMember.setNickName(rset.getString("NICKNAME"));
+				adminMember.setGradeName(rset.getString("GRADE_NAME"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminMember;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
