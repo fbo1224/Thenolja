@@ -165,6 +165,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
+    				location.href = '<%=contextPath%>/adminReviewList?currentPage=1'
     			}
     			
     		});
