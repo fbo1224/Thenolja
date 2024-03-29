@@ -33,15 +33,16 @@
         <div id="content">
             <div id="content_1">
 
-                <form action="#" method="get" id="search_member">
+                <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="탈퇴 회원 ID입력" name="memId">
+                        <input type="text" placeholder="탈퇴 회원 ID입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="submit" class="btn btn-outline-info" onclick="searchMemId()">검색</button>
                     </div>
-                </form>
+                    
+                </div>
 
             </div>
             <div id="content_2">
@@ -129,7 +130,58 @@
 
     </div>
     
+    
+    
     <script>
+    
+    	function searchMemId(){
+    		
+    		$.ajax({
+    		
+    			url : 'searchDeleteMemberId.do',
+    			type : 'post',
+    			data : {keyword : $('#keyword').val()},
+    			success : function(result){
+    				
+    				if(result == null){
+      					alert('회원이 존재하지 않습니다.');
+      					location.href = '<%=contextPath%>/accountCancellation?currentPage=1';
+      					
+      				} else {
+      						let resultStr = '';
+
+      					resultStr += '<tr>'
+      							   + '<td>' + result.memNo + '</td>'
+      							   + '<td>' + result.memId + '</td>'
+      							   + '<td>' + result.nickName + '</td>'
+      							   + '<td>' + result.gradeName + '</td>'
+      							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem('+ result.memNo+')">' + '조회' + '</button>' + '</td>'
+    	                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem('+ result.memNo+')">' + '삭제' + '</button>' + '</td>'
+      							   + '</tr>'
+      			
+      				$('#mem_list tbody').html(resultStr);
+      				}
+
+    				
+    				
+    			}
+    			
+    		});
+    		
+    		
+    	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     	function detailDeleteMem(e){
     		console.log(e);
     		$.ajax({
@@ -193,7 +245,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-            <table>
+            <table style="font-size: 14px;">
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
                     <td width="200">이름 : <span id="name"></span></td>

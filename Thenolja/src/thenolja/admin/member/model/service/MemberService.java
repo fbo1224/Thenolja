@@ -168,6 +168,20 @@ public class MemberService {
 		
 	}
 	
+	/**
+	 * 탈퇴 멤버 아이디로 검색
+	 */
+	public AdminMember selectDeleteMemberId(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		AdminMember adminMember = new MemberDao().selectDeleteMemberId(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminMember;
+	}
+	
 	
 	
 	

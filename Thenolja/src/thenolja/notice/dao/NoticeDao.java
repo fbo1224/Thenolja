@@ -248,7 +248,7 @@ public class NoticeDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("updateNoticeOne");
+		String sql = prop.getProperty("updateNoticeOne");// sql
 		System.out.println("[NoticeDao updateNoticeOne] " + sql);
 		
 		try {
@@ -283,15 +283,19 @@ public class NoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteNoticeOne");
+		
 		System.out.println("[NoticeDao delete sql] " + sql);
 		System.out.println("[NOTICE DAO DELETE] " + noticeNo);
 		
+		
 		try {
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);		
 			pstmt.setInt(1, noticeNo);
-
+			
+			
 			result = pstmt.executeUpdate();	
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

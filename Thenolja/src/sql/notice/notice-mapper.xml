@@ -50,7 +50,7 @@
 				)
 	</entry>	
 	
-	<!-- 공지사항 상세조회 -->
+	<!-- 공지사항 상세조회  -->
 	<entry key="selectNoticeOne">
 	    SELECT
                 NOTICE_NO,   	 /* 공지사항 번호 */
@@ -75,30 +75,47 @@
 		
 		WHERE NOTICE_NO = ?
 	
-	</entry>	
-	
-	<entry key="updateNoticeOne">
-		UPDATE
-				TB_NOTICE
-			SET
-					NOTICE_TITLE = ?,
-					NOTICE_CONTENT = ?,
-					STATUS = ?
-			WHERE   NOTICE_NO = ?
-			
-			/*AND     STATUS = 'Y'*/					
-			
-	
 	</entry>
 		
+	<!-- 공지사항 상세 조회 게시글 수정 -->
+	<entry key="updateNoticeOne">
+		
+		UPDATE TB_NOTICE
+		
+		SET    NOTICE_TITLE = ?,
+			   NOTICE_CONTENT = ?,
+			   STATUS         = ?
+		
+		WHERE	1=1
+		
+		AND     NOTICE_NO     = ?  
+					   					
+			
+	
+	</entry>
+	
+	<!-- 공지사항 상세 조회 게시글 삭제 -->	
 	<entry key="deleteNoticeOne">
 			
-			UPDATE  NOTICE
+		DELETE   FROM  TB_NOTICE
+		
+		WHERE	1=1
+		
+		AND       NOTICE_NO = ?
 			
-			SET     STATUS = 'N'
 					
-			WHERE   NOTICE_NO = ?				
+	
 	</entry>
+	
+	
+	<entry key="getTotal">
+	
+	  
+		
+	
+	
+	</entry>
+	
 	
 	
 </properties>

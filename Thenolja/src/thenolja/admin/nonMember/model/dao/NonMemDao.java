@@ -131,8 +131,40 @@ public class NonMemDao {
 		return result;
 	}
 	
-	
-	
+	/**
+	 * 비회원 이름으로 검색
+	 */
+	public NonMember selectNonMemberName(Connection conn, String keyword) {
+		
+		NonMember nonMember = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNonMemberName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				nonMember = new NonMember();
+				nonMember.setMemNo(rset.getInt("MEM_NO"));
+				nonMember.setMemName(rset.getString("MEM_NAME"));
+				nonMember.setMemPhone(rset.getString("MEM_PHONE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return nonMember;
+		
+	}
 	
 
 }

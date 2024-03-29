@@ -40,6 +40,7 @@ public class ReviewInsertFormController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
+			// System.out.println("sdfsdf");
 			
 			int maxSize = 1024 * 1024 * 10;
 			
@@ -70,7 +71,7 @@ public class ReviewInsertFormController extends HttpServlet {
 		int result = new ReviewService().insertReview(review);
 		
 		if(result > 0) {
-       	 request.getSession().setAttribute("alertMsg", "게시글 등록성공");
+       	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
     	 
        	 response.sendRedirect(request.getContextPath() + "/reviewList?currentPage=1");
        	 

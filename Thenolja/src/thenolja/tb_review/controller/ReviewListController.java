@@ -16,7 +16,7 @@ import thenolja.tb_review.model.vo.Review;
 /**
  * Servlet implementation class ReviewListController
  */
-@WebServlet(name = "ReviewListSelectController", urlPatterns = { "/reviewList" })
+@WebServlet("/reviewList")
 public class ReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
