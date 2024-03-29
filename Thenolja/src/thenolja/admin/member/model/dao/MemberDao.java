@@ -277,7 +277,7 @@ public class MemberDao {
 	/**
 	 * 등급 수정
 	 */
-	public int updateGrade(Connection conn, int memNo) {
+	public int updateGrade(Connection conn, AdminMember adminMember) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -285,8 +285,8 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			// pstmt.setInt(1, gradeNo);
-			pstmt.setInt(2, memNo);
+			pstmt.setInt(1, adminMember.getGradeNo());
+			pstmt.setInt(2, adminMember.getMemNo());
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
