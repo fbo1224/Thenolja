@@ -158,15 +158,16 @@
   				} else {
   						let resultStr = '';
 
-  					resultStr += '<tr>'
-  							   + '<td>' + result.memNo + '</td>'
-  							   + '<td>' + result.memId + '</td>'
-  							   + '<td>' + result.nickName + '</td>'
-  							   + '<td>' + result.gradeName + '</td>'
-  							  
-  							   + '</tr>'
-  			
-  				$('#mem_list tbody').html(resultStr);
+  						resultStr += '<tr>'
+	  							   + '<td>' + result.memNo + '</td>'
+	  							   + '<td>' + result.memId + '</td>'
+	  							   + '<td>' + result.nickName + '</td>'
+	  							   + '<td>' + result.gradeName + '</td>'
+	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem('+ result.memNo+')">' + '조회' + '</button>' + '</td>'
+		                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteMember('+ result.memNo+')">' + '삭제' + '</button>' + '</td>'
+	  							   + '</tr>'
+	  			
+	  				$('#mem_list tbody').html(resultStr);
   				}
 
   				
@@ -175,28 +176,12 @@
   		});
   		
   	}
-  </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
-   	<script>
-        			function detailMem(e){
+ 
+  	
+  	
+  	
+  	
+  	function detailMem(e){
         				// console.log(e);
         				
         				$.ajax({
@@ -220,9 +205,7 @@
         				
         			}
         		
-       </script>
-       
-      <script>
+  
 			      function deleteMember(e){
 			          console.log(e);
 			       
@@ -321,8 +304,9 @@
   			data : {memNo : $('#updateMemNo').val(),
   					gradeNo : $('#gradeSelect').val()},
   			success : function(result) {
-  				console.log(result);
-	             location.href = '<%=contextPath%>/selectMember?currentPage=1';
+  				// console.log(result);
+  				alert('등급 수정이 완료되었습니다!');
+  				location.reload(true);
   			}
   			
   		});

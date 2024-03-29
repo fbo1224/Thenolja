@@ -46,29 +46,7 @@
 		    WHERE RNUM BETWEEN ? AND ?
    </entry>
    
-   <entry key="selectIdMember">
-   
-      SELECT
-           TB_MEMBER.MEM_NO,
-           MEM_ID,
-           NICKNAME,
-           GRADE_NAME
-     FROM
 
-           TB_NONMEM
-     JOIN
-           TB_MEMBER ON (TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
-     JOIN
-           TB_MY_GRADE ON (TB_NONMEM.MEM_NO = GR_MEM_NO)
-     JOIN
-           TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
-     WHERE
-           DELETE_YN = 'Y'
-       AND
-       	   MEM_ID = ?
-   
-   </entry>
-   
    <entry key="selectMember">
 	SELECT
 	        MEM_NAME,
@@ -187,6 +165,35 @@
 	       AND
 	       		MEM_ID = ?    
 	</entry>
+	
+	
+	
+	<entry key="selectDeleteMemberId">
+	
+		SELECT
+		            TB_MEMBER.MEM_NO,
+		            MEM_ID,
+		            NICKNAME,
+		            GRADE_NAME
+		   FROM
+		         TB_NONMEM
+		    JOIN
+		         TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+		    JOIN
+		         TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
+		    JOIN
+		         TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
+		 WHERE
+		        DELETE_YN = 'N' 
+		         AND
+		               MEM_ID = ?
+
+	</entry>
+	
+	
+	
+	
+	
 	
 	
 	

@@ -60,6 +60,20 @@ public class NonMemService {
 		return result;
 	}
 	
+	/**
+	 * 비회원 이름으로 검색
+	 */
+	public NonMember selectNonMemberName(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		NonMember nonMember = new NonMemDao().selectNonMemberName(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return nonMember;
+	}
+	
 	
 	
 	

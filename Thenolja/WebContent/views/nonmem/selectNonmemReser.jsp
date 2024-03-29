@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ page import="thenolja.nonmem.model.vo.SelectNonmemReser"%>
     <%@ page import="java.util.ArrayList" %>
+    <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%
 	ArrayList<SelectNonmemReser> nonmemReser = (ArrayList) session.getAttribute("nonmemReser");
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd, HH:mm");
 %>
 <!DOCTYPE html>
 <html>
@@ -94,9 +97,10 @@
     	border : 0;
     	margin-bottom: 100px;
     	font-size: 22px;
+        transition: all 0.5s;
     }
     #goHome:hover{
-    	font-size:23px;
+    	color:black;
     }
 
     /*********************/
@@ -132,7 +136,17 @@
                         <p><%=c.getRoomName() %></p>
                         <p><%=c.getPeople() %>명</p>
                         <p><%=c.getPaymentPrice() %>원</p>
-                        <p><%=c.getCheckInDate() %> ~ <%=c.getCheckOutDate() %></p>
+                        <% Date newDate = sdf.parse(c.getCheckInDate()); %>
+                        <% Date newDate2 = sdf.parse(c.getCheckOutDate()); %>
+                        <%
+                        	// System.out.println(c.getCheckInDate());
+                        	// System.out.println(newDate);
+	                        SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
+	                        String date1 = sdf2.format(newDate);
+	                        String date2 = sdf2.format(newDate2);
+                        %>
+                        <p><%= date1 %> ~ <%= date2 %></p>
+                        <p>오후 <%= c.getCheckInTime() %>:00 ~ 오전 <%= c.getCheckOutTime() %>:00</p>
                     </div>
 
                 </div>

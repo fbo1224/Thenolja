@@ -120,9 +120,30 @@
 		                BY
 		                     RESER_NO DESC) A)
 	    WHERE RNUM BETWEEN ? AND ?  
-   	 
+
+   </entry>
    
-   
+   <entry key="searchReserMember">
+                    
+	   SELECT
+		        RESER_NO,
+		        MEM_ID,
+		        RESER_NAME,
+		        MEM_PHONE,
+		        TO_CHAR(CHECKIN_TIME ,'YYYY.MM.DD') "CHECKIN_TIME"
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+		  JOIN
+		        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+		 WHERE
+		        MEM_STATUS = 'Y'
+		   AND
+		   		CANCEL_YN = 'N'
+           AND
+                MEM_ID = ?
+
    </entry>
    
 	

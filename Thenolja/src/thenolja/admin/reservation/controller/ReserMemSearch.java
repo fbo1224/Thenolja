@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
 
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.admin.reservation.model.service.ReservatoinService;
+import thenolja.admin.reservation.model.vo.AdminReservation;
 
 /**
- * Servlet implementation class SelectMemberIdController
+ * Servlet implementation class ReserMemSearch
  */
-@WebServlet("/searchMemberId.do")
-public class SelectMemberIdController extends HttpServlet {
+@WebServlet("/reserSearchMemId.do")
+public class ReserMemSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMemberIdController() {
+    public ReserMemSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +32,15 @@ public class SelectMemberIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 		
 		String keyword = request.getParameter("keyword");
-	
-		AdminMember adminMember = new MemberService().selectMemberId(keyword);
 		
-	    response.setContentType("application/json; charset=UTF-8");
+		AdminReservation adminReservation = new ReservatoinService().searchReserMember(keyword);
+		
+		response.setContentType("application/json; charset=UTF-8");
 	      
-	    new Gson().toJson(adminMember, response.getWriter());
+		new Gson().toJson(adminReservation, response.getWriter());
 	}
 
 	/**
