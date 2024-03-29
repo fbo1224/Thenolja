@@ -63,13 +63,11 @@ public class ReservationInsertController extends HttpServlet {
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
 				reser = new ReserService().selectReservation();
-				Hotel hotel = new ReserService().selectHotel();
 
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
-				session.setAttribute("hotel", hotel);
 
-				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo());
+				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
 			
 		} else {

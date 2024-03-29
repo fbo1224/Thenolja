@@ -5,7 +5,7 @@
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
 
-	SelectNonmemReser snr = (SelectNonmemReser)request.getAttribute("snr");
+	SelectNonmemReser snr = (SelectNonmemReser)session.getAttribute("nonmemReser");
 %>   
   
 <!DOCTYPE html>
@@ -200,9 +200,9 @@
 					<input type="hidden" name="hotelNo" value="<%=snr.getHotelNo() %>">
 			        <h2><%=snr.getHotelName() %></h2>
 			        <p><%=snr.getRoomName() %></p>
-			        <p><%=snr.getMaxPeople() %></p>
-			        <p><%=snr.getPaymentPrice() %></p>
-			        <p><%=snr.getCheckInTime() %> ~ <%=snr.getCheckOutTime() %></p>
+			        <p>2인</p>
+			        <p>117,000원</p>
+			        <p>2024-02-28 ~ 2024-02-29</p>
 			        
     			</div>
 			</div>

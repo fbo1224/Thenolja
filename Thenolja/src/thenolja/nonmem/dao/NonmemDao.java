@@ -158,4 +158,57 @@ public class NonmemDao {
 		return member;
 	}
 	
+	public ArrayList<SelectNonmemReser> selectReserInfo(Connection conn, String memName, int memNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SelectNonmemReser> list = new ArrayList();
+		
+		
+		String sql = prop.getProperty("selectReserInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memName);
+			pstmt.setInt(2, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				SelectNonmemReser nonmemReser = new SelectNonmemReser(rset.getInt("MEM_NO"),
+						                            rset.getString("MEM_NAME"),
+						                            rset.getString("MEM_PHONE"),
+						                            rset.getString("MEM_STATUS"),
+						                            rset.getInt("RESER_NO"),
+						                            rset.getString("RESER_NAME"),
+						                            rset.getString("CHECKIN_DATE"),
+						                            rset.getString("CHECKOUT_DATE"),
+								                 	rset.getString("BICYCLE"),
+								                 	rset.getInt("PEOPLE"),
+								                 	rset.getString("PAYMENT_PRICE"),
+								                 	rset.getString("ROOM_NAME"),
+								                 	rset.getInt("ROOM_NUM"),
+								                 	rset.getInt("MAX_PEOPLE"),
+								                 	rset.getString("CHECKIN_TIME"),
+								                 	rset.getString("CHECKOUT_TIME"),
+								                 	rset.getInt("HOTEL_NO"),
+								                 	rset.getString("HOTEL_NAME"),
+								                 	rset.getString("HOTEL_LOCATION"),
+								                 	rset.getString("HOTEL_ADDRESS"),
+								                 	rset.getString("HOTEL_PATH"),
+								                 	rset.getString("ROOM_IMG"));
+				list.add(nonmemReser);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	
+	
 }

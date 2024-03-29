@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.nonmem.model.vo.SelectNonmemReser;
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_reservation.model.Service.ReserService;
@@ -42,15 +41,16 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
-		SelectNonmemReser snr = new SelectNonmemReser();
+		
 		request.setAttribute("reser", reser);
-		request.setAttribute("snr", snr);		
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		
 		view.forward(request, response);
+		
+		
 	}
 
 	/**

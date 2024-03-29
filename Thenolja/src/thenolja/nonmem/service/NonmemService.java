@@ -61,7 +61,17 @@ public class NonmemService {
 		return member;
 	}
 	
-
+	public ArrayList<SelectNonmemReser> selectReserInfo(String memName, int memNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<SelectNonmemReser> list = new NonmemDao().selectReserInfo(conn, memName, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
+	}
 
 	
 	
