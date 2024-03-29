@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.admin.member.model.service.MemberService;
+import thenolja.admin.member.model.vo.AdminMember;
 
 /**
  * Servlet implementation class UpdateGradeMember
@@ -31,10 +32,16 @@ public class UpdateGradeMember extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int gradeNo = Integer.parseInt(request.getParameter("gradeNo"));
 		
-		new MemberService().updateGrade(memNo);
+		AdminMember adminMember = new AdminMember();
+		adminMember.setMemNo(memNo);
+		adminMember.setGradeNo(gradeNo);
 		
+		int result = new MemberService().updateGrade(adminMember);
 		
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result > 0 ?  "success" : "fail");
 		
 	}
 
