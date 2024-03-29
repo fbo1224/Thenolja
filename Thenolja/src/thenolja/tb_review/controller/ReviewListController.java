@@ -62,7 +62,10 @@ public class ReviewListController extends HttpServlet {
 		
 		ArrayList<Review> reviewList = new ReviewService().selectList(pi);
 		
+		request.setAttribute("reviewList", reviewList);
+		request.setAttribute("pageInfo", pi);
 		
+		request.getRequestDispatcher("views/review/reviewList.jsp").forward(request, response);
 		
 	}
 

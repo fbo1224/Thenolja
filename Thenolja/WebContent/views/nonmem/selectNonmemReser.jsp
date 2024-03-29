@@ -46,6 +46,7 @@
         height: 80%;
         margin: auto;
         margin-top: 30px;
+        cursor: pointer;
     }
     #reser_hotel_img{
         width: 25%;
@@ -123,8 +124,7 @@
 		
 		<% for(SelectNonmemReser c : nonmemReser) { %>
 		<div id="content">
-            <a href="#">
-                <div id="reser_info">
+                <div id="reser_info" onclick="location.href='<%=contextPath%>/nonReserDetail'">
                     <div id="reser_hotel_img"><img src="<%=c.getRoomImg() %>" alt="" width="220px" height="220px"></div>
         
                     <div id="reser_detail">
@@ -136,7 +136,6 @@
                     </div>
 
                 </div>
-            </a>
 		</div>
 	<% } %>
 <% } %>
