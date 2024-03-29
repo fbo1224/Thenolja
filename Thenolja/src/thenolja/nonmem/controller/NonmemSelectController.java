@@ -34,14 +34,14 @@ public class NonmemSelectController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String nonmemName = request.getParameter("nonmemName");
-		String nonmemPhone = request.getParameter("nonmemPhone");
+		int nonmemNo = Integer.parseInt(request.getParameter("nonmemNo"));
 	
-		System.out.println(nonmemName);
-		System.out.println(nonmemPhone);
+		// System.out.println(nonmemName);
+		// System.out.println(nonmemNo);
 		
-		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemPhone);
+		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemNo);
 		
-		System.out.println(list);
+		// System.out.println(list);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("nonmemReser", list);

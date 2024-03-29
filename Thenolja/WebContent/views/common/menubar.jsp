@@ -222,9 +222,6 @@ div {
 		background-color: white;
 	}
 
-	#nonmemBtn:hover{
-		color: rgb(48, 56, 208);
-	}
 
 	#modal-body > li{
         list-style: none;
@@ -381,8 +378,8 @@ div {
 	      		<div class="modal-body">
 	      		<input type="hidden" name="memNo">
 	      		
-					비회원 성함<input type="text" maxlength="15" name="nonmemName" required><br>
-					비회원 전화번호<input type="text" maxlength="11" name="nonmemPhone" required>
+					비회원 예약번호<input type="text" maxlength="11" name="nonmemNo" required><br>
+					비회원 성함<input type="text" maxlength="15" name="nonmemName" required>
 				</div>
 				
 				<!-- Modal footer -->

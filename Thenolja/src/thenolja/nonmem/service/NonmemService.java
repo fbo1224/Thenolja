@@ -11,11 +11,11 @@ import thenolja.nonmem.model.vo.SelectNonmemReser;
 
 public class NonmemService {
 	
-	public ArrayList<SelectNonmemReser> selectNonmemReser(String nonmemName, String nonmemPhone) {
+	public ArrayList<SelectNonmemReser> selectNonmemReser(String nonmemName, int nonmemNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<SelectNonmemReser> list = new NonmemDao().selectNonmemReser(conn, nonmemName, nonmemPhone);
+		ArrayList<SelectNonmemReser> list = new NonmemDao().selectNonmemReser(conn, nonmemName, nonmemNo);
 		
 		JDBCTemplate.close(conn);
 		
