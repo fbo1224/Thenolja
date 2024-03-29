@@ -163,7 +163,8 @@
   							   + '<td>' + result.memId + '</td>'
   							   + '<td>' + result.nickName + '</td>'
   							   + '<td>' + result.gradeName + '</td>'
-  							  
+  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(result.memNo)">' + '조회' + '</button>' + '</td>'
+	                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(result.memNo)">' + '삭제' + '</button>' + '</td>'
   							   + '</tr>'
   			
   				$('#mem_list tbody').html(resultStr);
@@ -175,28 +176,12 @@
   		});
   		
   	}
-  </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
-   	<script>
-        			function detailMem(e){
+ 
+  	
+  	
+  	
+  	
+  	function detailMem(e){
         				// console.log(e);
         				
         				$.ajax({
@@ -220,9 +205,7 @@
         				
         			}
         		
-       </script>
-       
-      <script>
+  
 			      function deleteMember(e){
 			          console.log(e);
 			       
