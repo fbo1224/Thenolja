@@ -145,8 +145,28 @@ public class MemberService {
 		return member;
 	}
 
-	
-	
+//--------------------------------닉네임 중복확인-----------------------------------
+	public int nickNameCheck(String checkNickname) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().nickNameCheck(conn, checkNickname);
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
+	}
+//------------------------------------이메일 중복확인---------------------------------
+	public int emailCheck(String checkEmail) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().emailCheck(conn, checkEmail);
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
+	}
 	
 	
 	
