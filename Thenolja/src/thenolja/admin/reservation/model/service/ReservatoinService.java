@@ -105,5 +105,20 @@ public class ReservatoinService {
 		
 	}
 	
+	/**
+	 * 예약 회원 검색
+	 */
+	public AdminReservation searchReserMember(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		AdminReservation adminReservation = new ReservationDao().searchReserMember(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminReservation;
+		
+	}
+	
 
 }
