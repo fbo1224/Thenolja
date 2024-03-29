@@ -138,6 +138,62 @@
         <div id="footer"></div>
 
     </div>
+    
+    
+      <script>
+  	function searchMemId(){
+  	
+  		$.ajax({
+  			
+  			url : 'searchMemberId.do',
+  			type : 'post',
+  			data : { keyword : $('#keyword').val()},
+  			success : function(result){
+  				console.log(result);
+  				//$('.memNo').text(result);
+  				if(result == null){
+  					alert('회원이 존재하지 않습니다.');
+  					location.href = '<%=contextPath%>/selectMember?currentPage=1';
+  					
+  				} else {
+  						let resultStr = '';
+
+  					resultStr += '<tr>'
+  							   + '<td>' + result.memNo + '</td>'
+  							   + '<td>' + result.memId + '</td>'
+  							   + '<td>' + result.nickName + '</td>'
+  							   + '<td>' + result.gradeName + '</td>'
+  							  
+  							   + '</tr>'
+  			
+  				$('#mem_list tbody').html(resultStr);
+  				}
+
+  				
+  			
+  			}
+  		});
+  		
+  	}
+  </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
    	<script>
         			function detailMem(e){
@@ -276,23 +332,6 @@
   </script>
   
   
-  <script>
-  	function searchMemId(){
-  	
-  		$.ajax({
-  			
-  			url : 'searchMemberId.do',
-  			type : 'post',
-  			data : { keyword : $('#keyword').val()},
-  			success : function(result){
-  				console.log(result);
-  				$('.memNo').text(result);
-  				
-  			}
-  		});
-  		
-  	}
-  </script>
 
 
 

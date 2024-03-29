@@ -15,7 +15,7 @@
 				SEQ_MNO.NEXTVAL,
 				?,
 				?,
-				DEFAULT
+				'N'
 				)
 	</entry>
 	
@@ -26,6 +26,8 @@
 				MEM_PHONE
 		  FROM
 		  		TB_NONMEM
+		 WHERE
+		        MEM_NO = ?
 	</entry>
 	
 	<entry key="selectNonmemReser">
@@ -73,8 +75,6 @@
 		       MEM_NAME = ?
 		   AND
 		       MEM_PHONE = ?
-	
-	
 	
 	</entry>
 	

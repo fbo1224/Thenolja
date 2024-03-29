@@ -51,8 +51,8 @@ public class AjaxController {
 	}
 	
 	
-	public void favoriteData(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<HotelCard> hotelList = new HotelService().selectFavorite();
+	public void selectPopular(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<HotelCard> hotelList = new HotelService().selectPopular();
 		
 		
 		
