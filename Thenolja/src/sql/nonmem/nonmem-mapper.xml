@@ -48,6 +48,7 @@
 		       MAX_PEOPLE,
 		       M.CHECKIN_TIME AS CHECKIN_TIME,
 		       M.CHECKOUT_TIME AS CHECKOUT_TIME,
+		       HOTEL_NO,
 		       HOTEL_NAME,
 		       HOTEL_LOCATION,
 		       HOTEL_ADDRESS,

@@ -65,6 +65,7 @@ public class NonmemDao {
 								                 	rset.getInt("MAX_PEOPLE"),
 								                 	rset.getString("CHECKIN_TIME"),
 								                 	rset.getString("CHECKOUT_TIME"),
+								                 	rset.getInt("HOTEL_NO"),
 								                 	rset.getString("HOTEL_NAME"),
 								                 	rset.getString("HOTEL_LOCATION"),
 								                 	rset.getString("HOTEL_ADDRESS"),
