@@ -33,7 +33,7 @@
         <div id="content">
             <div id="content_1">
 
-                <form action="#" method="get" id="search_member">
+                <div id="search_member">
                     <div id="search_id">
                         <input type="text" placeholder="탈퇴 회원 ID입력" name="memId">
                     </div>
@@ -41,7 +41,8 @@
                     <div id="search_btn">
                         <button type="submit" class="btn btn-outline-info">검색</button>
                     </div>
-                </form>
+                    
+                </div>
 
             </div>
             <div id="content_2">
