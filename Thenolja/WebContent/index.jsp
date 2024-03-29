@@ -9,6 +9,6 @@
 
 <body>
 	<%@ include file="views/common/menubar.jsp" %>
-	 
+	<%@ include file="views/hotel/common/searchForm.jsp" %>
 </body>
 </html>

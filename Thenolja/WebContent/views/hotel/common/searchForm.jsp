@@ -17,7 +17,8 @@
 	}
 
 	#content-1{
-		width: 100%;
+		width: 1200px;
+		margin: auto;
 		height: 120px;
 		border-top: 1px solid gray;
 		border-bottom: 1px solid gray;
@@ -37,52 +38,105 @@
 		height: 40px;
 		margin: 5px;
 	}
+	#date {
+		display: inline-block;
+		font-size: 12px;
+		color: green;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
-<script>
-const toDay = new Date();
 
-$(function () {
-    $('input[name="daterange"]').daterangepicker({
-        minDate: new Date(),
-        "drops": "down",
-        "opens": "center",
-        "locale": {
-            "format": "YYYY-MM-DD",
-            "separator": " ~ ",
-            "applyLabel": "확인",
-            "cancelLabel": "취소",
-            "fromLabel": "From",
-            "toLabel": "To",
-            "customRangeLabel": "Custom",
-            "weekLabel": "W",
-            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-        },
-        
-        "startDate": new Date(),
-        "endDate": new Date(),
-        
-	    }, function (start, end, label) {
-        console.log(start.format('YYYY-MM-DD') +' '+ end.format('YYYY-MM-DD'));
-    
-		});
-    
-    
-	});
-    </script>
-    
+
 <div id="content-1">
-	<form id="select-form" action="">
+	<div id="select-form">
 		<div style="display: inline-block;">
 			<input class="form-control" type="text" name="daterange" value="" readonly/>
 		</div>
-		
-		<input class="form-control" min="1" max="99" id="people-input" type="number" name="people" value="" placeholder="인원수를 입력해주세요.">
-		<input class="form-control" id="search-input" type="text" name="search" required value="" placeholder="원하시는 지역을 입력해주세요.">
-		<input class="btn btn btn-info" type="submit" value="서치">
-	</form>
+		<span id="date"></span>
+		<input class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
+		<%if(){ %>
+			<select>
+			</select>
+		<%} %>
+		<input class="btn btn btn-info" id="search" type="button" value="서치">
+	</div>
+	
+	
+	
 </div>
+
+<script>
+const toDay = new Date();
+	let startDate;
+	let endDate;
+	
+	$(function () {
+	    $('input[name="daterange"]').daterangepicker({
+	        minDate: new Date(),
+	        "drops": "down",
+	        "opens": "center",
+	        "locale": {
+	            "format": "YYYY-MM-DD",
+	            "separator": " ~ ",
+	            "applyLabel": "확인",
+	            "cancelLabel": "취소",
+	            "fromLabel": "From",
+	            "toLabel": "To",
+	            "customRangeLabel": "Custom",
+	            "weekLabel": "W",
+	            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+	            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	        },
+	        
+	        "startDate": new Date(),
+	        "endDate": new Date(),
+	        
+		    }, function (start, end, label) {
+		    	// console.log(start.format('YYYY-MM-DD'));
+		    	// console.log(end.format('YYYY-MM-DD'));
+		    	startDate = start.format('YYYY-MM-DD');
+		    	endDate = end.format('YYYY-MM-DD');
+			    $('#date').text(startDate +' ~ '+endDate);
+			});
+		
+	    // 지역 가져오기
+	    $.ajax({
+	    	url: "searchLocation.jqAjax",
+	    	type: 'get',
+	    	success: function(result){
+	    		console.log(result);
+	    	},
+	    	error: function(result){
+	    		console.log(result);
+	    	}
+	    });
+	    
+	});
+	
+	$('#search').click(function(){
+		
+		$.ajax({
+			url: "searchData.jqAjax",
+			data: {
+				startDate : startDate,
+				endDate : endDate,
+				maxPeople : $('#people-input').val(),
+				location : $('#search-input').val(),
+			},
+			type: 'post',
+			success: function(result){
+				console.log(result);
+			},
+			error: function(result){
+				
+			}
+		});
+		
+	})
+	
+</script>
+    
 </body>
 </html>
