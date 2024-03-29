@@ -133,7 +133,7 @@
 										$memId.attr('readonly', true);
 										
 										// 중복확인 전 막아두었던 submit버튼 활성화
-										$('#enroll-form button[type=submit]').removeAttr('disabled');
+										//$('#enroll-form button[type=submit]').removeAttr('disabled');
 									}
 									else{
 										$memId.focus();
@@ -230,23 +230,27 @@
 				
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" id="memPhone" required></td>
+					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" required></td>
 					<td id="phoneMent"></td>
 				</tr>
-				<
+				<!--
 				<script>
 					function phoneCheck(){
-						const checkPhone = document.getElementById('memPhone').value;
+						const checkPhone = document.getElementsByName('memPhone').value;
 						const phoneMent = document.getElementById('phoneMent').innerHTML;
-						let honeReg = /^010?([0-9]{3})?([0-9]{4})$/;
 
-						if(checkPhone != /^010?([0-9]{3})?([0-9]{4})$/){
+						console.log(checkPhone);
+						let phoneReg = /^010?([0-9]{3})?([0-9]{4})$/;
+
+						if(phoneReg.test(checkPhone)){
+							phoneMent = '';
+						} else {
+							phoneMent = '형식에 맞지 않습니다';
 							checkPhone = '';
-							phoneMent = '올바른 형식이 아닙니다.';
-						} 
+						}
 					}
 				</script>
-				
+				-->
 
 				<tr>
 					<td>이메일</td>
@@ -273,6 +277,9 @@
 									
 									if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
 										$email.attr('readonly', true);
+										
+										// 중복확인 전 막아두었던 submit버튼 활성화
+										$('#enroll-form button[type=submit]').removeAttr('disabled');
 									}
 									else{
 										$email.focus();
