@@ -48,15 +48,14 @@
                
         <div id="content">
             <div id="content_1">
-                <form action="<%=contextPath%>/selectId" method="get" id="search_member">
+                <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원 ID입력" name="keyword">
-                    </div>
-        
+                        <input type="text" placeholder="회원 ID입력" id="keyword">
+                    </div>        
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info" onclick="searchMemId()">검색</button>
                     </div>
-                </form>
+                </div>
 
             </div>
             <div id="content_2">
@@ -264,11 +263,10 @@
   			url : 'gradeUpdate.do',
   			type : 'get',
   			data : {memNo : $('#updateMemNo').val(),
-  					gradeNo :$('#gradeSelect').val()},
+  					gradeNo : $('#gradeSelect').val()},
   			success : function(result) {
-  				consloe.log(result);
-  				
-  				
+  				console.log(result);
+	             location.href = '<%=contextPath%>/selectMember?currentPage=1';
   			}
   			
   		});
@@ -277,6 +275,24 @@
   
   </script>
   
+  
+  <script>
+  	function searchMemId(){
+  	
+  		$.ajax({
+  			
+  			url : 'searchMemberId.do',
+  			type : 'post',
+  			data : { keyword : $('#keyword').val()},
+  			success : function(result){
+  				console.log(result);
+  				$('.memNo').text(result);
+  				
+  			}
+  		});
+  		
+  	}
+  </script>
 
 
 

@@ -514,6 +514,31 @@ public class HotelDao {
 		return result;
 	}
 	
+	public ArrayList<String> selectLocation(Connection conn){
+		ArrayList<String> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLocation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String empty = "";
+				empty = rset.getString("HOTEL_LOCATION");
+				list.add(empty);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 	
 	

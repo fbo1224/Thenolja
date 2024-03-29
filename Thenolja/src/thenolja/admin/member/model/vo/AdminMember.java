@@ -22,7 +22,6 @@ public class AdminMember {
    private int gradeNo;
 
 
-	   
 	public int getGradeNo() {
 		return gradeNo;
 	}
@@ -232,11 +231,15 @@ public class AdminMember {
       return true;
    }
 
-   @Override
-   public String toString() {
-      return "Member [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", nickName=" + nickName
-            + ", bornDate=" + bornDate + ", email=" + email + ", deleteYn=" + deleteYn + ", joinDate=" + joinDate
-            + "]";
-   }
+@Override
+public String toString() {
+	return "AdminMember [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", nickName=" + nickName
+			+ ", bornDate=" + bornDate + ", email=" + email + ", deleteYn=" + deleteYn + ", joinDate=" + joinDate
+			+ ", memName=" + memName + ", memPhone=" + memPhone + ", memStatus=" + memStatus + ", gradeName="
+			+ gradeName + ", paymentPrice=" + paymentPrice + ", reserNo=" + reserNo + ", reserName=" + reserName
+			+ ", gradeNo=" + gradeNo + "]";
+}
+
+
    
 }

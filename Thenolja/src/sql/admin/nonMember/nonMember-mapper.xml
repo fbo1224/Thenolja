@@ -23,7 +23,7 @@
 		  FROM
 		     (SELECT 
 		            A.*, ROWNUM RNUM
-		        FROM( 		SELECT
+		        FROM(SELECT
 				        MEM_NO,
 				        MEM_NAME,
 				        MEM_PHONE

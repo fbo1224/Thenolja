@@ -1,12 +1,14 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
+import thenolja.tb_hotel.model.vo.HotelCard;
 
 public class AjaxController {
 	
@@ -48,5 +50,28 @@ public class AjaxController {
 		
 	}
 	
+	
+	public void selectPopular(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<HotelCard> hotelList = new HotelService().selectPopular();
+		
+		
+		
+		
+	}
+	
+	public void locRecomData(HttpServletRequest request, HttpServletResponse response) {
+		
+	}
+	
+	public void searchLocation(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<String> locList = new HotelService().selectLocation();
+		
+		response.setContentType("text/html; charset=UTF-8");
+		try {
+			response.getWriter().print(locList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

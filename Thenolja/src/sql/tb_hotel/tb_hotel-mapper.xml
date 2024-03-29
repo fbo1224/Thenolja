@@ -295,7 +295,14 @@
 		      HOTEL_NO = ?	      
 	</entry>
 	
-	
+	<entry key="selectLocation">
+		SELECT
+     	      DISTINCT HOTEL_LOCATION
+  		  FROM   
+      	      TB_HOTEL
+   		 WHERE
+      		  HOTEL_YN = 'Y'
+	</entry>
 	
 	
 	
