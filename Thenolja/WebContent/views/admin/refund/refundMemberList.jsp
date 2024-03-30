@@ -189,6 +189,7 @@
     				$('#bank').text(result.bank);
     				$('#refundPrice').text(result.refundPrice);
     				$('#refundAccNo').text(result.refundAccNo);
+    				$('#hotelPath').attr("src", result.hotelPath);
     			}
     		});
     	}
@@ -216,7 +217,7 @@
         <div class="modal-body">
             <table>
                 <tr>
-                    <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
+                    <td colspan="5" rowspan="5" width="120" height="120" ><img id="hotelPath" src="" alt="" width="120px"></td>
                     <td width="200">숙소 정보</td>
                     <td>환불자 정보</td>
                 </tr>
