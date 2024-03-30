@@ -233,6 +233,12 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
+				adminRefund = new AdminRefund();
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setMemId(rset.getString("MEM_ID"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
 				
 			}
 			
