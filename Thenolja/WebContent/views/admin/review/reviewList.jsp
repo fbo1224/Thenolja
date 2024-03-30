@@ -42,11 +42,11 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원  ID입력" name="memId">
+                        <input type="text" placeholder="회원  ID입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="submit" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info" onclick="searchReviewMember()">검색</button>
                     </div>
                 </div>
 
@@ -133,6 +133,44 @@
     
     
     <script>
+    	
+    	function searchReviewMember(){
+    		
+    		$.ajax({
+    			
+    			url : 'searchReview.do',
+    			type : 'post',
+    			data : {keyword : $('#keyword').val()},
+    			success : function(result){
+    				if(result == null){
+    					alert('회원이 존재하지 않습니다.');
+    					location.href = '<%=contextPath%>/adminReviewList?currentPage=1';
+    				} else{
+    					let resultStr = '';
+
+  						resultStr += '<tr>'
+	  							   + '<td>' + result.hotelName + '</td>'
+	  							   + '<td>' + result.memId + '</td>'
+	  							   + '<td>' + result.nickName + '</td>'
+	  							   + '<td>' + result.createDate + '</td>'
+	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview('+ result.reserNo+')">' + '조회' + '</button>' +'</td>'
+                     			   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteReview('+ result.reserNo+')">' +'삭제 ' + '</button>' + '</td>'
+	  							   + '</tr>'
+	  			
+	  				$('#mem_list tbody').html(resultStr);
+    					
+    				}
+    			}
+    			
+    			
+    		});
+    		
+    		
+    	}
+ 
+    	
+    
+    
     	function detailReview(e){
     		$.ajax({
     			url : 'detailReview.do',
