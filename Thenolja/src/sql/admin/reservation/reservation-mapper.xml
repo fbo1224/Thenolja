@@ -142,8 +142,10 @@
 		   AND
 		   		CANCEL_YN = 'N'
            AND
-                MEM_ID = ?
-
+                MEM_ID = ?         
+        ORDER
+          BY
+                RESER_NO DESC
    </entry>
    
 	

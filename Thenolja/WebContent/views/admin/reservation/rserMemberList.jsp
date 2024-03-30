@@ -151,7 +151,7 @@
     			type : 'post',
     			data : { keyword : $('#keyword').val()},
     			success : function(result){
-    				if(result == null){
+    				if(result.length === 0){
     					alert('예약 회원이 존재하지 않습니다.');
     					location.href = '<%=contextPath%>/reserMember?currentPage=1';
     				} else{
@@ -172,23 +172,23 @@
     					
     					let resultStr = '';
     					
-    					
-    					
+    					for(let i = 0; i < result.length; i++){
 
-      					resultStr += '<tr>'
-      							   + '<td>' + result.reserNo + '</td>'
-      							   + '<td>' + result.memId + '</td>'
-      							   + '<td>' + result.reserName + '</td>'
-      							   + '<td>' + result.memPhone + '</td>'
-	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>';
-									
-		                            if(currentDate > result.getCheckInTime) { 
-		                            	resultStr += '<td>' +
-		                        		+'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
-		                      	    } else {
-		                      	    	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
-		                      	    }
-		                            resultStr += '</tr>'
+          					resultStr += '<tr>'
+          							   + '<td>' + result[i].reserNo + '</td>'
+          							   + '<td>' + result[i].memId + '</td>'
+          							   + '<td>' + result[i].reserName + '</td>'
+          							   + '<td>' + result[i].memPhone + '</td>'
+    	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>';
+    									
+    		                            if(currentDate > result.getCheckInTime) { 
+    		                            	resultStr += '<td>' +
+    		                        		+'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    } else {
+    		                      	    	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    }
+    		                            resultStr += '</tr>'
+    					};
       			
       				$('#mem_list tbody').html(resultStr);
 	      						   console.log(resultStr);
