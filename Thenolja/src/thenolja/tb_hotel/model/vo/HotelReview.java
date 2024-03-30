@@ -6,7 +6,8 @@ public class HotelReview {
 	
 	private int hotelNo;
 	private int roomNo;
-	private int reviewScore;
+	private int reserNo;
+	private String reviewScore;
 	private String reserName;
 	private String reviewContent;
 	private Date createDate;
@@ -15,7 +16,7 @@ public class HotelReview {
 		super();
 	}
 
-	public HotelReview(int hotelNo, int roomNo, int reviewScore, String reserName, String reviewContent,
+	public HotelReview(int hotelNo, int roomNo, String reviewScore, String reserName, String reviewContent,
 			Date createDate) {
 		super();
 		this.hotelNo = hotelNo;
@@ -24,6 +25,14 @@ public class HotelReview {
 		this.reserName = reserName;
 		this.reviewContent = reviewContent;
 		this.createDate = createDate;
+	}
+	
+	public int getReserNo() {
+		return reserNo;
+	}
+
+	public void setReserNo(int reserNo) {
+		this.reserNo = reserNo;
 	}
 
 	public int getHotelNo() {
@@ -42,11 +51,11 @@ public class HotelReview {
 		this.roomNo = roomNo;
 	}
 
-	public int getReviewScore() {
+	public String getReviewScore() {
 		return reviewScore;
 	}
 
-	public void setReviewScore(int reviewScore) {
+	public void setReviewScore(String reviewScore) {
 		this.reviewScore = reviewScore;
 	}
 

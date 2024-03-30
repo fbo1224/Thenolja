@@ -11,6 +11,7 @@ import com.google.gson.JsonIOException;
 
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
+import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.HotelCard;
 
 public class AjaxController {
@@ -91,5 +92,45 @@ public class AjaxController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void commentAdmin(HttpServletRequest request, HttpServletResponse response) {
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		ArrayList<Comment> cList = new HotelService().commentAdmin(hotelNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
+		try {
+			gson.toJson(cList, response.getWriter());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

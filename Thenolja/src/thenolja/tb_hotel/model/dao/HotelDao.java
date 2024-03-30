@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
@@ -230,6 +231,7 @@ public class HotelDao {
 				dh.setHotelPath(rset.getString("HOTEL_PATH"));
 				dh.setHotelCate(rset.getString("HOTEL_CATEGORY"));
 				dh.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				dh.setHotelNo(rset.getInt("HOTEL_NO"));
 			}
 			
 		} catch (SQLException e) {
@@ -326,9 +328,11 @@ public class HotelDao {
 				hr.setRoomNo(rset.getInt("ROOM_NO"));
 				hr.setReserName(rset.getString("RESER_NAME"));
 				hr.setCreateDate(rset.getDate("CREATE_DATE"));
-				hr.setReviewScore(rset.getInt("REVIEW_SCORE"));
+				// score점수에서 '★' 형태로 변경
+				// hr.setReviewScore(rset.getInt("REVIEW_SCORE"));
+				hr.setReviewScore(rset.getString("REVIEW_SCORE"));
 				hr.setReviewContent(rset.getString("REVIEW_CONTENT"));
-				
+				hr.setReserNo(rset.getInt("RESER_NO"));
 				hrList.add(hr);
 			}
 			
@@ -601,7 +605,37 @@ public class HotelDao {
 		return rList;
 	}
 	
-	
+	public ArrayList<Comment> commentAdmin(Connection conn, int hotelNo){
+		ArrayList<Comment> cList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("commentAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Comment c = new Comment();
+				c.setReserNo(rset.getInt("RESER_NO"));
+				c.setRoomNo(rset.getInt("ROOM_NO"));
+				c.setNickname(rset.getString("NICKNAME"));
+				c.setCommentContent(rset.getString("COMMENT_CONTENT"));
+				c.setCreateDate(rset.getDate("CREATE_DATE"));
+				
+				cList.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cList;
+	}
 	
 	
 	

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.dao.HotelDao;
+import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
@@ -181,7 +182,15 @@ public class HotelService {
 		return rList;
 	}
 	
-	
+	public ArrayList<Comment> commentAdmin(int hotelNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Comment> cList = new HotelDao().commentAdmin(conn, hotelNo);
+		
+		close(conn);
+		
+		return cList;
+	}
 	
 	
 	

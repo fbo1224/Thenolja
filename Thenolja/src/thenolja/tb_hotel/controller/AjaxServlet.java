@@ -40,6 +40,7 @@ public class AjaxServlet extends HttpServlet {
 			case "deleteRoom"  : ac.deleteRoom(request, response); break;
 			case "popularData" : ac.selectPopular(request, response); break;
 			case "locRecomData" : ac.locRecomData(request, response); break;
+			case "commentAdmin" : ac.commentAdmin(request, response); break;
 			
 			case "searchLocation" : ac.searchLocation(request, response); break;
 		}

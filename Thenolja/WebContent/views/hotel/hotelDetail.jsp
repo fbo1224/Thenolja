@@ -111,6 +111,7 @@
 }
 #detail-content-review {
 	width: 80%;
+	height: 600px;
 	margin: auto;
 	padding: 10px;
 	border-top: 1px solid gray;
@@ -118,16 +119,23 @@
 }
 .content-review-1 {
 	width: 60%;
-	height: 40%;
+	height: 80px;
 	margin: auto;
 	margin-top: 15px;
 	border-radius: 12px;
 	padding: 10px;
+	float:left;
 }
 .review-1-div {
 	display: flex;
 	justify-content: space-between;
 	margin: 0px 3px;	
+}
+.review-1-content {
+	font-size: 14px;
+}
+.admins {
+	float: right;
 }
 #detail-content-imgInfo span{
 	padding: 3px;
@@ -218,13 +226,13 @@
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
 					<%for(HotelReview hr : dh.getReviewList() ){ %>
-					<div class="content-review-1 card">
+					<div class="content-review-1 card" id="<%= hr.getReserNo() %>">
 						<div class="review-1-div">
 							<span>작성자 : <%= hr.getReserName() %> </span>
 							<span>작성일 : <%= hr.getCreateDate() %> </span>
-							<span>리뷰 점수 : <%= hr.getReviewScore() %></span>
+							<span>리뷰 점수 <%= hr.getReviewScore() %></span>
 						</div>
-						<div>
+						<div class="review-1-content">
 							<span><%= hr.getReviewContent() %></span>
 						</div>
 					</div>
@@ -237,5 +245,68 @@
 			<h1>찾을 수 없습니다.</h1>
 		<%} %>
 	</div>
+	
+	<script>
+		$(function(){
+			$.ajax({
+				url: "commentAdmin.jqAjax",
+				data: {
+					hotelNo: '<%= dh.getHotelNo() %>'
+				},
+				type: 'get',
+				success: function(result){
+					for(let i = 0; i < result.length; i++){
+						$('.content-review-1').each(function(idx, ele){
+							if($(ele).attr('id') == result[i].reserNo){
+								console.log(result);
+								$(ele).after('<div class="content-review-1 card admins" style="border: 1px solid skyblue;" >'
+											+'<div class="review-1-div">'
+											  +'<p>작성자 : '+ result[i].nickname +'</p>'
+											  +'<p>작성일 : '+ result[i].createDate +'</p>'   
+										    +'</div>'
+										    +'<div class="review-1-content" >'
+										    	+'<span>'+result[i].commentContent+'</span>'
+										    +'</div>'
+										+'</div>');
+							
+							}
+						});
+						
+						
+					}
+				},
+				error : function(result){
+					console.log(result);
+				},
+				
+			});
+			
+		});
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
