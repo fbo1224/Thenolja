@@ -292,4 +292,41 @@ private Properties prop = new Properties();
 		return list;
 	}
 	
+	
+	/**
+	 * 메인페이지 환불
+	 */
+	public ArrayList<AdminRefund> selectRefundTop(Connection conn) {
+		
+		ArrayList<AdminRefund> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRefundTop");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminRefund adminRefund = new AdminRefund();
+				
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setRefundName(rset.getString("REFUND_NAME"));
+				adminRefund.setRefundPrice(rset.getInt("REFUND_PRICE"));
+			
+				list.add(adminRefund);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 }

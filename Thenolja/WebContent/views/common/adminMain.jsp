@@ -224,9 +224,28 @@
     				$('#reser_list tbody').html(resultStr);
     				
     			} 
+    		});
+    		
+    		
+    		$.ajax({
     			
+    			url : 'refundTop.do',
+    			type : 'post',
+    			success : function(result){
+    				let resultStr = '';
+    				for(let i = 0; i < result.length; i++){
+    					
+    					resultStr += '<tr>'
+    							  + '<td>' + result[i].reserNo + '</td>'
+    							  + '<td>' + result[i].refundName + '</td>'
+    							  + '<td>' + result[i].refundPrice + '</td>'
+    							  + '</tr>'
+    				};
+    				$('#refund_list tbody').html(resultStr);
+    			}
     			
     		});
+    		
     		
     		
     	})

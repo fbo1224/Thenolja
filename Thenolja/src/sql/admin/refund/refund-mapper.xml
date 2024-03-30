@@ -155,4 +155,21 @@
            RESER_NAME = ?
 	</entry>
 	
+	<entry key="selectRefundTop">
+		SELECT
+	        RF_RESER_NO,
+	        REFUND_NAME,
+	        REFUND_PRICE
+	  FROM( SELECT
+	                RF_RESER_NO,
+	                REFUND_NAME,
+	                REFUND_PRICE
+	          FROM
+	                TB_REFUND
+	         ORDER
+	            BY
+	                RF_RESER_NO DESC)
+	<![CDATA[WHERE ROWNUM <= 5 ]]>  
+	</entry>
+	
 </properties>

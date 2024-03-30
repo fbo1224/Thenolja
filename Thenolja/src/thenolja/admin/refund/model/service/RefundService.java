@@ -113,6 +113,20 @@ public class RefundService {
 		return list;
 	}
 	
+	/**
+	 * 메인페이지 환불
+	 */
+	public ArrayList<AdminRefund> selectRefundTop(){
+		
+		Connection conn  = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminRefund> list = new RefundDao().selectRefundTop(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 	
 	
 	
