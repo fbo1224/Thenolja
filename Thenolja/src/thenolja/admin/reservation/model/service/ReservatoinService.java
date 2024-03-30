@@ -135,5 +135,20 @@ public class ReservatoinService {
 		
 		return list;
 	}
+	
+	/**
+	 * 메인페이지 예약 수
+	 */
+	public int todayReserCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().todayReserCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
 
 }

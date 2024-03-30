@@ -139,12 +139,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                         
                         </tbody>
                       </table>
                 </div>
@@ -160,26 +154,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
                         </tbody>
                       </table>
                       </div>
@@ -191,7 +165,7 @@
         <div id="today_content">
             <div id="today_join"><p>회원가입<br><span id="join"></span>명 </p> </div>
 
-            <div id="today_reser"><p>예약<br> 20건</p></div>
+            <div id="today_reser"><p>예약<br><span id="todayReser"></span>건</p></div>
     
             <div id="today_refund"><p>결제금액 <br>0000000원</p></div>
             		
@@ -255,6 +229,16 @@
     				$('#join').text(result);	
     			}
     		});
+    		
+    		
+    		$.ajax({
+    			
+    			url : 'todayReser.do',
+    			type : 'post',
+    			success : function(result){
+    				$('#todayReser').text(result);
+    			}
+    		})
     		
     		
     		
