@@ -43,7 +43,7 @@ public class ReservationInsertController extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// String payment = request.getParameter("payment");
-		
+	//	int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
 		reser.setName(name);
@@ -52,6 +52,8 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setMemNo(memNo);
 		// reser.setReMemNo(memNo);
 		// reser.setPayment(payment);d
+	//	Hotel hotel = new Hotel();
+	//	hotel.setHotelNo(hotelNo);
 		
 		int result = new ReserService().insertReser(reser);
 		
@@ -63,9 +65,10 @@ public class ReservationInsertController extends HttpServlet {
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
 				reser = new ReserService().selectReservation();
-
+			//	hotel = new ReserService().selectHotel();
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
+			//	session.setAttribute("hotel", hotel);
 
 				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");

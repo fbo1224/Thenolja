@@ -41,8 +41,9 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
-		
+	//	Hotel hotel = new Hotel();
 		request.setAttribute("reser", reser);
+	//	request.setAttribute("hotel", hotel);
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
