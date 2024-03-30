@@ -24,6 +24,7 @@
 	.swiper {
       width: 100%;
       height: 350px;
+      padding: 20px;
     }
     .swiper-slide {
       text-align: center;
@@ -72,6 +73,12 @@
 	}
 	.mainPage-title-div > h3 {
 		margin: 3px;
+	}
+	.swiper-button-prev{
+		left: 1px;
+	}
+	.swiper-button-next{
+		right: 1px;
 	}
 </style>
 </head>
