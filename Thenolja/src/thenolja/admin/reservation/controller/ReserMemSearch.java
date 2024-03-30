@@ -1,6 +1,7 @@
 package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,11 +37,11 @@ public class ReserMemSearch extends HttpServlet {
 		
 		String keyword = request.getParameter("keyword");
 		
-		AdminReservation adminReservation = new ReservatoinService().searchReserMember(keyword);
+		ArrayList<AdminReservation> list = new ReservatoinService().searchReserMember(keyword);
 		
 		response.setContentType("application/json; charset=UTF-8");
 	      
-		new Gson().toJson(adminReservation, response.getWriter());
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
