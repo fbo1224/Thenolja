@@ -271,7 +271,7 @@ public class ReservationDao {
 				adminReservation.setReserNo(rset.getInt("RESER_NO"));
 				adminReservation.setMemId(rset.getString("MEM_ID"));
 				adminReservation.setReserName(rset.getString("RESER_NAME"));
-				adminReservation.setMemPhone(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
 				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
 				
 			}
