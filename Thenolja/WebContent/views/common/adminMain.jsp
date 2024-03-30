@@ -167,7 +167,7 @@
 
             <div id="today_reser"><p>예약<br><span id="todayReser"></span>건</p></div>
     
-            <div id="today_refund"><p>결제금액 <br>0000000원</p></div>
+            <div id="today_refund"><p>결제금액 <br><span id="todayPrice"></span>원</p></div>
             		
             
             </div>
@@ -238,9 +238,16 @@
     			success : function(result){
     				$('#todayReser').text(result);
     			}
-    		})
+    		});
     		
-    		
+    		$.ajax({
+    			
+    			url : 'todayPrice.do',
+    			type : 'post',
+    			success : function(result){
+    				$('#todayPrice').text(result);
+    			}
+    		});
     		
     	})
     	

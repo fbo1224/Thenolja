@@ -150,5 +150,19 @@ public class ReservatoinService {
 		return result;
 	}
 	
+	/**
+	 * 메인페이지 가격
+	 */
+	public int todayPrice() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().todayPrice(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
 
 }

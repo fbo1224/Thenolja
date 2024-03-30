@@ -169,12 +169,22 @@
    
    <entry key="todayReserCount">
    	SELECT
-        COUNT(*)
-  FROM
-        TB_RESERVATION
-  WHERE
-        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	        COUNT(*)
+	  FROM
+	        TB_RESERVATION
+	  WHERE
+	        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	   
+   </entry>
    
+   <entry key="todayPrice">
+           
+		SELECT
+		        SUM(PAYMENT_PRICE)
+		  FROM
+		        TB_RESERVATION
+		  WHERE
+		        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
    </entry>
    
 	

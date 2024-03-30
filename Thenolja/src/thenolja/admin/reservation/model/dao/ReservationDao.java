@@ -356,4 +356,33 @@ public class ReservationDao {
 	}
 	
 	
+	/**
+	 * 메인페이지 가격
+	 */
+	public int todayPrice(Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayPrice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			result = rset.getInt("SUM(PAYMENT_PRICE)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
