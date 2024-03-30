@@ -336,6 +336,44 @@
       WHERE RNUM BETWEEN 1 AND 10
 	</entry>
 	
+	<entry key="selectRecomData">
+		SELECT *
+        	  FROM(
+        	       SELECT A.*,
+        	       ROWNUM RNUM    
+         		FROM(
+            		 SELECT
+                     DISTINCT TB_HOTEL.HOTEL_NO,
+                     HOTEL_NAME,
+	                 HOTEL_LOCATION,
+	                 HOTEL_CATEGORY,
+	                 HOTEL_PATH,
+                     COUNT(HOTEL_LOCATION)
+                 FROM
+                 	 TB_RESERVATION
+              	 JOIN TB_ROOM
+                   ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO
+              	 JOIN TB_HOTEL
+                   ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+                WHERE
+                     HOTEL_YN = 'Y'
+                  AND
+                     ROOM_YN = 'Y'
+                GROUP
+                   BY 
+                     TB_HOTEL.HOTEL_NO,
+                     HOTEL_LOCATION,
+                     HOTEL_NAME,
+                     HOTEL_LOCATION,
+                     HOTEL_CATEGORY,
+                     HOTEL_PATH
+                ORDER
+                   BY
+                     COUNT(HOTEL_LOCATION) DESC) A)
+      WHERE RNUM BETWEEN 1 AND 4
+	</entry>
+	
+	
 	
 	
 	

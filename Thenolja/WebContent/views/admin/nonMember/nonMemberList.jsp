@@ -131,7 +131,7 @@
     			data : {keyword : $('#keyword').val()},
     			success : function(result){
     				if(result == null){
-      					alert('회원이 존재하지 않습니다.');
+      					alert('비회원이 존재하지 않습니다.');
       					location.href = '<%=contextPath%>/selectNonMem?currentPage=1';
       					
       				} else {

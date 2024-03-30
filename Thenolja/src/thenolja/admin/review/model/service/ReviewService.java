@@ -109,5 +109,21 @@ public class ReviewService {
 		return adminComment;
 		
 	}
-
+	
+	/**
+	 * 리뷰 조회
+	 */
+	public ArrayList<AdminReview> searchReviewMemId(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReview> list = new ReviewDao().searchReviewMemId(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	
+	}
+	
+	
 }

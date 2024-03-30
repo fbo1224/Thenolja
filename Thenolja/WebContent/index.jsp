@@ -24,6 +24,7 @@
 	.swiper {
       width: 100%;
       height: 350px;
+      padding: 20px;
     }
     .swiper-slide {
       text-align: center;
@@ -52,6 +53,10 @@
 	}
 	.card-info {
 		float:right;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 	}
 	.card-info > h4 {
 		text-align: center;
@@ -67,11 +72,19 @@
 		margin: 10px;	
 	}
 	.mainPage-title-div {
-		margin: 10px auto;
+		margin: 25px auto;
 		border-bottom: 1px solid gray;
 	}
 	.mainPage-title-div > h3 {
 		margin: 3px;
+	}
+	.swiper-button-prev{
+		display: block;
+		left: 1px;
+	}
+	.swiper-button-next{
+		display: block;
+		right: 1px;
 	}
 </style>
 </head>
@@ -85,7 +98,8 @@
 			<h3>요즘 인기있는 숙소</h3>
 		</div>
 		 <div class="swiper mySwiper">
-		    <div class="swiper-wrapper"></div>
+		    <div class="swiper-wrapper populars">
+		    </div>
 		    
 	    	<div class="swiper-pagination"></div>
 		    <div class="swiper-button-next"></div>
@@ -96,20 +110,24 @@
 		<div class="mainPage-title-div">
 			<h3>지역별 추천숙소</h3>
 		</div>	
-		
+		 <div class="swiper mySwiper-mid">
+		    <div class="swiper-wrapper recommands">
+		    </div>
+	  	</div>
 		
 	</div>
 	
 	<script>
 	$(function (){
 		
+		// 인기있는
 		$.ajax({
-			url:"favoriteData.jqAjax",
+			url:"popularData.jqAjax",
 			type: 'post',
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
-					$('.swiper-wrapper').append('<div class="swiper-slide">'
-							+'<div class="cards">'
+					$('.populars').append('<div class="swiper-slide">'
+							+'<div class="cards" id="'+ result[i].hotelNo +'">'
 								+'<div class="card-imgDiv">'
 									+'<img class="card-img" src="'+result[i].hotelPath+'">'
 								+'</div>'
@@ -119,6 +137,29 @@
 									+'<p>종류 : '+result[i].hotelCategory+'</p>'
 								+'</div>'
 							+'</div>'	
+						+'</div>');	
+				}
+			},
+			async : false,
+			error: function(){
+				
+			},
+		});
+		
+		// 추천숙소 ajax
+		$.ajax({
+			url:"locRecomData.jqAjax",
+			type: 'post',
+			success: function(result){
+				for(let i = 0; i < result.length; i++){
+					$('.recommands').append('<div class="swiper-slide">'
+							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:280px; cursor: pointer;">'
+							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
+							    +'<div class="card-body">'
+							    +'<h4 class="card-title">'+ result[i].hotelName +'</h4>'
+							    +'<p class="card-text">'+ result[i].hotelLocation +'</p>'							   
+							    +'</div>'
+							+'</div>'
 						+'</div>');	
 				}
 			},
@@ -142,6 +183,24 @@
 		      },
 		});
 		
+		// 하단 swipper/ 갯수설정, 세부 설정 필요
+		var swiper = new Swiper(".mySwiper-mid", {
+		      slidesPerView: 4,
+		      spaceBetween: 20,
+		      freeMode: true,
+		      pagination: {
+		        el: ".swiper-pagination",
+		        clickable: true,
+		      },		      
+		});
+		
+		$('.cards').click(function(e){
+			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+		});
+		
+		$('.card').click(function(e){
+			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+		});
 	
 	})
 	</script>

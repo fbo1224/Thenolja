@@ -1,4 +1,4 @@
-package thenolja.admin.refund.controller;
+package thenolja.admin.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import thenolja.admin.refund.model.service.RefundService;
-import thenolja.admin.refund.model.vo.AdminRefund;
+import thenolja.admin.review.model.service.ReviewService;
+import thenolja.admin.review.model.vo.AdminReview;
 
 /**
- * Servlet implementation class SearchRefundMember
+ * Servlet implementation class SearchReviewMember
  */
-@WebServlet("/searchRefundMem.do")
-public class SearchRefundMember extends HttpServlet {
+@WebServlet("/searchReview.do")
+public class SearchReviewMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchRefundMember() {
+    public SearchReviewMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,16 @@ public class SearchRefundMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		String keyword = request.getParameter("keyword");
 		
-		ArrayList<AdminRefund> list = new RefundService().selectRefundeMemberId(keyword);
+		ArrayList<AdminReview> list = new ReviewService().searchReviewMemId(keyword);
 		
 		response.setContentType("application/json; charset=UTF-8");
-	      
-	    new Gson().toJson(list, response.getWriter());
+		
+		new Gson().toJson(list, response.getWriter());
 	
 	}
 

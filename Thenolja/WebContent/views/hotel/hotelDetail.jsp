@@ -195,7 +195,7 @@
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
-							<%-- 객실예약 기능 없음 --%>
+							<%-- 객실예약 기능 추가 예정 --%>
 							<button class="btn btn-sm btn-info">객실 예약</button>
 						</div>
 					</div>			

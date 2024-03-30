@@ -136,20 +136,42 @@
     
     	function searchRefundMem(){
     		
+    		$.ajax({
     		url : 'searchRefundMem.do',
     		type : 'post',
     		data : { keyword : $('#keyword').val()},
     		success : function(result){
-    			
-    		}
-    		
-    		
-    	}
+    			if(result.length === 0){
+  					alert('회원이 존재하지 않습니다.');
+  					location.href = '<%=contextPath%>/refundMem?currentPage=1';
+  					
+  				} else {
+  						let resultStr = '';
+						
+  						for(let i = 0; i < result.length; i++){
+  							resultStr += '<tr>'
+	  							   + '<td>' + result[i].reserNo + '</td>'
+	  							   + '<td>' + result[i].memId + '</td>'
+	  							   + '<td>' + result[i].reserName + '</td>'
+	  							   + '<td>' + result[i].memPhone + '</td>'
+	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember('+ result[i].reserNo+')">' + '조회' + '</button>' + '</td>'
+	  							   + '</tr>'
+	  			
+  						};
+  						
+	  				$('#mem_list tbody').html(resultStr);
+  				}
+
+  				
+  			
+  			}
+  		});
+  		
+  	}
+ 
     
     
-    
-    
-    
+        
     
     
     

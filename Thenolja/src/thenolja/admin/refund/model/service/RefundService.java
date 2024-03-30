@@ -87,16 +87,30 @@ public class RefundService {
 	/**
 	 * 회원 환불
 	 */
-	public AdminRefund selectRefundeMemberId(String keyword) {
+	public ArrayList<AdminRefund> selectRefundeMemberId(String keyword) {
 		
 		Connection conn =JDBCTemplate.getConnection();
 		
-		AdminRefund adminRefund = new RefundDao().selectRefundeMemberId(conn, keyword);
+		ArrayList<AdminRefund> list = new RefundDao().selectRefundeMemberId(conn, keyword);
 		
 		JDBCTemplate.close(conn);
 		
-		return adminRefund;
+		return list;
 		
+	}
+	
+	/**
+	 * 비회원 환불 검색
+	 */
+	public ArrayList<AdminRefund> searchRefundNonMem(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminRefund> list = new RefundDao().searchRefundNonMem(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
 	}
 	
 	

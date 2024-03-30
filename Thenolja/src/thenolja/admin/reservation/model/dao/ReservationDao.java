@@ -252,9 +252,9 @@ public class ReservationDao {
 	/**
 	 * 예약 회원 검색
 	 */
-	public AdminReservation searchReserMember(Connection conn, String keyword) {
+	public ArrayList<AdminReservation> searchReserMember(Connection conn, String keyword) {
 		
-		AdminReservation adminReservation = null;
+		ArrayList<AdminReservation> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchReserMember");
@@ -266,14 +266,16 @@ public class ReservationDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
+				AdminReservation adminReservation = new AdminReservation();
 				adminReservation = new AdminReservation();
 				adminReservation.setReserNo(rset.getInt("RESER_NO"));
 				adminReservation.setMemId(rset.getString("MEM_ID"));
 				adminReservation.setReserName(rset.getString("RESER_NAME"));
-				adminReservation.setMemPhone(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
 				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
 				
+				list.add(adminReservation);
 			}
 			
 		} catch (SQLException e) {
@@ -283,7 +285,7 @@ public class ReservationDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return adminReservation;
+		return list;
 		
 	}
 	

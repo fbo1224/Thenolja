@@ -224,5 +224,47 @@ public class ReviewDao {
 		 return adminComment;
 	 }
 	 
+	 /**
+	  * 리뷰 검색
+	  */
+	 public ArrayList<AdminReview> searchReviewMemId(Connection conn, String keyword) {
+		 
+		 ArrayList<AdminReview> list = new ArrayList();
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("searchReviewMemId");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminReview adminReview = new AdminReview();
+				
+				adminReview.setHotelName(rset.getString("HOTEL_NAME"));
+				adminReview.setMemId(rset.getString("MEM_ID"));
+				adminReview.setNickName(rset.getString("NICKNAME"));
+				adminReview.setCreateDate(rset.getString("CREATE_DATE"));
+				adminReview.setReserNo(rset.getInt("RV_RESER_NO"));
+				
+				list.add(adminReview);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		 
+		 return list;
+		 
+	 }
 	 
 }
