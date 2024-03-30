@@ -218,9 +218,9 @@ private Properties prop = new Properties();
 	/**
 	 * 회원 환불 조회 검색
 	 */
-	public AdminRefund selectRefundeMemberId(Connection conn, String keyword) {
+	public ArrayList<AdminRefund> selectRefundeMemberId(Connection conn, String keyword) {
 		
-		AdminRefund adminRefund = null;
+		ArrayList<AdminRefund> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectRefundeMemberId");
@@ -232,14 +232,16 @@ private Properties prop = new Properties();
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
+				
+				AdminRefund adminRefund = new AdminRefund();
 				adminRefund = new AdminRefund();
 				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
 				adminRefund.setMemId(rset.getString("MEM_ID"));
 				adminRefund.setReserName(rset.getString("RESER_NAME"));
 				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
 				
-				
+				list.add(adminRefund);
 			}
 			
 		} catch (SQLException e) {
@@ -249,16 +251,16 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return adminRefund;
+		return list;
 	}
 	
 	
 	/**
 	 * 비회원 검색
 	 */
-	public AdminRefund searchRefundNonMem(Connection conn, String keyword) {
+	public ArrayList<AdminRefund> searchRefundNonMem(Connection conn, String keyword) {
 		
-		AdminRefund adminRefund = null;
+		ArrayList<AdminRefund> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchRefundNonMem");
@@ -270,13 +272,14 @@ private Properties prop = new Properties();
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				
+			while(rset.next()) {
+				AdminRefund adminRefund = new AdminRefund();
 				adminRefund = new AdminRefund();
 				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
 				adminRefund.setReserName(rset.getString("RESER_NAME"));
 				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
 				
+				list.add(adminRefund);
 			}
 			
 		} catch (SQLException e) {
@@ -286,7 +289,7 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return adminRefund;
+		return list;
 	}
 	
 }

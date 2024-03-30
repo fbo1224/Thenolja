@@ -133,6 +133,9 @@
 			          BY
 			                RF_RESER_NO, MEM_ID, RESER_NAME, MEM_PHONE
 
+				   ORDER
+				     BY
+				     	    RF_RESER_NO DESC
 	</entry>
 	
 	<entry key="searchRefundNonMem">
