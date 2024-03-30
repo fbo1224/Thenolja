@@ -28,9 +28,9 @@
     
     <div id="wrap">
         <div id="header">
-       		<%@ include file="../../common/adminMenubar.jsp" %> 
-        </div>
-               
+       		
+       		<%@ include file="../../common/menubar.jsp" %> 
+        </div>       
         <div id="content">
             <div id="content_1">
 
