@@ -144,7 +144,7 @@
     			success : function(result){
     				
     				if(result == null){
-      					alert('회원이 존재하지 않습니다.');
+      					alert('탈퇴 회원이 존재하지 않습니다.');
       					location.href = '<%=contextPath%>/accountCancellation?currentPage=1';
       					
       				} else {

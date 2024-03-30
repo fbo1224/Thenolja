@@ -99,6 +99,20 @@ public class RefundService {
 		
 	}
 	
+	/**
+	 * 비회원 환불 검색
+	 */
+	public AdminRefund searchRefundNonMem(String keyword) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		AdminRefund adminRefund = new RefundDao().searchRefundNonMem(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return adminRefund;
+	}
+	
 	
 	
 	

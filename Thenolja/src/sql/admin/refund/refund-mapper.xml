@@ -104,6 +104,9 @@
 	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
 	  WHERE
 	        MEM_STATUS = 'N'
+	  ORDER
+		 BY
+	        RF_RESER_NO DESC
 	
 	
 	</entry>
@@ -132,6 +135,21 @@
 
 	</entry>
 	
-	
+	<entry key="searchRefundNonMem">
+		SELECT
+	       RF_RESER_NO,
+	       RESER_NAME,
+	       MEM_PHONE
+	  FROM
+	        TB_REFUND
+	  JOIN
+	        TB_RESERVATION ON (RESER_NO = RF_RESER_NO)
+	  JOIN
+	        TB_NONMEM ON (RE_MEM_NO = MEM_NO)
+	  WHERE
+	        MEM_STATUS = 'N'
+        AND
+           RESER_NAME = ?
+	</entry>
 	
 </properties>

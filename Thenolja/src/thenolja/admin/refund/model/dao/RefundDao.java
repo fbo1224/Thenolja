@@ -252,4 +252,41 @@ private Properties prop = new Properties();
 		return adminRefund;
 	}
 	
+	
+	/**
+	 * 비회원 검색
+	 */
+	public AdminRefund searchRefundNonMem(Connection conn, String keyword) {
+		
+		AdminRefund adminRefund = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchRefundNonMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				adminRefund = new AdminRefund();
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return adminRefund;
+	}
+	
 }
