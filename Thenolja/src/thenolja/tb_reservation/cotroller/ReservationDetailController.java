@@ -40,6 +40,8 @@ public class ReservationDetailController extends HttpServlet {
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+	//	int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+	//	Hotel hotel = new ReserService().selectReserNo(reserNo);
 	//	int memNo = Integer.parseInt(request.getParameter("memNo"));
 	//d	Member member = new MemberService().selectMember (memNo);
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
