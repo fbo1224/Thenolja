@@ -142,20 +142,22 @@
     			type : 'post',
     			data : {keyword : $('#keyword').val()},
     			success : function(result){
-    				if(result == null){
+    				if(result.length === 0){
     					alert('회원이 존재하지 않습니다.');
     					location.href = '<%=contextPath%>/adminReviewList?currentPage=1';
     				} else{
     					let resultStr = '';
-
-  						resultStr += '<tr>'
-	  							   + '<td>' + result.hotelName + '</td>'
-	  							   + '<td>' + result.memId + '</td>'
-	  							   + '<td>' + result.nickName + '</td>'
-	  							   + '<td>' + result.createDate + '</td>'
-	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview('+ result.reserNo+')">' + '조회' + '</button>' +'</td>'
-                     			   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteReview('+ result.reserNo+')">' +'삭제 ' + '</button>' + '</td>'
-	  							   + '</tr>'
+						for(let i = 0; i < result.length; i++){
+							resultStr += '<tr>'
+		  							   + '<td>' + result[i].hotelName + '</td>'
+		  							   + '<td>' + result[i].memId + '</td>'
+		  							   + '<td>' + result[i].nickName + '</td>'
+		  							   + '<td>' + result[i].createDate + '</td>'
+		  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>'
+	                  			   	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteReview('+ result[i].reserNo+')">' +'삭제 ' + '</button>' + '</td>'
+		  							   + '</tr>'
+						};
+  						
 	  			
 	  				$('#mem_list tbody').html(resultStr);
     					

@@ -113,15 +113,15 @@ public class ReviewService {
 	/**
 	 * 리뷰 조회
 	 */
-	public AdminReview searchReviewMemId(String keyword) {
+	public ArrayList<AdminReview> searchReviewMemId(String keyword) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		AdminReview adminReview = new ReviewDao().searchReviewMemId(conn, keyword);
+		ArrayList<AdminReview> list = new ReviewDao().searchReviewMemId(conn, keyword);
 		
 		JDBCTemplate.close(conn);
 		
-		return adminReview;
+		return list;
 	
 	}
 	

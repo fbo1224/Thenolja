@@ -38,11 +38,11 @@ public class SearchReviewMember extends HttpServlet {
 		
 		String keyword = request.getParameter("keyword");
 		
-		AdminReview adminReview = new ReviewService().searchReviewMemId(keyword);
+		ArrayList<AdminReview> list = new ReviewService().searchReviewMemId(keyword);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		new Gson().toJson(adminReview, response.getWriter());
+		new Gson().toJson(list, response.getWriter());
 	
 	}
 

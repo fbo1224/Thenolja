@@ -227,9 +227,9 @@ public class ReviewDao {
 	 /**
 	  * 리뷰 검색
 	  */
-	 public AdminReview searchReviewMemId(Connection conn, String keyword) {
+	 public ArrayList<AdminReview> searchReviewMemId(Connection conn, String keyword) {
 		 
-		 AdminReview adminReview = null;
+		 ArrayList<AdminReview> list = new ArrayList();
 		 PreparedStatement pstmt = null;
 		 ResultSet rset = null;
 		 String sql = prop.getProperty("searchReviewMemId");
@@ -239,17 +239,20 @@ public class ReviewDao {
 			
 			pstmt.setString(1, keyword);
 			
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				
-				adminReview = new AdminReview();
+				AdminReview adminReview = new AdminReview();
 				
 				adminReview.setHotelName(rset.getString("HOTEL_NAME"));
 				adminReview.setMemId(rset.getString("MEM_ID"));
 				adminReview.setNickName(rset.getString("NICKNAME"));
 				adminReview.setCreateDate(rset.getString("CREATE_DATE"));
 				adminReview.setReserNo(rset.getInt("RV_RESER_NO"));
+				
+				list.add(adminReview);
 				
 			}
 			
@@ -260,7 +263,7 @@ public class ReviewDao {
 			JDBCTemplate.close(pstmt);
 		}
 		 
-		 return adminReview;
+		 return list;
 		 
 	 }
 	 
