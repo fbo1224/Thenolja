@@ -111,7 +111,8 @@
 }
 #detail-content-review {
 	width: 80%;
-	height: 600px;
+	height: auto;
+	overflow:hidden;
 	margin: auto;
 	padding: 10px;
 	border-top: 1px solid gray;
