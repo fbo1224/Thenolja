@@ -69,7 +69,16 @@ public class AjaxController {
 	}
 	
 	public void locRecomData(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<HotelCard> rList = new HotelService().selectRecomData();
 		
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
+		
+		try {
+			gson.toJson(rList, response.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void searchLocation(HttpServletRequest request, HttpServletResponse response) {

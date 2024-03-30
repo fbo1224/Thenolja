@@ -171,7 +171,15 @@ public class HotelService {
 		return plist;
 	}
 	
-	
+	public ArrayList<HotelCard> selectRecomData() {
+		Connection conn = getConnection();
+		
+		ArrayList<HotelCard> rList = new HotelDao().selectRecomData(conn);
+		
+		close(conn);
+		
+		return rList;
+	}
 	
 	
 	

@@ -53,6 +53,10 @@
 	}
 	.card-info {
 		float:right;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 	}
 	.card-info > h4 {
 		text-align: center;
@@ -92,7 +96,8 @@
 			<h3>요즘 인기있는 숙소</h3>
 		</div>
 		 <div class="swiper mySwiper">
-		    <div class="swiper-wrapper"></div>
+		    <div class="swiper-wrapper populars">
+		    </div>
 		    
 	    	<div class="swiper-pagination"></div>
 		    <div class="swiper-button-next"></div>
@@ -103,19 +108,23 @@
 		<div class="mainPage-title-div">
 			<h3>지역별 추천숙소</h3>
 		</div>	
-		
+		 <div class="swiper mySwiper">
+		    <div class="swiper-wrapper recommands">
+		    </div>
+	  	</div>
 		
 	</div>
 	
 	<script>
 	$(function (){
 		
+		// 인기있는
 		$.ajax({
-			url:"favoriteData.jqAjax",
+			url:"popularData.jqAjax",
 			type: 'post',
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
-					$('.swiper-wrapper').append('<div class="swiper-slide">'
+					$('.populars').append('<div class="swiper-slide">'
 							+'<div class="cards">'
 								+'<div class="card-imgDiv">'
 									+'<img class="card-img" src="'+result[i].hotelPath+'">'
@@ -126,6 +135,29 @@
 									+'<p>종류 : '+result[i].hotelCategory+'</p>'
 								+'</div>'
 							+'</div>'	
+						+'</div>');	
+				}
+			},
+			async : false,
+			error: function(){
+				
+			},
+		});
+		
+		// 추천숙소 ajax
+		$.ajax({
+			url:"locRecomData.jqAjax",
+			type: 'post',
+			success: function(result){
+				for(let i = 0; i < result.length; i++){
+					$('.recommands').append('<div class="swiper-slide">'
+							+'<div class="card" style="width:300px">'
+							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
+							    +'<div class="card-body">'
+							    +'<h4 class="card-title">'+ result[i].hotelName +'</h4>'
+							    +'<p class="card-text">'+ result[i].hotelLocation +'</p>'							   
+							    +'</div>'
+							+'</div>'
 						+'</div>');	
 				}
 			},

@@ -552,6 +552,7 @@ public class HotelDao {
 			
 			while(rset.next()){
 				HotelCard hc = new HotelCard();
+				hc.setHotelNo(rset.getInt("HOTEL_NO"));
 				hc.setHotelName(rset.getString("HOTEL_NAME"));
 				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
 				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
@@ -569,7 +570,36 @@ public class HotelDao {
 		return plist;
 	}
 	
-	
+	//
+	public ArrayList<HotelCard> selectRecomData(Connection conn){
+		ArrayList<HotelCard> rList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRecomData");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				HotelCard hc = new HotelCard();
+				hc.setHotelNo(rset.getInt("HOTEL_NO"));
+				hc.setHotelName(rset.getString("HOTEL_NAME"));
+				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				hc.setHotelPath(rset.getString("HOTEL_PATH"));
+				rList.add(hc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rList;
+	}
 	
 	
 	
