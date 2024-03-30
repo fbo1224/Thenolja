@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,21 +144,7 @@
                             <td>김민지</td>
                             <td>010-3322-1122</td>
                           </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td>김민지</td>
-                            <td>010-3322-1122</td>
-                          </tr>
+                         
                         </tbody>
                       </table>
                 </div>
@@ -168,8 +155,8 @@
                         <thead>
                           <tr>
                             <th>예약번호</th>
-                            <th>예약자명</th>
-                            <th>전화번호</th>
+                            <th>환불자명</th>
+                            <th>환불금액</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -214,6 +201,40 @@
         <div id="footer"></div>
 
     </div>
+    
+    
+    <script>
+    	$(function(){
+    		
+    		$.ajax({
+    			
+    			url : 'reserTop.do',
+    			type : 'post',
+    			success : function(result){
+    				
+    				let resultStr = '';
+    				for(let i = 0; i < result.length; i++){
+    					
+    					resultStr += '<tr>'
+    							  + '<td>' + result[i].reserNo + '</td>'
+    							  + '<td>' + result[i].reserName + '</td>'
+    							  + '<td>' + result[i].memPhone + '</td>'
+    							  + '<tr>'
+    				};
+    				$('#reser_list tbody').html(resultStr);
+    				
+    			} 
+    			
+    			
+    		});
+    		
+    		
+    	})
+    	
+    
+    </script>
+    
+    
 
 </body>
 </html>

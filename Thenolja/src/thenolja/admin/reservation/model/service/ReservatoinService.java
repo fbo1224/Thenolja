@@ -120,5 +120,20 @@ public class ReservatoinService {
 		
 	}
 	
+	
+	
+	/**
+	 * 메인 페이지 예약 
+	 */
+	public ArrayList<AdminReservation> reserTopFive(){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().reserTopFive(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 
 }

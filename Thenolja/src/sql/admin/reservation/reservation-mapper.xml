@@ -148,6 +148,25 @@
                 RESER_NO DESC
    </entry>
    
+   <entry key="reserTopFive">
+	   SELECT
+	        RESER_NO,
+	        RESER_NAME,
+	        MEM_PHONE
+	  FROM( SELECT
+	                RESER_NO,
+	                RESER_NAME,
+	                MEM_PHONE
+	          FROM
+	                TB_RESERVATION
+	          JOIN
+	                TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+	         ORDER
+	            BY
+	                RESER_NO DESC)
+	<![CDATA[WHERE ROWNUM <= 5 ]]>  
+   </entry>
+   
 	
 	
 	
