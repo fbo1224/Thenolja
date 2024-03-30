@@ -1,6 +1,7 @@
 package thenolja.admin.refund.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +38,11 @@ public class SearchRefundNonMember extends HttpServlet {
 		
 		String keyword = request.getParameter("keyword");
 		
-		AdminRefund adminRefund = new RefundService().searchRefundNonMem(keyword);
+		ArrayList<AdminRefund> list = new RefundService().searchRefundNonMem(keyword);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		new Gson().toJson(adminRefund, response.getWriter());
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
