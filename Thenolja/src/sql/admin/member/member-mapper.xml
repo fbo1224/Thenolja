@@ -191,7 +191,15 @@
 	</entry>
 	
 	
+	<entry key="countJoinMember">
+	SELECT
+	        COUNT(*)
+	  FROM
+	        TB_MEMBER
+	  WHERE
+	        TO_DATE(TO_CHAR(JOIN_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	
+	</entry>
 	
 	
 	

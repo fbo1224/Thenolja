@@ -182,6 +182,19 @@ public class MemberService {
 		return adminMember;
 	}
 	
+	/**
+	 * 가입자 수
+	 */
+	public int countJoinMember() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().countJoinMember(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 	
 	

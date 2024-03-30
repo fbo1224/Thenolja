@@ -189,7 +189,7 @@
             	<div id="today"><p>Today 현황</p></div>
 
         <div id="today_content">
-            <div id="today_join"><p>회원가입<br> 30명 </p> </div>
+            <div id="today_join"><p>회원가입<br><span id="join"></span>명 </p> </div>
 
             <div id="today_reser"><p>예약<br> 20건</p></div>
     
@@ -244,6 +244,16 @@
     				$('#refund_list tbody').html(resultStr);
     			}
     			
+    		});
+    		
+    		
+    		$.ajax({
+    			
+    			url : 'todayJoin.do',
+    			type : 'post',
+    			success : function(result){
+    				$('#join').text(result);	
+    			}
     		});
     		
     		
