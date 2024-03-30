@@ -72,16 +72,18 @@
 		margin: 10px;	
 	}
 	.mainPage-title-div {
-		margin: 10px auto;
+		margin: 25px auto;
 		border-bottom: 1px solid gray;
 	}
 	.mainPage-title-div > h3 {
 		margin: 3px;
 	}
 	.swiper-button-prev{
+		display: block;
 		left: 1px;
 	}
 	.swiper-button-next{
+		display: block;
 		right: 1px;
 	}
 </style>
@@ -108,7 +110,7 @@
 		<div class="mainPage-title-div">
 			<h3>지역별 추천숙소</h3>
 		</div>	
-		 <div class="swiper mySwiper">
+		 <div class="swiper mySwiper-mid">
 		    <div class="swiper-wrapper recommands">
 		    </div>
 	  	</div>
@@ -125,7 +127,7 @@
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
 					$('.populars').append('<div class="swiper-slide">'
-							+'<div class="cards">'
+							+'<div class="cards" id="'+ result[i].hotelNo +'">'
 								+'<div class="card-imgDiv">'
 									+'<img class="card-img" src="'+result[i].hotelPath+'">'
 								+'</div>'
@@ -151,7 +153,7 @@
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
 					$('.recommands').append('<div class="swiper-slide">'
-							+'<div class="card" style="width:300px">'
+							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:280px; cursor: pointer;">'
 							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
 							    +'<div class="card-body">'
 							    +'<h4 class="card-title">'+ result[i].hotelName +'</h4>'
@@ -181,6 +183,24 @@
 		      },
 		});
 		
+		// 하단 swipper/ 갯수설정, 세부 설정 필요
+		var swiper = new Swiper(".mySwiper-mid", {
+		      slidesPerView: 4,
+		      spaceBetween: 20,
+		      freeMode: true,
+		      pagination: {
+		        el: ".swiper-pagination",
+		        clickable: true,
+		      },		      
+		});
+		
+		$('.cards').click(function(e){
+			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+		});
+		
+		$('.card').click(function(e){
+			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+		});
 	
 	})
 	</script>
