@@ -220,7 +220,9 @@
 					<%for(HotelReview hr : dh.getReviewList() ){ %>
 					<div class="content-review-1 card">
 						<div class="review-1-div">
-							<span><%= hr.getReserName() %></span><span><%= hr.getCreateDate() %></span>
+							<span>작성자 : <%= hr.getReserName() %> </span>
+							<span>작성일 : <%= hr.getCreateDate() %> </span>
+							<span>리뷰 점수 : <%= hr.getReviewScore() %></span>
 						</div>
 						<div>
 							<span><%= hr.getReviewContent() %></span>
