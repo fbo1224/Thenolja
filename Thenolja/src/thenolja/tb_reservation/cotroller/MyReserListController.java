@@ -38,11 +38,11 @@ public class MyReserListController extends HttpServlet {
 		
 		if(reserList != null) {
 			Reservation reser = new ReserService().selectReservation();
-			Hotel hotel = new ReserService().selectHotel();
+		//	Hotel hotel = new ReserService().selectHotel();
 			
 			request.setAttribute("reserList", reserList);
 			request.setAttribute("reser", reser);
-			request.setAttribute("hotel", hotel);
+		//	request.setAttribute("hotel", hotel);
 			
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 			

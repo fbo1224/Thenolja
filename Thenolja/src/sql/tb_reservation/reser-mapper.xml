@@ -149,7 +149,7 @@
 		 		RE_MEM_NO = ?       
 		 ORDER BY RESER_NO DESC
 	</entry>
-	
+	<!-- 
 	<entry key="selectHotelNo">
 	SELECT
 	        HOTEL_NO,
@@ -163,7 +163,7 @@
 	        HOST_NAME
 	  FROM
 	        TB_HOTEL
-	  ORDER BY HOTEL_NO DESC
+    ORDER BY HOTEL_NO DESC    
 	</entry>
 		
 	<entry key="selectHotel">
@@ -183,5 +183,36 @@
 	        HOTEL_NO = ?
 	</entry>
 	
-	
+	<entry key="selectRoom">
+ 		SELECT
+		        ROOM_NO, 
+		        HOTEL_NO,
+		        ROOM_NAME,
+		        CHECKIN_TIME,
+		        CHECKOUT_TIME,
+		        ROOM_NUM,
+		        ROOM_PRICE,
+		        MAX_PEOPLE
+	      FROM 
+	        	TB_ROOM
+	     WHERE
+	     		ROOM_NO = ?
+	       AND
+	       		HOTEL_NO = ? 		   	
+	</entry>
+	<entry key="selectRoomNo">
+ 		SELECT
+		        ROOM_NO, 
+		        HOTEL_NO,
+		        ROOM_NAME,
+		        CHECKIN_TIME,
+		        CHECKOUT_TIME,
+		        ROOM_NUM,
+		        ROOM_PRICE,
+		        MAX_PEOPLE
+	      FROM 
+		        TB_ROOM
+	   ORDER BY ROOM_NO DESC
+	</entry>
+	 -->
 </properties>

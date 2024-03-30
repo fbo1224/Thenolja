@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.tb_refund.model.service.RefundService;
 import thenolja.tb_refund.model.vo.Refund;
+import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
@@ -57,6 +58,8 @@ public class RefundInsertController extends HttpServlet {
 			Reservation reser = new RefundService().selectReservation(reserNo);
 
 			if(refund != null && reser != null) {
+				
+				reser = new ReserService().updateReser(reserNo);
 				request.setAttribute("refund", refund);
 				
 				request.setAttribute("reser", reser);
