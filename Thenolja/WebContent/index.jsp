@@ -110,7 +110,7 @@
 		<div class="mainPage-title-div">
 			<h3>지역별 추천숙소</h3>
 		</div>	
-		 <div class="swiper mySwiper-mid">
+		 <div class="swiper mySwiper-2">
 		    <div class="swiper-wrapper recommands">
 		    </div>
 	  	</div>
@@ -184,7 +184,7 @@
 		});
 		
 		// 하단 swipper/ 갯수설정, 세부 설정 필요
-		var swiper = new Swiper(".mySwiper-mid", {
+		var swiper = new Swiper(".mySwiper-2", {
 		      slidesPerView: 4,
 		      spaceBetween: 20,
 		      freeMode: true,
