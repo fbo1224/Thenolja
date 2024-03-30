@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList" %>  
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel" %>  
 <%
 	Reservation reser = (Reservation)request.getAttribute("reser");
 
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
 	
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -132,8 +133,9 @@
 		<div id="content">
 	        <div id="reser_info">
 	            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
+				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 	            <div id="reser_detail">
-	                <h3>마리안느</h3>
+	                <h3><%=hotel.getHotelName() %></h3>
 	                <p>슈페리어 더블(오션뷰)</p>
 	                <p>2인</p>
 	                <p>117,000원</p>
@@ -141,7 +143,7 @@
 	            </div>
 
             <div id="review_in">
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=reser.getReserNo() %>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
+                <a href="<%=contextPath %>/review.insert?reserNo=<%=reser.getReserNo() %>&hotelNo=<%=hotel.getHotelNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
             </div>
         </div>
 	</div>

@@ -49,17 +49,17 @@ public class RefundInsertController extends HttpServlet {
 		refund.setRefundName(refundName);
 		refund.setBank(bankName);
 		
-		int result = new RefundService().insertRefund(refund);
+		int result1 = new RefundService().insertRefund(refund);
+		int result2 = new ReserService().deleteReser(reserNo);
 		
-		
-		if(result > 0) {
+		if(result1 * result2 > 0) {
 			
 			refund = new RefundService().selectRefund(reserNo);
 			Reservation reser = new RefundService().selectReservation(reserNo);
 
 			if(refund != null && reser != null) {
 				
-				reser = new ReserService().updateReser(reserNo);
+				
 				request.setAttribute("refund", refund);
 				
 				request.setAttribute("reser", reser);

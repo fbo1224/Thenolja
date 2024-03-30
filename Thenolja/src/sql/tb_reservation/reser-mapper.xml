@@ -66,8 +66,17 @@
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
 		 		RESER_NO = ?
+		   AND
+		   		CANCEL_YN = 'N'	
 	</entry>
-	
+	<entry key="deleteReser">
+		UPDATE
+				TB_RESERVATION
+	       SET
+	       		CANCEL_YN = 'Y'		
+	     WHERE
+	     		RESER_NO = ?	
+	</entry>
 	<!-- 
 	
 	<entry key="selectReservation">
@@ -121,6 +130,8 @@
 		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+		 WHERE
+		 		CANCEL_YN = 'N'	
 	  ORDER BY RESER_NO DESC
  	</entry>
 	<entry key="selectList">
@@ -146,10 +157,11 @@
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
-		 		RE_MEM_NO = ?       
+		 		RE_MEM_NO = ?    
+		   AND
+		   		CANCEL_YN = 'N'			   
 		 ORDER BY RESER_NO DESC
 	</entry>
-	<!-- 
 	<entry key="selectHotelNo">
 	SELECT
 	        HOTEL_NO,
@@ -182,6 +194,7 @@
 	 WHERE
 	        HOTEL_NO = ?
 	</entry>
+	<!-- 
 	
 	<entry key="selectRoom">
  		SELECT

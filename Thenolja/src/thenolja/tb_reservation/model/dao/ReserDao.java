@@ -238,7 +238,6 @@ public class ReserDao {
 		
 		return list;
 	}
-/*
 	public Hotel selectHotelNo(Connection conn, int hotelNo) {
 		
 		ResultSet rset = null;
@@ -305,6 +304,7 @@ public class ReserDao {
 		return hotel;
 	}
 
+	/*
 	public Room selectRoom(Connection conn) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -367,10 +367,22 @@ public class ReserDao {
 	}
 	*/
 
-	public Reservation updateReser(Connection conn, int reserNo) {
+	public int deleteReser(Connection conn, int reserNo) {
 		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReser");
 		
-		return null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

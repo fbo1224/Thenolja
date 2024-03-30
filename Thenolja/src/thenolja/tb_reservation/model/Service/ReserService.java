@@ -89,7 +89,6 @@ public class ReserService {
 		
 		return list;
 	}
-/*
 	public Hotel selectHotelNo(int hotelNo) {
 		
 		Connection conn = getConnection();
@@ -111,7 +110,7 @@ public class ReserService {
 		
 		return hotel;
 	}
-
+/*
 	public Room selectRoom() {
 		Connection conn = getConnection();
 		
@@ -133,15 +132,16 @@ public class ReserService {
 	}
 */
 
-	public Reservation updateReser(int reserNo) {
+	public int deleteReser(int reserNo) {
 
 		Connection conn = getConnection();
 		
-		Reservation reser = new ReserDao().updateReser(conn, reserNo);
+		int result = new ReserDao().deleteReser(conn, reserNo);
 		
 		close(conn);
 		
-		return reser;	}
+		return result;	
+	}
 
 	
 
