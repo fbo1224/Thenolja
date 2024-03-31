@@ -61,7 +61,7 @@ public class ReviewInsertFormController extends HttpServlet {
 		review.setImgPath(imgPath);
 		review.setContent(content);
 		review.setScore(score);
-		System.out.println(content);
+	//	System.out.println(content);
 		
 		if(multiRequest.getOriginalFileName("upfile") != null) {
 			review.setImgPath(multiRequest.getOriginalFileName("upfile"));
