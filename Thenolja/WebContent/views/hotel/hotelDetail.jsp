@@ -38,11 +38,13 @@
 #detail-content-img{
 	margin: auto;
 	width: 80%;
+	border-radius: 10px;
 	box-shadow: 2px 2px 2px gray;
 }
 #detail-content-img > img{
 	width:100%;
 	height: 500px;
+	border-radius: 10px;
 }
 #detail-content-imgInfo{
 	margin: auto;
