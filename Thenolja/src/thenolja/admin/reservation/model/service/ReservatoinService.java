@@ -120,6 +120,19 @@ public class ReservatoinService {
 		
 	}
 	
+	/**
+	 * 예약 비회원 검색
+	 */
+	public ArrayList<AdminReservation> searchNonMemName(String keyword){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().searchNonMemName(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 	
 	/**
