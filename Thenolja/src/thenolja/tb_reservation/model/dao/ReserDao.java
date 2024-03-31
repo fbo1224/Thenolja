@@ -336,7 +336,7 @@ public class ReserDao {
 		return room;
 		
 	}
-
+*/
 	public Room selectRoomNo(Connection conn, int roomNo, int hotelNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -365,7 +365,7 @@ public class ReserDao {
 		}
 		return room;
 	}
-	*/
+	
 
 	public int deleteReser(Connection conn, int reserNo) {
 		
@@ -384,6 +384,7 @@ public class ReserDao {
 		}
 		return result;
 	}
+
 	
 	
 	

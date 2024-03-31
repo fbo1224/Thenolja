@@ -79,7 +79,7 @@ public class ReviewInsertFormController extends HttpServlet {
 	       	 
        	} else {
         
-	       	 request.setAttribute("errorMsg", "게시글 작성 실패");
+	       	 request.setAttribute("errorMsg", "리뷰 작성 실패");
 	       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
         }         
      }

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList,thenolja.
-common.model.vo.PageInfo, thenolja.tb_hotel.model.vo.Hotel" %>  
+<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList, thenolja.common.model.vo.PageInfo" %>  
 <%
 	Review review = (Review)request.getAttribute("review");
 
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	Hotel hotle = (Hotel)request.getAttribute("hotel");
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -63,10 +61,10 @@ common.model.vo.PageInfo, thenolja.tb_hotel.model.vo.Hotel" %>
         height: 100%;
         border: 1px solid black;
     }
-    #review_set > #reser_hotel_img{
+    #review_set > #reser_review_img{
         float: left
     }
-    #reser_hotel_img{
+    #reser_review_img{
         border-radius: 10px;
     }
     #updateReview{
@@ -124,9 +122,10 @@ common.model.vo.PageInfo, thenolja.tb_hotel.model.vo.Hotel" %>
 			</tr>
 		</table>
 		<% } else { %>
-		<% for(Review r : reviewList) { %>
+		<%for(Review r : reviewList){ %>
 		<div id="content">
 			<div id="review_detail">
+			
 				<div id="hotel_name">
 					마리안느&nbsp;
 				</div>
@@ -135,13 +134,13 @@ common.model.vo.PageInfo, thenolja.tb_hotel.model.vo.Hotel" %>
 				</div>
 			</div>
 			<div id="reivew_set">
-				<div id="review_img"><img id="reser_hotel_img" src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="숙소사진" width="190px" height="190px"></div>
+				<div id="review_img"><img id="reser_review_img" src="<%=review.getImgPath() %>" alt="숙소사진" width="190px" height="190px"></div>
 				<div id="img_btn">
 					<button id="updateReview">리뷰 수정</button>
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;">
 				</div>
 			</div>
-		</div>
+		</div> 
 		<% } %>
 		<% } %>
 	</div>	

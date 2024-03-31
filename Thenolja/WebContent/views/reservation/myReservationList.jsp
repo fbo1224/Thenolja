@@ -121,13 +121,6 @@
             <div id="left_title"><h3>내 예약 내역</h3></div>
 		</div>
     
-	<% if(reserList.isEmpty()) { %>
-	<table>
-	<tr>
-	   <th colspan="5">내역이 존재하지 않습니다.</th>
-	</tr>
-	</table>
-	<% } else { %>
 		
 		<% for(Reservation c : reserList) { %>
 		<div id="content">
@@ -148,7 +141,6 @@
         </div>
 	</div>
 	<% } %>
-<% } %>
 <div id="homeBtn">
 	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	

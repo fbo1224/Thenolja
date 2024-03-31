@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
-<%@ page import="java.util.ArrayList" %>   
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel" %>   
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
 %>   
   
 <!DOCTYPE html>
