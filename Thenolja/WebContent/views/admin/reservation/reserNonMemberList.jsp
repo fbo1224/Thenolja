@@ -203,7 +203,7 @@
     		                            	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
     		                      	    } else {
     		                      	    	resultStr += '<td>' +
-    		                      	    	'<button id="refundBtn"  abled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    	'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
     		                      	    }
     		                            resultStr += '</tr>'
     					};

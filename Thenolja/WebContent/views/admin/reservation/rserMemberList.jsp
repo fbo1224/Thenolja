@@ -191,7 +191,8 @@
     					let resultStr = '';
     					
     					for(let i = 0; i < result.length; i++){
-
+    						const checkInTime = result[i].checkInTime;
+    						console.log(checkInTime);
           					resultStr += '<tr>'
           							   + '<td>' + result[i].reserNo + '</td>'
           							   + '<td>' + result[i].memId + '</td>'
@@ -199,11 +200,11 @@
           							   + '<td>' + result[i].memPhone + '</td>'
     	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>';
     									
-    		                            if(currentDate > result.getCheckInTime) { 
-    		                            	resultStr += '<td>' +
-    		                        		+'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                            if(currentDate > checkInTime) { 
+    		                            	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
     		                      	    } else {
-    		                      	    	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    	resultStr += '<td>' +
+    		                        		'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';	
     		                      	    }
     		                            resultStr += '</tr>'
     					};
