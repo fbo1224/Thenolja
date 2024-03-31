@@ -65,11 +65,11 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="예약자명 입력" name="memId">
+                        <input type="text" placeholder="예약자명 입력" id="keyword">
                     </div>
         
                     <div id="search_btn">
-                        <button type="button" class="btn btn-outline-info">검색</button>
+                        <button type="button" class="btn btn-outline-info" onclick="searchNonMem()">검색</button>
                     </div>
                 </div>
 
@@ -159,6 +159,68 @@
     </div>
     
     <script>
+    
+    	function searchNonMem(){
+    		
+    		$.ajax({
+    			
+    			url : 'reserSearchNonMem.do',
+    			type : 'post',
+    			data : {keyword : $('#keyword').val()},
+    			success : function(result){
+    				if(result.length === 0){
+    					alert('예약 회원이 존재하지 않습니다.');
+    					location.href = '<%=contextPath%>/reserNonMem?currentPage=1';
+    				} else{
+    					
+    					
+    					const date = new Date();
+    					
+    					const year = date.getFullYear();
+    					
+    					const month = date.getMonth() + 1;
+    					
+    					const day = date.getDate();
+    					
+    					const currentDate = year + '.' + (month < 10 ? '0' : "") + month + '.' + (day < 10 ? '0' : "") + day;
+    		    		
+    					console.log(currentDate);
+    					
+    					let resultStr = '';
+    					
+    					let checkInTime = '';
+    					
+    					for(let i = 0; i < result.length; i++){
+    						const checkInTime = result[i].checkInTime;
+    						console.log(checkInTime);
+          					resultStr += '<tr>'
+          							   + '<td>' + result[i].reserNo + '</td>'
+          							   + '<td>' + result[i].reserName + '</td>'
+          							   + '<td>' + result[i].memPhone + '</td>'
+    	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>';
+    									
+    		                            if(currentDate > checkInTime) { 
+    		                            	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    } else {
+    		                      	    	resultStr += '<td>' +
+    		                      	    	'<button id="refundBtn"  abled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    }
+    		                            resultStr += '</tr>'
+    					};
+      			
+      				$('#mem_list tbody').html(resultStr);
+	      						   console.log(resultStr);
+    				}
+    			}
+    		});	
+    		
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
     	function detailReserNonMem(e){
     		
     		$.ajax({

@@ -289,6 +289,45 @@ public class ReservationDao {
 		
 	}
 	
+	/**
+	 * 예약 비회원 검색
+	 */
+	public ArrayList<AdminReservation> searchNonMemName(Connection conn, String keyword){
+		
+		ArrayList<AdminReservation> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchNonMemName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminReservation adminReservation = new AdminReservation();
+				
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
+				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				
+				list.add(adminReservation);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 	
 	/**
