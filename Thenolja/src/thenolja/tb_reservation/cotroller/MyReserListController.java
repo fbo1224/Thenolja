@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -39,10 +40,12 @@ public class MyReserListController extends HttpServlet {
 		if(reserList != null) {
 			Reservation reser = new ReserService().selectReservation();
 			Hotel hotel = new ReserService().selectHotel();
+			Room room = new ReserService().selectRoom();
 			
 			request.setAttribute("reserList", reserList);
 			request.setAttribute("reser", reser);
 			request.setAttribute("hotel", hotel);
+			request.setAttribute("room", room);
 			
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 			

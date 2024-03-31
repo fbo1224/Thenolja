@@ -160,8 +160,10 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-				<button class="btn btn-sm btn-primary" >예약하기</button>
-				<button class="btn btn-sm btn-primary" >비회원예약하기</button>
+			<a href="<%=contextPath%>/insertReservation">
+				<button class="btn btn-sm btn-primary" >예약하기</button></a>
+			<a href="<%=contextPath%>/nonInsertReservation">
+				<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 			</div>
 			
 			<div id="detail-content-title">
@@ -207,7 +209,8 @@
 						<div>
 							<p>쿠폰적용가능</p>
 							<%-- 객실예약 기능 추가 예정 --%>
-							<button class="btn btn-sm btn-info">객실 예약</button>
+							<a href="<%=contextPath%>/insertReservation">
+							<button class="btn btn-sm btn-info">객실 예약</button></a>
 						</div>
 					</div>			
 					<%} %>

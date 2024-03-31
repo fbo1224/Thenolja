@@ -36,17 +36,11 @@
         SELECT A.*, ROWNUM RNUM
           FROM (		
         SELECT
-		        NICKNAME,
 		        RESER_NO,
 		        IMG_PATH,
 		        REVIEW_CONTENT,
 		        REVIEW_SCORE,
-		        CREATE_DATE,
-                HOTEL_NAME,
-                HOTEL_PATH,
-                RESER_DATE,
-                PEOPLE,
-                PAYMENT_PRICE
+		        CREATE_DATE
 		  FROM
 		        TB_REVIEW
 		  JOIN
@@ -57,7 +51,7 @@
 		        TB_ROOM ON (TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO)
 		  JOIN
 		        TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
-           AND
+         WHERE
               	REVIEW_YN = 'Y'
            AND
                 TB_HOTEL.HOTEL_NO = ?
@@ -68,7 +62,20 @@
 	
 	</entry>
 	
-	
+	<entry key="selectReview">
+        SELECT
+		        RV_RESER_NO,
+		        IMG_PATH,
+		        REVIEW_CONTENT,
+		        REVIEW_SCORE,
+		        CREATE_DATE
+		  FROM
+		        TB_REVIEW
+		 WHERE
+		 		RV_RESER_NO = ? 
+		   AND
+		   		REVIEW_YN = 'Y'      
+	</entry>
 
 	
 	

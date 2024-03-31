@@ -304,7 +304,7 @@ public class ReserDao {
 		return hotel;
 	}
 
-	/*
+
 	public Room selectRoom(Connection conn) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -313,8 +313,6 @@ public class ReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, room.getRoomNo());
-			pstmt.setInt(2, room.getHotelNo());
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				room = new Room();
@@ -365,7 +363,7 @@ public class ReserDao {
 		}
 		return room;
 	}
-	*/
+	
 
 	public int deleteReser(Connection conn, int reserNo) {
 		
@@ -384,6 +382,8 @@ public class ReserDao {
 		}
 		return result;
 	}
+
+
 	
 	
 	
