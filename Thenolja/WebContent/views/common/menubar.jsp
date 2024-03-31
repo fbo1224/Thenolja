@@ -189,6 +189,7 @@ div {
         list-style: none;
         padding: 0px;
         display:none;
+        border : 1px solid #469597
     }
 
     #navi > li > a:hover + ul{
@@ -206,7 +207,7 @@ div {
     
     #navi > li > ul a{
         font-size: 17px;
-        background-color: #E5E3E4;
+        background-color: white;
     }
     .form-control{
 		display: inline-block;
