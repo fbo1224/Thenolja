@@ -407,6 +407,45 @@ public class MemberDao {
 		return result;
 	}
 	
+	/**
+	 * 오래된 순
+	 */
+	public ArrayList<AdminMember> memberOldestList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminMember> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("memberOldestList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminMember adminMember = new AdminMember();
+				adminMember.setMemNo(rset.getInt("MEM_NO"));
+				adminMember.setMemId(rset.getString("MEM_ID"));
+				adminMember.setNickName(rset.getString("NICKNAME"));
+				adminMember.setGradeName(rset.getString("GRADE_NAME"));
+				
+				list.add(adminMember);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	
 	
 }

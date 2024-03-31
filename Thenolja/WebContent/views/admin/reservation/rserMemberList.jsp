@@ -28,7 +28,28 @@
     
     <div id="wrap">
         <div id="header">
-       		<%@ include file="../../common/menubar.jsp" %> 
+    <style>
+        .sort-btn{
+        	
+        	border : none;
+        	background : white;
+        	float: right;
+        	padding-top : 10%;
+        }
+        
+         .sort-btn:hover{
+        	
+        	color : #5BA199;
+        }
+
+		#oldest {
+		
+		padding-right : 20%;
+		
+		}
+
+
+</style>   		<%@ include file="../../common/menubar.jsp" %> 
         </div>
                
         <div id="content">
@@ -53,13 +74,10 @@
                         <h2>회원 예약 목록</h2>
                     </div>
         
-                    <div id="mem_sort">
-                        <select>
-                            <option value="newest">최신순</option>
-                            <option value="oldset">오래된순</option>
-                        </select>
-        
-                    </div>
+ 					<div id="mem_sort">
+			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>
+					</div>
         
                 </div>
                 

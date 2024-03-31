@@ -196,6 +196,18 @@ public class MemberService {
 		return result;
 	}
 	
-	
+	/**
+	 * 오래된 순으로 정렬
+	 */
+	public ArrayList<AdminMember> memberOldestList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().memberOldestList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 }
