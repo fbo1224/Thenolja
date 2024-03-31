@@ -192,9 +192,9 @@
 	  FROM
 	        TB_HOTEL
 	 WHERE
-	        HOTEL_NO = ?
+	        HOTEL_NO = ? 
 	</entry>
-	<!-- 
+	
 	
 	<entry key="selectRoom">
  		SELECT
@@ -208,11 +208,7 @@
 		        MAX_PEOPLE
 	      FROM 
 	        	TB_ROOM
-	     WHERE
-	     		ROOM_NO = ?
-	       AND
-	       		HOTEL_NO = ? 		   	
-	</entry>
+	</entry><!-- 
 	<entry key="selectRoomNo">
  		SELECT
 		        ROOM_NO, 

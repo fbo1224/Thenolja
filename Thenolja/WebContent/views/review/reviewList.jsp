@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList, thenolja.common.model.vo.PageInfo" %>  
+<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList, 
+				thenolja.common.model.vo.PageInfo, thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
 	Review review = (Review)request.getAttribute("review");
 
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	Reservation reser = (Reservation)request.getAttribute("reser");
 	
 	// 페이징바 만들 때 필요한 변수 미리 세팅
 	int currentPage = pi.getCurrentPage();
@@ -118,14 +120,14 @@
 		<% if(reviewList.isEmpty()) { %>
 		<table>
 			<tr>
-				<th colspan="5">내역이 존재하지 않습니다.</th>
+				<th style="font-size:40px;" colspan="5">작성된 리뷰가 존재하지 않습니다.</th>
 			</tr>
 		</table>
 		<% } else { %>
 		<%for(Review r : reviewList){ %>
 		<div id="content">
 			<div id="review_detail">
-			
+			<input type="hidden" name="hotelNo">
 				<div id="hotel_name">
 					마리안느&nbsp;
 				</div>
@@ -136,7 +138,7 @@
 			<div id="reivew_set">
 				<div id="review_img"><img id="reser_review_img" src="<%=review.getImgPath() %>" alt="숙소사진" width="190px" height="190px"></div>
 				<div id="img_btn">
-					<button id="updateReview">리뷰 수정</button>
+					<a href="update.review?reserNo=<%=review.getReserNo()%>"><button id="updateReview">리뷰 수정</button></a>
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;">
 				</div>
 			</div>

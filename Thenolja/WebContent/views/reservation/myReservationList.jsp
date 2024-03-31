@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel" %>  
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
+				 thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
 <%
 	Reservation reser = (Reservation)request.getAttribute("reser");
 
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
-	
+	Room room = (Room)request.getAttribute("room");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 %>    
 <!DOCTYPE html>
@@ -116,7 +117,7 @@
 	<div id="output">
         <div id="content_title">
             <div id="left_img">
-                <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="<%=contextPath %>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>내 예약 내역</h3></div>
 		</div>
@@ -129,10 +130,10 @@
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 	            <div id="reser_detail">
 	                <h3><%=hotel.getHotelName() %></h3>
-	                <p>슈페리어 더블(오션뷰)</p>
-	                <p>2인</p>
-	                <p>117,000원</p>
-	                <p>2024-02-28 ~ 2024-02-29</p>
+	                <p><%=room.getRoomName() %></p>
+	                <p><%=room.getMaxPeople() %>인</p>
+	                <p><%=reser.getPaymentPrice() %>원</p>
+	                <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
 	            </div>
 
             <div id="review_in">

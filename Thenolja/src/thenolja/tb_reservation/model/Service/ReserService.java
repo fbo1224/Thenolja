@@ -110,7 +110,7 @@ public class ReserService {
 		
 		return hotel;
 	}
-/*
+
 	public Room selectRoom() {
 		Connection conn = getConnection();
 		
@@ -120,7 +120,7 @@ public class ReserService {
 		
 		return room;
 	}
-*/
+
 	public Room selectRoomNo(int roomNo, int hotelNo) {
 		Connection conn = getConnection();
 		
@@ -142,6 +142,7 @@ public class ReserService {
 		
 		return result;	
 	}
+
 
 
 	
