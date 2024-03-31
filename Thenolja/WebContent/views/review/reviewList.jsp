@@ -139,22 +139,14 @@ common.model.vo.PageInfo, thenolja.tb_hotel.model.vo.Hotel" %>
 				<div id="img_btn">
 					<button id="updateReview">리뷰 수정</button>
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;">
-				</div>      
 				</div>
 			</div>
+		</div>
 		<% } %>
 		<% } %>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	</div>	
+		
+		
+		
 </body>
 </html>
