@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, thenolja.tb_hotel.model.vo.Hotel" %>  
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, 
+				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
-
-	Hotel hotel = (Hotel)request.getAttribute("hotel");
-%>
+	Reservation reser = (Reservation)session.getAttribute("reser");
+	Room room = (Room)session.getAttribute("room");
+	Hotel hotel = (Hotel)session.getAttribute("hotel");
+	
+	%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,11 +195,12 @@
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
                 <div id="reser_detail">
-                    <h3>마리안느</h3>
-                    <p>슈페리어 더블(오션뷰)</p>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-02-28 ~ 2024-02-29</p>
+				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+			        <h2><%=hotel.getHotelName() %></h2>
+			        <p><%=room.getRoomName() %></p>
+			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=room.getRoomPrice() %>원</p>
+			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
                 </div>
 
                 <div id="reser_btn">
@@ -263,7 +266,7 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>">
+	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>">
 	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
 	    </a>
     </div>

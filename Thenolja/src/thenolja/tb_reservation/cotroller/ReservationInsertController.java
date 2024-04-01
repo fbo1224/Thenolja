@@ -56,7 +56,6 @@ public class ReservationInsertController extends HttpServlet {
 		// reser.setPayment(payment);d
 	//	Hotel hotel = new Hotel();
 	//	hotel.setHotelNo(hotelNo);
-
 		
 
 		int result = new ReserService().insertReser(reser);
@@ -68,15 +67,25 @@ public class ReservationInsertController extends HttpServlet {
 			
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
-				reser = new ReserService().selectReservation();
+			reser = new ReserService().selectReservation();		
+			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+			
+			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
+			Room room = new ReserService().selectRoomNo(hotelNo);
+				
+				if(hotel != null && room != null) {
 
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
-
+				session.setAttribute("hotel", hotel);
+				session.setAttribute("room", room);
 
 				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");
-			
+				} else {
+					request.setAttribute("errorMsg", "예약에 실패했습니다!");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				}
 		} else {
 			request.setAttribute("errorMsg", "예약에 실패했습니다!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

@@ -387,8 +387,8 @@ div {
 	      <!-- Modal body -->
 		  	<form action="<%= contextPath %>/selectNonmem" method="get">
 	      		<div class="modal-body">
-					비회원 예약번호<br><input type="text" maxlength="11" name="nonmemNo" required><br>
-					비회원 성함<br><input type="text" maxlength="15" name="nonmemName" required>
+					예약번호<br><input type="text" maxlength="11" name="nonmemNo" required><br>
+					예약자 성함<br><input type="text" maxlength="15" name="nonmemName" required>
 				</div>
 				
 				<!-- Modal footer -->

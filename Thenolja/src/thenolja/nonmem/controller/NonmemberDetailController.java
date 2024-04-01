@@ -31,10 +31,10 @@ public class NonmemberDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member member = new NonmemService().selectNonMemNo(memNo);
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		
+		Member member = new NonmemService().selectNonMemNo();
 			
 		if(member != null) {
 			
@@ -47,9 +47,7 @@ public class NonmemberDetailController extends HttpServlet {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-		}*/
-	
-	
+		}
 	
 	
 	}
