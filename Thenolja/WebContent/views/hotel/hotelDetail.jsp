@@ -297,38 +297,40 @@ svg{
 				<!-- 동혁 시작-->
 				<% if(loginUser != null) { %> 
 					<div id="favorite">
-						<label for="checkbox" id="label">
-					        <input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden >
-					        <svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>
-					    </label>
+						<form method="post">
+							<label for="checkbox" id="label">
+						        <input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden >
+						        <svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>
+						    </label>
+					    </form>
 					</div>
 					
 					<script>
 		               function heartClick(){
 		            	   const cb = document.getElementById('checkbox');
 		            	   
-		            	   var hc = '';
-		            	   if(cb.checked == true){
-		                       console.log('heart');
-		                       hc = 'insert.heart';
-		                       
-		            	   } else {
-		            		   console.log('unheart');
-		            		   
-		            		   hc = 'delete.heart';
-		            	   }
+			            	   var hc = '';
+			            	   if(cb.checked == true){
+			                       console.log('heart');
+			                       hc = 'insertheart';
+			                       
+			            	   } else {
+			            		   console.log('unheart');
+			            		   hc = 'deleteheart';
+			            	   }
 		                   
-		            	   $ajax({
-		            		   
+		            	   $.ajax({
 		            		   url : 'hc',
 		            		   type: 'post',
 		            		   data : {
 		            		   hotelNo : <%= dh.getHotelNo()%>,
 		            		   memNo : <%= loginUser.getMemNo()%>,
 		            		   },
-		            		   success: function(response){
-		            			   console.log(success);
-		            		   }
+		            		   success: console.log('ajax호출')
+		            		   ,
+		            		   error: function(e){
+		           				console.log(e);
+		           			}
 		            	   })
 		            	   
 		                }
@@ -352,7 +354,7 @@ svg{
 						<div>
 							<p>쿠폰적용가능</p>
 							<%-- 객실예약 기능 추가 예정 --%>
-							<a href="<%=contextPath%>/insertReservation?hotelNo=<%=dh.getHotelNo()%>&roomNum=<%=ri.getRoomNum()%>">
+							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
 							<button class="btn btn-sm btn-info">객실 예약</button></a>
 						</div>
 					</div>			
