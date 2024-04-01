@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HeartInsertController
  */
-@WebServlet("/insert.heart")
+@WebServlet("/insertheart")
 public class HeartInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
