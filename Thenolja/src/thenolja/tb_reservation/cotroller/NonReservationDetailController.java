@@ -40,7 +40,7 @@ public class NonReservationDetailController extends HttpServlet {
 			request.setAttribute("reser", reser);
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/nonDetailReservation.jsp");
 			view.forward(request, response);
-			
+			// 이거 어떤방식으로 만든건지 묻기
 		} else {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
