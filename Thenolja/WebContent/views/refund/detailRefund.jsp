@@ -180,7 +180,25 @@
     #refund_btn > button{
         float: right;
     }
-
+    #return_main{
+    	width: 100px;
+    	height:40px;
+    	margin: auto;
+    }
+	#re_main{
+		margin-top: 100px;
+		width:100%;
+		height:100%;
+		border-radius:5px;
+		border:0;
+		background-color:#5BA199;
+		color : white;
+		font-size:17px;
+	}
+	#re_main:hover{
+		font-size:18px;
+		backgound-color:#52928b;
+	}
 
 
 </style>
@@ -337,8 +355,9 @@
       </div>
     </div>
   </div>
-    
-    
+  <div id="return_main">
+   <a href="<%=contextPath %>"><button id="re_main" type="button">메인 화면</button></a>
+   </div> 
     <br><br><br><br><br><br><br><br><br><br>
     
     

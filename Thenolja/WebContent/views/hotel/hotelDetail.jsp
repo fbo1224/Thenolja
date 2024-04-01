@@ -352,7 +352,7 @@ svg{
 						<div>
 							<p>쿠폰적용가능</p>
 							<%-- 객실예약 기능 추가 예정 --%>
-							<a href="<%=contextPath%>/insertReservation">
+							<a href="<%=contextPath%>/insertReservation?hotelNo=<%=dh.getHotelNo()%>&roomNum=<%=ri.getRoomNum()%>">
 							<button class="btn btn-sm btn-info">객실 예약</button></a>
 						</div>
 					</div>			
