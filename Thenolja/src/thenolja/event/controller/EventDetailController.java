@@ -34,13 +34,13 @@ public class EventDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 상세페이지 조회 시 파라미터 받기
-		int eventNo = Integer.parseInt(request.getParameter("EventNo"));
+		int noticeNo = Integer.parseInt(request.getParameter("EventNo"));
 		String flag  = request.getParameter("flag"); // 수정, 삭제 / 상세 페이지 구분을 위한 값 추가
 		
-		System.out.println("[EventDetailController eventNo] " + eventNo);  
+		System.out.println("[EventDetailController noticeNo] " + noticeNo);  
 
 		Notice result = new Notice();
-		result = new NoticeServiceImpl().selectNoticeOne(eventNo, flag);
+		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
 		System.out.println("[EventDetailController result] " + result);
 		
 		if(result != null) {

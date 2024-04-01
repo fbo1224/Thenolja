@@ -31,13 +31,13 @@ public class EventInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// �벑濡� submission �넻�떊
-		// �뙆�씪誘명꽣 �븳湲� 源⑥쭚 諛⑹�瑜� �쐞�븳 �씤肄붾뵫 �꽕�젙
+		// 등록 submission 통신
+		// 파라미터 한글 깨짐 방지를 위한 인코딩 설정
 		request.setCharacterEncoding("UTF-8");
-		// �씠踰ㅽ듃 �벑濡� 而⑦듃濡ㅻ윭
+		// 이벤트 등록 컨트롤러
 		
-		// �솕硫댁뿉�꽌 �꽆�뼱�삩 �뙆�씪誘명꽣 媛� �꽭�똿
-		// request.getParameter�뿉 �옉�꽦�븯�뒗 臾몄옄�뿴�� > html �깭洹몄뿉 �꽑�뼵�븳 name怨� �씪移섑빐�빞�븿.
+		// 화면에서 넘어온 파라미터 값 세팅
+		// request.getParameter에 작성하는 문자열은 > html 태그에 선언한 name과 일치해야함.
 		String eventTitle = "";
 		String eventContent = "";
 		String eventYn = "";
@@ -51,8 +51,8 @@ public class EventInsertController extends HttpServlet {
 		eventDate  = request.getParameter("eventStrtDt"); // eventStrtDt
 		eventDate  = request.getParameter("eventEndDt"); // eventStrtDt
 		eventImg  = request.getParameter("eventImg");
-		// 1. 濡쒓렇�씤�씠 �맂 寃쎌슦 濡쒓렇�씤 �젙蹂댁뿉 �엳�뒗 MEM_NO 瑜� �꽭�똿 �뀒�뒪�듃
-		// 2. 濡쒓렇�씤�씠 �븞�맂 寃쎌슦 writerNo瑜� �엫�쓽媛� 1濡� �꽭�똿�빐�꽌 �뀒�뒪�듃
+		// 1. 로그인이 된 경우 로그인 정보에 있는 MEM_NO 를 세팅 테스트
+		// 2. 로그인이 안된 경우 writerNo를 임의값 1로 세팅해서 테스트
 		writerNo = Integer.parseInt(request.getParameter("writerNo")); 
 		
 		System.out.println("eventTitle : " + eventTitle);
@@ -65,24 +65,24 @@ public class EventInsertController extends HttpServlet {
 		int svc = 0;
 		boolean rslt = false;
 		
-		// �씠踰ㅽ듃 ���옣 �꽌鍮꾩뒪 �샇異�
+		// 이벤트 저장 서비스 호출
 		Event event = new Event(eventTitle, eventContent, eventYn, eventDate, eventImg, writerNo);
 		svc = new EventServiceImpl().insertEvent(event);
 		
 		System.out.println("[svc] " + svc);
 		
-		// �젙�긽泥섎━ �떆 紐⑸줉 �솕硫댁쑝濡� sendRedirect
+		// 정상처리 시 목록 화면으로 sendRedirect
 		if(svc > 0) {  
 			rslt = true;
-			// �벑濡앹셿猷� �썑 response 媛앹껜�뿉 contentType �꽕�젙
+			// 등록완료 후 response 객체에 contentType 설정
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("SUCCESS");
 		}
 		
-		// ���옣 �떎�뙣 �떆 �벑濡앺솕硫댁쑝濡� sendRedirect
+		// 저장 실패 시 등록화면으로 sendRedirect
 		else {
 			rslt = false;
-			// �벑濡앹셿猷� �썑 response 媛앹껜�뿉 contentType �꽕�젙
+			// 등록완료 후 response 객체에 contentType 설정
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("FAIL");
 		}	
