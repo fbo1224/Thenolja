@@ -121,10 +121,10 @@ public class ReserService {
 		return room;
 	}
 
-	public Room selectRoomNo(int hotelNo) {
+	public Room selectRoomNo(int hotelNo, int roomNum) {
 		Connection conn = getConnection();
 		
-		Room room = new ReserDao().selectRoomNo(conn, hotelNo);
+		Room room = new ReserDao().selectRoomNo(conn, hotelNo, roomNum);
 		
 		close(conn);
 		

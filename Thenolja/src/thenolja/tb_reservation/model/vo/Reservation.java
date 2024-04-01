@@ -24,7 +24,9 @@ public class Reservation {
 	private String checkInTime;
 	private String checkOutTime;
 	private int hotelNo;
-	
+	private int roomNum;
+
+
 
 
 
@@ -51,11 +53,15 @@ public class Reservation {
 		this.name = name;
 	}
 	
+	public int getRoomNum() {
+		return roomNum;
+	}
+	public void setRoomNum(int roomNum) {
+		this.roomNum = roomNum;
+	}
 	public int getHotelNo() {
 		return hotelNo;
 	}
-	
-	
 	public void setHotelNo(int hotelNo) {
 		this.hotelNo = hotelNo;
 	}
