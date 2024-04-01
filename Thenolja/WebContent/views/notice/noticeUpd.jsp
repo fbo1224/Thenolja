@@ -187,6 +187,7 @@ function updNotice(eventStatus){
 	var chkStatus   = $('input[name="status"]:checked').val();
 	var confirmMsg;	// 수정, 삭제 버튼 클릭 시 확인 메시지
 	
+	
 	if(typeof eventStatus != "undefined"){
 		if(eventStatus == "UPD") confirmMsg = "게시글을 수정하시겠습니까?";
 		if(eventStatus == "DEL") confirmMsg = "게시글을 삭제하시겠습니까?";
@@ -294,7 +295,7 @@ function validation(eventStatus){
 * 함수설명 : 공지사항 내용 글자 count하는 부분
 ************************************/
 function countText(){
-
+ debugger
 	var content = $("#txtArea_content").val();
 	// 글자수 세기
 	if(content.length == 0 || content == ''){
@@ -340,9 +341,9 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 								
 									<% if("Y".equals(status)) { %>
-										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status %> ">
+										<input type="radio" id="rdo_statusY" name="status" checked="" value=" <%=status %> ">
 									<% } else { %>
-									<input type="radio" id="rdo_statusY" name="status" checked="" value="Y">
+										<input type="radio" id="rdo_statusY" name="status"value="Y">
 									
 									<% } %>
 								
@@ -356,9 +357,9 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 									
 									<% if("N".equals(status)) { %>
-										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status %> ">
+										<input type="radio" id="rdo_statusN" name="status" checked="" value=" <%=status %> ">
 									<% } else { %>
-									<input type="radio" id="rdo_statusN" name="status" checked="" value="N">
+										<input type="radio" id="rdo_statusN" name="status" value="N">
 									<% } %>
 								<% } %>
 								
@@ -381,6 +382,9 @@ function countText(){
         	<td></td>   
             <td>
             	<span id="spn_textcount">0/400</span>
+                <script type="text/javascript">
+                	countText();
+                </script>
             </td>
             <td></td>
         </tr>
