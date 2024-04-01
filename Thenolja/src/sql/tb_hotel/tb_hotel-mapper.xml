@@ -155,7 +155,8 @@
 		      ROOM_NUM,
 		      ROOM_PRICE,
 		      ROOM_IMG,
-		      ROOM_NAME
+		      ROOM_NAME,
+		      TB_ROOM.ROOM_NO
   		 FROM TB_ROOM
 	     JOIN TB_HOTEL
 	       ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
@@ -163,6 +164,8 @@
 	       ON TB_ROOM.ROOM_NO = TB_ROOM_IMG.ROOM_NO
 	    WHERE 
 	         TB_HOTEL.HOTEL_NO = ?
+	      AND
+	         HOTEL_YN = 'Y'   
 	      AND
 	         ROOM_YN = 'Y'   
 	</entry>

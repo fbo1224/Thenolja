@@ -295,7 +295,7 @@ public class HotelDao {
 				ri.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				ri.setRoomImg(rset.getString("ROOM_IMG"));
 				ri.setRoomName(rset.getString("ROOM_NAME"));
-				
+				ri.setRoomNo(rset.getInt("ROOM_NO"));
 				riList.add(ri);
 			}
 			

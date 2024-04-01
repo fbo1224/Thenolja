@@ -40,7 +40,7 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		int roomNum = Integer.parseInt(request.getParameter("roomNum"));		
+		int roomNum = Integer.parseInt(request.getParameter("roomNo"));
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
