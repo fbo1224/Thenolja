@@ -236,11 +236,6 @@ div {
 		width: 200px;
 		height: 30px;
 	}
-	.modal-footer > button{
-		width: 70px;
-		height: 40px;
-		font-size: 15px;
-	}
 
 </style>
     
