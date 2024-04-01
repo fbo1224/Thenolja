@@ -69,7 +69,9 @@ public class MembereOldest extends HttpServlet {
 		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		 ArrayList<AdminMember> list = new MemberService().memberOldestList(pi);
-
+		 
+		 System.out.println(list);
+		 
 		 request.setAttribute("memberOldestList", list);
 		 request.setAttribute("pageInfo", pi);
 		 
