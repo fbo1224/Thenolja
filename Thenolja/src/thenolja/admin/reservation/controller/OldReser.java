@@ -44,7 +44,7 @@ public class OldReser extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectListCount();
+		listCount = new ReservatoinService().selectReserCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -52,22 +52,22 @@ public class OldReser extends HttpServlet {
 		// System.out.println(currentPage);
 		
 		pageLimit = 5;
+		
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		
-		// System.out.println(maxPage);
 		
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
 		endPage = startPage + pageLimit - 1;
 		
-		 if(endPage > maxPage) {
-			 endPage = maxPage;
-		 }
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
-		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
+		//  System.out.println(pi);
 		 ArrayList<AdminReservation> list = new ReservatoinService().reserOldestList(pi);
 		 
 		 System.out.println(list);
