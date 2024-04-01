@@ -2,7 +2,10 @@ package thenolja.tb_hotel.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -288,7 +291,7 @@ public class HotelController {
 		String startDate = daterange.substring(0,daterange.indexOf(" "));
 		String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
 		SearchOptions so = new SearchOptions();
-		
+
 		int listCount;
 		int currentPage;
 		int pageLimit;   
@@ -333,7 +336,8 @@ public class HotelController {
 		so.setStartDate(startDate);
 		so.setEndDate(endDate);
 	
-		// ArrayList<HotelCard> slist = new HotelService().searchList(so, pi);
+		ArrayList<HotelCard> sList = new HotelService().searchList(so, pi);
+		
 		
 		// 응답 경로 지정
 		view = "views/hotel/searchList.jsp";
