@@ -6,6 +6,7 @@ public class RoomInfo {
 	private String checkOutTime;
 	private String roomName;
 	private String roomImg;
+	private int roomNo;
 	private int roomNum;
 	private int roomPrice;
 	 
@@ -23,6 +24,15 @@ public class RoomInfo {
 		this.roomImg = roomImg;
 		this.roomNum = roomNum;
 		this.roomPrice = roomPrice;
+	}
+	
+	
+	public int getRoomNo() {
+		return roomNo;
+	}
+
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
 
 	public String getCheckInTime() {

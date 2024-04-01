@@ -72,7 +72,7 @@ public class MembereOldest extends HttpServlet {
 		 
 		 System.out.println(list);
 		 
-		 request.setAttribute("memberOldestList", list);
+		 request.setAttribute("memberOldsetList", list);
 		 request.setAttribute("pageInfo", pi);
 		 
 		 
