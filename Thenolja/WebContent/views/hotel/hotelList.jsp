@@ -87,10 +87,9 @@
 <body>
 	<%@ include file="./common/searchForm.jsp" %>
 	<div id="wrap">
-			
 		<div id="content-2-lists">
 			<%if(list.isEmpty()){ %>
-				<div class="cards">
+				<div>
 					<h3>조회된 호텔이 없습니다.</h3>
 				</div>	
 				<%} else { %>

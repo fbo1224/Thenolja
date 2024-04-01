@@ -191,17 +191,24 @@ div {
 	      transform: scale(1);
 	      position: relative;
 	      z-index: 3;
+	      
     }
         
     #navi > li > ul{
         list-style: none;
         padding: 0px;
         display:none;
-        border : 1px solid #469597
+        border: 1px solid #469597;
+		position : relative;
+        z-index: 3;
     }
 
     #navi > li > a:hover + ul{
         display:block;
+    }
+    
+    #navi a:hover{
+    	z-index: 3;
     }
 
     #navi > li > ul:hover{
@@ -211,11 +218,13 @@ div {
     #navi a:hover{
         font-size: 17px;
         font-weight: 700;
+        
     }
     
     #navi > li > ul a{
         font-size: 17px;
-        background-color: white;
+        background : white;
+        
     }
     .form-control{
 		display: inline-block;
@@ -229,6 +238,7 @@ div {
 		border: none;
 		border-radius: 10px;
 		background-color: white;
+		
 	}
 
 
@@ -396,10 +406,6 @@ div {
 					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 				</div>
-<<<<<<< HEAD
-
-=======
->>>>>>> ad53a15293a4bf85e4c06f85c50d7beb61ab02e9
 			</form>
 
 	

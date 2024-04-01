@@ -21,6 +21,7 @@
 </head>
 
 <style>
+		
        #detailList{
             width: 100%;
             height: 90%;

@@ -430,9 +430,9 @@
                AND
                   ROOM_YN = 'Y'
                AND
-                  MAX_PEOPLE >= ?
+                  MAX_PEOPLE &gt;= ?
                AND
-                  HOTEL_LOCATION = ?   
+                  HOTEL_LOCATION LIKE ?  
                AND
                   NOT TB_ROOM.ROOM_NO IN(
                                          SELECT 
