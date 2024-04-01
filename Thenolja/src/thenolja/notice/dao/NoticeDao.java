@@ -248,7 +248,7 @@ public class NoticeDao {
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("updateNoticeOne");// sql
+		String sql = prop.getProperty("updateNoticeOne");
 		System.out.println("[NoticeDao updateNoticeOne] " + sql);
 		
 		try {
@@ -283,19 +283,15 @@ public class NoticeDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteNoticeOne");
-		
 		System.out.println("[NoticeDao delete sql] " + sql);
 		System.out.println("[NOTICE DAO DELETE] " + noticeNo);
 		
-		
 		try {
 			
-			pstmt = conn.prepareStatement(sql);		
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, noticeNo);
-			
-			
+
 			result = pstmt.executeUpdate();	
-			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -307,116 +303,5 @@ public class NoticeDao {
 		
 	}//method	
 	
-	
-	public int delete(Connection conn, String userNo) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("delete");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-		
-			pstmt.setInt(1, Integer.parseInt(userNo));
-			result = pstmt.executeUpdate();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-			return result;
-			
-		}//method   try~ with ~ 
-	
-	
-	// 전체 게시글 수
-	public int getTotal(Connection conn) {
-		int result = 0;
-		
-		
-		
-		return result;
-	}
-	
-/*
-	private Properties prop = new Properties();
-	
-	public ArrayList<NoticeVO> selectNoticeList(Connection conn){
-		
-		ArrayList<NoticeVO> list = new ArrayList(); // 힙 영역 공간 주소값
-		ResultSet rset = null;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("selectNoticeList");
-		//								
-		try {
-			pstmt = conn.prepareStatement(sql);
-		
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				/*NoticeVO noticeList = new NoticeVO();
-				notice.setNoticeNo(rset.getInt("NOTICE_NO"));		
-				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
-				notice.setNoticeWriter(rset.getString("USER_NAME"));
-				notice.setCreateDate(rset.getDate("CREATE_DATE")); 
-				
-				list.add(notice);*/
-		//	}// while문 안 지역변수
-			
-/*
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	
-	}//method
-*/	
-/*
-	public static void close(Statement stmt) {
-		try {
-			if(stmt != null && !stmt.isClosed()) {
-				stmt.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void close(ResultSet rset) {
-		try {
-			if(rset != null && !rset.isClosed()) {
-				rset.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }//DAO의 역할 : DB 외부데이터를 "입력"하는곳

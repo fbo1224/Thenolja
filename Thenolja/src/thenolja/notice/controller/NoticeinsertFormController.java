@@ -46,7 +46,7 @@ public class NoticeinsertFormController extends HttpServlet {
 					session.setAttribute("alertMsg", "관리자가 아닙니다. ");
 					response.sendRedirect(request.getContextPath());
 				}	
-		*/
+				*/
 			}
 	
 

@@ -128,7 +128,8 @@
 		
 		<% for(SelectNonmemReser c : nonmemReser) { %>
 		<div id="content">
-                <div id="reser_info" onclick="location.href='<%=contextPath%>/nonReserDetail'">
+                <div id="reser_info" onclick="location.href='<%=contextPath%>/nonmemDetail'">
+                	<input type="hidden" name="reserNo" value="<%= c.getReserNo() %>">
                     <div id="reser_hotel_img"><img src="<%=c.getRoomImg() %>" alt="" width="220px" height="220px"></div>
         
                     <div id="reser_detail">
@@ -148,7 +149,7 @@
                         <p><%= date1 %> ~ <%= date2 %></p>
                         <p>오후 <%= c.getCheckInTime() %>:00 ~ 오전 <%= c.getCheckOutTime() %>:00</p>
                     </div>
-
+	
                 </div>
 		</div>
 	<% } %>

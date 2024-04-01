@@ -232,6 +232,11 @@ div {
 
 	input{outline-color: rgb(70, 149, 151);}
 
+	.modal-body > input{
+		width: 200px;
+		height: 30px;
+	}
+
 </style>
     
 </head>
@@ -309,8 +314,8 @@ div {
 	                    <a href="#">고객센터관리</a>
 	                    <ul>
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
-	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
-	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
+	                        <li><a href="<%=contextPath %>/eventList?currentPage=1">이벤트</a></li>
+	                        <li><a href="<%=contextPath %>/couponList">쿠폰</a></li>
 	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
 	    
@@ -360,9 +365,6 @@ div {
 		    </div>
 		</header>
 	<% } %>
-	    <!-- Button to Open the Modal -->
-
-	
 	<!-- The Modal -->
 	<div class="modal" id="nonmemReser">
 	  <div class="modal-dialog">
@@ -377,10 +379,8 @@ div {
 	      <!-- Modal body -->
 		  	<form action="<%= contextPath %>/selectNonmem" method="get">
 	      		<div class="modal-body">
-	      		<input type="hidden" name="memNo">
-	      		
-					비회원 예약번호<input type="text" maxlength="11" name="nonmemNo" required><br>
-					비회원 성함<input type="text" maxlength="15" name="nonmemName" required>
+					예약번호<br><input type="text" maxlength="11" name="nonmemNo" required><br>
+					예약자 성함<br><input type="text" maxlength="15" name="nonmemName" required>
 				</div>
 				
 				<!-- Modal footer -->
@@ -388,8 +388,6 @@ div {
 					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 				</div>
-
-				
 			</form>
 
 	

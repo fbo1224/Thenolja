@@ -31,16 +31,16 @@ public class NonmemberDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member member = new NonmemService().selectNonMemNo(memNo);
+		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
+		
+		Member member = new NonmemService().selectNonMemNo();
 			
 		if(member != null) {
 			
 			request.setAttribute("member", member);
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/selectNonmemReser.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/nonDetailReservation.jsp");
 			view.forward(request, response);
 			
 		} else {

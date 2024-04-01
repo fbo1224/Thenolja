@@ -271,9 +271,9 @@
             <div class="container">
                   <div class="form-group">
                     <div><p>답글 작성</p></div>
-                    <textarea class="form-control" rows="5" id="comment" name="text" cols="53"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="text" cols="49"></textarea>
                   </div>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="insertComment()">등록하기</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="insertComment()" id="insertBtn">등록하기</button>
               </div>
 
         </div>
@@ -300,6 +300,7 @@
 					}else {
 						$('#comment').val(result['commentContent']);
 						$('#comment').attr('readonly', true);	
+						
 					}
 				},
 				error : function(e){
@@ -326,6 +327,7 @@
 					
 					if(result == 'success'){
 						selectCommentList();
+						
 					}
 				}
 			});
