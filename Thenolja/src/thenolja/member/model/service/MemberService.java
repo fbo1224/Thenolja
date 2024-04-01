@@ -167,7 +167,16 @@ public class MemberService {
 		
 		return count;
 	}
-	
+//------------------------------------찜 목록 추가----------------------------------------
+	public int heartInsert(int hotelNo, int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().heartInsert(conn, hotelNo, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
+	}
 	
 	
 	
