@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.admin.nonMember.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.admin.nonMember.model.service.NonMemService;
+import thenolja.admin.nonMember.model.vo.NonMember;
 import thenolja.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class MembereOldest
+ * Servlet implementation class OldNonMemList
  */
-@WebServlet("/oldestList.do")
-public class MembereOldest extends HttpServlet {
+@WebServlet("/oldestNonMemList.do")
+public class OldNonMemList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MembereOldest() {
+    public OldNonMemList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +33,7 @@ public class MembereOldest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -45,7 +43,7 @@ public class MembereOldest extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectListCount();
+		listCount = new NonMemService().selectListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -53,6 +51,7 @@ public class MembereOldest extends HttpServlet {
 		// System.out.println(currentPage);
 		
 		pageLimit = 5;
+		
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
@@ -63,23 +62,27 @@ public class MembereOldest extends HttpServlet {
 		
 		endPage = startPage + pageLimit - 1;
 		
-		 if(endPage > maxPage) {
-			 endPage = maxPage;
-		 }
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
-		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		 ArrayList<AdminMember> list = new MemberService().memberOldestList(pi);
-		 
-		 System.out.println(list);
-		 
-		 request.setAttribute("memberOldsetList", list);
-		 request.setAttribute("pageInfo", pi);
-		 
-		 
-		 RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
-		 view.forward(request, response);
-	
+		
+		// System.out.println(pi);
+		
+		
+		ArrayList<NonMember> list = new NonMemService().oldNonMemList(pi);
+		request.setAttribute("pageInfo", pi);
+		
+		request.setAttribute("oldNonMemList", list);
+		
+		// 응답화면 띄우기
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/nonMember/nonMemberList.jsp");
+		view.forward(request, response);
+		
+		// System.out.println(list);
+		
 	}
 
 	/**
