@@ -314,7 +314,7 @@ div {
 	                    <a href="#">고객센터관리</a>
 	                    <ul>
 	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
-	                        <li><a href="<%=contextPath %>/boardList?currentPage=1">이벤트</a></li>
+	                        <li><a href="<%=contextPath %>/eventList?currentPage=1">이벤트</a></li>
 	                        <li><a href="<%=contextPath %>/thumbnailList">쿠폰</a></li>
 	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
