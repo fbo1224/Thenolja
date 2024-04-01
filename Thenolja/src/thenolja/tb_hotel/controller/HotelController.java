@@ -338,8 +338,9 @@ public class HotelController {
 	
 		ArrayList<HotelCard> sList = new HotelService().searchList(so, pi);
 		
-		
 		// 응답 경로 지정
+		request.setAttribute("sList", sList);
+		request.setAttribute("pageInfo", pi);
 		view = "views/hotel/searchList.jsp";
 		return view;
 	}
