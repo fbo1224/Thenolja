@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_hotel.model.vo.Hotel" %>  
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_hotel.model.vo.Hotel,
+				thenolja.tb_hotel.model.vo.Room, thenolja.tb_review.model.vo.Review" %>  
 <%
 	Reservation reser = (Reservation)request.getAttribute("reser");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
+	Room room = (Room)request.getAttribute("room");
+	Review review = (Review)request.getAttribute("review");
 %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>리뷰 목록 조회</title>
+    <title>리뷰 수정</title>
     <style>
      div{
         box-sizing : border-box;
@@ -135,7 +138,7 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reviewInsert.do?reserNo=<%=reser.getReserNo()%>&hotelNo=<%=hotel.getHotelNo() %>" method="post" enctype="multipart/form-data">
+	<form action="<%=contextPath %>/reviewUpdate.do?reserNo=<%=reser.getReserNo() %>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo()%>" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
@@ -148,15 +151,15 @@
 	        No.<%=reser.getReserNo() %>
 	    </div>
 	    <div>
-           <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
+           <div id="reser_hotel_img"><img src="<%=hotel.getHotelPath() %>" alt="" width="220px" height="220px"></div>
 			<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
 			<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 	            <div id="reser_detail">
                 <h3><%=hotel.getHotelName() %></h3>
-                <p>슈페리어 더블(오션뷰)</p>
-                <p>2인</p>
-                <p>117,000원</p>
-                <p>2024-02-28 ~ 2024-02-29</p>
+                <p><%=room.getRoomName() %></p>
+                <p><%=reser.getPeople() %>인</p>
+                <p><%=reser.getPaymentPrice() %>원</p>
+                <p>2024-02-28<%=room.getCheckInTime() %> ~ 2024-02-29<%=room.getCheckOutTime() %></p>
             </div>
     	</div>
     </div>

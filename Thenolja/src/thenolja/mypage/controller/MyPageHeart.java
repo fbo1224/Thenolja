@@ -1,27 +1,23 @@
-package thenolja.member.controller;
+package thenolja.mypage.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import thenolja.member.model.service.MemberService;
 
 /**
- * Servlet implementation class HeartInsertController
+ * Servlet implementation class MyPageHeart
  */
-@WebServlet("/insertheart")
-public class HeartInsertController extends HttpServlet {
+@WebServlet("/mypage.heart")
+public class MyPageHeart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeartInsertController() {
+    public MyPageHeart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +26,13 @@ public class HeartInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
-		System.out.println(hotelNo);
-		System.out.println(memNo);
-		
-		int count = new MemberService().heartInsert(hotelNo, memNo);
-		
-		if(count > 0) {
-			HttpSession session = request.getSession();
-			request.setAttribute("alertMsg", "찜 목록에 추가하였습니다.");
-		} 
+	
+	
+	
+	
+	
 	}
 
 	/**

@@ -166,5 +166,49 @@ public class NonMemDao {
 		
 	}
 	
+	/**
+	 * 비회원 오래된순
+	 */
+	public ArrayList<NonMember> oldNonMemList (Connection conn, PageInfo pi){
+		
+		ArrayList<NonMember> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("oldNonMemList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				NonMember nonMem = new NonMember();
+				
+				nonMem.setMemNo(rset.getInt("MEM_NO"));
+				nonMem.setMemName(rset.getString("MEM_NAME"));
+				nonMem.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(nonMem);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 
 }
