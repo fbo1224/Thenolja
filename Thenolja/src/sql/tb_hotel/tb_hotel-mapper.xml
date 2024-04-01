@@ -175,9 +175,8 @@
                                    FROM
                                        TB_RESERVATION
                                   WHERE   
-                                       TB_RESERVATION.CHECKIN_TIME &lt;= SYSDATE
-                                    AND
-                                       TB_RESERVATION.CHECKOUT_TIME &lt;= SYSDATE)     
+                                       SYSDATE BETWEEN TB_RESERVATION.CHECKIN_TIME AND TB_RESERVATION.CHECKOUT_TIME
+                                  )     
 	</entry>
 	
 	
