@@ -63,6 +63,7 @@ public class ReviewListController extends HttpServlet {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
 		ArrayList<Review> reviewList = new ReviewService().selectList(pi, hotelNo);
+		
 	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 	if(reviewList != null) {
 		request.setAttribute("reviewList", reviewList);

@@ -228,7 +228,8 @@ public class ReserDao {
 				reser.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
 				reser.setPayment(rset.getString("PAYMENT"));
-				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));	
+				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				reser.setHotelPath(rset.getString("HOTEL_PATH"));
 				
 				list.add(reser);
 			}
@@ -315,8 +316,10 @@ public class ReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, roomNo);
-			pstmt.setInt(2, hotelNo);
+			pstmt.setInt(1, hotelNo);
+			pstmt.setInt(2, roomNo);
+		//	System.out.println(roomNo);
+		//	System.out.println(hotelNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				room = new Room();
@@ -329,6 +332,7 @@ public class ReserDao {
 				room.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				room.setMaxPeople(rset.getInt("MAX_PEOPLE"));
 			}
+			System.out.println(room);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

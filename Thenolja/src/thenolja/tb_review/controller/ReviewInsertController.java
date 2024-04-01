@@ -36,18 +36,21 @@ public class ReviewInsertController extends HttpServlet {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		// int score = Integer.parseInt(request.getParameter("starScore"));
 		
 		// System.out.println(score);
 		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
 		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
-	//	Room room = new ReserService().selectRoomNo(roomNo, hotelNo);
+		Room room = new ReserService().selectRoom(hotelNo, roomNo);
 		
-		if(reser != null && hotel != null) {
+		if(reser != null && hotel != null && room != null) {
 			request.setAttribute("reser", reser);
 			request.setAttribute("hotel", hotel);
+			request.setAttribute("room", room);
+		//	System.out.println(roomNo);
+		//	System.out.println(room);
 	//		request.setAttribute("room", room);
 			request.getRequestDispatcher("views/review/insertReview.jsp").forward(request, response);
 		} else {

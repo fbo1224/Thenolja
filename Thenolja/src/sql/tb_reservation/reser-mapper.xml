@@ -215,9 +215,9 @@
 	      FROM 
 	        	TB_ROOM
 	     WHERE
-	     		ROOM_NO = ?
+	     		HOTEL_NO = ?
 	       AND
-	       		HOTEL_NO = ?		  	
+	       		ROOM_NO = ?		  	
 	</entry>
 	<entry key="selectRoomNo">
  		SELECT
