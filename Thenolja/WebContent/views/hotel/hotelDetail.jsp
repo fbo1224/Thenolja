@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_hotel.model.vo.*" %>    
+<%@ page import="thenolja.tb_hotel.model.vo.*" %>   
     
     <%
      	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
@@ -159,23 +159,16 @@
     padding: 0;
 }
 
-body{
+#favorite{
 
     /*100% 창 높이*/
     height: 100vh;
-    /*배치 center*/
-    /*display: flex;
-    justify-content: center;
-    align-items: center;*/
     /*사용자정의: var 함수로 핸들링*/
     --c: #ff6b81;
 }
 
-svg{
+#svg{
     width: 30px;
-    /*상대포지션*/
-    position: relative;
-    /*z-index: 10;*/
 }
 
 #heart{
@@ -192,21 +185,6 @@ svg{
     stroke-dashoffset: 3000;
     /*끝점은 둥글게*/
     stroke-linecap: round;
-
-    
-}
-
-span{
-    display: block;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
-    border-radius: 50%;
-    /*절대적 포지션: center*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
 }
 
 /*checkbox를 클릭할 경우 애니메이션 실행*/
@@ -226,7 +204,7 @@ span{
      /*애니메이션실행: 애니메이션이름, 실행시간, 선형 마지막 정지한 프레임*/
     animation: beat 1s linear forwards;;
 }
-label{
+#label{
     /*마우스 heart로 이동시 마우스 커서변동*/
     cursor: pointer;
 }
@@ -280,7 +258,7 @@ label{
 }
 #favorite{
 	float:right;
-	margin-top:5px;
+	margin-top:10px;
 }
 	/*동혁 끝*/
 
@@ -327,13 +305,17 @@ label{
 				</ul>
 				
 				<!-- 동혁 시작-->
-					<div id="favorite">
-						<label for="checkbox">
-					        <input type="checkbox" id="checkbox" hidden>
-					        <svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>
-					        <span></span>
-					    </label>
+				<%--<% if(loginUser != null) --%>
+					 <div id="favorite">
+						<form>
+							<label for="checkbox" id="label">
+						        <input type="checkbox" id="checkbox" name="heart" value="heart" hidden>
+						        <svg id="svg" t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>
+						        <span></span>
+						    </label>
+					    </form>
 					</div>
+				<%--<% } %>--%>
 				<!-- 동혁 끝 -->
 			</div>
 			
