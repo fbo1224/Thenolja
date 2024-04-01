@@ -160,7 +160,7 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-			<a href="<%=contextPath%>/insertReservation">
+			<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo() %>">
 				<button class="btn btn-sm btn-primary" >예약하기</button></a>
 			<a href="<%=contextPath%>/nonInsertReservation">
 				<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
@@ -179,7 +179,7 @@
 				<div>
 					 <span>★</span>
 					 <span><%= dh.getCountReviews() %> 개의 리뷰</span>
-					 <span>리뷰조회</span>
+					 <span><a href="#reviews">리뷰조회</a></span>
 				</div>
 				<div>
 					<span><%= dh.getHotelCate() %></span>
@@ -231,6 +231,7 @@
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
+					<a name="reviews"></a>
 					<%for(HotelReview hr : dh.getReviewList() ){ %>
 					<div class="content-review-1 card" id="<%= hr.getReserNo() %>">
 						<div class="review-1-div">
@@ -261,25 +262,27 @@
 				},
 				type: 'get',
 				success: function(result){
-					for(let i = 0; i < result.length; i++){
-						$('.content-review-1').each(function(idx, ele){
-							if($(ele).attr('id') == result[i].reserNo){
-								console.log(result);
-								$(ele).after('<div class="content-review-1 card admins" style="border: 1px solid skyblue;" >'
-											+'<div class="review-1-div">'
-											  +'<p>작성자 : '+ result[i].nickname +'</p>'
-											  +'<p>작성일 : '+ result[i].createDate +'</p>'   
-										    +'</div>'
-										    +'<div class="review-1-content" >'
-										    	+'<span>'+result[i].commentContent+'</span>'
-										    +'</div>'
-										+'</div>');
-							
-							}
-						});
-						
-						
+					
+					if(result != null){
+						for(let i = 0; i < result.length; i++){
+							$('.content-review-1').each(function(idx, ele){
+								if($(ele).attr('id') == result[i].reserNo){
+									// console.log(result);
+									$(ele).after('<div class="content-review-1 card admins" style="border: 1px solid skyblue;" >'
+												+'<div class="review-1-div">'
+												  +'<p>작성자 : '+ result[i].nickname +'</p>'
+												  +'<p>작성일 : '+ result[i].createDate +'</p>'   
+											    +'</div>'
+											    +'<div class="review-1-content" >'
+											    	+'<span>'+ result[i].commentContent +'</span>'
+											    +'</div>'
+											+'</div>');
+								
+								}
+							});	
+						}
 					}
+					
 				},
 				error : function(result){
 					console.log(result);
@@ -290,27 +293,7 @@
 		});
 	</script>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

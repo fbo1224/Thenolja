@@ -31,7 +31,7 @@ public class NonmemberDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		/*
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 		Member member = new NonmemService().selectNonMemNo(memNo);
@@ -40,14 +40,14 @@ public class NonmemberDetailController extends HttpServlet {
 			
 			request.setAttribute("member", member);
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/selectNonmemReser.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/nonmem/nonDetailReservation.jsp");
 			view.forward(request, response);
 			
 		} else {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-		}
+		}*/
 	
 	
 	
