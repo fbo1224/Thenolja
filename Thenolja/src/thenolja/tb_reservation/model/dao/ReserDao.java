@@ -44,7 +44,7 @@ public class ReserDao {
 			pstmt.setString(3, reser.getBicycle());
 			pstmt.setInt(4, reser.getRoomNo());
 			pstmt.setInt(5, reser.getMemNo());
-			System.out.println(reser);
+		//	System.out.println(reser);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -225,6 +225,7 @@ public class ReserDao {
 				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
+				reser.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
 				reser.setPayment(rset.getString("PAYMENT"));
 				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));	
