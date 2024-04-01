@@ -36,7 +36,7 @@
         SELECT A.*, ROWNUM RNUM
           FROM (		
         SELECT
-		        RESER_NO,
+		        RV_RESER_NO,
 		        IMG_PATH,
 		        REVIEW_CONTENT,
 		        REVIEW_SCORE,

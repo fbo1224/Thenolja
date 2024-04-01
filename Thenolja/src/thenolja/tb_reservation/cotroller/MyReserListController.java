@@ -36,6 +36,7 @@ public class MyReserListController extends HttpServlet {
 		
 		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
 		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
 		if(reserList != null) {
 			Reservation reser = new ReserService().selectReservation();

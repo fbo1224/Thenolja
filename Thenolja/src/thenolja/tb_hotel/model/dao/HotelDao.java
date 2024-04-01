@@ -18,6 +18,7 @@ import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
 import thenolja.tb_hotel.model.vo.HotelReview;
 import thenolja.tb_hotel.model.vo.RoomInfo;
+import thenolja.tb_hotel.model.vo.SearchOptions;
 import thenolja.tb_hotel.model.vo.ServiceList;
 
 public class HotelDao {
@@ -636,6 +637,22 @@ public class HotelDao {
 		
 		return cList;
 	}
+	
+	public ArrayList<HotelCard> searchList(Connection conn, SearchOptions so, PageInfo pi){
+		ArrayList<HotelCard> sList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return sList; 
+	}
+	
 	
 	
 	

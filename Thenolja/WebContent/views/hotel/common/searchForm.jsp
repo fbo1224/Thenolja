@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>searchForm</title>
-  
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-   
 <style>
 	div{
 		box-sizing: border-box;
@@ -19,7 +14,7 @@
 	#content-1{
 		width: 1200px;
 		margin: auto;
-		height: 120px;
+		height: 100px;
 		border-top: 1px solid gray;
 		border-bottom: 1px solid gray;
 		display: flex;
@@ -48,20 +43,20 @@
 </head>
 <body>
 
+<%@ include file="/views/common/menubar.jsp" %>
 
 <div id="content-1">
-	<form id="select-form" action="#">
+	<form id="select-form" action="<%= contextPath %>/searchList.hotels">
 		<div style="display: inline-block;">
-			<input class="form-control" type="text" name="daterange" value="" readonly/>
+			<input class="form-control" type="text" name="daterange" readonly required/>
 		</div>
 		<span id="date"></span>
 		<input class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
 		
-		<select id="locations" name="loc">
+		<select id="locations" name="location">
 		</select>
-		<input class="btn btn btn-info" id="search" type="button" value="서치">
+		<input class="btn btn btn-info" id="search" type="submit" value="검색">
 	</form>
-	
 </div>
 
 <script>
@@ -96,7 +91,7 @@ const toDay = new Date();
 		    	// console.log(end.format('YYYY-MM-DD'));
 		    	startDate = start.format('YYYY-MM-DD');
 		    	endDate = end.format('YYYY-MM-DD');
-			    $('#date').text(startDate +' ~ '+endDate);
+			    $('#date').text(startDate+'/'+endDate);
 			});
 		
 	    // 지역 가져오기

@@ -154,9 +154,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="./common/searchForm.jsp" %>
 	<div id="detail-wrap">
-		<%@ include file="./common/searchForm.jsp" %>
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">

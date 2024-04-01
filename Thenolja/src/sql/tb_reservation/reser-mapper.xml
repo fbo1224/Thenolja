@@ -175,7 +175,8 @@
 	        HOST_NAME
 	  FROM
 	        TB_HOTEL
-    ORDER BY HOTEL_NO DESC    
+   	 WHERE
+	        HOTEL_NO = ?    
 	</entry>
 		
 	<entry key="selectHotel">
@@ -191,8 +192,6 @@
 	        HOST_NAME
 	  FROM
 	        TB_HOTEL
-	 WHERE
-	        HOTEL_NO = ? 
 	</entry>
 	
 	
@@ -208,7 +207,8 @@
 		        MAX_PEOPLE
 	      FROM 
 	        	TB_ROOM
-	</entry><!-- 
+	  ORDER BY ROOM_NO DESC
+	</entry>
 	<entry key="selectRoomNo">
  		SELECT
 		        ROOM_NO, 
@@ -221,7 +221,9 @@
 		        MAX_PEOPLE
 	      FROM 
 		        TB_ROOM
+ 		 WHERE
+	        	HOTEL_NO = ? 
 	   ORDER BY ROOM_NO DESC
 	</entry>
-	 -->
+
 </properties>
