@@ -111,7 +111,7 @@
                        	  </tr>
                        <% } else { %>
                        		<% for(AdminMember m : list) { %>
-	                       	   <tr class="memNo">
+	                       	   <tr>
 	                       	   		<td><%= m.getMemNo() %></td>
 	                       	   		<td><%= m.getMemId() %></td>
 	                       	   		<td><%= m.getNickName() %></td>
@@ -128,8 +128,7 @@
                         </tbody>
                       </table>
                 </div>
-        
-        
+
                 <div class="paging-area" align="center";>
                 
                 	<%if(currentPage > 1) { %>
@@ -148,36 +147,7 @@
                   <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                <div class="paging-area" align="center";>
-                
-                	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                </div>
-        
-                
-                
-                
-                
+      
         
             </div>
         </div>

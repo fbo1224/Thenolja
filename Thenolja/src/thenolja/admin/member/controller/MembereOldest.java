@@ -73,6 +73,7 @@ public class MembereOldest extends HttpServlet {
 		 request.setAttribute("memberOldestList", list);
 		 request.setAttribute("pageInfo", pi);
 		 
+		 
 		 RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
 		 view.forward(request, response);
 	
