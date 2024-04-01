@@ -148,6 +148,7 @@
 
                 <div class="paging-area" align="center";>
                 
+
                 	<%if(currentPage > 1) { %>
                 	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
