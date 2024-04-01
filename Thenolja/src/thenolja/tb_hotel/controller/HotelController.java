@@ -17,6 +17,7 @@ import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.SearchOptions;
 
 public class HotelController {
 
@@ -27,7 +28,8 @@ public class HotelController {
 		return view;
 	}
 	
-	public int insert(HttpServletRequest request, HttpServletResponse response) {
+	public String insert(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
 		int result = 0;
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// loadName 도로명주소
@@ -81,11 +83,18 @@ public class HotelController {
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
-			System.out.println(h);
+			// System.out.println(h);
 			
 			result = new HotelService().insertHotel(h);
 		}
-		return result;
+		if(result > 0) {
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+		}
+		else {
+			request.setAttribute("errorMsg", "hotel 추가 실패...");
+			view="views/common/errorPage.jsp";	
+		}
+		return view;
 	}
 	
 	public String hotelList(HttpServletRequest request, HttpServletResponse response) {
@@ -174,8 +183,10 @@ public class HotelController {
 	}
 	
 	
-	public int update(HttpServletRequest request, HttpServletResponse response) {
+	public String update(HttpServletRequest request, HttpServletResponse response) {
 		Hotel h = null;
+		int result = 0;
+		String view = "";
 		// 업데이트 데이터 가지고 업데이트 수행
 		if(ServletFileUpload.isMultipartContent(request)) {
 			String savePath = request.getServletContext()
@@ -230,13 +241,17 @@ public class HotelController {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
 				new File(savePath + "/" + beforeImgName).delete();
 			}
-			
 		}
 		
-		int result = new HotelService().updateHotel(h);
+		result = new HotelService().updateHotel(h);
 		
-		
-		return result;
+		if(result > 0) {
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+		} else {
+			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
+		}
+		return view;
 	}
 	
 	
@@ -259,8 +274,98 @@ public class HotelController {
 			request.setAttribute("errorMsg", "조회에 실패했습니다.");
 			view = "views/common/errorPage.jsp";
 		}
-		
-		
 		return view;
 	}
+	
+	//
+	public String searchList(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		String daterange = request.getParameter("daterange");
+		String location = request.getParameter("location").trim();
+		int maxPeople = Integer.parseInt(request.getParameter("people"));
+		
+		String startDate = daterange.substring(0,daterange.indexOf(" "));
+		String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
+		SearchOptions so = new SearchOptions();
+		
+		int listCount;
+		int currentPage;
+		int pageLimit;   
+		int boardLimit;  
+		
+		int maxPage;     
+		int startPage;   
+		int endPage;
+		
+		String loginStatus = "";
+		if(request.getParameter("loginStatus") != null) {
+			loginStatus = request.getParameter("loginStatus"); 
+		}
+		
+		listCount = new HotelService().selectListCountRoomIn();
+		
+		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// * pageList : 페이징바 최대 개수
+		pageLimit = 5;
+		
+		// * boardLimit : 한 페이지에 보여질 게시글의 최대 개수
+		boardLimit = 6;
+		
+		// * maxPage : 가장 마지막 페이지가 몇 번 페이지인지(총 페이지 개수)
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+	
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		// 3) VO로 가공
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
+								  maxPage, startPage, endPage);
+		so.setMaxPeople(maxPeople);
+		so.setLocation(location);
+		so.setStartDate(startDate);
+		so.setEndDate(endDate);
+	
+		// ArrayList<HotelCard> slist = new HotelService().searchList(so, pi);
+		
+		// 응답 경로 지정
+		view = "views/hotel/searchList.jsp";
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

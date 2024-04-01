@@ -14,6 +14,7 @@ import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.SearchOptions;
 
 public class HotelService {
 
@@ -192,7 +193,15 @@ public class HotelService {
 		return cList;
 	}
 	
-	
+	public ArrayList<HotelCard> searchList(SearchOptions so, PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<HotelCard> slist = new HotelDao().searchList(conn, so, pi);
+		
+		close(conn);
+		
+		return slist;
+	}
 	
 	
 	

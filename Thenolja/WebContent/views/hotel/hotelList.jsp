@@ -85,13 +85,9 @@
 </style>
 </head>
 <body>
-
-
-	<%@ include file="../common/menubar.jsp"%>
+	<%@ include file="./common/searchForm.jsp" %>
 	<div id="wrap">
-	
-		<%@ include file="./common/searchForm.jsp" %>
-		
+			
 		<div id="content-2-lists">
 			<%if(list.isEmpty()){ %>
 				<div class="cards">

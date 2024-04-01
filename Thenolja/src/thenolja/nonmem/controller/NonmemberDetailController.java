@@ -34,7 +34,7 @@ public class NonmemberDetailController extends HttpServlet {
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
-		Member member = new NonmemService().selectNonMemNo();
+		Member member = new NonmemService().selectNonMemNo(reserNo);
 			
 		if(member != null) {
 			
