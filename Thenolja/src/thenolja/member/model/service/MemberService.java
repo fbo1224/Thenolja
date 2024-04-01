@@ -173,11 +173,32 @@ public class MemberService {
 		
 		int count = new MemberDao().heartInsert(conn, hotelNo, memNo);
 		
+		if(count > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
 		JDBCTemplate.close(conn);
 		
 		return count;
 	}
-	
+//-------------------------------------찜 목록 삭제---------------------------------------
+	public int heartDelete(int hotelNo, int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().heartDelete(conn, hotelNo, memNo);
+		
+		if(count > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
+	}
 	
 	
 }

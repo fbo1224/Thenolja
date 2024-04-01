@@ -44,9 +44,7 @@ public class HeartInsertController extends HttpServlet {
 		if(count > 0) {
 			HttpSession session = request.getSession();
 			request.setAttribute("alertMsg", "찜 목록에 추가하였습니다.");
-		} else {
-			request.setAttribute("alertMsg", "찜 목록 추가 실패");
-		}
+		} 
 	}
 
 	/**

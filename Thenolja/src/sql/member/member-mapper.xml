@@ -212,8 +212,16 @@
 		       ?
 		       )
 	
+	</entry>
 	
-	
+	<entry key="deleteHeart">
+		DELETE 
+		  FROM 
+		       TB_SAVED
+		 WHERE 
+		       HOTEL_NO = ?
+		   AND
+		       SA_MEM_NO = ?
 	</entry>
 	
 </properties>
