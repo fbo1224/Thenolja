@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -43,16 +45,24 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
-		Hotel hotel = new Hotel();
+		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
+		Room room = new ReserService().selectRoomNo(hotelNo);
+		
+		if(hotel != null && room != null) {
 		request.setAttribute("reser", reser);
 		request.setAttribute("hotel", hotel);
+		request.setAttribute("room", room);
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
 		
 		view.forward(request, response);
-		
+		} else {
+			request.setAttribute("errorMsg", "숙소 조회를 실패하셨습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 		
 	}
 

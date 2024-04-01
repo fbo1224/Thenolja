@@ -50,8 +50,6 @@ public class NonmemberDetailController extends HttpServlet {
 		}
 	
 	
-	
-	
 	}
 
 	/**

@@ -122,8 +122,14 @@
             <div id="left_title"><h3>내 예약 내역</h3></div>
 		</div>
     
-		
-		<% for(Reservation c : reserList) { %>
+		<% if(reserList.isEmpty()) { %>
+		<table>
+			<tr>
+				<th style="font-size:40px;" colspan="5">작성된 리뷰가 존재하지 않습니다.</th>
+			</tr>
+		</table>
+		<% } else { %>
+		<% for(Reservation r : reserList) { %>
 		<div id="content">
 	        <div id="reser_info">
 	            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
@@ -133,7 +139,7 @@
 	                <p><%=room.getRoomName() %></p>
 	                <p><%=room.getMaxPeople() %>인</p>
 	                <p><%=reser.getPaymentPrice() %>원</p>
-	                <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
+	                <p><%=room.getCheckInTime() %> ~ <%=room.getCheckOutTime() %> </p>
 	            </div>
 
             <div id="review_in">
@@ -141,6 +147,7 @@
             </div>
         </div>
 	</div>
+	<% } %>
 	<% } %>
 <div id="homeBtn">
 	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>

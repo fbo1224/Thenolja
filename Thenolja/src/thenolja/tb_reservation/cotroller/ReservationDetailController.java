@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.member.model.service.MemberService;
 import thenolja.member.model.vo.Member;
@@ -41,14 +42,16 @@ public class ReservationDetailController extends HttpServlet {
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+		System.out.println(reserNo);
 	//	Hotel hotel = new ReserService().selectReserNo(reserNo);
 	//	int memNo = Integer.parseInt(request.getParameter("memNo"));
-	//d	Member member = new MemberService().selectMember (memNo);
+	//	Member member = new MemberService().selectMember (memNo);
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// Member member = new NonmemService().selectNonMemNo(memNo);
 			
 		if(reser != null) {
-			request.setAttribute("reser", reser);
+			HttpSession session = request.getSession();
+			session.setAttribute("reser", reser);
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
 			view.forward(request, response);
 			// response.sendRedirect("views/reservation/detailReservation.jsp");
