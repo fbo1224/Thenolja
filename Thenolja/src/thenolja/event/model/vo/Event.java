@@ -2,20 +2,20 @@ package  thenolja.event.model.vo;
 
 public class Event {
 	
-	private int eventNo;			// �씠踰ㅽ듃 愿�由щ쾲�샇
-	private String eventTitle;		// �씠踰ㅽ듃 �젣紐�
-	private String eventContent;	// �씠踰ㅽ듃 �궡�슜
-	private String eventDate;		// �씠踰ㅽ듃 �벑濡앹씪
-	private String eventYn;			// �씠踰ㅽ듃 吏꾪뻾�뿬遺�
-	private String eventImg;		// �씠踰ㅽ듃 �씠誘몄�
-	private int writerNo;			// �옉�꽦�옄 愿�由щ쾲�샇
-	private String writer; 	   		// �긽�꽭�솕硫� 議고쉶 �떆 �옉�꽦�옄紐�
+	private int eventNo;			// 이벤트 관리번호
+	private String eventTitle;		// 이벤트 제목
+	private String eventContent;	// 이벤트 내용
+	private String eventDate;		// 이벤트 등록일
+	private String eventYn;			// 이벤트 진행여부
+	private String eventImg;		// 이벤트 이미지
+	private int writerNo;			// 작성자 관리번호
+	private String writer; 	   		// 상세화면 조회 시 작성자명
 	
 	public Event() {
 		super();
 }
 	
-		// ���옣 �떆 �뙆�씪誘명꽣 泥섎━瑜� �쐞�븳 �깮�꽦�옄 �깮�꽦
+		// 저장 시 파라미터 처리를 위한 생성자 생성
 		public Event(String title, String content, String eventDate, String eventYn, String eventImg, int writerNo ) {
 			this.eventTitle    = title;
 			this.eventContent  = content;
@@ -25,7 +25,7 @@ public class Event {
 			this.writerNo        = writerNo;
 		}
 		
-		// �닔�젙�떆 �뙆�씪誘명꽣 泥섎━瑜� �쐞�븳 �깮�꽦�옄 �깮�꽦
+		// 수정시 파라미터 처리를 위한 생성자 생성
 		public Event(String title, String content, String eventDate, int eventNo) {
 			this.eventTitle    = title;
 			this.eventContent  = content;

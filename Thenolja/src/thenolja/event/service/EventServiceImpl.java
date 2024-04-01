@@ -17,16 +17,16 @@ public class EventServiceImpl {
 	
 	/*
 	 * 
-	 * �씠踰ㅽ듃 紐⑸줉 議고쉶
+	 * 이벤트 목록 조회
 	 * 
 	 * */
 	public ArrayList<Event> selectEventList(){
 		
-		Connection con = getConnection();	// SQL-MAPPER�옉�꽦�맂 SQL 諛쏆븘�떞湲�
+		Connection con = getConnection();	// SQL-MAPPER작성된 SQL 받아담기
 		ArrayList<Event> list = null;
 		
 		try {
-			// dao�뿉�꽌 db connection �깮�꽦�븯怨� �뜲�씠�꽣 議고쉶�빐�꽌 list�뿉 �떞�븘�꽌 諛섑솚
+			// dao에서 db connection 생성하고 데이터 조회해서 list에 담아서 반환
 			list = new EventDao().selectEventList(con);
 			System.out.println("[EventServiceImpl selectEventList] " + list);
 			for(int i=0; i<list.size(); i++) {
@@ -43,7 +43,7 @@ public class EventServiceImpl {
 	}//method
 	
 	/*
-	 * �씠踰ㅽ듃 �벑濡�
+	 * 이벤트 등록
 	 * 
 	 * */
 	public int insertEvent(Event event) {
@@ -75,7 +75,7 @@ public class EventServiceImpl {
 	}//method
 	
 	/*
-	 * �씠踰ㅽ듃 �닔�젙
+	 * 이벤트 수정
 	 * 
 	 * */	
 	public int updateEventOne(Event event) {

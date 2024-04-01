@@ -199,7 +199,7 @@
           							   + '<td>' + result[i].memPhone + '</td>'
     	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>';
     									
-    		                            if(currentDate > checkInTime) { 
+    		                            if(currentDate >= checkInTime) { 
     		                            	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
     		                      	    } else {
     		                      	    	resultStr += '<td>' +
