@@ -54,7 +54,7 @@ public class ReviewInsertFormController extends HttpServlet {
 		int reserNo = Integer.parseInt(multiRequest.getParameter("reserNo"));
 		String imgPath = multiRequest.getParameter("upfile");
 		String content = multiRequest.getParameter("reviewContent");
-		int score = Integer.parseInt(multiRequest.getParameter("starScore"));
+		String score = multiRequest.getParameter("starScore");
 		
 		Review review = new Review();
 		review.setReserNo(reserNo);

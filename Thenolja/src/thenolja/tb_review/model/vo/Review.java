@@ -7,7 +7,7 @@ public class Review {
 	private int reserNo;
 	private String imgPath;
 	private String content;
-	private int score;
+	private String score;
 	private Date createDate;
 	private String reviewYN;
 	private Date reserDate;
@@ -36,7 +36,7 @@ public class Review {
 	public Review() {
 		super();
 	}
-	public Review(int reserNo, String imgPath, String content, int score, Date createDate, String reviewYN) {
+	public Review(int reserNo, String imgPath, String content, String score, Date createDate, String reviewYN) {
 		super();
 		this.reserNo = reserNo;
 		this.imgPath = imgPath;
@@ -197,10 +197,10 @@ public class Review {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getScore() {
+	public String getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
 	public Date getCreateDate() {
@@ -219,12 +219,34 @@ public class Review {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bicycle == null) ? 0 : bicycle.hashCode());
+		result = prime * result + ((cancelYN == null) ? 0 : cancelYN.hashCode());
+		result = prime * result + ((checkIn == null) ? 0 : checkIn.hashCode());
+		result = prime * result + ((checkInTime == null) ? 0 : checkInTime.hashCode());
+		result = prime * result + ((checkOut == null) ? 0 : checkOut.hashCode());
+		result = prime * result + ((checkOutTime == null) ? 0 : checkOutTime.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((hotelName == null) ? 0 : hotelName.hashCode());
+		result = prime * result + hotelNo;
+		result = prime * result + ((hotelPath == null) ? 0 : hotelPath.hashCode());
 		result = prime * result + ((imgPath == null) ? 0 : imgPath.hashCode());
+		result = prime * result + memNo;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
+		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
+		result = prime * result + paymentPrice;
+		result = prime * result + people;
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + reMemNo;
+		result = prime * result + ((reserDate == null) ? 0 : reserDate.hashCode());
 		result = prime * result + reserNo;
 		result = prime * result + ((reviewYN == null) ? 0 : reviewYN.hashCode());
-		result = prime * result + score;
+		result = prime * result + ((roomName == null) ? 0 : roomName.hashCode());
+		result = prime * result + roomNo;
+		result = prime * result + roomNum;
+		result = prime * result + roomPrice;
+		result = prime * result + ((score == null) ? 0 : score.hashCode());
 		return result;
 	}
 	@Override
@@ -236,6 +258,36 @@ public class Review {
 		if (getClass() != obj.getClass())
 			return false;
 		Review other = (Review) obj;
+		if (bicycle == null) {
+			if (other.bicycle != null)
+				return false;
+		} else if (!bicycle.equals(other.bicycle))
+			return false;
+		if (cancelYN == null) {
+			if (other.cancelYN != null)
+				return false;
+		} else if (!cancelYN.equals(other.cancelYN))
+			return false;
+		if (checkIn == null) {
+			if (other.checkIn != null)
+				return false;
+		} else if (!checkIn.equals(other.checkIn))
+			return false;
+		if (checkInTime == null) {
+			if (other.checkInTime != null)
+				return false;
+		} else if (!checkInTime.equals(other.checkInTime))
+			return false;
+		if (checkOut == null) {
+			if (other.checkOut != null)
+				return false;
+		} else if (!checkOut.equals(other.checkOut))
+			return false;
+		if (checkOutTime == null) {
+			if (other.checkOutTime != null)
+				return false;
+		} else if (!checkOutTime.equals(other.checkOutTime))
+			return false;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -246,10 +298,55 @@ public class Review {
 				return false;
 		} else if (!createDate.equals(other.createDate))
 			return false;
+		if (hotelName == null) {
+			if (other.hotelName != null)
+				return false;
+		} else if (!hotelName.equals(other.hotelName))
+			return false;
+		if (hotelNo != other.hotelNo)
+			return false;
+		if (hotelPath == null) {
+			if (other.hotelPath != null)
+				return false;
+		} else if (!hotelPath.equals(other.hotelPath))
+			return false;
 		if (imgPath == null) {
 			if (other.imgPath != null)
 				return false;
 		} else if (!imgPath.equals(other.imgPath))
+			return false;
+		if (memNo != other.memNo)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nickName == null) {
+			if (other.nickName != null)
+				return false;
+		} else if (!nickName.equals(other.nickName))
+			return false;
+		if (payment == null) {
+			if (other.payment != null)
+				return false;
+		} else if (!payment.equals(other.payment))
+			return false;
+		if (paymentPrice != other.paymentPrice)
+			return false;
+		if (people != other.people)
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (reMemNo != other.reMemNo)
+			return false;
+		if (reserDate == null) {
+			if (other.reserDate != null)
+				return false;
+		} else if (!reserDate.equals(other.reserDate))
 			return false;
 		if (reserNo != other.reserNo)
 			return false;
@@ -258,7 +355,21 @@ public class Review {
 				return false;
 		} else if (!reviewYN.equals(other.reviewYN))
 			return false;
-		if (score != other.score)
+		if (roomName == null) {
+			if (other.roomName != null)
+				return false;
+		} else if (!roomName.equals(other.roomName))
+			return false;
+		if (roomNo != other.roomNo)
+			return false;
+		if (roomNum != other.roomNum)
+			return false;
+		if (roomPrice != other.roomPrice)
+			return false;
+		if (score == null) {
+			if (other.score != null)
+				return false;
+		} else if (!score.equals(other.score))
 			return false;
 		return true;
 	}

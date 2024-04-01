@@ -83,20 +83,11 @@ public class ReviewDao {
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
 	        	r.setContent(rset.getString("REVIEW_CONTENT"));
-	        	r.setScore(rset.getInt("REVIEW_SCORE"));
+	        	r.setScore(rset.getString("REVIEW_SCORE"));
 	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
 	    		r.setHotelNo(rset.getInt("HOTEL_NO"));
 				r.setHotelName(rset.getString("HOTEL_NAME"));
 				r.setRoomName(rset.getString("ROOM_NAME"));
-				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
-				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
-				r.setReserDate(rset.getDate("RESER_DATE"));
-				r.setName(rset.getString("RESER_NAME"));
-				r.setPhone(rset.getString("RESER_PHONE"));
-				r.setBicycle(rset.getString("BICYCLE"));
-				r.setCheckIn(rset.getString("CHECKIN_TIME"));
-				r.setCheckOut(rset.getString("CHECKOUT_TIME"));
-				r.setPeople(rset.getInt("MAX_PEOPLE"));
 				r.setRoomNo(rset.getInt("ROOM_NO"));
 				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				r.setMemNo(rset.getInt("MEM_NO"));
@@ -125,7 +116,7 @@ public class ReviewDao {
 			pstmt.setInt(1, review.getReserNo());
 			pstmt.setString(2, review.getImgPath());
 			pstmt.setString(3, review.getContent());
-			pstmt.setInt(4, review.getScore());
+			pstmt.setString(4, review.getScore());
 			
 			result = pstmt.executeUpdate();
 			
@@ -157,7 +148,7 @@ public class ReviewDao {
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
 	        	r.setContent(rset.getString("REVIEW_CONTENT"));
-	        	r.setScore(rset.getInt("REVIEW_SCORE"));
+	        	r.setScore(rset.getString("REVIEW_SCORE"));
 	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
 	        	
 	        }
