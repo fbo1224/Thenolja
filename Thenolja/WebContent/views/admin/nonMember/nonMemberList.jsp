@@ -3,6 +3,8 @@
     
 <%@ page import="java.util.ArrayList,   thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
 <%
+ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
+	
 	NonMember nonMember = (NonMember)request.getAttribute("nonMember");	
 
 	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
@@ -75,8 +77,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -92,12 +94,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                        <% if(list.isEmpty()) {%>
+                        <% if(list!=null &&list.isEmpty()) { %>
                         	<tr>
                         		<th colspan="3">비회원이 존재하지 않습니다.</th>
                         	</tr>
                         <%} else { %>	
-                        	
+                        	<%if(list != null){ %>
                         	<% for(NonMember n : list) { %>
                           <tr>
                             <td><%= n.getMemNo() %></td>
@@ -107,13 +109,33 @@
                           </tr>
                          <% } %>
                         <% }  %>
+                        <% } %>
+                        
+                         	<% if(oldList != null) { %>
+                       		<%for(NonMember n : oldList) { %>
+                       	<tr>
+	                       	   		<td><%= n.getMemNo() %></td>
+	                                <td><%= n.getMemName() %></td>
+	                                <td><%= n.getMemPhone()%></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%=  n .getMemNo() %>)">삭제</button></td>
+		                            
+	                       	  </tr>
+                       		<%} %>
+                       	<% } %>
+
+                        
+                        
+                        
+                        
+                        
                         </tbody>
                       </table>
 
                 </div>  
         
      <div class="paging-area" align="center";>
-                
+               
+               <% if(list!=null && list.isEmpty()) { %>
                 	<%if(currentPage > 1) { %>
                 	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
@@ -129,6 +151,33 @@
                   <% if(currentPage != maxPage) { %>
                   <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
+                  
+                   <% } else { %>
+
+                    <%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
+                  
+                  <%} %>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                 </div>
         
 

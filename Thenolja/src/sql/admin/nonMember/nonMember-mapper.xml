@@ -61,6 +61,29 @@
 
 	</entry>
 	
+	<entry key="oldNonMemList">
+		
+			
+		SELECT *
+		  FROM
+		     (SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM(SELECT
+				        MEM_NO,
+				        MEM_NAME,
+				        MEM_PHONE
+				  FROM
+				        TB_NONMEM
+				  WHERE
+				        MEM_STATUS = 'N'
+				 ORDER
+				  	BY
+				  		MEM_NO ASC) A)
+		    WHERE RNUM BETWEEN ? AND ?
+	
+	
+	
+	</entry>
 	
 	
 	
