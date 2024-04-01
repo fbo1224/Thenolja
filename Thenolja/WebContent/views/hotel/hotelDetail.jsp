@@ -151,20 +151,15 @@
 	width: 40%;
 }
 
-
 	/*동혁 시작*/
-{
-    /*초기화*/
-    margin: 0;
-    padding: 0;
-}
-
 #favorite{
 
     /*100% 창 높이*/
-    height: 100vh;
+    <%--height: 100vh;--%>
     /*사용자정의: var 함수로 핸들링*/
     --c: #ff6b81;
+    float:right;
+	margin-top:10px;
 }
 
 svg{
@@ -255,10 +250,6 @@ svg{
     100%{
         transform: scale(1);
     }
-}
-#favorite{
-	float:right;
-	margin-top:10px;
 }
 	/*동혁 끝*/
 

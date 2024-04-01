@@ -291,7 +291,13 @@ public class HotelController {
 		String startDate = daterange.substring(0,daterange.indexOf(" "));
 		String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
 		SearchOptions so = new SearchOptions();
-
+		
+		if(daterange.equals("")) {
+			request.setAttribute("errorMsg", "날짜를 꼭 선택해주세요.");
+			view = "views/common/errorPage.jsp";
+			return view;
+		}
+		
 		int listCount;
 		int currentPage;
 		int pageLimit;   

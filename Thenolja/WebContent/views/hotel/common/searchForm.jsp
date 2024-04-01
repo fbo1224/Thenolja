@@ -51,7 +51,7 @@
 			<input class="form-control" type="text" name="daterange" readonly required/>
 		</div>
 		<span id="date"></span>
-		<input class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
+		<input required class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
 		<select id="locations" name="location">
 		</select>
 		<input type="hidden" name="currentPage" value="1">
