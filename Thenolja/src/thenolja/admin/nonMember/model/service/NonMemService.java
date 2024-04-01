@@ -74,6 +74,21 @@ public class NonMemService {
 		return nonMember;
 	}
 	
+	/**
+	 * 비회원 오래된순
+	 */
+	public ArrayList<NonMember> oldNonMemList (PageInfo pi){
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<NonMember> list =new NonMemDao().oldNonMemList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	
+		
+	}
+	
 	
 	
 	
