@@ -167,7 +167,17 @@
 	      AND
 	         HOTEL_YN = 'Y'   
 	      AND
-	         ROOM_YN = 'Y'   
+	         ROOM_YN = 'Y'
+	     AND        
+        	NOT TB_ROOM.ROOM_NO IN(
+                                 SELECT 
+                                       ROOM_NO
+                                   FROM
+                                       TB_RESERVATION
+                                  WHERE   
+                                       TB_RESERVATION.CHECKIN_TIME &lt;= SYSDATE
+                                    AND
+                                       TB_RESERVATION.CHECKOUT_TIME &lt;= SYSDATE)     
 	</entry>
 	
 	
