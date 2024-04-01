@@ -387,7 +387,27 @@ public class MemberDao {
 		}
 		return count;
 	}
-	
+//-------------------------------------찜목록 추가--------------------------------------
+	public int heartInsert(Connection conn, int memNo, int hotelNo) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertHeart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, hotelNo);
+			pstmt.setInt(2, memNo);
+			
+			count = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return count;
+	}
 	
 	
 	
