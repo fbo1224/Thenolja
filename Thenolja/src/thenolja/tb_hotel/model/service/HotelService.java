@@ -203,7 +203,13 @@ public class HotelService {
 		return slist;
 	}
 	
-	
+	public int countReview(int hotelNo) {
+		Connection conn = getConnection();
+		int result = new HotelDao().countReviews(conn, hotelNo);
+		
+		close(conn);
+		return result;
+	}
 	
 	
 	

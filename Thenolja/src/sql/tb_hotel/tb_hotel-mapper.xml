@@ -181,39 +181,42 @@
 	
 	
 	<entry key="hotelReviews">
-	SELECT
-	      TB_HOTEL.HOTEL_NO,
-	      TB_RESERVATION.ROOM_NO,
-	      RESER_NAME,
-	      CREATE_DATE,
-	      CASE WHEN REVIEW_SCORE = 1 THEN '★' 
-               WHEN REVIEW_SCORE = 2 THEN '★★'
-               WHEN REVIEW_SCORE = 3 THEN '★★★'
-               WHEN REVIEW_SCORE = 4 THEN '★★★★'
-          ELSE '★★★★★'
-          END AS REVIEW_SCORE,
-	      REVIEW_CONTENT,
-	      TB_RESERVATION.RESER_NO
-  	  FROM
-          TB_RESERVATION
-  	  JOIN TB_ROOM  
-        ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO
-      JOIN TB_HOTEL
-        ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
-      JOIN TB_REVIEW
-        ON TB_RESERVATION.RESER_NO = TB_REVIEW.RV_RESER_NO
-     WHERE
-          TB_HOTEL.HOTEL_YN = 'Y'
-       AND
-          CANCEl_YN = 'N'
-       AND
-          TB_ROOM.ROOM_YN = 'Y'   
-       AND
-          REVIEW_YN = 'Y'
-       AND
-          TB_HOTEL.HOTEL_NO = ?
-      ORDER
-         BY CREATE_DATE DESC    
+	SELECT *
+         FROM(SELECT A.*, ROWNUM RNUM
+                FROM(SELECT
+                          TB_HOTEL.HOTEL_NO,
+                          TB_RESERVATION.ROOM_NO,
+                          RESER_NAME,
+                          CREATE_DATE,
+                          CASE WHEN REVIEW_SCORE = 1 THEN '★' 
+                               WHEN REVIEW_SCORE = 2 THEN '★★'
+                               WHEN REVIEW_SCORE = 3 THEN '★★★'
+                               WHEN REVIEW_SCORE = 4 THEN '★★★★'
+                          ELSE '★★★★★'
+                          END AS REVIEW_SCORE,
+                          REVIEW_CONTENT,
+                          TB_RESERVATION.RESER_NO
+                      FROM
+                          TB_RESERVATION
+                      JOIN TB_ROOM  
+                        ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO
+                      JOIN TB_HOTEL
+                        ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
+                      JOIN TB_REVIEW
+                        ON TB_RESERVATION.RESER_NO = TB_REVIEW.RV_RESER_NO
+                     WHERE
+                          TB_HOTEL.HOTEL_YN = 'Y'
+                       AND
+                          CANCEl_YN = 'N'
+                       AND
+                          TB_ROOM.ROOM_YN = 'Y'   
+                       AND
+                          REVIEW_YN = 'Y'
+                       AND
+                          TB_HOTEL.HOTEL_NO = ?
+                      ORDER
+                         BY CREATE_DATE DESC) A)
+         WHERE RNUM BETWEEN 1 AND 5 
 	</entry>
 	
 	<entry key="countReviews">

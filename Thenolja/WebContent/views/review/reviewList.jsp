@@ -31,14 +31,16 @@
     }
     #content{
         width: 1200px;
-        height: 200px;
-        margin-top: 30px;
-        border: 1px solid black;
+        height: 180px;
+        margin-top: 20px;
+        border: 1px solid silver;
+        border-radius: 20px;
     }
     #content_title{
         width: 100%;
-        height: 100%;
+        height: 50px;
         margin-top : 20px;
+        border-bottom: 1px solid black;
     }
     #left_img{
         float: left;
@@ -50,7 +52,10 @@
     #review_detail{
         width: 60%;
         height: 100%;
-        border: 1px solid black;
+    }
+    #review_detail > *{
+    	padding-left: 30px;
+    	margin-top: 10px;'
     }
     #content > div{
         float: left;
@@ -58,7 +63,6 @@
     #reivew_set{
         width: 40%;
         height: 100%;
-        border: 1px solid black;
     }
     #review_set > #reser_review_img{
         float: left
@@ -73,7 +77,7 @@
         border-radius: 5px;
         margin-left: 80px;
         font-size: 17px;
-        margin-top: 80px;
+        margin-top: 70px;
     }
     #updateReview:hover{
         font-size: 17.3px;
@@ -86,6 +90,7 @@
     #review_img{
         width: 40%;
         height: 100%;
+        margin-top: 14px;
     }
     #reivew_set > div{
         float: left;
@@ -94,13 +99,16 @@
         width: 60%;
         height: 100%;
     }
-    #hotel_name{
+    #hotelName{
         width: 100%;
-        height: 25%;
+        height: 40%;
+        font-size:25px;
+        font-weight:bord;
     }
-    #review_content{
+    #score{
         width: 100%;
-        height: 75%;
+        height: 60%;
+        font-size: 19px;
     }
 </style>
 </head>
@@ -126,16 +134,18 @@
 			<div id="review_detail">
 			<input type="hidden" name="hotelNo">
 				<div id="hotel_name">
-					마리안느&nbsp;
+					<span id="hotelName"><%=r.getHotelName() %></span><br>
+					<span id="roomName"><%=r.getRoomName() %></span>
 				</div>
 				<div id="review_content">
-					<%=r.getContent() %>
+					<span id="score"><%=r.getScore() %></span><br>
+					<span id="reviewCC"><%=r.getContent() %></span>
 				</div>
 			</div>
 			<div id="reivew_set">
-				<div id="review_img"><img id="reser_review_img" src="<%=r.getImgPath() %>" alt="숙소사진" width="190px" height="190px"></div>
+				<div id="review_img"><img id="reser_review_img" src="resources/reviewImage/SkyReview2.webp" alt="숙소사진" width="150px" height="150px"></div>
 				<div id="img_btn">
-					<a href="update.review?reserNo=<%=r.getReserNo()%>"><button id="updateReview">리뷰 수정</button></a>
+					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;">
 				</div>
 			</div>

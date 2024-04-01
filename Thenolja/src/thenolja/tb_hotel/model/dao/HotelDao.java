@@ -329,7 +329,7 @@ public class HotelDao {
 				hr.setRoomNo(rset.getInt("ROOM_NO"));
 				hr.setReserName(rset.getString("RESER_NAME"));
 				hr.setCreateDate(rset.getDate("CREATE_DATE"));
-				// score점수에서 '★' 형태로 변경
+				// score 점수에서 '★' 형태로 변경
 				// hr.setReviewScore(rset.getInt("REVIEW_SCORE"));
 				hr.setReviewScore(rset.getString("REVIEW_SCORE"));
 				hr.setReviewContent(rset.getString("REVIEW_CONTENT"));

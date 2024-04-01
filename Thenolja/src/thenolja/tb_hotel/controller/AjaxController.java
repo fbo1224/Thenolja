@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
+import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_hotel.model.dao.HotelDao;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
 import thenolja.tb_hotel.model.vo.Comment;
@@ -107,7 +109,41 @@ public class AjaxController {
 		
 	}
 	
+	public void reviewList(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		int listCount;   
+		int currentPage; 
+		int pageLimit;   
+		int boardLimit;  
+		
+		int maxPage;     
+		int startPage;   
+		int endPage;     
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		
+		listCount = new HotelService().countReview(hotelNo);
+		
+		pageLimit = 5;
+		boardLimit = 6;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
 	
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		// 3) VO로 가공
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
+								  maxPage, startPage, endPage);
+		
+	}
 	
 	
 	
