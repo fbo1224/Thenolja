@@ -191,17 +191,24 @@ div {
 	      transform: scale(1);
 	      position: relative;
 	      z-index: 3;
+	      
     }
         
     #navi > li > ul{
         list-style: none;
         padding: 0px;
         display:none;
-        border : 1px solid #469597
+        border: 1px solid #469597;
+		position : relative;
+        z-index: 3;
     }
 
     #navi > li > a:hover + ul{
         display:block;
+    }
+    
+    #navi a:hover{
+    	z-index: 3;
     }
 
     #navi > li > ul:hover{
@@ -211,11 +218,13 @@ div {
     #navi a:hover{
         font-size: 17px;
         font-weight: 700;
+        
     }
     
     #navi > li > ul a{
         font-size: 17px;
-        background-color: white;
+        background : white;
+        
     }
     .form-control{
 		display: inline-block;
@@ -229,6 +238,7 @@ div {
 		border: none;
 		border-radius: 10px;
 		background-color: white;
+		
 	}
 
 
