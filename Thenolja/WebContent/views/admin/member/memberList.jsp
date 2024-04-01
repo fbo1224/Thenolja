@@ -106,11 +106,12 @@
                         </thead>
                         <tbody>
                        
-                       <% if(list.isEmpty()) { %>
+                       <% if(list!=null &&list.isEmpty()) { %>
                        	   <tr>
                        	   		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
                        	  </tr>
                        <% } else { %>
+                     	<%if(list != null){ %>
                        		<% for(AdminMember m : list) { %>
 	                       	   <tr>
 	                       	   		<td><%= m.getMemNo() %></td>
@@ -123,6 +124,21 @@
 		                            
 	                       	  </tr>
                        		<% } %>
+                       	<%} %>
+                       	<% if(oldList != null) { %>
+                       		<%for(AdminMember m : oldList) { %>
+                       	<tr>
+	                       	   		<td><%= m.getMemNo() %></td>
+	                       	   		<td><%= m.getMemId() %></td>
+	                       	   		<td><%= m.getNickName() %></td>
+	                       	   		<td><%= m.getGradeName() %></td>
+	                       	   		
+		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
+		                            
+	                       	  </tr>
+                       		<%} %>
+                       	<% } %>
                        <% } %>
                           
                           
