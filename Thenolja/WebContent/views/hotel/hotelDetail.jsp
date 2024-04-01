@@ -270,8 +270,7 @@ svg{
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-			<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo() %>">
-				<button class="btn btn-sm btn-primary" >예약하기</button></a>
+				<button class="btn btn-sm btn-primary" >예약하기</button>
 			<a href="<%=contextPath%>/nonInsertReservation">
 				<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 			</div>

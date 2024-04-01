@@ -408,6 +408,53 @@
          TB_HOTEL.HOTEL_NO = ?
 	</entry>
 	
+	<entry key="searchList">
+	SELECT *
+    FROM(SELECT A.*, ROWNUM RNUM
+        FROM(
+            SELECT
+                  TB_HOTEL.HOTEL_NO,
+                  HOTEL_NAME,
+                  HOTEL_LOCATION,
+                  HOTEL_CATEGORY,
+                  HOTEL_PATH,
+                  MIN(ROOM_PRICE) AS ROOM_PRICE
+              FROM
+                  TB_HOTEL
+              JOIN TB_ROOM
+                ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+              JOIN TB_RESERVATION
+                ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO 
+             WHERE
+                  HOTEL_YN = 'Y'
+               AND
+                  ROOM_YN = 'Y'
+               AND
+                  MAX_PEOPLE >= ?
+               AND
+                  HOTEL_LOCATION = ?   
+               AND
+                  NOT TB_ROOM.ROOM_NO IN(
+                                         SELECT 
+                                               ROOM_NO
+                                           FROM
+                                               TB_RESERVATION
+                                          WHERE   
+                                               TB_RESERVATION.CHECKIN_TIME &lt;= ?
+                                            AND
+                                               TB_RESERVATION.CHECKOUT_TIME &lt;= ?)
+            GROUP BY
+                 TB_HOTEL.HOTEL_NO,
+                 HOTEL_NAME,
+                 HOTEL_LOCATION,
+                 HOTEL_CATEGORY,
+                 HOTEL_PATH,
+                 RESER_NO,
+                 TB_ROOM.ROOM_NO
+            ORDER BY TB_HOTEL.HOTEL_NO DESC) A)
+    	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
 	
 	
 	

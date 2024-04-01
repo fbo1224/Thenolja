@@ -198,7 +198,7 @@
 	
 				<div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-				<input type="hidden" name="roomNum" value="<%=room.getRoomNum() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
@@ -226,7 +226,7 @@
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">

@@ -212,7 +212,10 @@
 		        MAX_PEOPLE
 	      FROM 
 	        	TB_ROOM
-	  ORDER BY ROOM_NO DESC
+	     WHERE
+	     		ROOM_NO = ?
+	       AND
+	       		HOTEL_NO = ?		  	
 	</entry>
 	<entry key="selectRoomNo">
  		SELECT
