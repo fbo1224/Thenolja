@@ -31,7 +31,7 @@ public class NonReservationDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// 예약 리스트에서 상세조회로 가는 서블릿
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
@@ -45,7 +45,7 @@ public class NonReservationDetailController extends HttpServlet {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-		}
+		} 
 		
 	}
 

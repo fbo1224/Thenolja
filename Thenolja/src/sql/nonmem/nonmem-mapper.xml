@@ -73,9 +73,9 @@
 		 USING
 		       (ROOM_NO)
 		 WHERE
-		       MEM_NAME = ?
+		       RESER_NAME = ?
 		   AND
-		       MEM_NO = ?
+		       RESER_NO = ?
 		   AND
 		       MEM_STATUS = 'N'
 	

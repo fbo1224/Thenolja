@@ -109,7 +109,7 @@
  	-->
  	
  	<entry key="selectReserNo">
- 		SELECT
+ 		SELECT 
 		        RESER_NO,
 		        RESER_DATE,
 		        RESER_NAME,

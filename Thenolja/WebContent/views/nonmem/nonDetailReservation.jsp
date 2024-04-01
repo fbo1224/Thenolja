@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.nonmem.model.vo.SelectNonmemReser"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
+	ArrayList<SelectNonmemReser> nonmemReser = (ArrayList) session.getAttribute("nonmemReser");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd, HH:mm");
 %>
 <!DOCTYPE html>
 <html>
@@ -186,7 +190,7 @@
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
+                <div id="reser_no"><p>No.예약넘버</p></div>
                 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
