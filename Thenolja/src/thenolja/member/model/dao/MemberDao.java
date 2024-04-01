@@ -6,11 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import thenolja.common.JDBCTemplate;
 import thenolja.member.model.vo.Member;
-import thenolja.tb_reservation.model.vo.Reservation;
 
 public class MemberDao {
 
@@ -427,8 +427,22 @@ public class MemberDao {
 		}
 		return count;
 	}
+//----------------------------숙소상세조회페이지 로그인 사용자 찜목록 확인----------------------------
 	
-	
+	public int selectHeart(Connection conn) {
+		int result = 0;
+		Statement stmt = null;
+		
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

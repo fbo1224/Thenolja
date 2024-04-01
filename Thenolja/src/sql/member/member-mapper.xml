@@ -224,4 +224,10 @@
 		       SA_MEM_NO = ?
 	</entry>
 	
+	<entry key="selectHeart">
+		SELECT
+		       
+	
+	</entry>
+	
 </properties>

@@ -274,17 +274,15 @@ svg{
 				<!-- 동혁 시작-->
 				<% if(loginUser != null) { %> 
 					<div id="favorite">
-						<!-- <form method="post"> -->
 							<label for="checkbox" id="label">
 							
 						    </label>
-					    <!-- </form> -->
 					</div>
 					
 					<script>
 						window.onload = function(){
 							$.ajax({
-								url : 'db가서 select하는 매핑값적기',
+								url : 'selectHeart',
 								type : 'get',
 								success: function(result){
 									

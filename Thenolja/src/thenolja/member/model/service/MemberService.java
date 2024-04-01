@@ -199,6 +199,18 @@ public class MemberService {
 		
 		return count;
 	}
+//-----------------------------------숙소상세조회페이지 로그인 사용자 찜목록 확인-----------------------------
+	public int selectHeart() {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().selectHeart(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	
+		
+	}
 	
 }
