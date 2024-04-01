@@ -60,7 +60,7 @@ public class NoticeUpdateController extends HttpServlet {
 		System.out.println("content : " + content);
 		System.out.println("status  : " + status);
 		System.out.println("noticNo : " + noticeNo);
-		System.out.println("noticNo : " + status.length());
+		System.out.println("status length  : " + status.length());
 		
 		int svc = 0;
 		boolean rslt = false;

@@ -51,7 +51,7 @@ public class EventController extends HttpServlet {
 		//�쓳�떟�솕硫� �쓣�슦湲� (list媛앹껜, �럹�씠吏� 媛앹껜 setAttribute)
 		request.setAttribute("eventList", eventList);
 		//request.setAttribute("pagingVo", pagingVo);
-		RequestDispatcher view = request.getRequestDispatcher("/view/event/eventList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/event/eventList.jsp");
 		view.forward(request, response);		
 		
 		
