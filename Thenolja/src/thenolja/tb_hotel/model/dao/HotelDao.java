@@ -644,8 +644,34 @@ public class HotelDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchList");
 		
+		int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, so.getMaxPeople());
+			pstmt.setString(2, so.getLocation());
+			pstmt.setString(3, "%"+so.getStartDate()+"%");
+			pstmt.setString(4, "%"+so.getEndDate()+"%");
+			
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				HotelCard hc = new HotelCard();
+				hc.setHotelNo(Integer.parseInt(rset.getString("HOTEL_NO")));
+				hc.setHotelName(rset.getString("HOTEL_NAME"));
+				hc.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				hc.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				hc.setHotelPath(rset.getString("HOTEL_PATH"));
+				hc.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				sList.add(hc);
+				System.out.println(hc);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

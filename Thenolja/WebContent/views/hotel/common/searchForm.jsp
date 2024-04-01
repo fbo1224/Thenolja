@@ -46,15 +46,15 @@
 <%@ include file="/views/common/menubar.jsp" %>
 
 <div id="content-1">
-	<form id="select-form" action="<%= contextPath %>/searchList.hotels">
+	<form id="select-form" action="<%= contextPath %>/searchList.hotels" method="get">
 		<div style="display: inline-block;">
 			<input class="form-control" type="text" name="daterange" readonly required/>
 		</div>
 		<span id="date"></span>
 		<input class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
-		
 		<select id="locations" name="location">
 		</select>
+		<input type="hidden" name="currentPage" value="1">
 		<input class="btn btn btn-info" id="search" type="submit" value="검색">
 	</form>
 </div>
@@ -71,7 +71,7 @@ const toDay = new Date();
 	        "drops": "down",
 	        "opens": "center",
 	        "locale": {
-	            "format": "YYYY-MM-DD",
+	            "format": "YY/MM/DD",
 	            "separator": " ~ ",
 	            "applyLabel": "확인",
 	            "cancelLabel": "취소",
