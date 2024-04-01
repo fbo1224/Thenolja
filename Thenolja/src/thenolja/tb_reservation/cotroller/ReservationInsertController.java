@@ -69,11 +69,11 @@ public class ReservationInsertController extends HttpServlet {
 			// DB하이 ~
 			reser = new ReserService().selectReservation();		
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-			int roomNum = Integer.parseInt(request.getParameter("roomNum"));
+			int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 			// Room room = new ReserService().updateRoom();
 			
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
-			Room room = new ReserService().selectRoomNo(hotelNo, roomNum);
+			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 				
 				if(hotel != null && room != null) {
 

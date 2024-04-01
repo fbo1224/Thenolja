@@ -196,7 +196,7 @@
 
                 <div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-				<input type="hidden" name="roomNum" value="<%=room.getRoomNum() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
