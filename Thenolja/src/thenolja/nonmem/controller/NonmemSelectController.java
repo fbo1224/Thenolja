@@ -46,7 +46,7 @@ public class NonmemSelectController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("nonmemReser", list);
 		
-		request.getRequestDispatcher("views\\nonmem\\selectNonmemReser.jsp").forward(request, response);
+		request.getRequestDispatcher("views\\nonmem\\nonDetailReservation.jsp").forward(request, response);
 		/*if(result > 0) {
 		} else {
 			request.setAttribute("errorMsg", "조회된 결과가 없습니다.");
