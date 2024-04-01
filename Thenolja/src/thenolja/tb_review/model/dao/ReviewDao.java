@@ -5,6 +5,7 @@ import static thenolja.common.JDBCTemplate.close;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,11 +79,29 @@ public class ReviewDao {
 	        while(rset.next()) {
 	        	
 	        	Review r = new Review();
+	        	r.setNickName(rset.getString("NICKNAME"));
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
 	        	r.setContent(rset.getString("REVIEW_CONTENT"));
 	        	r.setScore(rset.getInt("REVIEW_SCORE"));
 	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
+	    		r.setHotelNo(rset.getInt("HOTEL_NO"));
+				r.setHotelName(rset.getString("HOTEL_NAME"));
+				r.setRoomName(rset.getString("ROOM_NAME"));
+				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				r.setReserDate(rset.getDate("RESER_DATE"));
+				r.setName(rset.getString("RESER_NAME"));
+				r.setPhone(rset.getString("RESER_PHONE"));
+				r.setBicycle(rset.getString("BICYCLE"));
+				r.setCheckIn(rset.getString("CHECKIN_TIME"));
+				r.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				r.setPeople(rset.getInt("MAX_PEOPLE"));
+				r.setRoomNo(rset.getInt("ROOM_NO"));
+				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				r.setMemNo(rset.getInt("MEM_NO"));
+				r.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				r.setHotelPath(rset.getString("HOTEL_PATH"));
 	        	
 	        	reviewList.add(r);
 	        }
