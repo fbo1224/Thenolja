@@ -333,7 +333,7 @@ public class HotelController {
 		so.setStartDate(startDate);
 		so.setEndDate(endDate);
 	
-		ArrayList<HotelCard> slist = new HotelService().searchList(so, pi);
+		// ArrayList<HotelCard> slist = new HotelService().searchList(so, pi);
 		
 		// 응답 경로 지정
 		view = "views/hotel/searchList.jsp";

@@ -648,6 +648,9 @@ public class HotelDao {
 			pstmt = conn.prepareStatement(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return sList; 
