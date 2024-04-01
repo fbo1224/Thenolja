@@ -87,7 +87,6 @@
 <body>
 	<%@ include file="./common/searchForm.jsp" %>
 	<div id="wrap">
-			
 		<div id="content-2-lists">
 			<%if(list.isEmpty()){ %>
 				<div class="cards">

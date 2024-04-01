@@ -150,9 +150,11 @@
 		        TB_RESERVATION.CHECKOUT_TIME,
 		        MAX_PEOPLE,
 		        TB_ROOM.ROOM_NO,
+		        ROOM_PRICE,
 		        RE_MEM_NO,
 		        PAYMENT,
-		        PAYMENT_PRICE
+		        PAYMENT_PRICE,
+		        HOTEL_PATH
 		  FROM
 		        TB_RESERVATION
 		  JOIN

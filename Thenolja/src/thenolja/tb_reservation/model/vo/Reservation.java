@@ -25,9 +25,19 @@ public class Reservation {
 	private String checkOutTime;
 	private int hotelNo;
 	private int roomNum;
+	private String hotelPath;
 
 
 
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
 
 
 	public Reservation() {

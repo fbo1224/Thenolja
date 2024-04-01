@@ -651,9 +651,9 @@ public class HotelDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, so.getMaxPeople());
-			pstmt.setString(2, so.getLocation());
-			pstmt.setString(3, "%"+so.getStartDate()+"%");
-			pstmt.setString(4, "%"+so.getEndDate()+"%");
+			pstmt.setString(2, "%"+so.getLocation()+"%");
+			pstmt.setString(3, so.getStartDate());
+			pstmt.setString(4, so.getEndDate());
 			
 			pstmt.setInt(5, startRow);
 			pstmt.setInt(6, endRow);
@@ -669,7 +669,6 @@ public class HotelDao {
 				hc.setHotelPath(rset.getString("HOTEL_PATH"));
 				hc.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				sList.add(hc);
-				System.out.println(hc);
 			}
 			
 		} catch (SQLException e) {

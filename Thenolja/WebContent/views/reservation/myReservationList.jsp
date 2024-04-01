@@ -134,7 +134,7 @@
 	                <h3><%=r.getHotelName() %></h3>
 	                <p><%=r.getRoomName() %></p>
 	                <p><%=r.getPeople() %>인</p>
-	                <p><%=r.getPaymentPrice() %>원</p>
+	                <p><%=r.getRoomPrice() %>원</p>
 	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
 	            </div>
 
