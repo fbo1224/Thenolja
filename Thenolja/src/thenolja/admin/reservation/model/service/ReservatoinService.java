@@ -177,5 +177,20 @@ public class ReservatoinService {
 		return result;
 	}
 	
+	/**
+	 * 오래된 회원 예약 
+	 */
+	public ArrayList<AdminReservation> reserOldestList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().reserOldestList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+	
 
 }
