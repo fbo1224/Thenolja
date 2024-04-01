@@ -192,13 +192,27 @@
 	
 	</entry>
 	
-		<entry key="emailCheck"><!-- 이메일 체크 -->
+	<entry key="emailCheck"><!-- 이메일 체크 -->
 		SELECT
 		       COUNT(*)
 		  FROM
 		       TB_MEMBER
 		 WHERE
 		       EMAIL = ?
+	
+	</entry>
+	
+	<entry key="insertHeart">
+		INSERT
+		  INTO
+		       TB_SAVED
+		VALUES
+		       (
+		       ?,
+		       ?
+		       )
+	
+	
 	
 	</entry>
 	

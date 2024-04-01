@@ -1,4 +1,4 @@
-package thenolja.admin.member.controller;
+package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import thenolja.admin.member.model.service.MemberService;
-import thenolja.admin.member.model.vo.AdminMember;
+import thenolja.admin.reservation.model.service.ReservatoinService;
+import thenolja.admin.reservation.model.vo.AdminReservation;
 import thenolja.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class MembereOldest
+ * Servlet implementation class OldReser
  */
-@WebServlet("/oldestList.do")
-public class MembereOldest extends HttpServlet {
+@WebServlet("/oldReserList.do")
+public class OldReser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MembereOldest() {
+    public OldReser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +44,7 @@ public class MembereOldest extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectListCount();
+		listCount = new ReservatoinService().selectReserCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -53,33 +52,34 @@ public class MembereOldest extends HttpServlet {
 		// System.out.println(currentPage);
 		
 		pageLimit = 5;
+		
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		
-		// System.out.println(maxPage);
 		
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
 		endPage = startPage + pageLimit - 1;
 		
-		 if(endPage > maxPage) {
-			 endPage = maxPage;
-		 }
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
-		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		 ArrayList<AdminMember> list = new MemberService().memberOldestList(pi);
+		//  System.out.println(pi);
+		 ArrayList<AdminReservation> list = new ReservatoinService().reserOldestList(pi);
 		 
 		 System.out.println(list);
 		 
-		 request.setAttribute("memberOldsetList", list);
+		 request.setAttribute("reserOldestList", list);
 		 request.setAttribute("pageInfo", pi);
 		 
 		 
-		 RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
+		 RequestDispatcher view = request.getRequestDispatcher("/views/admin/reservation/rserMemberList.jsp");
 		 view.forward(request, response);
-	
+		 
+		 
 	}
 
 	/**

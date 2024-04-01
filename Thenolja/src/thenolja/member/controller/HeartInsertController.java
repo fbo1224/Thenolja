@@ -1,11 +1,15 @@
 package thenolja.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import thenolja.member.model.service.MemberService;
 
 /**
  * Servlet implementation class HeartInsertController
@@ -29,11 +33,20 @@ public class HeartInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String hotelNo = request.getParameter("hotelNo");
-		String memNo = request.getParameter("memNo");
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 		System.out.println(hotelNo);
 		System.out.println(memNo);
+		
+		int count = new MemberService().heartInsert(hotelNo, memNo);
+		
+		if(count > 0) {
+			HttpSession session = request.getSession();
+			request.setAttribute("alertMsg", "찜 목록에 추가하였습니다.");
+		} else {
+			request.setAttribute("alertMsg", "찜 목록 추가 실패");
+		}
 	}
 
 	/**
