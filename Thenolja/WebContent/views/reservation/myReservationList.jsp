@@ -3,11 +3,7 @@
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
 				 thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
-
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
-	Room room = (Room)request.getAttribute("room");
-	Hotel hotel = (Hotel)request.getAttribute("hotel");
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +121,7 @@
 		<% if(reserList.isEmpty()) { %>
 		<table>
 			<tr>
-				<th style="font-size:40px;" colspan="5">작성된 리뷰가 존재하지 않습니다.</th>
+				<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
 			</tr>
 		</table>
 		<% } else { %>
@@ -133,17 +129,17 @@
 		<div id="content">
 	        <div id="reser_info">
 	            <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
-				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
 	            <div id="reser_detail">
-	                <h3><%=hotel.getHotelName() %></h3>
-	                <p><%=room.getRoomName() %></p>
-	                <p><%=room.getMaxPeople() %>인</p>
-	                <p><%=reser.getPaymentPrice() %>원</p>
-	                <p><%=room.getCheckInTime() %> ~ <%=room.getCheckOutTime() %> </p>
+	                <h3><%=r.getHotelName() %></h3>
+	                <p><%=r.getRoomName() %></p>
+	                <p><%=r.getPeople() %>인</p>
+	                <p><%=r.getPaymentPrice() %>원</p>
+	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
 	            </div>
 
             <div id="review_in">
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=reser.getReserNo() %>&hotelNo=<%=hotel.getHotelNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
+                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
             </div>
         </div>
 	</div>

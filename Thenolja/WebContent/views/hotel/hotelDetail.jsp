@@ -205,11 +205,12 @@
 							<p>입실시간 : <%= ri.getCheckInTime() %></p>
 							<p>퇴실시간 : <%= ri.getCheckOutTime() %></p>
 							<p>가격 : <%= ri.getRoomPrice() %></p>
+							<input type="hidden" name="roomNo" value="<%=ri.getRoomNum() %>">
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
 							<%-- 객실예약 기능 추가 예정 --%>
-							<a href="<%=contextPath%>/insertReservation">
+							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo() %>">
 							<button class="btn btn-sm btn-info">객실 예약</button></a>
 						</div>
 					</div>			

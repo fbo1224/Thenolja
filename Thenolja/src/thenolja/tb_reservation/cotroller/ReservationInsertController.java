@@ -69,6 +69,7 @@ public class ReservationInsertController extends HttpServlet {
 			// DB하이 ~
 			reser = new ReserService().selectReservation();		
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+			// Room room = new ReserService().updateRoom();
 			
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 			Room room = new ReserService().selectRoomNo(hotelNo);
@@ -85,6 +86,8 @@ public class ReservationInsertController extends HttpServlet {
 				} else {
 					request.setAttribute("errorMsg", "예약에 실패했습니다!");
 					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+					
+					
 				}
 		} else {
 			request.setAttribute("errorMsg", "예약에 실패했습니다!");

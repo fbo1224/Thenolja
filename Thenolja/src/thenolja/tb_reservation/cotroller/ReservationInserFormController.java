@@ -50,7 +50,7 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		if(hotel != null && room != null) {
 		request.setAttribute("reser", reser);
-		request.setAttribute("hotel", hotel);
+		request.setAttribute("hotel", hotel);      
 		request.setAttribute("room", room);
 		//System.out.println(list);
 		

@@ -214,6 +214,11 @@ public class ReserDao {
 			while(rset.next()) {
 				
 				Reservation reser = new Reservation();
+				reser.setHotelNo(rset.getInt("HOTEL_NO"));
+				reser.setHotelName(rset.getString("HOTEL_NAME"));
+				reser.setRoomName(rset.getString("ROOM_NAME"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
 				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
