@@ -38,6 +38,8 @@ public class ReservationInserFormController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
