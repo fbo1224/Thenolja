@@ -45,17 +45,11 @@ public class HotelServlet extends HttpServlet {
 			// insertHotel.jsp
 			case "insertForm" : view =  hc.insertForm(request, response); break;
 			
-			//
-			case "insert" : result =  hc.insert(request, response);
+			// 뷰 응답 controller에서 할 것.
+			case "insert" : view =  hc.insert(request, response);
 							// hotelList로 이동
-							if(result > 0) {
-								view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1")) {	
 								flag = false;
-							}
-							// 실패시 에러페이지로.
-							else {
-								request.setAttribute("errorMsg", "hotel 추가 실패...");
-								view="views/common/errorPage.jsp";	
 							}
 							break;
 			
@@ -66,13 +60,9 @@ public class HotelServlet extends HttpServlet {
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			// 
-			case "update" : result =  hc.update(request, response);
-							if(result > 0) {
-								view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+			case "update" : view =  hc.update(request, response);
+							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1")) {
 								flag = false;
-							} else {
-								request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
-								view = "views/common/errorPage.jsp";
 							}
 							break;
 
@@ -80,7 +70,8 @@ public class HotelServlet extends HttpServlet {
 			case "select" : view =  hc.select(request, response); break;
 			
 			// searchList
-			// 
+			case "searchList" : view = hc.searchList(request, response); break;
+			
 		}
 		
 		if(flag) {
