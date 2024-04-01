@@ -8,38 +8,38 @@
 	
 	<entry key="insertRoom">
 	INSERT
-  INTO
-      TB_ROOM(
-              ROOM_NO,
-              HOTEL_NO,
-              ROOM_NAME,
-              CHECKIN_TIME,
-              CHECKOUT_TIME,
-              ROOM_NUM,
-              ROOM_PRICE,
-              MAX_PEOPLE
-              )
-       VALUES(
-              SEQ_ROOM.NEXTVAL,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?
-             )
+		  INTO
+		      TB_ROOM(
+		              ROOM_NO,
+		              HOTEL_NO,
+		              ROOM_NAME,
+		              CHECKIN_TIME,
+		              CHECKOUT_TIME,
+		              ROOM_NUM,
+		              ROOM_PRICE,
+		              MAX_PEOPLE
+		              )
+		       VALUES(
+		              SEQ_ROOM.NEXTVAL,
+		              ?,
+		              ?,
+		              ?,
+		              ?,
+		              ?,
+		              ?,
+		              ?
+		             )
 	</entry>
 	
 	<entry key="insertRoomImg">
 	INSERT
-  	  INTO
-      	  TB_ROOM_IMG
-   VALUES(
-          SEQ_ROOM_IMG.NEXTVAL,
-          SEQ_ROOM.CURRVAL,
-          ?
-          )
+	  	  INTO
+	      	  TB_ROOM_IMG
+	   VALUES(
+	          SEQ_ROOM_IMG.NEXTVAL,
+	          SEQ_ROOM.CURRVAL,
+	          ?
+	          )
 	</entry>
 	
 	<entry key="countRoom">
