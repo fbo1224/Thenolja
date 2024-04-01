@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo" %>
 <%
-	
+	ArrayList<AdminMember> oldList = (ArrayList<AdminMember>)request.getAttribute("memberOldsetList");
 	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("selectMemberList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -86,7 +86,7 @@
                     </div>
         
 			          <div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=1'">오래된순</button>
 			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/selectMember?currentPage=1'">최신순</button>
 					</div>
 
@@ -148,6 +148,36 @@
                   <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                 </div>
+                
+                
+                
+                
+                
+                
+                
+                <div class="paging-area" align="center";>
+                
+                	<%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestList.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
+                </div>
+        
+                
+                
+                
+                
         
             </div>
         </div>
@@ -159,36 +189,7 @@
     
       <script>
       
-      	function oldestList(){
-      		$.ajax({
-      			
-      			url : 'oldestList.do?currentPage=1',
-      			type : 'post',
-      			success : function(result){
-      				if(result.length === 0){
-      					location.href = '<%=contextPath%>/oldestList.do?currentPage=1';
-      				} else {
-      						let resultStr = '';
-      						
-      						for(let i = 0; i < result.length; i++){
-      							resultStr += '<tr>'
- 	  							   + '<td>' + result[i].memNo + '</td>'
- 	  							   + '<td>' + result[i].memId + '</td>'
- 	  							   + '<td>' + result[i].nickName + '</td>'
- 	  							   + '<td>' + result[i].gradeName + '</td>'
- 	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem('+ result[i].memNo+')">' + '조회' + '</button>' + '</td>'
- 		                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteMember('+ result[i].memNo+')">' + '삭제' + '</button>' + '</td>'
- 	  							   + '</tr>'
-      						}
-
-      						
-    	  			
-    	  				$('#mem_list tbody').html(resultStr);
-      				}
-
-      			}
-      		});
-      	}
+   
       
       
       

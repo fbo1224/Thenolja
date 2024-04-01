@@ -3,6 +3,7 @@ package thenolja.admin.member.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,14 +68,13 @@ public class MembereOldest extends HttpServlet {
 		
 		 PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		ArrayList<AdminMember> list = new MemberService().memberOldestList(pi);
-		
-		response.setContentType("application/json; charset=UTF-8");
-		
-		new Gson().toJson(list, response.getWriter());
-	
+		 ArrayList<AdminMember> list = new MemberService().memberOldestList(pi);
+
+		 request.setAttribute("memberOldestList", list);
+		 request.setAttribute("pageInfo", pi);
+		 
+		 RequestDispatcher view = request.getRequestDispatcher("/views/admin/member/memberList.jsp");
+		 view.forward(request, response);
 	
 	}
 
