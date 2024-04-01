@@ -10,6 +10,7 @@ public class SelectNonmemReser {
 	// reservation
 	private int reserNo;
 	private String reserName;
+	private String reserPhone;
 	private String checkInDate;
 	private String checkOutDate;
 	private String bicycle;
@@ -38,9 +39,10 @@ public class SelectNonmemReser {
 	}
 
 	public SelectNonmemReser(int memNo, String memName, String memPhone, String memStatus, int reserNo,
-			String reserName, String checkInDate, String checkOutDate, String bicycle, int people, String paymentPrice,
-			String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime, int hotelNo,
-			String hotelName, String hotelLocation, String hotelAddress, String hotelPath, String roomImg) {
+			String reserName, String reserPhone, String checkInDate, String checkOutDate, String bicycle, int people,
+			String paymentPrice, String roomName, int roomNum, int maxPeople, String checkInTime, String checkOutTime,
+			int hotelNo, String hotelName, String hotelLocation, String hotelAddress, String hotelPath,
+			String roomImg) {
 		super();
 		this.memNo = memNo;
 		this.memName = memName;
@@ -48,6 +50,7 @@ public class SelectNonmemReser {
 		this.memStatus = memStatus;
 		this.reserNo = reserNo;
 		this.reserName = reserName;
+		this.reserPhone = reserPhone;
 		this.checkInDate = checkInDate;
 		this.checkOutDate = checkOutDate;
 		this.bicycle = bicycle;
@@ -112,6 +115,14 @@ public class SelectNonmemReser {
 
 	public void setReserName(String reserName) {
 		this.reserName = reserName;
+	}
+
+	public String getReserPhone() {
+		return reserPhone;
+	}
+
+	public void setReserPhone(String reserPhone) {
+		this.reserPhone = reserPhone;
 	}
 
 	public String getCheckInDate() {
@@ -245,12 +256,13 @@ public class SelectNonmemReser {
 	@Override
 	public String toString() {
 		return "SelectNonmemReser [memNo=" + memNo + ", memName=" + memName + ", memPhone=" + memPhone + ", memStatus="
-				+ memStatus + ", reserNo=" + reserNo + ", reserName=" + reserName + ", checkInDate=" + checkInDate
-				+ ", checkOutDate=" + checkOutDate + ", bicycle=" + bicycle + ", people=" + people + ", paymentPrice="
-				+ paymentPrice + ", roomName=" + roomName + ", roomNum=" + roomNum + ", maxPeople=" + maxPeople
-				+ ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime + ", hotelNo=" + hotelNo
-				+ ", hotelName=" + hotelName + ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress
-				+ ", hotelPath=" + hotelPath + ", roomImg=" + roomImg + "]";
+				+ memStatus + ", reserNo=" + reserNo + ", reserName=" + reserName + ", reserPhone=" + reserPhone
+				+ ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", bicycle=" + bicycle
+				+ ", people=" + people + ", paymentPrice=" + paymentPrice + ", roomName=" + roomName + ", roomNum="
+				+ roomNum + ", maxPeople=" + maxPeople + ", checkInTime=" + checkInTime + ", checkOutTime="
+				+ checkOutTime + ", hotelNo=" + hotelNo + ", hotelName=" + hotelName + ", hotelLocation="
+				+ hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelPath=" + hotelPath + ", roomImg=" + roomImg
+				+ "]";
 	}
 
 	
