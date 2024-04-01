@@ -25,33 +25,33 @@
 		     (SELECT 
 		            A.*, ROWNUM RNUM
 		        FROM( SELECT
-		        HOTEL_NAME,
-		        MEM_ID,
-		        NICKNAME,
-		        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE",
-		        RV_RESER_NO
-		  FROM
-		        TB_MEMBER
-		  JOIN
-		        TB_RESERVATION ON (RE_MEM_NO = TB_MEMBER.MEM_NO)
-		  JOIN
-		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
-		  JOIN
-		        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
-		  JOIN
-		        TB_REVIEW ON (RV_RESER_NO = RESER_NO)
-		  JOIN
-		        TB_NONMEM ON (TB_MEMBER.MEM_NO = TB_NONMEM.MEM_NO)
-		 WHERE
-		        MEM_STATUS = 'Y'
-		   AND
-		       REVIEW_YN = 'Y'
-		  GROUP
-		    BY
-		            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD'),RV_RESER_NO
-		ORDER
-		  BY
-		        CREATE_DATE DESC) A)
+						        HOTEL_NAME,
+						        MEM_ID,
+						        NICKNAME,
+						        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE",
+						        RV_RESER_NO
+						  FROM
+						        TB_MEMBER
+						  JOIN
+						        TB_RESERVATION ON (RE_MEM_NO = TB_MEMBER.MEM_NO)
+						  JOIN
+						        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
+						  JOIN
+						        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
+						  JOIN
+						        TB_REVIEW ON (RV_RESER_NO = RESER_NO)
+						  JOIN
+						        TB_NONMEM ON (TB_MEMBER.MEM_NO = TB_NONMEM.MEM_NO)
+						 WHERE
+						        MEM_STATUS = 'Y'
+						   AND
+						       REVIEW_YN = 'Y'
+						  GROUP
+						    BY
+						            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD'),RV_RESER_NO
+						ORDER
+						  BY
+						        CREATE_DATE DESC) A)
 		    WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -123,7 +123,7 @@
 	
 	
 	<entry key="selectCommentList">
-SELECT 
+		SELECT 
 		        COMMENT_CONTENT
 		  FROM
 		        TB_COMMENT
@@ -137,7 +137,45 @@ SELECT
 	</entry>
 	
 	
+	<entry key="searchReviewMemId">
 	
+
+		     SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM( SELECT
+						        HOTEL_NAME,
+						        MEM_ID,
+						        NICKNAME,
+						        TO_CHAR(CREATE_DATE ,'YYYY.MM.DD')"CREATE_DATE",
+						        RV_RESER_NO
+						  FROM
+						        TB_MEMBER
+						  JOIN
+						        TB_RESERVATION ON (RE_MEM_NO = TB_MEMBER.MEM_NO)
+						  JOIN
+						        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
+						  JOIN
+						        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
+						  JOIN
+						        TB_REVIEW ON (RV_RESER_NO = RESER_NO)
+						  JOIN
+						        TB_NONMEM ON (TB_MEMBER.MEM_NO = TB_NONMEM.MEM_NO)
+						 WHERE
+						        MEM_STATUS = 'Y'
+						   AND
+						       REVIEW_YN = 'Y'
+						   AND
+						   		MEM_ID = ?
+						  GROUP
+						    BY
+						            HOTEL_NAME, MEM_ID, NICKNAME,TO_CHAR(CREATE_DATE ,'YYYY.MM.DD'),RV_RESER_NO
+						ORDER
+						  BY
+						        CREATE_DATE DESC) A
+
+	
+	
+	</entry>
 	
 	
 </properties>

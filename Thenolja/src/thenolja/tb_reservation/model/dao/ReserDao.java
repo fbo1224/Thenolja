@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 public class ReserDao {
@@ -41,13 +42,12 @@ public class ReserDao {
 			pstmt.setString(1, reser.getName());
 			pstmt.setString(2, reser.getPhone());
 			pstmt.setString(3, reser.getBicycle());
+		//	pstmt.setString(4, reser.getCheckIn());
+		//	pstmt.setString(5, reser.getCheckOut());
+	//		pstmt.setInt(6, reser.getPeople());
 			pstmt.setInt(4, reser.getMemNo());
-			// pstmt.setString(4, reser.getCheckIn());
-			// pstmt.setString(5, reser.getCheckOut());
-			// pstmt.setInt(4, reser.getPeople());
+		//	pstmt.setInt(8, reser.getPaymentPrice());
 			// pstmt.setString(7, reser.getPayment());
-			// pstmt.setInt(8, reser.getPaymentPrice());
-			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -238,7 +238,6 @@ public class ReserDao {
 		
 		return list;
 	}
-
 	public Hotel selectHotelNo(Connection conn, int hotelNo) {
 		
 		ResultSet rset = null;
@@ -304,7 +303,86 @@ public class ReserDao {
 		}
 		return hotel;
 	}
+
+
+	public Room selectRoom(Connection conn) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Room room = new Room();
+		String sql = prop.getProperty("selectRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				room = new Room();
+				room.setRoomNo(rset.getInt("ROOM_NO"));
+				room.setHotelNo(rset.getInt("HOTEL_NO"));
+				room.setRoomName(rset.getString("ROOM_NAME"));
+				room.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				room.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				room.setRoomNum(rset.getInt("ROOM_NUM"));
+				room.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				room.setMaxPeople(rset.getInt("MAX_PEOPLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return room;
+		
+	}
+
+	public Room selectRoomNo(Connection conn, int roomNo, int hotelNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Room room = new Room();
+		String sql = prop.getProperty("selectRoomNo"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				room = new Room();
+				room.setRoomNo(rset.getInt("ROOM_NO"));
+				room.setHotelNo(rset.getInt("HOTEL_NO"));
+				room.setRoomName(rset.getString("ROOM_NAME"));
+				room.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				room.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				room.setRoomNum(rset.getInt("ROOM_NUM"));
+				room.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				room.setMaxPeople(rset.getInt("MAX_PEOPLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return room;
+	}
 	
+
+	public int deleteReser(Connection conn, int reserNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reserNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	
 	

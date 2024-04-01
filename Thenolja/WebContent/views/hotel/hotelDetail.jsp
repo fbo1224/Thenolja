@@ -38,11 +38,13 @@
 #detail-content-img{
 	margin: auto;
 	width: 80%;
+	border-radius: 10px;
 	box-shadow: 2px 2px 2px gray;
 }
 #detail-content-img > img{
 	width:100%;
 	height: 500px;
+	border-radius: 10px;
 }
 #detail-content-imgInfo{
 	margin: auto;
@@ -111,6 +113,8 @@
 }
 #detail-content-review {
 	width: 80%;
+	height: auto;
+	overflow:hidden;
 	margin: auto;
 	padding: 10px;
 	border-top: 1px solid gray;
@@ -118,16 +122,23 @@
 }
 .content-review-1 {
 	width: 60%;
-	height: 40%;
+	height: 80px;
 	margin: auto;
 	margin-top: 15px;
 	border-radius: 12px;
 	padding: 10px;
+	float:left;
 }
 .review-1-div {
 	display: flex;
 	justify-content: space-between;
 	margin: 0px 3px;	
+}
+.review-1-content {
+	font-size: 14px;
+}
+.admins {
+	float: right;
 }
 #detail-content-imgInfo span{
 	padding: 3px;
@@ -149,8 +160,10 @@
 		<%if(dh != null) { %>
 		<div id="detail-content">
 			<div id="detail-content-btns">
-				<button class="btn btn-sm btn-primary" >예약하기</button>
-				<button class="btn btn-sm btn-primary" >비회원예약하기</button>
+			<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo() %>">
+				<button class="btn btn-sm btn-primary" >예약하기</button></a>
+			<a href="<%=contextPath%>/nonInsertReservation">
+				<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 			</div>
 			
 			<div id="detail-content-title">
@@ -166,7 +179,7 @@
 				<div>
 					 <span>★</span>
 					 <span><%= dh.getCountReviews() %> 개의 리뷰</span>
-					 <span>리뷰조회</span>
+					 <span><a href="#reviews">리뷰조회</a></span>
 				</div>
 				<div>
 					<span><%= dh.getHotelCate() %></span>
@@ -195,8 +208,9 @@
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
-							<%-- 객실예약 기능 없음 --%>
-							<button class="btn btn-sm btn-info">객실 예약</button>
+							<%-- 객실예약 기능 추가 예정 --%>
+							<a href="<%=contextPath%>/insertReservation">
+							<button class="btn btn-sm btn-info">객실 예약</button></a>
 						</div>
 					</div>			
 					<%} %>
@@ -217,12 +231,15 @@
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
+					<a name="reviews"></a>
 					<%for(HotelReview hr : dh.getReviewList() ){ %>
-					<div class="content-review-1 card">
+					<div class="content-review-1 card" id="<%= hr.getReserNo() %>">
 						<div class="review-1-div">
-							<span><%= hr.getReserName() %></span><span><%= hr.getCreateDate() %></span>
+							<span>작성자 : <%= hr.getReserName() %> </span>
+							<span>작성일 : <%= hr.getCreateDate() %> </span>
+							<span>리뷰 점수 <%= hr.getReviewScore() %></span>
 						</div>
-						<div>
+						<div class="review-1-content">
 							<span><%= hr.getReviewContent() %></span>
 						</div>
 					</div>
@@ -235,5 +252,50 @@
 			<h1>찾을 수 없습니다.</h1>
 		<%} %>
 	</div>
+	
+	<script>
+		$(function(){
+			$.ajax({
+				url: "commentAdmin.jqAjax",
+				data: {
+					hotelNo: '<%= dh.getHotelNo() %>'
+				},
+				type: 'get',
+				success: function(result){
+					
+					if(result != null){
+						for(let i = 0; i < result.length; i++){
+							$('.content-review-1').each(function(idx, ele){
+								if($(ele).attr('id') == result[i].reserNo){
+									// console.log(result);
+									$(ele).after('<div class="content-review-1 card admins" style="border: 1px solid skyblue;" >'
+												+'<div class="review-1-div">'
+												  +'<p>작성자 : '+ result[i].nickname +'</p>'
+												  +'<p>작성일 : '+ result[i].createDate +'</p>'   
+											    +'</div>'
+											    +'<div class="review-1-content" >'
+											    	+'<span>'+ result[i].commentContent +'</span>'
+											    +'</div>'
+											+'</div>');
+								
+								}
+							});	
+						}
+					}
+					
+				},
+				error : function(result){
+					console.log(result);
+				},
+				
+			});
+			
+		});
+	</script>
+	
+
+	
+	
+	
 </body>
 </html>

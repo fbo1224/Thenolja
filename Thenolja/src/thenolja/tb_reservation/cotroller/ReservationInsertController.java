@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import thenolja.member.model.service.MemberService;
-import thenolja.member.model.vo.Member;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -41,18 +40,25 @@ public class ReservationInsertController extends HttpServlet {
 		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+
+	
+
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));
 		// String payment = request.getParameter("payment");
-		
+	//	int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
 		reser.setMemNo(memNo);
-		// reser.setReMemNo(memNo);
 		// reser.setPayment(payment);d
+	//	Hotel hotel = new Hotel();
+	//	hotel.setHotelNo(hotelNo);
+
 		
+
 		int result = new ReserService().insertReser(reser);
 		
 		// 여기까지 INSERT는 정상적으로 됐음.
@@ -66,6 +72,7 @@ public class ReservationInsertController extends HttpServlet {
 
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
+
 
 				response.sendRedirect(request.getContextPath() + "/reserDetail?reserNo=" + reser.getReserNo());
 //			response.sendRedirect(request.getContextPath() + "/views/reservation/waitingPage.jsp");

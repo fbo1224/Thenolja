@@ -33,6 +33,25 @@
             margin: auto;
             margin-top: 5%;
         }
+        
+        .sort-btn{
+        	
+        	border : none;
+        	background : white;
+        	float: right;
+        	padding-top : 10%;
+        }
+        
+         .sort-btn:hover{
+        	
+        	color : #5BA199;
+        }
+
+		#oldest {
+		
+		padding-right : 20%;
+		
+		}
 
 
 </style>
@@ -43,7 +62,7 @@
     
     <div id="wrap">
         <div id="header">
-        <%@ include file="../../common/adminMenubar.jsp" %> 
+        	<%@ include file="../../common/menubar.jsp" %> 
         </div>
                
         <div id="content">
@@ -66,14 +85,11 @@
                         <h2>회원목록</h2>
                     </div>
         
-                    <div id="mem_sort">
-                        <select>
-                            <option value="newest">최신순</option>
-                            <option value="oldset">오래된순</option>
-                        </select>
-        
-                    </div>
-        
+			          <div id="mem_sort">
+			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/selectMember?currentPage=1'">최신순</button>
+					</div>
+
                 </div>
         
                 <div id="mem_list">
@@ -140,7 +156,42 @@
     </div>
     
     
+    
       <script>
+      
+      	function oldestList(){
+      		$.ajax({
+      			
+      			url : 'oldestList.do?currentPage=1',
+      			type : 'post',
+      			success : function(result){
+      				if(result.length === 0){
+      					location.href = '<%=contextPath%>/oldestList.do?currentPage=1';
+      				} else {
+      						let resultStr = '';
+      						
+      						for(let i = 0; i < result.length; i++){
+      							resultStr += '<tr>'
+ 	  							   + '<td>' + result[i].memNo + '</td>'
+ 	  							   + '<td>' + result[i].memId + '</td>'
+ 	  							   + '<td>' + result[i].nickName + '</td>'
+ 	  							   + '<td>' + result[i].gradeName + '</td>'
+ 	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem('+ result[i].memNo+')">' + '조회' + '</button>' + '</td>'
+ 		                           + '<td>' + '<button class="btn btn-sm btn-outline-secondary" onclick="deleteMember('+ result[i].memNo+')">' + '삭제' + '</button>' + '</td>'
+ 	  							   + '</tr>'
+      						}
+
+      						
+    	  			
+    	  				$('#mem_list tbody').html(resultStr);
+      				}
+
+      			}
+      		});
+      	}
+      
+      
+      
   	function searchMemId(){
   	
   		$.ajax({

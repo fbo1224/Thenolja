@@ -13,6 +13,7 @@ import thenolja.member.model.service.MemberService;
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.service.NonmemService;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -40,6 +41,7 @@ public class ReservationDetailController extends HttpServlet {
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+	//	Hotel hotel = new ReserService().selectReserNo(reserNo);
 	//	int memNo = Integer.parseInt(request.getParameter("memNo"));
 	//d	Member member = new MemberService().selectMember (memNo);
 		// int memNo = Integer.parseInt(request.getParameter("memNo"));

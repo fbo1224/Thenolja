@@ -38,8 +38,10 @@ public class AjaxServlet extends HttpServlet {
 		switch(mapping) {
 			case "deleteHotel" : ac.deleteHotel(request, response); break;
 			case "deleteRoom"  : ac.deleteRoom(request, response); break;
-			case "favoriteData" : ac.selectPopular(request, response); break;
+			case "popularData" : ac.selectPopular(request, response); break;
 			case "locRecomData" : ac.locRecomData(request, response); break;
+			case "commentAdmin" : ac.commentAdmin(request, response); break;
+			
 			case "searchLocation" : ac.searchLocation(request, response); break;
 		}
 		

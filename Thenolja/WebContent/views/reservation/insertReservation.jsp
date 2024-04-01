@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon, thenolja.nonmem.model.vo.SelectNonmemReser" %>
-<%@ page import="java.util.ArrayList" %>   
+<%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel" %>   
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
-
-	SelectNonmemReser snr = (SelectNonmemReser)session.getAttribute("nonmemReser");
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
 %>   
   
 <!DOCTYPE html>
@@ -197,9 +196,8 @@
     			</div>
 	
 				<div id="reser_detail">
-					<input type="hidden" name="hotelNo" value="<%=snr.getHotelNo() %>">
-			        <h2><%=snr.getHotelName() %></h2>
-			        <p><%=snr.getRoomName() %></p>
+			        <h2>마리안느</h2>
+			        <p>슈페리어 더블(오션뷰)</p>
 			        <p>2인</p>
 			        <p>117,000원</p>
 			        <p>2024-02-28 ~ 2024-02-29</p>
@@ -225,7 +223,7 @@
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=snr.getHotelNo() %>" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">

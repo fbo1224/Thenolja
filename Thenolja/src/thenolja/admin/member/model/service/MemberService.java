@@ -182,7 +182,32 @@ public class MemberService {
 		return adminMember;
 	}
 	
+	/**
+	 * 가입자 수
+	 */
+	public int countJoinMember() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().countJoinMember(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
-	
+	/**
+	 * 오래된 순으로 정렬
+	 */
+	public ArrayList<AdminMember> memberOldestList(PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().memberOldestList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 }

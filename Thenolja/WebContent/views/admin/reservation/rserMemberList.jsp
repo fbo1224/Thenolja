@@ -28,7 +28,28 @@
     
     <div id="wrap">
         <div id="header">
-       		<%@ include file="../../common/adminMenubar.jsp" %> 
+    <style>
+        .sort-btn{
+        	
+        	border : none;
+        	background : white;
+        	float: right;
+        	padding-top : 10%;
+        }
+        
+         .sort-btn:hover{
+        	
+        	color : #5BA199;
+        }
+
+		#oldest {
+		
+		padding-right : 20%;
+		
+		}
+
+
+</style>   		<%@ include file="../../common/menubar.jsp" %> 
         </div>
                
         <div id="content">
@@ -53,13 +74,10 @@
                         <h2>회원 예약 목록</h2>
                     </div>
         
-                    <div id="mem_sort">
-                        <select>
-                            <option value="newest">최신순</option>
-                            <option value="oldset">오래된순</option>
-                        </select>
-        
-                    </div>
+ 					<div id="mem_sort">
+			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>
+					</div>
         
                 </div>
                 
@@ -151,7 +169,7 @@
     			type : 'post',
     			data : { keyword : $('#keyword').val()},
     			success : function(result){
-    				if(result == null){
+    				if(result.length === 0){
     					alert('예약 회원이 존재하지 않습니다.');
     					location.href = '<%=contextPath%>/reserMember?currentPage=1';
     				} else{
@@ -172,23 +190,24 @@
     					
     					let resultStr = '';
     					
-    					
-    					
-
-      					resultStr += '<tr>'
-      							   + '<td>' + result.reserNo + '</td>'
-      							   + '<td>' + result.memId + '</td>'
-      							   + '<td>' + result.reserName + '</td>'
-      							   + '<td>' + result.memPhone + '</td>'
-	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result.reserNo+')">' + '조회' + '</button>' +'</td>';
-									
-		                            if(currentDate > result.getCheckInTime) { 
-		                            	resultStr += '<td>' +
-		                        		+'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
-		                      	    } else {
-		                      	    	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result.reserNo+')">' + '환불처리' + '</button>' + '</td>';
-		                      	    }
-		                            resultStr += '</tr>'
+    					for(let i = 0; i < result.length; i++){
+    						const checkInTime = result[i].checkInTime;
+    						console.log(checkInTime);
+          					resultStr += '<tr>'
+          							   + '<td>' + result[i].reserNo + '</td>'
+          							   + '<td>' + result[i].memId + '</td>'
+          							   + '<td>' + result[i].reserName + '</td>'
+          							   + '<td>' + result[i].memPhone + '</td>'
+    	                        	   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem('+ result[i].reserNo+')">' + '조회' + '</button>' +'</td>';
+    									
+    		                            if(currentDate > checkInTime) { 
+    		                            	resultStr += '<td>' + '<button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';
+    		                      	    } else {
+    		                      	    	resultStr += '<td>' +
+    		                        		'<button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem('+ result[i].reserNo+')">' + '환불처리' + '</button>' + '</td>';	
+    		                      	    }
+    		                            resultStr += '</tr>'
+    					};
       			
       				$('#mem_list tbody').html(resultStr);
 	      						   console.log(resultStr);

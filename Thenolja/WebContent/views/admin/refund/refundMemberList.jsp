@@ -23,14 +23,36 @@
 <head>
     <title>회원 환불 목록</title>
     
-    <link rel="stylesheet" href="resources/css/admin_select.css">    
+    <link rel="stylesheet" href="resources/css/admin_select.css">  
+<style>
+        .sort-btn{
+        	
+        	border : none;
+        	background : white;
+        	float: right;
+        	padding-top : 10%;
+        }
+        
+         .sort-btn:hover{
+        	
+        	color : #5BA199;
+        }
+
+		#oldest {
+		
+		padding-right : 20%;
+		
+		}
+
+
+</style>  
 </head>
 <body>
     
     <div id="wrap">
         <div id="header">
 
-       		<%@ include file="../../common/adminMenubar.jsp" %> 
+       		<%@ include file="../../common/menubar.jsp" %> 
 	
         </div>
                
@@ -56,13 +78,10 @@
                         <h2>회원 환불 목록</h2>
                     </div>
         
-                    <div id="mem_sort">
-                        <select>
-                            <option value="newest">최신순</option>
-                            <option value="oldset">오래된순</option>
-                        </select>
-        
-                    </div>
+ 					<div id="mem_sort">
+			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
+						 <button class="sort-btn" id="newest" onclick="">최신순</button>
+					</div>
         
                 </div>
         
@@ -136,20 +155,42 @@
     
     	function searchRefundMem(){
     		
+    		$.ajax({
     		url : 'searchRefundMem.do',
     		type : 'post',
     		data : { keyword : $('#keyword').val()},
     		success : function(result){
-    			
-    		}
-    		
-    		
-    	}
+    			if(result.length === 0){
+  					alert('회원이 존재하지 않습니다.');
+  					location.href = '<%=contextPath%>/refundMem?currentPage=1';
+  					
+  				} else {
+  						let resultStr = '';
+						
+  						for(let i = 0; i < result.length; i++){
+  							resultStr += '<tr>'
+	  							   + '<td>' + result[i].reserNo + '</td>'
+	  							   + '<td>' + result[i].memId + '</td>'
+	  							   + '<td>' + result[i].reserName + '</td>'
+	  							   + '<td>' + result[i].memPhone + '</td>'
+	  							   + '<td>' + '<button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember('+ result[i].reserNo+')">' + '조회' + '</button>' + '</td>'
+	  							   + '</tr>'
+	  			
+  						};
+  						
+	  				$('#mem_list tbody').html(resultStr);
+  				}
+
+  				
+  			
+  			}
+  		});
+  		
+  	}
+ 
     
     
-    
-    
-    
+        
     
     
     
@@ -167,6 +208,7 @@
     				$('#bank').text(result.bank);
     				$('#refundPrice').text(result.refundPrice);
     				$('#refundAccNo').text(result.refundAccNo);
+    				$('#hotelPath').attr("src", result.hotelPath);
     			}
     		});
     	}
@@ -194,7 +236,7 @@
         <div class="modal-body">
             <table>
                 <tr>
-                    <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="120px"></td>
+                    <td colspan="5" rowspan="5" width="120" height="120" ><img id="hotelPath" src="" alt="" width="120px"></td>
                     <td width="200">숙소 정보</td>
                     <td>환불자 정보</td>
                 </tr>

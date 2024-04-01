@@ -191,9 +191,45 @@
 	</entry>
 	
 	
+	<entry key="countJoinMember">
+	SELECT
+	        COUNT(*)
+	  FROM
+	        TB_MEMBER
+	  WHERE
+	        TO_DATE(TO_CHAR(JOIN_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	
+	</entry>
+	
+	<entry key="memberOldestList">
+		
+		SELECT *
+		  FROM
+		     (SELECT 
+		            A.*, ROWNUM RNUM
+		        FROM( SELECT
+		                       TB_MEMBER.MEM_NO,
+		                       MEM_ID,
+		                       NICKNAME,
+		                       GRADE_NAME
+		              FROM
+		                    TB_NONMEM
+		               JOIN
+		                    TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+		               JOIN
+		                    TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
+		               JOIN
+		                    TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
+		            WHERE
+		                   DELETE_YN = 'Y'    
+		                   
+		            ORDER
+		               BY
+		                     MEM_NO ASC) A)
+		    WHERE RNUM BETWEEN ? AND ?
 	
 	
-	
+	</entry>
 	
 	
 	

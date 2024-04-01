@@ -122,6 +122,7 @@
 	
 	<entry key="selectHotel">
 		SELECT
+			  HOTEL_NO,	
 		      HOTEL_NAME,
 		      HOTEL_PATH,
 		      HOTEL_CATEGORY,
@@ -173,8 +174,14 @@
 	      TB_RESERVATION.ROOM_NO,
 	      RESER_NAME,
 	      CREATE_DATE,
-	      REVIEW_SCORE,
-	      REVIEW_CONTENT
+	      CASE WHEN REVIEW_SCORE = 1 THEN '★' 
+               WHEN REVIEW_SCORE = 2 THEN '★★'
+               WHEN REVIEW_SCORE = 3 THEN '★★★'
+               WHEN REVIEW_SCORE = 4 THEN '★★★★'
+          ELSE '★★★★★'
+          END AS REVIEW_SCORE,
+	      REVIEW_CONTENT,
+	      TB_RESERVATION.RESER_NO
   	  FROM
           TB_RESERVATION
   	  JOIN TB_ROOM  
@@ -335,6 +342,72 @@
         ORDER BY COUNT(TB_ROOM.ROOM_NO) DESC) A)
       WHERE RNUM BETWEEN 1 AND 10
 	</entry>
+	
+	<entry key="selectRecomData">
+		SELECT *
+        	  FROM(
+        	       SELECT A.*,
+        	       ROWNUM RNUM    
+         		FROM(
+            		 SELECT
+                     DISTINCT TB_HOTEL.HOTEL_NO,
+                     HOTEL_NAME,
+	                 HOTEL_LOCATION,
+	                 HOTEL_CATEGORY,
+	                 HOTEL_PATH,
+                     COUNT(HOTEL_LOCATION)
+                 FROM
+                 	 TB_RESERVATION
+              	 JOIN TB_ROOM
+                   ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO
+              	 JOIN TB_HOTEL
+                   ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+                WHERE
+                     HOTEL_YN = 'Y'
+                  AND
+                     ROOM_YN = 'Y'
+                GROUP
+                   BY 
+                     TB_HOTEL.HOTEL_NO,
+                     HOTEL_LOCATION,
+                     HOTEL_NAME,
+                     HOTEL_LOCATION,
+                     HOTEL_CATEGORY,
+                     HOTEL_PATH
+                ORDER
+                   BY
+                     COUNT(HOTEL_LOCATION) DESC) A)
+      WHERE RNUM BETWEEN 1 AND 4
+	</entry>
+	
+	<entry key="commentAdmin">
+	SELECT
+	      COMMENT_CONTENT,
+	      TB_COMMENT.CREATE_DATE,
+	      TB_MEMBER.NICKNAME,
+	      TB_RESERVATION.RESER_NAME,
+	      TB_RESERVATION.ROOM_NO,
+	      TB_RESERVATION.RESER_NO
+  	  FROM
+          TB_COMMENT
+  	  JOIN TB_MEMBER
+        ON TB_MEMBER.MEM_NO = TB_COMMENT.COMMENT_MEM_NO
+      JOIN TB_RESERVATION
+        ON TB_RESERVATION.RESER_NO = TB_COMMENT.CO_RESER_NO
+      JOIN TB_ROOM
+        ON TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO
+      JOIN TB_HOTEL
+        ON TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO
+      JOIN TB_REVIEW
+        ON TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO
+     WHERE 
+          TB_MEMBER.DELETE_YN = 'Y'
+      AND
+         TB_RESERVATION.CANCEL_YN = 'N'
+      AND
+         TB_HOTEL.HOTEL_NO = ?
+	</entry>
+	
 	
 	
 	

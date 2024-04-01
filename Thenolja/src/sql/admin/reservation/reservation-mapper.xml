@@ -142,8 +142,75 @@
 		   AND
 		   		CANCEL_YN = 'N'
            AND
-                MEM_ID = ?
-
+                MEM_ID = ?         
+        ORDER
+          BY
+                RESER_NO DESC
+   </entry>
+   
+   
+   <entry key="searchNonMemName">
+   		SELECT
+		        RESER_NO,
+		        RESER_NAME,
+		        MEM_PHONE,
+		        TO_CHAR(CHECKIN_TIME ,'YYYY.MM.DD') "CHECKIN_TIME"
+		        
+		  FROM
+		        TB_RESERVATION
+		  JOIN
+		        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+		 WHERE
+		        MEM_STATUS = 'N'
+		   AND
+		   		CANCEL_YN = 'N'
+           AND
+                RESER_NAME = ?
+		 ORDER
+               BY
+                    RESER_NO DESC
+   </entry>
+   
+   
+   
+   
+   <entry key="reserTopFive">
+	   SELECT
+	        RESER_NO,
+	        RESER_NAME,
+	        MEM_PHONE
+	  FROM( SELECT
+	                RESER_NO,
+	                RESER_NAME,
+	                MEM_PHONE
+	          FROM
+	                TB_RESERVATION
+	          JOIN
+	                TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+	         ORDER
+	            BY
+	                RESER_NO DESC)
+	<![CDATA[WHERE ROWNUM <= 5 ]]>  
+   </entry>
+   
+   <entry key="todayReserCount">
+   	SELECT
+	        COUNT(*)
+	  FROM
+	        TB_RESERVATION
+	  WHERE
+	        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	   
+   </entry>
+   
+   <entry key="todayPrice">
+           
+		SELECT
+		        SUM(PAYMENT_PRICE)
+		  FROM
+		        TB_RESERVATION
+		  WHERE
+		        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
    </entry>
    
 	

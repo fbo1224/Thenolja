@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_refund.model.vo.Refund;
 import thenolja.tb_reservation.model.dao.ReserDao;
 import thenolja.tb_reservation.model.vo.Reservation;
@@ -88,7 +89,6 @@ public class ReserService {
 		
 		return list;
 	}
-
 	public Hotel selectHotelNo(int hotelNo) {
 		
 		Connection conn = getConnection();
@@ -110,6 +110,39 @@ public class ReserService {
 		
 		return hotel;
 	}
+
+	public Room selectRoom() {
+		Connection conn = getConnection();
+		
+		Room room = new ReserDao().selectRoom(conn);
+		
+		close(conn);
+		
+		return room;
+	}
+
+	public Room selectRoomNo(int roomNo, int hotelNo) {
+		Connection conn = getConnection();
+		
+		Room room = new ReserDao().selectRoomNo(conn, roomNo, hotelNo);
+		
+		close(conn);
+		
+		return room;
+	}
+
+
+	public int deleteReser(int reserNo) {
+
+		Connection conn = getConnection();
+		
+		int result = new ReserDao().deleteReser(conn, reserNo);
+		
+		close(conn);
+		
+		return result;	
+	}
+
 
 
 	

@@ -108,16 +108,73 @@ public class ReservatoinService {
 	/**
 	 * 예약 회원 검색
 	 */
-	public AdminReservation searchReserMember(String keyword) {
+	public ArrayList<AdminReservation> searchReserMember(String keyword) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		AdminReservation adminReservation = new ReservationDao().searchReserMember(conn, keyword);
+		ArrayList<AdminReservation> list = new ReservationDao().searchReserMember(conn, keyword);
 		
 		JDBCTemplate.close(conn);
 		
-		return adminReservation;
+		return list;
 		
+	}
+	
+	/**
+	 * 예약 비회원 검색
+	 */
+	public ArrayList<AdminReservation> searchNonMemName(String keyword){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().searchNonMemName(conn, keyword);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 메인 페이지 예약 
+	 */
+	public ArrayList<AdminReservation> reserTopFive(){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().reserTopFive(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	/**
+	 * 메인페이지 예약 수
+	 */
+	public int todayReserCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().todayReserCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	
+	/**
+	 * 메인페이지 가격
+	 */
+	public int todayPrice() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ReservationDao().todayPrice(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 	
 

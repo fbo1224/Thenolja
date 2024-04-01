@@ -252,9 +252,9 @@ public class ReservationDao {
 	/**
 	 * 예약 회원 검색
 	 */
-	public AdminReservation searchReserMember(Connection conn, String keyword) {
+	public ArrayList<AdminReservation> searchReserMember(Connection conn, String keyword) {
 		
-		AdminReservation adminReservation = null;
+		ArrayList<AdminReservation> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchReserMember");
@@ -266,13 +266,93 @@ public class ReservationDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
+				AdminReservation adminReservation = new AdminReservation();
 				adminReservation = new AdminReservation();
 				adminReservation.setReserNo(rset.getInt("RESER_NO"));
 				adminReservation.setMemId(rset.getString("MEM_ID"));
 				adminReservation.setReserName(rset.getString("RESER_NAME"));
-				adminReservation.setMemPhone(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
 				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				
+				list.add(adminReservation);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	/**
+	 * 예약 비회원 검색
+	 */
+	public ArrayList<AdminReservation> searchNonMemName(Connection conn, String keyword){
+		
+		ArrayList<AdminReservation> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchNonMemName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminReservation adminReservation = new AdminReservation();
+				
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
+				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				
+				list.add(adminReservation);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	
+	/**
+	 * 메인페이지 예약 5
+	 */
+	public ArrayList<AdminReservation> reserTopFive(Connection conn){
+		
+		ArrayList<AdminReservation> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("reserTopFive");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminReservation adminReservation = new AdminReservation();
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminReservation);
 				
 			}
 			
@@ -283,15 +363,65 @@ public class ReservationDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return adminReservation;
+		return list;
+	}
+	
+	/**
+	 * 메인페이지 예약
+	 */
+	public int todayReserCount(Connection conn) {
 		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayReserCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			result = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	
 	
-	
-	
-	
-	
-	
+	/**
+	 * 메인페이지 가격
+	 */
+	public int todayPrice(Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayPrice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			result = rset.getInt("SUM(PAYMENT_PRICE)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

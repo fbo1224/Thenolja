@@ -8,6 +8,7 @@ public class DetailHotel {
 	private String hotelPath; // 사진경로
 	private String hotelCate;
 	private String hotelIntro;
+	private int hotelNo;
 	private int countReviews;
 	private ArrayList<RoomInfo> roomList;
 	private ArrayList<ServiceList> serList;
@@ -29,6 +30,14 @@ public class DetailHotel {
 		this.reviewList = reviewList;
 	}
 	
+	public int getHotelNo() {
+		return hotelNo;
+	}
+
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
+	}
+
 	public int getCountReviews() {
 		return countReviews;
 	}
