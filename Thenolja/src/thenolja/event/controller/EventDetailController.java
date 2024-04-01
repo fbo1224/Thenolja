@@ -29,28 +29,28 @@ public class EventDetailController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 怨듭��궗�빆 �긽�꽭�솕硫� 議고쉶
+	 * 공지사항 상세화면 조회
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// �긽�꽭�럹�씠吏� 議고쉶 �떆 �뙆�씪誘명꽣 諛쏄린
-		int noticeNo = Integer.parseInt(request.getParameter("EventNo"));
-		String flag  = request.getParameter("flag"); // �닔�젙, �궘�젣 / �긽�꽭 �럹�씠吏� 援щ텇�쓣 �쐞�븳 媛� 異붽�
+		// 상세페이지 조회 시 파라미터 받기
+		int eventNo = Integer.parseInt(request.getParameter("EventNo"));
+		String flag  = request.getParameter("flag"); // 수정, 삭제 / 상세 페이지 구분을 위한 값 추가
 		
-		System.out.println("[EventDetailController noticeNo] " + noticeNo);  
+		System.out.println("[EventDetailController eventNo] " + eventNo);  
 
 		Notice result = new Notice();
-		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
+		result = new NoticeServiceImpl().selectNoticeOne(eventNo, flag);
 		System.out.println("[EventDetailController result] " + result);
 		
 		if(result != null) {
 			request.setAttribute("event", result);
-			request.getRequestDispatcher("view/notice/eventDetail.jsp").forward(request, response); //�룷�썙�뵫
+			request.getRequestDispatcher("views/event/eventDetail.jsp").forward(request, response); //포워딩
 			
-		}else { //�떎�뙣 => �뿉�윭�럹�씠吏� 蹂대궡湲�
+		}else { //실패 => 에러페이지 보내기
 			
-			request.setAttribute("errorMsg", "�씠踰ㅽ듃 �긽�꽭 議고쉶 �떎�뙣");
-			RequestDispatcher view = request.getRequestDispatcher("view/common/error.Msg");
+			request.setAttribute("errorMsg", "이벤트 상세 조회 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");
 			view.forward(request,response);	
 		}
 		

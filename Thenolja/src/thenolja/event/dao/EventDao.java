@@ -30,12 +30,12 @@ public class EventDao {
 	
 	/*
 	 * 
-	 * �씠踰ㅽ듃 紐⑸줉 議고쉶
+	 * 이벤트 목록 조회
 	 * 
 	 * */
 	public ArrayList<Event> selectEventList(Connection conn){
 		
-		// �씠踰ㅽ듃 紐⑸줉 議고쉶�븷 list �꽑�뼵
+		// 이벤트 목록 조회할 list 선언
 		ArrayList<Event> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -48,7 +48,7 @@ public class EventDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				// 議고쉶 寃곌낵 Event 媛앹껜�뿉 �떞湲�
+				// 조회 결과 Event 객체에 담기
 				Event evnt = new Event();
 				evnt.setEventNo(rset.getInt("EVENT_NO"));
 				evnt.setEventContent(rset.getString("EVENT_CONTENT"));
@@ -57,7 +57,7 @@ public class EventDao {
 				evnt.setEventImg(rset.getString("EVENT_IMG"));
 				evnt.setWriter(rset.getString("WRITER"));
 				
-				// event媛앹껜�뿉 �떞�� �궡�슜 list�뿉 異붽�
+				// event객체에 담은 내용 list에 추가
 				list.add(evnt);
 			}
 			
@@ -70,7 +70,7 @@ public class EventDao {
 	}//method
 	
 	/*
-	 * 怨듭��궗�빆 �벑濡�
+	 * 공지사항 등록
 	 * 
 	 * */	
 	public int insertEvent(Connection conn, Event event) {
@@ -79,7 +79,7 @@ public class EventDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertEvent");
 		System.out.println("[EventDao insert sql] " + sql);
-		//�뜲�씠�꽣 �엯�젰諛쏆쓣 �뙆�씪 NOtice�뙆�씪
+		//데이터 입력받을 파일 NOtice파일
 		System.out.println("[EVENT DAO INSERT] " + event.getEventTitle());
 		System.out.println("[EVENT DAO INSERT] " + event.getEventContent());
 		System.out.println("[EVENT DAO INSERT] " + event.getEventYn());
@@ -108,12 +108,12 @@ public class EventDao {
 	}//method
 	
 	/*
-	 * �씠踰ㅽ듃 �닔�젙
+	 * 이벤트 수정
 	 * 
 	 * */		
 	public int updateEventOne(Connection conn, Event event) {
 		
-		System.out.println("[EventDAO PARAM �솗�씤]");
+		System.out.println("[EventDAO PARAM 확인]");
 		System.out.println(	event.getEventTitle());
 		System.out.println(event.getEventContent());
 		System.out.println(event.getEventNo());
