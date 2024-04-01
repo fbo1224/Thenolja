@@ -27,7 +27,7 @@ public class MyPageHeart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
 	
 	
 	

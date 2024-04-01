@@ -19,8 +19,6 @@ public class MemberDao {
 	public MemberDao() {
 		String sqlFile = MemberDao.class.getResource("/sql/member/member-mapper.xml").getPath();
 		
-		
-		
 		try {
 			prop.loadFromXML(new FileInputStream(sqlFile));
 		} catch (IOException e) {
