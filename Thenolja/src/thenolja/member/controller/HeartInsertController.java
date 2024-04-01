@@ -27,6 +27,13 @@ public class HeartInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		String hotelNo = request.getParameter("hotelNo");
+		String memNo = request.getParameter("memNo");
+		
+		System.out.println(hotelNo);
+		System.out.println(memNo);
 	}
 
 	/**
