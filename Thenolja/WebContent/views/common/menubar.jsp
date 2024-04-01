@@ -406,10 +406,6 @@ div {
 					<button type="submit" class="btn btn-primary" data-toggle="modal">조회</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 				</div>
-<<<<<<< HEAD
-
-=======
->>>>>>> ad53a15293a4bf85e4c06f85c50d7beb61ab02e9
 			</form>
 
 	
