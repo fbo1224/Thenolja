@@ -21,7 +21,7 @@
 		 		'12/12/12',
 		 		'10/10/10',
 		 		2,
-		 		1,
+		 		?,
 		 		?,
 		 		'계좌이체',
 		 		'330000'
@@ -136,13 +136,18 @@
  	</entry>
 	<entry key="selectList">
 		SELECT
+				TB_HOTEL.HOTEL_NO,
+				HOTEL_NAME,
+				ROOM_NAME,
+				TB_ROOM.CHECKIN_TIME,
+				TB_ROOM.CHECKOUT_TIME,
 		        RESER_NO,
 		        RESER_DATE,
 		        RESER_NAME,
 		        RESER_PHONE,
 		        BICYCLE,
-		        TB_ROOM.CHECKIN_TIME,
-		        TB_ROOM.CHECKOUT_TIME,
+		        TB_RESERVATION.CHECKIN_TIME,
+		        TB_RESERVATION.CHECKOUT_TIME,
 		        MAX_PEOPLE,
 		        TB_ROOM.ROOM_NO,
 		        RE_MEM_NO,
@@ -153,7 +158,7 @@
 		  JOIN
 		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
 		  JOIN
-		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
+		        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
@@ -223,6 +228,8 @@
 		        TB_ROOM
  		 WHERE
 	        	HOTEL_NO = ? 
+	       AND
+	       		ROOM_NUM = ? 	
 	   ORDER BY ROOM_NO DESC
 	</entry>
 

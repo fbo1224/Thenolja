@@ -45,7 +45,8 @@ public class ReserDao {
 		//	pstmt.setString(4, reser.getCheckIn());
 		//	pstmt.setString(5, reser.getCheckOut());
 	//		pstmt.setInt(6, reser.getPeople());
-			pstmt.setInt(4, reser.getMemNo());
+			pstmt.setInt(4, reser.getRoomNo());
+			pstmt.setInt(5, reser.getMemNo());
 		//	pstmt.setInt(8, reser.getPaymentPrice());
 			// pstmt.setString(7, reser.getPayment());
 			result = pstmt.executeUpdate();
@@ -214,6 +215,11 @@ public class ReserDao {
 			while(rset.next()) {
 				
 				Reservation reser = new Reservation();
+				reser.setHotelNo(rset.getInt("HOTEL_NO"));
+				reser.setHotelName(rset.getString("HOTEL_NAME"));
+				reser.setRoomName(rset.getString("ROOM_NAME"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
 				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
@@ -334,7 +340,7 @@ public class ReserDao {
 		
 	}
 
-	public Room selectRoomNo(Connection conn, int hotelNo) {
+	public Room selectRoomNo(Connection conn, int hotelNo, int roomNum) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		Room room = new Room();
@@ -343,6 +349,7 @@ public class ReserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, hotelNo);
+			pstmt.setInt(2, roomNum);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				room = new Room();

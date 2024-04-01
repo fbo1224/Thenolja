@@ -36,17 +36,10 @@ public class MyReserListController extends HttpServlet {
 		
 		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
 		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
-		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
 		if(reserList != null) {
-			Reservation reser = new ReserService().selectReservation();
-			Hotel hotel = new ReserService().selectHotel();
-			Room room = new ReserService().selectRoom();
 			
 			request.setAttribute("reserList", reserList);
-			request.setAttribute("reser", reser);
-			request.setAttribute("hotel", hotel);
-			request.setAttribute("room", room);
 			
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 			

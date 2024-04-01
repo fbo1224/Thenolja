@@ -196,6 +196,7 @@
 
                 <div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNum() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
@@ -217,11 +218,11 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">예약금액 : <%= reser.getPaymentPrice() %></td>
+                            <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
                             <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%= reser.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+                            <td>결제금액 : <%= room.getRoomPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
                     </table>
                 </div>
 

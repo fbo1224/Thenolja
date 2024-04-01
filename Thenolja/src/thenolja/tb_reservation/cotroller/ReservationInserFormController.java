@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
@@ -41,16 +40,17 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		ArrayList<Coupon> list = new ReserService().selectCoupon();
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		
+		int roomNum = Integer.parseInt(request.getParameter("roomNum"));		
 		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
+		
 		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
-		Room room = new ReserService().selectRoomNo(hotelNo);
+		Room room = new ReserService().selectRoomNo(hotelNo, roomNum);
 		
 		if(hotel != null && room != null) {
 		request.setAttribute("reser", reser);
-		request.setAttribute("hotel", hotel);
+		request.setAttribute("hotel", hotel);      
 		request.setAttribute("room", room);
 		//System.out.println(list);
 		

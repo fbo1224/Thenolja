@@ -18,7 +18,18 @@ public class Reservation {
 	private String phone;
 	private String name;
 	private int memNo;
-	
+	private String hotelName;
+	private String roomName;
+	private int roomPrice;
+	private String checkInTime;
+	private String checkOutTime;
+	private int hotelNo;
+	private int roomNum;
+
+
+
+
+
 	public Reservation() {
 		super();
 	}
@@ -40,6 +51,19 @@ public class Reservation {
 		this.paymentPrice = paymentPrice;
 		this.phone = phone;
 		this.name = name;
+	}
+	
+	public int getRoomNum() {
+		return roomNum;
+	}
+	public void setRoomNum(int roomNum) {
+		this.roomNum = roomNum;
+	}
+	public int getHotelNo() {
+		return hotelNo;
+	}
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
 	}
 	public int getReserNo() {
 		return reserNo;
@@ -125,6 +149,54 @@ public class Reservation {
 	
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	
+	
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+	
+	
+	public String getRoomName() {
+		return roomName;
+	}
+	
+	
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+	
+	
+	public int getRoomPrice() {
+		return roomPrice;
+	}
+	
+	
+	public void setRoomPrice(int roomPrice) {
+		this.roomPrice = roomPrice;
+	}
+	
+	
+	public String getCheckInTime() {
+		return checkInTime;
+	}
+	
+	
+	public void setCheckInTime(String checkInTime) {
+		this.checkInTime = checkInTime;
+	}
+	
+	
+	public String getCheckOutTime() {
+		return checkOutTime;
+	}
+	
+	
+	public void setCheckOutTime(String checkOutTime) {
+		this.checkOutTime = checkOutTime;
 	}
 	@Override
 	public int hashCode() {
