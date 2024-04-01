@@ -45,7 +45,7 @@ public class EventDetailController extends HttpServlet {
 		
 		if(result != null) {
 			request.setAttribute("event", result);
-			request.getRequestDispatcher("view/notice/eventDetail.jsp").forward(request, response); //포워딩
+			request.getRequestDispatcher("views/event/eventDetail.jsp").forward(request, response); //포워딩
 			
 		}else { //실패 => 에러페이지 보내기
 			
