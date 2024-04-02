@@ -105,46 +105,36 @@
 <body>
 	<%@ include file="../common/menubar.jsp"%>
 
-		<script>
-			alert("로그인 페이지로 이동합니다.")
-			location.href = '<%=contextPath%>/loginPage';
-		</script>
+	<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
+	<input type="hidden" name="hotelNo" value="<%= %>">
+
 	<div id="output">
         <div id="content_title">
             <div id="left_img">
                 <a href="<%=contextPath %>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
-            <div id="left_title"><h3>내 예약 내역</h3></div>
+            <div id="left_title"><h3>찜목록</h3></div>
 		</div>
     
 		<table>
 			<tr>
-				<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
+				<th style="font-size:40px;" colspan="5">찜한 내역이 존재하지 않습니다.</th>
 			</tr>
 		</table>
+		
 		<% for(Reservation r : reserList) { %>
 		<div id="content">
 	        <div id="reser_info">
 	            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
-				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
-	            <div id="reser_detail">
-	                <h3><%=r.getHotelName() %></h3>
-	                <p><%=r.getRoomName() %></p>
-	                <p><%=r.getPeople() %>인</p>
-	                <p><%=r.getRoomPrice() %>원</p>
-	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
-	            </div>
-
-            <div id="review_in">
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
-            </div>
-        </div>
-	</div>
-	<% } %>
+		            <div id="reser_detail">
+		                <h3><%=r.getHotelName() %></h3>
+		                <p><%=r.getRoomName() %></p>
+		            </div>
+	        </div>
+		</div>
+		<% } %>
 <div id="homeBtn">
 	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
-	
 </div>
 </div>
 

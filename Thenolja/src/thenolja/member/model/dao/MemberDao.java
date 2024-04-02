@@ -451,7 +451,7 @@ public class MemberDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		System.out.println("selectHeart DAO");
+		// System.out.println("selectHeart DAO");
 		return count;
 	}
 	

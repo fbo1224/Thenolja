@@ -56,6 +56,20 @@
 		       DEFAULT, <!-- 탈퇴여부 -->
 		       SYSDATE <!-- 가입일 -->
 		       )
+		  INTO
+		       TB_MEM_GRADE
+		VALUES
+		       (
+		       SEQ_MEM_GRADE.NEXTVAL,
+		       DEFAULT
+		       )
+		  INTO
+		       TB_MY_GRADE
+		VALUES
+		       (
+		       SEQ_MNO.CURRVAL,
+		       SEQ_MEM_GRADE.CURRVAL
+		       )
 		SELECT
 		       *
 		  FROM
