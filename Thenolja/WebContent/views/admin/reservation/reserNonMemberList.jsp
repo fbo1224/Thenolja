@@ -335,7 +335,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-            <table>
+            <table style="font-size: 13px;">
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img id="hotelPath" src="" alt="" width="120px"></td>
                     <td width="200"><span id="hotelName"></span></td>

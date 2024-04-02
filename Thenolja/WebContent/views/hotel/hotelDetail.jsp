@@ -401,8 +401,6 @@ svg{
 		<%} %>
 	</div>
 	
-	<br><br><br><br>
-	
 	<style>
 		body{
 		    background-color: #f4f7f6;
@@ -688,52 +686,9 @@ svg{
 		    </div>
 		</div>
 		<div class="paging-area" align="center">
-		
 		</div>
-        	
-			<%--
-        	<%for(int i = startPage; i <= endPage; i++){ %>
-        		<% if(currentPage != i) { %>
-        			<button class="btn btn btn-outline-info"
-        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>&loginStatus=A'" ><%= i %></button>
-        		<%} else { %>
-        			<button
-        			class="btn btn btn-outline-info"
-        			disabled ><%= i %></button>
-        		<%} %>
-        	<%} %>
-        	
-        	<%if(currentPage != maxPage){ %>
-        		<button class="btn btn btn-outline-info"
-        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>&loginStatus=A' " >다음</button>
-        	<%} %>
-        
-        	<%if(currentPage > 1){ %>
-        		<button class="btn btn btn-outline-info"
-				onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
-			<%} %>
-			
-        	<%for(int i = startPage; i <= endPage; i++){ %>
-        		<% if(currentPage != i) { %>
-        			<button class="btn btn btn-outline-info"
-        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
-        		<%} else { %>
-        			<button
-        			class="btn btn btn-outline-info"
-        			disabled ><%= i %></button>
-        		<%} %>
-        	<%} %>
-        	
-        	<%if(currentPage != maxPage){ %>
-        		<button class="btn btn btn-outline-info"
-        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
-        	<%} %>
-	     </div>
-	</div>
-	 --%>
+		
 	<script>
-	let currentPage
-	
 		$(function(){
 			$.ajax({
 				url: "reviewList.jqAjax",
@@ -743,7 +698,7 @@ svg{
 				},
 				type: 'get',
 				success: function(result){
-					console.log(result);
+					//console.log(result);
 					for(let i = 0; i < result.reviewList.length; i++){
 						$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
 											   +'<div class="message-data">'
@@ -759,7 +714,7 @@ svg{
 					
 					if(result.pi.currentPage > 1){
 						$('.paging-area').append(
-						'<button class="btn btn btn-outline-info" onclick="location.href=" >'
+						'<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage=result.pi.currentPage - 1">'
 							+이전
 						+'</button>'		
 						)
@@ -767,16 +722,24 @@ svg{
 					}
 				   	for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
 	        			if(result.pi.currentPage != i) {
-	        				$('.paging-area').append('<button class="btn btn btn-outline-info">'+i+'</button>')
+	        				$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage= + i + ">'
+	        						+i
+	        					+'</button>')
 	        			}
 	        			else {
-	        				$('.paging-area').append('<button class="btn btn btn-outline-info"disabled >'+i+'</button>')
-	        				
+	        				$('.paging-area').append('<button class="btn btn btn-outline-info"disabled >'
+	        						+i
+	        						+'</button>')
 	        			}
 	        		}
-	        			
-					
-	        			
+				   	
+	        		if(result.pi.currentPage != result.pi.maxPage){
+	        			$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage=result.pi.currentPage + 1">'
+	        			+'다음'
+	        			+'</button>');
+	        		}
+	        		
+	        		
 				},
 				error: function(result){
 					console.log(result);	

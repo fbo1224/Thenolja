@@ -260,7 +260,7 @@
 	                    <br>
 	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
 	                    
-	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
+	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon" onclick="MemCoupon(<%=loginUser.getMemNo() %>)">쿠폰 적용</button>
 	           
 	                </div>
 	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
@@ -347,5 +347,19 @@
 		</div>
 	</div>
 <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
