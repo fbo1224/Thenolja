@@ -432,6 +432,7 @@ public class MemberDao {
 	public int selectHeart(Connection conn, int hotelNo, int memNo) {
 		int count = 0;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String sql = prop.getProperty("selectHeart");
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -439,7 +440,11 @@ public class MemberDao {
 			pstmt.setInt(1, hotelNo);
 			pstmt.setInt(2, memNo);
 			
-			count = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

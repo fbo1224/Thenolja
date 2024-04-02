@@ -38,7 +38,7 @@ public class HeartSelectController extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
-		response.getWriter().print(selectHeart > 0 ? 1 : 0);
+		response.getWriter().print(selectHeart);
 		
 		System.out.println("hotelNo넘긴값 :" + hotelNo);
 		System.out.println("memNo넘긴값 :" + memNo);
