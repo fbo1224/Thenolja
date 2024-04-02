@@ -112,7 +112,7 @@
 		    <div class="swiper-wrapper recommands">
 		    </div>
 	  	</div>
-		
+		<%@ include file="views/common/footer.jsp" %>
 	</div>
 	
 	<script>
