@@ -243,4 +243,20 @@
 		       SA_MEM_NO = ?
 	</entry>
 	
+	<entry key="selectHeartList">
+		SELECT
+		       MEM_NO,
+		       ROOM_NAME,
+		       HOTEL_NAME,
+		       HOTEL_LOCATION,
+		       HOTEL_ADDRESS,
+		       HOTEL_PATH
+		  FROM
+		       TB_MEMBER
+		  JOIN
+		       
+	
+	
+	</entry>
+	
 </properties>

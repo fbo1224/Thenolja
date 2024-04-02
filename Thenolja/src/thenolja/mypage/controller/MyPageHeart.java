@@ -1,11 +1,16 @@
 package thenolja.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import thenolja.mypage.model.vo.MyPageHeartList;
+import thenolja.mypage.service.MyPageService;
 
 /**
  * Servlet implementation class MyPageHeart
@@ -29,6 +34,7 @@ public class MyPageHeart extends HttpServlet {
 
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
+		ArrayList<MyPageHeartList> list = new MyPageService().selectHeartList(memNo);
 		
 		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
 	
