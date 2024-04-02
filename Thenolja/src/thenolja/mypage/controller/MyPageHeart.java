@@ -27,9 +27,10 @@ public class MyPageHeart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		
 		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
-	
-	
 	
 	
 	

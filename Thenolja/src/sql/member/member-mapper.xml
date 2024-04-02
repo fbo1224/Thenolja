@@ -56,6 +56,14 @@
 		       DEFAULT, <!-- 탈퇴여부 -->
 		       SYSDATE <!-- 가입일 -->
 		       )
+
+		  INTO
+		       TB_MY_GRADE
+		VALUES
+		       (
+		       SEQ_MNO.CURRVAL,
+		       1
+		       )
 		SELECT
 		       *
 		  FROM
