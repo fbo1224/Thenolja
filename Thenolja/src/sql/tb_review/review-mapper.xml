@@ -75,7 +75,7 @@
 	
 	</entry>
 	
-	<entry key="selectReview">
+	<entry key="selectReviewList">
         SELECT
         		NICKNAME,
 		        RV_RESER_NO,
@@ -102,7 +102,7 @@
         JOIN
                 TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
 		 WHERE
-		 		RV_RESER_NO = ? 
+		 		MEM_NO = ? 
 		   AND
 		   		REVIEW_YN = 'Y'      
 	</entry>

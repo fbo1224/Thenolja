@@ -38,18 +38,13 @@ public class ReservationDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//		request.setCharacterEncoding("UTF-8");
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		Reservation reser = new ReserService().selectReserNo(reserNo);
 		System.out.println(reserNo);
-	//	Hotel hotel = new ReserService().selectReserNo(reserNo);
-	//	int memNo = Integer.parseInt(request.getParameter("memNo"));
-	//	Member member = new MemberService().selectMember (memNo);
-		// int memNo = Integer.parseInt(request.getParameter("memNo"));
-		// Member member = new NonmemService().selectNonMemNo(memNo);
 			
 		if(reser != null) {
+			System.out.println(reser);
 			HttpSession session = request.getSession();
 			session.setAttribute("reser", reser);
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");

@@ -44,8 +44,8 @@
 	</entry>
 	
 	<entry key="selectReservation">
-		SELECT
-		        RESER_NO,
+        SELECT
+		        SEQ_RESERVATION.CURRVAL,
 		        RESER_DATE,
 		        RESER_NAME,
 		        RESER_PHONE,
@@ -66,8 +66,6 @@
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
-		 		RESER_NO = ?
-		   AND
 		   		CANCEL_YN = 'N'	
 	</entry>
 	<entry key="deleteReser">
@@ -128,12 +126,13 @@
 		  JOIN
 		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
 		  JOIN
-		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
+		        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
 		  JOIN
 		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
 		 		CANCEL_YN = 'N'	
-	  ORDER BY RESER_NO DESC
+		   AND
+		   		RESER_NO = ?	
  	</entry>
 	<entry key="selectList">
 		SELECT
