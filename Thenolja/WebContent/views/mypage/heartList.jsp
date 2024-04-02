@@ -16,7 +16,7 @@
 <style>
 
     div{
-    	border: 1px solid red;
+    	/*border: 1px solid red;*/
         box-sizing : border-box;
     }
     #output{
@@ -25,23 +25,28 @@
         margin: auto;
     }
     #content{
-        width: 1200px;
-        height: 300px;
+        width: 600px;
+        height: 200px;
         margin-top: 20px;
+        margin: auto;
     }
     #content_title{
-        width: 100%;
         height: 100%;
         margin-top : 20px;
     }
     #left_title{
-        margin-left: 60px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        color: #5BA199;
     }
     #reser_info{
-        width: 1000px;
-        height: 80%;
+        width: 600px;
+        height: 200px;
         margin: auto;
         margin-top: 30px;
+        border: outset;
+        border-radius: 10px;
     }
     #reser_hotel_img{
         width: 25%;
@@ -49,32 +54,42 @@
     }
     #reser_hotel_img > img{
         border-radius: 10px;
+        width: 200px;
+        height: 195px;
+    }
+
+    #reser_detail{
+        margin-left: 250px;
     }
     #reser_detail > p{
         font-size: 20px;
     }
-    #reser_detail > h3{
+    #reser_detail > span{
         font-weight: bold;
-    }
-    #reser_detail{
-        width: 60%;
-        height: 100%;
-        float: left;
+        font-size: 40px;
     }
     #homeBtn {
     	text-align:center;
+        margin: auto;
     }
     #goHome{
     	width : 300px;
     	height: 50px;
     	border-radius : 10px;
     	background-color: #5BA199;
-    	border : 0;
-    	margin-bottom: 100px;
+    	border: none;
+    	margin-top:100px;
     	font-size: 22px;
     }
     #goHome:hover{
-    	font-size:23px;
+    	color:black;
+    }
+
+    #heart > img{
+        width: 25px;
+        height: 25px;
+        float: right;
+        margin-top: 10px;
     }
 
     /*********************/
@@ -83,11 +98,10 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
-	<input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
 
 	<div id="output">
         <div id="content_title">
-            <div id="left_title"><h3>찜목록</h3></div>
+            <div id="left_title"><span>내 찜목록</span></div>
 		</div>
     	<% if(heartList.isEmpty()) { %>
 			<table>
@@ -100,11 +114,17 @@
 			<% for(MyPageHeartList h : heartList) { %>
 			<div id="content">
 			        <div id="reser_info">
-			            <div id="reser_hotel_img"><img src="#" alt="호텔이미지" width="220px" height="220px"></div>
-				            <div id="reser_detail">
-				                <h3><%= h.getHotelName() %></h3>
-				                <p>객실이름</p>
-				            </div>
+			            <div id="reser_hotel_img">
+                            <img src="<%= h.getHotelPath() %>" alt="호텔이미지" width="220px" height="220px">
+                        </div>
+                        <div id="reser_detail">
+                            <h3><%= h.getHotelName() %></h3><br>
+                            <p><%= h.getRoomName() %></p>
+                            <p><%= h.getHotelAddress() %></p>
+                        </div>
+                        <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
+				            
+				            
 			        </div>
 				</div>
 			<% } %>
