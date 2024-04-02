@@ -47,7 +47,6 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 		Room room = new ReserService().selectRoom(hotelNo, roomNo);
-		Coupon coupon = new ReserService().selectCoupon();
 		
 		if(hotel != null && room != null) {
 		request.setAttribute("reser", reser);

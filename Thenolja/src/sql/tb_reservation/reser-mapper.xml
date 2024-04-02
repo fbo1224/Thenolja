@@ -252,5 +252,7 @@
 		        TB_COUPON ON(TB_MY_COUPON.COUPON_NO = TB_COUPON.COUPON_NO)
 		  JOIN
 		        TB_MEMBER ON(MEM_NO = CO_MEM_NO)
+		 WHERE
+		 		CO_MEM_NO = ?       
 	</entry>
 </properties>

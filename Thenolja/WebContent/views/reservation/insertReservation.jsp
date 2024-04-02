@@ -4,7 +4,6 @@
 <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
-	Coupon coupon = (Coupon)request.getAttribute("coupon");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
 %>   
@@ -221,17 +220,16 @@
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;">결제금액 : <div name="paymentPrice"><%=room.getRoomPrice()-(room.getRoomPrice()/coupon.getCouponPercent()) %></div> 원</td>
+							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
-						
+						<input type="hidden" name="paymentPrice" >
 		                <br>
 						<h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
 						<br>
@@ -292,6 +290,38 @@
     </div>
     <!-- /0. 전체 감싸는 div 끝 -->
     
+    <script>
+    	$.ajax({
+    		url: "cupon.jqAjax",
+    		type: 'get',
+    		data:{
+    			memberNo: <%= loginUser.getMemNo() %>
+    		},
+    		success: function(result){
+    			console.log(result);
+    			if(result.length == 0){
+    				$('#couponTable').append('<tr>'
+	                   +'<th colspan="5">쿠폰이 존재하지 않습니다.</th>'
+		                +'</tr>');
+    			} else{
+    				for(let i = 0; i < result.length; i++){
+    					$('#couponTable').append('<tr class="list" onclick="clickList()">'
+    			                + '<td>' + result[i].couponNo +'</td>'
+    			                + '<td>' + result[i].couponContent + '</td>'
+    			                + '<td>' + result[i].couponDate + '</td>'
+    			                + '<td>' + result[i].couponCode + '</td>'
+    			                + '<td>' + result[i].couponPercent + '</td>'
+    			                +'</tr>');
+    				}
+    			}
+    		},
+    		error: function(result){
+    			console.log(result);
+    		}
+    		
+    	});
+    </script>
+    
     
     <div class="container">
     	<!-- The Modal -->
@@ -304,23 +334,8 @@
 	        		</div>
 	        
 			        <div class="modal-body">
-			        <table class="table table-hover">
+			        <table class="table table-hover" id="couponTable">
 		        
-					<% if(list.isEmpty()) { %>
-		                <tr>
-		                   <th colspan="5">쿠폰이 존재하지 않습니다.</th>
-		                </tr>
-		             <% } else { %>
-		               
-			             <% for(Coupon c : list) { %>
-			             	<tr class="list">
-			                <td><%= c.getCouponNo() %></td>
-			                <td><%= c.getCouponContent() %></td>
-			                <td><%= c.getCouponDate() %></td>
-			                <td><%= c.getCouponCode() %></td>
-			                </tr>
-		                <% } %>
-	                <% } %>
 	                </table>
 					</div>
 				

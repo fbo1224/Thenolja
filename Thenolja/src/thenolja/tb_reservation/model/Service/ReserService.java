@@ -154,14 +154,14 @@ public class ReserService {
 		return reser;
 	}
 
-	public Coupon selectCoupon() {
+	public ArrayList<Coupon> selectCoupon(int memberNo) {
 		Connection conn = getConnection();
 		
-		Coupon coupon =  new ReserDao().selectCoupon(conn);
+		ArrayList<Coupon> couponList =  new ReserDao().selectCoupon(conn, memberNo);
 		
 		close(conn);
 		
-		return coupon;
+		return couponList;
 	}
 
 

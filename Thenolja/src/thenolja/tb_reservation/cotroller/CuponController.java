@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_hotel.model.vo.Hotel;
-import thenolja.tb_hotel.model.vo.Room;
+import com.google.gson.Gson;
+
+import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_reservation.model.Service.ReserService;
-import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class MyReserListController
+ * Servlet implementation class CuponController
  */
-@WebServlet("/myReser.list")
-public class MyReserListController extends HttpServlet {
+@WebServlet("/cupon.jqAjax")
+public class CuponController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyReserListController() {
+    public CuponController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +33,16 @@ public class MyReserListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		System.out.println(memberNo);
 		
-		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
-		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
+		ArrayList<Coupon> coupon = new ReserService().selectCoupon(memberNo);
 		
-		if(reserList != null) {
-			
-			request.setAttribute("reserList", reserList);
-			
-			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
-			
-		} else {
-			request.setAttribute("errorMsg", "조회된 내역이 없습니다");
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
-	
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
 		
-	
+		gson.toJson(coupon, response.getWriter());
+		
 	}
 
 	/**
