@@ -123,8 +123,6 @@
                             <p><%= h.getHotelAddress() %></p>
                         </div>
                         <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
-				            
-				            
 			        </div>
 				</div>
 			<% } %>
