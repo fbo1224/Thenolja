@@ -38,7 +38,7 @@ public class EventDetailController extends HttpServlet {
 		int noticeNo = Integer.parseInt(request.getParameter("EventNo"));
 		String flag  = request.getParameter("flag"); // 수정, 삭제 / 상세 페이지 구분을 위한 값 추가
 		
-		System.out.println("[EventDetailController noticeNo] " + noticeNo);  
+		System.out.println("[EventDetailController evetNo] " + noticeNo);  
 
 		Notice result = new Notice();
 		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);
@@ -46,7 +46,7 @@ public class EventDetailController extends HttpServlet {
 		
 		if(result != null) {
 			request.setAttribute("event", result);
-			request.getRequestDispatcher("views/notice/eventDetail.jsp").forward(request, response); //포워딩
+			request.getRequestDispatcher("views/event/eventDetail.jsp").forward(request, response); //포워딩
 			
 		}else { //실패 => 에러페이지 보내기
 			

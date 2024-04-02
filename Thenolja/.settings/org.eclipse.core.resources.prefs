@@ -4,6 +4,7 @@ encoding//WebContent/views/notice/noticeEnrollForm.jsp=UTF-8
 encoding//src/thenolja/event/controller/EventController.java=UTF-8
 encoding//src/thenolja/event/controller/EventDetailController.java=UTF-8
 encoding//src/thenolja/event/controller/EventInsertController.java=UTF-8
+encoding//src/thenolja/event/controller/EventUpdateController.java=UTF-8
 encoding//src/thenolja/event/dao/EventDao.java=UTF-8
 encoding//src/thenolja/event/model/vo/Event.java=UTF-8
 encoding//src/thenolja/event/service/EventServiceImpl.java=UTF-8
