@@ -14,6 +14,7 @@ import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.HotelReview;
 import thenolja.tb_hotel.model.vo.SearchOptions;
 
 public class HotelService {
@@ -93,7 +94,7 @@ public class HotelService {
 		    // 서비스 리스트, 선택한 호텔 리뷰 가져오기, 리뷰 갯수 가져오기
 			dh.setSerList(selectHotelInfos.hotelServiceList(conn, hotelNo));
 			dh.setRoomList(selectHotelInfos.hotelRoomList(conn, hotelNo));
-			dh.setReviewList(selectHotelInfos.hotelReviews(conn, hotelNo));
+			//dh.setReviewList(selectHotelInfos.hotelReviews(conn, hotelNo));
 			dh.setCountReviews(selectHotelInfos.countReviews(conn, hotelNo));
 		}
 		
@@ -211,6 +212,15 @@ public class HotelService {
 		return result;
 	}
 	
+	public ArrayList<HotelReview> reviewList(PageInfo pi, int hotelNo){
+		Connection conn = getConnection();
+		
+		ArrayList<HotelReview> reviewList = new HotelDao().hotelReviews(conn, pi,hotelNo);
+		
+		close(conn);
+		
+		return reviewList;
+	}
 	
 	
 	

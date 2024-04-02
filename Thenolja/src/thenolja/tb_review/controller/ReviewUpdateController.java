@@ -40,14 +40,10 @@ public class ReviewUpdateController extends HttpServlet {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		
-		Reservation reser = new ReserService().selectReserNo(reserNo);
 		Review review = new ReviewService().selectReview(reserNo);
-		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 		Room room = new ReserService().selectRoom(hotelNo, roomNo);
 		
-		if(reser != null && hotel != null && room != null & review != null) {
-			request.setAttribute("reser", reser);
-			request.setAttribute("hotel", hotel);
+		if(room != null && review != null) {
 			request.setAttribute("room", room);
 			request.setAttribute("review", review);
 

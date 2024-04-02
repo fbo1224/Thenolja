@@ -131,7 +131,7 @@ public class ReviewDao {
 
 	public Review selectReview(Connection conn, int reserNo) {
 		
-		Review review = new Review();
+		Review r = new Review();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectReview");
@@ -144,12 +144,21 @@ public class ReviewDao {
 	        rset = pstmt.executeQuery();		
 	        while(rset.next()) {
 	        	
-	        	Review r = new Review();
+	        	r = new Review();
+	        	r.setNickName(rset.getString("NICKNAME"));
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
 	        	r.setContent(rset.getString("REVIEW_CONTENT"));
 	        	r.setScore(rset.getString("REVIEW_SCORE"));
 	        	r.setCreateDate(rset.getDate("CREATE_DATE"));
+	    		r.setHotelNo(rset.getInt("HOTEL_NO"));
+				r.setHotelName(rset.getString("HOTEL_NAME"));
+				r.setRoomName(rset.getString("ROOM_NAME"));
+				r.setRoomNo(rset.getInt("ROOM_NO"));
+				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
+				r.setMemNo(rset.getInt("MEM_NO"));
+				r.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				r.setHotelPath(rset.getString("HOTEL_PATH"));
 	        	
 	        }
 		} catch (SQLException e) {
@@ -158,7 +167,7 @@ public class ReviewDao {
 			close(rset);
 			close(pstmt);
 		}
-		return review;
+		return r;
 	
 	}
 

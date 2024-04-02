@@ -310,15 +310,21 @@ public class HotelDao {
 	}
 	
 	// 해당 호텔의 리뷰 가져오기
-	public ArrayList<HotelReview> hotelReviews(Connection conn, int hotelNo){
+	public ArrayList<HotelReview> hotelReviews(Connection conn, PageInfo pi, int hotelNo){
 		ArrayList<HotelReview> hrList = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("hotelReviews");
+
+		int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setInt(1, hotelNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
