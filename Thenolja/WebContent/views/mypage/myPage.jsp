@@ -141,7 +141,11 @@
             <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
                 <div id="gradeIcon">
+                
+                <% System.out.println("<%=gradeName%>"); %>
                     <span id="grade" style="color: goldenrod;"><%= gradeName %></span>
+				                   
+                    
                     <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
             </div>
