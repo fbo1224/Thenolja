@@ -378,6 +378,14 @@ div {
 					</button></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
 		         	<li><a href="#">고객센터</a></li>
+		         	<ul>
+	                        <li><a href="<%=contextPath %>/noticeList">공지사항</a></li>
+	                        <li><a href="<%=contextPath %>/eventList?currentPage=1">이벤트</a></li>
+	                        <li><a href="<%=contextPath %>/couponList">쿠폰</a></li>
+	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
+	                </ul>
+	    
+		         	
 	         	<% } %>
 		    </ul>
 		    </div>
