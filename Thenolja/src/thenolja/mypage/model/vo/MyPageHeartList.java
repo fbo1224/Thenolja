@@ -1,8 +1,7 @@
 package thenolja.mypage.model.vo;
 
 public class MyPageHeartList {
-	private int memNo;
-	private String roomName;
+	
 	private String hotelName;
 	private String hotelLocation;
 	private String hotelAddress;
@@ -10,27 +9,12 @@ public class MyPageHeartList {
 	public MyPageHeartList() {
 		super();
 	}
-	public MyPageHeartList(int memNo, String roomName, String hotelName, String hotelLocation, String hotelAddress,
-			String hotelPath) {
+	public MyPageHeartList(String hotelName, String hotelLocation, String hotelAddress, String hotelPath) {
 		super();
-		this.memNo = memNo;
-		this.roomName = roomName;
 		this.hotelName = hotelName;
 		this.hotelLocation = hotelLocation;
 		this.hotelAddress = hotelAddress;
 		this.hotelPath = hotelPath;
-	}
-	public int getMemNo() {
-		return memNo;
-	}
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
-	}
-	public String getRoomName() {
-		return roomName;
-	}
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
 	}
 	public String getHotelName() {
 		return hotelName;
@@ -58,11 +42,9 @@ public class MyPageHeartList {
 	}
 	@Override
 	public String toString() {
-		return "MyPageHeartList [memNo=" + memNo + ", roomName=" + roomName + ", hotelName=" + hotelName
-				+ ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelPath=" + hotelPath
-				+ "]";
+		return "MyPageHeartList [hotelName=" + hotelName + ", hotelLocation=" + hotelLocation + ", hotelAddress="
+				+ hotelAddress + ", hotelPath=" + hotelPath + "]";
 	}
-	
 	
 	
 }

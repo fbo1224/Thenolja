@@ -719,7 +719,6 @@ svg{
 										   +'</div>'	 
 										  +'</li>');
 				}
-				
 				if(result.pi.currentPage > 1){
 					$('.paging-area').append(
 					'<button class="btn btn btn-outline-info" onclick="reviewAjax(' + (result.pi.currentPage-1) +');">'
@@ -788,12 +787,11 @@ svg{
 			async: false
 		});
 
-		
-	
 	}
-		$(function(){
-			reviewAjax(1);
-		});
+	
+	$(function(){
+		reviewAjax(1);
+	});
 		
 	</script>
 	
