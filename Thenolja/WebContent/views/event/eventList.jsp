@@ -200,8 +200,8 @@ function clckEvent(eventNo){
 									<span class="txt">더놀자</span>									
 							</div>																						
 										<strong class="title"><%=n.getEventContent() %></strong>
-										<p class="date"><%=n.getEventDate() %> ~ <%=n.getEventDate() %></p>	
-								<% } else { %>
+										<p class="date"><%=n.getEventStrtDt() %> ~ <%=n.getEventEndDt() %></p> <!-- 이벤트 시작일~ 이벤트 종료일 -->
+								<% } else { %>				
 									<span class="flag type08 small">종료</span>
 									<span class="txt">더놀자</span>										
 								<% } %>																	

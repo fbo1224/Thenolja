@@ -3,6 +3,7 @@ package thenolja.admin.refund.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +15,16 @@ import thenolja.admin.refund.model.vo.AdminRefund;
 import thenolja.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class RefundNonMemberController
+ * Servlet implementation class OldRefundMember
  */
-@WebServlet("/refundNonMem")
-public class RefundNonMemberController extends HttpServlet {
+@WebServlet("/oldestRefundMemList.do")
+public class OldRefundMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundNonMemberController() {
+    public OldRefundMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,12 +43,11 @@ public class RefundNonMemberController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new RefundService().selectRefundNonMemberCount();
+		listCount  = new RefundService().selectRefundMemCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		pageLimit = 5;
-		
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
@@ -62,15 +62,21 @@ public class RefundNonMemberController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
 		// System.out.println(pi);
 		
-		ArrayList<AdminRefund> list = new RefundService().selectRefundNonMemberList(pi);
+		ArrayList<AdminRefund> list = new RefundService().OldRefundMemberList(pi);
 		
-		request.setAttribute("selectRefundNonMemberList", list);
+		request.setAttribute("OldRefundMemberList", list);
 		request.setAttribute("pageInfo", pi);
 		
-		request.getRequestDispatcher("views/admin/refund/refundNonMemberList.jsp").forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("views/admin/refund/refundMemberList.jsp");
+		
+		view.forward(request, response);
+		
+		
+		
+		
+		
 	}
 
 	/**

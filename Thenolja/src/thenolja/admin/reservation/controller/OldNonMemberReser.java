@@ -1,29 +1,30 @@
-package thenolja.admin.refund.controller;
+package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.admin.refund.model.service.RefundService;
-import thenolja.admin.refund.model.vo.AdminRefund;
+import thenolja.admin.reservation.model.service.ReservatoinService;
+import thenolja.admin.reservation.model.vo.AdminReservation;
 import thenolja.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class RefundNonMemberController
+ * Servlet implementation class OldNonMemberReser
  */
-@WebServlet("/refundNonMem")
-public class RefundNonMemberController extends HttpServlet {
+@WebServlet("/oldestListNonMem.do")
+public class OldNonMemberReser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundNonMemberController() {
+    public OldNonMemberReser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +33,7 @@ public class RefundNonMemberController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -42,7 +43,7 @@ public class RefundNonMemberController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new RefundService().selectRefundNonMemberCount();
+		listCount = new ReservatoinService().selectNonMemCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -62,15 +63,16 @@ public class RefundNonMemberController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
 		// System.out.println(pi);
 		
-		ArrayList<AdminRefund> list = new RefundService().selectRefundNonMemberList(pi);
+		ArrayList<AdminReservation> list = new ReservatoinService().oldReserNonMember(pi);
 		
-		request.setAttribute("selectRefundNonMemberList", list);
+		request.setAttribute("oldReserNonMember", list);
 		request.setAttribute("pageInfo", pi);
 		
-		request.getRequestDispatcher("views/admin/refund/refundNonMemberList.jsp").forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("/views/admin/reservation/reserNonMemberList.jsp");
+		
+		view.forward(request, response);
 	}
 
 	/**
