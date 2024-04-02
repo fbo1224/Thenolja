@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/views/event/eventDetail.jsp=UTF-8
 encoding//WebContent/views/notice/noticeEnrollForm.jsp=UTF-8
 encoding//src/thenolja/event/controller/EventController.java=UTF-8
 encoding//src/thenolja/event/controller/EventDetailController.java=UTF-8
