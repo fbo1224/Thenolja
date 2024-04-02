@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.admin.review.model.vo.AdminReview, thenolja.common.model.vo.PageInfo" %>   
 <%
+
+	ArrayList<AdminReview> oldList = (ArrayList<AdminReview>)request.getAttribute("oldReviewMemberList");
 	ArrayList<AdminReview> list = (ArrayList<AdminReview>)request.getAttribute("selectReviewMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -82,8 +84,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=1'">최신순</button>
 					</div>
         
         
@@ -103,11 +105,12 @@
                         <tbody>
                         
                         
-                        <% if(list.isEmpty()) { %>
+                        <% if(list!=null &&list.isEmpty()) { %>
                         	<tr>
                         		<th colspan="4">리뷰가 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
+                        	<%if(list != null){ %>
                         	<% for(AdminReview review : list) { %>
                         		<tr>
                         			<td><%=review.getHotelName() %></td>
@@ -119,6 +122,28 @@
                         		</tr>
                         	<% } %>
                         <% } %>
+                       <%} %>
+                       
+                       <% if(oldList!=null &&oldList.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="4">리뷰가 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                       
+                        <% if(oldList != null) { %>
+                       		<%for(AdminReview review  : oldList) { %>
+                       			<tr>
+									<td><%=review.getHotelName() %></td>
+                        			<td><%=review.getMemId() %></td>
+                        			<td><%=review.getNickName() %></td>
+                        			<td><%=review.getCreateDate() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=review.getReserNo()%>)">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(<%=review.getReserNo()%>)">삭제</button></td>
+		                            
+	                       	  </tr>
+                       		<%} %>
+                       	<% } %>
+                       <% } %>  
                    
                         </tbody>
                       </table>
@@ -127,6 +152,7 @@
         
                 <div class="paging-area" align="center";>
                 
+				<% if(list!=null && list.isEmpty()) { %>
                 	<%if(currentPage > 1) {%>
                     <button class="btn btn-sm btn-outline-secondary"  onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage - 1%>'"><</button>
                     <% } %>
@@ -142,6 +168,25 @@
                 		<% if(currentPage != maxPage) { %>
                 		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage + 1%>'">></button>
                 		<% } %>
+                		
+                		<% } else { %>
+	                    <%if(currentPage > 1) { %>
+	                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=<%=currentPage - 1%>'"><</button>
+	     				<%} %>
+	                    
+	                    <% for(int i = startPage; i <= endPage; i ++) { %>
+	                    	<%if (currentPage != i)  { %>
+	                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=<%=i%>'"><%= i %></button>
+	                  		<% } else { %>
+	                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+	                    <% } %>
+	                   <%} %>
+	                  
+	                  <% if(currentPage != maxPage) { %>
+	                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.docurrentPage=<%=currentPage + 1%>'">></button>
+	                  <%} %>
+	                  
+	                  <%} %>
                 	</div>
         
 

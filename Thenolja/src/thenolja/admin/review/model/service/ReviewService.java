@@ -125,5 +125,19 @@ public class ReviewService {
 	
 	}
 	
+	/**
+	 * 리뷰 오래된 순
+	 */
+	public ArrayList<AdminReview> oldReviewMemberList(PageInfo pi){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReview> list = new ReviewDao().oldReviewMemberList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 	
 }
