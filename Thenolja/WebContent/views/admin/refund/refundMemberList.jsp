@@ -277,11 +277,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-            <table>
+            <table style="font-size: 12px;">
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" ><img id="hotelPath" src="" alt="" width="120px"></td>
-                    <td width="200">숙소 정보</td>
-                    <td>환불자 정보</td>
+                    <td width="200"><b>숙소 정보</b></td>
+                    <td><b>환불자 정보</b></td>
                 </tr>
                 <tr>
                     <td><span id="hotelName"></span></td>

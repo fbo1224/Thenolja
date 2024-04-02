@@ -300,12 +300,12 @@
 			<input type="hidden" id="reserNo22" name="reser_No" value=""/>
 		
 		
-            <table>
+            <table style="font-size: 14px;">
                 <tr>
                     <td colspan="5" rowspan="5" width="120" height="120" id="hotelPath"><img id="imgPath" src="" alt="" width="120px" height="110px"></td>
-                    <td width="120"><span id="hotelName"></span></td>
-                    <td><span id="roomName"></span></td>
-                    <td><span id="reviewScore"></span></td>
+                    <td width="160"><span id="hotelName"></span></td>
+                    <td width="200"><span id="roomName"></span></td>
+                    <td width="140"><span id="reviewScore"></span></td>
                 </tr>
                 <tr id="contentMessage">
                     <td colspan="3" width="300"><span id="reviewContent"></span></td>
@@ -315,7 +315,7 @@
 
             <div class="container">
                   <div class="form-group">
-                    <div><p>답글 작성</p></div>
+                    <div><p style="font-size: 14px;">답글 작성</p></div>
                     <textarea class="form-control" rows="5" id="comment" name="text" cols="49"></textarea>
                   </div>
                   <button type="button" class="btn btn-sm btn-outline-secondary" style="float: right;" onclick="insertComment()" id="insertBtn">등록하기</button>
@@ -342,9 +342,13 @@
 					if(result == null){
 						$('#comment').val('');
 						$('#comment').attr('readonly', false);	
+						$('#insertBtn').attr("disabled", false);
+						
 					}else {
 						$('#comment').val(result['commentContent']);
 						$('#comment').attr('readonly', true);	
+						$('#insertBtn').attr("disabled", true);
+						
 						
 					}
 				},
