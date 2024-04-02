@@ -206,12 +206,7 @@ public class MemberService {
 		
 		int count = new MemberDao().selectHeart(conn, hotelNo, memNo);
 		
-		if(count > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		System.out.println("selectHeart Servlet");
+		// System.out.println("selectHeart Servlet");
 		JDBCTemplate.close(conn);
 		
 		return count;
