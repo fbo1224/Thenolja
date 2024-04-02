@@ -226,8 +226,14 @@
 	
 	<entry key="selectHeart">
 		SELECT
-		       
-	
+		       HOTEL_NO,
+		       SA_MEM_NO
+		  FROM
+		       TB_SAVED
+		 WHERE
+		       HOTEL_NO = ?
+		   AND
+		       SA_MEM_NO = ?
 	</entry>
 	
 </properties>
