@@ -201,7 +201,9 @@
 
             </div>
         </div>
-        <div id="footer"></div>
+        <div id="footer">
+       		<%@ include file="../../common/footer.jsp" %>  
+        </div>
 
     </div>
     
