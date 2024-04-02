@@ -8,7 +8,6 @@
     <style>
 
         div{
-        	border : 1px solid red;
             box-sizing : border-box;
         }
 
@@ -27,8 +26,11 @@
         #content{
             height: 70%;
         }
-		  #header, #footer{
-            height: 70%;
+		 
+		
+		
+		#header, #footer{
+            height: 15%;
         }
 
 
@@ -173,11 +175,10 @@
             
             </div>
         </div>
-        <div id="footer">
-         	<%@ include file="footer.jsp" %> 
-        </div>
-
-    </div>
+   	 </div>
+     <div id="footer">
+       	<%@ include file="footer.jsp" %> 
+     </div>
     
     
     <script>
