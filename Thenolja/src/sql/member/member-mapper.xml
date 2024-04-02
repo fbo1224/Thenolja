@@ -252,9 +252,21 @@
 		       HOTEL_ADDRESS,
 		       HOTEL_PATH
 		  FROM
-		       TB_MEMBER
+		       TB_NONMEM
+          JOIN
+               TB_RESERVATION
+            ON
+               (MEM_NO = RE_MEM_NO)
 		  JOIN
-		       
+               TB_ROOM
+         USING
+               (ROOM_NO)
+          JOIN
+               TB_HOTEL
+         USING
+               (HOTEL_NO)
+         WHERE
+               MEM_NO = ?
 	
 	
 	</entry>
