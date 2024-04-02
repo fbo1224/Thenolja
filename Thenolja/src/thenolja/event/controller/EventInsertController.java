@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.event.model.vo.Event;
 import thenolja.event.service.EventServiceImpl;
 import thenolja.notice.model.vo.Notice;
-import thenolja.notice.service.NoticeServiceImpl;
+
 
 /**
  * Servlet implementation class EventRegController
@@ -41,15 +41,25 @@ public class EventInsertController extends HttpServlet {
 		String eventTitle = "";
 		String eventContent = "";
 		String eventYn = "";
-		String eventDate = "";
+		String eventStrtDt="";
+		String eventEndDt="";
 		String eventImg = "";
 		int    writerNo = 0;
 		
 		eventTitle   = request.getParameter("eventTitle");
 		eventContent = request.getParameter("eventContent");
 		eventYn  	= request.getParameter("eventYn");
-		eventDate  = request.getParameter("eventStrtDt"); // eventStrtDt
-		eventDate  = request.getParameter("eventEndDt"); // eventStrtDt
+		eventStrtDt = request.getParameter("eventStrtDt");
+		eventEndDt = request.getParameter("eventEndDt");
+		eventImg = request.getParameter("eventImg");
+		
+		/* eventDate = request.getParameter("eventDate"); */
+		
+		/*
+		 * eventDate = request.getParameter("eventStrtDt"); // eventStrtDt eventDate =
+		 * request.getParameter("eventEndDt"); // eventStrtDt
+		 */		
+		
 		eventImg  = request.getParameter("eventImg");
 		// 1. 로그인이 된 경우 로그인 정보에 있는 MEM_NO 를 세팅 테스트
 		// 2. 로그인이 안된 경우 writerNo를 임의값 1로 세팅해서 테스트
@@ -58,7 +68,8 @@ public class EventInsertController extends HttpServlet {
 		System.out.println("eventTitle : " + eventTitle);
 		System.out.println("eventContent : " + eventContent);
 		System.out.println("eventYn : " + eventYn );
-		System.out.println("eventDate : " + eventDate );
+		System.out.println("eventStrtDt : " + eventStrtDt );
+		System.out.println("eventEndDt : " + eventEndDt);
 		System.out.println("eventImg : " + eventImg );
 		System.out.println("writerNo : " + writerNo );
 		
@@ -66,7 +77,7 @@ public class EventInsertController extends HttpServlet {
 		boolean rslt = false;
 		
 		// 이벤트 저장 서비스 호출
-		Event event = new Event(eventTitle, eventContent, eventYn, eventDate, eventImg, writerNo);
+		Event event = new Event(eventTitle, eventContent, eventYn, eventStrtDt,eventEndDt, eventImg, writerNo);
 		svc = new EventServiceImpl().insertEvent(event);
 		
 		System.out.println("[svc] " + svc);

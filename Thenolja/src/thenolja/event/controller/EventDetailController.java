@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.notice.model.vo.Notice;
 import thenolja.notice.service.NoticeServiceImpl;
 
+
 /**
  * Servlet implementation class NoticeDetailController
  */
@@ -29,7 +30,7 @@ public class EventDetailController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 공지사항 상세화면 조회
+	 * 이벤트 상세화면 조회
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -45,7 +46,7 @@ public class EventDetailController extends HttpServlet {
 		
 		if(result != null) {
 			request.setAttribute("event", result);
-			request.getRequestDispatcher("views/event/eventDetail.jsp").forward(request, response); //포워딩
+			request.getRequestDispatcher("views/notice/eventDetail.jsp").forward(request, response); //포워딩
 			
 		}else { //실패 => 에러페이지 보내기
 			
