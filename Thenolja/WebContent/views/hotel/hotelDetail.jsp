@@ -680,6 +680,7 @@ svg{
 		                        </div>
 		                    </div>
 		                </div>
+		                <a name="reviews"></a>
 		                <div class="chat-history">
 		                    <ul class="m-b-0" id="review-ul">
 		                    </ul>
