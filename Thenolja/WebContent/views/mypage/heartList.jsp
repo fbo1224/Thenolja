@@ -26,7 +26,7 @@
     }
     #content{
         width: 600px;
-        height: 200px;
+        height: auto;
         margin-top: 20px;
         margin: auto;
     }
@@ -110,7 +110,6 @@
 				</tr>
 			</table>
 		<% } else { %>
-		
 			<% for(MyPageHeartList h : heartList) { %>
 			<div id="content">
 			        <div id="reser_info">
@@ -119,7 +118,7 @@
                         </div>
                         <div id="reser_detail">
                             <h3><%= h.getHotelName() %></h3><br>
-                            <p><%= h.getRoomName() %></p>
+                            <p><%= h.getHotelLocation() %></p>
                             <p><%= h.getHotelAddress() %></p>
                         </div>
                         <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>

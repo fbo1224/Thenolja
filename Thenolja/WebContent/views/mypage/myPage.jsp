@@ -132,7 +132,11 @@
         </div>
         <div id="content2" class="content">
             <div id="ct2_1">
+            	
+            
                 <img class="img" src="./resources/mypage/user.png" alt="프로필" style="width: 150px; height: 150px; margin-top: 40px; margin-left: 40px;">
+                
+                
             </div>
             <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
