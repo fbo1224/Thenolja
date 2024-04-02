@@ -15,7 +15,7 @@
 <title>마이페이지</title>
 
 <style>
-    div{border: 1px solid red; box-sizing: border-box;}
+    /*div{border: 1px solid red; box-sizing: border-box;}*/
 
     #wrap{
         width: 900px;
@@ -115,8 +115,7 @@
     a:hover{text-decoration: black;}
     
     #gradeInfo{
-        display: inline-block;
-        float: left;
+        display: none;
     }
 </style>
 
@@ -175,7 +174,19 @@
             </div>
 
             <script>
-                
+                $(document).ready(function(){
+                    $("#gradeIcon").hover(function(){
+                        $("#gradeInfo").css("display", "block");
+                    },function(){
+                        $("#gradeInfo").css("display", "none");
+                    })
+                });
+
+
+                const grade = document.getElementById('grade');
+                const gradeInfo = document.getElementById('gradeInfo');
+
+                gradeInfo.attr(display, 'block');
 
             </script>
 
