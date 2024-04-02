@@ -181,13 +181,6 @@
                         $("#gradeInfo").css("display", "none");
                     })
                 });
-
-
-                const grade = document.getElementById('grade');
-                const gradeInfo = document.getElementById('gradeInfo');
-
-                gradeInfo.attr(display, 'block');
-
             </script>
 
             <div id="ct2_4">
