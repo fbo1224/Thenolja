@@ -33,11 +33,11 @@ public class ReserService {
 		return result;
 	}
 
-	public ArrayList<Coupon> selectCoupon() {
+	public ArrayList<Coupon> selectCouponList() {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Coupon> list = new ReserDao().selectCoupon(conn);
+		ArrayList<Coupon> list = new ReserDao().selectCouponList(conn);
 		
 		close(conn);
 		
@@ -152,6 +152,16 @@ public class ReserService {
 		close(conn);
 		
 		return reser;
+	}
+
+	public Coupon selectCoupon() {
+		Connection conn = getConnection();
+		
+		Coupon coupon =  new ReserDao().selectCoupon(conn);
+		
+		close(conn);
+		
+		return coupon;
 	}
 
 

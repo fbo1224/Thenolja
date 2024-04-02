@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
+	Coupon coupon = (Coupon)request.getAttribute("coupon");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
 %>   
@@ -220,7 +221,7 @@
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;">결제금액 : <%=room.getRoomPrice() %>원</td>
+							<td width="400px" style="font-weight: bold;">결제금액 : <div name="paymentPrice"><%=room.getRoomPrice()-(room.getRoomPrice()/coupon.getCouponPercent()) %></div> 원</td>
 						</tr>
 	               </table>
 				</div>

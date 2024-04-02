@@ -184,7 +184,7 @@
 			<%if(loginStatus != null && loginStatus.equals("A")){ %>
 	        	<%if(currentPage > 1){ %>
 	        		<button class="btn btn btn-outline-info"
-					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>&loginStatus=A' " >이전</button>
+					onclick="location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>&loginStatus=A' " >이전</button>
 				<%} %>
 				
 	        	<%for(int i = startPage; i <= endPage; i++){ %>

@@ -41,6 +41,7 @@ public class ReservationInsertController extends HttpServlet {
 		String bicycle = request.getParameter("bicycle");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		
 
 	
@@ -55,6 +56,7 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setBicycle(bicycle);
 		reser.setMemNo(memNo);
 		reser.setRoomNo(roomNo);
+		reser.setPaymentPrice(paymentPrice);
 		// reser.setPayment(payment);d
 	//	Hotel hotel = new Hotel();
 	//	hotel.setHotelNo(hotelNo);
