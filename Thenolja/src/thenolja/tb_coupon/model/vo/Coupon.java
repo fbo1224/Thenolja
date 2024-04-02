@@ -9,18 +9,29 @@ public class Coupon {
 	private Date couponDate;
 	private String couponYN;
 	private String couponCode;
+	private int couponPercent;
 	
 	public Coupon() {
 		super();
 	}
 	
-	public Coupon(int couponNo, String couponContent, Date couponDate, String couponYN, String couponCode) {
+	public Coupon(int couponNo, String couponContent, Date couponDate, String couponYN, String couponCode,
+			int couponPercent) {
 		super();
 		this.couponNo = couponNo;
 		this.couponContent = couponContent;
 		this.couponDate = couponDate;
 		this.couponYN = couponYN;
 		this.couponCode = couponCode;
+		this.couponPercent = couponPercent;
+	}
+
+	public int getCouponPercent() {
+		return couponPercent;
+	}
+
+	public void setCouponPercent(int couponPercent) {
+		this.couponPercent = couponPercent;
 	}
 
 	public int getCouponNo() {

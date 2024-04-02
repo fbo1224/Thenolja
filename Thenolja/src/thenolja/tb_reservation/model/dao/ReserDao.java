@@ -44,6 +44,7 @@ public class ReserDao {
 			pstmt.setString(3, reser.getBicycle());
 			pstmt.setInt(4, reser.getRoomNo());
 			pstmt.setInt(5, reser.getMemNo());
+			pstmt.setInt(6, reser.getPaymentPrice());
 		//	System.out.println(reser);
 			result = pstmt.executeUpdate();
 			
@@ -55,12 +56,12 @@ public class ReserDao {
 		return result;
 	}
 
-	public ArrayList<Coupon> selectCoupon(Connection conn) {
+	public ArrayList<Coupon> selectCouponList(Connection conn) {
 		
 		ArrayList<Coupon> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectCoupon");
+		String sql = prop.getProperty("selectCouponList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -74,6 +75,7 @@ public class ReserDao {
 				c.setCouponDate(rset.getDate("COUPON_DATE"));
 				//c.setCouponYN(rset.getString("COUPON_YN"));
 				c.setCouponCode(rset.getString("COUPON_CODE"));
+				c.setCouponPercent(rset.getInt("COUPON_PERCENT"));
 				
 				list.add(c);
 				
@@ -426,6 +428,35 @@ public class ReserDao {
 			close(pstmt);
 		}
 		return reser;
+	}
+
+	public Coupon selectCoupon(Connection conn) {
+		Coupon c = new Coupon();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectCouponList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				c = new Coupon();
+				c.setCouponNo(rset.getInt("COUPON_NO"));
+				c.setCouponContent(rset.getString("COUPON_CONTENT"));
+				c.setCouponDate(rset.getDate("COUPON_DATE"));
+				c.setCouponCode(rset.getString("COUPON_CODE"));
+				c.setCouponPercent(rset.getInt("COUPON_PERCENT"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
 	}
 
 

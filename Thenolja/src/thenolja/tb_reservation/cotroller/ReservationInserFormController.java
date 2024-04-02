@@ -38,7 +38,7 @@ public class ReservationInserFormController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		ArrayList<Coupon> list = new ReserService().selectCouponList();
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));		
 		
@@ -47,6 +47,7 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 		Room room = new ReserService().selectRoom(hotelNo, roomNo);
+		Coupon coupon = new ReserService().selectCoupon();
 		
 		if(hotel != null && room != null) {
 		request.setAttribute("reser", reser);

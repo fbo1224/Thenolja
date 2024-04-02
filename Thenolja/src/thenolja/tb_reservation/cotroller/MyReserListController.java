@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.Room;
@@ -39,7 +40,8 @@ public class MyReserListController extends HttpServlet {
 		
 		if(reserList != null) {
 			
-			request.setAttribute("reserList", reserList);
+			HttpSession session = request.getSession();
+			session.setAttribute("reserList", reserList);
 			
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 			
