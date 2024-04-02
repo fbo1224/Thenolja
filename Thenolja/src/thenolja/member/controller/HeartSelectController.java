@@ -40,10 +40,10 @@ public class HeartSelectController extends HttpServlet {
 		
 		response.getWriter().print(selectHeart);
 		
-		System.out.println("hotelNo넘긴값 :" + hotelNo);
-		System.out.println("memNo넘긴값 :" + memNo);
+		// System.out.println("hotelNo넘긴값 :" + hotelNo);
+		// System.out.println("memNo넘긴값 :" + memNo);
 		
-		System.out.println("결과값: " + selectHeart);
+		// System.out.println("결과값: " + selectHeart);
 	}
 
 	/**
