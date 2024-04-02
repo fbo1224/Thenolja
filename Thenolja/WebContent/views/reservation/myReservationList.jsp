@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
-				 thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
+				 thenolja.tb_review.model.vo.Review" %>  
 <%
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	System.out.println(reviewList);
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -125,29 +127,35 @@
 				</tr>
 			</table>
 		<% } else { %>
-			<% for(Reservation r : reserList) { %>
-				<div id="content">
-			        <div id="reser_info">
-			            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-						<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
-						<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
-			            <div id="reser_detail">
-			                <h3><%=r.getHotelName() %></h3>
-			                <p><%=r.getRoomName() %></p>
-			                <p><%=r.getPeople() %>인</p>
-			                <p><%=r.getRoomPrice() %>원</p>
-			                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
-			            </div>
-		
-			            <div id="review_in">
-			                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
-			            </div>
-			        </div>
-				</div>
+		<% for(Reservation r : reserList) { %>
+		<div id="content">
+	        <div id="reser_info">
+	            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
+				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
+				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
+	            <div id="reser_detail">
+	                <h3><%=r.getHotelName() %></h3>
+	                <p><%=r.getRoomName() %></p>
+	                <p><%=r.getPeople() %>인</p>
+	                <p><%=r.getRoomPrice() %>원</p>
+	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
+	            </div>
+
+            <% for(Review re : reviewList) { %>
+            <div id="review_in">
+            <% if(re.getMemNo() == 0) { %>
+                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+            <% } else { %>	
+            	<a href="<%=contextPath %>/update.review"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 수정</button></a>
+            <% } %>
+            </div>
+            <% } %>
+        </div>
 			<% } %>
 		<% } %>
 	<div id="homeBtn">
 		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+>>>>>>> 4d01b482708b3843094e6953ffe24e2cb5962e81
 	</div>
 </div>
 

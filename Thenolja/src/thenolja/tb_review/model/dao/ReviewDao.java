@@ -129,22 +129,20 @@ public class ReviewDao {
 	}
 
 
-	public Review selectReview(Connection conn, int reserNo) {
+	public ArrayList<Review> selectReviewList(Connection conn, int reMemNo) {
 		
-		Review r = new Review();
+		ArrayList<Review> reviewList = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectReview");
+		String sql = prop.getProperty("selectReviewList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-	        pstmt.setInt(1, reserNo);
-	         
+	        pstmt.setInt(1, reMemNo);
 	        rset = pstmt.executeQuery();		
 	        while(rset.next()) {
 	        	
-	        	r = new Review();
+	        	Review r = new Review();
 	        	r.setNickName(rset.getString("NICKNAME"));
 	        	r.setReserNo(rset.getInt("RV_RESER_NO"));
 	        	r.setImgPath(rset.getString("IMG_PATH"));
@@ -166,8 +164,8 @@ public class ReviewDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}
-		return r;
+		}//System.out.println(r);
+		return reviewList;
 	
 	}
 

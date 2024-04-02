@@ -97,12 +97,11 @@ public class ReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reser.getReserNo());
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
+			if(rset.next()) {
 				reser = new Reservation();
-				reser.setReserNo(rset.getInt("RESER_NO"));
+				reser.setReserNo(rset.getInt("CURRVAL"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
@@ -133,7 +132,7 @@ public class ReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-				
+			pstmt.setInt(1, reserNo);	
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				reser = new Reservation();

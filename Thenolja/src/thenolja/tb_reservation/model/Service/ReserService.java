@@ -17,20 +17,23 @@ import thenolja.tb_reservation.model.vo.Reservation;
 
 public class ReserService {
 
-	public int insertReser(Reservation reser) {
+	public Reservation insertReser(Reservation reser) {
 		
 		Connection conn = getConnection();
 		
 		int result = new ReserDao().insertReser(conn, reser);
 		
+		Reservation r = null;
 		if(result > 0) {
-			commit(conn);
+			r = new ReserDao().selectReservation(conn);
+			if(r != null) {
+			commit(conn);}
 		} else {
 			rollback(conn);
 		}
 		close(conn);
 		
-		return result;
+		return r;
 	}
 
 	public ArrayList<Coupon> selectCouponList() {
