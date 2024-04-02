@@ -429,19 +429,25 @@ public class MemberDao {
 	}
 //----------------------------숙소상세조회페이지 로그인 사용자 찜목록 확인----------------------------
 	
-	public int selectHeart(Connection conn) {
-		int result = 0;
-		Statement stmt = null;
-		
+	public int selectHeart(Connection conn, int hotelNo, int memNo) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectHeart");
 		try {
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, hotelNo);
+			pstmt.setInt(2, memNo);
+			
+			count = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
-		
-		return result;
+		System.out.println("selectHeart DAO");
+		return count;
 	}
 	
 	

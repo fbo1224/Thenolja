@@ -36,8 +36,8 @@ public class HeartInsertController extends HttpServlet {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		System.out.println(hotelNo);
-		System.out.println(memNo);
+		// System.out.println(hotelNo);
+		// System.out.println(memNo);
 		
 		int count = new MemberService().heartInsert(hotelNo, memNo);
 		
