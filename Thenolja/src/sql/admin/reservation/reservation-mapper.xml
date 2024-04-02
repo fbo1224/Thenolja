@@ -240,6 +240,33 @@
 	    WHERE RNUM BETWEEN ? AND ?
    </entry>
 	
+	<entry key="oldReserNonMember">
+	      	   SELECT *
+	  FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+					        RESER_NO,
+					        RESER_NAME,
+					        MEM_PHONE,
+					        TO_CHAR(CHECKIN_TIME ,'YYYY.MM.DD') "CHECKIN_TIME"
+					        
+					  FROM
+					        TB_RESERVATION
+					  JOIN
+					        TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+					 WHERE
+					        MEM_STATUS = 'N'
+					   AND
+					   		CANCEL_YN = 'N'
+					 ORDER
+		                BY
+		                     RESER_NO ASC) A)
+	    WHERE RNUM BETWEEN ? AND ?  
+		
+	
+	
+	</entry>
 	
 	
 </properties>

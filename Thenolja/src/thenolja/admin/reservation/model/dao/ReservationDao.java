@@ -471,4 +471,70 @@ public class ReservationDao {
 		
 	}
 	
+	/**
+	 * 오래된 비회원 예약
+	 */
+	public ArrayList<AdminReservation> oldReserNonMember(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminReservation> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset  = null;
+		String sql = prop.getProperty("oldReserNonMember");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminReservation adminReservation = new AdminReservation();
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setMemPhone(rset.getString("MEM_PHONE"));
+				adminReservation.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				
+				list.add(adminReservation);
+
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
