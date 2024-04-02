@@ -55,11 +55,11 @@ public class ReviewService {
 		
 		Connection conn = getConnection();
 		
-		Review review = new ReviewDao().selectReview(conn, reserNo);
+		Review r = new ReviewDao().selectReview(conn, reserNo);
 		
 		close(conn);
 		
-		return review;
+		return r;
 	}
 
 }

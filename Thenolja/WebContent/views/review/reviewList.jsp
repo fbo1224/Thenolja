@@ -50,18 +50,18 @@
         margin-left: 60px;
     }
     #review_detail{
-        width: 60%;
+        width: 70%;
         height: 100%;
     }
     #review_detail > *{
     	padding-left: 30px;
-    	margin-top: 10px;'
+    	margin-top: 5px;'
     }
     #content > div{
         float: left;
     }
     #reivew_set{
-        width: 40%;
+        width: 30%;
         height: 100%;
     }
     #review_set > #reser_review_img{
@@ -75,7 +75,7 @@
         color: white;
         background-color: rgb(91, 161, 153);
         border-radius: 5px;
-        margin-left: 80px;
+        margin-left: 40px;
         font-size: 17px;
         margin-top: 70px;
     }
@@ -84,7 +84,6 @@
     }
     #cancel{
         margin-left: 40px;
-        margin-bottom: 300px;
         font-size: 20px;
     }
     #review_img{
@@ -99,16 +98,36 @@
         width: 60%;
         height: 100%;
     }
-    #hotelName{
+    #nickName{
         width: 100%;
-        height: 40%;
-        font-size:25px;
+        height: 30%;
+        font-size:23px;
         font-weight:bord;
     }
     #score{
         width: 100%;
-        height: 60%;
-        font-size: 19px;
+        height: 70%;
+        font-size: 18px;
+    }
+    #hotelName{
+    	font-size: 18px;
+    }
+    #reviewCC{font-size: 15px;}
+    #homeBtn {
+    	text-align:center;
+    	margin-top:100px;
+    }
+    #goHome{
+    	width : 300px;
+    	height: 50px;
+    	border-radius : 10px;
+    	background-color: #5BA199;
+    	border : 0;
+    	margin-bottom: 100px;
+    	font-size: 22px;
+    }
+    #goHome:hover{
+    	font-size:23px;
     }
 </style>
 </head>
@@ -132,13 +151,12 @@
 		<%for(Review r : reviewList){ %>
 		<div id="content">
 			<div id="review_detail">
-			<input type="hidden" name="hotelNo">
 				<div id="hotel_name">
-					<span id="hotelName"><%=r.getHotelName() %></span><br>
+					<span id="nickName"><%=r.getNickName() %></span>님<br>
+					<span id="hotelName"><%=r.getHotelName() %></span>&nbsp;&nbsp;<span id="score"><%=r.getScore() %></span><br><br>
 					<span id="roomName"><%=r.getRoomName() %></span>
 				</div>
 				<div id="review_content">
-					<span id="score"><%=r.getScore() %></span><br>
 					<span id="reviewCC"><%=r.getContent() %></span>
 				</div>
 			</div>
@@ -147,13 +165,16 @@
 				<div id="img_btn">
 					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;">
+					
 				</div>
 			</div>
 		</div> 
 		<% } %>
 		<% } %>
+	<div id="homeBtn">
+	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	</div>
 	</div>	
-		
 		
 		
 </body>
