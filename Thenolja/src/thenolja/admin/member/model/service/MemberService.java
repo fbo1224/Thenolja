@@ -210,4 +210,18 @@ public class MemberService {
 		return list;
 	}
 	
+	/**
+	 * 탈퇴회원 오래된 순으로 정렬
+	 */
+	public ArrayList<AdminMember> oldDeleteMemberList(PageInfo pi){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().oldDeleteMemberList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 }

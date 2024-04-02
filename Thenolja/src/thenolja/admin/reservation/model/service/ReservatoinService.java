@@ -192,5 +192,21 @@ public class ReservatoinService {
 		
 	}
 	
+	/**
+	 * 오래된 비회원 예약
+	 */
+	public ArrayList<AdminReservation> oldReserNonMember(PageInfo pi){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().oldReserNonMember(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+		
+	}
+	
 
 }

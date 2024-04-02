@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
 import thenolja.event.model.vo.Event;
-import thenolja.notice.model.vo.Notice;
+
 
 public class EventDao {
 
@@ -51,8 +52,10 @@ public class EventDao {
 				// 조회 결과 Event 객체에 담기
 				Event evnt = new Event();
 				evnt.setEventNo(rset.getInt("EVENT_NO"));
+				evnt.setEventTitle(rset.getString("EVENT_TITLE"));
 				evnt.setEventContent(rset.getString("EVENT_CONTENT"));
-				evnt.setEventDate(rset.getString("EVENT_DATE"));
+				evnt.setEventStrtDt(rset.getString("EVENT_STRT_DT"));
+				evnt.setEventEndDt(rset.getString("EVENT_END_DT"));
 				evnt.setEventYn(rset.getString("EVENT_YN"));
 				evnt.setEventImg(rset.getString("EVENT_IMG"));
 				evnt.setWriter(rset.getString("WRITER"));
@@ -83,7 +86,8 @@ public class EventDao {
 		System.out.println("[EVENT DAO INSERT] " + event.getEventTitle());
 		System.out.println("[EVENT DAO INSERT] " + event.getEventContent());
 		System.out.println("[EVENT DAO INSERT] " + event.getEventYn());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventDate());
+		System.out.println("[EVENT DAO INSERT] " + event.getEventStrtDt());
+		System.out.println("[EVENT DAO INSERT] " + event.getEventEndDt());
 		System.out.println("[EVENT DAO INSERT] " + event.getEventImg());
 		
 		try {
@@ -93,8 +97,10 @@ public class EventDao {
 			pstmt.setString(1, event.getEventTitle());
 			pstmt.setString(2, event.getEventContent());
 			pstmt.setString(3, event.getEventYn());
-			pstmt.setString(4, event.getEventDate());
-			pstmt.setString (5, event.getEventImg());
+			pstmt.setString(4, event.getEventStrtDt());
+			pstmt.setString(5, event.getEventEndDt());
+			
+			pstmt.setString (6, event.getEventImg());
 		
 			result = pstmt.executeUpdate();	
 		
@@ -131,10 +137,11 @@ public class EventDao {
 			
 			pstmt.setString(1, event.getEventTitle());
 			pstmt.setString(2, event.getEventContent());
-			pstmt.setString(3, event.getEventDate());
-			pstmt.setString(4, event.getEventYn());
-			pstmt.setInt   (5, event.getEventNo());
-			pstmt.setString (6, event.getEventImg());
+			pstmt.setString(3, event.getEventStrtDt());
+			pstmt.setString(4, event.getEventEndDt());
+			pstmt.setString(5, event.getEventYn());
+			pstmt.setInt   (6, event.getEventNo());
+			pstmt.setString (7, event.getEventImg());
 			
 			result = pstmt.executeUpdate();
 			
@@ -151,6 +158,40 @@ public class EventDao {
 		
 	}//method
 	
+	/*
+	 * 공지사항 삭제
+	 * 
+	 * */	
+	public int deleteEventOne(Connection conn, int eventNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteEventOne");
+		System.out.println("[EventDao delete sql] " + sql);
+		System.out.println("[EVENT DAO DELETE] " + eventNo);
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, eventNo);
+
+			result = pstmt.executeUpdate();	
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+		
+	}//method	
+	
+
+}//DAO의 역할 : DB 외부데이터를 "입력"하는곳
 	
 	
-}
+	
+	
+	
+

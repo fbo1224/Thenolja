@@ -5,7 +5,8 @@ public class Event {
 	private int eventNo;			// 이벤트 관리번호
 	private String eventTitle;		// 이벤트 제목
 	private String eventContent;	// 이벤트 내용
-	private String eventDate;		// 이벤트 등록일
+	private String eventStrtDt;		// 이벤트 시작일
+	private String eventEndDt;		// 이벤트 종료일
 	private String eventYn;			// 이벤트 진행여부
 	private String eventImg;		// 이벤트 이미지
 	private int writerNo;			// 작성자 관리번호
@@ -15,23 +16,29 @@ public class Event {
 		super();
 }
 	
-		// 저장 시 파라미터 처리를 위한 생성자 생성
-		public Event(String title, String content, String eventDate, String eventYn, String eventImg, int writerNo ) {
-			this.eventTitle    = title;
-			this.eventContent  = content;
-			this.eventDate 		= eventDate;
-			this.eventYn         = eventYn;
-			this.eventImg        = eventImg;
-			this.writerNo        = writerNo;
-		}
+	// 저장 시 파라미터 처리를 위한 생성자 생성
+	public Event(String eventTitle, 
+				String eventContent, String eventStrtDt, 
+				String eventEndDt, String eventYn, String eventImg, int writerNo) {
+		this.eventTitle      = eventTitle;
+		this.eventContent 	 = eventContent;
+		this.eventStrtDt 	 = eventStrtDt;
+		this.eventEndDt		 = eventEndDt;
+		this.eventYn         = eventYn;
+		this.eventImg        = eventImg;
+		this.writerNo        = writerNo;
+	}
 		
-		// 수정시 파라미터 처리를 위한 생성자 생성
-		public Event(String title, String content, String eventDate, int eventNo) {
-			this.eventTitle    = title;
-			this.eventContent  = content;
-			this.eventDate 		= eventDate;
-			this.eventNo 		= eventNo;
-		}		
+	// 수정시 파라미터 처리를 위한 생성자 생성
+	public Event(int eventNo, String eventTitle, 
+				String eventContent, String eventStrtDt, 
+				String eventEndDt, String eventYn, String eventImg, int writerNo) {
+		this.eventTitle    = eventTitle;
+		this.eventContent  = eventContent;
+		this.eventStrtDt   = eventStrtDt;
+		this.eventEndDt	   = eventEndDt;
+		this.eventNo 	   = eventNo;
+	}		
 
 	public int getEventNo() {
 		return eventNo;
@@ -57,13 +64,22 @@ public class Event {
 		this.eventContent = eventContent;
 	}
 
-	public String getEventDate() {
-		return eventDate;
+	public String getEventStrtDt() {
+		return eventStrtDt;
 	}
 
-	public void setEventDate(String eventDate) {
-		this.eventDate = eventDate;
+	public void setEventStrtDt(String eventStrtDt) {
+		this.eventStrtDt = eventStrtDt;
 	}
+	
+	public String getEventEndDt() {
+		return eventEndDt;
+	}
+
+	public void setEventEndDt(String eventEndDt) {
+		this.eventEndDt = eventEndDt;
+	}
+	
 
 	public String getEventYn() {
 		return eventYn;

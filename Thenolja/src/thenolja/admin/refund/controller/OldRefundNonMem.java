@@ -14,16 +14,16 @@ import thenolja.admin.refund.model.vo.AdminRefund;
 import thenolja.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class RefundNonMemberController
+ * Servlet implementation class OldRefundNonMem
  */
-@WebServlet("/refundNonMem")
-public class RefundNonMemberController extends HttpServlet {
+@WebServlet("/oldestNonRefund.do")
+public class OldRefundNonMem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundNonMemberController() {
+    public OldRefundNonMem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -65,12 +65,16 @@ public class RefundNonMemberController extends HttpServlet {
 		
 		// System.out.println(pi);
 		
-		ArrayList<AdminRefund> list = new RefundService().selectRefundNonMemberList(pi);
+		ArrayList<AdminRefund> list = new RefundService().oldRefundNonMemberList(pi);
 		
-		request.setAttribute("selectRefundNonMemberList", list);
+		request.setAttribute("oldRefundNonMemberList", list);
 		request.setAttribute("pageInfo", pi);
 		
-		request.getRequestDispatcher("views/admin/refund/refundNonMemberList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/refund/refundNonMemberList.jsp").forward(request, response);;
+		
+		
+		
+		
 	}
 
 	/**
