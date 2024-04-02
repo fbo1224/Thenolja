@@ -337,7 +337,7 @@ function countText(){
        		<!-- 게시여부 영역  STRT -->  <!-- notice.getStatus()  -->
            	<th class="th_left"><span>진행</span></th>
 				<td>
-					<div class="radio-btn-wrap" id="notice_rdo_wrap">
+					<div class="radio-btn-wrap" id="event_rdo_wrap">
 						<span class="radio-btn">
 								<!-- 조회 데이터 유무에 따른 처리  -->
 								<% if(!"".equals(eventYn)) { %>
