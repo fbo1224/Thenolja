@@ -40,10 +40,6 @@ public class HeartDeleteController extends HttpServlet {
 		
 		int count = new MemberService().heartDelete(hotelNo, memNo);
 		
-		if(count > 0) {
-			HttpSession session = request.getSession();
-			request.setAttribute("alertMsg", "찜 목록에서 삭제되었습니다.");
-		}
 		
 		
 	}

@@ -132,12 +132,20 @@
         </div>
         <div id="content2" class="content">
             <div id="ct2_1">
+            	
+            
                 <img class="img" src="./resources/mypage/user.png" alt="프로필" style="width: 150px; height: 150px; margin-top: 40px; margin-left: 40px;">
+                
+                
             </div>
             <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
             <div id="ct2_3">
                 <div id="gradeIcon">
+                
+                <% System.out.println("<%=gradeName%>"); %>
                     <span id="grade" style="color: goldenrod;"><%= gradeName %></span>
+				                   
+                    
                     <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
             </div>
@@ -180,7 +188,7 @@
         <div id="content3" class="content">
 
             <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
-            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.heart"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.heart?memNo=<%= loginUser.getMemNo() %>"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
             <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
             <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
         </div>

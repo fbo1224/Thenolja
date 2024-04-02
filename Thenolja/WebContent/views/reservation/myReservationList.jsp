@@ -121,11 +121,11 @@
 		</div>
     
 		<% if(reserList.isEmpty()) { %>
-		<table>
-			<tr>
-				<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
-			</tr>
-		</table>
+			<table>
+				<tr>
+					<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
+				</tr>
+			</table>
 		<% } else { %>
 		<% for(Reservation r : reserList) { %>
 		<div id="content">
@@ -151,13 +151,12 @@
             </div>
             <% } %>
         </div>
+			<% } %>
+		<% } %>
+	<div id="homeBtn">
+		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+>>>>>>> 4d01b482708b3843094e6953ffe24e2cb5962e81
 	</div>
-	<% } %>
-	<% } %>
-<div id="homeBtn">
-	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
-	
-</div>
 </div>
 
 </body>

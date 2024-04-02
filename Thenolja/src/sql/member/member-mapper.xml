@@ -245,16 +245,18 @@
 	
 	<entry key="selectHeartList">
 		SELECT
-		       MEM_NO,
-		       ROOM_NAME,
 		       HOTEL_NAME,
 		       HOTEL_LOCATION,
 		       HOTEL_ADDRESS,
 		       HOTEL_PATH
 		  FROM
-		       TB_MEMBER
-		  JOIN
-		       
+		       TB_SAVED
+          JOIN
+                TB_HOTEL
+         USING
+               (HOTEL_NO)
+        WHERE
+              SA_MEM_NO = ?
 	
 	
 	</entry>

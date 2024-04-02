@@ -85,7 +85,7 @@
 			margin-top: 50px;
 		}
 
-		div > .btn{
+		.loginBtn{
 			width: 400px;
 			height: 50px;
 			background-color: rgb(70, 149, 151);
@@ -93,7 +93,9 @@
 			font-size: 20px;
 			font-weight: bold;
 			margin-bottom: 30px;
+			border:none;
 		}
+		.loginBtn:hover{color:lightgray;}
 
 
 	
@@ -126,7 +128,7 @@
 						</div>
 
 						<div id="content3">
-							<button type="submit" class="btn">로그인</button>
+							<button type="submit" class="loginBtn">로그인</button>
 						</div>
 
 					</form>

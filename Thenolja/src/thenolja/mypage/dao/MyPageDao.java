@@ -44,9 +44,7 @@ public class MyPageDao {
 			
 			while(rset.next()) {
 				
-				MyPageHeartList heartList = new MyPageHeartList(rset.getInt("MEM_NO"),
-																rset.getString("ROOM_NAME"),
-																rset.getString("HOTEL_NAME"),
+				MyPageHeartList heartList = new MyPageHeartList(rset.getString("HOTEL_NAME"),
 																rset.getString("HOTEL_LOCATION"),
 																rset.getString("HOTEL_ADDRESS"),
 																rset.getString("HOTEL_PATH"));

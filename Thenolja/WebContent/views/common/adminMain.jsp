@@ -23,12 +23,14 @@
             width: 100%;
         }
 
-        #footer {
-            height: 15%;
-        }
-
         #content{
             height: 70%;
+        }
+		 
+		
+		
+		#header, #footer{
+            height: 15%;
         }
 
 
@@ -46,71 +48,72 @@
         }
         
         
-            #content2 > div{
-        width: 100%;
-    }
-    #today {
-        height: 15%;
-    }
-
-    #today > p{
-        font-size: 20px;
-        font-weight: 700;
-        margin-top: 5%;
-    }
-
-    #today_content{
-        height: 85%;
-        
-    }
-
-    #today_content > div{
-        width: 60%;
-    }
-
-    #today > p{
-        padding-top: 20%;
-    }
-
-    #today_content > div{
-        height: 30%;
-        border-radius: 50%;
-        border: 1px solid #5BA199;
-        color: #5BA199;
-        margin: auto;
-        margin-top: 5%;
-    }
-
-    #today_content > div > p {
-        text-align: center;
-        font-size: 20px;
-        font-weight: 700;
-        padding-top: 35%;
-    }
-
-    #today_content > div:hover{
-        height: 30%;
-        border-radius: 50%;
-        background-color: #5BA199;
-        color: white;
-        transition: 0.8s ease-out;
-    }
-
-
-    #reser_list , #refund_list{
-        width: 80%;
-        height: 50%;
-        margin: auto;
-        padding-top: 10%;
-    }
-
-    #reser_list_title, #refund_list_title{
-
-        font-size: 20px;
-        font-weight: 700;
-
-    }
-        
+        #content2 > div{
+       	 	width: 100%;
+    	}
+    	
+	    #today {
+	        height: 15%;
+	    }
+	
+	    #today > p{
+	        font-size: 20px;
+	        font-weight: 700;
+	        margin-top: 5%;
+	    }
+	
+	    #today_content{
+	        height: 85%;
+	        
+	    }
+	
+	    #today_content > div{
+	        width: 60%;
+	    }
+	
+	    #today > p{
+	        padding-top: 20%;
+	    }
+	
+	    #today_content > div{
+	        height: 30%;
+	        border-radius: 50%;
+	        border: 1px solid #5BA199;
+	        color: #5BA199;
+	        margin: auto;
+	        margin-top: 5%;
+	    }
+	
+	    #today_content > div > p {
+	        text-align: center;
+	        font-size: 20px;
+	        font-weight: 700;
+	        padding-top: 35%;
+	    }
+	
+	    #today_content > div:hover{
+	        height: 30%;
+	        border-radius: 50%;
+	        background-color: #5BA199;
+	        color: white;
+	        transition: 0.8s ease-out;
+	    }
+	
+	
+	    #reser_list , #refund_list{
+	        width: 80%;
+	        height: 50%;
+	        margin: auto;
+	        padding-top: 10%;
+	    }
+	
+	    #reser_list_title, #refund_list_title{
+	
+	        font-size: 20px;
+	        font-weight: 700;
+	
+	    }
+	        
 
 
 
@@ -172,9 +175,10 @@
             
             </div>
         </div>
-        <div id="footer"></div>
-
-    </div>
+   	 </div>
+     <div id="footer">
+       	<%@ include file="footer.jsp" %> 
+     </div>
     
     
     <script>
