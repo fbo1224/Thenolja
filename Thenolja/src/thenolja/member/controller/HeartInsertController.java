@@ -41,10 +41,6 @@ public class HeartInsertController extends HttpServlet {
 		
 		int count = new MemberService().heartInsert(hotelNo, memNo);
 		
-		if(count > 0) {
-			HttpSession session = request.getSession();
-			request.setAttribute("alertMsg", "찜 목록에 추가하였습니다.");
-		} 
 	}
 
 	/**

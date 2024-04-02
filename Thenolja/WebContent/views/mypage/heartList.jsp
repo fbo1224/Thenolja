@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
-				 thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
+<%@ page import="java.util.ArrayList,thenolja.mypage.model.vo.MyPageHeartList" %>  
 <%
-	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
+	ArrayList<MyPageHeartList> heartList = (ArrayList<MyPageHeartList>)request.getAttribute("heartList");
 %>  
 <!DOCTYPE html>
 <html>
@@ -90,24 +89,26 @@
         <div id="content_title">
             <div id="left_title"><h3>찜목록</h3></div>
 		</div>
-    
-		<table>
-			<tr>
-				<th style="font-size:40px;" colspan="5">찜한 내역이 존재하지 않습니다.</th>
-			</tr>
-		</table>
+    	<% if(heartList.isEmpty()) { %>
+			<table>
+				<tr>
+					<th style="font-size:40px;" colspan="5">찜한 내역이 존재하지 않습니다.</th>
+				</tr>
+			</table>
+		<% } else { %>
 		
-		<%-- <% for(Reservation r : reserList) { --%>
-		<div id="content">
-	        <div id="reser_info">
-	            <div id="reser_hotel_img"><img src="#" alt="호텔이미지" width="220px" height="220px"></div>
-		            <div id="reser_detail">
-		                <h3>호텔이름</h3>
-		                <p>객실이름</p>
-		            </div>
-	        </div>
-		</div>
-		<%--<% } --%>
+			<% for(MyPageHeartList h : heartList) { %>
+			<div id="content">
+			        <div id="reser_info">
+			            <div id="reser_hotel_img"><img src="#" alt="호텔이미지" width="220px" height="220px"></div>
+				            <div id="reser_detail">
+				                <h3><%= h.getHotelName() %></h3>
+				                <p>객실이름</p>
+				            </div>
+			        </div>
+				</div>
+			<% } %>
+		<% } %>
 <div id="homeBtn">
 	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 </div>

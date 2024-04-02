@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.mypage.model.vo.MyPageHeartList;
 import thenolja.mypage.service.MyPageService;
@@ -16,13 +17,13 @@ import thenolja.mypage.service.MyPageService;
  * Servlet implementation class MyPageHeart
  */
 @WebServlet("/mypage.heart")
-public class MyPageHeart extends HttpServlet {
+public class MyPageHeartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageHeart() {
+    public MyPageHeartController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +35,13 @@ public class MyPageHeart extends HttpServlet {
 
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		ArrayList<MyPageHeartList> list = new MyPageService().selectHeartList(memNo);
+		ArrayList<MyPageHeartList> heartList = new MyPageService().selectHeartList(memNo);
+			
+		request.setAttribute("heartList", heartList);
 		
 		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
-	
-	
-	
+			
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
