@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>        
 <%
 
+	ArrayList<AdminRefund> oldList = (ArrayList<AdminRefund>)request.getAttribute("oldRefundNonMemberList");
 	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundNonMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -75,8 +76,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>			          	 
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest"  onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=1'">최신순</button>			          	 
 					</div>
         
                 </div>
@@ -93,11 +94,13 @@
                         </thead>
                         <tbody>
                         
-                        <% if(list.isEmpty()) { %>
+                   		<% if(list!=null &&list.isEmpty()) { %>
                         	<tr>
                         		<th colspan="3">환불 비회원이 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
+                        
+                      	<%if(list != null){ %>                       
                         	<% for(AdminRefund refunNonMem : list) { %>
                         		<tr>
                         			<td><%=refunNonMem.getReserNo() %></td>
@@ -107,7 +110,26 @@
                         		</tr>
                         	<% } %>
                         <% } %>
-    
+                       <% } %>
+
+                   		<% if(oldList!=null &&oldList.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="3">환불 비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        
+                       	<% if(oldList != null) { %>
+                       		<%for(AdminRefund refunNonMem : oldList) { %>
+                       			<tr>
+	                       	   		<td><%=refunNonMem.getReserNo() %></td>
+                        			<td><%=refunNonMem.getReserName() %></td>
+                        			<td><%=refunNonMem.getMemPhone() %></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refunNonMem.getReserNo()%>)">조회</button></td>
+		                            
+	                       	   </tr>
+                       		<%} %>
+                       	<% } %>
+					<%} %>
                    
                         </tbody>
                       </table>

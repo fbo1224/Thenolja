@@ -382,7 +382,50 @@ private Properties prop = new Properties();
 		
 	}
 	
-	
+	/**
+	 * 비회원 환불 오래된 순
+	 */
+	public ArrayList<AdminRefund> oldRefundNonMemberList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminRefund> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("oldRefundNonMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminRefund adminRefund = new AdminRefund();
+				
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminRefund);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+		
+	}
 	
 	
 	
