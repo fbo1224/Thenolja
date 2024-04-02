@@ -108,6 +108,12 @@
                          <% } %>
                         <% }  %>
                         <% } %>
+                          
+                          	<% if(oldList!=null &&oldList.isEmpty()) { %>
+	                        	<tr>
+	                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
+	                        	</tr>
+                       		 <%} else { %>
                         
                          	<% if(oldList != null) { %>
                        		<%for(NonMember n : oldList) { %>
@@ -118,10 +124,10 @@
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%=  n .getMemNo() %>)">삭제</button></td>
 		                            
 	                       	  </tr>
-                       		<%} %>
-                       	<% } %>
-
-                        
+	                       		<%} %>
+	                       	<% } %>
+	 					<% } %>
+	                        
                         
                         
                         
