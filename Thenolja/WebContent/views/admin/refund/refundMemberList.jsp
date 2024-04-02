@@ -3,8 +3,7 @@
     
 <%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>    
 <%
-	AdminRefund adminRefund = (AdminRefund)request.getAttribute("adminRefund");
-	
+	ArrayList<AdminRefund> oldList = (ArrayList<AdminRefund>)request.getAttribute("OldRefundMemberList");
 	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundMemberList");
 
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -79,8 +78,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
-						 <button class="sort-btn" id="newest" onclick="">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestRefundMemList.do?currentPage=1'">오래된순</button>
+						 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/refundMem?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -99,12 +98,13 @@
                         <tbody>
                         
                         
-                        <% if(list.isEmpty()) { %>
+                         <% if(list!=null &&list.isEmpty()) { %>
                         	<tr>
                         		<th colspan="4">환불 회원이 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
-                        
+                        	
+                        	<%if(list != null){ %>
                         	<% for(AdminRefund refundMem : list) { %>
                         	<tr>
                         		<td><%=refundMem.getReserNo() %></td>
@@ -114,10 +114,31 @@
                         	 	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refundMem.getReserNo()%>)">조회</button></td>
                         	</tr>
                         	
-                        	
+                        		<% } %>
                         	<% } %>
                         <% } %>
                         
+                         <% if(oldList!=null &&oldList.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="4">환불 회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        	
+                          	
+                       	<% if(oldList != null) { %>
+                       		<%for(AdminRefund refundMem : oldList) { %>
+                       	<tr>
+                        		<td><%=refundMem.getReserNo() %></td>
+                        		<td><%=refundMem.getMemId() %>
+                        		<td><%=refundMem.getReserName() %>
+                        		<td><%=refundMem.getMemPhone() %>	                       	   		
+		                     	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refundMem.getReserNo()%>)">조회</button></td>
+		                            
+	                       	  </tr>
+                       		<%} %>
+                       	<% } %>
+                  
+                        <%} %>
         
                         </tbody>
                       </table>
@@ -125,7 +146,8 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                	
+                
+                <% if(list!=null && list.isEmpty()) { %>
                 	<% if(currentPage > 1) { %>
                     <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage - 1%>'"><</button>
                     <% } %>
@@ -142,6 +164,27 @@
                    <% if(currentPage != maxPage) { %>
                     <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundMem?currentPage=<%=currentPage + 1%>'">></button>
                    <% } %>
+                  
+                   <% } else { %>
+                   
+                    <%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestRefundMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestRefundMemList.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestRefundMemList.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
+                  
+                  <%} %>
+
                 </div>
         
 

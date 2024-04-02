@@ -3,10 +3,8 @@
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_hotel.model.vo.Hotel,
 				thenolja.tb_hotel.model.vo.Room, thenolja.tb_review.model.vo.Review" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
-	Hotel hotel = (Hotel)request.getAttribute("hotel");
+	Review r = (Review)request.getAttribute("review");
 	Room room = (Room)request.getAttribute("room");
-	Review review = (Review)request.getAttribute("review");
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +136,7 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reviewUpdate.do?reserNo=<%=reser.getReserNo() %>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo()%>" method="post" enctype="multipart/form-data">
+	<form action="<%=contextPath %>/reviewUpdate.do?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
@@ -148,18 +146,16 @@
 		</div>
 	<div id="content_1">
 	    <div id="hotel-no">
-	        No.<%=reser.getReserNo() %>
+	        No.<%=r.getReserNo() %>
 	    </div>
 	    <div>
-           <div id="reser_hotel_img"><img src="<%=hotel.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-			<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
-			<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+           <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
 	            <div id="reser_detail">
-                <h3><%=hotel.getHotelName() %></h3>
-                <p><%=room.getRoomName() %></p>
-                <p><%=reser.getPeople() %>인</p>
-                <p><%=reser.getPaymentPrice() %>원</p>
-                <p>2024-02-28<%=room.getCheckInTime() %> ~ 2024-02-29<%=room.getCheckOutTime() %></p>
+                <h3><%=r.getHotelName() %></h3>
+                <p><%=r.getRoomName() %></p>
+                <p><%=room.getMaxPeople() %>인</p>
+                <p><%=r.getPaymentPrice() %>원</p>
+                <p>2024-02-28&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ 2024-02-29&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
             </div>
     	</div>
     </div>
@@ -178,7 +174,7 @@
 	</div>
             
     <div id="content_4">
-        <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;"><%=review.getContent() %></textarea>
+        <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;"><%=r.getContent() %></textarea>
     </div>
         
     <div id="footer">
@@ -222,7 +218,7 @@
         		url : 'reviewInsert.do',
         		type : 'post',
         		data : {
-        			reserNo : <%=reser.getReserNo()%>,
+        			reserNo : <%=r.getReserNo()%>,
         			imgPath : $('#file-up').val(),
         			content : $('#review-content').val(),
         			score : $('.star').val()

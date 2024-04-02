@@ -143,6 +143,17 @@ public class ReserService {
 		return result;	
 	}
 
+	public Reservation selectReser(int reserNo) {
+		
+		Connection conn = getConnection();
+		
+		Reservation reser = new ReserDao().selectReser(conn, reserNo);
+		
+		close(conn);
+		
+		return reser;
+	}
+
 
 
 

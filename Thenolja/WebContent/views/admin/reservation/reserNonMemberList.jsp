@@ -3,6 +3,8 @@
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>       
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
 <%
+
+	ArrayList<AdminReservation> oldList = (ArrayList<AdminReservation>)request.getAttribute("oldReserNonMember");
 	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -83,8 +85,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="oldestList()">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -102,11 +104,13 @@
                         <tbody>
                         <tr>
                         
-                        <%if(list.isEmpty()) { %>
+                       <% if(list!=null &&list.isEmpty()) { %>
                         	<tr>
                         		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
+                        
+                        <%if(list != null){ %>
                         	<% for (AdminReservation adminReserNon : list) { %>
                         	<tr>
                         		<td><%=adminReserNon.getReserNo() %></td>
@@ -122,9 +126,33 @@
                         	</tr>
                         	
                         	
-                        	
+                        		<% } %>
                         	<% } %>
                         <%} %>
+                        
+                  		<% if(oldList!=null &&oldList.isEmpty()) { %>
+                        	<tr>
+                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
+                        	</tr>
+                        <% } else { %>
+                        
+                            <% if(oldList != null) { %>
+                       		<%for(AdminReservation adminReserNon: oldList) { %>
+                              <tr>
+                        		<td><%=adminReserNon.getReserNo() %></td>
+                        		<td><%=adminReserNon.getReserName() %></td>
+                        		<td><%=adminReserNon.getMemPhone() %></td>
+                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
+                            	
+                            	<%if(today.compareTo(adminReserNon.getCheckInTime()) < 0) {%>
+                            	<td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
+                        	 	<% } else { %>
+                        	 	<td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
+                        		<%} %>
+                        	</tr>
+                       		<%} %>
+                       	<% } %>
+   					<%} %>
 
                         </tbody>
                       </table>
@@ -133,6 +161,8 @@
         
                 <div class="paging-area" align="center";>
                 
+                
+                <% if(list!=null && list.isEmpty()) { %>
                 	<% if(currentPage > 1) { %>
                 		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage - 1%>'"><</button>
                 	<% } %>
@@ -149,6 +179,28 @@
                    	<% if(currentPage != maxPage) { %>
                     	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage + 1%>'">></button>
                 	<% } %>
+                	
+                	<% } else { %>
+   
+                    <%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
+                  
+                  <%} %>
+              	
+                	
                 </div>
         
 

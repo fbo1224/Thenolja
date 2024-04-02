@@ -3,10 +3,8 @@
     
 <%@ page import="java.util.ArrayList,   thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
 <%
-ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
+	ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
 	
-	NonMember nonMember = (NonMember)request.getAttribute("nonMember");	
-
 	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -110,6 +108,12 @@ ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNo
                          <% } %>
                         <% }  %>
                         <% } %>
+                          
+                          	<% if(oldList!=null &&oldList.isEmpty()) { %>
+	                        	<tr>
+	                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
+	                        	</tr>
+                       		 <%} else { %>
                         
                          	<% if(oldList != null) { %>
                        		<%for(NonMember n : oldList) { %>
@@ -120,10 +124,10 @@ ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNo
 		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%=  n .getMemNo() %>)">삭제</button></td>
 		                            
 	                       	  </tr>
-                       		<%} %>
-                       	<% } %>
-
-                        
+	                       		<%} %>
+	                       	<% } %>
+	 					<% } %>
+	                        
                         
                         
                         

@@ -237,5 +237,5 @@
 	       		ROOM_NUM = ? 	
 	   ORDER BY ROOM_NO DESC
 	</entry>
-
+	
 </properties>

@@ -267,4 +267,50 @@ public class ReviewDao {
 		 
 	 }
 	 
+	 /**
+	  * 리뷰 오래된순
+	  */
+	 public ArrayList<AdminReview> oldReviewMemberList(Connection conn, PageInfo pi){
+		 
+		 ArrayList<AdminReview> list = new ArrayList();
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("oldReviewMemberList");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+		 
+			while(rset.next()) {
+				
+				AdminReview adminReview = new AdminReview();
+				adminReview.setHotelName(rset.getString("HOTEL_NAME"));
+				adminReview.setMemId(rset.getString("MEM_ID"));
+				adminReview.setNickName(rset.getString("NICKNAME"));
+				adminReview.setCreateDate(rset.getString("CREATE_DATE"));
+				adminReview.setReserNo(rset.getInt("RV_RESER_NO"));
+				
+				list.add(adminReview);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		 
+		 return list;
+
+	 }
+	 
 }

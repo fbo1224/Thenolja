@@ -123,6 +123,13 @@
                        <% } %>
                        <%} %>
                        
+                       <% if(oldList!=null &&oldList.isEmpty()) { %>
+                        	<tr>
+                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
+                        	</tr>
+                        <% } else { %>
+                       
+                       
                        	<% if(oldList != null) { %>
                        		<%for(AdminReservation adminReservation : oldList) { %>
                        	<tr>
@@ -140,9 +147,9 @@
 	                      		<% } %>
 	                            
                         </tr>
-                        <% } %>
-                       <% } %>
-                       
+                        	<% } %>
+                       	<% } %>
+                       <%} %>
                        
                        
                        

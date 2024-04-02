@@ -200,15 +200,16 @@ public class MemberService {
 		return count;
 	}
 //-----------------------------------숙소상세조회페이지 로그인 사용자 찜목록 확인-----------------------------
-	public int selectHeart() {
+	public int selectHeart(int hotelNo, int memNo) {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().selectHeart(conn);
+		int count = new MemberDao().selectHeart(conn, hotelNo, memNo);
 		
+		// System.out.println("selectHeart Servlet");
 		JDBCTemplate.close(conn);
 		
-		return result;
+		return count;
 	
 		
 	}

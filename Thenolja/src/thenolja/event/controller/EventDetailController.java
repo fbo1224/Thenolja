@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.notice.model.vo.Notice;
 import thenolja.notice.service.NoticeServiceImpl;
 
+
 /**
  * Servlet implementation class NoticeDetailController
  */
@@ -29,7 +30,7 @@ public class EventDetailController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 공지사항 상세화면 조회
+	 * 이벤트 상세화면 조회
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -37,7 +38,7 @@ public class EventDetailController extends HttpServlet {
 		int noticeNo = Integer.parseInt(request.getParameter("EventNo"));
 		String flag  = request.getParameter("flag"); // 수정, 삭제 / 상세 페이지 구분을 위한 값 추가
 		
-		System.out.println("[EventDetailController noticeNo] " + noticeNo);  
+		System.out.println("[EventDetailController evetNo] " + noticeNo);  
 
 		Notice result = new Notice();
 		result = new NoticeServiceImpl().selectNoticeOne(noticeNo, flag);

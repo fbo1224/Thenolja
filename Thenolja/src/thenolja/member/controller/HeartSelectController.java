@@ -1,6 +1,7 @@
 package thenolja.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,9 +31,19 @@ public class HeartSelectController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int selectHeart = new MemberService().selectHeart();
-		request.setAttribute("selectHeart", selectHeart);
-	
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		int selectHeart = new MemberService().selectHeart(hotelNo, memNo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		response.getWriter().print(selectHeart);
+		
+		System.out.println("hotelNo넘긴값 :" + hotelNo);
+		System.out.println("memNo넘긴값 :" + memNo);
+		
+		System.out.println("결과값: " + selectHeart);
 	}
 
 	/**
