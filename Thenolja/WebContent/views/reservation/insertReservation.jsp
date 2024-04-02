@@ -305,7 +305,7 @@
 		                +'</tr>');
     			} else{
     				for(let i = 0; i < result.length; i++){
-    					$('#couponTable').append('<tr class="list" onclick="clickList()">'
+    					$('#couponTable').append('<tr class="list">'
     			                + '<td>' + result[i].couponNo +'</td>'
     			                + '<td>' + result[i].couponContent + '</td>'
     			                + '<td>' + result[i].couponDate + '</td>'
@@ -320,6 +320,9 @@
     		}
     		
     	});
+    	
+    	
+    	
     </script>
     
     
