@@ -15,7 +15,7 @@
 <title>마이페이지</title>
 
 <style>
-    /*div{border: 1px solid red; box-sizing: border-box;}*/
+    div{border: 1px solid red; box-sizing: border-box;}
 
     #wrap{
         width: 900px;
@@ -82,6 +82,7 @@
 
     #gradeIcon{
         margin-top: 50px;
+        display: inline-block;
     }
 
     #ct2_4 > button{
@@ -113,6 +114,10 @@
     }
     a:hover{text-decoration: black;}
     
+    #gradeInfo{
+        display: inline-block;
+        float: left;
+    }
 </style>
 
 </head>
@@ -142,13 +147,37 @@
             <div id="ct2_3">
                 <div id="gradeIcon">
                 
-                <% System.out.println("<%=gradeName%>"); %>
-                    <span id="grade" style="color: goldenrod;"><%= gradeName %></span>
-				                   
+                <!-- 회원등급에 따라 색 조정 -->
+                <% if(gradeName.equals("FAMILY")) { %>
+                    <span id="grade" style="color: chocolate;"><%= gradeName %></span>
+				<% } else if(gradeName.equals("SILVER")) { %>
+					<span id="grade" style="color: silver;"><%= gradeName %></span>
+				<% } else if(gradeName.equals("GOLD")) { %>
+					<span id="grade" style="color: gold;"><%= gradeName %></span>
+				<% } else if(gradeName.equals("VIP")) { %>
+					<span id="grade" style="color: cadetblue;"><%= gradeName %></span>
+                <% } else { %>
+                	<span id="grade" style="color: plum;"><%= gradeName %></span>
+                <% } %>
                     
                     <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
+                <div id="gradeInfo">
+                    <p>
+                        <br><span style="font-weight: bold;">등급표</span><br><br>
+                        <span style="color: plum;">VVIP</span>
+                        <span style="color: cadetblue;">VIP</span>
+                        <span style="color: gold;">GOLD</span>
+                        <span style="color: silver;">SILVER</span>
+                        <span style="color: chocolate;">FAMILY</span>
+                    </p>
+                </div>
             </div>
+
+            <script>
+                
+
+            </script>
 
             <div id="ct2_4">
                 <button type="button" id="update" onclick="location.href='<%= contextPath %>/update.ck'">정보수정</button>
