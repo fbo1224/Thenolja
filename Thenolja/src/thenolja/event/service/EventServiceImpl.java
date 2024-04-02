@@ -31,7 +31,8 @@ public class EventServiceImpl {
 			System.out.println("[EventServiceImpl selectEventList] " + list);
 			for(int i=0; i<list.size(); i++) {
 				System.out.println("[EventServiceImpl content] " + list.get(i).getEventContent());
-				System.out.println("[EventServiceImpl date] " + list.get(i).getEventDate());
+				System.out.println("[EventServiceImpl date] " + list.get(i).getEventStrtDt());
+				System.out.println("[EventServiceImpl date]" + list.get(i).getEventEndDt());
 				System.out.println("[EventServiceImpl eventYn] " + list.get(i).getEventYn());
 			}
 		}catch (Exception e) {
@@ -101,6 +102,33 @@ public class EventServiceImpl {
 		return result;
 		
 		
-	}	
+	}//method
+	
+	/*
+	 * 공지사항 삭제
+	 * 
+	 * */
+	public int deleteEventOne(int eventNo) {
+		
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			
+			result = new EventDao().deleteEventOne(conn, eventNo);
+			
+			if(result > 0) commit(conn);
+			else rollback(conn);
+			
+			close(conn);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}//method
+	
 	
 }

@@ -35,6 +35,11 @@
     border: 1px solid #17a2b8;
 }
 
+#cancel{
+	background:#b6b6b6;
+	border:1px solid #b6b6b6;
+}
+
 
 .radio-btn{
     position: relative;
@@ -150,8 +155,14 @@ input[type="text"], input[type="password"] {
 .regc {
 	display : none;
 	float : center;
-	
+}
 
+.evnt_inner_inpt{
+    height: 48px;
+    padding: 0 30px 0 16px;
+    border: 1px solid #aeaeb2;
+    border-radius: 10px;
+    background-color: #d7d7d7;
 }
 
 
@@ -164,16 +175,25 @@ input[type="text"], input[type="password"] {
 <%@ include file="../common/menubar.jsp" %>
 
 <script type="text/javascript">
-	
+/* 페이지 초기화 */
+$(document).ready(function(){
+	document.getElementById('eventStrt').value = new Date().toISOString().slice(0, 10);
+	document.getElementById('eventEnd').value  = new Date().toISOString().slice(0, 10);
+});
 	
 /************************ 
 * 함수설명 : 등록버튼 클릭 이벤트
 *************************/ 
 function regEvent(){
-
-	var inptTitle = $('#title').val();
+debugger
+	var inptTitle   = $('#title').val();
 	var inptContent = $('#txtArea_content').val();
 	var chkStatus   = $('input[name="status"]:checked').val();
+	var inptEventStrtDt = $('#eventStrt').val();
+	var inptEventEndDt  = $('#eventEnd').val();
+	
+	console.log(inptEventStrtDt)
+	console.log(inptEventEndDt)
 	
 	//유효성 검사 함수 호출
 	if(validation()){
@@ -185,12 +205,13 @@ function regEvent(){
 		$.ajax({
 			type:"POST",
 			url : "<%=contextPath%>/eventReg",
-			data : {eventTitle : inptTitle, eventContent : inptContent, eventYn : chkStatus, writerNo: 1},
+			data : {eventTitle : inptTitle, eventContent : inptContent, eventStrtDt : eventStrt, eventEndDt : eventEnd , eventYn : chkStatus},
 			success:function(res){
 			
 			
 			if(res == "SUCCESS"){
-				alert("이벤트게시글이 정상적으로 등록되었습니다.");
+				alert("이벤트등록이 정상적으로 등록되었습니다.");
+				
 				location.href="<%= contextPath%>/eventList"
 					}else{
 						alert("이벤트 등록 중 오류가 발생하였습니다.");
@@ -198,7 +219,7 @@ function regEvent(){
 					}
 				},
 				error:function(e){
-					alert("게시글 등록 중 오류가 발생하였습니다.");
+					alert("이벤트 등록 중 오류가 발생하였습니다.");
 					return;
 				}
 				
@@ -248,9 +269,24 @@ function validation(){
 		alert("이벤트내용은 400자까지만 입력 가능합니다.");
 		return;
 	}
-	return true;
-}
 
+	// 이벤트 시작일 체크
+	if($("#eventStrt").val() == ""){
+		alert("시작날짜를 선택해주세요.");	
+		$("#eventStrt").focus();
+		return;
+	}
+	
+	//이벤트 종료일 체크
+	if($("#eventEnd").val()== ""){
+		alert("종료날짜를 선택해주세요.");
+		$("#eventEnd").focus();
+		return;
+	}
+	
+	return true;
+}	
+	
 /*********************************** 
 * 함수설명 : 이벤트 내용 글자 count하는 부분
 ************************************/
@@ -281,7 +317,7 @@ function countText(){
 
 	<div class="container">
 		<!-- logo START -->
-			<div id="logo" class="logo_main" align="center"></div>
+		<div id="logo" class="logo_main" align="center"></div>
 		<!-- logo END -->	
 
 		<!-- form태그 시작 -->
@@ -293,6 +329,7 @@ function countText(){
 			  </tr>
 			  
 			  	<!-- 게시여부 영역  STRT -->
+			  <tr>
            		<th class="th_left"><span>이벤트상태여부</span></th>
 				<td>
 					<div class="radio-btn-wrap" id="event_rdo_wrap">
@@ -307,11 +344,10 @@ function countText(){
 						</span>
 					</div>
 	            </td>
+	           </tr>
             <!-- 게시여부 영역  END -->
-			  	
-  		<!-- 이벤트 내용 -->
-  		
-  		
+            
+  		  <!-- 이벤트 내용 -->
  		  <tr>
             <th><span>이벤트 내용</span>	</th>
             <td>
@@ -326,8 +362,38 @@ function countText(){
             </td>
             <td></td>
         </tr>
+        
+ 		<!-- 이벤트 시작일, 종료일 전체영역 START -->
+		<tr id="wrap_event">
+			<th><span>이벤트 기간</span><br><span>(시작일 / 종료일)</span></th>
+				<td>
+					<div class="toggle-group"></div>
+					<div class="radio-btn-wrap" id="mixList_205" style="display:none;">
+						<span class="radio-btn">
+							<label for="">이벤트 기간(이벤트 시작일/종료일)</label>
+						</span>
+					</div>
+					<div class="array-list" data-attr_item_vlue="null">
+						<!-- 이벤트 시작일 -->
+						<div class="item">
+							<div class="select-box bg-gray" style="float:left; margin-right:10px;">
+								<input type="date" id="eventStrt" class="evnt_inner_inpt" name="eventStrtDt" >
+							</div>
+						</div>
+						
+						<!-- 이벤트 종료일 -->
+						<div class="item">
+							<div class="select-box bg-gray" style="float:left; margin-right:10px;">
+								<input type="date" id="eventEnd" class="evnt_inner_inpt" name="eventEndDt" >
+							</div>
+						</div>
+						
+					</div>
+				</td>
+		</tr>
+		<!-- 이벤트 시작일, 종료일 전체영역 END -->   
 			
-      <!-- 첨부파일 전체영역 START -->         
+       <!-- 첨부파일 전체영역 START -->         
 		<tr data-attr_seq="194" data-attr_disp_form_cd="FD" data-attr_calc_typ_cd="null" data-attr_mndt_inpt_yn="Y">	
 			<th><span>사진</span></th>	
 			
@@ -336,6 +402,7 @@ function countText(){
 			
 					<label for="file_110" tabindex="0">사진파일찾기</label>	
 						<input type="file" id="file_110" name="fileUpload" data-file_id="110" tabindex="-1">	
+						 <img width="100" id="title-img" height="80" src="#" alt="대표이미지">
 						<input type="hidden" id="apndFileId_110" data-attr_item_sno="" data-prod_id="">	
 					
 					<!-- 업로드 영역 START -->
@@ -358,38 +425,16 @@ function countText(){
  		관리자명 :admin 
  		관리자 번호 :  
 		이벤트기간 :  -->
-		<tr>
-			<td>시작 : <input type="datetime-local" name="datetime-local"></td>
-		</tr>
-		<tr>
-			<td>끝  : <input type="datetime-local" name="datetime-local"></td>
-		</tr>
-		<!--년도,월,일 /오전/오후 시,분을 입력 받을 수 있는 텍스트 상자 -->
-		</table>
-	
-	<table>
+		
 		<tr>
 			<td colspan="2" id="">
-			<input type="button" id="reg"    class="btn btn-primary" value="등록" onclick="regEvent();">
+			<input type="button" id="save"    class="btn btn-primary" value="등록" onclick="regEvent();">
 			<input type="button" id="cancel" class="btn btn-primary" value="취소" onclick="history.back();">
 			</td>
 		</tr>
-	</table>
-</form>
+		</table>
+	</form>
+</div>
 <!-- form태그 끝 -->	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
- 
-
 </body>
 </html>
