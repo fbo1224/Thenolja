@@ -3,10 +3,8 @@
     
 <%@ page import="java.util.ArrayList,   thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
 <%
-ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
+	ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
 	
-	NonMember nonMember = (NonMember)request.getAttribute("nonMember");	
-
 	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
