@@ -1,36 +1,26 @@
 package thenolja.mypage.model.vo;
 
 public class MyPageHeartList {
-	private int memNo;
-	private String roomName;
+	
 	private String hotelName;
 	private String hotelLocation;
 	private String hotelAddress;
 	private String hotelPath;
+	private String roomName;
+	private int reviewScore;
+	
 	public MyPageHeartList() {
 		super();
 	}
-	public MyPageHeartList(int memNo, String roomName, String hotelName, String hotelLocation, String hotelAddress,
-			String hotelPath) {
+	public MyPageHeartList(String hotelName, String hotelLocation, String hotelAddress, String hotelPath,
+			String roomName, int reviewScore) {
 		super();
-		this.memNo = memNo;
-		this.roomName = roomName;
 		this.hotelName = hotelName;
 		this.hotelLocation = hotelLocation;
 		this.hotelAddress = hotelAddress;
 		this.hotelPath = hotelPath;
-	}
-	public int getMemNo() {
-		return memNo;
-	}
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
-	}
-	public String getRoomName() {
-		return roomName;
-	}
-	public void setRoomName(String roomName) {
 		this.roomName = roomName;
+		this.reviewScore = reviewScore;
 	}
 	public String getHotelName() {
 		return hotelName;
@@ -56,13 +46,24 @@ public class MyPageHeartList {
 	public void setHotelPath(String hotelPath) {
 		this.hotelPath = hotelPath;
 	}
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+	public int getReviewScore() {
+		return reviewScore;
+	}
+	public void setReviewScore(int reviewScore) {
+		this.reviewScore = reviewScore;
+	}
 	@Override
 	public String toString() {
-		return "MyPageHeartList [memNo=" + memNo + ", roomName=" + roomName + ", hotelName=" + hotelName
-				+ ", hotelLocation=" + hotelLocation + ", hotelAddress=" + hotelAddress + ", hotelPath=" + hotelPath
+		return "MyPageHeartList [hotelName=" + hotelName + ", hotelLocation=" + hotelLocation + ", hotelAddress="
+				+ hotelAddress + ", hotelPath=" + hotelPath + ", roomName=" + roomName + ", reviewScore=" + reviewScore
 				+ "]";
 	}
-	
 	
 	
 }

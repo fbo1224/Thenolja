@@ -26,7 +26,7 @@
     }
     #content{
         width: 600px;
-        height: 200px;
+        height: auto;
         margin-top: 20px;
         margin: auto;
     }
@@ -110,21 +110,22 @@
 				</tr>
 			</table>
 		<% } else { %>
-		
-			<% for(MyPageHeartList h : heartList) { %>
-			<div id="content">
-			        <div id="reser_info">
-			            <div id="reser_hotel_img">
-                            <img src="<%= h.getHotelPath() %>" alt="호텔이미지" width="220px" height="220px">
-                        </div>
-                        <div id="reser_detail">
-                            <h3><%= h.getHotelName() %></h3><br>
-                            <p><%= h.getRoomName() %></p>
-                            <p><%= h.getHotelAddress() %></p>
-                        </div>
-                        <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
-			        </div>
-				</div>
+			<% for(int i = 0; i < heartList.size(); i++) { %>
+				<% for(MyPageHeartList h : heartList) { %>
+				<div id="content">
+				        <div id="reser_info">
+				            <div id="reser_hotel_img">
+	                            <img src="<%= h.getHotelPath() %>" alt="호텔이미지" width="220px" height="220px">
+	                        </div>
+	                        <div id="reser_detail">
+	                            <h3><%= h.getHotelName() %></h3><br>
+	                            <p><%= h.getRoomName() %></p>
+	                            <p><%= h.getHotelAddress() %></p>
+	                        </div>
+	                        <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
+				        </div>
+					</div>
+				<% } %>
 			<% } %>
 		<% } %>
 <div id="homeBtn">
