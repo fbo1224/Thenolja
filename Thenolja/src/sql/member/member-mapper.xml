@@ -248,27 +248,13 @@
 		       HOTEL_NAME,
 		       HOTEL_LOCATION,
 		       HOTEL_ADDRESS,
-		       HOTEL_PATH,
-               ROOM_NAME,
-               REVIEW_SCORE
+		       HOTEL_PATH
 		  FROM
 		       TB_SAVED
           JOIN
                 TB_HOTEL
          USING
                (HOTEL_NO)
-          JOIN
-               TB_ROOM
-        USING
-                (HOTEL_NO)
-        JOIN
-              TB_RESERVATION
-        USING
-             (ROOM_NO)
-        JOIN
-             TB_REVIEW
-        ON
-             (RESER_NO = RV_RESER_NO)
         WHERE
               SA_MEM_NO = ?
 	

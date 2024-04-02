@@ -47,9 +47,7 @@ public class MyPageDao {
 				MyPageHeartList heartList = new MyPageHeartList(rset.getString("HOTEL_NAME"),
 																rset.getString("HOTEL_LOCATION"),
 																rset.getString("HOTEL_ADDRESS"),
-																rset.getString("HOTEL_PATH"),
-																rset.getString("ROOM_NAME"),
-																rset.getInt("REVIEW_SCORE"));
+																rset.getString("HOTEL_PATH"));
 				list.add(heartList);
 			}
 			
