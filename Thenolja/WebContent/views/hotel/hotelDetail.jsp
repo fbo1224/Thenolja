@@ -378,11 +378,13 @@ svg{
 				</p>
 			</div>
 			
+			<!-- review영역 ajax -->
+			<%--
 			<div>
 				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
 				<div id="detail-content-review">
 					<a name="reviews"></a>
-					<%for(HotelReview hr : dh.getReviewList() ){ %>
+					 <%for(HotelReview hr : dh.getReviewList() ){ %>
 					<div class="content-review-1 card" id="<%= hr.getReserNo() %>">
 						<div class="review-1-div">
 							<span>작성자 : <%= hr.getReserName() %> </span>
@@ -395,7 +397,7 @@ svg{
 					</div>
 					<%} %>
 				</div>
-				
+			  --%>
 				<!-- 페이징처리 -->
 			</div>
 			
@@ -432,7 +434,6 @@ svg{
 		}
 		
 		.chat-app .chat {
-		    margin-left: 280px;
 		    border-left: 1px solid #eaeaea
 		}
 		
@@ -664,66 +665,81 @@ svg{
 		        overflow-x: auto
 		    }
 		}
+
 	</style>
 	
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-	<div class="container">
-	<div class="row clearfix">
-	    <div class="col-lg-12">
-	        <div class="card chat-app">
-	            <div class="chat">
-	                <div class="chat-header clearfix">
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-	                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-	                            </a>
-	                            <div class="chat-about">
-	                                <h6 class="m-b-0">Aiden Chavez</h6>
-	                                <small>Last seen: 2 hours ago</small>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="chat-history">
-	                    <ul class="m-b-0">
-	                        <li class="clearfix">
-	                            <div class="message-data text-right">
-	                                <span class="message-data-time">10:10 AM, Today</span>
-	                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-	                            </div>
-	                            <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
-	                        </li>
-	                        <li class="clearfix">
-	                            <div class="message-data">
-	                                <span class="message-data-time">10:12 AM, Today</span>
-	                            </div>
-	                            <div class="message my-message">Are we meeting today?</div>                                    
-	                        </li>                               
-	                        <li class="clearfix">
-	                            <div class="message-data">
-	                                <span class="message-data-time">10:15 AM, Today</span>
-	                            </div>
-	                            <div class="message my-message">Project has been already finished and I have results to show you.</div>
-	                        </li>
-	                    </ul>
-	                </div>
-	                <div class="chat-message clearfix">
-	                    <div class="input-group mb-0">
-	                        <div class="input-group-prepend">
-	                            <span class="input-group-text"><i class="fa fa-send"></i></span>
-	                        </div>
-	                        <input type="text" class="form-control" placeholder="Enter text here...">                                    
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+	<div class="container review-div">
+		<div class="row clearfix">
+		    <div class="col-lg-12">
+		        <div class="card chat-app">
+		            <div class="chat">
+		                <div class="chat-header clearfix">
+		                    <div class="row">
+		                        <div class="col-lg-6">
+		                            <img src="<%= dh.getHotelPath() %>" alt="avatar">
+		                            <div class="chat-about">
+		                                <h6 class="m-b-0"><%= dh.getHotelName() %></h6>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="chat-history">
+		                    <ul class="m-b-0" id="review-ul">
+		                    </ul>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<div class="paging-area" align="center">
+		
+		</div>
+        	
+			<%--
+        	<%for(int i = startPage; i <= endPage; i++){ %>
+        		<% if(currentPage != i) { %>
+        			<button class="btn btn btn-outline-info"
+        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>&loginStatus=A'" ><%= i %></button>
+        		<%} else { %>
+        			<button
+        			class="btn btn btn-outline-info"
+        			disabled ><%= i %></button>
+        		<%} %>
+        	<%} %>
+        	
+        	<%if(currentPage != maxPage){ %>
+        		<button class="btn btn btn-outline-info"
+        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>&loginStatus=A' " >다음</button>
+        	<%} %>
+        
+        	<%if(currentPage > 1){ %>
+        		<button class="btn btn btn-outline-info"
+				onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
+			<%} %>
+			
+        	<%for(int i = startPage; i <= endPage; i++){ %>
+        		<% if(currentPage != i) { %>
+        			<button class="btn btn btn-outline-info"
+        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
+        		<%} else { %>
+        			<button
+        			class="btn btn btn-outline-info"
+        			disabled ><%= i %></button>
+        		<%} %>
+        	<%} %>
+        	
+        	<%if(currentPage != maxPage){ %>
+        		<button class="btn btn btn-outline-info"
+        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
+        	<%} %>
+	     </div>
 	</div>
-	</div>
-	
+	 --%>
 	<script>
+	let currentPage
+	
 		$(function(){
 			$.ajax({
 				url: "reviewList.jqAjax",
@@ -733,11 +749,45 @@ svg{
 				},
 				type: 'get',
 				success: function(result){
+					console.log(result);
+					for(let i = 0; i < result.reviewList.length; i++){
+						$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
+											   +'<div class="message-data">'
+												   	+'<span class="message-data-time">'+result.reviewList[i].reserName+'</span>'
+					                                +'<span class="message-data-time">'+result.reviewList[i].createDate+'</span>'
+					                                +'<span class="message-data-time">'+result.reviewList[i].reviewScore+'</span>'
+						                       +'</div>'
+											   +'<div class="message my-message">'
+											   	  +result.reviewList[i].reviewContent
+											   +'</div>'	 
+											  +'</li>');
+					}
 					
+					if(result.pi.currentPage > 1){
+						$('.paging-area').append(
+						'<button class="btn btn btn-outline-info" onclick="location.href=" >'
+							+이전
+						+'</button>'		
+						)
+		        		
+					}
+				   	for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
+	        			if(result.pi.currentPage != i) {
+	        				$('.paging-area').append('<button class="btn btn btn-outline-info">'+i+'</button>')
+	        			}
+	        			else {
+	        				$('.paging-area').append('<button class="btn btn btn-outline-info"disabled >'+i+'</button>')
+	        				
+	        			}
+	        		}
+	        			
+					
+	        			
 				},
 				error: function(result){
 					console.log(result);	
-				}
+				},
+				async: false
 			})
 			
 			
@@ -748,22 +798,21 @@ svg{
 				},
 				type: 'get',
 				success: function(result){
-					
+					// console.log($('#review-ul').children());
 					if(result != null){
 						for(let i = 0; i < result.length; i++){
-							$('.content-review-1').each(function(idx, ele){
+							$('#review-ul').children().each(function(idx, ele){
 								if($(ele).attr('id') == result[i].reserNo){
 									// console.log(result);
-									$(ele).after('<div class="content-review-1 card admins" style="border: 1px solid skyblue;" >'
-												+'<div class="review-1-div">'
-												  +'<p>작성자 : '+ result[i].nickname +'</p>'
-												  +'<p>작성일 : '+ result[i].createDate +'</p>'   
+									$(ele).after('<li class="clearfix">'
+												+'<div class="message-data text-right">'
+								    				+'<span class="message-data-time">작성자 : '+ result[i].nickname +'</span>'
+													+'<span class="message-data-time">작성일 : '+ result[i].createDate +'</span>'
+								    			+'</div>'
+												+'<div class="message other-message float-right">'
+													+'<span class="message-data-time">'+ result[i].commentContent +'</span>'
 											    +'</div>'
-											    +'<div class="review-1-content" >'
-											    	+'<span>'+ result[i].commentContent +'</span>'
-											    +'</div>'
-											+'</div>');
-								
+											+'</li>');
 								}
 							});	
 						}
@@ -773,7 +822,7 @@ svg{
 				error : function(result){
 					console.log(result);
 				},
-				
+				async: false
 			});
 
 		});

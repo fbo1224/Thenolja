@@ -2,6 +2,8 @@ package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,11 +12,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
 import thenolja.common.model.vo.PageInfo;
-import thenolja.tb_hotel.model.dao.HotelDao;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
 import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.HotelReview;
 
 public class AjaxController {
 	
@@ -110,7 +112,6 @@ public class AjaxController {
 	}
 	
 	public void reviewList(HttpServletRequest request, HttpServletResponse response) {
-		String view = "";
 		
 		int listCount;   
 		int currentPage; 
@@ -142,6 +143,23 @@ public class AjaxController {
 		// 3) VO로 가공
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
 								  maxPage, startPage, endPage);
+		
+		
+		ArrayList<HotelReview> reviewList = new HotelService().reviewList(pi,hotelNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
+		Map<String, Object> datas = new HashMap<>();
+		
+		datas.put("reviewList", reviewList);
+		datas.put("pi", pi);
+		
+		try {
+			gson.toJson(datas, response.getWriter());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

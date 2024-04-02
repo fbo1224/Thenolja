@@ -216,7 +216,7 @@
                           TB_HOTEL.HOTEL_NO = ?
                       ORDER
                          BY CREATE_DATE DESC) A)
-         WHERE RNUM BETWEEN 1 AND 5 
+         WHERE RNUM BETWEEN ? AND ? 
 	</entry>
 	
 	<entry key="countReviews">
