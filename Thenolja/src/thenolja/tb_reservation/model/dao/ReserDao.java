@@ -430,25 +430,26 @@ public class ReserDao {
 		return reser;
 	}
 
-	public Coupon selectCoupon(Connection conn) {
-		Coupon c = new Coupon();
+	public ArrayList<Coupon> selectCoupon(Connection conn, int memberNo) {
+		 ArrayList<Coupon> cList = new  ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectCouponList");
+		String sql = prop.getProperty("selectCoupon");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setInt(1, memberNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				c = new Coupon();
+				Coupon c = new Coupon();
 				c.setCouponNo(rset.getInt("COUPON_NO"));
 				c.setCouponContent(rset.getString("COUPON_CONTENT"));
 				c.setCouponDate(rset.getDate("COUPON_DATE"));
 				c.setCouponCode(rset.getString("COUPON_CODE"));
 				c.setCouponPercent(rset.getInt("COUPON_PERCENT"));
 				
+				cList.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -456,7 +457,8 @@ public class ReserDao {
 			close(rset);
 			close(pstmt);
 		}
-		return c;
+		System.out.println(cList);
+		return cList;
 	}
 
 

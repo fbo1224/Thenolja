@@ -1,6 +1,7 @@
-package thenolja.member.controller;
+package thenolja.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import thenolja.member.model.service.MemberService;
+import thenolja.mypage.model.vo.MyPageHeartList;
+import thenolja.mypage.service.MyPageService;
 
 /**
- * Servlet implementation class HeartInsertController
+ * Servlet implementation class MyPageHeart
  */
-@WebServlet("/insertheart")
-public class HeartInsertController extends HttpServlet {
+@WebServlet("/mypage.heart")
+public class MyPageHeartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeartInsertController() {
+    public MyPageHeartController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +32,16 @@ public class HeartInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		// System.out.println(hotelNo);
-		// System.out.println(memNo);
+		ArrayList<MyPageHeartList> heartList = new MyPageService().selectHeartList(memNo);
+			
+		request.setAttribute("heartList", heartList);
 		
-		int count = new MemberService().heartInsert(hotelNo, memNo);
-		
+		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
+			
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

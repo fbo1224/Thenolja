@@ -1,4 +1,4 @@
-package thenolja.mypage.controller;
+package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.mypage.model.vo.MyPageHeartList;
-import thenolja.mypage.service.MyPageService;
+import com.google.gson.Gson;
+
+import thenolja.tb_coupon.model.vo.Coupon;
+import thenolja.tb_reservation.model.Service.ReserService;
 
 /**
- * Servlet implementation class MyPageHeart
+ * Servlet implementation class CuponController
  */
-@WebServlet("/mypage.heart")
-public class MyPageHeart extends HttpServlet {
+@WebServlet("/cupon.jqAjax")
+public class CuponController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageHeart() {
+    public CuponController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +33,16 @@ public class MyPageHeart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		System.out.println(memberNo);
 		
-		ArrayList<MyPageHeartList> list = new MyPageService().selectHeartList(memNo);
+		ArrayList<Coupon> coupon = new ReserService().selectCoupon(memberNo);
 		
-		request.getRequestDispatcher("views\\mypage\\heartList.jsp").forward(request, response);
-	
-	
-	
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new Gson();
+		
+		gson.toJson(coupon, response.getWriter());
+		
 	}
 
 	/**

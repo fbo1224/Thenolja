@@ -119,37 +119,36 @@
 		</div>
     
 		<% if(reserList.isEmpty()) { %>
-		<table>
-			<tr>
-				<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
-			</tr>
-		</table>
+			<table>
+				<tr>
+					<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
+				</tr>
+			</table>
 		<% } else { %>
-		<% for(Reservation r : reserList) { %>
-		<div id="content">
-	        <div id="reser_info">
-	            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
-				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
-	            <div id="reser_detail">
-	                <h3><%=r.getHotelName() %></h3>
-	                <p><%=r.getRoomName() %></p>
-	                <p><%=r.getPeople() %>인</p>
-	                <p><%=r.getRoomPrice() %>원</p>
-	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
-	            </div>
-
-            <div id="review_in">
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
-            </div>
-        </div>
+			<% for(Reservation r : reserList) { %>
+				<div id="content">
+			        <div id="reser_info">
+			            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
+						<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
+						<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
+			            <div id="reser_detail">
+			                <h3><%=r.getHotelName() %></h3>
+			                <p><%=r.getRoomName() %></p>
+			                <p><%=r.getPeople() %>인</p>
+			                <p><%=r.getRoomPrice() %>원</p>
+			                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
+			            </div>
+		
+			            <div id="review_in">
+			                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
+			            </div>
+			        </div>
+				</div>
+			<% } %>
+		<% } %>
+	<div id="homeBtn">
+		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
-	<% } %>
-	<% } %>
-<div id="homeBtn">
-	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
-	
-</div>
 </div>
 
 </body>
