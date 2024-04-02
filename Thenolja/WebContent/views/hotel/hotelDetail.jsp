@@ -657,7 +657,10 @@ svg{
 		        overflow-x: auto
 		    }
 		}
-
+		.paging-area{
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
 	</style>
 	
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -689,100 +692,109 @@ svg{
 		</div>
 		
 	<script>
-		$(function(){
-			$.ajax({
-				url: "reviewList.jqAjax",
-				data: {
-					hotelNo : '<%= dh.getHotelNo() %>',
-					currentPage: 1,
-				},
-				type: 'get',
-				success: function(result){
-					//console.log(result);
-					for(let i = 0; i < result.reviewList.length; i++){
-						$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
-											   +'<div class="message-data">'
-												   	+'<span class="message-data-time">'+result.reviewList[i].reserName+'</span>'
-					                                +'<span class="message-data-time">'+result.reviewList[i].createDate+'</span>'
-					                                +'<span class="message-data-time">'+result.reviewList[i].reviewScore+'</span>'
-						                       +'</div>'
-											   +'<div class="message my-message">'
-											   	  +result.reviewList[i].reviewContent
-											   +'</div>'	 
-											  +'</li>');
-					}
-					
-					if(result.pi.currentPage > 1){
-						$('.paging-area').append(
-						'<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage=result.pi.currentPage - 1">'
-							+이전
-						+'</button>'		
-						)
-		        		
-					}
-				   	for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
-	        			if(result.pi.currentPage != i) {
-	        				$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage= + i + ">'
-	        						+i
-	        					+'</button>')
-	        			}
-	        			else {
-	        				$('.paging-area').append('<button class="btn btn btn-outline-info"disabled >'
-	        						+i
-	        						+'</button>')
-	        			}
-	        		}
-				   	
-	        		if(result.pi.currentPage != result.pi.maxPage){
-	        			$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="location.href=<%= contextPath %>/hotelList.hotels?currentPage=result.pi.currentPage + 1">'
-	        			+'다음'
-	        			+'</button>');
-	        		}
-	        		
-	        		
-				},
-				error: function(result){
-					console.log(result);	
-				},
-				async: false
-			})
+	
+	function reviewAjax(value){
+		$('#review-ul').empty();
+		$('.paging-area').empty();
 			
-			
-			$.ajax({
-				url: "commentAdmin.jqAjax",
-				data: {
-					hotelNo: '<%= dh.getHotelNo() %>'
-				},
-				type: 'get',
-				success: function(result){
-					// console.log($('#review-ul').children());
-					if(result != null){
-						for(let i = 0; i < result.length; i++){
-							$('#review-ul').children().each(function(idx, ele){
-								if($(ele).attr('id') == result[i].reserNo){
-									// console.log(result);
-									$(ele).after('<li class="clearfix">'
-												+'<div class="message-data text-right">'
-								    				+'<span class="message-data-time">작성자 : '+ result[i].nickname +'</span>'
-													+'<span class="message-data-time">작성일 : '+ result[i].createDate +'</span>'
-								    			+'</div>'
-												+'<div class="message other-message float-right">'
-													+'<span class="message-data-time">'+ result[i].commentContent +'</span>'
-											    +'</div>'
-											+'</li>');
-								}
-							});	
-						}
-					}
-					
-				},
-				error : function(result){
-					console.log(result);
-				},
-				async: false
-			});
-
+		
+		$.ajax({
+			url: "reviewList.jqAjax",
+			data: {
+				hotelNo : '<%= dh.getHotelNo() %>',
+				currentPage: value,
+			},
+			type: 'get',
+			success: function(result){
+				console.log(result);
+				for(let i = 0; i < result.reviewList.length; i++){
+					$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
+										   +'<div class="message-data">'
+											   	+'<span class="message-data-time">'+result.reviewList[i].reserName+'</span>'
+				                                +'<span class="message-data-time">'+result.reviewList[i].createDate+'</span>'
+				                                +'<span class="message-data-time">'+result.reviewList[i].reviewScore+'</span>'
+					                       +'</div>'
+										   +'<div class="message my-message">'
+										   	  +result.reviewList[i].reviewContent
+										   +'</div>'	 
+										  +'</li>');
+				}
+				
+				if(result.pi.currentPage > 1){
+					$('.paging-area').append(
+					'<button class="btn btn btn-outline-info" onclick="reviewAjax(' + (result.pi.currentPage-1) +');">'
+						+'이전'
+					+'</button>'		
+					)
+	        		
+				}
+				
+			   	for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
+        			if(result.pi.currentPage != i) {
+        				$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="reviewAjax('+ i +')">'
+        						+i
+        					+'</button>')
+        			}
+        			else {
+        				$('.paging-area').append('<button class="btn btn btn-outline-info"disabled >'
+        						+i
+        						+'</button>')
+        			}
+        		}
+			   	
+        		if(result.pi.currentPage != result.pi.maxPage){
+        			$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="reviewAjax('+(result.pi.currentPage+1)+')">'
+        			+'다음'
+        			+'</button>');
+        		}
+        		
+        		
+			},
+			error: function(result){
+				console.log(result);	
+			},
+			async: false
 		});
+		
+		$.ajax({
+			url: "commentAdmin.jqAjax",
+			data: {
+				hotelNo: '<%= dh.getHotelNo() %>'
+			},
+			type: 'get',
+			success: function(result){
+				if(result != null){
+					for(let i = 0; i < result.length; i++){
+						$('#review-ul').children().each(function(idx, ele){
+							if($(ele).attr('id') == result[i].reserNo){
+								$(ele).after('<li class="clearfix">'
+											+'<div class="message-data text-right">'
+							    				+'<span class="message-data-time">작성자 : '+ result[i].nickname +'</span>'
+												+'<span class="message-data-time">작성일 : '+ result[i].createDate +'</span>'
+							    			+'</div>'
+											+'<div class="message other-message float-right">'
+												+'<span class="message-data-time">'+ result[i].commentContent +'</span>'
+										    +'</div>'
+										+'</li>');
+							}
+						});	
+					}
+				}
+				
+			},
+			error : function(result){
+				console.log(result);
+			},
+			async: false
+		});
+
+		
+	
+	}
+		$(function(){
+			reviewAjax(1);
+		});
+		
 	</script>
 	
 
