@@ -191,6 +191,13 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -329,4 +336,61 @@ private Properties prop = new Properties();
 		
 		return list;
 	}
+	
+	/**
+	 * 회원 환불 오래된 순
+	 */
+	public ArrayList<AdminRefund> OldRefundMemberList(Connection conn, PageInfo pi){
+		
+		ArrayList<AdminRefund> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("OldRefundMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				AdminRefund adminRefund = new AdminRefund();
+				adminRefund.setReserNo(rset.getInt("RF_RESER_NO"));
+				adminRefund.setMemId(rset.getString("MEM_ID"));
+				adminRefund.setReserName(rset.getString("RESER_NAME"));
+				adminRefund.setMemPhone(rset.getString("MEM_PHONE"));
+				
+				list.add(adminRefund);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

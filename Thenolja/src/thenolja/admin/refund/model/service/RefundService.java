@@ -127,7 +127,25 @@ public class RefundService {
 		return list;
 	}
 	
+	/**
+	 * 회원 환불 오래된 순
+	 */
 	
+	public ArrayList<AdminRefund> OldRefundMemberList(PageInfo pi){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminRefund> list = new RefundDao().OldRefundMemberList(conn, pi);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+	
+	/**
+	 * 
+	 */
 	
 	
 }
