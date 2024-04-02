@@ -267,7 +267,7 @@ label{
 						<div id="intro-text-area">
 							<label for="intro">소개말을 적어주세요</label>
 							<div>
-								<textarea required class="form-control" rows="5" id="intro" name="introText"></textarea>
+								<textarea required onkeydown="test(this)" class="form-control" rows="5" id="intro" name="introText"></textarea>
 							</div>
 						</div>
 						
@@ -281,6 +281,12 @@ label{
 			</div>
 				
 		<script>
+		function test(e){
+			if($('#intro').val()=="<script>"){
+				alert('사용할수 없는 단어가 포함되었습니다.');
+				$('#intro').val('');
+			}
+		}
 	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	    function findAddrs() {
 	        new daum.Postcode({
