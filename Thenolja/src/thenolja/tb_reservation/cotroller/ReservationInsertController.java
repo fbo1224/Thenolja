@@ -62,24 +62,24 @@ public class ReservationInsertController extends HttpServlet {
 	//	hotel.setHotelNo(hotelNo);
 		
 
-		int result = new ReserService().insertReser(reser);
+		reser = new ReserService().insertReser(reser);
 		
 		// 여기까지 INSERT는 정상적으로 됐음.
 		// 근데 detailReservation.jsp로 넘어갈 때 servlet을 통해서 유저 객체를 넘겨주어야함.
 		
-		if(result > 0) {
+		if(reser != null) {
 			
 			// int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 			// DB하이 ~
-			reser = new ReserService().selectReservation();		
+		//
+		//	reser = new ReserService().selectReservation();
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 			// Room room = new ReserService().updateRoom();
 			
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 				
-				if(hotel != null && room != null) {
-
+			if(hotel != null && room != null && reser != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
 				session.setAttribute("hotel", hotel);

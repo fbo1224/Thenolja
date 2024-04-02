@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_hotel.model.vo.Hotel;
-import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
+import thenolja.tb_review.model.service.ReviewService;
+import thenolja.tb_review.model.vo.Review;
 
 /**
  * Servlet implementation class MyReserListController
@@ -36,11 +36,13 @@ public class MyReserListController extends HttpServlet {
 		
 		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
 		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
+		ArrayList<Review> reviewList = new ReviewService().selectReviewList(reMemNo);
 		
 		if(reserList != null) {
 			
 			request.setAttribute("reserList", reserList);
-			
+			request.setAttribute("reviewList", reviewList);
+			// System.out.println(review);
 			request.getRequestDispatcher("views/reservation/myReservationList.jsp").forward(request, response);
 			
 		} else {

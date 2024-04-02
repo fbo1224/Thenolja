@@ -51,15 +51,15 @@ public class ReviewService {
 		return result;
 	}
 
-	public Review selectReview(int reserNo) {
+	public ArrayList<Review> selectReviewList(int reMemNo) {
 		
 		Connection conn = getConnection();
 		
-		Review r = new ReviewDao().selectReview(conn, reserNo);
+		ArrayList<Review> reviewList = new ReviewDao().selectReviewList(conn, reMemNo);
 		
 		close(conn);
 		
-		return r;
+		return reviewList;
 	}
 
 }

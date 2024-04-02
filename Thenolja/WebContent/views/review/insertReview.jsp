@@ -158,7 +158,7 @@
                 <p><%=room.getRoomName() %></p>
                 <p><%=reser.getPeople() %>인</p>
                 <p><%=reser.getPaymentPrice() %>원</p>
-                <p>2024-02-28<%=room.getCheckInTime() %> ~ 2024-02-29<%=room.getCheckOutTime() %></p>
+                <p>2024-02-28&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ 2024-02-29&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
             </div>
     	</div>
     </div>

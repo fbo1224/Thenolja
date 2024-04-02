@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
-				 thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
+				 thenolja.tb_review.model.vo.Review" %>  
 <%
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	System.out.println(reviewList);
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -139,9 +141,15 @@
 	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
 	            </div>
 
+            <% for(Review re : reviewList) { %>
             <div id="review_in">
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰작성</button></a>
+            <% if(re.getMemNo() == 0) { %>
+                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+            <% } else { %>	
+            	<a href="<%=contextPath %>/update.review"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 수정</button></a>
+            <% } %>
             </div>
+            <% } %>
         </div>
 	</div>
 	<% } %>

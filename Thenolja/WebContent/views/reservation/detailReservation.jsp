@@ -197,6 +197,8 @@
                 <div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+				<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
+				
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
@@ -267,7 +269,7 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>">
+	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&reserNo=<%=reser.getReserNo()%>">
 	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
 	    </a>
     </div>
