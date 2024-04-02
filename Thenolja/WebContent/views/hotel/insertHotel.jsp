@@ -267,7 +267,7 @@ label{
 						<div id="intro-text-area">
 							<label for="intro">소개말을 적어주세요</label>
 							<div>
-								<textarea required onkeydown="test(this)" class="form-control" rows="5" id="intro" name="introText"></textarea>
+								<textarea required onkeydown="test()" class="form-control" rows="5" id="intro" name="introText"></textarea>
 							</div>
 						</div>
 						
@@ -281,8 +281,8 @@ label{
 			</div>
 				
 		<script>
-		function test(e){
-			if($('#intro').val()=="<script>"){
+		function test(){
+			if($('#intro').val().includes("<script>")){
 				alert('사용할수 없는 단어가 포함되었습니다.');
 				$('#intro').val('');
 			}
