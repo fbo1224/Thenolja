@@ -60,7 +60,7 @@
 				EVENT_CONTENT = ?,
 				EVENT_YN = ?
 					
-		WHERE   NOTICE_NO = ?
+		WHERE   EVENT_NO = ?
 	
 	</entry>
 
