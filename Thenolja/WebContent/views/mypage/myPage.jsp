@@ -145,8 +145,23 @@
             <div id="ct2_1">
             	
                 <div id="profile" onclick="profileClick();"></div>
-                <input id="profileChange" type="file" onchange="loadImg(this);" hidden>
-                
+                <form action="insertProfile" enctype="multipart/form-data" method="post" id="insertform">
+                    <input id="profileChange" type="file" onchange="loadImg(this);">
+                    <input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
+                </form>
+
+                <!-- 이미지 클릭하면 input요소 선택되게-->
+                <script>
+                    $(function(){
+                        $('#profileChange').hide();
+
+                        $('#profile').click(function(){
+                            $('#profileChange').click();
+                            // console.log('testtt');
+                        });
+                    });
+                </script>
+
                 <!-- SELECT PROFILE PATH-->
                 <script>
                     $(function(){
@@ -158,7 +173,7 @@
 							let resultStr;
                             
                             if(result  === "null"){
-                            	//console.log("test1");
+                            	console.log("test1");
                                 resultStr = '<img class="img" src="./resources/mypage/user.png" alt="기본프로필">'
                             } else {
                             	//console.log("test2");
@@ -186,7 +201,7 @@
                     }
                 </script>
 
-                <!-- INSERT PROFILE PATH-->
+                <!-- INSERT PROFILE PATH
                 <script>
                     function profileClick(){
                         $('#profileChange').click();
@@ -195,7 +210,7 @@
                             url:'insertProfile',
                             type:'post',
                             data:{
-                                memNo : <%= loginUser.getMemNo() %>
+                                memNo : <%--<%= loginUser.getMemNo() %>--%>
                             },
                             success:function(result){
                                 console.log(result);
@@ -207,7 +222,7 @@
                         });
                     }
 
-                </script>
+                </script>-->
                 
             </div>
             <div id="ct2_2">
