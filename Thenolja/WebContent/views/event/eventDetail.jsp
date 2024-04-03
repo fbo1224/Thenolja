@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenoleja.event.model.vo.Event" %>
+<%@ page import="java.util.ArrayList, thenolja.event.model.vo.Event" %>
      <%
      Event event = (Event)request.getAttribute("event");
     
@@ -93,7 +93,7 @@
 		<!-- 타이틀 영역 -->
 	    <tr id="detail_title-area">
 	         <td class="detail_title_name_td" width="500" colspan="3"><%= event.getEventTitle()  %></td>
-	         <td class="detail_title_date_td"><%= event.getEventDate() %> </td>
+	         <td class="detail_title_date_td"><%= event.getCreateDt() %> </td>
 	    </tr>
 	    <!-- 컨텐츠영역 -->
 	    <tr id="detail_content-area">
