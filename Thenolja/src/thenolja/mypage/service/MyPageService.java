@@ -19,7 +19,16 @@ public class MyPageService {
 		
 		return list;
 	}
-	
+//------------------------------프로필사진 있는지 확인---------------------------
+	public String selectProfile(int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String filePath = new MyPageDao().selectProfile(conn, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return filePath;
+	}
 	
 	
 	
