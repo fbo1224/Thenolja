@@ -6,7 +6,6 @@
 	Reservation reser = (Reservation)request.getAttribute("reser");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
-	System.out.println(hotel.getHotelNo());
 %>    
 <!DOCTYPE html>
 <html lang="en">
