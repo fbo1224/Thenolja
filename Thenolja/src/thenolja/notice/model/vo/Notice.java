@@ -1,4 +1,4 @@
-package thenoleja.notice.model.vo;
+package thenolja.notice.model.vo;
 
 import java.util.Date;
 

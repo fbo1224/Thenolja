@@ -156,7 +156,7 @@
                 <div class="paging-area" align="center";>
                 
 				
-				<% if(list!=null && list.isEmpty()) { %>
+				<% if(list!=null) { %>
 				<%-- selectMember 페이징처리.... --%>
                 	<%if(currentPage > 1) { %>
                 	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectMember?currentPage=<%=currentPage - 1%>'"><</button>

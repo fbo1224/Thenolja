@@ -117,6 +117,13 @@
     #gradeInfo{
         display: none;
     }
+    .img{
+        width: 150px; 
+        height: 150px; 
+        margin-top: 40px; 
+        margin-left: 40px;
+        cursor:pointer
+    }
 </style>
 
 </head>
@@ -137,12 +144,36 @@
         <div id="content2" class="content">
             <div id="ct2_1">
             	
-            
-                <img class="img" src="./resources/mypage/user.png" alt="프로필" style="width: 150px; height: 150px; margin-top: 40px; margin-left: 40px;">
+                <!-- tb_profile가서 가져온값이 null이면 밑에이걸로 넣어주기-->
+                <div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>
                 
                 
+                <input id="profileChange" type="file" hidden>
+
+                <script>
+                    function profileClick(){
+                        $('#profileChange').click();
+
+                        $.ajax({
+                            url:'profileChange',
+                            type:'get',
+                            data:{
+                                memNo : <%= loginUser.getMemNo() %>
+                            },
+                            success:function(result){
+                                console.log(result);
+                                if(result == null){
+                                    $('.img').attr(src,'./resources/mypage/user.png');
+                                }
+                            }
+                        });
+                    }
+
+                </script>
             </div>
-            <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
+            <div id="ct2_2">
+                <div id="name"><%= loginUser.getMemName() %>님</div>
+            </div>
             <div id="ct2_3">
                 <div id="gradeIcon">
                 
