@@ -52,7 +52,7 @@ div {
 }
 .content-div-1{
 	width: 32%;
-	height: 70%;
+	height: 80%;
 	padding: 10px;
 }
 .content-div-1:hover {
@@ -69,6 +69,12 @@ div {
 #btn-div{
 	margin-top: 10px;
 	margin-bottom: 15px;
+}
+.form-group > input {
+	margin-left: 10px;
+}
+ input[type="time"] {
+	width: 65%;
 }
 </style>
 </head>
@@ -100,7 +106,7 @@ div {
 				  <img width="100px" height="100px" src="<%= r.getRoomImgPath()  %>" alt="beforeImg">
 				</div>
 				
-				<div class="form-grop">
+				<div class="form-group">
 					<label>입실시간</label>
 					<input type="time" name="in_time" readonly value="<%= r.getCheckInTime() %>" ><br>				
 					<label>퇴실시간</label>

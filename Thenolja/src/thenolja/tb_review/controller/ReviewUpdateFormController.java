@@ -65,9 +65,8 @@ public class ReviewUpdateFormController extends HttpServlet {
 		
 		if(multiRequest.getOriginalFileName("upfile") != null) {
 			review.setOriginName(multiRequest.getOriginalFileName("upfile"));
-			System.out.println(review.getOriginName());
 			review.setChangeName(multiRequest.getFilesystemName("upfile"));
-			review.setImgPath("resources/reviewImage/" + review.getOriginName());
+			review.setImgPath("resources/reviewImage/" + review.getChangeName());
 		}
 		int result = new ReviewService().updateReview(review);
 			

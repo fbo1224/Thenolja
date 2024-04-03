@@ -35,15 +35,14 @@ public class ReviewListController extends HttpServlet {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		ArrayList<Review> reviewList = new ReviewService().selectList(hotelNo);
 	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-	if(reviewList != null) {
-		request.setAttribute("reviewList", reviewList);
-		
-		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
- 	} else {
-        
-      	 request.setAttribute("errorMsg", "조회된 리뷰가 없습니다.");
-      	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
-   }    
+		if(reviewList != null) {
+			request.setAttribute("reviewList", reviewList);
+			request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
+	 	} else {
+	        
+	      	 request.setAttribute("errorMsg", "조회된 리뷰가 없습니다.");
+	      	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
+	   }    
 	}
 
 	/**

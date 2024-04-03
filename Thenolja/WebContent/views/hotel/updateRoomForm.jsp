@@ -70,7 +70,12 @@ div {
 #btn-div{
 	margin-top: 20px;
 }
-
+.form-group > input {
+	margin-left: 10px;
+}
+ input[type="time"] {
+	width: 65%;
+}
 </style>
 </head>
 <body>
