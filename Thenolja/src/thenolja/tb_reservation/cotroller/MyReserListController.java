@@ -35,8 +35,9 @@ public class MyReserListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
-		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
+		
 		ArrayList<Review> reviewList = new ReviewService().selectReviewList(reMemNo);
+		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
 		
 		if(reserList != null) {
 			

@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_review.model.service.ReviewService;
 import thenolja.tb_review.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewListController
+ * Servlet implementation class ReviewMyListController
  */
-@WebServlet("/reviewList")
-public class ReviewListController extends HttpServlet {
+@WebServlet("/myReview.list")
+public class ReviewMyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListController() {
+    public ReviewMyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,18 @@ public class ReviewListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		ArrayList<Review> reviewList = new ReviewService().selectList(hotelNo);
-	//	int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-	if(reviewList != null) {
-		request.setAttribute("reviewList", reviewList);
+
+		int reMemNo = Integer.parseInt(request.getParameter("memNo"));
+		ArrayList<Review> myList = new ReviewService().selectReviewList(reMemNo);
 		
-		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
- 	} else {
-        
-      	 request.setAttribute("errorMsg", "조회된 리뷰가 없습니다.");
-      	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
-   }    
+		if(myList != null) {
+			request.setAttribute("myList", myList);
+			request.getRequestDispatcher("views/review/myReviewList.jsp").forward(request, response);
+	 	} else {
+	        
+	      	 request.setAttribute("errorMsg", "조회된 리뷰가 없습니다.");
+	      	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
+	   }    
 	}
 
 	/**

@@ -31,10 +31,7 @@
 	</entry>
 	
 	<entry key="selectList">
-       SELECT * 
-        FROM (
-      SELECT A.*, ROWNUM RNUM
-        FROM ( SELECT
+        SELECT
                 NICKNAME,
                 RV_RESER_NO,
                 IMG_PATH,
@@ -60,22 +57,60 @@
                 TB_RESERVATION ON (TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO)
         JOIN
                 TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
-          JOIN
+       	JOIN
                 TB_ROOM ON (TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO)
         JOIN
                 TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
-         WHERE
-                REVIEW_YN = 'Y'
-           AND
+	   WHERE
+		   		REVIEW_YN = 'Y' 
+         AND
                 TB_HOTEL.HOTEL_NO = ?
-         ORDER
-            BY
-                CREATE_DATE DESC) A)
-      WHERE RNUM BETWEEN ? AND ?
+       ORDER
+          BY
+                CREATE_DATE DESC 
 	
 	</entry>
 	
 	<entry key="selectReviewList">
+        SELECT
+                NICKNAME,
+                RV_RESER_NO,
+                IMG_PATH,
+                REVIEW_CONTENT,
+           CASE WHEN REVIEW_SCORE = 1 THEN '★' 
+                WHEN REVIEW_SCORE = 2 THEN '★★'
+                WHEN REVIEW_SCORE = 3 THEN '★★★'
+                WHEN REVIEW_SCORE = 4 THEN '★★★★'
+           ELSE '★★★★★'
+           END AS "REVIEW_SCORE",
+                CREATE_DATE,
+                TB_HOTEL.HOTEL_NO,
+                HOTEL_NAME,
+                ROOM_NAME,
+                TB_ROOM.ROOM_NO,
+                ROOM_PRICE,
+                MEM_NO,
+                PAYMENT_PRICE,
+                HOTEL_PATH
+        FROM
+                TB_REVIEW
+        JOIN
+                TB_RESERVATION ON (TB_REVIEW.RV_RESER_NO = TB_RESERVATION.RESER_NO)
+        JOIN
+                TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+       	JOIN
+                TB_ROOM ON (TB_ROOM.ROOM_NO = TB_RESERVATION.ROOM_NO)
+        JOIN
+                TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
+	   WHERE
+		 		MEM_NO = ? 
+		 AND
+		   		REVIEW_YN = 'Y' 
+       ORDER
+          BY
+                CREATE_DATE DESC 		     
+	</entry>
+	<entry key="selectReview">
         SELECT
         		NICKNAME,
 		        RV_RESER_NO,
@@ -102,12 +137,18 @@
         JOIN
                 TB_HOTEL ON (TB_HOTEL.HOTEL_NO = TB_ROOM.HOTEL_NO)       
 		 WHERE
-		 		MEM_NO = ? 
+		 		RV_RESER_NO = ? 
 		   AND
 		   		REVIEW_YN = 'Y'      
 	</entry>
-
-	
+	<entry key="deleteReview">
+		UPDATE
+				TB_REVIEW
+		   SET
+		   		REVIEW_YN = 'N'
+		 WHERE
+		 		RV_RESER_NO = ?  				
+	</entry>
 	
 	
 	
