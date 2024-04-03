@@ -144,25 +144,44 @@
         <div id="content2" class="content">
             <div id="ct2_1">
             	
-                <!-- tb_profile가서 가져온값이 null이면 밑에이걸로 넣어주기-->
-                <div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>
+                <div id="profile" onclick="profileClick();">
+                    <!--<img class="img" src="./resources/mypage/user.png" alt="프로필">-->
+                </div>
                 
-                
-                <input id="profileChange" type="file" hidden>
+                <!-- SELECT PROFILE PATH-->
+                <script>
+                    $.ajax({
+                        url: 'selectProfile',
+                        data:{memNo : <%= loginUser.getMemNo()%>},
+                        success: function(result){
+                            console.log(result);
+							let resultStr;
+                            
+                            if(result.equals('')){
+                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>'
+                            } else {
+                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="result" alt="프로필"></div>'
+                            }
+                            $('#profile').html(resultStr);
+                        }
+                    });
+                </script>
 
+                <input id="profileChange" type="file" hidden>
+                <!-- INSERT PROFILE PATH
                 <script>
                     function profileClick(){
                         $('#profileChange').click();
 
                         $.ajax({
-                            url:'profileChange',
+                            url:'insertProfile',
                             type:'get',
                             data:{
-                                memNo : <%= loginUser.getMemNo() %>
+                                memNo : <%--<%= loginUser.getMemNo() %>--%>
                             },
                             success:function(result){
                                 console.log(result);
-                                if(result == null){
+                                if(result > 0){
                                     $('.img').attr(src,'./resources/mypage/user.png');
                                 }
                             }
@@ -170,6 +189,7 @@
                     }
 
                 </script>
+                -->
             </div>
             <div id="ct2_2">
                 <div id="name"><%= loginUser.getMemName() %>님</div>
