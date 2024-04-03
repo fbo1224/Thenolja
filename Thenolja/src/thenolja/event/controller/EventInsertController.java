@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.event.model.vo.Event;
 import thenolja.event.service.EventServiceImpl;
-import thenolja.notice.model.vo.Notice;
-
 
 /**
- * Servlet implementation class EventRegController
+ * Servlet implementation class EventInsertController
  */
 @WebServlet("/eventReg")
 public class EventInsertController extends HttpServlet {
@@ -31,59 +29,45 @@ public class EventInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 등록 submission 통신
-		// 파라미터 한글 깨짐 방지를 위한 인코딩 설정
-		request.setCharacterEncoding("UTF-8");
-		// 이벤트 등록 컨트롤러
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 화면에서 넘어온 파라미터 값 세팅
-		// request.getParameter에 작성하는 문자열은 > html 태그에 선언한 name과 일치해야함.
-		String eventTitle = "";
-		String eventContent = "";
-		String eventYn = "";
-		String eventStrtDt="";
-		String eventEndDt="";
-		String eventImg = "";
-		int    writerNo = 0;
+		System.out.println("[EventInsertController]");
+		String evtTitle 	= "";
+		String evtContent 	= "";
+		String evtYn 		= "";
+		String eventImg		= "";
+		String evtStrtDt 	= "";
+		String evtEndDt 	= "";
 		
-		eventTitle   = request.getParameter("eventTitle");
-		eventContent = request.getParameter("eventContent");
-		eventYn  	= request.getParameter("eventYn");
-		eventStrtDt = request.getParameter("eventStrtDt");
-		eventEndDt = request.getParameter("eventEndDt");
-		eventImg = request.getParameter("eventImg");
+		evtTitle 	 = request.getParameter("eventTitle");
+		evtContent 	 = request.getParameter("eventContent");
+		evtYn 		 = request.getParameter("eventYn");
+		evtStrtDt 	 = request.getParameter("eventStrtDt");
+		evtEndDt 	 = request.getParameter("eventEndDt");
+		// writerNo 	 = request.getParameter("writerNo");
+		int writerNo = 1; 
 		
-		/* eventDate = request.getParameter("eventDate"); */
+		System.out.println("EventInsertController evtTitle "   + evtTitle);
+		System.out.println("EventInsertController evtContent " + evtContent);
+		System.out.println("EventInsertController evtYn "      + evtYn);
+		System.out.println("EventInsertController "            + evtStrtDt);
+		System.out.println("EventInsertController "            + evtEndDt);
 		
-		/*
-		 * eventDate = request.getParameter("eventStrtDt"); // eventStrtDt eventDate =
-		 * request.getParameter("eventEndDt"); // eventStrtDt
-		 */		
+		Event evt = new Event(evtTitle, evtContent, evtYn, 
+							  evtStrtDt, evtEndDt, eventImg, writerNo);
 		
-		eventImg  = request.getParameter("eventImg");
-		// 1. 로그인이 된 경우 로그인 정보에 있는 MEM_NO 를 세팅 테스트
-		// 2. 로그인이 안된 경우 writerNo를 임의값 1로 세팅해서 테스트
-		writerNo = Integer.parseInt(request.getParameter("writerNo")); 
-		
-		System.out.println("eventTitle : " + eventTitle);
-		System.out.println("eventContent : " + eventContent);
-		System.out.println("eventYn : " + eventYn );
-		System.out.println("eventStrtDt : " + eventStrtDt );
-		System.out.println("eventEndDt : " + eventEndDt);
-		System.out.println("eventImg : " + eventImg );
-		System.out.println("writerNo : " + writerNo );
-		
-		int svc = 0;
+		int svc = new EventServiceImpl().insertEventInfo(evt);
 		boolean rslt = false;
 		
-		// 이벤트 저장 서비스 호출
-		Event event = new Event(eventTitle, eventContent, eventYn, eventStrtDt,eventEndDt, eventImg, writerNo);
-		svc = new EventServiceImpl().insertEvent(event);
-		
-		System.out.println("[svc] " + svc);
-		
 		// 정상처리 시 목록 화면으로 sendRedirect
-		if(svc > 0) {  
+		if(svc > 0) {
 			rslt = true;
 			// 등록완료 후 response 객체에 contentType 설정
 			response.setContentType("text/html charset=UTF-8");
@@ -96,18 +80,7 @@ public class EventInsertController extends HttpServlet {
 			// 등록완료 후 response 객체에 contentType 설정
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("FAIL");
-		}	
-	}
-
-
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		}
 	}
 
 }

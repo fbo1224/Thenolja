@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>더놀자 > 이벤트 > 목록</title>
-
+<%@ include file="../common/menubar.jsp" %>
 <style>
 
 /* body layout 기준 */
@@ -151,7 +151,16 @@ li {
 * 함수설명 : 이벤트 클릭 이벤트 처리
 ************************************/
 function clckEvent(eventNo){
+
+	
 	console.log(" [clckEvent eventNo] ", eventNo);
+	if(typeof eventNo != "undefined" && eventNo != ""){
+		// 관리자인 경우 (수정화면)
+		 location.href= '<%= contextPath %>/selectUpdate.event?eventNo=' + eventNo + '&flag=' + 'Y';
+		
+		// 일반회원인 경우 (상세화면)
+		// location.href= '<%= contextPath %>/detail.event?eventNo=' + eventNo + '&flag=' + 'N';
+	}
 }
 
 
@@ -161,8 +170,6 @@ function clckEvent(eventNo){
 </head>
 <body>
 
-<%@ include file="../common/menubar.jsp" %>
-
 
     <br>
    	 <h2 align="center">이벤트</h2>
@@ -170,7 +177,7 @@ function clckEvent(eventNo){
     
     <!-- 등록 버튼 영역 START -->
    	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
-	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>
+	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/view/event/eventReg.jsp" role="button" style=>등록하기</a>
    	<!-- 등록 버튼 영역 END -->
    	
     <br>
@@ -200,8 +207,9 @@ function clckEvent(eventNo){
 									<span class="txt">더놀자</span>									
 							</div>																						
 										<strong class="title"><%=n.getEventContent() %></strong>
-										<p class="date"><%=n.getEventStrtDt() %> ~ <%=n.getEventEndDt() %></p> <!-- 이벤트 시작일~ 이벤트 종료일 -->
-								<% } else { %>				
+										<!-- 이벤트 시작일 ~ 종료일 세팅 -->
+										<p class="date"><%=n.getEventStrtDt() %> ~ <%=n.getEventEndDt() %></p>	
+								<% } else { %>
 									<span class="flag type08 small">종료</span>
 									<span class="txt">더놀자</span>										
 								<% } %>																	
