@@ -101,11 +101,9 @@ const toDay = new Date();
 	    	success: function(result){
 	    		result = result.replaceAll("[","");
 	    		result = result.replaceAll("]","");
-	    		
-	    		result = result.split(",")
-	    		// console.log(result);
+	    		result = result.split(",");
 	    		for(let i = 0; i < result.length; i++){
-	    			$('#locations').append('<option value="'+ result[i] +'">'+result[i]+'</option>');
+	    			$('#locations').append('<option value="'+result[i].trim()+'">'+result[i].trim()+'</option>');
 	    		}
 	    	},
 	    	error: function(result){
@@ -114,29 +112,6 @@ const toDay = new Date();
 	    });
 	    
 	});
-	
-	// ajax 보류
-	$('').click(function(){
-		
-		$.ajax({
-			url: "searchData.jqAjax",
-			data: {
-				startDate : startDate,
-				endDate : endDate,
-				maxPeople : $('#people-input').val().trim(),
-				location : $('#locations[name=loc] option:selected').text().trim(),
-			},
-			type: 'post',
-			success: function(result){
-				console.log(result);
-			},
-			error: function(result){
-				
-			}
-		});
-		
-	})
-	
 </script>
     
 </body>
