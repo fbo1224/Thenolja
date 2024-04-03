@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.mypage.service.MyPageService;
+
 /**
  * Servlet implementation class MyPageProfileController
  */
-@WebServlet("/profileChange")
-public class MyPageProfileController extends HttpServlet {
+@WebServlet("/insertProfile")
+public class InsertProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageProfileController() {
+    public InsertProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +29,15 @@ public class MyPageProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
+		System.out.println(memNo);
+		
+		int count = new MyPageService().insertFilePath(memNo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		response.getWriter().print(count);
 	
 	
 	

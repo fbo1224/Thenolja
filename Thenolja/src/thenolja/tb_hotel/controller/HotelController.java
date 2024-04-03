@@ -298,8 +298,6 @@ public class HotelController {
 			return view;
 		}
 		
-		// System.out.println(location);
-		
 		int listCount;
 		int currentPage;
 		int pageLimit;   
@@ -349,6 +347,12 @@ public class HotelController {
 		// 응답 경로 지정
 		request.setAttribute("sList", sList);
 		request.setAttribute("pageInfo", pi);
+
+		// 검색데이터 다시 보내기
+		request.setAttribute("daterange", daterange);
+		request.setAttribute("location", location);
+		request.setAttribute("maxPeople", maxPeople);
+		
 		view = "views/hotel/searchList.jsp";
 		return view;
 	}

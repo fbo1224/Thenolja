@@ -61,8 +61,35 @@ public class MyPageDao {
 		return list;
 	}
 	
+//--------------------------------- 프사 유무 확인----------------------------------
 	
-	
+	public String selectProfile(Connection conn, int memNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String filePath = "";
+		
+		String sql = prop.getProperty("selectProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			filePath = rset.getString("PROFILE_PATH");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return filePath;
+	}
 	
 	
 	
