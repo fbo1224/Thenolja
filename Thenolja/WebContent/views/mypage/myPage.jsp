@@ -148,27 +148,31 @@
                 
                 <!-- 회원등급에 따라 색 조정 -->
                 <% if(gradeName.equals("FAMILY")) { %>
-                    <span id="grade" style="color: chocolate; border-bottom: 1px solid chocolate;"><%= gradeName %></span>
+                    <span id="grade" style="color: chocolate;"><%= gradeName %></span>
+                    <img src="./resources/mypage/FAMILY.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("SILVER")) { %>
-					<span id="grade" style="color: silver; border-bottom: 1px solid silver;"><%= gradeName %></span>
+					<span id="grade" style="color: silver;"><%= gradeName %></span>
+                    <img src="./resources/mypage/SILVER.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("GOLD")) { %>
-					<span id="grade" style="color: gold; border-bottom: 1px solid gold;"><%= gradeName %></span>
+					<span id="grade" style="color: gold;"><%= gradeName %></span>
+                    <img src="./resources/mypage/GOLD.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("VIP")) { %>
-					<span id="grade" style="color: yellowgreen; border-bottom: 1px solid yellowgreen;"><%= gradeName %></span>
+					<span id="grade" style="color: yellowgreen;"><%= gradeName %></span>
+                    <img src="./resources/mypage/VIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
                 <% } else { %>
-                	<span id="grade" style="color: plum; border-bottom: 1px solid plum;"><%= gradeName %></span>
+                	<span id="grade" style="color: plum;"><%= gradeName %></span>
+                    <img src="./resources/mypage/VVIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
                 <% } %>
                     
-                    <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
                 <div id="gradeInfo">
                     <p>
                         <br><span style="font-weight: bold;">등급표</span><br><br>
-                        <span style="color: plum;">VVIP</span>
-                        <span style="color: yellowgreen;">VIP</span>
-                        <span style="color: gold;">GOLD</span>
-                        <span style="color: silver;">SILVER</span>
-                        <span style="color: chocolate;">FAMILY</span>
+                        <span style="color: plum; border-bottom: 1px solid plum;">VVIP</span>
+                        <span style="color: yellowgreen; border-bottom: 1px solid yellowgreen;">VIP</span>
+                        <span style="color: gold; border-bottom: 1px solid gold;">GOLD</span>
+                        <span style="color: silver; border-bottom: 1px solid silver;">SILVER</span>
+                        <span style="color: chocolate; border-bottom: 1px solid chocolate;">FAMILY</span>
                     </p>
                 </div>
             </div>
