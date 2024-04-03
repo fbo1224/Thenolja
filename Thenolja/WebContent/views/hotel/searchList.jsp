@@ -5,13 +5,6 @@
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("sList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
-	String daterange = (String)request.getAttribute("daterange");
-	String location = (String)request.getAttribute("location");
-	int maxPeople = (int)request.getAttribute("maxPeople");
-	
-	String startDate = daterange.substring(0,daterange.indexOf(" "));
-	String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
-	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
