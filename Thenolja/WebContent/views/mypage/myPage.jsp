@@ -157,10 +157,10 @@
                             console.log(result);
 							let resultStr;
                             
-                            if(result.equals("")){
-                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>'
+                            if(result == null){
+                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="기본프로필"></div>'
                             } else {
-                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="result" alt="프로필"></div>'
+                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src='+ result +' alt="수정프로필"></div>'
                             }
                             $('#profile').html(resultStr);
                         },
