@@ -31,9 +31,9 @@ public class SelectProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		System.out.println("멤넘버" : memNo);
+		System.out.println("멤넘버:" + memNo);
 		String filePath = new MyPageService().selectProfile(memNo);
-		System.out.println(filePath);
+		System.out.println("돌아온값 : " +filePath);
 		response.setContentType("text/html; charset=UTF-8");
 		
 		response.getWriter().print(filePath);
