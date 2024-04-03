@@ -162,7 +162,7 @@
                 <div class="paging-area" align="center";>
                 
                 
-                <% if(list!=null && list.isEmpty()) { %>
+                <% if(list!=null) { %>
                 	<% if(currentPage > 1) { %>
                 		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage - 1%>'"><</button>
                 	<% } %>

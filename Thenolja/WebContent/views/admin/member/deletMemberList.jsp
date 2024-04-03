@@ -117,7 +117,7 @@
                       
                         <% if(oldList!=null &&oldList.isEmpty()) { %>
                         	<tr>
-                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
+                        		<th colspan="3">탈퇴 회원이 존재하지 않습니다.</th>
                         	</tr>
                         <% } else { %>
                       
@@ -149,7 +149,7 @@
         
                 <div class="paging-area" align="center";>
                 
-                <% if(list!=null && list.isEmpty()) { %>
+                <% if(list!=null) { %>
 	                <% if(currentPage > 1) { %>
 	                 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=<%=currentPage - 1%>'"><</button>
 	                <% } %>
