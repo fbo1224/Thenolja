@@ -352,7 +352,7 @@
 <% } %>
 
 
-
+<%@ include file="../common/footer.jsp" %>
 
 
 
