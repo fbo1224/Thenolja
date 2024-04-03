@@ -106,8 +106,8 @@ public class ReserDao {
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
@@ -141,8 +141,8 @@ public class ReserDao {
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
