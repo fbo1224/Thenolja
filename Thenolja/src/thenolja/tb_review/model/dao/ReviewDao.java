@@ -5,14 +5,12 @@ import static thenolja.common.JDBCTemplate.close;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_review.model.vo.Review;
 
 public class ReviewDao {
@@ -225,6 +223,37 @@ public class ReviewDao {
 		return result;
 	}
 
+
+	public int updateReview(Connection conn, Review review) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, review.getImgPath());
+			pstmt.setString(2, review.getContent());
+			pstmt.setString(3, review.getScore());
+			pstmt.setInt(4, review.getReserNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	
+	
+	
+	
+	
 
 
 }

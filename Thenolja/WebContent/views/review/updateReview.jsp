@@ -171,8 +171,12 @@
 	<div id="content_3">
 	    <input type="file" name="upfile" id="file-up">
 	    <button type="button" id="insert-img">사진추가</button>
+     	<% if(r != null) { %>
+     	첨부파일 : <label><img src="<%= r.getImgPath()%>"></label>
+     	<input type="hidden" name="fileNo" value="<%=r.getFileNo() %>"/>
+     	<input type="hidden" name="changeName" value="<%=r.getChangeName() %>"/>
+     	<% } %>
 	</div>
-            
     <div id="content_4">
         <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;"><%=r.getContent() %></textarea>
     </div>
