@@ -117,6 +117,13 @@
     #gradeInfo{
         display: none;
     }
+    .img{
+        width: 150px; 
+        height: 150px; 
+        margin-top: 40px; 
+        margin-left: 40px;
+        cursor:pointer
+    }
 </style>
 
 </head>
@@ -137,38 +144,66 @@
         <div id="content2" class="content">
             <div id="ct2_1">
             	
-            
-                <img class="img" src="./resources/mypage/user.png" alt="프로필" style="width: 150px; height: 150px; margin-top: 40px; margin-left: 40px;">
+                <!-- tb_profile가서 가져온값이 null이면 밑에이걸로 넣어주기-->
+                <div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>
                 
                 
+                <input id="profileChange" type="file" hidden>
+
+                <script>
+                    function profileClick(){
+                        $('#profileChange').click();
+
+                        $.ajax({
+                            url:'profileChange',
+                            type:'get',
+                            data:{
+                                memNo : <%= loginUser.getMemNo() %>
+                            },
+                            success:function(result){
+                                console.log(result);
+                                if(result == null){
+                                    $('.img').attr(src,'./resources/mypage/user.png');
+                                }
+                            }
+                        });
+                    }
+
+                </script>
             </div>
-            <div id="ct2_2"><div id="name"><%= loginUser.getMemName() %>님</div></div>
+            <div id="ct2_2">
+                <div id="name"><%= loginUser.getMemName() %>님</div>
+            </div>
             <div id="ct2_3">
                 <div id="gradeIcon">
                 
                 <!-- 회원등급에 따라 색 조정 -->
                 <% if(gradeName.equals("FAMILY")) { %>
-                    <span id="grade" style="color: chocolate; border-bottom: 1px solid chocolate;"><%= gradeName %></span>
+                    <span id="grade" style="color: chocolate;"><%= gradeName %></span>
+                    <img src="./resources/mypage/FAMILY.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("SILVER")) { %>
-					<span id="grade" style="color: silver; border-bottom: 1px solid silver;"><%= gradeName %></span>
+					<span id="grade" style="color: silver;"><%= gradeName %></span>
+                    <img src="./resources/mypage/SILVER.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("GOLD")) { %>
-					<span id="grade" style="color: gold; border-bottom: 1px solid gold;"><%= gradeName %></span>
+					<span id="grade" style="color: gold;"><%= gradeName %></span>
+                    <img src="./resources/mypage/GOLD.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
 				<% } else if(gradeName.equals("VIP")) { %>
-					<span id="grade" style="color: yellowgreen; border-bottom: 1px solid yellowgreen;"><%= gradeName %></span>
+					<span id="grade" style="color: yellowgreen;"><%= gradeName %></span>
+                    <img src="./resources/mypage/VIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
                 <% } else { %>
-                	<span id="grade" style="color: plum; border-bottom: 1px solid plum;"><%= gradeName %></span>
+                	<span id="grade" style="color: plum;"><%= gradeName %></span>
+                    <img src="./resources/mypage/VVIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
                 <% } %>
                     
-                    <img src="./resources/mypage/grade.png" alt="회원등급" style="width: 40px; height: 40px;">
                 </div>
                 <div id="gradeInfo">
                     <p>
                         <br><span style="font-weight: bold;">등급표</span><br><br>
-                        <span style="color: plum;">VVIP</span>
-                        <span style="color: yellowgreen;">VIP</span>
-                        <span style="color: gold;">GOLD</span>
-                        <span style="color: silver;">SILVER</span>
-                        <span style="color: chocolate;">FAMILY</span>
+                        <span style="color: plum; border-bottom: 1px solid plum;">VVIP</span>
+                        <span style="color: yellowgreen; border-bottom: 1px solid yellowgreen;">VIP</span>
+                        <span style="color: gold; border-bottom: 1px solid gold;">GOLD</span>
+                        <span style="color: silver; border-bottom: 1px solid silver;">SILVER</span>
+                        <span style="color: chocolate; border-bottom: 1px solid chocolate;">FAMILY</span>
                     </p>
                 </div>
             </div>

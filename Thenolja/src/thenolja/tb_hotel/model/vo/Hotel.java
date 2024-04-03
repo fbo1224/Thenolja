@@ -8,7 +8,7 @@ public class Hotel {
 	private String hotelPhone;
 	private String hotelLocation; // 지역
 	private String hotelAddress;  // 주소
-	private String hotelDetail;
+	private String hotelDetail;   // 상세주소
 	private String hotelCategory;
 	private String hotelPath; // 숙소사진
 	private String hotelIntro;

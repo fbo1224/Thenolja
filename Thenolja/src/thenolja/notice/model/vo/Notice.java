@@ -84,6 +84,11 @@ public class Notice {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	
+	@Override
+	public String toString() {
+		return "Notice [noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent + ", createDate=" + createDate
+				+ ", status=" + status + ", writerNo=" + writerNo + ", writer=" + writer + ", viewCount=" + viewCount
+				+ ", noticeNo=" + noticeNo + "]";
+	}
 	
 }

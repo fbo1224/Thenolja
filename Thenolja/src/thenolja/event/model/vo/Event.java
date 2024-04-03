@@ -1,5 +1,8 @@
-package  thenolja.event.model.vo;
+package thenolja.event.model.vo;
 
+/**
+ * 
+ */
 public class Event {
 	
 	private int eventNo;			// 이벤트 관리번호
@@ -11,34 +14,38 @@ public class Event {
 	private String eventImg;		// 이벤트 이미지
 	private int writerNo;			// 작성자 관리번호
 	private String writer; 	   		// 상세화면 조회 시 작성자명
+	private String createDt;		// 등록일
+
+	// 기본 생성자
+	public Event() {}
 	
-	public Event() {
-		super();
-}
-	
-	// 저장 시 파라미터 처리를 위한 생성자 생성
-	public Event(String eventTitle, 
-				String eventContent, String eventStrtDt, 
-				String eventEndDt, String eventYn, String eventImg, int writerNo) {
-		this.eventTitle      = eventTitle;
-		this.eventContent 	 = eventContent;
-		this.eventStrtDt 	 = eventStrtDt;
-		this.eventEndDt		 = eventEndDt;
-		this.eventYn         = eventYn;
-		this.eventImg        = eventImg;
-		this.writerNo        = writerNo;
+	// 이벤트 등록시 사용 생성자
+	public Event(String evtTitle, String evtContent, String evtYn,
+				 String evtStrtDt, String evtEndDt,String createDt, String eventImg, int writerNo) {
+		this.eventTitle 	= evtTitle;
+		this.eventContent 	= evtContent;
+		this.eventYn 		= evtYn;
+		this.eventStrtDt 	= evtStrtDt;
+		this.eventEndDt 	= evtEndDt;
+		this.eventImg 		= eventImg;
+		this.writerNo 		= writerNo;
+		this.createDt       = createDt;
 	}
-		
-	// 수정시 파라미터 처리를 위한 생성자 생성
-	public Event(int eventNo, String eventTitle, 
-				String eventContent, String eventStrtDt, 
-				String eventEndDt, String eventYn, String eventImg, int writerNo) {
-		this.eventTitle    = eventTitle;
-		this.eventContent  = eventContent;
-		this.eventStrtDt   = eventStrtDt;
-		this.eventEndDt	   = eventEndDt;
-		this.eventNo 	   = eventNo;
-	}		
+	
+	// 이벤트 업데이트 시 사용 생성자
+	public Event(String evtTitle, String evtContent, String evtYn,
+				 String evtStrtDt, String evtEndDt,String createDt, String eventImg, 
+				 int writerNo, int eventNo) {
+		this.eventTitle 	= evtTitle;
+		this.eventContent 	= evtContent;
+		this.eventYn 		= evtYn;
+		this.eventStrtDt 	= evtStrtDt;
+		this.eventEndDt 	= evtEndDt;
+		this.eventImg 		= eventImg;
+		this.writerNo 		= writerNo;
+		this.eventNo		= eventNo;
+		this.createDt       = createDt;
+	}	
 
 	public int getEventNo() {
 		return eventNo;
@@ -63,23 +70,6 @@ public class Event {
 	public void setEventContent(String eventContent) {
 		this.eventContent = eventContent;
 	}
-
-	public String getEventStrtDt() {
-		return eventStrtDt;
-	}
-
-	public void setEventStrtDt(String eventStrtDt) {
-		this.eventStrtDt = eventStrtDt;
-	}
-	
-	public String getEventEndDt() {
-		return eventEndDt;
-	}
-
-	public void setEventEndDt(String eventEndDt) {
-		this.eventEndDt = eventEndDt;
-	}
-	
 
 	public String getEventYn() {
 		return eventYn;
@@ -110,5 +100,34 @@ public class Event {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public String getEventStrtDt() {
+		return eventStrtDt;
+	}
 
+	public void setEventStrtDt(String eventStrtDt) {
+		this.eventStrtDt = eventStrtDt;
+	}
+
+	public String getEventEndDt() {
+		return eventEndDt;
+	}
+
+	public void setCreateDt(String createDt) {
+		this.createDt = createDt;
+	}
+	public String getCreateDt() {
+		return createDt;
+	}
+
+	public void setEventEndDt(String eventEndDt) {
+		this.eventEndDt = eventEndDt;
+	}	
+
+	@Override
+	public String toString() {
+		return "Event [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
+				+ ", eventStrtDt=" + eventStrtDt + ", eventEndDt=" + eventEndDt + ", eventYn=" + eventYn + ", eventImg="
+				+ eventImg + ", writerNo=" + writerNo + ", writer=" + writer + ", createDt=" + createDt + "]";
+	}
+	
 }

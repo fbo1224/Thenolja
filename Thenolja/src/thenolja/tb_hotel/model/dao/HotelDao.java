@@ -399,7 +399,7 @@ public class HotelDao {
 				h.setHotelPath(rset.getString("HOTEL_PATH"));
 				h.setHotelIntro(rset.getString("HOTEL_INTRO"));
 				h.setHostName(rset.getString("HOST_NAME"));
-				h.setHotelDetail(rset.getString("DETAILLOCATION"));
+				h.setHotelDetail(rset.getString("HOTEL_DEAIL_ADDR"));
 			}
 			
 		} catch (SQLException e) {

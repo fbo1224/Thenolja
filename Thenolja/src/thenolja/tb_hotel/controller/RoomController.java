@@ -57,6 +57,9 @@ public class RoomController {
 			String inTime = multiRequest.getParameter("in_time");
 			String outTime = multiRequest.getParameter("out_time");
 			
+			inTime = inTime.substring(0, inTime.indexOf(":"));
+			outTime = outTime.substring(0, outTime.indexOf(":"));
+			
 			// VO담기
 			Room r = new Room();
 			r.setHotelNo(hotelNo);
@@ -105,7 +108,7 @@ public class RoomController {
 	public String updateRoomForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-		System.out.println(roomNo);
+		
 		Room r = new RoomService().updateRoomForm(roomNo);
 		
 		if(r != null) {
@@ -150,7 +153,10 @@ public class RoomController {
 			String outTime = multiRequest.getParameter("out_time");
 			String roomImgBefore = multiRequest.getParameter("roomImgBefore"); 
 			
-			System.out.println("roomImgBefore : " + roomImgBefore);
+			// System.out.println("roomImgBefore : " + roomImgBefore);
+			
+			inTime = inTime.substring(0, inTime.indexOf(":"));
+			outTime = outTime.substring(0, outTime.indexOf(":"));
 			
 			// VO담기
 			Room r = new Room();

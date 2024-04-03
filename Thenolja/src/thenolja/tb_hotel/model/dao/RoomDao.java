@@ -113,8 +113,8 @@ public class RoomDao {
 				r.setHotelNo(hotelNo);
 				r.setRoomNo(rset.getInt("ROOM_NO"));
 				r.setRoomName(rset.getString("ROOM_NAME"));
-				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
-				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				r.setCheckInTime(rset.getString("CHECKIN_TIME")+":00");
+				r.setCheckOutTime(rset.getString("CHECKOUT_TIME")+":00");
 				r.setRoomNum(rset.getInt("ROOM_NUM"));
 				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));
@@ -146,8 +146,8 @@ public class RoomDao {
 			
 			if(rset.next()) {
 				r.setRoomName(rset.getString("ROOM_NAME"));
-				r.setCheckInTime(rset.getString("CHECKIN_TIME"));
-				r.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				r.setCheckInTime(rset.getString("CHECKIN_TIME")+":00");
+				r.setCheckOutTime(rset.getString("CHECKOUT_TIME")+":00");
 				r.setRoomNum(rset.getInt("ROOM_NUM"));
 				r.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				r.setMaxPeople(rset.getInt("MAX_PEOPLE"));

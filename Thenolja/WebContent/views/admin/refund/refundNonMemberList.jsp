@@ -137,7 +137,8 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                	
+                
+                <% if(list!=null) { %>
                 	<%if(currentPage > 1) { %>
                     <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=currentPage - 1%>'"><</button>
                     <% } %>
@@ -154,6 +155,29 @@
                     <% if(currentPage != maxPage) { %>
                     <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=currentPage + 1%>'">></button>
                 	<% } %>
+                	
+                	<% } else { %>
+                   
+                    <%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <%} %>
+                  
+                  <%} %>
+                	
+                	
+                	
                 </div>
         
 
