@@ -5,7 +5,6 @@ import static thenolja.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_review.model.dao.ReviewDao;
 import thenolja.tb_review.model.vo.Review;
 
@@ -78,6 +77,21 @@ public class ReviewService {
 		Connection conn = getConnection();
 		
 		int result = new ReviewDao().deleteReview(conn, reserNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);		
+		return result;
+	}
+
+	public int updateReview(Review review) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReviewDao().updateReview(conn, review);
 		
 		if(result > 0) {
 			commit(conn);

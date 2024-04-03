@@ -1,5 +1,6 @@
 package thenolja.tb_review.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
@@ -63,24 +64,23 @@ public class ReviewUpdateFormController extends HttpServlet {
 	//	System.out.println(content);
 		
 		if(multiRequest.getOriginalFileName("upfile") != null) {
-			review.setImgPath(multiRequest.getOriginalFileName("upfile"));
-			
-			review.setImgPath(multiRequest.getFilesystemName("upfile"));
-			review.setImgPath("resources/reviewImage");
+			review.setOriginName(multiRequest.getOriginalFileName("upfile"));
+			review.setChangeName(multiRequest.getFilesystemName("upfile"));
+			review.setImgPath("resources/reviewImage/" + review.getOriginName());
 		}
 		int result = new ReviewService().updateReview(review);
-		
-		if(result > 0) {
-       	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
-		//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-	       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo);
-	       	 
-       	} else {
-        
-	       	 request.setAttribute("errorMsg", "리뷰 작성 실패");
-	       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
-        }       
+			
+			if(result > 0) {
+	       	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
+			//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+				int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo);
+		       	 
+	       	} else {
+	        
+		       	 request.setAttribute("errorMsg", "리뷰 작성 실패");
+		       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
+	        }       
 		}
 	
 	

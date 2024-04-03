@@ -32,6 +32,11 @@ public class Review {
 	private int roomNum;
 	private String hotelPath;
 	private String nickName;
+    private int fileNo;
+    private int refBno;
+    private String originName;
+    private String changeName;
+    private String filePath;
 	
 	public Review() {
 		super();
@@ -47,6 +52,36 @@ public class Review {
 	}
 	
 	
+	public int getFileNo() {
+		return fileNo;
+	}
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+	public int getRefBno() {
+		return refBno;
+	}
+	public void setRefBno(int refBno) {
+		this.refBno = refBno;
+	}
+	public String getOriginName() {
+		return originName;
+	}
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+	public String getChangeName() {
+		return changeName;
+	}
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	public String getNickName() {
 		return nickName;
 	}
