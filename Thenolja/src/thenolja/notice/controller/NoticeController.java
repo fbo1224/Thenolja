@@ -39,7 +39,6 @@ public class NoticeController extends HttpServlet {
 		
 		// ## vo : value object (변하지 않는 값을 처리할 때 사용함)
 		// 공지사항 조회 결과 담을 list선언 > list타입은 NoticeVO
-		
 		ArrayList<Notice> list  = new ArrayList<Notice>();
 		
 		// NoticeServiceImpl 객체 선언
