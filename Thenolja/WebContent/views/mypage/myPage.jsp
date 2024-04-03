@@ -121,8 +121,9 @@
         height: 150px; 
         margin-top: 40px; 
         margin-left: 40px;
-        cursor:pointer
+        cursor:pointer;
     }
+    .img:hover{opacity: 0.7;}
 </style>
 
 </head>
@@ -143,31 +144,35 @@
         <div id="content2" class="content">
             <div id="ct2_1">
             	
-                <div id="profile" onclick="profileClick();">
-                    <!--<img class="img" src="./resources/mypage/user.png" alt="프로필">-->
-                </div>
+                <div id="profile" onclick="profileClick();"></div>
                 
                 <!-- SELECT PROFILE PATH-->
                 <script>
-                    $.ajax({
+                    $(function(){
+                        $.ajax({
                         url: 'selectProfile',
-                        data:{memNo : <%= loginUser.getMemNo()%>},
+                        data:{memNo : <%= loginUser.getMemNo() %>},
                         success: function(result){
-                            // console.log(result);
+                           // console.log(typeof(result));
 							let resultStr;
                             
-                            if(result == null){
-                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="기본프로필"></div>'
+                            if(result  === "null"){
+                            	//console.log("test1");
+                                resultStr = '<img class="img" src="./resources/mypage/user.png" alt="기본프로필">'
                             } else {
-                                resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src='+ result +' alt="수정프로필"></div>'
+                            	//console.log("test2");
+                                resultStr = '<img class="img" src='+ result +' alt="수정프로필">'
                             }
                             $('#profile').html(resultStr);
                         }
+                        
+                    	});
                     });
                 </script>
 
-                <input id="profileChange" type="file" hidden>
-                <!-- INSERT PROFILE PATH
+                <input id="profileChange" type="file" onchange="loadImg();" hidden>
+
+                <!-- INSERT PROFILE PATH-->
                 <script>
                     function profileClick(){
                         $('#profileChange').click();
@@ -176,19 +181,20 @@
                             url:'insertProfile',
                             type:'get',
                             data:{
-                                memNo : <%--<%= loginUser.getMemNo() %>--%>
+                                memNo : <%= loginUser.getMemNo() %>
                             },
                             success:function(result){
                                 console.log(result);
+                                /*
                                 if(result > 0){
                                     $('.img').attr(src,'./resources/mypage/user.png');
-                                }
-                            }
+                                }*/
+                            },
                         });
                     }
 
                 </script>
-                -->
+                
             </div>
             <div id="ct2_2">
                 <div id="name"><%= loginUser.getMemName() %>님</div>

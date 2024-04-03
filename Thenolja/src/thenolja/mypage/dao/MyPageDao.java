@@ -68,7 +68,6 @@ public class MyPageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String filePath = null;
-		int count = 0;
 		
 		String sql = prop.getProperty("selectProfile");
 		
@@ -78,10 +77,9 @@ public class MyPageDao {
 			
 			rset = pstmt.executeQuery();
 			
-			rset.next();
-			//count = rset.getInt("COUNT(*)");
-			
-			filePath = rset.getString("PROFILE_PATH");
+			if(rset.next()) {
+				filePath = rset.getString("PROFILE_PATH");				
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
