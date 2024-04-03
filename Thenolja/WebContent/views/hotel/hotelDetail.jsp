@@ -372,30 +372,9 @@ svg{
 				</p>
 			</div>
 			
-			<!-- review영역 ajax -->
-			<%--
-			<div>
-				<h3 style="text-align: center; margin-top: 10px;">이용자 후기</h3>
-				<div id="detail-content-review">
-					<a name="reviews"></a>
-					 <%for(HotelReview hr : dh.getReviewList() ){ %>
-					<div class="content-review-1 card" id="<%= hr.getReserNo() %>">
-						<div class="review-1-div">
-							<span>작성자 : <%= hr.getReserName() %> </span>
-							<span>작성일 : <%= hr.getCreateDate() %> </span>
-							<span>리뷰 점수 <%= hr.getReviewScore() %></span>
-						</div>
-						<div class="review-1-content">
-							<span><%= hr.getReviewContent() %></span>
-						</div>
-					</div>
-					<%} %>
-				</div>
-			  --%>
-				<!-- 페이징처리 -->
-			</div>
+	</div>
 			
-		</div>
+	</div>
 		<%} else { %>
 			<h1>찾을 수 없습니다.</h1>
 		<%} %>
@@ -720,13 +699,12 @@ svg{
 										   +'</div>'	 
 										  +'</li>');
 				}
+				
 				if(result.pi.currentPage > 1){
 					$('.paging-area').append(
 					'<button class="btn btn btn-outline-info" onclick="reviewAjax(' + (result.pi.currentPage-1) +');">'
 						+'이전'
-					+'</button>'		
-					)
-	        		
+					+'</button>');
 				}
 				
 			   	for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
@@ -742,7 +720,8 @@ svg{
         			}
         		}
 			   	
-        		if(result.pi.currentPage != result.pi.maxPage){
+			   	// 임시방편
+        		if(result.pi.currentPage != result.pi.maxPage && result.pi.currentPage != 1){
         			$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="reviewAjax('+(result.pi.currentPage+1)+')">'
         			+'다음'
         			+'</button>');
