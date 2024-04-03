@@ -182,7 +182,6 @@
                             reader.onload = function(e){
                                 $('.img').attr('src', e.target.result);
                             };
-
                        }
                     }
                 </script>
@@ -194,7 +193,7 @@
 
                         $.ajax({
                             url:'insertProfile',
-                            type:'get',
+                            type:'post',
                             data:{
                                 memNo : <%= loginUser.getMemNo() %>
                             },
