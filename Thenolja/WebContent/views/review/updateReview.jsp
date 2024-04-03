@@ -41,15 +41,14 @@
 	    margin: auto;
 	}
 	#content_2{
-		width: 80%;
+		width: 40%;
 		height: 8%;
-        text-align: center;
+        text-align: left;
         font-size: 50px;
     }
     #starList{
         width: 100%;
         height: 100%;
-        margin-left:0px;
     }
 	#content_3{
 		width: 80%;
@@ -87,9 +86,9 @@
         margin-left: 30px;
     }
    	#insert-img{
-        width: 80%;
+        width: 60%;
         height: 80%;
-        margin-left: 95px;
+        margin-left: 80px;
         margin-top : 10px;
         background-color: silver;
         text-align: center;
@@ -128,6 +127,9 @@
     #add:hover{
     	font-size: 32px;
     	background-color: rgb(50, 146, 97);
+    }
+    #review_img{
+    	border-radius: 5px;
     }
 	</style>
 	
@@ -172,7 +174,7 @@
 	    <input type="file" name="upfile" id="file-up">
 	    <button type="button" id="insert-img">사진추가</button>
      	<% if(r != null) { %>
-     	첨부파일 : <label><img src="<%= r.getImgPath()%>"></label>
+     	<label style="margin-left: 20px;">첨부파일 :&nbsp;&nbsp; <img id="review_img" src="<%= r.getImgPath()%>" width="100px" height="100px"></label>
      	<input type="hidden" name="fileNo" value="<%=r.getFileNo() %>"/>
      	<input type="hidden" name="changeName" value="<%=r.getChangeName() %>"/>
      	<% } %>

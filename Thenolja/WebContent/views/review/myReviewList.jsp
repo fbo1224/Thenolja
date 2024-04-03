@@ -130,7 +130,7 @@
 	<div id="output">
 		<div id="content_title">
 			<div id="left_img">
-				<a href="<%=contextPath%>"><img src="<%=r.getImgPath() %>" alt="왼쪽 화살표" width="40px"></a>
+				<a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
 			</div>
 			<div id="left_title"><h3>MY REVIEW</h3></div>
 		</div>
@@ -154,7 +154,7 @@
 				</div>
 			</div>
 			<div id="reivew_set">
-				<div id="review_img"><img id="reser_review_img" src="resources/reviewImage/SkyReview2.webp" alt="숙소사진" width="150px" height="150px"></div>
+				<div id="review_img"><img id="reser_review_img" src="<%=r.getImgPath() %>" alt="숙소사진" width="150px" height="150px"></div>
 				<div id="img_btn">
 					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>
 					<a href="delete.review?reserNo=<%=r.getReserNo()%>">
