@@ -42,15 +42,15 @@ public class ReviewUpdateFormController extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// System.out.println("sdfsdf");
 			
-			int maxSize = 1024 * 1024 * 10;
-			
-			HttpSession session = request.getSession();
-			ServletContext application = session.getServletContext();
-			String savePath = application.getRealPath("/resources/reviewImage/");
-			
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			
+		int maxSize = 1024 * 1024 * 10;
+		
+		HttpSession session = request.getSession();
+		ServletContext application = session.getServletContext();
+		String savePath = application.getRealPath("/resources/reviewImage/");
+		
+		MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		
+		
 		int reserNo = Integer.parseInt(multiRequest.getParameter("reserNo"));
 		String imgPath = multiRequest.getParameter("upfile");
 		String content = multiRequest.getParameter("reviewContent");
@@ -69,7 +69,7 @@ public class ReviewUpdateFormController extends HttpServlet {
 			review.setImgPath("resources/reviewImage/" + review.getChangeName());
 		}
 		int result = new ReviewService().updateReview(review);
-			
+		
 			if(result > 0) {
 	       	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
 			//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
@@ -81,7 +81,7 @@ public class ReviewUpdateFormController extends HttpServlet {
 		       	 request.setAttribute("errorMsg", "리뷰 작성 실패");
 		       	 request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
 	        }       
-		}
+			}
 	
 	
 	}
