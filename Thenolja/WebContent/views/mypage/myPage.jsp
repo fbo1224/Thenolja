@@ -163,7 +163,8 @@
                                 resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="result" alt="프로필"></div>'
                             }
                             $('#profile').html(resultStr);
-                        }
+                        },
+                        error: console.log('ajax.error')
                     });
                 </script>
 
