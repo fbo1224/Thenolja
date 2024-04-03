@@ -145,26 +145,26 @@ li {
 </style>
 
 
-<script type="text/javascript">
-
-/*********************************** 
-* 함수설명 : 이벤트 클릭 이벤트 처리
-************************************/
-function clckEvent(eventNo){
-
-	
-	console.log(" [clckEvent eventNo] ", eventNo);
-	if(typeof eventNo != "undefined" && eventNo != ""){
-		// 관리자인 경우 (수정화면)
-		 location.href= '<%= contextPath %>/selectUpdate.event?eventNo=' + eventNo + '&flag=' + 'Y';
+	<script type="text/javascript">
 		
-		// 일반회원인 경우 (상세화면)
-		// location.href= '<%= contextPath %>/detail.event?eventNo=' + eventNo + '&flag=' + 'N';
-	}
-}
-
-
-</script>
+		/*********************************** 
+		* 함수설명 : 이벤트 클릭 이벤트 처리
+		************************************/
+		function clckEvent(eventNo){
+			
+			console.log(" [clckEvent eventNo] ", eventNo);
+			
+			if(typeof eventNo != "undefined" && eventNo != ""){
+				// 관리자인 경우 (수정화면)
+				 //location.href= '<%= contextPath %>/selectUpdate.event?eventNo=' + eventNo + '&flag=' + 'Y';
+				 
+				// 일반회원인 경우 (상세화면)
+				location.href= '<%= contextPath %>/detail.event?eventNo=' + eventNo + '&flag=' + 'N';
+			}
+			
+		}
+	
+	</script>
 
 
 </head>
@@ -177,11 +177,10 @@ function clckEvent(eventNo){
     
     <!-- 등록 버튼 영역 START -->
    	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
-	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/view/event/eventReg.jsp" role="button" style=>등록하기</a>
+	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>
    	<!-- 등록 버튼 영역 END -->
    	
     <br>
-
 	<!-- 이미지 게시판 전체 영역 START -->
 	
 	<!-- 실제 구현 시 반복할 부분 START -->
@@ -201,28 +200,47 @@ function clckEvent(eventNo){
 							<img src="<%= n.getEventImg() %>" alt="당신의 직춘기 레벨을 진단해보세요!" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
 						</div> 
 						<div class="txt-box">																			
+							<% if( "Y".equals(n.getEventYn()) ) { %>
 							<div class="category-box">
-								<% if( "Y".equals(n.getEventYn()) ) { %>
 									<span class="flag type01 small">진행중</span>		
 									<span class="txt">더놀자</span>									
 							</div>																						
-										<strong class="title"><%=n.getEventContent() %></strong>
-										<!-- 이벤트 시작일 ~ 종료일 세팅 -->
-										<p class="date"><%=n.getEventStrtDt() %> ~ <%=n.getEventEndDt() %></p>	
-								<% } else { %>
-									<span class="flag type08 small">종료</span>
-									<span class="txt">더놀자</span>										
-								<% } %>																	
-						</div>																							
+							<strong class="title"><%=n.getEventContent() %></strong>
+							<!-- 이벤트 시작일 ~ 종료일 세팅 -->
+							<p class="date"><%=n.getEventStrtDt() %> ~ <%=n.getEventEndDt() %></p>	
+							<% } else { %>
+								<span class="flag type08 small">종료</span>
+								<span class="txt">더놀자</span>										
+							<% } %>																	
+						 </div>																							
 					</a>																								
 				</li> 	         		
-         		
          	<% } %>
-
          <% } %>
 
 	</ul>
 	<!-- 실제 구현 시 반복할 부분 END -->
+	<%-- <script>
+		// loginId null 체크
+		<% if("".equals(loginId)){ %>
+			// 수정화면 진입 (관리자전용URL)
+			<% if("admin".contains(loginId)){  %>
+				/*$('tbody > tr.list').click(function(){
+			        //location.href='<%=contextPath%>/detail.notice';  
+			        const noticeNo = $(this).children().eq(0).text();
+			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+			      });*/
+			<% } else{ %>
+	        // 상세화면 진입 (회원전용URL)
+		         $('tbody > tr.list').click(function(){
+			          //location.href='<%=contextPath%>/detail.notice';  
+			           const noticeNo = $(this).children().eq(0).text();
+			           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
+		        }); 
+			<% } %>
+		<% } %>
+	</script>	 --%>
+	
 	
 </body>
 </html>

@@ -107,15 +107,15 @@
 </div>
 	<script>
 		// loginId null 체크
-		 <% if("".equals(loginId)){ %> 
-			//수정화면 진입 (관리자전용URL)
-			 <% if("admin".contains(loginId)){  %> 
+		<%-- <% if("".equals(loginId)){ %> --%>
+			// 수정화면 진입 (관리자전용URL)
+			<%-- <% if("admin".contains(loginId)){  %> --%>
 				$('tbody > tr.list').click(function(){
 			        //location.href='<%=contextPath%>/detail.notice';  
 			        const noticeNo = $(this).children().eq(0).text();
 			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
 			      });
-			 <% } else{ %> 
+			<%-- <% } else{ %> --%>
 	        // 상세화면 진입 (회원전용URL)
 		        /* $('tbody > tr.list').click(function(){
 		          //location.href='<%=contextPath%>/detail.notice';  
@@ -123,8 +123,8 @@
 		           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
 		
 		        }); */
-			 <% } %> 
-		 <% } %> 
+			<%-- <% } %> --%>
+		<%-- <% } %> --%>
 		
 		
 	</script>

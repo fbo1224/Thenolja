@@ -52,41 +52,26 @@ public class ReviewInsertFormController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			
-		int reserNo = Integer.parseInt(multiRequest.getParameter("reserNo"));
-		String imgPath = multiRequest.getParameter("upfile");
-		String content = multiRequest.getParameter("reviewContent");
-		String score = multiRequest.getParameter("starScore");
-		
-		Review review = new Review();
-		review.setReserNo(reserNo);
-		review.setImgPath(imgPath);
-		review.setContent(content);
-		review.setScore(score);
-	//	System.out.println(content);
-		
-		if(multiRequest.getOriginalFileName("upfile") != null) {
-			review.setOriginName(multiRequest.getOriginalFileName("upfile"));
-			review.setChangeName(multiRequest.getFilesystemName("upfile"));
-			review.setImgPath("resources/reviewImage/" + review.getOriginName());
+			int reserNo = Integer.parseInt(multiRequest.getParameter("reserNo"));
+			String imgPath = multiRequest.getParameter("upfile");
+			String content = multiRequest.getParameter("reviewContent");
+			String score = multiRequest.getParameter("starScore");
 			
-			if(multiRequest.getParameter("fileNo") != null) {
-				// 첨부파일이 존재 + 원본파일도 존재 => UPDATE ATTACHMENT => 원본파일번호가 필요함
-				// 기존파일이 가지고 있던 FileNo를 at에 담을 것
-				review.setFileNo(Integer.parseInt(multiRequest.getParameter("fileNo")));
-				
-				// 기존에 존재하던 첨부파일 삭제
-				new File(savePath + "/" + multiRequest.getParameter("changeName")).delete();
-			} else {
-				// 첨부파일이 존재 + 원본파일은 없음 => INSERT ATTACHMENT => 어떤게시글의 첨부파일인지(REF_BNO)
-				// 어떤 게시글의 첨부 파일인지 (REF_BNO)
-				review.setRefBno(reserNo);
-			} 
-		}
+			Review review = new Review();
+			review.setReserNo(reserNo);
+			review.setImgPath(imgPath);
+			review.setContent(content);
+			review.setScore(score);
+		//	System.out.println(content);
+			
+			if(multiRequest.getOriginalFileName("upfile") != null) {
+				review.setOriginName(multiRequest.getOriginalFileName("upfile"));
+				review.setChangeName(multiRequest.getFilesystemName("upfile"));
+				review.setImgPath("resources/reviewImage/" + review.getOriginName());
+			}
 		int result = new ReviewService().insertReview(review);
 		
 		if(result > 0) {
-       	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
-		//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 	       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo);
 	       	 

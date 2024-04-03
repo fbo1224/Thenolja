@@ -45,6 +45,7 @@ public class EventInsertController extends HttpServlet {
 		String eventImg		= "";
 		String evtStrtDt 	= "";
 		String evtEndDt 	= "";
+		String createDate   = "";
 		
 		evtTitle 	 = request.getParameter("eventTitle");
 		evtContent 	 = request.getParameter("eventContent");
@@ -53,6 +54,7 @@ public class EventInsertController extends HttpServlet {
 		evtEndDt 	 = request.getParameter("eventEndDt");
 		// writerNo 	 = request.getParameter("writerNo");
 		int writerNo = 1; 
+		createDate    = request.getParameter("createDate");
 		
 		System.out.println("EventInsertController evtTitle "   + evtTitle);
 		System.out.println("EventInsertController evtContent " + evtContent);
@@ -61,7 +63,7 @@ public class EventInsertController extends HttpServlet {
 		System.out.println("EventInsertController "            + evtEndDt);
 		
 		Event evt = new Event(evtTitle, evtContent, evtYn, 
-							  evtStrtDt, evtEndDt, eventImg, writerNo);
+							  evtStrtDt, evtEndDt, eventImg, writerNo, createDate);
 		
 		int svc = new EventServiceImpl().insertEventInfo(evt);
 		boolean rslt = false;

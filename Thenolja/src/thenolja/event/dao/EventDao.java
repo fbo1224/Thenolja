@@ -95,11 +95,11 @@ public class EventDao {
 			pstmt.setString(1, evt.getEventTitle());
 			pstmt.setString(2, evt.getEventContent());
 			pstmt.setString(3, evt.getEventYn());
-//			pstmt.setString(4, evt.getEventImg());
-			pstmt.setString(4, "resources/img/TheNoleJa_Logo.png");
+			pstmt.setString(4, evt.getEventImg());
 			pstmt.setString(5, evt.getEventStrtDt());
 			pstmt.setString(6, evt.getEventEndDt());
 			pstmt.setInt   (7, evt.getWriterNo());
+			pstmt.setString(8, evt.getCreateDate());
 
 			result = pstmt.executeUpdate();	
 		
@@ -217,7 +217,7 @@ public class EventDao {
 				event.setEventStrtDt(rset.getString("EVENT_STRT_DT"));
 				event.setEventEndDt(rset.getString("EVENT_END_DT"));
 				event.setWriter(rset.getString("WRITER"));
-				event.setCreateDt(rset.getString("CREATE_DATE"));
+				event.setCreateDate(rset.getString("CREATE_DATE"));
 			}	
 		
 		} catch (SQLException e) {

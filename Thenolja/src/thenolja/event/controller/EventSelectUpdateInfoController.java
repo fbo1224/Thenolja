@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.event.model.vo.Event;
 import thenolja.event.service.EventServiceImpl;
-import thenolja.notice.model.vo.Notice;
-import thenolja.notice.service.NoticeServiceImpl;
+import thenolja.event.model.vo.Event;
+import thenolja.event.service.EventServiceImpl;
 
 /**
  * Servlet implementation class EventUpdateController
@@ -51,7 +51,7 @@ public class EventSelectUpdateInfoController extends HttpServlet {
 		
 		if(result != null) {
 			request.setAttribute("event", result);
-			request.getRequestDispatcher("views/event/eventUpd.jsp").forward(request, response); //포워딩
+			request.getRequestDispatcher("view/event/eventUpd.jsp").forward(request, response); //포워딩
 		}else { //실패 => 에러페이지 보내기
 			request.setAttribute("errorMsg", "이벤트 상세 조회 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/error.Msg");

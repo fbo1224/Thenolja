@@ -93,13 +93,20 @@
 		<!-- 타이틀 영역 -->
 	    <tr id="detail_title-area">
 	         <td class="detail_title_name_td" width="500" colspan="3"><%= event.getEventTitle()  %></td>
-	         <td class="detail_title_date_td"><%= event.getCreateDt() %> </td>
+	         <td class="detail_title_date_td"><%= event.getCreateDate() %> </td>
 	    </tr>
 	    <!-- 컨텐츠영역 -->
 	    <tr id="detail_content-area">
 		   <td class="detail_content-area"><%= event.getEventContent() %></td>  
 	    </tr>
-	
+		
+		 <tr id="detail_date-area">
+			<td class="detail_date-area"><%= event.getEventStrtDt() %></td>	
+			<td class="detail_date-area"><%= event.getEventEndDt() %></td>	
+		</tr>	
+		 
+		
+		
 	</table>
 	<div class="btn-wrap">
 		<input type="button" id="detail-golist" class="btn btn-light"   value="목록으로 이동" onclick="history.back();"/>
@@ -110,10 +117,10 @@
         <!-- 새롭게 조회해온 USER_NO컬럼값을 가지고 비교    매핑값? SERVLET키값= -->
 	 
       
-     <%--  <a href="<%= contextPath %>/updateForm.notice?noticeNo=<%= notice.getNoticeNo() %>"   
+     <%--  <a href="<%= contextPath %>/updateForm.event?eventNo=<%= event.getEventNo() %>"   
          class="btn btn-sm btn-warning">수정하기</a>
 
-    	<a href="<%= contextPath %>/delete.notice?noticeNo=<%= notice.getNoticeNo() %>"
+    	<a href="<%= contextPath %>/delete.event?eventNo=<%= event.getEventNo() %>"
     	class="btn btn-sm btn-danger">삭제하기</a> --%>
 	</div>	
 	<br>
