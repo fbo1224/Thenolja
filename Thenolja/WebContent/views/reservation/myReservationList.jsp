@@ -5,7 +5,6 @@
 <%
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
-	System.out.println(reviewList);
 %>    
 <!DOCTYPE html>
 <html lang="en">

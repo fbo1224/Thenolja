@@ -26,11 +26,11 @@ public class ReviewService {
       return result;
 	}
 
-	public ArrayList<Review> selectList(PageInfo pi, int hotelNo) {
+	public ArrayList<Review> selectList(int hotelNo) {
 		
 		Connection conn = getConnection();
 		  
-		ArrayList<Review> reviewList = new ReviewDao().selectList(conn, pi, hotelNo);
+		ArrayList<Review> reviewList = new ReviewDao().selectList(conn, hotelNo);
 		  
 		close(conn);
 		
@@ -55,22 +55,37 @@ public class ReviewService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Review> reviewList = new ReviewDao().selectReviewList(conn, reMemNo);
-		
+		ArrayList<Review> myList = new ReviewDao().selectReviewList(conn, reMemNo);
+
 		close(conn);
 		
-		return reviewList;
+		return myList;
 	}
 	
 	public Review selectReview(int reserNo) {
 		
 		Connection conn = getConnection();
 		
-		Review review = new ReviewDao().selectReview(reserNo);
+		Review review = new ReviewDao().selectReview(conn, reserNo);
 		
 		close(conn);
 		
 		return review;
+	}
+
+	public int deleteReview(int reserNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReviewDao().deleteReview(conn, reserNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);		
+		return result;
 	}
 
 }
