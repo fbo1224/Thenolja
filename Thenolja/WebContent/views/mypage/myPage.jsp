@@ -154,7 +154,7 @@
 				<% } else if(gradeName.equals("GOLD")) { %>
 					<span id="grade" style="color: gold;"><%= gradeName %></span>
 				<% } else if(gradeName.equals("VIP")) { %>
-					<span id="grade" style="color: cadetblue;"><%= gradeName %></span>
+					<span id="grade" style="color: yellowgreen;"><%= gradeName %></span>
                 <% } else { %>
                 	<span id="grade" style="color: plum;"><%= gradeName %></span>
                 <% } %>
@@ -165,7 +165,7 @@
                     <p>
                         <br><span style="font-weight: bold;">등급표</span><br><br>
                         <span style="color: plum;">VVIP</span>
-                        <span style="color: cadetblue;">VIP</span>
+                        <span style="color: yellowgreen;">VIP</span>
                         <span style="color: gold;">GOLD</span>
                         <span style="color: silver;">SILVER</span>
                         <span style="color: chocolate;">FAMILY</span>
