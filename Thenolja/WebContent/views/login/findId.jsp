@@ -79,21 +79,16 @@
             border-radius: 10px;
 		}
 
-
 		img{
 			width: 200px;
 			height: 200px;
 		}
-
-	
 	
 	</style>
 
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-
-	
       
 		<div id="wrap">
 			<div id="content">
@@ -114,11 +109,10 @@
 						</div>
 
 					</form>
-						<div id="content3">
-							<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
-                            <button class="btn" onclick="location.href='<%= contextPath %>/findPwdPage'">비밀번호 찾기</button>
-						</div>
-
+					<div id="content3">
+						<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
+                           <button class="btn" onclick="location.href='<%= contextPath %>/findPwdPage'">비밀번호 찾기</button>
+					</div>
 				
 				</div>
 			</div>
