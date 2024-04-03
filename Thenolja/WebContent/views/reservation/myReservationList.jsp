@@ -141,21 +141,18 @@
 	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
 	            </div>
 
-            <% for(Review re : reviewList) { %>
+
             <div id="review_in">
-            <% if(re.getMemNo() == 0) { %>
                 <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
-            <% } else { %>	
-            	<a href="<%=contextPath %>/update.review"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 수정</button></a>
-            <% } %>
+
             </div>
-            <% } %>
+
         </div>
 			<% } %>
 		<% } %>
+		</div>
 	<div id="homeBtn">
 		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
->>>>>>> 4d01b482708b3843094e6953ffe24e2cb5962e81
 	</div>
 </div>
 
