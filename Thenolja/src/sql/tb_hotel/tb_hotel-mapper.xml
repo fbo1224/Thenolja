@@ -21,7 +21,8 @@
 		 		?,
 		 		DEFAULT,
 		 		?,
-		 		?
+		 		?,
+		 		DEFAULT
 		 	   )    
 	</entry>
 	
@@ -248,7 +249,7 @@
 	          HOTEL_PATH,
 	          HOTEL_INTRO,
 	          HOST_NAME,
-	          DETAILLOCATION
+	          HOTEL_DEAIL_ADDR
           FROM
         	  TB_HOTEL
   	     WHERE
@@ -283,7 +284,7 @@
 		      HOTEL_INTRO = ?,
 		      HOST_NAME = ?,
 		      HOTEL_PATH = ?,
-		      DETAILLOCATION = ?
+		      HOTEL_DEAIL_ADDR = ?
 		WHERE 
 		     HOTEL_NO = ? 
 		  AND
@@ -436,8 +437,10 @@
                   MIN(ROOM_PRICE) AS ROOM_PRICE
               FROM
                   TB_HOTEL
+              LEFT    
               JOIN TB_ROOM
                 ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+              LEFT  
               JOIN TB_RESERVATION
                 ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO 
              WHERE
@@ -455,7 +458,7 @@
                                            FROM
                                                TB_RESERVATION
                                           WHERE   
-                                               TB_RESERVATION.CHECKIN_TIME &lt;= ?
+                                               TB_RESERVATION.CHECKIN_TIME &gt;= ?
                                             AND
                                                TB_RESERVATION.CHECKOUT_TIME &lt;= ?)
             GROUP BY
@@ -464,9 +467,8 @@
                  HOTEL_LOCATION,
                  HOTEL_CATEGORY,
                  HOTEL_PATH,
-                 RESER_NO,
-                 TB_ROOM.ROOM_NO
-            ORDER BY TB_HOTEL.HOTEL_NO DESC) A)
+                 HOTEL_ENROLLDATE
+            ORDER BY HOTEL_ENROLLDATE DESC) A)
     	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	

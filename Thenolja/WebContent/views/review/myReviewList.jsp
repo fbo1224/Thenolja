@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList" %>  
 <%
-	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	ArrayList<Review> myList = (ArrayList<Review>)request.getAttribute("myList");
+	
 %>	
 <!DOCTYPE html>
 <html>
@@ -131,16 +132,16 @@
 			<div id="left_img">
 				<a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
 			</div>
-			<div id="left_title"><h3>REVIEW</h3></div>
+			<div id="left_title"><h3>MY REVIEW</h3></div>
 		</div>
-		<% if(reviewList.isEmpty()) { %>
+		<% if(myList.isEmpty()) { %>
 		<table>
 			<tr>
 				<th style="font-size:40px;" colspan="5">작성된 리뷰가 존재하지 않습니다.</th>
 			</tr>
 		</table>
 		<% } else { %>
-		<%for(Review r : reviewList){ %>
+		<%for(Review r : myList){ %>
 		<div id="content">
 			<div id="review_detail">
 				<div id="hotel_name">
@@ -155,11 +156,9 @@
 			<div id="reivew_set">
 				<div id="review_img"><img id="reser_review_img" src="resources/reviewImage/SkyReview2.webp" alt="숙소사진" width="150px" height="150px"></div>
 				<div id="img_btn">
-					<% if(loginUser.getMemNo() == r.getMemNo()) { %>
 					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>
-					<a href="delete.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>">
+					<a href="delete.review?reserNo=<%=r.getReserNo()%>">
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;"></a>
-					<% } %>
 				</div>
 			</div>
 		</div> 

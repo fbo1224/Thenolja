@@ -75,7 +75,7 @@ public class ReviewInsertFormController extends HttpServlet {
        	 // request.getSession().setAttribute("alertMsg", "게시글 등록성공");
 		//	 int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-	       	 response.sendRedirect(request.getContextPath() + "/reviewList?currentPage=1&hotelNo=" + hotelNo);
+	       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo);
 	       	 
        	} else {
         
