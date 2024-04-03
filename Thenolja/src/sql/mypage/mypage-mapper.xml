@@ -6,25 +6,7 @@
 		MyPage Mapper
 	</comment>
 	
-	<entry key="selectProfile">
-		SELECT 
-			   PROFILE_PATH 
-		  FROM 
-			   TB_PROFILE 
-		 WHERE 
-			   MEM_NO = ?
-	</entry>
-	
-	<entry key="insertProfile">
-		INSERT
-		  INTO
-		       TB_PROFILE
-		VALUES
-		       (
-		       ?,
-		       ?
-		       )
-	</entry>
+
 	
 	
 </properties>
