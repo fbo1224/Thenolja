@@ -73,7 +73,6 @@ public class MyPageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
