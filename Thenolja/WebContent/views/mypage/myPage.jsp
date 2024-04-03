@@ -145,6 +145,7 @@
             <div id="ct2_1">
             	
                 <div id="profile" onclick="profileClick();"></div>
+                <input id="profileChange" type="file" onchange="loadImg(this);" hidden>
                 
                 <!-- SELECT PROFILE PATH-->
                 <script>
@@ -170,7 +171,21 @@
                     });
                 </script>
 
-                <input id="profileChange" type="file" onchange="loadImg();" hidden>
+                <!-- load img-->
+                <script>
+                    function loadImg(inputFile){
+                       // console.log(inputFile.files);
+                        if(inputFile.files.length){
+                            const reader = new FileReader();
+                            reader.readAsDataURL(inputFile.files[0]);
+                            
+                            reader.onload = function(e){
+                                $('.img').attr('src', e.target.result);
+                            };
+
+                       }
+                    }
+                </script>
 
                 <!-- INSERT PROFILE PATH-->
                 <script>
@@ -187,7 +202,7 @@
                                 console.log(result);
                                 /*
                                 if(result > 0){
-                                    $('.img').attr(src,'./resources/mypage/user.png');
+                                    $('.img').attr('src','./resources/mypage/user.png');
                                 }*/
                             },
                         });
