@@ -298,6 +298,8 @@ public class HotelController {
 			return view;
 		}
 		
+		// System.out.println(location);
+		
 		int listCount;
 		int currentPage;
 		int pageLimit;   
