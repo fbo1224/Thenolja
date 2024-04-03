@@ -440,6 +440,7 @@
               LEFT    
               JOIN TB_ROOM
                 ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+              LEFT  
               JOIN TB_RESERVATION
                 ON TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO 
              WHERE
@@ -457,7 +458,7 @@
                                            FROM
                                                TB_RESERVATION
                                           WHERE   
-                                               TB_RESERVATION.CHECKIN_TIME &lt;= ?
+                                               TB_RESERVATION.CHECKIN_TIME &gt;= ?
                                             AND
                                                TB_RESERVATION.CHECKOUT_TIME &lt;= ?)
             GROUP BY
