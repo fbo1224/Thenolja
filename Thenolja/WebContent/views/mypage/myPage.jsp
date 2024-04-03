@@ -157,7 +157,7 @@
                             console.log(result);
 							let resultStr;
                             
-                            if(result.equals('')){
+                            if(result.equals("")){
                                 resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="./resources/mypage/user.png" alt="프로필"></div>'
                             } else {
                                 resultStr = '<div id="profile" onclick="profileClick();"><img class="img" src="result" alt="프로필"></div>'
