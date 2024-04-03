@@ -10,9 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
 import thenolja.event.model.vo.Event;
-
+import thenolja.notice.model.vo.Notice;
 
 public class EventDao {
 
@@ -52,7 +51,6 @@ public class EventDao {
 				// 조회 결과 Event 객체에 담기
 				Event evnt = new Event();
 				evnt.setEventNo(rset.getInt("EVENT_NO"));
-				evnt.setEventTitle(rset.getString("EVENT_TITLE"));
 				evnt.setEventContent(rset.getString("EVENT_CONTENT"));
 				evnt.setEventStrtDt(rset.getString("EVENT_STRT_DT"));
 				evnt.setEventEndDt(rset.getString("EVENT_END_DT"));
@@ -70,38 +68,39 @@ public class EventDao {
 		}
 		
 		return list;
-	}//method
+	}
 	
 	/*
-	 * 공지사항 등록
+	 * 이벤트 등록
 	 * 
 	 * */	
-	public int insertEvent(Connection conn, Event event) {
+	public int insertEventInfo(Connection conn, Event evt) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertEvent");
 		System.out.println("[EventDao insert sql] " + sql);
 		//데이터 입력받을 파일 NOtice파일
-		System.out.println("[EVENT DAO INSERT] " + event.getEventTitle());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventContent());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventYn());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventStrtDt());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventEndDt());
-		System.out.println("[EVENT DAO INSERT] " + event.getEventImg());
+		System.out.println("[EventDao INSERT] title "       + evt.getEventTitle());
+		System.out.println("[EventDao INSERT] content "     + evt.getEventContent());
+		System.out.println("[EventDao INSERT] eventYn "     + evt.getEventYn());
+		System.out.println("[EventDao INSERT] eventImg " 	+ evt.getEventImg());
+		System.out.println("[EventDao INSERT] eventStrtDt " + evt.getEventStrtDt());
+		System.out.println("[EventDao INSERT] eventEndDt "  + evt.getEventEndDt());
 		
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setString(1, event.getEventTitle());
-			pstmt.setString(2, event.getEventContent());
-			pstmt.setString(3, event.getEventYn());
-			pstmt.setString(4, event.getEventStrtDt());
-			pstmt.setString(5, event.getEventEndDt());
-			
-			pstmt.setString (6, event.getEventImg());
-		
+			pstmt.setString(1, evt.getEventTitle());
+			pstmt.setString(2, evt.getEventContent());
+			pstmt.setString(3, evt.getEventYn());
+//			pstmt.setString(4, evt.getEventImg());
+			pstmt.setString(4, "resources/img/TheNoleJa_Logo.png");
+			pstmt.setString(5, evt.getEventStrtDt());
+			pstmt.setString(6, evt.getEventEndDt());
+			pstmt.setInt   (7, evt.getWriterNo());
+
 			result = pstmt.executeUpdate();	
 		
 		} catch (SQLException e) {
@@ -110,8 +109,10 @@ public class EventDao {
 			close(conn);
 		}
 		
+		
+		
 		return result;
-	}//method
+	}		
 	
 	/*
 	 * 이벤트 수정
@@ -119,11 +120,8 @@ public class EventDao {
 	 * */		
 	public int updateEventOne(Connection conn, Event event) {
 		
-		System.out.println("[EventDAO PARAM 확인]");
-		System.out.println(	event.getEventTitle());
-		System.out.println(event.getEventContent());
-		System.out.println(event.getEventNo());
-		System.out.println(event.getEventImg());
+		System.out.println("[EVENTDAO PARAM 확인]");
+		System.out.println(event);
 		
 		int result = 0;
 		
@@ -135,17 +133,18 @@ public class EventDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, event.getEventTitle());
-			pstmt.setString(2, event.getEventContent());
-			pstmt.setString(3, event.getEventStrtDt());
-			pstmt.setString(4, event.getEventEndDt());
-			pstmt.setString(5, event.getEventYn());
-			pstmt.setInt   (6, event.getEventNo());
-			pstmt.setString (7, event.getEventImg());
+			pstmt.setString   (1, event.getEventTitle());
+			pstmt.setString   (2, event.getEventContent());
+			pstmt.setString   (3, event.getEventYn());
+			pstmt.setString   (4, event.getEventStrtDt());
+			pstmt.setString   (5, event.getEventEndDt());
+			pstmt.setString   (6, event.getEventImg());
+			pstmt.setInt      (7, event.getWriterNo());
+			pstmt.setInt	  (8, event.getEventNo());
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println("[EventDAO updateEventOne] " + result);
+			System.out.println("[EventDao updateEventOne] " + result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,10 +155,11 @@ public class EventDao {
 		
 		return result;
 		
-	}//method
+	}//method	
+	
 	
 	/*
-	 * 공지사항 삭제
+	 * 이벤트 삭제
 	 * 
 	 * */	
 	public int deleteEventOne(Connection conn, int eventNo) {
@@ -185,13 +185,50 @@ public class EventDao {
 		
 		return result;
 		
-	}//method	
-	
-
-}//DAO의 역할 : DB 외부데이터를 "입력"하는곳
+	}//method		
 	
 	
+	/*
+	 * 이벤트 상세화면 조회 (회원)
+	 * 
+	 * */
+	public Event selectEventOne(Connection conn, int eventNo) {
+		
+		System.out.println("[EventDao selectEventOne eventNo] " + eventNo);  
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Event event  = null;
+		String sql = prop.getProperty("selectEventOne");
+		System.out.println("[EventDao selectEventOne] " + sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,eventNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				event = new Event();
+				event.setEventNo(rset.getInt("EVENT_NO"));
+				event.setEventTitle(rset.getString("EVENT_TITLE"));
+				event.setEventContent(rset.getString("EVENT_CONTENT"));
+				event.setEventYn(rset.getString("EVENT_YN"));
+				event.setEventStrtDt(rset.getString("EVENT_STRT_DT"));
+				event.setEventEndDt(rset.getString("EVENT_END_DT"));
+				event.setWriter(rset.getString("WRITER"));
+				event.setCreateDt(rset.getString("CREATE_DATE"));
+			}	
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			close(pstmt);
+		}
+		
+		return event;
 	
+	}	
 	
-	
-
+}

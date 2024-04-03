@@ -1,8 +1,6 @@
 package thenolja.event.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import thenolja.event.dao.EventDao;
@@ -31,8 +29,8 @@ public class EventServiceImpl {
 			System.out.println("[EventServiceImpl selectEventList] " + list);
 			for(int i=0; i<list.size(); i++) {
 				System.out.println("[EventServiceImpl content] " + list.get(i).getEventContent());
-				System.out.println("[EventServiceImpl date] " + list.get(i).getEventStrtDt());
-				System.out.println("[EventServiceImpl date]" + list.get(i).getEventEndDt());
+				System.out.println("[EventServiceImpl date] "    + list.get(i).getEventStrtDt());
+				System.out.println("[EventServiceImpl date] "    + list.get(i).getEventEndDt());
 				System.out.println("[EventServiceImpl eventYn] " + list.get(i).getEventYn());
 			}
 		}catch (Exception e) {
@@ -41,19 +39,20 @@ public class EventServiceImpl {
 		
 		return list;
 		
-	}//method
-	
+	}
+
 	/*
+	 * 
 	 * 이벤트 등록
 	 * 
 	 * */
-	public int insertEvent(Event event) {
-		
+	public int insertEventInfo(Event evt) {
+	
 		Connection conn = getConnection();
 		int result = 0;
 		
 		try {
-			result = new EventDao().insertEvent(conn, event);
+			result = new EventDao().insertEventInfo(conn, evt);
 
 			if(result > 0) commit(conn);
 			else rollback(conn);
@@ -64,16 +63,8 @@ public class EventServiceImpl {
 			e.printStackTrace();
 		}
 		
-		return result;
-		
-	
-	
-	
-	
-	
-	
-	
-	}//method
+		return result;			
+	}
 	
 	/*
 	 * 이벤트 수정
@@ -86,7 +77,7 @@ public class EventServiceImpl {
 		
 		try {
 			
-			result = new EventDao().updateEventOne(conn,event);
+			result = new EventDao().updateEventOne(conn, event);
 			
 			if(result > 0)
 				 commit(conn);
@@ -101,11 +92,10 @@ public class EventServiceImpl {
 		
 		return result;
 		
-		
-	}//method
+	}
 	
 	/*
-	 * 공지사항 삭제
+	 * 이벤트 삭제
 	 * 
 	 * */
 	public int deleteEventOne(int eventNo) {
@@ -128,7 +118,43 @@ public class EventServiceImpl {
 		
 		return result;
 		
-	}//method
+	}//method	
+	
+	/*
+	 * 이벤트 상세화면 조회 (회원)
+	 * 
+	 * */
+	public Event selectEventOne(int eventNo, String flag) {
+		
+		System.out.println("[EventServiceImpl selectEventOne eventNo] " + eventNo);  
+		System.out.println("[EventServiceImpl selectEventOne flag] " 	   + flag);  
+		Connection conn = getConnection();
+		Event result = null;
+		int viewCount = 0;
+		
+		try {
+			
+			// 1. 이벤트 상세페이지 진입 시 조회 수 업데이트 (상세페이지 진입 시에만)
+			//if("N".equals(flag)) viewCount = new EventDao().increaseViewCount(conn, eventNo);
+			//else viewCount = 1; // 이벤트 수정/삭제 페이지 진입 시 조회 수 count 임의 값 설정
+			viewCount=1;
+			
+			if(viewCount > 0) {
+				// 2. 공지사항 상세페이지 조회
+				result = new EventDao().selectEventOne(conn,eventNo);
+				close(conn);
+			}else {
+				close(conn);
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}	
 	
 	
 }
