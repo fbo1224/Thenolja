@@ -21,7 +21,7 @@ public class Event {
 	
 	// 이벤트 등록시 사용 생성자
 	public Event(String evtTitle, String evtContent, String evtYn,
-				 String evtStrtDt, String evtEndDt, String eventImg, int writerNo) {
+				 String evtStrtDt, String evtEndDt,String createDt, String eventImg, int writerNo) {
 		this.eventTitle 	= evtTitle;
 		this.eventContent 	= evtContent;
 		this.eventYn 		= evtYn;
@@ -29,11 +29,12 @@ public class Event {
 		this.eventEndDt 	= evtEndDt;
 		this.eventImg 		= eventImg;
 		this.writerNo 		= writerNo;
+		this.createDt       = createDt;
 	}
 	
 	// 이벤트 업데이트 시 사용 생성자
 	public Event(String evtTitle, String evtContent, String evtYn,
-				 String evtStrtDt, String evtEndDt, String eventImg, 
+				 String evtStrtDt, String evtEndDt,String createDt, String eventImg, 
 				 int writerNo, int eventNo) {
 		this.eventTitle 	= evtTitle;
 		this.eventContent 	= evtContent;
@@ -43,6 +44,7 @@ public class Event {
 		this.eventImg 		= eventImg;
 		this.writerNo 		= writerNo;
 		this.eventNo		= eventNo;
+		this.createDt       = createDt;
 	}	
 
 	public int getEventNo() {
