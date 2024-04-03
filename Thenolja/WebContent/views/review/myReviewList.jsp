@@ -130,7 +130,7 @@
 	<div id="output">
 		<div id="content_title">
 			<div id="left_img">
-				<a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+				<a href="<%=contextPath%>"><img src="<%=r.getImgPath() %>" alt="왼쪽 화살표" width="40px"></a>
 			</div>
 			<div id="left_title"><h3>MY REVIEW</h3></div>
 		</div>
