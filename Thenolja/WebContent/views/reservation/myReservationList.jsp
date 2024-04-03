@@ -89,7 +89,7 @@
     	width : 300px;
     	height: 50px;
     	border-radius : 10px;
-    	background-color: #5BA199;
+    	background-color: rgb(199, 199, 199);
     	border : 0;
     	margin-bottom: 100px;
     	font-size: 22px;
@@ -142,8 +142,8 @@
 
 
             <div id="review_in">
+            	<%= r.getCheckOut() %>
                 <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
-
             </div>
 
         </div>
