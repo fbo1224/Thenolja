@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%--  <%
+   <%--  <%
     	LoginUser loginuser = session
     	String adminNm = loginuser.getNickname;
     	int memNo = lgoinUser.getMemno;
-    %>  --%>
+    %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,6 +188,7 @@ function regEvent(){
 	var chkStatus   = $('input[name="status"]:checked').val();
 	var inptEventStrtDt = $('#eventStrt').val();
 	var inptEventEndDt  = $('#eventEnd').val();
+	var CreateDate = $('#createDate').val();
 	
 	console.log("inptEventStrtDt " + inptEventStrtDt);
 	console.log("inptEventEndDt "  + inptEventEndDt);
@@ -202,9 +203,9 @@ function regEvent(){
 			type:"POST",
 			url : "<%=contextPath%>/eventReg",
 			data : {eventTitle : inptTitle, eventContent : inptContent, 
-				    eventStrtDt : inptEventStrtDt, eventEndDt : inptEventEndDt , eventYn : chkStatus},
+				    eventStrtDt : inptEventStrtDt, eventEndDt : inptEventEndDt , eventYn : chkStatus, CreateDate : createDate},
 			success:function(res){
-			
+				console.log("CreateDate " + CreateDate);
 				if(res == "SUCCESS"){
 					alert("이벤트가 정상적으로 등록되었습니다.");
 					location.href="<%= contextPath%>/eventList"
@@ -231,8 +232,8 @@ function validation(){
 	
 	// 각 필드 필수값 체크
 	var content = $("#txtArea_content").val();
-	
 	var today = new Date();
+	
 	var year    = today.getFullYear().toString();
 	var month   = ("00" + (today.getMonth() + 1) ).toString().slice(-2);
 	var day     = ("00" + today.getDate()).toString().slice(-2);
@@ -293,11 +294,19 @@ function validation(){
 	}
 	
 	// 이벤트 시작일과 종료일은 현재 날짜보다 작을 수 없다
-/* 	if($("#eventStrt").val() < fullDay){
+	if($("#eventStrt").val() < fullDay){
 		alert("시작일은 현재날짜 보다 이전일 수 없습니다.");
 		$("#eventStrt").focus();
 		return;
+	}
+	/* if($("#eventEnd").val() < fullDay){
+		alert("종료일은 현재날짜 보다 이전일 수 없습니다.");
+		$("#eventEnd").focus();
+		return;		
 	} */
+	
+	
+	
 	
 	return true;
 }	
