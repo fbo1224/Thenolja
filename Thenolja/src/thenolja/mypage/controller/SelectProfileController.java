@@ -13,7 +13,7 @@ import thenolja.mypage.service.MyPageService;
 /**
  * Servlet implementation class SelectProfileController
  */
-@WebServlet("/insertProfile")
+@WebServlet("/selectProfile")
 public class SelectProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,9 +31,9 @@ public class SelectProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
+		System.out.println("멤넘버" : memNo);
 		String filePath = new MyPageService().selectProfile(memNo);
-		
+		System.out.println(filePath);
 		response.setContentType("text/html; charset=UTF-8");
 		
 		response.getWriter().print(filePath);
