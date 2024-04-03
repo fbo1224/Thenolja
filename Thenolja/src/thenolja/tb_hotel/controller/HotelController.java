@@ -348,11 +348,6 @@ public class HotelController {
 		request.setAttribute("sList", sList);
 		request.setAttribute("pageInfo", pi);
 
-		// 검색데이터 다시 보내기
-		request.setAttribute("daterange", daterange);
-		request.setAttribute("location", location);
-		request.setAttribute("maxPeople", maxPeople);
-		
 		view = "views/hotel/searchList.jsp";
 		return view;
 	}
