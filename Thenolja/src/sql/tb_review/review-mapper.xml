@@ -149,7 +149,16 @@
 		 WHERE
 		 		RV_RESER_NO = ?  				
 	</entry>
-	
+	<entry key="updateReview">
+		UPDATE 
+				TB_REVIEW
+		   SET		
+				IMG_PATH = ?,
+				REVIEW_CONTENT = ?,
+				REVIEW_SCORE = ?
+		 WHERE
+		 		RV_RESER_NO = ?
+	</entry>
 	
 	
 	

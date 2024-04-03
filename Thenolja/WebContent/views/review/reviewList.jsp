@@ -153,7 +153,7 @@
 				</div>
 			</div>
 			<div id="reivew_set">
-				<div id="review_img"><img id="reser_review_img" src="resources/reviewImage/SkyReview2.webp" alt="숙소사진" width="150px" height="150px"></div>
+				<div id="review_img"><img id="reser_review_img" src="<%=r.getImgPath() %>" alt="숙소사진" width="150px" height="150px"></div>
 				<div id="img_btn">
 					<% if(loginUser.getMemNo() == r.getMemNo()) { %>
 					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>

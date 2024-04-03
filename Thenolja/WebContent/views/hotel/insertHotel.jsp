@@ -283,8 +283,11 @@ label{
 		<script>
 		function test(){
 			if($('#intro').val().includes("<script>")){
-				alert('사용할수 없는 단어가 포함되었습니다.');
-				$('#intro').val('');
+				// alert('사용할수 없는 단어가 포함되었습니다.');
+				// $('#intro').val('');
+				
+				$('#intro').replaceAll('<', '&gt;');
+				
 			}
 		}
 	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
