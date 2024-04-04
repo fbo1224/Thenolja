@@ -43,10 +43,16 @@
     <br>
     
     <!-- 등록 버튼 영역 START -->
-   	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
 	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
    	<!-- 등록 버튼 영역 END -->
    	
+     <!-- 관리자가 아니면 등록하기 버튼 숨김처리 -->
+    <% if(!"A".equals(loginUser.getMemStatus())) { %>
+    <!-- 	<script>
+    		$("#btn_reg").style.display='none';
+    	</script> -->
+    <% } %>  	
+    
     <br>
     
     <table class="table table-hover">
