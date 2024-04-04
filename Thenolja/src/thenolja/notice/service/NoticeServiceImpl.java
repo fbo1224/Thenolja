@@ -14,30 +14,30 @@ public class NoticeServiceImpl{
 
 	
 	/*
-	 * °øÁö»çÇ× ¸ñ·Ï Á¶È¸
+	 * ê³µì§€ì‚¬í•­ ëª©ë¡ ì¡°íšŒ
 	 * 
 	 * */	
 	public ArrayList<Notice> selectNoticeList(){
 		
-		Connection conn = getConnection(); // SQL-MAPPERÀÛ¼ºµÈ SQL ¹Ş¾Æ´ã±â
+		Connection conn = getConnection(); // SQL-MAPPERì‘ì„±ëœ SQL ë°›ì•„ë‹´ê¸°
 		ArrayList<Notice> list = null;
 		
 		try {
-			// dao¿¡¼­ db connection »ı¼ºÇÏ°í µ¥ÀÌÅÍ Á¶È¸ÇØ¼­ list¿¡ ´ã¾Æ¼­ ¹İÈ¯
+			// daoì—ì„œ db connection ìƒì„±í•˜ê³  ë°ì´í„° ì¡°íšŒí•´ì„œ listì— ë‹´ì•„ì„œ ë°˜í™˜
 			list = new NoticeDao().selectNoticeList(conn);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		// DB¿¬°áÁ¤º¸ Á¾·á
+		// DBì—°ê²°ì •ë³´ ì¢…ë£Œ
 		close(conn);
 		
 		return list;
 	}//method
 	
 	/*
-	 * °øÁö»çÇ× »ó¼¼È­¸é Á¶È¸ (È¸¿ø)
+	 * ê³µì§€ì‚¬í•­ ìƒì„¸í™”ë©´ ì¡°íšŒ (íšŒì›)
 	 * 
 	 * */
 	public Notice selectNoticeOne(int noticeNo, String flag) {
@@ -50,12 +50,12 @@ public class NoticeServiceImpl{
 		
 		try {
 			
-			// 1. °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ® (»ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã¿¡¸¸)
+			// 1. ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸ (ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œì—ë§Œ)
 			if("N".equals(flag)) viewCount = new NoticeDao().increaseViewCount(conn, noticeNo);
-			else viewCount = 1; // °øÁö»çÇ× ¼öÁ¤/»èÁ¦ ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö count ÀÓÀÇ °ª ¼³Á¤
+			else viewCount = 1; // ê³µì§€ì‚¬í•­ ìˆ˜ì •/ì‚­ì œ í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ count ì„ì˜ ê°’ ì„¤ì •
 			
 			if(viewCount > 0) {
-				// 2. °øÁö»çÇ× »ó¼¼ÆäÀÌÁö Á¶È¸
+				// 2. ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì¡°íšŒ
 				result = new NoticeDao().selectNoticeOne(conn,noticeNo);
 				close(conn);
 			}else {
@@ -72,13 +72,13 @@ public class NoticeServiceImpl{
 	}//method
 
 	/*
-	 * °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ®
+	 * ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸
 	 * 
 	 * */
 	public int increaseViewCount(int noticeNo) {
 		
 		System.out.println("[NoticeService increaseViewCount] " + noticeNo);
-		Connection conn = getConnection(); // SQL-MAPPERÀÛ¼ºµÈ SQL ¹Ş¾Æ´ã±â
+		Connection conn = getConnection(); // SQL-MAPPERì‘ì„±ëœ SQL ë°›ì•„ë‹´ê¸°
 		int result = 0;
 		
 		result = new NoticeDao().increaseViewCount(conn, noticeNo);
@@ -87,7 +87,7 @@ public class NoticeServiceImpl{
 	}
 	
 	/*
-	 * °øÁö»çÇ× µî·Ï
+	 * ê³µì§€ì‚¬í•­ ë“±ë¡
 	 * 
 	 * */
 	public int insertNotice(Notice notice) {
@@ -113,7 +113,7 @@ public class NoticeServiceImpl{
 	
 	
 	/*
-	 * °øÁö»çÇ× ¼öÁ¤
+	 * ê³µì§€ì‚¬í•­ ìˆ˜ì •
 	 * 
 	 * */	
 	public int updateNoticeOne(Notice notice) {
@@ -141,7 +141,7 @@ public class NoticeServiceImpl{
 	}	
 	
 	/*
-	 * °øÁö»çÇ× »èÁ¦
+	 * ê³µì§€ì‚¬í•­ ì‚­ì œ
 	 * 
 	 * */
 	public int deleteNoticeOne(int noticeNo) {

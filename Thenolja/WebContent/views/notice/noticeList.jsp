@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenoleja.notice.model.vo.Notice" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	String loginId = list.get(0).getNoticeTitle();
@@ -46,7 +46,7 @@
     
     <!-- 등록 버튼 영역 START -->
    	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
-	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
+	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/view/notice/noticeReg.jsp" role="button" style=>등록하기</a>
    	<!-- 등록 버튼 영역 END -->
    	
     <br>
@@ -110,19 +110,24 @@
 		<%-- <% if("".equals(loginId)){ %> --%>
 			// 수정화면 진입 (관리자전용URL)
 			<%-- <% if("admin".contains(loginId)){  %> --%>
+			<%-- <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>--%>
+			
 				$('tbody > tr.list').click(function(){
 			        //location.href='<%=contextPath%>/detail.notice';  
 			        const noticeNo = $(this).children().eq(0).text();
 			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
 			      });
 			<%-- <% } else{ %> --%>
+			
+			<%--<%} else { %>--%>
 	        // 상세화면 진입 (회원전용URL)
-		        /* $('tbody > tr.list').click(function(){
+		      /*   $('tbody > tr.list').click(function(){
 		          //location.href='<%=contextPath%>/detail.notice';  
 		           const noticeNo = $(this).children().eq(0).text();
 		           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
-		
-		        }); */
+		        });*/ 
+		         <%-- <% } %>--%>
+	        
 			<%-- <% } %> --%>
 		<%-- <% } %> --%>
 		

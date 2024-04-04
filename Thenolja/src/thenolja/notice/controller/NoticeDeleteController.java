@@ -11,7 +11,7 @@ import thenolja.notice.service.NoticeServiceImpl;
 
 /**
  * Servlet implementation class NoticeDeleteController
- * °øÁö»çÇ× »èÁ¦
+ * ê³µì§€ì‚¬í•­ ì‚­ì œ
  */
 @WebServlet("/delNotice")
 public class NoticeDeleteController extends HttpServlet {
@@ -34,32 +34,32 @@ public class NoticeDeleteController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 * °øÁö»çÇ× »èÁ¦ Ã³¸®
+	 * ê³µì§€ì‚¬í•­ ì‚­ì œ ì²˜ë¦¬
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// ÆÄ¶ó¹ÌÅÍ °ª È®ÀÎ
+		// íŒŒë¼ë¯¸í„° ê°’ í™•ì¸
 		System.out.println("[NoticeDeleteController param] " + request.getParameter("noticeNo"));
 		
 		int result  = 0;
 		boolean rslt = false;
 		int noticNo = Integer.parseInt( request.getParameter("noticeNo") );
 		
-		// °øÁö»çÇ× »èÁ¦Ã³¸® ¼­ºñ½º È£Ãâ
+		// ê³µì§€ì‚¬í•­ ì‚­ì œì²˜ë¦¬ ì„œë¹„ìŠ¤ í˜¸ì¶œ
 		result      = new NoticeServiceImpl().deleteNoticeOne(noticNo);
 		
-		// Á¤»óÃ³¸® ½Ã ¸ñ·Ï È­¸éÀ¸·Î sendRedirect
+		// ì •ìƒì²˜ë¦¬ ì‹œ ëª©ë¡ í™”ë©´ìœ¼ë¡œ sendRedirect
 		if(result > 0) {
 			rslt = true;
-			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
+			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("SUCCESS");
 		}
 		
-		// ÀúÀå ½ÇÆĞ ½Ã µî·ÏÈ­¸éÀ¸·Î sendRedirect
+		// ì €ì¥ ì‹¤íŒ¨ ì‹œ ë“±ë¡í™”ë©´ìœ¼ë¡œ sendRedirect
 		else {
 			rslt = false;
-			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
+			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("FAIL");
 		}		
