@@ -266,7 +266,7 @@
                 </div>
             </div>
         </div>
-
+<%=hotel.getHotelNo()%>
     </div>
     <div id="my_btn">
 	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&reserNo=<%=reser.getReserNo()%>">
@@ -286,7 +286,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"  method="post"> 
+        <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
             

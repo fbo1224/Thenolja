@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_refund.model.vo.Refund, thenolja.tb_reservation.model.vo.Reservation" %>  
+<%@ page import="thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
 <%
 	Refund refund = (Refund)request.getAttribute("refund");
-
 	Reservation reser = (Reservation)request.getAttribute("reser");
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
+	Room room = (Room)request.getAttribute("room");
 
 %>
 <!DOCTYPE html>
@@ -17,63 +19,59 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 
-    div{
-        /*border: 1px solid red;*/
+   div{
         box-sizing : border-box;
     }
 
     #content{
         width: 1200px;
-        height: 1200px;
+        height: 840px;
         margin: auto;
     }
     
     /*********************/
 
-    #content_title, #detail{width: 100%;}
+   #content_title, #detail{width: 100%;}
 
     #content_title{height: 10%;}
 
     #left_img{
-        width: 15%;
+        width: 5%;
         height: 100%;
         float: left;
     }
 
     #left_img > a > img{
-        margin-left: 120px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     #left_title{
-        width: 85%;
+        width: 95%;
         height: 100%;
         float: left;
     }
     
     #left_title > h3 {
-        margin-top: 35px;
+        margin-top: 25px;
     }
 
     #detail{height: 90%;}
     
     #reser_info{
         width: 100%;
-        height: 25%;
+        height: 35%;
     }
     #price_info{
         width: 100%;
-        height: 75%;
+        height: 65%;
 
     }
-
     #reser_no {
         width: 100%;
         height: 10%;
     }
 
     #reser_no > p {
-        margin-top: 10px;
         padding-left: 120px;
     }
 
@@ -106,8 +104,8 @@
         position: relative;
     }
 
-    #reser_btn > p{
-        width: 120px;
+    #reser_btn > button{
+        width: 100px;
         height: 40px;
         border-radius: 10px;
         position: absolute;
@@ -116,30 +114,28 @@
         right: 0px;
         left: 0px;
         margin:auto;
-
     }
 
     #rser_price{
         width: 100%;
         height: 20%;
         padding-left: 120px;
-        padding-top: 20px;
+        padding-top: 5px;
     }
     
     #reser_price_info{
         width: 100%;
-        height: 30%;
+        height: 50%;
         padding-left: 120px;
         padding-top: 30px;
     }
 
     #reser_member {
         width: 100%;
-        height: 20%;
+        height: 30%;
         padding-left: 120px;
         padding-top: 30px;
     }
-
     #refund_member{
         width: 100%;
         height: 30%;
@@ -181,12 +177,12 @@
         float: right;
     }
     #return_main{
-    	width: 100px;
+    	width: 200px;
     	height:40px;
     	margin: auto;
     }
 	#re_main{
-		margin-top: 100px;
+		margin-top: 200px;
 		width:100%;
 		height:100%;
 		border-radius:5px;
@@ -199,7 +195,7 @@
 		font-size:18px;
 		backgound-color:#52928b;
 	}
-
+	
 
 </style>
 
@@ -211,7 +207,7 @@
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="#"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>상세조회</h3></div>
         </div>
@@ -222,13 +218,16 @@
 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
-                <div id="reser_detail">
-                    <h3>마리안느 호텔</h3>
-                    <p>슈페리어 더블(오션뷰)</p>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-02-28 ~ 2024-02-29</p>
-                </div>
+ 				<div id="reser_detail">
+				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+			        <h2><%=hotel.getHotelName() %></h2>
+			        <p><%=room.getRoomName() %></p>
+			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=room.getRoomPrice() %>원</p>
+			        <p><%=reser.getCheckIn() %>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut() %>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+			        
+    			</div>
 
                 <div id="reser_btn">
                     <p class="btn btn-secondary" >환불처리중</p>
@@ -244,11 +243,11 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">결제금액 : <%=reser.getPaymentPrice() %></td>
+                            <td width="170x">결제금액 : <%=room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
                             <td width="170x">할인 금액 : 0원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=reser.getPaymentPrice() %></td>
+                            <td>결제금액 : <%=refund.getRefundPrice() %></td>
                         </tr>
                     </table>
                 </div>
@@ -268,7 +267,7 @@
                     </tr>
                     <tr>
                         <td>입금자명</td> 
-                        <td><%=reser.getName() %></td>
+                        <td><%=refund.getRefundName() %></td>
                     </tr>
                     </table>
                 </div>
@@ -355,9 +354,9 @@
       </div>
     </div>
   </div>
-  <div id="return_main">
+<div id="return_main">
    <a href="<%=contextPath %>"><button id="re_main" type="button">메인 화면</button></a>
-   </div> 
+</div> 
     <br><br><br><br><br><br><br><br><br><br>
     
     

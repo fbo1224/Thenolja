@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member" %>
-<%@ page import="java.util.ArrayList" %>   
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
 <%
-%>   
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
+	Room room = (Room)request.getAttribute("room");
+%>     
   
 <!DOCTYPE html>
 <html>
@@ -165,12 +167,13 @@
     			</div>
 	
 				<div id="reser_detail">
-				
-			        <h2>마리안느 호텔</h2>
-			        <p>슈페리어 더블(오션뷰)</p>
-			        <p>2인</p>
-			        <p>117,000원</p>
-			        <p>2024-02-28 ~ 2024-02-29</p>
+				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+			        <h2><%=hotel.getHotelName() %></h2>
+			        <p><%=room.getRoomName() %></p>
+			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=room.getRoomPrice() %>원</p>
+			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
 			        
     			</div>
 			</div>
@@ -180,20 +183,20 @@
 	        <div id="price_info">
 	        	
 	        	<!-- 0-2-2-1. 가격정보 시작 -->
-	        	<div id="reser_price">
+	   	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="400px">결제금액 : 333,000원</td>
-							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="30px"></td>
+	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
+							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
-							<td width="30px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="35px"></td>
-							<td width="400px">결제금액 : 333,000원</td>
+							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
+							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insertNon.reser" method="post" id="insert-form">
+				<form action="<%= contextPath %>/insertNon.reser?hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
 				
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_refund.model.service.RefundService;
 import thenolja.tb_refund.model.vo.Refund;
 import thenolja.tb_reservation.model.Service.ReserService;
@@ -41,6 +43,8 @@ public class RefundInsertController extends HttpServlet {
 		String accNo = request.getParameter("accNo");
 		String refundName = request.getParameter("refundName");
 		String bankName = request.getParameter("bankName");
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));	
 		
 		// 3) 데이터 가공
 		Refund refund = new Refund();
@@ -56,12 +60,14 @@ public class RefundInsertController extends HttpServlet {
 			
 			refund = new RefundService().selectRefund(reserNo);
 			Reservation reser = new RefundService().selectReservation(reserNo);
-
-			if(refund != null && reser != null) {
-				
-				
+			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
+			Room room = new ReserService().selectRoom(hotelNo, roomNo);
+			
+			if(refund != null && reser != null && hotel != null && room != null) {
+				System.out.println(reser);
 				request.setAttribute("refund", refund);
-				
+				request.setAttribute("hotel", hotel);      
+				request.setAttribute("room", room);
 				request.setAttribute("reser", reser);
 				// System.out.println(reser);
 				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");

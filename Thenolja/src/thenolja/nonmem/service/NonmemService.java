@@ -86,7 +86,7 @@ public class NonmemService {
 		
 		Member non = null;
 		if(result > 0) {
-			non = new NonmemDao().selectNonMemer(conn);
+			non = new NonmemDao().selectNonMember(conn);
 		if(non != null) {
 			commit(conn);}
 		} else {

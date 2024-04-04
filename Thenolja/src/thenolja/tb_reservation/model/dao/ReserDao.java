@@ -108,8 +108,8 @@ public class ReserDao {
 				reser.setBicycle(rset.getString("BICYCLE"));
 				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
 				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
@@ -145,8 +145,8 @@ public class ReserDao {
 				reser.setBicycle(rset.getString("BICYCLE"));
 				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
 				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
@@ -226,8 +226,8 @@ public class ReserDao {
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setRoomPrice(rset.getInt("ROOM_PRICE"));
@@ -269,7 +269,7 @@ public class ReserDao {
 				hotel.setHotelPath(rset.getString("HOTEL_PATH"));
 				hotel.setHotelIntro(rset.getString("HOTEL_INTRO"));
 				hotel.setHostName(rset.getString("HOST_NAME"));
-
+				System.out.println(hotelNo);
 			}
 			
 		} catch (SQLException e) {
@@ -462,6 +462,43 @@ public class ReserDao {
 		}
 		System.out.println(cList);
 		return cList;
+	}
+
+	public Reservation selectNonReservation(Connection conn) {
+		Reservation reser = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNonReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reser = new Reservation();
+				reser.setReserNo(rset.getInt("CURRVAL"));
+				reser.setReserDate(rset.getDate("RESER_DATE"));
+				reser.setName(rset.getString("RESER_NAME"));
+				reser.setPhone(rset.getString("RESER_PHONE"));
+				reser.setBicycle(rset.getString("BICYCLE"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
+				reser.setPeople(rset.getInt("MAX_PEOPLE"));
+				reser.setRoomNo(rset.getInt("ROOM_NO"));
+				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
+				reser.setPayment(rset.getString("PAYMENT"));
+				reser.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reser;
 	}
 
 

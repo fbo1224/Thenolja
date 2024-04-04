@@ -305,13 +305,15 @@
 		                +'</tr>');
     			} else{
     				for(let i = 0; i < result.length; i++){
-    					$('#couponTable').append('<tr id="list">'
+    					$('#couponTable').append(
+    							'<tbody>'
+    							+ '<tr class="list">'
     			                + '<td>' + result[i].couponNo +'</td>'
     			                + '<td>' + result[i].couponContent + '</td>'
     			                + '<td>' + result[i].couponDate + '</td>'
     			                + '<td>' + result[i].couponCode + '</td>'
-    			                + '<td>' + result[i].couponPercent + '</td>'
-    			                +'</tr>');
+    			                + '<td>' + result[i].couponPercent + '%</td>'
+    			                +'</tr></tbody>');
     				}
     			}
     		},
@@ -320,6 +322,7 @@
     		}
     		
     	});
+    	
     </script>
     
     
