@@ -194,13 +194,14 @@
    </entry>
    
    <entry key="todayReserCount">
-   	SELECT
+	SELECT
 	        COUNT(*)
 	  FROM
 	        TB_RESERVATION
 	  WHERE
 	        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
-	   
+        AND
+            CANCEL_YN = 'N'
    </entry>
    
    <entry key="todayPrice">
