@@ -14,14 +14,14 @@ public class Event {
 	private String eventImg;		// 이벤트 이미지
 	private int writerNo;			// 작성자 관리번호
 	private String writer; 	   		// 상세화면 조회 시 작성자명
-	private String createDate;		// 등록일
+	private String createDt;		// 등록일
 
 	// 기본 생성자
 	public Event() {}
 	
 	// 이벤트 등록시 사용 생성자
 	public Event(String evtTitle, String evtContent, String evtYn,
-				 String evtStrtDt, String evtEndDt, String eventImg, int writerNo, String createDate) {
+				 String evtStrtDt, String evtEndDt, String eventImg, int writerNo) {
 		this.eventTitle 	= evtTitle;
 		this.eventContent 	= evtContent;
 		this.eventYn 		= evtYn;
@@ -29,7 +29,6 @@ public class Event {
 		this.eventEndDt 	= evtEndDt;
 		this.eventImg 		= eventImg;
 		this.writerNo 		= writerNo;
-		this.createDate     = createDate;
 	}
 	
 	// 이벤트 업데이트 시 사용 생성자
@@ -111,11 +110,11 @@ public class Event {
 		return eventEndDt;
 	}
 
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+	public void setCreateDt(String createDt) {
+		this.createDt = createDt;
 	}
-	public String getCreateDate() {
-		return createDate;
+	public String getCreateDt() {
+		return createDt;
 	}
 
 	public void setEventEndDt(String eventEndDt) {
@@ -126,7 +125,7 @@ public class Event {
 	public String toString() {
 		return "Event [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
 				+ ", eventStrtDt=" + eventStrtDt + ", eventEndDt=" + eventEndDt + ", eventYn=" + eventYn + ", eventImg="
-				+ eventImg + ", writerNo=" + writerNo + ", writer=" + writer + ", createDt=" + createDate + "]";
+				+ eventImg + ", writerNo=" + writerNo + ", writer=" + writer + ", createDt=" + createDt + "]";
 	}
 	
 }

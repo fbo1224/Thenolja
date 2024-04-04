@@ -93,7 +93,7 @@
 		<!-- 타이틀 영역 -->
 	    <tr id="detail_title-area">
 	         <td class="detail_title_name_td" width="500" colspan="3"><%= event.getEventTitle()  %></td>
-	         <td class="detail_title_date_td"><%= event.getCreateDate() %> </td>
+	         <td class="detail_title_date_td"><%= event.getCreateDt() %> </td>
 	    </tr>
 	    <!-- 컨텐츠영역 -->
 	    <tr id="detail_content-area">

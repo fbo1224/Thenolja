@@ -81,12 +81,7 @@ public class EventDao {
 		String sql = prop.getProperty("insertEvent");
 		System.out.println("[EventDao insert sql] " + sql);
 		//데이터 입력받을 파일 NOtice파일
-		System.out.println("[EventDao INSERT] title "       + evt.getEventTitle());
-		System.out.println("[EventDao INSERT] content "     + evt.getEventContent());
-		System.out.println("[EventDao INSERT] eventYn "     + evt.getEventYn());
-		System.out.println("[EventDao INSERT] eventImg " 	+ evt.getEventImg());
-		System.out.println("[EventDao INSERT] eventStrtDt " + evt.getEventStrtDt());
-		System.out.println("[EventDao INSERT] eventEndDt "  + evt.getEventEndDt());
+		System.out.println("[EventDao INSERT] evt "       + evt);
 		
 		try {
 			
@@ -99,7 +94,6 @@ public class EventDao {
 			pstmt.setString(5, evt.getEventStrtDt());
 			pstmt.setString(6, evt.getEventEndDt());
 			pstmt.setInt   (7, evt.getWriterNo());
-			pstmt.setString(8, evt.getCreateDate());
 
 			result = pstmt.executeUpdate();	
 		
@@ -217,7 +211,7 @@ public class EventDao {
 				event.setEventStrtDt(rset.getString("EVENT_STRT_DT"));
 				event.setEventEndDt(rset.getString("EVENT_END_DT"));
 				event.setWriter(rset.getString("WRITER"));
-				event.setCreateDate(rset.getString("CREATE_DATE"));
+				event.setCreateDt(rset.getString("CREATE_DATE"));
 			}	
 		
 		} catch (SQLException e) {
