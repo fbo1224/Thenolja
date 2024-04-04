@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import thenolja.common.model.vo.PageInfo;
@@ -525,7 +526,7 @@ public class HotelDao {
 		return result;
 	}
 	
-	public ArrayList<String> selectLocation(Connection conn){
+	public List<String> selectLocation(Connection conn){
 		ArrayList<String> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
