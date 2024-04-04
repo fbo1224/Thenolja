@@ -143,12 +143,21 @@
         </div>
         <div id="content2" class="content">
             <div id="ct2_1">
+
+                <script>
+                    function goData(){
+                        let form = document.userinput;
+                        form.action = 'insertProfile'
+                    }
+                </script>
             	
                 <div id="profile" onclick="profileClick();"></div>
-                <form action="insertProfile" enctype="multipart/form-data" method="post" id="insertform">
+                <form onsubmit="goData()" enctype="multipart/form-data" method="post" id="insertform">
                     <input id="profileChange" type="file" onchange="loadImg(this);">
                     <input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
                 </form>
+				
+				<!-- input값을 servlet으로 넘기기 -->
 
                 <!-- 이미지 클릭하면 input요소 선택되게-->
                 <script>
@@ -199,6 +208,7 @@
                             };
                        }
                     }
+
                 </script>
 
                 <!-- INSERT PROFILE PATH
