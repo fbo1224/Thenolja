@@ -99,8 +99,8 @@ public class MyPageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, profile.getMemNo());
-			pstmt.setString(2, profile.getProfilePath());
+			pstmt.setString(1, profile.getProfilePath());
+			pstmt.setInt(2, profile.getMemNo());
 			
 			result = pstmt.executeUpdate();
 			

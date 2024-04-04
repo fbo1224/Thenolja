@@ -36,6 +36,8 @@ public class InsertProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// System.out.println("insert profile servlet");
+		
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// size
@@ -69,7 +71,7 @@ public class InsertProfileController extends HttpServlet {
 		}
 		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

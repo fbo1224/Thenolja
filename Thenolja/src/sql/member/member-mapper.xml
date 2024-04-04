@@ -271,14 +271,14 @@
 	</entry>
 	
 	<entry key="insertProfile">
-		INSERT
-		  INTO
-		       TB_PROFILE
-		VALUES
-		       (
-		       ?,
-		       ?
-		       )
+
+		UPDATE
+			   TB_PROFILE
+		   SET
+		       PROFILE_PATH = ?
+		 WHERE
+		       MEM_NO = ?
+		
 	</entry>
 	
 	
