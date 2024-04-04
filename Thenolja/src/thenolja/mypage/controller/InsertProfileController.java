@@ -64,9 +64,12 @@ public class InsertProfileController extends HttpServlet {
 				profile.setProfilePath("resources/profile_upfiles/" + profile.getChangeName());
 			}
 			
-			int result = new MyPageService().insertProfile(profile);
+			int result = new MyPageService().updateProfile(profile);
 			
 			// System.out.println(memNo);
+			if(result == 0) {
+				new MyPageService().insertProfile(profile);
+			}
 			
 		}
 		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);

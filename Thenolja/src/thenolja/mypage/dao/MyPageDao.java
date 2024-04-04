@@ -90,12 +90,12 @@ public class MyPageDao {
 		}
 		return filePath;
 	}
-//---------------------------------프사 인서트------------------------------------
-	public int insertProfile(Connection conn, Profile profile) {
+//---------------------------------프사 업뎃------------------------------------
+	public int updateProfile(Connection conn, Profile profile) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertProfile");
+		String sql = prop.getProperty("updateProfile");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -111,7 +111,27 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	
+//-----------------------------------프사 사진 인서트-----------------------------------------
+	public int insertProfile(Connection conn, Profile profile) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, profile.getMemNo());
+			pstmt.setString(2, profile.getProfilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
