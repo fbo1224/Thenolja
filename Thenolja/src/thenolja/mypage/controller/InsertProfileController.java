@@ -7,13 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import thenolja.common.MyFileRenamePolicy;
+import thenolja.mypage.model.vo.MyFileRenamePolicy;
+import thenolja.mypage.model.vo.Profile;
+import thenolja.mypage.service.MyPageService;
 
 /**
  * Servlet implementation class MyPageProfileController
@@ -34,7 +35,7 @@ public class InsertProfileController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+		
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// size
@@ -47,25 +48,26 @@ public class InsertProfileController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); 
 			//-------------------------------------------------------------------------------------------------------------------
 			
-			//if(multiRequest.getOriginalFileName("") != null) {
-				
-			//}
+			String filePath = multiRequest.getParameter("upfile");
+			int memNo = Integer.parseInt(request.getParameter("memNo"));
 			
-		}*/
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-	
-		
-		System.out.println(memNo);
-		System.out.println("insert profile servlet 호출");
-		//int count = new MyPageService().insertFilePath(memNo);
-		
-		response.setContentType("text/html; charset=UTF-8");
-		
-		//response.getWriter().print(count);
-	
-	
-	
-	
+			Profile profile = new Profile();
+			profile.setMemNo(memNo);
+			profile.setProfilePath(filePath);
+			
+			
+			if(multiRequest.getOriginalFileName("upfile") != null) {
+				profile.setOriginName(multiRequest.getOriginalFileName("upfile"));
+				profile.setChangeName(multiRequest.getFilesystemName("upfile"));
+				profile.setProfilePath("./resources/profile_upfiles/" + profile.getOriginName());
+			}
+			
+			int result = new MyPageService().insertProfile(profile);
+			
+			// System.out.println(memNo);
+			
+		}
+		request.getRequestDispatcher("views/mypage/mypage.jsp").forward(request, response);
 	}
 
 	/**

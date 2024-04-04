@@ -145,11 +145,16 @@
         <div id="content2" class="content">
             <div id="ct2_1">
                 
-                <form action="insertProfile" enctype="multipart/form-data" method="post" id="insertform">
+                <form action="insertProfile?memNo=<%= loginUser.getMemNo() %>" enctype="multipart/form-data" method="post" id="insertform">
                     
                     <div id="profile" onclick="profileClick();"></div>
-                    <input id="profileChange" type="file" onchange="loadImg(this);">
+
+                    <input id="profileChange" type="file" name="upfile" onchange="loadImg(this);">
+                    <!--
                     <input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
+                    -->
+                    
+                    <%= loginUser.getMemNo() %>
                     <input type="submit">변경사항 저장
 
                 </form>
