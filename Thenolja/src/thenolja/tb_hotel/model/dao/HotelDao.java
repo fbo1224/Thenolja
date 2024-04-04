@@ -688,7 +688,33 @@ public class HotelDao {
 		return sList; 
 	}
 	
-	
+	public int searchListCount(Connection conn, String startDate, String endDate, String location, int maxPeople) {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, maxPeople);
+			pstmt.setString(2, "%"+location+"%");
+			pstmt.setString(3, startDate);
+			pstmt.setString(4, endDate);
+			rset = pstmt.executeQuery();
+			
+
+			rset.next();
+			cnt = rset.getInt("CNTS");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cnt;
+	}
 	
 	
 	
