@@ -12,6 +12,7 @@ import java.util.Properties;
 import thenolja.common.JDBCTemplate;
 import thenolja.member.model.dao.MemberDao;
 import thenolja.mypage.model.vo.MyPageHeartList;
+import thenolja.mypage.model.vo.Profile;
 
 public class MyPageDao {
 	
@@ -89,7 +90,27 @@ public class MyPageDao {
 		}
 		return filePath;
 	}
-	
+//---------------------------------프사 인서트------------------------------------
+	public int insertProfile(Connection conn, Profile profile) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, profile.getMemNo());
+			pstmt.setString(2, profile.getProfilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
