@@ -24,77 +24,7 @@ public class AdminMember {
 
    
 
-	public String getProfilePath() {
-		return profilePath;
-	}
 	
-	public void setProfilePath(String profilePath) {
-		this.profilePath = profilePath;
-	}
-
-	public int getGradeNo() {
-		return gradeNo;
-	}
-	
-	public void setGradeNo(int gradeNo) {
-		this.gradeNo = gradeNo;
-	}
-
-	public int getReserNo() {
-		return reserNo;
-	}
-	
-	public void setReserNo(int reserNo) {
-		this.reserNo = reserNo;
-	}
-	
-	public String getReserName() {
-		return reserName;
-	}
-	
-	public void setReserName(String reserName) {
-		this.reserName = reserName;
-	}
-	
-	public int getPaymentPrice() {
-	      return paymentPrice;
-	}
-
-   public void setPaymentPrice(int paymentPrice) {
-      this.paymentPrice = paymentPrice;
-   }
-
-   public String getMemName() {
-      return memName;
-   }
-
-   public void setMemName(String memName) {
-      this.memName = memName;
-   }
-
-   public String getMemPhone() {
-      return memPhone;
-   }
-
-   public void setMemPhone(String memPhone) {
-      this.memPhone = memPhone;
-   }
-
-   public String getMemStatus() {
-      return memStatus;
-   }
-
-   public void setMemStatus(String memStatus) {
-      this.memStatus = memStatus;
-   }
-
-   public String getGradeName() {
-      return gradeName;
-   }
-
-   public void setGradeName(String gradeName) {
-      this.gradeName = gradeName;
-   }
 
    public AdminMember() {
       super();
@@ -176,7 +106,79 @@ public class AdminMember {
    public void setJoinDate(String joinDate) {
       this.joinDate = joinDate;
    }
+   
+   public String getProfilePath() {
+		return profilePath;
+	}
+	
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
 
+	public int getGradeNo() {
+		return gradeNo;
+	}
+	
+	public void setGradeNo(int gradeNo) {
+		this.gradeNo = gradeNo;
+	}
+
+	public int getReserNo() {
+		return reserNo;
+	}
+	
+	public void setReserNo(int reserNo) {
+		this.reserNo = reserNo;
+	}
+	
+	public String getReserName() {
+		return reserName;
+	}
+	
+	public void setReserName(String reserName) {
+		this.reserName = reserName;
+	}
+	
+	public int getPaymentPrice() {
+	      return paymentPrice;
+	}
+
+   public void setPaymentPrice(int paymentPrice) {
+      this.paymentPrice = paymentPrice;
+   }
+
+   public String getMemName() {
+      return memName;
+   }
+
+   public void setMemName(String memName) {
+      this.memName = memName;
+   }
+
+   public String getMemPhone() {
+      return memPhone;
+   }
+
+   public void setMemPhone(String memPhone) {
+      this.memPhone = memPhone;
+   }
+
+   public String getMemStatus() {
+      return memStatus;
+   }
+
+   public void setMemStatus(String memStatus) {
+      this.memStatus = memStatus;
+   }
+
+   public String getGradeName() {
+      return gradeName;
+   }
+
+   public void setGradeName(String gradeName) {
+      this.gradeName = gradeName;
+   }
+   
    @Override
    public int hashCode() {
       final int prime = 31;
