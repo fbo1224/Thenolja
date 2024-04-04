@@ -159,9 +159,6 @@
         font-weight: bold;
         margin-left: 300px;
     }
-    #list:active{
-    	background-color: silver;
-    }
 </style>
 </head>
 <body>
