@@ -33,7 +33,7 @@ public class SelectCouponController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Coupon> list = new ReserService().selectCoupon();
+		ArrayList<Coupon> list = new ReserService().selectCouponList();
 		request.setAttribute("insertReservation", list);
 		//System.out.println(list);
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");

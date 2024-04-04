@@ -3,6 +3,7 @@ package thenolja.tb_hotel.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +88,7 @@ public class AjaxController {
 	}
 	
 	public void searchLocation(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<String> locList = new HotelService().selectLocation();
+		List<String> locList = new HotelService().selectLocation();
 		
 		response.setContentType("text/html; charset=UTF-8");
 		try {
