@@ -26,7 +26,7 @@ public class ReserService {
 		Reservation r = null;
 		if(result > 0) {
 			r = new ReserDao().selectReservation(conn);
-			if(r != null) {
+		if(r != null) {
 			commit(conn);}
 		} else {
 			rollback(conn);

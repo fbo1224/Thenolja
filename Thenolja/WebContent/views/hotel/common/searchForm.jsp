@@ -92,6 +92,7 @@ const toDay = new Date();
 		    	startDate = start.format('YYYY-MM-DD');
 		    	endDate = end.format('YYYY-MM-DD');
 			    $('#date').text(startDate+'/'+endDate);
+			 
 			});
 		
 	    // 지역 가져오기
@@ -112,6 +113,7 @@ const toDay = new Date();
 	    });
 	    
 	});
+	
 </script>
     
 </body>
