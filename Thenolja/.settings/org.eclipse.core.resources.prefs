@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
 encoding//WebContent/views/event/eventDetail.jsp=UTF-8
 encoding//WebContent/views/notice/noticeEnrollForm.jsp=UTF-8
+encoding//src/thenolja/coupon/controller/CouponController.java=UTF-8
+encoding//src/thenolja/coupon/dao/CouponDao.java=UTF-8
+encoding//src/thenolja/coupon/model/vo/Coupon.java=UTF-8
+encoding//src/thenolja/coupon/service/CouponServiceImpl.java=UTF-8
 encoding//src/thenolja/event/controller/EventController.java=UTF-8
 encoding//src/thenolja/event/controller/EventDeleteController.java=UTF-8
 encoding//src/thenolja/event/controller/EventDetailController.java=UTF-8

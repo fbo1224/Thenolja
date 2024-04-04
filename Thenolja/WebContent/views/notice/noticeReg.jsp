@@ -225,7 +225,7 @@ function regNotice(){
 		// confirm 함수는 확인창 결과값으로 TRUE와 FALSE 값을 RETURN 하게 됨.
 		if(confirm("게시글을 등록하시겠습니까?")){	
 		// 게시글 저장 submission 정보 세팅
-		
+		// data : getParameter 지정 값   : 값
 		$.ajax({
 			type: "POST",
 			url : "<%=contextPath%>/regNotice",
