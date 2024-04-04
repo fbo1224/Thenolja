@@ -218,13 +218,11 @@ div {
     #navi a:hover{
         font-size: 17px;
         font-weight: 700;
-        
     }
     
     #navi > li > ul a{
         font-size: 17px;
         background : white;
-        
     }
     .form-control{
 		display: inline-block;
@@ -378,6 +376,7 @@ div {
 					</button></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
 		         	<li><a href="#">고객센터</a></li>
+		         	
 		         	
 	         	<% } %>
 		    </ul>

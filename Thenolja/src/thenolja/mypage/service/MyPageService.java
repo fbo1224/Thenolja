@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import thenolja.common.JDBCTemplate;
 import thenolja.mypage.dao.MyPageDao;
 import thenolja.mypage.model.vo.MyPageHeartList;
+import thenolja.mypage.model.vo.Profile;
 
 public class MyPageService {
 	
@@ -29,7 +30,19 @@ public class MyPageService {
 		
 		return filePath;
 	}
-	
+//----------------------------프로필 사진 인서트-----------------------------------------
+	public int insertProfile(Profile profile) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MyPageDao().insertProfile(conn, profile);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
 	
 	
 	

@@ -36,14 +36,14 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * °øÁö»çÇ× ¸ñ·Ï Á¶È¸
+	 * ê³µì§€ì‚¬í•­ ëª©ë¡ ì¡°íšŒ
 	 * 
 	 * */
-	public ArrayList<Notice> selectNoticeList(Connection conn){ //selectNoticeList È£Ãâ
+	public ArrayList<Notice> selectNoticeList(Connection conn){ //selectNoticeList í˜¸ì¶œ
 		
 		System.out.println("[NoticeDao conn] " + conn);
 		
-		ArrayList<Notice> list = new ArrayList(); // Èü ¿µ¿ª °ø°£ ÁÖ¼Ò°ª
+		ArrayList<Notice> list = new ArrayList(); // í™ ì˜ì—­ ê³µê°„ ì£¼ì†Œê°’
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -53,10 +53,10 @@ public class NoticeDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery(); // ½ÇÁ¦ Äõ¸®¹®ÀÌ ¼öÇàµÇ´Â ºÎºĞ
+			rset = pstmt.executeQuery(); // ì‹¤ì œ ì¿¼ë¦¬ë¬¸ì´ ìˆ˜í–‰ë˜ëŠ” ë¶€ë¶„
 			
 			while(rset.next()) {
-				//while ¹İº¹¹® ¾È¿¡ Áö¿ªº¯¼ö 
+				//while ë°˜ë³µë¬¸ ì•ˆì— ì§€ì—­ë³€ìˆ˜ 
 				Notice notice = new Notice();
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));		
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
@@ -83,7 +83,7 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * °øÁö»çÇ× »ó¼¼È­¸é Á¶È¸ (È¸¿ø)
+	 * ê³µì§€ì‚¬í•­ ìƒì„¸í™”ë©´ ì¡°íšŒ (íšŒì›)
 	 * 
 	 * */
 	public Notice selectNoticeOne(Connection conn, int noticeNo) {
@@ -125,7 +125,7 @@ public class NoticeDao {
 	
 	
 	/*
-	 * °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ®
+	 * ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸
 	 * 
 	 * */
 	public int increaseViewCount(Connection conn, int noticeNo) {
@@ -155,7 +155,7 @@ public class NoticeDao {
 	}
 	
 	/*
-	 * °øÁö»çÇ× »ó¼¼ÆäÀÌÁö ÁøÀÔ ½Ã Á¶È¸ ¼ö ¾÷µ¥ÀÌÆ®
+	 * ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€ ì§„ì… ì‹œ ì¡°íšŒ ìˆ˜ ì—…ë°ì´íŠ¸
 	 * 
 	 * */	
 	public Notice selectNotice(Connection conn, int noticeNo) {
@@ -191,10 +191,10 @@ public class NoticeDao {
 		
 		
 		return notice;
-	}//method          //¹İÈ¯ notice
+	}//method          //ë°˜í™˜ notice
 	
 	/*
-	 * °øÁö»çÇ× µî·Ï
+	 * ê³µì§€ì‚¬í•­ ë“±ë¡
 	 * 
 	 * */	
 	public int insertNotice(Connection conn, Notice notice) {
@@ -203,7 +203,7 @@ public class NoticeDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertNotice");
 		System.out.println("[NoticeDao insert sql] " + sql);
-		//µ¥ÀÌÅÍ ÀÔ·Â¹ŞÀ» ÆÄÀÏ NOticeÆÄÀÏ
+		//ë°ì´í„° ì…ë ¥ë°›ì„ íŒŒì¼ NOticeíŒŒì¼
 		System.out.println("[NOTICE DAO INSERT] " + notice.getNoticeTitle());
 		System.out.println("[NOTICE DAO INSERT] " + notice.getNoticeContent());
 		System.out.println("[NOTICE DAO INSERT] " + notice.getStatus());
@@ -230,12 +230,12 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * °øÁö»çÇ× ¼öÁ¤
+	 * ê³µì§€ì‚¬í•­ ìˆ˜ì •
 	 * 
 	 * */		
 	public int updateNoticeOne(Connection conn, Notice notice) {
 		
-		System.out.println("[NOTICEDAO PARAM È®ÀÎ]");
+		System.out.println("[NOTICEDAO PARAM í™•ì¸]");
 		System.out.println(notice);
 		
 		int result = 0;
@@ -269,7 +269,7 @@ public class NoticeDao {
 	}//method
 	
 	/*
-	 * °øÁö»çÇ× »èÁ¦
+	 * ê³µì§€ì‚¬í•­ ì‚­ì œ
 	 * 
 	 * */	
 	public int deleteNoticeOne(Connection conn, int noticeNo) {
@@ -321,7 +321,7 @@ public class NoticeDao {
 		}//method   try~ with ~ 
 	
 	
-	// ÀüÃ¼ °Ô½Ã±Û ¼ö
+	// ì „ì²´ ê²Œì‹œê¸€ ìˆ˜
 	public int getTotal(Connection conn) {
 		int result = 0;
 		
@@ -335,7 +335,7 @@ public class NoticeDao {
 	
 	public ArrayList<NoticeVO> selectNoticeList(Connection conn){
 		
-		ArrayList<NoticeVO> list = new ArrayList(); // Èü ¿µ¿ª °ø°£ ÁÖ¼Ò°ª
+		ArrayList<NoticeVO> list = new ArrayList(); // í™ ì˜ì—­ ê³µê°„ ì£¼ì†Œê°’
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -356,7 +356,7 @@ public class NoticeDao {
 				notice.setCreateDate(rset.getDate("CREATE_DATE")); 
 				
 				list.add(notice);*/
-		//	}// while¹® ¾È Áö¿ªº¯¼ö
+		//	}// whileë¬¸ ì•ˆ ì§€ì—­ë³€ìˆ˜
 			
 /*
 		} catch (SQLException e) {
@@ -409,4 +409,4 @@ public class NoticeDao {
 
 
 
-}//DAOÀÇ ¿ªÇÒ : DB ¿ÜºÎµ¥ÀÌÅÍ¸¦ "ÀÔ·Â"ÇÏ´Â°÷
+}//DAOì˜ ì—­í•  : DB ì™¸ë¶€ë°ì´í„°ë¥¼ "ì…ë ¥"í•˜ëŠ”ê³³

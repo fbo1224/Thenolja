@@ -58,7 +58,7 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="탈퇴 회원 ID입력" id="keyword">
+                        <input type="text" placeholder="탈퇴 회원 ID입력" id="keyword" maxlength="12">
                     </div>
         
                     <div id="search_btn">
@@ -273,7 +273,12 @@
     				$('#phone').text(result.memPhone);
     				$('#totalPrice').text(result.paymentPrice);
     				$('#bornDate').text(result.bornDate);
+    				if(result.profilePath == null) {
+						$('#profilePath').attr("src", "./resources/mypage/user.png");
+					} else{
+    				$('#profilePath').attr("src", result.profilePath);
     				
+					}
     				
     			}
     			
@@ -324,7 +329,7 @@
         <div class="modal-body">
             <table style="font-size: 14px;">
                 <tr>
-                    <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
+                    <td colspan="5" rowspan="5" width="120" height="120" ><img id="profilePath" src="" alt="" width="70px"></td>
                     <td width="200">이름 : <span id="name"></span></td>
                     <td width="200">등급 : <span id="grade"></span></td>
                 </tr>

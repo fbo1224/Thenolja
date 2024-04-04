@@ -58,7 +58,7 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원  ID입력" id="keyword">
+                        <input type="text" placeholder="회원 ID입력" id="keyword" maxlength="12">
                     </div>
         
                     <div id="search_btn">
@@ -160,59 +160,50 @@
 
                 </div>
         
-                <div class="paging-area" align="center";>
+ 				<div class="paging-area" align="center";>
                 
-                  <% if(list!=null) { %>
-                    <% if(currentPage > 1) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
+                <% if(list!=null) { %>
+                	<%if(currentPage > 1) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
                     <% } %>
                     
-                    <% for (int i = startPage; i <= endPage; i++) { %>
-                    	
-                    	<% if (currentPage != i) { %>
-                   
-                    		<button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=i%>'"><%=i %></button>
-
-                		<%} else { %>
-                		<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
-	                <% } %>
-	               
-	              <% } %>
-	              
-	              <% if(currentPage != maxPage) { %>
-	              <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage + 1 %>'">></button>
-	               <% } %>
-	               
-	                    
-              <% } else { %>
-   
-                    <% if(currentPage > 1) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage - 1%>'"><</button>
+                    <% for(int i = startPage; i <= endPage; i++) { %>
+                    	<% if(currentPage != i) {%>
+                    		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=i%>'"><%=i %></button>
+                    	<% } else { %>
+                    		<button  disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
+                    	<% } %>
+                    
                     <% } %>
                     
-                    <% for (int i = startPage; i <= endPage; i++) { %>
-                    	
-                    	<% if (currentPage != i) { %>
+                    <% if(currentPage != maxPage) { %>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage + 1%>'">></button>
+                	<% } %>
+                	
+                	<% } else { %>
                    
-                    		<button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/oldReserList.do?currentPage=<%=i%>'"><%=i %></button>
-
-                		<%} else { %>
-                		<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
-	                <% } %>
-	               
-	              <% } %>
-	              
-	              <% if(currentPage != maxPage) { %>
-	              <button class="btn btn-sm btn-outline-secondary" onclick="loaction.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage + 1 %>'">></button>
-	               <% } %>
-	               
+                    <%if(currentPage > 1) { %>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage - 1%>'"><</button>
+     				<%} %>
+                    
+                    <% for(int i = startPage; i <= endPage; i ++) { %>
+                    	<%if (currentPage != i)  { %>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=i%>'"><%= i %></button>
+                  		<% } else { %>
+                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+                    <% } %>
+                   <%} %>
+                  
+                  <% if(currentPage != maxPage) { %>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
-	               
-	               
-	               
-	               
-	               
+                  
+                  <%} %>
+                	
+                	
+                	
                 </div>
+        
         
 
             </div>

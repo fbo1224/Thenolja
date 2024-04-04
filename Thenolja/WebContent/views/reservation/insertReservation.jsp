@@ -235,11 +235,11 @@
 						<br>
 	               		<div id="mem-name">
 		                    <h5>예약자 이름</h5>
-		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;" maxlength="4">
 	           			</div>
 		                <div id="mem-phone">
 		                    <h5>전화 번호</h5>
-		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;" maxlength="11">
 		                </div>
 		                <div id="mem-bicycle">
 							<br> <h5>이동 방식</h5>
@@ -305,7 +305,7 @@
 		                +'</tr>');
     			} else{
     				for(let i = 0; i < result.length; i++){
-    					$('#couponTable').append('<tr id="list"">'
+    					$('#couponTable').append('<tr id="list">'
     			                + '<td>' + result[i].couponNo +'</td>'
     			                + '<td>' + result[i].couponContent + '</td>'
     			                + '<td>' + result[i].couponDate + '</td>'
@@ -335,7 +335,7 @@
 	        
 			        <div class="modal-body">
 			        <table class="table table-hover" id="couponTable">
-		        
+		        		
 	                </table>
 					</div>
 				
@@ -348,6 +348,8 @@
 	</div>
 <% } %>
 	<script>
+		
+		
 	</script>
 
 <%@ include file="../common/footer.jsp" %>

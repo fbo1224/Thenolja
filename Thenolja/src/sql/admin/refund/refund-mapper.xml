@@ -204,7 +204,7 @@
 		                RF_RESER_NO, MEM_ID, RESER_NAME, MEM_PHONE
 		       ORDER
 		          BY
-		                RF_RESER_NO DESC) A)
+		                RF_RESER_NO ASC) A)
 		    WHERE RNUM BETWEEN ? AND ?
 	
 	

@@ -70,7 +70,7 @@
             <div id="content_1">
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="회원 ID입력" id="keyword">
+                        <input type="text" placeholder="회원 ID입력" id="keyword" maxlength="12">
                     </div>        
                     <div id="search_btn">
                         <button type="button" class="btn btn-outline-info" onclick="searchMemId()">검색</button>
@@ -270,6 +270,12 @@
         						$('#bornDate').text(result.bornDate);
         						$('#joinDate').text(result.joinDate);
         						$('#totalPrice').text(result.paymentPrice);
+        						if(result.profilePath == null) {
+        							$('#profilePath').attr("src", "./resources/mypage/user.png");
+        						} else{
+        							
+        							$('#profilePath').attr("src", result.profilePath);
+        						}
         						$('#updateMemNo').val(e);
 
         					}
@@ -326,7 +332,7 @@
             
                 <table style="font-size: 14px;">
                     <tr>
-                        <td colspan="5" rowspan="5" width="120" height="120" ><img src="https://static-00.iconduck.com/assets.00/address-book-new-icon-2048x2048-wtz2hcio.png" alt="" width="70px"></td>
+                        <td colspan="5" rowspan="5" width="120" height="120" ><img id="profilePath" src="" alt="" width="70px"></td>
                         <td width="200">이름 :<span id="name"></span></td>
                         <td width="200">등급 :
                             <select id="gradeSelect" name="grade">

@@ -1,5 +1,9 @@
 package thenolja.nonmem.service;
 
+import static thenolja.common.JDBCTemplate.close;
+import static thenolja.common.JDBCTemplate.commit;
+import static thenolja.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -7,6 +11,8 @@ import thenolja.common.JDBCTemplate;
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.dao.NonmemDao;
 import thenolja.nonmem.model.vo.SelectNonmemReser;
+import thenolja.tb_reservation.model.dao.ReserDao;
+import thenolja.tb_reservation.model.vo.Reservation;
 
 
 public class NonmemService {
@@ -71,6 +77,24 @@ public class NonmemService {
 		
 		
 		return list;
+	}
+
+	public Member insertNonMember(Member nonmem) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NonmemDao().insertNonMember(conn, nonmem);
+		
+		Member non = null;
+		if(result > 0) {
+			non = new NonmemDao().selectNonMemer(conn);
+		if(non != null) {
+			commit(conn);}
+		} else {
+			rollback(conn);
+		}
+			close(conn);
+		
+		return non;	
 	}
 
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
 	String gradeName = (String)session.getAttribute("gradeName");
 %>
@@ -143,18 +144,19 @@
         </div>
         <div id="content2" class="content">
             <div id="ct2_1">
+                
+                <form action="insertProfile?memNo=<%= loginUser.getMemNo() %>" enctype="multipart/form-data" method="post" id="insertform">
+                    
+                    <div id="profile" onclick="profileClick();"></div>
 
-                <script>
-                    function goData(){
-                        let form = document.userinput;
-                        form.action = 'insertProfile'
-                    }
-                </script>
-            	
-                <div id="profile" onclick="profileClick();"></div>
-                <form onsubmit="goData()" enctype="multipart/form-data" method="post" id="insertform">
-                    <input id="profileChange" type="file" onchange="loadImg(this);">
+                    <input id="profileChange" type="file" name="upfile" onchange="loadImg(this);">
+                    <!--
                     <input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
+                    -->
+                    
+                    <%= loginUser.getMemNo() %>
+                    <input type="submit">변경사항 저장
+
                 </form>
 				
 				<!-- input값을 servlet으로 넘기기 -->
@@ -185,8 +187,8 @@
                             	console.log("test1");
                                 resultStr = '<img class="img" src="./resources/mypage/user.png" alt="기본프로필">'
                             } else {
-                            	//console.log("test2");
-                                resultStr = '<img class="img" src='+ result +' alt="수정프로필">'
+                            	console.log(result);
+                                resultStr = '<img class="img" src="'+ result +'" alt="수정프로필">'
                             }
                             $('#profile').html(resultStr);
                         }

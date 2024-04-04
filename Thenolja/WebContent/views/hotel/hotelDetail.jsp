@@ -353,7 +353,7 @@ svg{
 							<%-- 객실예약 기능 추가 예정 --%>
 							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
 							<button class="btn btn-sm btn-info">객실 예약</button></a>
-							<a href="#">
+							<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
 							<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 						</div>
 					</div>			
@@ -672,7 +672,8 @@ svg{
 		</div>
 		
 	<script>
-	
+	console.log(startDate);
+	console.log(endDate);
 	function reviewAjax(value){
 		$('#review-ul').empty();
 		$('.paging-area').empty();
