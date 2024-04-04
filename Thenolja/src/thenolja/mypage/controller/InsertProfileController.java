@@ -34,7 +34,7 @@ public class InsertProfileController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/*
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// size
@@ -51,13 +51,12 @@ public class InsertProfileController extends HttpServlet {
 				
 			//}
 			
-		}
+		}*/
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 	
 		
 		System.out.println(memNo);
 		System.out.println("insert profile servlet 호출");
-		
 		//int count = new MyPageService().insertFilePath(memNo);
 		
 		response.setContentType("text/html; charset=UTF-8");
