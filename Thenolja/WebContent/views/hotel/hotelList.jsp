@@ -172,21 +172,21 @@
 						for(let i = 0; i < result.hotelList.length; i++){
 							$('#content-2-lists').append(
 									'<div class="cards">'
-										+'<div class="card-imgDiv" id="'+ result.hotelList[i].hotelNo +'">'
-											+'<img class="card-img" src="'+ result.hotelList[i].hotelPath +'">'
+										+'<div class="card-imgDiv" id="'+result.hotelList[i].hotelNo+'">'
+											+'<img class="card-img" src="'+result.hotelList[i].hotelPath+'">'
 										+'</div>'
 									+'<div class="card-info">'
-										+'<h4>'+ result.hotelList[i].hotelLocation +'</h4>'
+										+'<h4>'+result.hotelList[i].hotelLocation+'</h4>'
 										+'<p>숙소명 : '+result.hotelList[i].hotelName+'</p>'
 										+'<p>종류 : '+result.hotelList[i].hotelCategory+'</p>'
 											+'<div class="option-btns-room" align="center">'
-												+'<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
-												+'<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
-												+'<a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
+												+' <a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
+												+' <a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
+												+' <a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
 											+'</div>'
 											+'<div class="option-btns" align="center">'
-												+'<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo="'+ result.hotelList[i].hotelNo+'>숙소정보수정</a>'
-												+'<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal">숙소삭제</a>'
+												+' <a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo="'+result.hotelList[i].hotelNo+'>숙소정보수정</a>'
+												+' <a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal">숙소삭제</a>'
 											+'</div>'
 									+'</div>'
 								+'</div>');
@@ -221,12 +221,11 @@
 		
 			$(document).on('click', '.hotelBtn', function(e){
 				hotelNo = $(this).parent().parent().prev().attr('id');
-				console.log(hotelNo);
 			});
 			
 			
 			$('.deleteHotelBtn').click(function(e){
-				deleteAjax(hotelNo);
+				deleteAjax();
 			})
 			
 		</script>

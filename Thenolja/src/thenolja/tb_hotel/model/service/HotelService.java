@@ -223,6 +223,17 @@ public class HotelService {
 		return reviewList;
 	}
 	
+	public int searchListCount(String startDate,String endDate,String location,int maxPeople) {
+		Connection conn = getConnection();
+		
+		int cnt = new HotelDao().searchListCount(conn, startDate, endDate, location, maxPeople);
+		
+		close(conn);
+		
+		return cnt;
+	}
+	
+	
 	
 	
 }

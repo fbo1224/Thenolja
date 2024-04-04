@@ -312,18 +312,17 @@ public class HotelController {
 			loginStatus = request.getParameter("loginStatus"); 
 		}
 		
-		listCount = new HotelService().selectListCountRoomIn();
+		listCount = new HotelService().searchListCount(startDate,endDate,location,maxPeople);
+		System.out.println(listCount);
 		
-		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
+		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		// * pageList : 페이징바 최대 개수
 		pageLimit = 5;
 		
-		// * boardLimit : 한 페이지에 보여질 게시글의 최대 개수
+
 		boardLimit = 6;
 		
-		// * maxPage : 가장 마지막 페이지가 몇 번 페이지인지(총 페이지 개수)
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
