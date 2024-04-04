@@ -158,24 +158,24 @@ div {
 				roomNo = $(this).parent().parent().attr('id');
 			});
 			
-			$('.deleteRoomBtn').click(function(e){
-			$.ajax({
-					url: 'deleteRoom.jqAjax',
-					data: {
-						roomNo : roomNo,
-					},
-					type: 'get',
-					success : function(result){
-						alert(result);
-					},
-					error: function(error){
-						alert(result);
-					},
-					async: false
-				});
-				
+			$('.deleteRoomBtn').click(function(e){ // 의미없음
+				$.ajax({
+						url: 'deleteRoom.jqAjax',
+						data: {
+							roomNo : roomNo,
+						},
+						type: 'get',
+						success : function(result){
+							alert(result);
+						},
+						error: function(error){
+							alert(result);
+						},
+						async: false
+					});
+					
 				location.reload();
-			})
+			});
 			
 		</script>
 </body>

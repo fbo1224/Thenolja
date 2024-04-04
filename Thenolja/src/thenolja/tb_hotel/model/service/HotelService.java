@@ -7,6 +7,7 @@ import static thenolja.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.dao.HotelDao;
@@ -154,10 +155,10 @@ public class HotelService {
 		return result;
 	}
 	
-	public ArrayList<String> selectLocation() {
+	public List<String> selectLocation() {
 		Connection conn = getConnection();
 		
-		ArrayList<String> result = new HotelDao().selectLocation(conn);
+		List<String> result = new HotelDao().selectLocation(conn);
 		
 		close(conn);
 		
