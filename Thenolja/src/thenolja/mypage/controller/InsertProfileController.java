@@ -36,6 +36,8 @@ public class InsertProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// System.out.println("insert profile servlet");
+		
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// size
@@ -47,7 +49,7 @@ public class InsertProfileController extends HttpServlet {
 			// 객체 생성과 파일 이름 수정
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); 
 			//-------------------------------------------------------------------------------------------------------------------
-			
+			System.out.println(multiRequest);
 			String filePath = multiRequest.getParameter("upfile");
 			int memNo = Integer.parseInt(request.getParameter("memNo"));
 			
@@ -62,14 +64,17 @@ public class InsertProfileController extends HttpServlet {
 				profile.setProfilePath("resources/profile_upfiles/" + profile.getChangeName());
 			}
 			
-			int result = new MyPageService().insertProfile(profile);
+			int result = new MyPageService().updateProfile(profile);
 			
 			// System.out.println(memNo);
+			if(result == 0) {
+				new MyPageService().insertProfile(profile);
+			}
 			
 		}
 		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

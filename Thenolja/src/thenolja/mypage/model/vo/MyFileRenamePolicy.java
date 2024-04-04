@@ -15,12 +15,17 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
 	  String originName = originFile.getName();
       
 	  int randomNo = (int)(Math.random() * 90000) + 10000;
-	   
-      String ext = originName.substring(originName.lastIndexOf("."));
+	  
+	  String ext = "";
+	  
+	  //if(originName.contains(".")) {
+		  ext = originName.substring(originName.lastIndexOf("."));
+		  
+	  //} 
+	  String changeName = "profile" + "_" + randomNo + ext;
+	  
+	  return new File(originFile.getParent(), changeName);
          
-      String changeName = "profile" + "_" + randomNo + ext;
-      
-      return new File(originFile.getParent(), changeName);
    }
    
       
