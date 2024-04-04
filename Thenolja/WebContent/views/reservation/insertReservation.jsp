@@ -218,7 +218,7 @@
 	        			<tr>
 	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-							<td width="400px">할인 금액 : 0원</td>
+							<td width="400px">할인 금액 : <p id="나중에 여기다가 요소 추출해서 ajax쓴다음에 여기 innerHTML에다가 값 넣기"></p>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
 							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
 						</tr>
@@ -305,16 +305,19 @@
 		                +'</tr>');
     			} else{
     				for(let i = 0; i < result.length; i++){
+    					
     					$('#couponTable').append(
-    							'<tbody>'
-    							+ '<tr class="list">'
-    			                + '<td>' + result[i].couponNo +'</td>'
-    			                + '<td>' + result[i].couponContent + '</td>'
-    			                + '<td>' + result[i].couponDate + '</td>'
-    			                + '<td>' + result[i].couponCode + '</td>'
-    			                + '<td>' + result[i].couponPercent + '%</td>'
-    			                +'</tr></tbody>');
+    						'<tbody>'
+    							+ '<tr class="list" id="ab' + i + '" onclick="getPercent(' + i + ');">'
+	    			              + '<td>' + result[i].couponNo +'</td>'
+	    			              + '<td>' + result[i].couponContent + '</td>'
+	    			              + '<td>' + result[i].couponDate + '</td>'
+	    			              + '<td>' + result[i].couponCode + '</td>'
+	    			              + '<td id="percent' + i + '" name="percentin">' + result[i].couponPercent + '</td>'
+    			                  +'</tr></tbody>');
+    					
     				}
+    				
     			}
     		},
     		error: function(result){
@@ -322,6 +325,23 @@
     		}
     		
     	});
+    	/*
+    	function getPercent(){
+
+    		let abc = $('#percent1').html();
+    		console.log(abc);
+    		
+    		
+    	}*/
+    	
+    	function getPercent(index){
+
+    		 let abc = $('#percent' + index).html();
+	    	 
+    		 location.href="<%=contextPath%>/coupon.insert"
+    		
+    	}
+    	
     	
     </script>
     
@@ -338,22 +358,27 @@
 	        
 			        <div class="modal-body">
 			        <table class="table table-hover" id="couponTable">
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 		        		
 	                </table>
 					</div>
 				
 					<div class="modal-footer">
-		         	<button type="button" class="btn btn-secondary" data-dismiss="modal">적용</button>
+		         	<button type="button" id="aaaa" class="btn btn-secondary" data-dismiss="modal">적용</button>
 		       		</div>
 	     		</div>
 			</div>
 		</div>
 	</div>
 <% } %>
-	<script>
-		
-		
-	</script>
 
 <%@ include file="../common/footer.jsp" %>
 
