@@ -313,8 +313,6 @@ public class HotelController {
 		}
 		
 		listCount = new HotelService().searchListCount(startDate,endDate,location,maxPeople);
-		System.out.println(listCount);
-		
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
