@@ -40,28 +40,32 @@ public class NonReservationInsertController extends HttpServlet {
 		String name = request.getParameter("nonMemName");
 		String phone = request.getParameter("nonMemPhone");
 		String bicycle = request.getParameter("bicycle");
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		
-		Reservation reser = new Reservation();
-		reser.setName(name);
-		reser.setPhone(phone);
-		reser.setBicycle(bicycle);
+		Member nonmem = new Member();
+		nonmem.setMemName(name);
+		nonmem.setMemPhone(phone);
 		
-		Member member = new Member();
-		member.setMemName(name);
-		member.setMemPhone(phone);
+		nonmem = new NonmemService().insertNonMember(nonmem);
 		
-		int result1 = new ReserService().insertReser(reser);
-		int result2 = new NonmemService().insertNonMem(member);
-		if(result1 * result2 > 0) {
+		if(nonmem != null) {
+			int memNo = nonmem.getMemNo();
 			
-			reser = new ReserService().selectReservation();
-			member = new NonmemService().SelectNonmem();
+			Reservation reser = new Reservation();
+			reser.setName(name);
+			reser.setPhone(phone);
+			reser.setBicycle(bicycle);
+			reser.setRoomNo(roomNo);
+			reser.setMemNo(memNo);
+			
+			reser = new ReserService().insertReser(reser);
+			
 			Hotel hotel = new ReserService().selectHotel();
 			
 			if(reser != null && hotel != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
-				session.setAttribute("member", member);
+				session.setAttribute("nonmem", nonmem);
 				session.setAttribute("hotel", hotel);
 
 				

@@ -211,6 +211,51 @@ public class NonmemDao {
 		}
 		return list;
 	}
-	
+
+	public int insertNonMember(Connection conn, Member nonmem) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNonMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nonmem.getMemName());
+			pstmt.setString(2, nonmem.getMemPhone());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public Member selectNonMemer(Connection conn) {
+		
+		Member member = new Member();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNonMemer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				member = new Member();
+				member.setMemNo(rset.getInt("CURRVAL"));
+				member.setMemName(rset.getString("MEM_NAME"));
+				member.setMemPhone(rset.getString("MEM_PHONE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return member;
+	}
 	
 }
