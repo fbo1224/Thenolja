@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-	String loginId = list.get(0).getNoticeTitle();
-	//System.out.println("noticeList = " + list); 컴파일에러 발생
 %>
 <!DOCTYPE html>
 <html>
@@ -108,31 +106,27 @@
 <br><br><br>
 </div>
 	<script>
-		// loginId null 체크
-		<%-- <% if("".equals(loginId)){ %> --%>
+			// loginId null 체크
 			// 수정화면 진입 (관리자전용URL)
-			<%-- <% if("admin".contains(loginId)){  %> --%>
-		 <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
+			<%if(loginUser != null){ %>
 			
-				$('tbody > tr.list').click(function(){
-			        //location.href='<%=contextPath%>/detail.notice';  
-			        const noticeNo = $(this).children().eq(0).text();
-			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
-			      })
-			 <% } else { %>
-			
-			<%--<%} else { %>--%>
-	        // 상세화면 진입 (회원전용URL)
-		      /*   $('tbody > tr.list').click(function(){
-		          //location.href='<%=contextPath%>/detail.notice';  
-		           const noticeNo = $(this).children().eq(0).text();
-		           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
-		        });*/ 
-		        <% } %>
-	        
-			<%-- <% } %> --%>
-		<%-- <% } %> --%>
-		
+			 	<%if("A".equals(loginUser.getMemStatus())){ %>
+					$('tbody > tr.list').click(function(){
+				        //location.href='<%=contextPath%>/detail.notice';  
+				        const noticeNo = $(this).children().eq(0).text();
+				        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+				      })
+				 <% } else { %>
+				
+			        	// 상세화면 진입 (회원전용URL)
+				       $('tbody > tr.list').click(function(){
+				          //location.href='<%=contextPath%>/detail.notice';  
+				           const noticeNo = $(this).children().eq(0).text();
+				           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
+				        });
+			     <% } %>
+			     
+		     <%}%>
 		
 	</script>
 

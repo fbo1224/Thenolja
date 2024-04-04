@@ -375,9 +375,7 @@ div {
 						비회원 예약조회
 					</button></li>
 		        <% } else { %> <!-- 로그인상태라면 -->
-		         	<li><a href="#">고객센터</a></li>
-		         	
-		         	
+		         	<li><a href="<%= contextPath %>/views/customer/customerCenter.jsp">고객센터</a></li>
 	         	<% } %>
 		    </ul>
 		    </div>
