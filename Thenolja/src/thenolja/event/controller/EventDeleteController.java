@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thenolja.event.model.vo.Event;
 import thenolja.event.service.EventServiceImpl;
-
+import thenolja.notice.service.NoticeServiceImpl;
 
 /**
  * Servlet implementation class EventDeleteController

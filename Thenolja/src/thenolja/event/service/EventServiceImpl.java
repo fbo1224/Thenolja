@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import thenolja.event.dao.EventDao;
 import thenolja.event.model.vo.Event;
-import thenolja.notice.dao.NoticeDao;
-import thenolja.notice.model.vo.Notice;
+import thenolja.event.dao.EventDao;
+import thenolja.event.model.vo.Event;
 
 import static thenolja.common.JDBCTemplate.*;
 

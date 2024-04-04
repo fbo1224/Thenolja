@@ -188,14 +188,14 @@ function regEvent(){
 	var chkStatus   = $('input[name="status"]:checked').val();
 	var inptEventStrtDt = $('#eventStrt').val();
 	var inptEventEndDt  = $('#eventEnd').val();
-	var CreateDate = $('#createDate').val();
 	
 	console.log("inptEventStrtDt " + inptEventStrtDt);
 	console.log("inptEventEndDt "  + inptEventEndDt);
-	
+
 	//유효성 검사 함수 호출
 	if(validation()){
 		// confirm 함수는 확인창 결과값으로 TRUE와 FALSE 값을 RETURN 하게 됨.
+		
 		if(confirm("게시글 등록하시겠습니까?")){
 		// 게시글 저장 submission 정보 세팅	
 		
@@ -203,9 +203,9 @@ function regEvent(){
 			type:"POST",
 			url : "<%=contextPath%>/eventReg",
 			data : {eventTitle : inptTitle, eventContent : inptContent, 
-				    eventStrtDt : inptEventStrtDt, eventEndDt : inptEventEndDt , eventYn : chkStatus, CreateDate : createDate},
+				    eventStrtDt : inptEventStrtDt, eventEndDt : inptEventEndDt , eventYn : chkStatus},
 			success:function(res){
-				console.log("CreateDate " + CreateDate);
+				
 				if(res == "SUCCESS"){
 					alert("이벤트가 정상적으로 등록되었습니다.");
 					location.href="<%= contextPath%>/eventList"
@@ -232,8 +232,8 @@ function validation(){
 	
 	// 각 필드 필수값 체크
 	var content = $("#txtArea_content").val();
-	var today = new Date();
 	
+	var today = new Date();
 	var year    = today.getFullYear().toString();
 	var month   = ("00" + (today.getMonth() + 1) ).toString().slice(-2);
 	var day     = ("00" + today.getDate()).toString().slice(-2);
@@ -294,19 +294,11 @@ function validation(){
 	}
 	
 	// 이벤트 시작일과 종료일은 현재 날짜보다 작을 수 없다
-	if($("#eventStrt").val() < fullDay){
+/* 	if($("#eventStrt").val() < fullDay){
 		alert("시작일은 현재날짜 보다 이전일 수 없습니다.");
 		$("#eventStrt").focus();
 		return;
-	}
-	/* if($("#eventEnd").val() < fullDay){
-		alert("종료일은 현재날짜 보다 이전일 수 없습니다.");
-		$("#eventEnd").focus();
-		return;		
 	} */
-	
-	
-	
 	
 	return true;
 }	
