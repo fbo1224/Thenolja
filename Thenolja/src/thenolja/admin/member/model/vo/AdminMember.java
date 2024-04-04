@@ -20,7 +20,17 @@ public class AdminMember {
    private int reserNo;
    private String reserName;
    private int gradeNo;
+   private String profilePath;
 
+   
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+	
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
 
 	public int getGradeNo() {
 		return gradeNo;

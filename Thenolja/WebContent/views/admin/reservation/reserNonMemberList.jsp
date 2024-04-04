@@ -67,7 +67,7 @@
 
                 <div id="search_member">
                     <div id="search_id">
-                        <input type="text" placeholder="예약자명 입력" id="keyword">
+                        <input type="text" placeholder="예약자명 입력" id="keyword" maxlength="4">
                     </div>
         
                     <div id="search_btn">

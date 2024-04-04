@@ -49,30 +49,35 @@
 
    <entry key="selectMember">
 	SELECT
-	        MEM_NAME,
-	        EMAIL,
-	        MEM_PHONE,
-	        BORN_DATE,
-	        GRADE_NAME,
-	        TO_CHAR(JOIN_DATE ,'YYYY.MM.DD') "JOIN_DATE",
-	        NVL((SUM(PAYMENT_PRICE)),0)"PAYMENT_PRICE"
-	        
-	  FROM
-	        TB_NONMEM
-	   LEFT
-	   JOIN
-	        TB_RESERVATION ON (MEM_NO = RE_MEM_NO)
-	   JOIN
-	        TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
-	   JOIN
-	        TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
-	   JOIN
-	        TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO) 
-	  WHERE
-	        TB_NONMEM.MEM_NO = ?
-	  GROUP
-	     BY
-	         MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD')
+	           MEM_NAME,
+	           EMAIL,
+	           MEM_PHONE,
+	           BORN_DATE,
+	           GRADE_NAME,
+	           TO_CHAR(JOIN_DATE ,'YYYY.MM.DD') "JOIN_DATE",
+	           NVL((SUM(PAYMENT_PRICE)),0)"PAYMENT_PRICE",
+	           PROFILE_PATH
+	           
+	     FROM
+	           TB_NONMEM
+	      LEFT
+	      JOIN
+	           TB_RESERVATION ON (MEM_NO = RE_MEM_NO)
+	      JOIN
+	           TB_MEMBER ON(TB_NONMEM.MEM_NO = TB_MEMBER.MEM_NO)
+	      JOIN
+	           TB_MY_GRADE ON (TB_MEMBER.MEM_NO = GR_MEM_NO)
+	      JOIN
+	           TB_MEM_GRADE ON (TB_MY_GRADE.GRADE_NO = TB_MEM_GRADE.GRADE_NO)
+	       LEFT     
+	       JOIN
+	            TB_PROFILE ON (TB_NONMEM.MEM_NO = TB_PROFILE.MEM_NO)
+	     WHERE
+	           TB_NONMEM.MEM_NO = ?
+	     GROUP
+	        BY
+	            MEM_NAME, EMAIL, MEM_PHONE, BORN_DATE, 
+	             GRADE_NAME, TO_CHAR(JOIN_DATE ,'YYYY.MM.DD'), PROFILE_PATH
    </entry>
    
    <entry key="deleteMember">
