@@ -235,11 +235,11 @@
 						<br>
 	               		<div id="mem-name">
 		                    <h5>예약자 이름</h5>
-		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <input type="text" id="reser-name" name="memName" placeholder="이름을 입력해주세요" style="width:300px; height:40px; border-radius: 5px;" maxlength="4">
 	           			</div>
 		                <div id="mem-phone">
 		                    <h5>전화 번호</h5>
-		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;">
+		                    <input type="text" id="reser-phone" name="memPhone" placeholder="전화번호를 입력해주세요" style="width:300px; height:40px; border-radius: 5px;" maxlength="11">
 		                </div>
 		                <div id="mem-bicycle">
 							<br> <h5>이동 방식</h5>

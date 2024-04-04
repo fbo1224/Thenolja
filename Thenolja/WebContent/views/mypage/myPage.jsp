@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 	String gradeName = (String)session.getAttribute("gradeName");
 %>
@@ -187,8 +187,8 @@
                             	console.log("test1");
                                 resultStr = '<img class="img" src="./resources/mypage/user.png" alt="기본프로필">'
                             } else {
-                            	//console.log("test2");
-                                resultStr = '<img class="img" src='+ result +' alt="수정프로필">'
+                            	console.log(result);
+                                resultStr = '<img class="img" src="'+ result +'" alt="수정프로필">'
                             }
                             $('#profile').html(resultStr);
                         }

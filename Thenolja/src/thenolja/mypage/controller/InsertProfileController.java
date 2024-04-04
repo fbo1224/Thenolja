@@ -59,7 +59,7 @@ public class InsertProfileController extends HttpServlet {
 			if(multiRequest.getOriginalFileName("upfile") != null) {
 				profile.setOriginName(multiRequest.getOriginalFileName("upfile"));
 				profile.setChangeName(multiRequest.getFilesystemName("upfile"));
-				profile.setProfilePath("./resources/profile_upfiles/" + profile.getOriginName());
+				profile.setProfilePath("resources/profile_upfiles/" + profile.getChangeName());
 			}
 			
 			int result = new MyPageService().insertProfile(profile);
@@ -67,7 +67,7 @@ public class InsertProfileController extends HttpServlet {
 			// System.out.println(memNo);
 			
 		}
-		request.getRequestDispatcher("views/mypage/mypage.jsp").forward(request, response);
+		request.getRequestDispatcher("views\\mypage\\myPage.jsp").forward(request, response);
 	}
 
 	/**
