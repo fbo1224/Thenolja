@@ -685,7 +685,7 @@ svg{
 			},
 			type: 'get',
 			success: function(result){
-				console.log(result);
+				//console.log(result);
 				for(let i = 0; i < result.reviewList.length; i++){
 					$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
 										   +'<div class="message-data">'
