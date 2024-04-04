@@ -270,7 +270,12 @@
         						$('#bornDate').text(result.bornDate);
         						$('#joinDate').text(result.joinDate);
         						$('#totalPrice').text(result.paymentPrice);
-        						$('#profilePath').attr("src", result.profilePath);
+        						if(result.profilePath == null) {
+        							$('#profilePath').attr("src", "./resources/mypage/user.png");
+        						} else{
+        							
+        							$('#profilePath').attr("src", result.profilePath);
+        						}
         						$('#updateMemNo').val(e);
 
         					}

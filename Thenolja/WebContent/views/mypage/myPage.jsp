@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%
 	String gradeName = (String)session.getAttribute("gradeName");
 %>
@@ -125,6 +125,13 @@
         cursor:pointer;
     }
     .img:hover{opacity: 0.7;}
+    #save{
+        background-color: white;
+        font-weight: bold;
+        border: none;
+        float: right;
+    }
+    #save:hover{background-color: black; color: white;}
 </style>
 
 </head>
@@ -147,15 +154,11 @@
                 
                 <form action="insertProfile?memNo=<%= loginUser.getMemNo() %>" enctype="multipart/form-data" method="post" id="insertform">
                     
-                    <div id="profile" onclick="profileClick();"></div>
+                    <div id="profile"></div>
 
                     <input id="profileChange" type="file" name="upfile" onchange="loadImg(this);">
-                    <!--
-                    <input type="hidden" name="memNo" value="<%= loginUser.getMemNo() %>">
-                    -->
-                    
-                    <%= loginUser.getMemNo() %>
-                    <input type="submit">변경사항 저장
+
+                    <input id="save" type="submit" value="저장">
 
                 </form>
 				
@@ -165,10 +168,12 @@
                 <script>
                     $(function(){
                         $('#profileChange').hide();
+                        $('#save').hide();
 
                         $('#profile').click(function(){
                             $('#profileChange').click();
                             // console.log('testtt');
+                            $('#save').show();
                         });
                     });
                 </script>
@@ -184,7 +189,7 @@
 							let resultStr;
                             
                             if(result  === "null"){
-                            	console.log("test1");
+                            	console.log("selectNull");
                                 resultStr = '<img class="img" src="./resources/mypage/user.png" alt="기본프로필">'
                             } else {
                             	console.log(result);

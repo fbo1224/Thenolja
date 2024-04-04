@@ -672,12 +672,10 @@ svg{
 		</div>
 		
 	<script>
-	console.log(startDate);
-	console.log(endDate);
+	
 	function reviewAjax(value){
 		$('#review-ul').empty();
-		$('.paging-area').empty();
-			
+		$('.paging-area').empty();		
 		
 		$.ajax({
 			url: "reviewList.jqAjax",
@@ -687,7 +685,7 @@ svg{
 			},
 			type: 'get',
 			success: function(result){
-				console.log(result);
+				//console.log(result);
 				for(let i = 0; i < result.reviewList.length; i++){
 					$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
 										   +'<div class="message-data">'

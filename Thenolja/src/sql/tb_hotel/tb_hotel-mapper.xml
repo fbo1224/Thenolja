@@ -473,7 +473,32 @@
     	WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	
+	<entry key="searchListCount">
+		SELECT
+		      COUNT(DISTINCT TB_HOTEL.HOTEL_NO) AS CNTS
+		  FROM
+		       TB_HOTEL
+		  JOIN TB_ROOM
+		    ON TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO
+		 WHERE
+		      HOTEL_YN = 'Y'
+		   AND 
+		      ROOM_YN = 'Y'
+           AND
+              MAX_PEOPLE &gt;= ?
+           AND
+              HOTEL_LOCATION LIKE ?   
+           AND
+                  NOT TB_ROOM.ROOM_NO IN(
+                                         SELECT 
+                                               ROOM_NO
+                                           FROM
+                                               TB_RESERVATION
+                                          WHERE   
+                                               TB_RESERVATION.CHECKIN_TIME &gt;= ?
+                                            AND
+                                               TB_RESERVATION.CHECKOUT_TIME &lt;= ?)
+	</entry>
 	
 	
 	

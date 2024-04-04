@@ -30,7 +30,20 @@ public class MyPageService {
 		
 		return filePath;
 	}
-//----------------------------프로필 사진 인서트-----------------------------------------
+//----------------------------프로필 사진 업뎃-----------------------------------------
+	public int updateProfile(Profile profile) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MyPageDao().updateProfile(conn, profile);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+//-------------------------------프로필 사진 인서트----------------------------------------
 	public int insertProfile(Profile profile) {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -43,8 +56,6 @@ public class MyPageService {
 		}
 		return result;
 	}
-	
-	
 	
 	
 	

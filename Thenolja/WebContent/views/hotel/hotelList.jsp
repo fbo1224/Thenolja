@@ -121,64 +121,6 @@
 					<%} %>
   				<%} %>
 		</div>
-
-		<!-- The Modal -->
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">숙소삭제</h4>
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body" align="center">
-		        	정말로 삭제하시겠습니까?
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer .hr-footer">
-		      	<button type="button" class="btn btn-danger deleteHotelBtn" data-dismiss="modal">삭제</button>
-		        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" >닫기</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
-		
-		<script>
-			let hotelNo;
-			$('.hotelBtn').click(function(e){
-				hotelNo = $(this).parent().parent().prev().attr('id');
-			});
-			
-			$('.deleteHotelBtn').click(function(e){
-				$.ajax({
-					url: 'deleteHotel.jqAjax',
-					data: {
-						hotelNo : hotelNo,
-					},
-					type: 'get',
-					success : function(result){
-						alert(result);
-					},
-					error: function(error){
-						alert(error);
-					},
-					async: false
-				});
-				
-				location.reload();
-			})
-			
-		</script>
-		
-		<script>
-			$('.card-imgDiv').click(function(e){
-				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
-			});
-		</script>
 		
 		<div class="paging-area" align="center">
 			<%if(loginStatus != null && loginStatus.equals("A")){ %>
@@ -227,6 +169,118 @@
 	        	<%} %>
 	        <%} %>	
 	     </div>
+
+		<!-- The Modal -->
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">숙소삭제</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body" align="center">
+		        	정말로 삭제하시겠습니까?
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer .hr-footer">
+		      	<button type="button" class="btn btn-danger deleteHotelBtn" data-dismiss="modal">삭제</button>
+		        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" >닫기</button>
+		      </div>
+		
+		    </div>
+		  </div>
+		</div>
+		
+		<script>
+		let hotelNo;
+		const loginStatus = '<%= loginStatus %>';
+		
+		function deleteAjax(){
+			$.ajax({
+				url: 'deleteHotel.jqAjax',
+				data: {
+					hotelNo : hotelNo,
+					currentPage: 1,
+				},
+				type: 'get',
+				success : function(result){
+					console.log(result);
+					$('#content-2-lists').empty();
+					$('.paging-area').empty();
+					
+					if(result.hotelList === null ){
+						$('#content-2-lists').append(
+								'<div><h3>조회된 호텔이 없습니다.</h3></div>');
+					} else {
+						for(let i = 0; i < result.hotelList.length; i++){
+							$('#content-2-lists').append(
+									'<div class="cards">'
+										+'<div class="card-imgDiv" id="'+result.hotelList[i].hotelNo+'">'
+											+'<img class="card-img" src="'+result.hotelList[i].hotelPath+'">'
+										+'</div>'
+									+'<div class="card-info">'
+										+'<h4>'+result.hotelList[i].hotelLocation+'</h4>'
+										+'<p>숙소명 : '+result.hotelList[i].hotelName+'</p>'
+										+'<p>종류 : '+result.hotelList[i].hotelCategory+'</p>'
+											+'<div class="option-btns-room" align="center">'
+												+' <a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
+												+' <a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
+												+' <a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
+											+'</div>'
+											+'<div class="option-btns" align="center">'
+												+' <a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo="'+result.hotelList[i].hotelNo+'>숙소정보수정</a>'
+												+' <a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal">숙소삭제</a>'
+											+'</div>'
+									+'</div>'
+								+'</div>');
+						}
+				
+						if(result.pi.currentPage > 1){
+							$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move('+(result.pi.currentPage-1)+');">이전</button>');	
+						}
+						for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
+		        			if(result.pi.currentPage != i) {
+		        				$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move('+i+')">'+i+'</button>');
+		        			} else {
+		        				$('.paging-area').append('<button class="btn btn btn-outline-info" disabled>'+i+'</button>');
+		        			}
+		        		}
+						if(result.pi.currentPage != result.pi.maxPage){
+							$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move(' + (result.pi.currentPage+1) +');">다음</button>');
+		        		} 
+		
+					}
+				},
+				error: function(error){
+					alert(error);
+				},
+			
+				});
+		}
+			function move(currentPage){
+				location.href="<%= contextPath %>/hotelList.hotels?currentPage="+currentPage+"&loginStatus=A";
+			}
+			
+			$(document).on('click', '.hotelBtn', function(e){
+				hotelNo = $(this).parent().parent().prev().attr('id');
+			});
+			
+			
+			$('.deleteHotelBtn').click(function(e){
+				deleteAjax();
+			})
+			
+		</script>
+		
+		<script>
+			$('.card-imgDiv').click(function(e){
+				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+			});
+		</script>
 	</div>
 </body>
 </html>
