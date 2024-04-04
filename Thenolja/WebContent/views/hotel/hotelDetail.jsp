@@ -672,7 +672,8 @@ svg{
 		</div>
 		
 	<script>
-	
+	console.log(startDate);
+	console.log(endDate);
 	function reviewAjax(value){
 		$('#review-ul').empty();
 		$('.paging-area').empty();

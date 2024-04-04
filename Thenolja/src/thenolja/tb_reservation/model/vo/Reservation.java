@@ -15,6 +15,8 @@ public class Reservation {
 	private int reMemNo;
 	private String payment;
 	private int paymentPrice;
+	
+	
 	private String phone;
 	private String name;
 	private int memNo;

@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
-				 thenolja.tb_review.model.vo.Review" %>  
+				 thenolja.tb_review.model.vo.Review" %>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>  				   
 <%
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	
+	Date date = new Date();
+    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
+    String today = simpleDate.format(date);
+	
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -137,12 +143,16 @@
 	                <p><%=r.getRoomName() %></p>
 	                <p><%=r.getPeople() %>인</p>
 	                <p><%=r.getRoomPrice() %>원</p>
-	                <p><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOutTime() %> : 00</p>
+	                <p><%=r.getCheckIn() %><%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOut() %><%=r.getCheckOutTime() %> : 00</p>
 	            </div>
 
 
             <div id="review_in">
+            <% if(today.compareTo(r.getCheckOut()) < 0) { %>
                 <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+            <% } else { %>
+            	<button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button>
+            <% } %>
             </div>
 
         </div>
