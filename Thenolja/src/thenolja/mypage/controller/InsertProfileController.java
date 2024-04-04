@@ -49,7 +49,7 @@ public class InsertProfileController extends HttpServlet {
 			// 객체 생성과 파일 이름 수정
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy()); 
 			//-------------------------------------------------------------------------------------------------------------------
-			
+			System.out.println(multiRequest);
 			String filePath = multiRequest.getParameter("upfile");
 			int memNo = Integer.parseInt(request.getParameter("memNo"));
 			
