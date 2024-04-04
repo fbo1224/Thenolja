@@ -125,7 +125,6 @@
     
     <div id="wrap">
         <div id="header">
-	        <%--<%@ include file="adminMenubar.jsp" %> --%>
 	        <%@ include file="menubar.jsp" %> 
         </div>
                
