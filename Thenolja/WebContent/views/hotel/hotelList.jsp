@@ -148,28 +148,85 @@
 		</div>
 		
 		<script>
-			let hotelNo;
-			$('.hotelBtn').click(function(e){
+		let hotelNo;
+		
+		function deleteAjax(){
+			$.ajax({
+				url: 'deleteHotel.jqAjax',
+				data: {
+					hotelNo : hotelNo,
+					currentPage: 1,
+				},
+				type: 'get',
+				success : function(result){
+					console.log(result);
+					$('#content-2-lists').empty();
+					$('#paging-area').empty();
+					
+					const loginStatus = '<%= loginStatus %>'
+					
+					if(result.hotelList === null ){
+						$('#content-2-lists').append(
+								'<div><h3>조회된 호텔이 없습니다.</h3></div>');
+					} else {
+						for(let i = 0; i < result.hotelList.length; i++){
+							$('#content-2-lists').append(
+									'<div class="cards">'
+										+'<div class="card-imgDiv" id="'+ result.hotelList[i].hotelNo +'">'
+											+'<img class="card-img" src="'+ result.hotelList[i].hotelPath +'">'
+										+'</div>'
+									+'<div class="card-info">'
+										+'<h4>'+ result.hotelList[i].hotelLocation +'</h4>'
+										+'<p>숙소명 : '+result.hotelList[i].hotelName+'</p>'
+										+'<p>종류 : '+result.hotelList[i].hotelCategory+'</p>'
+											+'<div class="option-btns-room" align="center">'
+												+'<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
+												+'<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
+												+'<a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
+											+'</div>'
+											+'<div class="option-btns" align="center">'
+												+'<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo="'+ result.hotelList[i].hotelNo+'>숙소정보수정</a>'
+												+'<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal">숙소삭제</a>'
+											+'</div>'
+									+'</div>'
+								+'</div>');
+						}
+				
+						if(result.pi.currentPage > 1){
+							$('#paging-area').append(
+		        			'<button class="btn btn btn-outline-info" onclick="location.href="<%= contextPath %>/hotelList.hotels?currentPage=""'+ (result.pi.currentPage-1)+'>이전</button>');	
+						}
+						for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
+		        			if(result.pi.currentPage != i) {
+		        				$('#paging-area').append(
+		        				'<button class="btn btn btn-outline-info" onclick=" location.href="<%= contextPath %>/hotelList.hotels?currentPage=""'+ i +'>' +i+ '</button>');
+		        			} else {
+		        				$('#paging-area').append(
+		        					'<button class="btn btn btn-outline-info" disabled >'+ i +'></button>');
+		        			}
+		        		}
+						if(result.pi.currentPage != result.pi.maxPage){
+							$('#paging-area').append(
+		        			'<button class="btn btn btn-outline-info" onclick="location.href="<%= contextPath %>/hotelList.hotels?currentPage=""'+ (result.pi.currentPage + 1)+'>다음</button>');
+		        		} 
+		
+					}
+				},
+				error: function(error){
+					alert(error);
+				},
+			
+				});
+		}
+		
+			$(document).on('click', '.hotelBtn', function(e){
 				hotelNo = $(this).parent().parent().prev().attr('id');
+				console.log(hotelNo);
 			});
 			
+			
 			$('.deleteHotelBtn').click(function(e){
-				$.ajax({
-					url: 'deleteHotel.jqAjax',
-					data: {
-						hotelNo : hotelNo,
-					},
-					type: 'get',
-					success : function(result){
-						alert(result);
-					},
-					error: function(error){
-						alert(error);
-					},
-					async: false
-				});
-				
-				location.reload();
+				deleteAjax(hotelNo);
 			})
 			
 		</script>
