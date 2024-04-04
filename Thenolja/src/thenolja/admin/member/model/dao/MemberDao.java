@@ -122,7 +122,7 @@ public class MemberDao {
 			pstmt.setInt(1, MemNo);
 			
 			rset = pstmt.executeQuery();
-			//
+			
 			if(rset.next()) {
 				member = new AdminMember();
 				member.setMemName(rset.getString("MEM_NAME"));
@@ -132,6 +132,7 @@ public class MemberDao {
 				member.setGradeName(rset.getString("GRADE_NAME"));
 				member.setJoinDate(rset.getString("JOIN_DATE"));
 				member.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				member.setProfilePath(rset.getString("PROFILE_PATH"));
 			
 				
 			}

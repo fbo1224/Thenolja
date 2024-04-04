@@ -218,13 +218,11 @@ div {
     #navi a:hover{
         font-size: 17px;
         font-weight: 700;
-        
     }
     
     #navi > li > ul a{
         font-size: 17px;
         background : white;
-        
     }
     .form-control{
 		display: inline-block;

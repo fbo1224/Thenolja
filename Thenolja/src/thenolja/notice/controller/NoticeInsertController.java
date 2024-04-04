@@ -37,17 +37,17 @@ public class NoticeInsertController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 * °øÁö»çÇ× µî·Ï
+	 * ê³µì§€ì‚¬í•­ ë“±ë¡
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getContentType());
-		// µî·Ï submission Åë½Å
-		// ÆÄ¶ó¹ÌÅÍ ÇÑ±Û ±úÁü ¹æÁö¸¦ À§ÇÑ ÀÎÄÚµù ¼³Á¤
+		// ë“±ë¡ submission í†µì‹ 
+		// íŒŒë¼ë¯¸í„° í•œê¸€ ê¹¨ì§ ë°©ì§€ë¥¼ ìœ„í•œ ì¸ì½”ë”© ì„¤ì •
 		request.setCharacterEncoding("UTF-8");
 		
-		// È­¸é¿¡¼­ ³Ñ¾î¿Â ÆÄ¶ó¹ÌÅÍ °ª ¼¼ÆÃ
-		// request.getParameter¿¡ ÀÛ¼ºÇÏ´Â ¹®ÀÚ¿­Àº > html ÅÂ±×¿¡ ¼±¾ğÇÑ name°ú ÀÏÄ¡ÇØ¾ßÇÔ.
+		// í™”ë©´ì—ì„œ ë„˜ì–´ì˜¨ íŒŒë¼ë¯¸í„° ê°’ ì„¸íŒ…
+		// request.getParameterì— ì‘ì„±í•˜ëŠ” ë¬¸ìì—´ì€ > html íƒœê·¸ì— ì„ ì–¸í•œ nameê³¼ ì¼ì¹˜í•´ì•¼í•¨.
 		String title = "";
 		String content = "";
 		String status = "";
@@ -62,24 +62,24 @@ public class NoticeInsertController extends HttpServlet {
 		int svc = 0;
 		boolean rslt = false;
 		
-		// °øÁö»çÇ× ÀúÀå ¼­ºñ½º È£Ãâ
+		// ê³µì§€ì‚¬í•­ ì €ì¥ ì„œë¹„ìŠ¤ í˜¸ì¶œ
 		Notice notice = new Notice(title, content, status);
 		svc = new NoticeServiceImpl().insertNotice(notice);
 		
 		System.out.println("[svc] " + svc);
 		
-		// Á¤»óÃ³¸® ½Ã ¸ñ·Ï È­¸éÀ¸·Î sendRedirect
+		// ì •ìƒì²˜ë¦¬ ì‹œ ëª©ë¡ í™”ë©´ìœ¼ë¡œ sendRedirect
 		if(svc > 0) {
 			rslt = true;
-			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
+			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("SUCCESS");
 		}
 		
-		// ÀúÀå ½ÇÆĞ ½Ã µî·ÏÈ­¸éÀ¸·Î sendRedirect
+		// ì €ì¥ ì‹¤íŒ¨ ì‹œ ë“±ë¡í™”ë©´ìœ¼ë¡œ sendRedirect
 		else {
 			rslt = false;
-			// µî·Ï¿Ï·á ÈÄ response °´Ã¼¿¡ contentType ¼³Á¤
+			// ë“±ë¡ì™„ë£Œ í›„ response ê°ì²´ì— contentType ì„¤ì •
 			response.setContentType("text/html charset=UTF-8");
 			response.getWriter().write("FAIL");
 		}	

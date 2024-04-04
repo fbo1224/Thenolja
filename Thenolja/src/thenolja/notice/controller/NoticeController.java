@@ -31,23 +31,23 @@ public class NoticeController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * ¼öÁ¤ÀÏ : 2024.03.20
-	 * ¼öÁ¤ÀÚ : shkim
-	 * ¼öÁ¤³»¿ë : °øÁö»çÇ× ¸ñ·Ï Á¶È¸ Ã³¸®
+	 * ìˆ˜ì •ì¼ : 2024.03.20
+	 * ìˆ˜ì •ì : shkim
+	 * ìˆ˜ì •ë‚´ìš© : ê³µì§€ì‚¬í•­ ëª©ë¡ ì¡°íšŒ ì²˜ë¦¬
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// ## vo : value object (º¯ÇÏÁö ¾Ê´Â °ªÀ» Ã³¸®ÇÒ ¶§ »ç¿ëÇÔ)
-		// °øÁö»çÇ× Á¶È¸ °á°ú ´ãÀ» list¼±¾ğ > listÅ¸ÀÔÀº NoticeVO
+		// ## vo : value object (ë³€í•˜ì§€ ì•ŠëŠ” ê°’ì„ ì²˜ë¦¬í•  ë•Œ ì‚¬ìš©í•¨)
+		// ê³µì§€ì‚¬í•­ ì¡°íšŒ ê²°ê³¼ ë‹´ì„ listì„ ì–¸ > listíƒ€ì…ì€ NoticeVO
 		ArrayList<Notice> list  = new ArrayList<Notice>();
 		
-		// NoticeServiceImpl °´Ã¼ ¼±¾ğ
+		// NoticeServiceImpl ê°ì²´ ì„ ì–¸
 		NoticeServiceImpl serviceImpl = new NoticeServiceImpl();
 		
-		// serviceImpl¿¡¼­ selectNoticeList¸Ş¼Òµå È£Ãâ(°øÁö»çÇ× Á¶È¸ ¸Ş¼ÒµåÀÓ)
+		// serviceImplì—ì„œ selectNoticeListë©”ì†Œë“œ í˜¸ì¶œ(ê³µì§€ì‚¬í•­ ì¡°íšŒ ë©”ì†Œë“œì„)
 		list = serviceImpl.selectNoticeList();
 		
-		//ÀÀ´äÈ­¸é ¶ç¿ì±â (list°´Ã¼, ÆäÀÌÂ¡ °´Ã¼ setAttribute)
+		//ì‘ë‹µí™”ë©´ ë„ìš°ê¸° (listê°ì²´, í˜ì´ì§• ê°ì²´ setAttribute)
 		request.setAttribute("noticeList", list);
 		//request.setAttribute("pagingVo", pagingVo);
 		RequestDispatcher view = request.getRequestDispatcher("/views/notice/noticeList.jsp");
