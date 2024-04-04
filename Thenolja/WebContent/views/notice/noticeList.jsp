@@ -95,6 +95,8 @@
 	      <li class="page-item"><a class="page-link" href="#">1</a></li>
 	      <li class="page-item"><a class="page-link" href="#">2</a></li>
 	      <li class="page-item"><a class="page-link" href="#">3</a></li>
+	      <li class="page-item"><a class="page-link" href="#">4</a></li>
+	      <li class="page-item"><a class="page-link" href="#">5</a></li>
 	      <li class="page-item">
 	        <a class="page-link" href="#"> > </a>
 	      </li>
@@ -116,8 +118,8 @@
 			        //location.href='<%=contextPath%>/detail.notice';  
 			        const noticeNo = $(this).children().eq(0).text();
 			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
-			      });
-			 <% } else{ %>
+			      })
+			 <% } else { %>
 			
 			<%--<%} else { %>--%>
 	        // 상세화면 진입 (회원전용URL)
