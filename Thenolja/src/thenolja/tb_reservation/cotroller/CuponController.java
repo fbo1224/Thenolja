@@ -34,8 +34,6 @@ public class CuponController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		System.out.println(memberNo);
-		
 		ArrayList<Coupon> coupon = new ReserService().selectCoupon(memberNo);
 		
 		response.setContentType("application/json; charset=UTF-8");

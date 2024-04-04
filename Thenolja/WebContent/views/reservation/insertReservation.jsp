@@ -159,6 +159,9 @@
         font-weight: bold;
         margin-left: 300px;
     }
+    #list:active{
+    	background-color: silver;
+    }
 </style>
 </head>
 <body>
@@ -305,7 +308,7 @@
 		                +'</tr>');
     			} else{
     				for(let i = 0; i < result.length; i++){
-    					$('#couponTable').append('<tr id="list"">'
+    					$('#couponTable').append('<tr id="list">'
     			                + '<td>' + result[i].couponNo +'</td>'
     			                + '<td>' + result[i].couponContent + '</td>'
     			                + '<td>' + result[i].couponDate + '</td>'
@@ -335,7 +338,7 @@
 	        
 			        <div class="modal-body">
 			        <table class="table table-hover" id="couponTable">
-		        
+		        		
 	                </table>
 					</div>
 				
@@ -348,6 +351,8 @@
 	</div>
 <% } %>
 	<script>
+		
+		
 	</script>
 
 <%@ include file="../common/footer.jsp" %>

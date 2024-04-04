@@ -142,7 +142,6 @@
 
 
             <div id="review_in">
-            	<%= r.getCheckOut() %>
                 <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
             </div>
 

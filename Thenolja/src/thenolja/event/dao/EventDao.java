@@ -79,9 +79,9 @@ public class EventDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertEvent");
-		System.out.println("[EventDao insert sql] " + sql);
+		//System.out.println("[EventDao insert sql] " + sql);
 		//데이터 입력받을 파일 NOtice파일
-		System.out.println("[EventDao INSERT] evt "       + evt);
+		//System.out.println("[EventDao INSERT] evt "       + evt);
 		
 		try {
 			
