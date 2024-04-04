@@ -273,8 +273,12 @@
     				$('#phone').text(result.memPhone);
     				$('#totalPrice').text(result.paymentPrice);
     				$('#bornDate').text(result.bornDate);
+    				if(result.profilePath == null) {
+						$('#profilePath').attr("src", "./resources/mypage/user.png");
+					} else{
     				$('#profilePath').attr("src", result.profilePath);
     				
+					}
     				
     			}
     			
