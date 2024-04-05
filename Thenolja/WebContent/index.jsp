@@ -87,7 +87,7 @@
 		right: 1px;
 	}
 	#banner{
-		background-image : url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpzDTO-htzyXd0VJjcNXqYHY8a4On1xbobGWeBvQ6Cqg&s');
+		background-image : url('resources/img/mainbanner2.png');
 		width : 1000px;
 		height : 400px;
 		margin : 20px auto;
