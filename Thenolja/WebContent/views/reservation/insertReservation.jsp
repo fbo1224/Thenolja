@@ -387,6 +387,7 @@
 
 	function getPercent(e){
 		$('#pprice').empty();
+		$('#payPrice').empty();
 		couponNo = $(e).children().eq(0).text();
 		content = $(e).children().eq(1).text();
 		date = $(e).children().eq(2).text();
@@ -408,7 +409,7 @@
 	 	$('#pprice').append('<span name="couponPrice">' + ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>) + '</span>');
 		$('#hidePrice').val((<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)));
 		$('#couponNo').val(coupon.couponNo);
-		console.log($('#couponNo').val(coupon.couponNo));
+		// console.log($('#couponNo').val(coupon.couponNo));
 		//console.log($('#hidePrice').val());
 		$('#payPrice').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
 	}	
