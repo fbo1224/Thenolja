@@ -151,7 +151,7 @@
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
 					$('.recommands').append('<div class="swiper-slide">'
-							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:280px; cursor: pointer;">'
+							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:250px; height:180px; cursor: pointer; white-space:nowrap;">'
 							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
 							    +'<div class="card-body">'
 							    +'<h4 class="card-title">'+ result[i].hotelName +'</h4>'
