@@ -2,10 +2,7 @@ package thenolja.tb_hotel.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +17,7 @@ import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.SearchData;
 import thenolja.tb_hotel.model.vo.SearchOptions;
 
 public class HotelController {
@@ -284,6 +282,11 @@ public class HotelController {
 		String location = request.getParameter("location").trim();
 		int maxPeople = Integer.parseInt(request.getParameter("people"));
 		
+		SearchData searchData = new SearchData();
+		searchData.setDaterange(daterange);
+		searchData.setLocation(location);
+		searchData.setMaxPeople(maxPeople);
+		
 		String startDate = daterange.substring(0,daterange.indexOf(" "));
 		String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
 		SearchOptions so = new SearchOptions();
@@ -340,7 +343,7 @@ public class HotelController {
 		// 응답 경로 지정
 		request.setAttribute("sList", sList);
 		request.setAttribute("pageInfo", pi);
-
+		request.setAttribute("searchData", searchData);
 		view = "views/hotel/searchList.jsp";
 		return view;
 	}
