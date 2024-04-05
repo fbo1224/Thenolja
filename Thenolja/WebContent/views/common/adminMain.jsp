@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>  
+<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
+<%
+	Date date = new Date();
+	SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy년 M월 d일");
+	String today = simpleDate.format(date);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -296,7 +301,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-            <p class="modal-title">오늘의 가입자</p>
+            <p class="modal-title"><%=today %> 가입자</p>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
