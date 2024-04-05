@@ -56,7 +56,6 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
 		RequestDispatcher view = request.getRequestDispatcher("/views/reservation/insertReservation.jsp");
-		
 		view.forward(request, response);
 		} else {
 			request.setAttribute("errorMsg", "숙소 조회를 실패하셨습니다.");

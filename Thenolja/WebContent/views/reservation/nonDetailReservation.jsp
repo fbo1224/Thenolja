@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member" %>  
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, 
+				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
 <%
-	Reservation reser = (Reservation)request.getAttribute("reser");
-%>
+	Reservation reser = (Reservation)session.getAttribute("reser");
+	Room room = (Room)session.getAttribute("room");
+	Hotel hotel = (Hotel)session.getAttribute("hotel");
+	System.out.println(reser.getName());
+%>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,6 @@
 <style>
 
     div{
-        border: 1px solid red;
         box-sizing : border-box;
     }
 
@@ -135,11 +138,6 @@
         padding-top: 30px;
     }
 
-    table{
-        width: 70%;
-
-    }
-
     hr{
         border: 1px solid;
         width: 90%;
@@ -190,13 +188,16 @@
                 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
-                <div id="reser_detail">
-                    <h3>마리안느 호텔</h3>
-                    <p>슈페리어 더블(오션뷰)</p>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-02-28 ~ 2024-02-29</p>
-                </div>
+				<div id="reser_detail">
+				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+			        <h2><%=hotel.getHotelName() %></h2>
+			        <p><%=room.getRoomName() %></p>
+			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=room.getRoomPrice() %>원</p>
+			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
+			        
+    			</div>
 
                 <div id="reser_btn">
                     <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>
@@ -210,14 +211,15 @@
                 <div id="rser_price">
                     <h3>결제 금액</h3>
                     <hr>
-                    <table>
-                        <tr>
-                            <td width="170x">예약금액 : <%= reser.getPaymentPrice() %></td>
-                            <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
-                            <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%= reser.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
-                    </table>
+   	        		<table>
+	        			<tr>
+	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
+							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
+							<td width="400px">할인 금액 : 0원</td>
+							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
+							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
+						</tr>
+	               </table>
                 </div>
 
                 <div id="reser_price_info">
@@ -278,7 +280,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"  method="post"> 
+        <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>%reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
             

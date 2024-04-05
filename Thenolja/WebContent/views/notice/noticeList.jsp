@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member" %>
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-	String loginId = list.get(0).getNoticeTitle();
-	//System.out.println("noticeList = " + list); 컴파일에러 발생
 %>
 <!DOCTYPE html>
 <html>
@@ -45,10 +43,16 @@
     <br>
     
     <!-- 등록 버튼 영역 START -->
-   	<%-- <a class="btn btn-sm btn-info" id="btn_reg" href="<%= contextPath %>/insertForm.notice">등록</a> --%>
 	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
    	<!-- 등록 버튼 영역 END -->
    	
+     <!-- 관리자가 아니면 등록하기 버튼 숨김처리 -->
+    <% if(!"A".equals(loginUser.getMemStatus())) { %>
+    <!-- 	<script>
+    		$("#btn_reg").style.display='none';
+    	</script> -->
+    <% } %>  	
+    
     <br>
     
     <table class="table table-hover">
@@ -108,31 +112,27 @@
 <br><br><br>
 </div>
 	<script>
-		// loginId null 체크
-		<%-- <% if("".equals(loginId)){ %> --%>
+			// loginId null 체크
 			// 수정화면 진입 (관리자전용URL)
-			<%-- <% if("admin".contains(loginId)){  %> --%>
-		 <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
+			<%if(loginUser != null){ %>
 			
-				$('tbody > tr.list').click(function(){
-			        //location.href='<%=contextPath%>/detail.notice';  
-			        const noticeNo = $(this).children().eq(0).text();
-			        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
-			      })
-			 <% } else { %>
-			
-			<%--<%} else { %>--%>
-	        // 상세화면 진입 (회원전용URL)
-		      /*   $('tbody > tr.list').click(function(){
-		          //location.href='<%=contextPath%>/detail.notice';  
-		           const noticeNo = $(this).children().eq(0).text();
-		           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
-		        });*/ 
-		        <% } %>
-	        
-			<%-- <% } %> --%>
-		<%-- <% } %> --%>
-		
+			 	<%if("A".equals(loginUser.getMemStatus())){ %>
+					$('tbody > tr.list').click(function(){
+				        //location.href='<%=contextPath%>/detail.notice';  
+				        const noticeNo = $(this).children().eq(0).text();
+				        location.href= '<%= contextPath %>/selectUpdate.notice?noticeNo=' + noticeNo + '&flag=' + 'Y';
+				      })
+				 <% } else { %>
+				
+			        	// 상세화면 진입 (회원전용URL)
+				       $('tbody > tr.list').click(function(){
+				          //location.href='<%=contextPath%>/detail.notice';  
+				           const noticeNo = $(this).children().eq(0).text();
+				           location.href= '<%= contextPath %>/detail.notice?noticeNo=' + noticeNo + '&flag=' + 'N';
+				        });
+			     <% } %>
+			     
+		     <%}%>
 		
 	</script>
 

@@ -323,7 +323,7 @@ svg{
 		            		   hotelNo : <%= dh.getHotelNo() %>
 		            		   },
 		            		   success: function(result){
-		            			   console.log(result); // onload속성으로 유지시켜라 하트를..
+		            			   console.log(result);
 		            		   },
 		            		   error: function(e){
 		           				console.log(e);
@@ -685,7 +685,7 @@ svg{
 			},
 			type: 'get',
 			success: function(result){
-				console.log(result);
+				//console.log(result);
 				for(let i = 0; i < result.reviewList.length; i++){
 					$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
 										   +'<div class="message-data">'

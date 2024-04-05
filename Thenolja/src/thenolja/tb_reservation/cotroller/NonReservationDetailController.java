@@ -38,6 +38,7 @@ public class NonReservationDetailController extends HttpServlet {
 			
 		if(reser != null) {
 			request.setAttribute("reser", reser);
+			
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/nonDetailReservation.jsp");
 			view.forward(request, response);
 			// 이거 어떤방식으로 만든건지 묻기

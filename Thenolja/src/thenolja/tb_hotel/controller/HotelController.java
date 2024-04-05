@@ -261,15 +261,11 @@ public class HotelController {
 	public String select(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		// System.out.println(hotelNo);
 		
 		// 선택한 호텔 정보 가져오기
 		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
-
-		// System.out.println(dh);
 		
 		if(dh != null) {
-			// request에 가져온정보들 담기
 			request.setAttribute("hotelDetail", dh);
 			view = "views/hotel/hotelDetail.jsp";
 			
@@ -313,8 +309,6 @@ public class HotelController {
 		}
 		
 		listCount = new HotelService().searchListCount(startDate,endDate,location,maxPeople);
-		System.out.println(listCount);
-		
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		

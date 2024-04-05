@@ -231,12 +231,12 @@ public class NonmemDao {
 		}
 		return result;
 	}
-	public Member selectNonMemer(Connection conn) {
+	public Member selectNonMember(Connection conn) {
 		
 		Member member = new Member();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectNonMemer");
+		String sql = prop.getProperty("selectNonMember");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

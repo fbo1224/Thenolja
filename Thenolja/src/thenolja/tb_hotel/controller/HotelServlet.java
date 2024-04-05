@@ -48,9 +48,7 @@ public class HotelServlet extends HttpServlet {
 			// 뷰 응답 controller에서 할 것.
 			case "insert" : view =  hc.insert(request, response);
 							// hotelList로 이동
-							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1")) {	
-								flag = false;
-							}
+							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A")) flag = false;	
 							break;
 			
 			// hotelList.jsp
@@ -59,11 +57,8 @@ public class HotelServlet extends HttpServlet {
 			// updateHotel.jsp
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
-			// 
 			case "update" : view =  hc.update(request, response);
-							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1")) {
-								flag = false;
-							}
+							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A")) flag = false;
 							break;
 
 			// hotelDetail

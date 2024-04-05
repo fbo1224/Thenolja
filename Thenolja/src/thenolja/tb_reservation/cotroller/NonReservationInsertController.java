@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import thenolja.member.model.vo.Member;
 import thenolja.nonmem.service.NonmemService;
 import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
@@ -45,31 +46,32 @@ public class NonReservationInsertController extends HttpServlet {
 		Member nonmem = new Member();
 		nonmem.setMemName(name);
 		nonmem.setMemPhone(phone);
-		
 		nonmem = new NonmemService().insertNonMember(nonmem);
 		
-		if(nonmem != null) {
-			int memNo = nonmem.getMemNo();
+		int memNo = nonmem.getMemNo();
+		
+		Reservation reser = new Reservation();
+		reser.setName(name);
+		reser.setPhone(phone);
+		reser.setBicycle(bicycle);
+		reser.setRoomNo(roomNo);
+		reser.setMemNo(memNo);
+		
+		reser = new ReserService().insertReser(reser);
+		if(nonmem != null && reser != null ) {
 			
-			Reservation reser = new Reservation();
-			reser.setName(name);
-			reser.setPhone(phone);
-			reser.setBicycle(bicycle);
-			reser.setRoomNo(roomNo);
-			reser.setMemNo(memNo);
-			
-			reser = new ReserService().insertReser(reser);
-			
+			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 			Hotel hotel = new ReserService().selectHotel();
+			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
-			if(reser != null && hotel != null) {
+			if(hotel != null && room != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
 				session.setAttribute("nonmem", nonmem);
 				session.setAttribute("hotel", hotel);
-
+				session.setAttribute("room", room);
 				
-				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo());
+				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo() +"&roomNo=" + room.getRoomNo());
 				
 			} else {
 				request.setAttribute("errorMsg", "예약에 실패했습니다!");

@@ -19,15 +19,13 @@
 				)
 	</entry>
 	
-	<entry key="selectNonMemer">
+	<entry key="selectNonMember">
 		SELECT
 				SEQ_MNO.CURRVAL,
 				MEM_NAME,
 				MEM_PHONE
 		  FROM
 		  		TB_NONMEM
-		 WHERE
-		        MEM_NO = ?
 	</entry>
 	
 	<entry key="selectNonMem">

@@ -21,7 +21,7 @@
 		FROM TB_NOTICE
 		
 		WHERE 1=1
-		ORDER BY CREATE_DATE DESC
+		ORDER BY CREATE_DATE DESC, NOTICE_NO DESC
 	</entry>
 	
 	<!-- 공지사항 등록 -->

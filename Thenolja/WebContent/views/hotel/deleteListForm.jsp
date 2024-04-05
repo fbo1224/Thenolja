@@ -59,6 +59,7 @@ div {
 	border-radius: 10px;
 	border: 1px solid gray;
 	box-shadow: 5px 3px 3px gray;
+	padding: 9px;
 }
 
 #content-add-sect{
