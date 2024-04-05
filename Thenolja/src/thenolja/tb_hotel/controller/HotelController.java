@@ -259,12 +259,22 @@ public class HotelController {
 	public String select(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		String daterange = request.getParameter("daterange");
+		String location = request.getParameter("location").trim();
+		int maxPeople = Integer.parseInt(request.getParameter("people"));
+		
+		SearchData searchData = new SearchData();
+		searchData.setDaterange(daterange);
+		searchData.setLocation(location);
+		searchData.setMaxPeople(maxPeople);
+		
 		
 		// 선택한 호텔 정보 가져오기
 		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
 		
 		if(dh != null) {
 			request.setAttribute("hotelDetail", dh);
+			request.setAttribute("searchData", searchData);
 			view = "views/hotel/hotelDetail.jsp";
 			
 		} else {
