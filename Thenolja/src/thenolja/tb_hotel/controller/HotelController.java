@@ -2,10 +2,7 @@ package thenolja.tb_hotel.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +17,7 @@ import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
+import thenolja.tb_hotel.model.vo.SearchData;
 import thenolja.tb_hotel.model.vo.SearchOptions;
 
 public class HotelController {
@@ -91,7 +89,7 @@ public class HotelController {
 			result = new HotelService().insertHotel(h);
 		}
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
 		}
 		else {
 			request.setAttribute("errorMsg", "hotel 추가 실패...");
@@ -249,7 +247,7 @@ public class HotelController {
 		result = new HotelService().updateHotel(h);
 		
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
 		} else {
 			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
 			view = "views/common/errorPage.jsp";
@@ -283,6 +281,11 @@ public class HotelController {
 		String daterange = request.getParameter("daterange");
 		String location = request.getParameter("location").trim();
 		int maxPeople = Integer.parseInt(request.getParameter("people"));
+		
+		SearchData searchData = new SearchData();
+		searchData.setDaterange(daterange);
+		searchData.setLocation(location);
+		searchData.setMaxPeople(maxPeople);
 		
 		String startDate = daterange.substring(0,daterange.indexOf(" "));
 		String endDate = daterange.substring(daterange.lastIndexOf(" ") + 1);
@@ -340,7 +343,7 @@ public class HotelController {
 		// 응답 경로 지정
 		request.setAttribute("sList", sList);
 		request.setAttribute("pageInfo", pi);
-
+		request.setAttribute("searchData", searchData);
 		view = "views/hotel/searchList.jsp";
 		return view;
 	}

@@ -137,7 +137,7 @@
 
                 </div>  
         
-     <div class="paging-area" align="center";>
+     		<div class="paging-area" align="center";>
                
                <% if(list!=null) { %>
                 	<%if(currentPage > 1) { %>
