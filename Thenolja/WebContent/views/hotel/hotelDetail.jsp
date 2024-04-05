@@ -323,7 +323,7 @@ svg{
 		            		   hotelNo : <%= dh.getHotelNo() %>
 		            		   },
 		            		   success: function(result){
-		            			   console.log(result); // onload속성으로 유지시켜라 하트를..
+		            			   console.log(result);
 		            		   },
 		            		   error: function(e){
 		           				console.log(e);
