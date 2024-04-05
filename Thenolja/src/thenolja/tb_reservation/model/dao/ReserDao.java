@@ -434,7 +434,7 @@ public class ReserDao {
 	}
 
 	public ArrayList<Coupon> selectCoupon(Connection conn, int memberNo) {
-		 ArrayList<Coupon> cList = new  ArrayList();
+		ArrayList<Coupon> cList = new  ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectCoupon");
@@ -460,7 +460,6 @@ public class ReserDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(cList);
 		return cList;
 	}
 
@@ -499,6 +498,35 @@ public class ReserDao {
 			close(pstmt);
 		}
 		return reser;
+	}
+
+	public Coupon selectoCoupon(Connection conn, int couponNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Coupon coupon = new Coupon();
+		String sql = prop.getProperty("selectoCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, couponNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				coupon = new Coupon();
+				coupon.setCouponNo(rset.getInt("COUPON_NO"));
+				coupon.setCouponContent(rset.getString("COUPON_CONTENT"));
+				coupon.setCouponDate(rset.getDate("COUPON_DATE"));
+				coupon.setCouponCode(rset.getString("COUPON_CODE"));
+				coupon.setCouponPercent(rset.getInt("COUPON_PERCENT"));
+		
+			}
+			} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return coupon;
 	}
 
 

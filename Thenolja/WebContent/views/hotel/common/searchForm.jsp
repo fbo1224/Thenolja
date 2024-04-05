@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ page import="thenolja.tb_hotel.model.vo.*" %>
+    <%
+    SearchData searchData= null;
+	if(request.getAttribute("searchData") != null){
+		searchData = (SearchData)request.getAttribute("searchData");
+	}
+   	System.out.println(searchData);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,11 +54,22 @@
 
 <div id="content-1">
 	<form id="select-form" action="<%= contextPath %>/searchList.hotels" method="get">
-		<div style="display: inline-block;">
-			<input class="form-control" type="text" name="daterange" readonly required/>
-		</div>
-		<span id="date"></span>
-		<input required class="form-control" id="people-input" type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
+		<%if(searchData != null){ %>
+			<div style="display: inline-block;">
+				<input class="form-control" type="text" name="daterange" value="<%= searchData.getDaterange() %>" readonly required/>	
+			</div>
+			<span id="date"><%= searchData.getDaterange() %></span>
+			<input required class="form-control" id="people-input"
+			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." value="<%= searchData.getLocation() %>" >
+		<%} else { %>
+			<div style="display: inline-block;">
+				<input class="form-control" type="text" name="daterange" readonly required/>
+			</div>
+			<span id="date"></span>
+			<input required class="form-control" id="people-input"
+			 type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
+		<%} %>
+		
 		<select id="locations" name="location">
 		</select>
 		<input type="hidden" name="currentPage" value="1">

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, 
-				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
+				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room,  thenolja.tb_coupon.model.vo.Coupon" %>  
 <%
 	Reservation reser = (Reservation)session.getAttribute("reser");
 	Room room = (Room)session.getAttribute("room");
 	Hotel hotel = (Hotel)session.getAttribute("hotel");
+	Coupon coupon = (Coupon)session.getAttribute("coupon");
 	
 	%>
 <!DOCTYPE html>
@@ -203,7 +204,7 @@
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
 			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
+			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
                 </div>
 
                 <div id="reser_btn">
@@ -222,9 +223,9 @@
                         <tr>
                             <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
+                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%= room.getRoomPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+                            <td>결제금액 : <%=reser.getPaymentPrice() %>
                     </table>
                 </div>
 
@@ -289,7 +290,7 @@
         <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            
+            <input type="hidden" name="refundPrice" value="<%=reser.getPaymentPrice() %>">
             <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
