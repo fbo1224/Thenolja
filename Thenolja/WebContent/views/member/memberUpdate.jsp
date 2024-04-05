@@ -115,6 +115,22 @@
 
 			</table>
 
+			<!-- 이름 정규표현식-->
+			<script>
+				$('input[name=memName]').blur(function(){
+						const memNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]{2,15}$/;
+						const memNameVal = $('input[name=memName]').val();
+	
+						if(!memNameReg.test(memNameVal)){
+							$('input[name=memName]').val('');
+							$('input[name=memName]').css('border-color','orangered');
+						}
+						else{
+							$('input[name=memName]').css('border-color','rgb(230, 230, 230)');
+						}
+					});
+			</script>
+
 			<!-- 전화번호 정규표현식-->
 			<script>
 				$('input[name=memPhone]').blur(function(){
@@ -130,7 +146,57 @@
 					}
 				});
 			</script>
+
+			<!-- 이메일 정규표현식 -->
+			<script>
+				$('input[name=email]').blur(function(){
+					const emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+					const emailVal = $('input[name=email]').val();
+	
+					if(!emailReg.test(emailVal)){
+						$('input[name=email]').val('');
+						$('input[name=email]').css('border-color','orangered');
+					}
+					else{
+						$('input[name=email]').css('border-color','rgb(230, 230, 230)');
+					}
+				});
+			</script>
+
+			<!-- 비밀번호1 정규표현식 -->
+			<script>
+				/* 비밀번호 */
+				$('input[name=memPwd]').blur(function(){
+					const pwdReg =  /^[A-Za-z0-9]{4,15}$/;
+					const pwdVal = $('input[name=memPwd]').val();
+	
+					if(!pwdReg.test(pwdVal)){
+						$('input[name=memPwd]').val('');
+						$('input[name=memPwd]').css('border-color','orangered');
+					}
+					else{
+						$('input[name=memPwd]').css('border-color','rgb(230, 230, 230)');
+					}
+				});
+			</script>
+
+			<!-- 비밀번호2 정규표현식 -->
+			<script>
+					$('#newPwd2').blur(function(){
+						const pwdReg2 = /^[A-Za-z0-9]{4,15}$/;
+						const pwdVal2 = $('#newPwd2').val();
+	
+						if(!pwdReg2.test(pwdVal2)){
+							$('#newPwd2').val('');
+							$('#newPwd2').css('border-color','orangered');
+						}
+						else{
+							$('#newPwd2').css('border-color','rgb(230, 230, 230)');
+						}
+					});
+			</script>
 			
+			<!-- 비밀번호 일치확인 -->
 			<script>
 				function pwdCheck(){
 					const pwd1 = document.getElementById('newPwd1');
@@ -146,7 +212,7 @@
 						/*next.disabled = true;*/
 						return false;
 					}
-					else{+
+					else{
 						pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
 						pwdCheck.style = "color:green; display:block;";
 						/*next.disabled = false;*/
