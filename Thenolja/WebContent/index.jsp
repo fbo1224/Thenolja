@@ -46,8 +46,8 @@
 		height: 100%;
 	}
     .card-img{
-		width: 100%;
-		height: 100%;
+		width: 275px;
+		height: 180px;
 		border-radius: 10px;
 		cursor: pointer;
 	}
