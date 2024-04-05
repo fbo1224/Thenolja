@@ -262,12 +262,11 @@
 	               BY
 	                     MEM_NO ASC) A)
 	    WHERE RNUM BETWEEN ? AND ?
-		
-	
-	
 	
 	</entry>
 	
+
 	
+
 	
 </properties>

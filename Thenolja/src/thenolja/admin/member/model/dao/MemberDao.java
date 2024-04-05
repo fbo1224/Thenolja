@@ -493,5 +493,6 @@ public class MemberDao {
 		
 	}
 	
+
 	
 }
