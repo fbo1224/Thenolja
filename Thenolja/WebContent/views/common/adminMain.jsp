@@ -165,7 +165,7 @@
             	<div id="today"><p>Today 현황</p></div>
 
         <div id="today_content">
-            <div id="today_join"><p>회원가입<br><span id="join"></span>명 </p> </div>
+            <div id="today_join"  data-toggle="modal" data-target="#myModal" onclick="detailJoin()"><p>회원가입<br><span id="join"></span>명 </p> </div>
 
             <div id="today_reser"><p>예약<br><span id="todayReser"></span>건</p></div>
     
@@ -255,13 +255,70 @@
     		
     	})
     	
-    	
+    	function detailJoin(){
+    		
+    		$.ajax({
+    			
+    			url : 'detailJoinMember.do',
+    			type : 'post',
+    			success : function(result){
+    				console.log(result);
+    				let resultStr = '';
+                    if(result.length === 0) {
+                    	resultStr += '<tr>'
+                				  + '<th colspan="3">오늘은 가입자가 없습니다</th>'
+                				  + '</tr>'
+               		} else {
+    				for(let i = 0; i < result.length; i++){
+	    					
+	    					resultStr += '<tr>'
+	    							  + '<td>' + result[i].memNo + '</td>'
+	    							  + '<td>' + result[i].memId + '</td>'
+	    							  + '<td>' + result[i].nickName + '</td>'
+	    							  + '<tr>'
+	    				};
+	    				$('#joinDetail tbody').html(resultStr);
+               		}    				
+                    $('#joinDetail tbody').html(resultStr);
+    			}
+    		});
+    	}
     	
     	
     
     </script>
     
-    
+ <!-- 오늘 가입자 명단 모달 -->   
+ <div class="modal" id="myModal">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <p class="modal-title">오늘의 가입자</p>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+					<table id="joinDetail" class="table table-bordered" style="text-align: center";>
+                        <thead>
+                          <tr>
+                          	<th>번호</th>
+                            <th>아이디</th>
+                            <th>닉네임</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+        </div>
+     
+      </div>
+    </div>
+  </div>
+      
     
     
    
