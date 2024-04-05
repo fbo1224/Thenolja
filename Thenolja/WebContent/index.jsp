@@ -87,11 +87,14 @@
 		right: 1px;
 	}
 	#banner{
-		background-image : url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpzDTO-htzyXd0VJjcNXqYHY8a4On1xbobGWeBvQ6Cqg&s');
+		background-image : url('resources/img/mainbanner03.png');
+		background-size:cover;
 		width : 1000px;
 		height : 400px;
 		margin : 20px auto;
 		border-radius: 10px;
+		object-fit: cover;
+		background-repeat: no-repeat;
 	}
 </style>
 </head>
