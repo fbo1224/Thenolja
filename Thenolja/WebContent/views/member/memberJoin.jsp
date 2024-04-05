@@ -307,10 +307,12 @@
 					$('input[name=memId]').css('border-color','orangered');
 				}
 				else{
-					$('input[name=memId]').css('border-color', 'rgb(70, 149, 151)');
+					$('input[name=memId]').css('border-color', 'rgb(230, 230, 230)');
 				}
 			});
+		</script>
 
+		<script>
 			/* 비밀번호 */
 			$('input[name=memPwd]').blur(function(){
 				const pwdReg =  /^[A-Za-z0-9]{4,15}$/;
@@ -324,7 +326,9 @@
 					$('input[name=memPwd]').css('border-color','rgb(230, 230, 230)');
 				}
 			});
+		</script>
 
+		<script>
 			/* 비밀번호 확인 */
 				$('#memPwd2').blur(function(){
 					const pwdReg2 = /^[A-Za-z0-9]{4,15}$/;
@@ -338,7 +342,9 @@
 						$('#memPwd2').css('border-color','rgb(230, 230, 230)');
 					}
 				});
+		</script>
 
+		<script>
 			/* 이름 */
 			$('input[name=memName]').blur(function(){
 					const memNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]{2,15}$/;
@@ -352,7 +358,9 @@
 						$('input[name=memName]').css('border-color','rgb(230, 230, 230)');
 					}
 				});
+		</script>
 
+		<script>
 			/* 닉네임 */
 			$('input[name=nickname]').blur(function(){
 					const nicknameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,15}$/;
@@ -366,7 +374,9 @@
 						$('input[name=nickname]').css('border-color','rgb(230, 230, 230)');
 					}
 				});
+		</script>
 
+		<script>
 			/* 전화번호 */
 			$('input[name=memPhone]').blur(function(){
 				const phoneReg = /^01([0|1|])-?([0-9]{4})-?([0-9]{4})$/;
@@ -380,13 +390,28 @@
 					$('input[name=memPhone]').css('border-color','rgb(230, 230, 230)');
 				}
 			});
+		</script>
 
+		<script>
 			/* 이메일 */
+			$('input[name=email]').blur(function(){
+				const emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+				const emailVal = $('input[name=email]').val();
 
+				if(!emailReg.test(emailVal)){
+					$('input[name=email]').val('');
+					$('input[name=email]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=email]').css('border-color','rgb(230, 230, 230)');
+				}
+			});
+		</script>
 
+		<script>
 			/* 생년월일 */
 			$('input[name=bornDate]').blur(function(){
-				const bornDateReg = /^[0-9]{8})$/;
+				const bornDateReg = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/
 				const bornDateVal = $('input[name=bornDate]').val();
 
 				if(!bornDateReg.test(bornDateVal)){
@@ -397,12 +422,7 @@
 					$('input[name=bornDate]').css('border-color','rgb(230, 230, 230)');
 				}
 			});
-
-
-
 		</script>
-	
-	
 	</div>
 
 
