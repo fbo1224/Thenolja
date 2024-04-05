@@ -264,7 +264,7 @@
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="500px">할인 금액 : <span id="pprice"></span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="300px" style="font-weight: bold;" >결제금액 : <span><%=room.getRoomPrice() %></span> 원</td>
+							<td width="300px" style="font-weight: bold;" >결제금액 : <span id="payPrice"></span> 원</td>
 						</tr>
 	               </table>
 				</div>
@@ -272,6 +272,7 @@
 
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
 					<input id="hidePrice" type="hidden" name="paymentPrice" value="">
+					<input id="couponNo" type="hidden" name="couponNo" value="">
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
 		                <br>
@@ -406,7 +407,10 @@
 	 	// console.log(parseInt(percent));
 	 	$('#pprice').append('<span name="couponPrice">' + ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>) + '</span>');
 		$('#hidePrice').val((<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)));
-		console.log($('#hidePrice').val());
+		$('#couponNo').val(coupon.couponNo);
+		console.log($('#couponNo').val(coupon.couponNo));
+		//console.log($('#hidePrice').val());
+		$('#payPrice').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
 	}	
     </script>
     

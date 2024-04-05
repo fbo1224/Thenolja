@@ -167,6 +167,17 @@ public class ReserService {
 		return couponList;
 	}
 
+	public Coupon selectoCoupon(int couponNo) {
+
+		Connection conn = getConnection();
+		
+		Coupon coupon =  new ReserDao().selectoCoupon(conn, couponNo);
+		
+		close(conn);
+		
+		return coupon;
+	}
+
 
 
 

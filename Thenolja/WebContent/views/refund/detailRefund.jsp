@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_refund.model.vo.Refund, thenolja.tb_reservation.model.vo.Reservation" %>  
-<%@ page import="thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_refund.model.vo.Refund, 
+				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room,  thenolja.tb_coupon.model.vo.Coupon" %>  
 <%
+	Reservation reser = (Reservation)session.getAttribute("reser");
+	Coupon coupon = (Coupon)session.getAttribute("coupon");
 	Refund refund = (Refund)request.getAttribute("refund");
-	Reservation reser = (Reservation)request.getAttribute("reser");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
 
@@ -243,9 +244,9 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">결제금액 : <%=room.getRoomPrice() %></td>
+                            <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : 0원</td>
+                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
                             <td>결제금액 : <%=refund.getRefundPrice() %></td>
                         </tr>
