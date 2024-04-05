@@ -91,7 +91,7 @@ public class HotelController {
 			result = new HotelService().insertHotel(h);
 		}
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
 		}
 		else {
 			request.setAttribute("errorMsg", "hotel 추가 실패...");
@@ -249,7 +249,7 @@ public class HotelController {
 		result = new HotelService().updateHotel(h);
 		
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
 		} else {
 			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
 			view = "views/common/errorPage.jsp";
