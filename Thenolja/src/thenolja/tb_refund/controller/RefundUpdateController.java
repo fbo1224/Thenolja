@@ -1,4 +1,4 @@
-package thenolja.tb_refund.controller;
+    package thenolja.tb_refund.controller;
 
 import java.io.IOException;
 
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thenolja.tb_hotel.model.vo.Hotel;
+import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_refund.model.service.RefundService;
 import thenolja.tb_refund.model.vo.Refund;
 import thenolja.tb_reservation.model.Service.ReserService;
@@ -38,30 +40,40 @@ public class RefundUpdateController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		String accNo =request.getParameter("accNo");
+		String accNo = request.getParameter("accNo");
 		String refundName = request.getParameter("refundName");
 		String bankName = request.getParameter("bankName");
+		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));	
+		int refundPrice = Integer.parseInt(request.getParameter("refundPrice"));
 		
-		
+		// 3) 데이터 가공
 		Refund refund = new Refund();
 		refund.setReserNo(reserNo);
+		refund.setRefundPrice(refundPrice);
 		refund.setAccNo(accNo);
 		refund.setRefundName(refundName);
 		refund.setBank(bankName);
 		
-		int result = new RefundService().updateRefund(refund);
+		int result1 = new RefundService().insertRefund(refund);
+		int result2 = new ReserService().deleteReser(reserNo);
 		
-		if(result > 0) {
+		if(result1 * result2 > 0) {
 			
 			refund = new RefundService().selectRefund(reserNo);
 			Reservation reser = new RefundService().selectReservation(reserNo);
+			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
+			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
-			if(refund != null && reser != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("refund", refund);
-				session.setAttribute("reser", reser);
+			if(refund != null && reser != null && hotel != null && room != null) {
+				System.out.println(reser);
+				request.setAttribute("refund", refund);
+				request.setAttribute("hotel", hotel);      
+				request.setAttribute("room", room);
+				request.setAttribute("reser", reser);
 		// 		request.getRequestDispatcher("views/refund/detailRefund.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath() + "/detail.refund?reserNo=" + refund.getReserNo());
+				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");
+				view.forward(request, response);
 				
 			} else {
 				request.setAttribute("errorMsg", "환불 수정에 실패하였습니다");

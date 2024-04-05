@@ -45,10 +45,12 @@ public class RefundInsertController extends HttpServlet {
 		String bankName = request.getParameter("bankName");
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));	
+		int refundPrice = Integer.parseInt(request.getParameter("refundPrice"));
 		
 		// 3) 데이터 가공
 		Refund refund = new Refund();
 		refund.setReserNo(reserNo);
+		refund.setRefundPrice(refundPrice);
 		refund.setAccNo(accNo);
 		refund.setRefundName(refundName);
 		refund.setBank(bankName);

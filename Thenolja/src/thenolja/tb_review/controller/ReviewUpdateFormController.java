@@ -1,6 +1,5 @@
 package thenolja.tb_review.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
@@ -15,7 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import thenolja.common.MyFileRenamePolicy;
+import thenolja.tb_review.model.vo.MyFileRenamePolicy;
 import thenolja.tb_review.model.service.ReviewService;
 import thenolja.tb_review.model.vo.Review;
 

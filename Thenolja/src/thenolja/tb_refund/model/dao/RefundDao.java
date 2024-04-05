@@ -38,9 +38,10 @@ public class RefundDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, refund.getReserNo());
-			pstmt.setString(2, refund.getAccNo());
-			pstmt.setString(3, refund.getRefundName());
-			pstmt.setString(4, refund.getBank());
+			pstmt.setInt(2, refund.getRefundPrice());
+			pstmt.setString(3, refund.getAccNo());
+			pstmt.setString(4, refund.getRefundName());
+			pstmt.setString(5, refund.getBank());
 			
 			result = pstmt.executeUpdate();
 			

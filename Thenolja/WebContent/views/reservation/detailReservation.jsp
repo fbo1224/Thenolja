@@ -223,9 +223,9 @@
                         <tr>
                             <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
+                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=reser.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+                            <td>결제금액 : <%=reser.getPaymentPrice() %>
                     </table>
                 </div>
 
@@ -290,7 +290,7 @@
         <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            
+            <input type="hidden" name="refundPrice" value="<%=reser.getPaymentPrice() %>">
             <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">

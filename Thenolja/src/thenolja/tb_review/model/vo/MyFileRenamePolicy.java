@@ -1,8 +1,6 @@
 package thenolja.tb_review.model.vo;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
@@ -16,16 +14,18 @@ public class MyFileRenamePolicy implements FileRenamePolicy{
       // 원본 파일명!!
       String originName = originFile.getName();
       
-      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-      
       int randomNo = (int)(Math.random() * 90000) + 10000;
       
       String ext = originName.substring(originName.lastIndexOf("."));
-         
-      String changeName = "review" + currentTime + "_" + randomNo + ext;
+      
+      System.out.println("randomNo" + randomNo);
+      System.out.println("ext : " + ext);
+      
+      
+      String changeName = "review" + "_" + randomNo + ext;
+      System.out.println("changeName : " + changeName);   
       
       return new File(originFile.getParent(), changeName);
-      
       
       
       
