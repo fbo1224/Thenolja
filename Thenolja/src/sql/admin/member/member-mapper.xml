@@ -264,8 +264,24 @@
 	    WHERE RNUM BETWEEN ? AND ?
 	
 	</entry>
+	 
 	
-
+	<entry key="todayJoinDetail">
+	 SELECT 
+            MEM_NO,
+	        MEM_ID,
+            NICKNAME
+	  FROM
+	        TB_MEMBER
+      JOIN
+            TB_NONMEM USING (MEM_NO)
+	  WHERE
+	        TO_DATE(TO_CHAR(JOIN_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+      ORDER
+         BY
+           MEM_NO DESC
+	
+	</entry>
 	
 
 	

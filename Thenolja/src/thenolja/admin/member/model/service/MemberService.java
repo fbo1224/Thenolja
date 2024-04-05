@@ -224,6 +224,18 @@ public class MemberService {
 		return list;
 	}
 	
-
+	/**
+	 * 오늘 가입자 정보
+	 */
+	public ArrayList<AdminMember> todayJoinDetail(){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminMember> list = new MemberDao().todayJoinDetail(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 }

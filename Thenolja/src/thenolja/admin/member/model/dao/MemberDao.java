@@ -489,10 +489,38 @@ public class MemberDao {
 		}
 		
 		return list;
-		
-		
+
 	}
-	
+
+	public ArrayList<AdminMember> todayJoinDetail(Connection conn){
+		
+		ArrayList<AdminMember> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayJoinDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				AdminMember adminMember = new AdminMember();
+				adminMember.setMemNo(rset.getInt("MEM_NO"));
+				adminMember.setMemId(rset.getString("MEM_ID"));
+				adminMember.setNickName(rset.getString("NICKNAME"));
+				
+				list.add(adminMember);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 
 	
 }
