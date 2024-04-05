@@ -101,12 +101,9 @@
 
 <body>
 	<%@ include file="views/hotel/common/searchForm.jsp" %>
-	
-	
+
 	<div id="wrap">
 		<div id="banner">
-		
-		
 		</div>
 		<div class="mainPage-title-div">
 			<h3>요즘 인기있는 숙소</h3>
