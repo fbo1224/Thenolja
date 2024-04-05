@@ -40,8 +40,20 @@ public class ReservationInserFormController extends HttpServlet {
 		
 		ArrayList<Coupon> list = new ReserService().selectCouponList();
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		int roomNo = Integer.parseInt(request.getParameter("roomNo"));		
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		String daterange = request.getParameter("daterange");
+		int people = Integer.parseInt(request.getParameter("people"));
+		String startDate =  daterange.substring(0, daterange.indexOf(" ")).trim();
+		String endDate =  daterange.substring(daterange.lastIndexOf(" ")).trim();
+		System.out.println(startDate);
+		System.out.println(endDate);
+		if(startDate != null && endDate != null && people > 0) {
+			Reservation reser = new Reservation();
+			reser.setCheckIn(startDate);
+			reser.setCheckOut(endDate);
+			reser.setPeople(people);
 		
+		}
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
 		

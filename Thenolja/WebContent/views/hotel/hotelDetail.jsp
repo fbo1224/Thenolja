@@ -350,9 +350,9 @@ svg{
 						</div>
 						<div>
 							<p>쿠폰적용가능</p>
-							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
 							<button class="btn btn-sm btn-info">객실 예약</button></a>
-							<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+							<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
 							<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 						</div>
 					</div>			
