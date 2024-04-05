@@ -22,37 +22,7 @@ public class AdminReservation {
 	
 	
 	
-	public String getHotelName() {
-		return hotelName;
-	}
 
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public String getHotelPath() {
-		return hotelPath;
-	}
-
-	public void setHotelPath(String hotelPath) {
-		this.hotelPath = hotelPath;
-	}
-
-	public String getMemId() {
-		return memId;
-	}
-
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-
-	public String getMemPhone() {
-		return memPhone;
-	}
-
-	public void setMemPhone(String memPhone) {
-		this.memPhone = memPhone;
-	}
 
 	public AdminReservation() {
 		super();
@@ -177,7 +147,39 @@ public class AdminReservation {
 	public void setPaymentPrice(int paymentPrice) {
 		this.paymentPrice = paymentPrice;
 	}
+	
+	public String getHotelName() {
+		return hotelName;
+	}
 
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	public String getMemPhone() {
+		return memPhone;
+	}
+
+	public void setMemPhone(String memPhone) {
+		this.memPhone = memPhone;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

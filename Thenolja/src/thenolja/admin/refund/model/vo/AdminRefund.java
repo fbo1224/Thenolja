@@ -15,55 +15,6 @@ public class AdminRefund {
 	private String reserDate;
 	
 	
-	
-	public String getHotelName() {
-		return hotelName;
-	}
-
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public String getHotelPath() {
-		return hotelPath;
-	}
-
-	public void setHotelPath(String hotelPath) {
-		this.hotelPath = hotelPath;
-	}
-
-	public String getReserDate() {
-		return reserDate;
-	}
-
-	public void setReserDate(String reserDate) {
-		this.reserDate = reserDate;
-	}
-
-	public String getReserName() {
-		return reserName;
-	}
-
-	public void setReserName(String reserName) {
-		this.reserName = reserName;
-	}
-
-	public String getMemPhone() {
-		return memPhone;
-	}
-
-	public void setMemPhone(String memPhone) {
-		this.memPhone = memPhone;
-	}
-
-	public String getMemId() {
-		return memId;
-	}
-
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-
 	public AdminRefund() {
 		super();
 	}
@@ -115,6 +66,55 @@ public class AdminRefund {
 
 	public void setBank(String bank) {
 		this.bank = bank;
+	}
+
+	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getHotelPath() {
+		return hotelPath;
+	}
+
+	public void setHotelPath(String hotelPath) {
+		this.hotelPath = hotelPath;
+	}
+
+	public String getReserDate() {
+		return reserDate;
+	}
+
+	public void setReserDate(String reserDate) {
+		this.reserDate = reserDate;
+	}
+
+	public String getReserName() {
+		return reserName;
+	}
+
+	public void setReserName(String reserName) {
+		this.reserName = reserName;
+	}
+
+	public String getMemPhone() {
+		return memPhone;
+	}
+
+	public void setMemPhone(String memPhone) {
+		this.memPhone = memPhone;
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
 	@Override
