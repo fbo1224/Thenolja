@@ -138,13 +138,21 @@
 	            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
 				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
 				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
-	            <div id="reser_detail">
+				<input type="hidden" name="reserNo" value="<%=r.getReserNo() %>">
+	            <div id="reser_detail" onclick="myList();">
 	                <h3><%=r.getHotelName() %></h3>
 	                <p><%=r.getRoomName() %></p>
 	                <p><%=r.getPeople() %>인</p>
 	                <p><%=r.getPaymentPrice() %>원</p>
 	                <p><%=r.getCheckIn() %>&nbsp;&nbsp;<%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOut() %>&nbsp;&nbsp;<%=r.getCheckOutTime() %> : 00</p>
 	            </div>
+	            <script>
+	            	function myList(){
+	            		
+	            		location.href="<%=contextPath%>/reserDetail?reserNo=<%=r.getReserNo()%>";
+	            	}
+	            
+	            </script>
 
 
             <div id="review_in">
