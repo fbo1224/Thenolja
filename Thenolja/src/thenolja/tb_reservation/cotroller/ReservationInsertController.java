@@ -41,14 +41,9 @@ public class ReservationInsertController extends HttpServlet {
 		String bicycle = request.getParameter("bicycle");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
-//		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
-		
-
+		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 	
 
-		// int memNo = Integer.parseInt(request.getParameter("memNo"));
-		// String payment = request.getParameter("payment");
-	//	int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		// 3) 데이터 가공
 		Reservation reser = new Reservation();
 		reser.setName(name);
@@ -56,10 +51,7 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setBicycle(bicycle);
 		reser.setMemNo(memNo);
 		reser.setRoomNo(roomNo);
-	//	reser.setPaymentPrice(paymentPrice);
-		// reser.setPayment(payment);d
-	//	Hotel hotel = new Hotel();
-	//	hotel.setHotelNo(hotelNo);
+		reser.setPaymentPrice(paymentPrice);
 		
 
 		reser = new ReserService().insertReser(reser);

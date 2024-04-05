@@ -73,7 +73,7 @@
     #reser_price{
         width:100%;
         height: 10%;
-        font-size: 23px;
+        font-size: 20px;
         padding-top: 40px;
         border-bottom: 1px solid silver;
         text-align: center;
@@ -159,6 +159,50 @@
         font-weight: bold;
         margin-left: 300px;
     }
+    [type="radio"]:checked {
+  border: 0.4em solid tomato;
+	}
+	
+	[type="radio"]:focus-visible {
+	  outline-offset: max(2px, 0.1em);
+	  outline: max(2px, 0.1em) dotted tomato;
+	}
+	
+	[type="radio"]:hover {
+	  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+	  cursor: pointer;
+	}
+	
+	[type="radio"]:hover + span {
+	  cursor: pointer;
+	}
+	
+	[type="radio"]:disabled {
+	  background-color: lightgray;
+	  box-shadow: none;
+	  opacity: 0.7;
+	  cursor: not-allowed;
+	}
+	
+	[type="radio"]:disabled + span {
+	  opacity: 0.7;
+	  cursor: not-allowed;
+	}
+	
+	/* Global CSS */
+	fieldset {
+	  display: flex;
+	  justify-content: center;
+	  border: none;
+	  margin: 0;
+	  padding: 40px 20px;
+	}
+	
+	*,
+	*::before,
+	*::after {
+	  box-sizing: border-box;
+	}
 </style>
 </head>
 <body>
@@ -216,20 +260,20 @@
 	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
+	        				<td width="300px">결제금액 : <%=room.getRoomPrice() %>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-							<td width="400px">할인 금액 : <p id="나중에 여기다가 요소 추출해서 ajax쓴다음에 여기 innerHTML에다가 값 넣기"></p>원</td>
+							<td width="500px">할인 금액 : <span id="pprice"></span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
+							<td width="300px" style="font-weight: bold;" >결제금액 : <span><%=room.getRoomPrice() %></span> 원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
+					<input id="hidePrice" type="hidden" name="paymentPrice" value="">
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
-						<input type="hidden" name="paymentPrice" >
 		                <br>
 						<h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
 						<br>
@@ -258,7 +302,7 @@
 	                    <br>
 	                    <h5>쿠폰</h5>
 	                    <br>
-	                    <input type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
+	                    <input id="couponInput" type="text" name="couponName" style="width:300px; height:40px; border-radius: 5px;" placeholder="[10% 혜택] 회원 등급 쿠폰">
 	                    
 	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
 	           
@@ -289,8 +333,11 @@
 		<!-- /0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 끝 -->
     </div>
     <!-- /0. 전체 감싸는 div 끝 -->
-    
+   
     <script>
+	let coupon = {};
+    
+    $(function(){
     	$.ajax({
     		url: "cupon.jqAjax",
     		type: 'get',
@@ -298,7 +345,7 @@
     			memberNo: <%= loginUser.getMemNo() %>
     		},
     		success: function(result){
-    			console.log(result);
+    			// console.log(result);
     			if(result.length == 0){
     				$('#couponTable').append('<tr>'
 	                   +'<th colspan="5">쿠폰이 존재하지 않습니다.</th>'
@@ -308,14 +355,14 @@
     					
     					$('#couponTable').append(
     						'<tbody>'
-    							+ '<tr class="list" id="ab' + i + '" onclick="getPercent(' + i + ');">'
-	    			              + '<td>' + result[i].couponNo +'</td>'
+    							+ '<tr class="list" id="ab' + i + '>'
+    							  + '<input type="radio" " onclick="return getPercent(this);">'
+	    			              + '<td name="couponNo">' + result[i].couponNo +'</td>'
 	    			              + '<td>' + result[i].couponContent + '</td>'
 	    			              + '<td>' + result[i].couponDate + '</td>'
 	    			              + '<td>' + result[i].couponCode + '</td>'
-	    			              + '<td id="percent' + i + '" name="percentin">' + result[i].couponPercent + '</td>'
+	    			              + '<td id="percent' + i + '" name="percent">' + result[i].couponPercent + '%</td>'
     			                  +'</tr></tbody>');
-    					
     				}
     				
     			}
@@ -334,15 +381,33 @@
     		
     	}*/
     	
-    	function getPercent(index){
+    	
+    });
 
-    		 let abc = $('#percent' + index).html();
-	    	 
-    		 location.href="<%=contextPath%>/coupon.insert"
-    		
-    	}
-    	
-    	
+	function getPercent(e){
+		$('#pprice').empty();
+		couponNo = $(e).children().eq(0).text();
+		content = $(e).children().eq(1).text();
+		date = $(e).children().eq(2).text();
+		code = $(e).children().eq(3).text();
+		percent = $(e).children().eq(4).text();
+		
+		// console.log(parseInt("2%"));
+		//$('#myModal').hide('.modal-content');
+		//$('#myModal').css('display', 'none');
+		//$('.show').css('display', 'none');
+		// console.log(coupon);
+		$('#couponInput').val(content +' '+ percent + ' 할인!');
+		coupon.couponNo = couponNo;
+		coupon.content = content;
+		coupon.date = date;
+		coupon.code = code;
+		coupon.percent = parseInt(percent);
+	 	// console.log(parseInt(percent));
+	 	$('#pprice').append('<span name="couponPrice">' + ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>) + '</span>');
+		$('#hidePrice').val((<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)));
+		console.log($('#hidePrice').val());
+	}	
     </script>
     
     

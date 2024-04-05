@@ -27,7 +27,10 @@ public class CouponApplyController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		int couponPercent = Integer.parseInt(request.getParameter("couponPercent"));
+		int couponNo = Integer.parseInt(request.getParameter("couponNo"));
+		System.out.println(couponNo);
+		System.out.println(couponPercent);
 		request.getRequestDispatcher(request.getContextPath());	
 	}
 
