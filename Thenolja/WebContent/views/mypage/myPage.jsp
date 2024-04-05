@@ -218,29 +218,6 @@
 
                 </script>
 
-                <!-- INSERT PROFILE PATH
-                <script>
-                    function profileClick(){
-                        $('#profileChange').click();
-
-                        $.ajax({
-                            url:'insertProfile',
-                            type:'post',
-                            data:{
-                                memNo : <%--<%= loginUser.getMemNo() %>--%>
-                            },
-                            success:function(result){
-                                console.log(result);
-                                /*
-                                if(result > 0){
-                                    $('.img').attr('src','./resources/mypage/user.png');
-                                }*/
-                            },
-                        });
-                    }
-
-                </script>-->
-                
             </div>
             <div id="ct2_2">
                 <div id="name"><%= loginUser.getMemName() %>님</div>
@@ -335,7 +312,7 @@
             <div class="icon"><div class="iconImg"><a href="<%=contextPath%>/myReser.list?reMemNo=<%=loginUser.getMemNo()%>"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/reservation.png" alt="예약내역"></div><span>예약내역</span></a></div></div>
             <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/action.png" alt="이용내역"></div><span>이용내역</span></a></div></div>
             <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/bell.png" alt="공지사항"></div><span>공지사항</span></a></div></div>
-            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/question.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="<%= contextPath%>/mypage.qna"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/question.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
             
         </div>
 
