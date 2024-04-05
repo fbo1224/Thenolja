@@ -104,7 +104,6 @@
 				</div>
 				<div id="login-area" class="content">
 				
-					<!-- <form action="<%-- ><%= contextPath %>--%>/#" method="post"> -->
 						<div id="content1">
 							<input type="password" name="memPwd" id="password" class="input" placeholder="본인 확인을 위해 비밀번호를 입력해주세요." autofocus maxlength="15" required>
 							<div id="pwdCheck2" class="input"></div>
@@ -131,15 +130,13 @@
                                     pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
                                     next.disabled = false;
 									pwdCheck.style = "color:green; background-color:lightgreen; display:block;";
-
+									pwd.readOnly = true;
                                     return true;
                                 }
                             }        
 
                         </script>
 
-					<!-- </form> -->
-				
 				</div>
 			</div>
 		

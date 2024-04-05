@@ -115,6 +115,20 @@
 				</tr>
 
 			</table>
+
+			<script>
+				function(){
+					const phone = document.getElementsByName('memPhone');
+
+					const regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+					if(!regExp.test(phone.value)){
+						phone.style="border-color: red;"
+						phone.value = '';
+					}
+
+				}
+			</script>
 			
 			<script>
 				function pwdCheck(){
@@ -131,7 +145,7 @@
 						/*next.disabled = true;*/
 						return false;
 					}
-					else{
+					else{+
 						pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
 						pwdCheck.style = "color:green; display:block;";
 						/*next.disabled = false;*/
