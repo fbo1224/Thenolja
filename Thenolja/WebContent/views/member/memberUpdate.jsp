@@ -63,7 +63,6 @@
 		border-color: rgb(70, 149, 151);
 	}
 
-
 </style>
 
 
@@ -115,6 +114,22 @@
 				</tr>
 
 			</table>
+
+			<!-- 전화번호 정규표현식-->
+			<script>
+				$('input[name=memPhone]').blur(function(){
+					let phoneCheck = /^01([0|1|])-?([0-9]{4})-?([0-9]{4})$/;
+					let phoneVal = $('input[name=memPhone]').val();
+
+					if(!phoneCheck.test(phoneVal)){
+						$('input[name=memPhone]').val('');
+						$('input[name=memPhone]').css('border-color','orangered');
+					}
+					else{
+						$('input[name=memPhone]').css('border-color',' rgb(230, 230, 230)');
+					}
+				});
+			</script>
 			
 			<script>
 				function pwdCheck(){
@@ -131,7 +146,7 @@
 						/*next.disabled = true;*/
 						return false;
 					}
-					else{
+					else{+
 						pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
 						pwdCheck.style = "color:green; display:block;";
 						/*next.disabled = false;*/

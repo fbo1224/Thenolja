@@ -106,7 +106,7 @@
 			<table align="center" id="table">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" maxlength="12" required name="memId" autofocus></td>
+					<td><input type="text" maxlength="12" required name="memId" placeholder="4~12 영숫자" autofocus></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck();">중복확인</button></td>
 				</tr>
 				
@@ -150,13 +150,13 @@
 				
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" maxlength="15" required name="memPwd" class="pwdCheck"></td>
+					<td><input type="password" maxlength="15" required name="memPwd" class="pwdCheck" placeholder="4~15 영숫자"></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>비밀번호 확인</td>
-					<td><input type="password" maxlength="15" required class="pwdCheck"></td>
+					<td><input type="password" maxlength="15" required id="memPwd2" class="pwdCheck"></td>
 					
 					<td><button onclick="pwdCheck()" class="btn btn-sm btn-primary">일치확인</button></td>
 
@@ -191,7 +191,7 @@
 				
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" maxlength="30" required name="nickname"></td>
+					<td><input type="text" maxlength="10" required name="nickname" placeholder="한글 또는 영숫자"></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="nickNameCheck();">중복확인</button></td>
 				</tr>
 
@@ -233,24 +233,6 @@
 					<td><input type="text" placeholder="-제외하고 입력해주세요." maxlength="11" name="memPhone" required></td>
 					<td id="phoneMent"></td>
 				</tr>
-				<!--
-				<script>
-					function phoneCheck(){
-						const checkPhone = document.getElementsByName('memPhone').value;
-						const phoneMent = document.getElementById('phoneMent').innerHTML;
-
-						console.log(checkPhone);
-						let phoneReg = /^010?([0-9]{3})?([0-9]{4})$/;
-
-						if(phoneReg.test(checkPhone)){
-							phoneMent = '';
-						} else {
-							phoneMent = '형식에 맞지 않습니다';
-							checkPhone = '';
-						}
-					}
-				</script>
-				-->
 
 				<tr>
 					<td>이메일</td>
@@ -296,7 +278,7 @@
 				
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="bornDate" placeholder="생년월일 8자리를 입력해주세요." required></td>
+					<td><input type="text" name="bornDate" placeholder="생년월일 8자리를 입력해주세요." maxlength="8" required></td>
 					<td></td>
 				</tr>
 
@@ -312,8 +294,135 @@
 			<br><br>
 		
 		</form>
-	
-	
+
+		<!-- 정규표현식 -->
+		<script>
+			/* 아이디 */
+			$('input[name=memId]').blur(function(){
+				const idReg =  /^[A-Za-z0-9]{4,12}$/;
+				const idVal = $('input[name=memId]').val();
+
+				if(!idReg.test(idVal)){
+					$('input[name=memId]').val('');
+					$('input[name=memId]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=memId]').css('border-color', 'rgb(230, 230, 230)');
+				}
+			});
+		</script>
+
+		<script>
+			/* 비밀번호 */
+			$('input[name=memPwd]').blur(function(){
+				const pwdReg =  /^[A-Za-z0-9]{4,15}$/;
+				const pwdVal = $('input[name=memPwd]').val();
+
+				if(!pwdReg.test(pwdVal)){
+					$('input[name=memPwd]').val('');
+					$('input[name=memPwd]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=memPwd]').css('border-color','rgb(230, 230, 230)');
+				}
+			});
+		</script>
+
+		<script>
+			/* 비밀번호 확인 */
+				$('#memPwd2').blur(function(){
+					const pwdReg2 = /^[A-Za-z0-9]{4,15}$/;
+					const pwdVal2 = $('#memPwd2').val();
+
+					if(!pwdReg2.test(pwdVal2)){
+						$('#memPwd2').val('');
+						$('#memPwd2').css('border-color','orangered');
+					}
+					else{
+						$('#memPwd2').css('border-color','rgb(230, 230, 230)');
+					}
+				});
+		</script>
+
+		<script>
+			/* 이름 */
+			$('input[name=memName]').blur(function(){
+					const memNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]{2,15}$/;
+					const memNameVal = $('input[name=memName]').val();
+
+					if(!memNameReg.test(memNameVal)){
+						$('input[name=memName]').val('');
+						$('input[name=memName]').css('border-color','orangered');
+					}
+					else{
+						$('input[name=memName]').css('border-color','rgb(230, 230, 230)');
+					}
+				});
+		</script>
+
+		<script>
+			/* 닉네임 */
+			$('input[name=nickname]').blur(function(){
+					const nicknameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,15}$/;
+					const nicknameVal = $('input[name=nickname]').val();
+
+					if(!nicknameReg.test(nicknameVal)){
+						$('input[name=nickname]').val('');
+						$('input[name=nickname]').css('border-color','orangered');
+					}
+					else{
+						$('input[name=nickname]').css('border-color','rgb(230, 230, 230)');
+					}
+				});
+		</script>
+
+		<script>
+			/* 전화번호 */
+			$('input[name=memPhone]').blur(function(){
+				const phoneReg = /^01([0|1|])-?([0-9]{4})-?([0-9]{4})$/;
+				const phoneVal = $('input[name=memPhone]').val();
+
+				if(!phoneReg.test(phoneVal)){
+					$('input[name=memPhone]').val('');
+					$('input[name=memPhone]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=memPhone]').css('border-color','rgb(230, 230, 230)');
+				}
+			});
+		</script>
+
+		<script>
+			/* 이메일 */
+			$('input[name=email]').blur(function(){
+				const emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+				const emailVal = $('input[name=email]').val();
+
+				if(!emailReg.test(emailVal)){
+					$('input[name=email]').val('');
+					$('input[name=email]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=email]').css('border-color','rgb(230, 230, 230)');
+				}
+			});
+		</script>
+
+		<script>
+			/* 생년월일 */
+			$('input[name=bornDate]').blur(function(){
+				const bornDateReg = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/
+				const bornDateVal = $('input[name=bornDate]').val();
+
+				if(!bornDateReg.test(bornDateVal)){
+					$('input[name=bornDate]').val('');
+					$('input[name=bornDate]').css('border-color','orangered');
+				}
+				else{
+					$('input[name=bornDate]').css('border-color','rgb(230, 230, 230)');
+				}
+			});
+		</script>
 	</div>
 
 

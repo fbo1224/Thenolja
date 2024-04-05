@@ -57,7 +57,6 @@ public class InsertProfileController extends HttpServlet {
 			profile.setMemNo(memNo);
 			profile.setProfilePath(filePath);
 			
-			
 			if(multiRequest.getOriginalFileName("upfile") != null) {
 				profile.setOriginName(multiRequest.getOriginalFileName("upfile"));
 				profile.setChangeName(multiRequest.getFilesystemName("upfile"));

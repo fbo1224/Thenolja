@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.HotelCard, thenolja.common.model.vo.PageInfo" %>
+    <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*, thenolja.common.model.vo.PageInfo " %>
     <%
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("sList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	SearchData searchData= null;
+	if(request.getAttribute("searchData") != null){
+		searchData = (SearchData)request.getAttribute("searchData");
+	}
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -108,21 +113,17 @@
 					<%} %>
   				<%} %>
 		</div>
-		<script>
-			$('.card-imgDiv').click(function(e){
-				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
-			});
-		</script>
+	
 		<div class="paging-area" align="center">
         	<%if(currentPage > 1){ %>
         		<button class="btn btn btn-outline-info"
-				onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
+				onclick="pageMove(<%= currentPage-1 %>)" >이전</button>
 			<%} %>
 			
         	<%for(int i = startPage; i <= endPage; i++){ %>
         		<% if(currentPage != i) { %>
         			<button class="btn btn btn-outline-info"
-        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
+        			onclick="pageMove(<%= i %>)"><%= i %></button>
         		<%} else { %>
         			<button
         			class="btn btn btn-outline-info"
@@ -132,9 +133,20 @@
         	
         	<%if(currentPage != maxPage){ %>
         		<button class="btn btn btn-outline-info"
-        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
+        		onclick="pageMove(<%= currentPage + 1 %>);" >다음</button>
         	<%} %>
 	     </div>
 </div>
+	<script>
+			$('.card-imgDiv').click(function(e){
+				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+			});
+			
+			function pageMove(currentPage){
+				 location.href="<%= contextPath %>/searchList.hotels?currentPage="+currentPage+"&daterange=<%= searchData.getDaterange()%>&location=<%= searchData.getLocation() %>&people=<%= searchData.getMaxPeople()%>";
+					 
+			}
+			
+	</script>
 </body>
 </html>

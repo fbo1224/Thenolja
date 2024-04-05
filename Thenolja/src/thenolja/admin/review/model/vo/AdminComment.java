@@ -7,16 +7,6 @@ public class AdminComment {
 	private String creaeteDate;
 	private String commentMemNo;
 	private String nickName;
-	
-	
-	
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
 
 	public AdminComment() {
 		super();
@@ -61,7 +51,15 @@ public class AdminComment {
 	public void setCommentMemNo(String commentMemNo) {
 		this.commentMemNo = commentMemNo;
 	}
+	
+	public String getNickName() {
+		return nickName;
+	}
 
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -55,6 +55,11 @@ li {
 }  
 
 /* 이벤트 게시판 layout START */
+#evtIng{
+	padding-left: 350px;
+	padding-top : 150px;
+}
+
 .thumb-list{
 	position:relative;
 	margin: 30px -18px 0;
@@ -145,17 +150,24 @@ li {
 
 
 <script type="text/javascript">
-
-/*********************************** 
+/*****************************************
 * 함수설명 : 이벤트 클릭 이벤트 처리   로그인계정 조건추가
-************************************/
+******************************************/
 function clckEvent(eventNo){
 
 	if(typeof eventNo != "undefined" && eventNo != ""){
-		// 관리자인 경우 (수정화면)
-		 location.href= '<%=contextPath %>/selectUpdate.event?eventNo=' + eventNo + '&flag=' + 'Y';
-		// 일반회원인 경우 (상세화면)
-		//location.href= '<%=contextPath %>/detail.event?eventNo=' + eventNo + '&flag=' + 'N';
+	    
+		<%if(loginUser != null){ %>
+		
+		    <%if("A".equals(loginUser.getMemStatus())){ %>
+				// 관리자인 경우 (수정화면)
+				location.href= '<%=contextPath %>/selectUpdate.event?eventNo=' + eventNo + '&flag=' + 'Y';
+			<%}else{%>
+				// 일반회원인 경우 (상세화면)
+			 	location.href= '<%=contextPath %>/detail.event?eventNo=' + eventNo + '&flag=' + 'N';
+			 <%}%>
+			 
+		<%}%>	 
 	}
 }
 

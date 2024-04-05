@@ -3,6 +3,7 @@ package thenolja.nonmem.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +39,6 @@ public class NonmemSelectController extends HttpServlet {
 	
 		// System.out.println(nonmemName);
 		// System.out.println(nonmemNo);
-		
 		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemNo);
 		
 		// System.out.println(list);
@@ -46,7 +46,14 @@ public class NonmemSelectController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("nonmemReser", list);
 		
-		request.getRequestDispatcher("views\\nonmem\\nonDetailReservation.jsp").forward(request, response);
+		
+		if(!list.isEmpty()) {
+			request.getRequestDispatcher("views\\nonmem\\nonDetailReservation.jsp").forward(request, response);
+		} else {
+			request.setAttribute("errorMsg", "예약된 내역이 없습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 		
 		
 	
