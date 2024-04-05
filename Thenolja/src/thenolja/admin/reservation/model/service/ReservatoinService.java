@@ -208,5 +208,19 @@ public class ReservatoinService {
 		
 	}
 	
+	/**
+	 * 오늘 예약자 목록
+	 */
+	public ArrayList<AdminReservation> todayReserDetail(){
+		
+		Connection conn  = JDBCTemplate.getConnection();
+		
+		ArrayList<AdminReservation> list = new ReservationDao().todayReserDetail(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 
 }

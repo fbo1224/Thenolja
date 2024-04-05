@@ -268,10 +268,29 @@
 		                BY
 		                     RESER_NO ASC) A)
 	    WHERE RNUM BETWEEN ? AND ?  
-		
-	
-	
+
 	</entry>
 	
+	<entry key="todayReserDetail">
+		SELECT
+				RESER_NO,
+		        RESER_NAME,
+	            HOTEL_NAME,
+	            PAYMENT_PRICE
+		  FROM
+		        TB_RESERVATION
+	      JOIN
+	            TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)
+	      JOIN
+	            TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
+		  WHERE
+		        TO_DATE(TO_CHAR(RESER_DATE, 'YYYY-MM-DD')) = TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+	        AND
+	            CANCEL_YN = 'N'
+	      ORDER
+	        BY
+	        	RESER_NO DESC
+	
+	</entry>
 	
 </properties>

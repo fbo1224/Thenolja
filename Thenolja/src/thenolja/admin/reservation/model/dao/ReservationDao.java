@@ -520,8 +520,40 @@ public class ReservationDao {
 	}
 	
 	
-	
-	
+	/**
+	 * 오늘 예약 목록
+	 */
+	public ArrayList<AdminReservation> todayReserDetail(Connection conn){
+		
+		ArrayList<AdminReservation> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("todayReserDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				AdminReservation adminReservation = new AdminReservation();
+				
+				adminReservation.setReserNo(rset.getInt("RESER_NO"));
+				adminReservation.setReserName(rset.getString("RESER_NAME"));
+				adminReservation.setHotelName(rset.getString("HOTEL_NAME"));
+				adminReservation.setPaymentPrice(rset.getInt("PAYMENT_PRICE"));
+				
+				list.add(adminReservation);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	
 	
 	
