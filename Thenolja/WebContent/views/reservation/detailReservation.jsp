@@ -223,7 +223,7 @@
                         <tr>
                             <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td>
+                            <td width="170x">할인 금액 : <%=Math.round((coupon.getCouponPercent()* 0.01) * room.getRoomPrice())%>원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
                             <td>결제금액 : <%=reser.getPaymentPrice() %>
                     </table>

@@ -159,50 +159,7 @@
         font-weight: bold;
         margin-left: 300px;
     }
-    [type="radio"]:checked {
-  border: 0.4em solid tomato;
-	}
-	
-	[type="radio"]:focus-visible {
-	  outline-offset: max(2px, 0.1em);
-	  outline: max(2px, 0.1em) dotted tomato;
-	}
-	
-	[type="radio"]:hover {
-	  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
-	  cursor: pointer;
-	}
-	
-	[type="radio"]:hover + span {
-	  cursor: pointer;
-	}
-	
-	[type="radio"]:disabled {
-	  background-color: lightgray;
-	  box-shadow: none;
-	  opacity: 0.7;
-	  cursor: not-allowed;
-	}
-	
-	[type="radio"]:disabled + span {
-	  opacity: 0.7;
-	  cursor: not-allowed;
-	}
-	
-	/* Global CSS */
-	fieldset {
-	  display: flex;
-	  justify-content: center;
-	  border: none;
-	  margin: 0;
-	  padding: 40px 20px;
-	}
-	
-	*,
-	*::before,
-	*::after {
-	  box-sizing: border-box;
-	}
+
 </style>
 </head>
 <body>
@@ -323,7 +280,7 @@
 	                
 	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
-	                    <button type="submit" id="reser-btn">?원 결제하기</button>
+	                    <button type="submit" id="reser-btn"><span id="lastPay"></span>원 결제하기</button>
 	                </div>
 
 	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
@@ -388,6 +345,7 @@
 	function getPercent(e){
 		$('#pprice').empty();
 		$('#payPrice').empty();
+		$('#lastPay').empty();
 		couponNo = $(e).children().eq(0).text();
 		content = $(e).children().eq(1).text();
 		date = $(e).children().eq(2).text();
@@ -412,6 +370,7 @@
 		// console.log($('#couponNo').val(coupon.couponNo));
 		//console.log($('#hidePrice').val());
 		$('#payPrice').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
+		$('#lastPay').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
 	}	
     </script>
     
