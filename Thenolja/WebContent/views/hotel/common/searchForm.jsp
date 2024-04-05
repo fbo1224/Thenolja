@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="thenolja.tb_hotel.model.vo.*" %>
+    <%@ page import="thenolja.tb_hotel.model.vo.SearchData" %>
     <%
-    SearchData searchData= null;
+    
+    SearchData searchDataForm= null;
 	if(request.getAttribute("searchData") != null){
-		searchData = (SearchData)request.getAttribute("searchData");
+		searchDataForm = (SearchData)request.getAttribute("searchData");
 	}
-   	System.out.println(searchData);
+   		
     %>
 <!DOCTYPE html>
 <html>
@@ -54,24 +55,26 @@
 
 <div id="content-1">
 	<form id="select-form" action="<%= contextPath %>/searchList.hotels" method="get">
-		<%if(searchData != null){ %>
+		<%if(searchDataForm != null){ %>
 			<div style="display: inline-block;">
-				<input class="form-control" type="text" name="daterange" value="<%= searchData.getDaterange() %>" readonly required/>	
+				<input type="text" name="daterange" readonly
+				required value="<%= searchDataForm.getDaterange() %>" />	
 			</div>
-			<span id="date"><%= searchData.getDaterange() %></span>
+			<span id="date"><%= searchDataForm.getDaterange() %></span>
 			<input required class="form-control" id="people-input"
-			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." value="<%= searchData.getLocation() %>" >
+			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요."  value="<%= searchDataForm.getMaxPeople() %>" >
+			<select id="locations" name="location">
+			</select>
 		<%} else { %>
 			<div style="display: inline-block;">
-				<input class="form-control" type="text" name="daterange" readonly required/>
+				<input class="form-control" type="text" name="daterange" required/>
 			</div>
 			<span id="date"></span>
 			<input required class="form-control" id="people-input"
 			 type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
+			<select id="locations" name="location">
+			</select>
 		<%} %>
-		
-		<select id="locations" name="location">
-		</select>
 		<input type="hidden" name="currentPage" value="1">
 		<input class="btn btn btn-info" id="search" type="submit" value="검색">
 	</form>
@@ -82,10 +85,10 @@ const toDay = new Date();
 	let startDate;
 	let endDate;
 	let locations;
-	
+
 	$(function () {
 	    $('input[name="daterange"]').daterangepicker({
-	        minDate: new Date(),
+	    	minDate: new Date(),
 	        "drops": "down",
 	        "opens": "center",
 	        "locale": {
@@ -100,17 +103,11 @@ const toDay = new Date();
 	            "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
 	            "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 	        },
-	        
-	        "startDate": new Date(),
-	        "endDate": new Date(),
-	        
+
 		    }, function (start, end, label) {
-		    	// console.log(start.format('YYYY-MM-DD'));
-		    	// console.log(end.format('YYYY-MM-DD'));
 		    	startDate = start.format('YYYY-MM-DD');
 		    	endDate = end.format('YYYY-MM-DD');
 			    $('#date').text(startDate+'/'+endDate);
-			 
 			});
 		
 	    // 지역 가져오기
@@ -124,13 +121,22 @@ const toDay = new Date();
 	    		for(let i = 0; i < result.length; i++){
 	    			$('#locations').append('<option value="'+result[i].trim()+'">'+result[i].trim()+'</option>');
 	    		}
+	    		
+	    		<% if(searchDataForm != null) { %>
+	    			$('#locations').children().each(function(idx, item){
+	    				if($(item).val() == '<%= searchDataForm.getLocation() %>'){
+	    					console.log($(item).val());
+	    					$(item).attr('selected', 'true');
+	    	    		}
+	    	  	    });
+	    		<%} %>
 	    	},
 	    	error: function(result){
 	    		console.log(result);
-	    	}
+	    	},
 	    });
-	    
 	});
+	
 	
 </script>
     
