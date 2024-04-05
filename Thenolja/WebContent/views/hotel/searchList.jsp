@@ -89,8 +89,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="./common/searchForm.jsp" %>
 	<div id="wrap">
+		<%@ include file="./common/searchForm.jsp" %>
 		<div id="content-2-lists">
 			<%if(list.isEmpty()){ %>
 				<div>
@@ -112,6 +112,7 @@
 	  				</div>
 					<%} %>
   				<%} %>
+  			
 		</div>
 	
 		<div class="paging-area" align="center">
@@ -139,7 +140,7 @@
 </div>
 	<script>
 			$('.card-imgDiv').click(function(e){
-				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id')+"&daterange=<%= searchData.getDaterange()%>&location=<%= searchData.getLocation() %>&people=<%= searchData.getMaxPeople()%>";
 			});
 			
 			function pageMove(currentPage){
