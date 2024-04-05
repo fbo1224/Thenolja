@@ -63,7 +63,6 @@
 		border-color: rgb(70, 149, 151);
 	}
 
-
 </style>
 
 
@@ -116,18 +115,20 @@
 
 			</table>
 
+			<!-- 전화번호 정규표현식-->
 			<script>
-				function(){
-					const phone = document.getElementsByName('memPhone');
+				$('input[name=memPhone]').blur(function(){
+					let phoneCheck = /^01([0|1|])-?([0-9]{4})-?([0-9]{4})$/;
+					let phoneVal = $('input[name=memPhone]').val();
 
-					const regExp = /^\d{3}-\d{3,4}-\d{4}$/;
-
-					if(!regExp.test(phone.value)){
-						phone.style="border-color: red;"
-						phone.value = '';
+					if(!phoneCheck.test(phoneVal)){
+						$('input[name=memPhone]').val('');
+						$('input[name=memPhone]').css('border-color','orangered');
 					}
-
-				}
+					else{
+						$('input[name=memPhone]').css('border-color',' rgb(230, 230, 230)');
+					}
+				});
 			</script>
 			
 			<script>
