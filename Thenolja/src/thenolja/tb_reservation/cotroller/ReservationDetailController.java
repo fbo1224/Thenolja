@@ -40,16 +40,19 @@ public class ReservationDetailController extends HttpServlet {
 
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		Reservation reser = new ReserService().selectReserNo(reserNo);
 		System.out.println(reserNo);
+		Reservation reser = new ReserService().selectReserNo(reserNo);
+		
+		//System.out.println(couponNo);
+		//System.out.println(couponPercent);
+		request.getRequestDispatcher(request.getContextPath());	
+		
 			
 		if(reser != null) {
-			System.out.println(reser);
 			HttpSession session = request.getSession();
 			session.setAttribute("reser", reser);
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/detailReservation.jsp");
 			view.forward(request, response);
-			// response.sendRedirect("views/reservation/detailReservation.jsp");
 			
 		} else {
 			request.setAttribute("errorMsg", "예약을 실패하셨습니다.");
