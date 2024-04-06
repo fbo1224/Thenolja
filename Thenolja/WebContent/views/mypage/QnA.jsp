@@ -14,7 +14,11 @@
 <style>
     /*div{border: 1px solid red;}*/
     #wrap{
-        width: 900px;
+        width: 1200px;
+        margin: auto;
+    }
+    #content{
+ 	    width: 900px;
         height: auto;
         margin: auto;
         margin-top: 100px;
@@ -83,9 +87,9 @@
                 </tbody>
             </table>
         </div>
+	<%@ include file="../common/footer.jsp" %>
     </div>
 	
-	<%@ include file="../common/footer.jsp" %>
 
 
 
