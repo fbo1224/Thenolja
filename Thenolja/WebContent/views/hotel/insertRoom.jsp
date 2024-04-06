@@ -86,17 +86,17 @@ div {
 				<div class="content-div-1">
 					<div class="form-group">
 					  <label>객실이름</label>
-					  <input type="text" class="form-control" name="roomName" required >
+					  <input type="text" class="form-control" maxlength="25" name="roomName" required >
 					</div>
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="text" class="form-control"  name="maxPeople" required >
+					  <input type="text" class="form-control" maxlength="9" name="maxPeople" required >
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
-					  <input type="file"  name="roomImg" required>
+					  <input id="attachImg" type="file"  name="roomImg" onchange="changeVal();" required>
 					</div>
 					
 					<div class="form-grop">
@@ -108,12 +108,12 @@ div {
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" required>
+					  <input type="text"  name="roomPrice" maxlength="9" required>
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" required>
+					  <input type="text"  name="roomNum" maxlength="9" required>
 					</div>
 				</div>
 			</section>
@@ -127,5 +127,11 @@ div {
 		<button type="button" class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
 	<%} %>	
 	</div>
+	<script>
+	function changeVal() {
+		console.log($('#attachImg').val());	
+	}
+		
+	</script>
 </body>
 </html>

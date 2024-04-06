@@ -40,8 +40,11 @@ public class ReservationInsertController extends HttpServlet {
 		String name = request.getParameter("memName");
 		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		String checkIn = request.getParameter("checkIn");
+		String checkOut = request.getParameter("checkOut");
+		int people = Integer.parseInt(request.getParameter("people"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		int couponNo = Integer.parseInt(request.getParameter("couponNo"));
 		
@@ -50,11 +53,15 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
-		reser.setMemNo(memNo);
+		reser.setCheckIn(checkIn);
+		reser.setCheckOut(checkOut);
+		reser.setPeople(people);
 		reser.setRoomNo(roomNo);
+		reser.setReMemNo(memNo);
 		reser.setPaymentPrice(paymentPrice);
 		
 		reser = new ReserService().insertReser(reser);
+		System.out.println(reser);
 		Coupon coupon = new ReserService().selectoCoupon(couponNo);
 		
 		// 여기까지 INSERT는 정상적으로 됐음.

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member" %>
-<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room, thenolja.tb_reservation.model.vo.ReserInfo" %>   
 <%
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
+	ReserInfo rinfo = (ReserInfo)request.getAttribute("rinfo");
 %>     
-  
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,17 +163,17 @@
 			<div id="reser_info">
 				
 	    		<div id="reser_hotel_img">
-	    			<img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="300px" height="300px">
+	    			<img src="<%=hotel.getHotelPath() %>" alt="" width="300px" height="300px">
     			</div>
 	
-				<div id="reser_detail">
+<div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
-			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
 			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
+			        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
 			        
     			</div>
 			</div>
@@ -197,7 +197,10 @@
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insertNon.reser?hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-				
+					<input id="hidePrice" type="hidden" name="paymentPrice" value="<%=room.getRoomNo()%>">
+					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
+					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
+					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
 					
@@ -247,8 +250,6 @@
     </div>
     <!-- /0. 전체 감싸는 div 끝 -->
     
-    
-   
 				
 </body>
 </html>

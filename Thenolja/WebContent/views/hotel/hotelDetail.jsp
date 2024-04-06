@@ -1,16 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_hotel.model.vo.*, java.util.Date" %>   
+<%@ page import="thenolja.tb_hotel.model.vo.*, java.util.Calendar, java.text.SimpleDateFormat" %>   
     
     <%
      	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
-    	
-	    Date today = new Date();
 		
-		System.out.println(today);
+		SimpleDateFormat newForm = new SimpleDateFormat("yy/MM/dd");
+		
+		Calendar cal = Calendar.getInstance();
+		
+		//오늘 날짜
+		String date = newForm.format(cal.getTime());
+		System.out.println(date);
+
+		// 내일 날짜
+		cal.add(Calendar.DATE, 1);
+		System.out.println(newForm.format(cal.getTime()));
+		
+		// 해당 호텔 위치
+		System.out.println(dh.getHotelLocation());
 		
 		// Date
-		// people 2
+		// people 2 기본적으로 2로 설정
 		// location
     	
     %>

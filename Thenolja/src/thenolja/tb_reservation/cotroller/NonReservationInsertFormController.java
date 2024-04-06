@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
+import thenolja.tb_reservation.model.vo.ReserInfo;
 
 /**
  * Servlet implementation class NonReservationInsertFormController
@@ -37,6 +38,17 @@ public class NonReservationInsertFormController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));		
+		String daterange = request.getParameter("daterange");
+		int people = Integer.parseInt(request.getParameter("people"));
+		String startDate =  daterange.substring(0, daterange.indexOf(" ")).trim();
+		String endDate =  daterange.substring(daterange.lastIndexOf(" ")).trim();
+		//System.out.println(startDate);
+		//System.out.println(endDate);
+		if(startDate != null && endDate != null && people > 0) {
+			ReserInfo rinfo = new ReserInfo();
+			rinfo.setStartDate(startDate);
+			rinfo.setEndDate(endDate);
+			rinfo.setPeople(people);
 		
 		
 		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
@@ -45,6 +57,7 @@ public class NonReservationInsertFormController extends HttpServlet {
 		if(hotel != null && room != null) {
 			request.setAttribute("hotel", hotel);      
 			request.setAttribute("room", room);
+			request.setAttribute("rinfo", rinfo);
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/nonInsertReservation.jsp");
 			view.forward(request, response);
@@ -52,6 +65,7 @@ public class NonReservationInsertFormController extends HttpServlet {
 			request.setAttribute("errorMsg", "숙소 조회를 실패하셨습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
+		}
 		}
 	}
 
