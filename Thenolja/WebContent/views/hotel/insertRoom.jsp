@@ -86,17 +86,17 @@ div {
 				<div class="content-div-1">
 					<div class="form-group">
 					  <label>객실이름</label>
-					  <input type="text" class="form-control" maxlength="25" name="roomName" required >
+					  <input type="text" class="form-control" maxlength="25" name="roomName" oninput="testVal(this, roomName);" required >
 					</div>
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="text" class="form-control" maxlength="9" name="maxPeople" required >
+					  <input type="text" class="form-control" maxlength="3" name="maxPeople" oninput="testVal(this, maxPeople);" required >
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
-					  <input id="attachImg" type="file"  name="roomImg" onchange="changeVal();" required>
+					  <input id="attachImg" type="file"  name="roomImg" oninput="testVal(this, roomImg);" required>
 					</div>
 					
 					<div class="form-grop">
@@ -108,12 +108,12 @@ div {
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" maxlength="9" required>
+					  <input type="text"  name="roomPrice" maxlength="9" oninput="testVal(this, roomPrice);" required>
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" maxlength="9" required>
+					  <input type="text"  name="roomNum" maxlength="9" oninput="testVal(this, roomNum);" required>
 					</div>
 				</div>
 			</section>
@@ -128,8 +128,44 @@ div {
 	<%} %>	
 	</div>
 	<script>
-	function changeVal() {
-		console.log($('#attachImg').val());	
+	const regRoomName = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
+	const regNum = /^[0-9]+$/;
+	
+	function testVal(e, tag) {
+		if($(e).val() == " "){
+			alert('입력은 공백으로 시작할수 없습니다.');
+			$(e).val('');
+			return;
+		}
+		
+		if(tag.name === 'roomName'){
+			if(!regRoomName.test($(e).val())){
+				alert('입력할수 없는 문자입니다.');
+				$(e).val('');
+				return;
+			}	
+		}
+		else if(tag.name === 'maxPeople' ||
+				tag.name === 'roomPrice' ||
+				tag.name === 'roomNum') {
+					if(isNaN($(e).val())){
+						alert('올바른 숫자만 입력해주세요.');
+						$(e).val('');
+						return;
+					}
+		}
+		else if(tag.name === 'roomImg'){
+			if($(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpg" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".png" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpeg"
+			) {
+				alert('.jpg, .png, .jpeg 형식의 사진 파일만 가능합니다.');
+				$(e).val('');
+				return;
+			}
+			
+		}
+		
 	}
 		
 	</script>

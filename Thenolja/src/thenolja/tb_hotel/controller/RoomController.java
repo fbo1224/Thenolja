@@ -53,7 +53,7 @@ public class RoomController {
 			int maxPeople = Integer.parseInt(multiRequest.getParameter("maxPeople"));
 			int roomPrice = Integer.parseInt(multiRequest.getParameter("roomPrice"));
 			int roomNum = Integer.parseInt(multiRequest.getParameter("roomNum"));
-			String roomName = multiRequest.getParameter("roomName");
+			String roomName = multiRequest.getParameter("roomName").trim();
 			String inTime = multiRequest.getParameter("in_time");
 			String outTime = multiRequest.getParameter("out_time");
 			
