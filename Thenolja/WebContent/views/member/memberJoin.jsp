@@ -105,10 +105,12 @@
 		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
 			<table align="center" id="table">
 				<tr>
-					<td>아이디</td>
+					<td id="idWord">아이디</td>
 					<td><input type="text" maxlength="12" required name="memId" placeholder="4~12 영숫자" autofocus></td>
 					<td><button class="btn btn-sm btn-primary" type="button" onclick="idCheck();">중복확인</button></td>
 				</tr>
+				
+
 				
 				<script>
 					function idCheck(){

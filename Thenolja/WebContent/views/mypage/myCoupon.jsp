@@ -131,16 +131,16 @@
 	</div>
 </div>
 
-	            <script>
-	                $(document).ready(function(){
-	                    $('#content').hover(function(){
-	                        $('#reser_info').css('border', 'none');
-	                        $('#reser_info').css('border', '3px solid black');
-	                    },function(){
-	                        $('#reser_info').css('border', 'outset');
-	                    });
-	                });
-	            </script>
+    <script>
+        $(document).ready(function(){
+            $('#content').hover(function(){
+                $('#reser_info').css('border', 'none');
+                $('#reser_info').css('border', '3px solid black');
+            },function(){
+                $('#reser_info').css('border', 'outset');
+            });
+        });
+    </script>
 
 </body>
 </html>
