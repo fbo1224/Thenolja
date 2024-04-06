@@ -198,7 +198,9 @@
         <div id="contentHeader"><h2 align="center">이벤트</h2></div>
      
      <!-- 등록 버튼 영역 START -->
+    <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
     <a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>
+    <%} %>  
        <!-- 등록 버튼 영역 END -->
        
      <br>
