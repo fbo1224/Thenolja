@@ -63,8 +63,8 @@
 	}
 	.card-info > p{
 		margin: 0px;
-		padding-left: 30px;
 		margin-bottom: 10px;
+		font-size: 14px;
 	}
 	.cards{
 		width:	100%;
@@ -144,8 +144,8 @@
 								+'</div>'
 								+'<div class="card-info">'
 									+'<h4>'+result[i].hotelLocation+'</h4>'
-									+'<p>숙소명 : '+result[i].hotelName +'</p>'
-									+'<p>종류 : '+result[i].hotelCategory+'</p>'
+									+'<p>'+result[i].hotelName +'</p>'
+									+'<p>'+result[i].hotelCategory+'</p>'
 								+'</div>'
 							+'</div>'	
 						+'</div>');	
@@ -167,7 +167,7 @@
 							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:250px; height:180px; cursor: pointer; white-space:nowrap;">'
 							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
 							    +'<div class="card-body">'
-							    +'<h4 class="card-title">'+ result[i].hotelName +'</h4>'
+							    +'<h5 class="card-title">'+ result[i].hotelName +'</h5>'
 							    +'<p class="card-text">'+ result[i].hotelLocation +'</p>'							   
 							    +'</div>'
 							+'</div>'
