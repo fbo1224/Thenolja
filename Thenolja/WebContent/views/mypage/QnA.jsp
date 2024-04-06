@@ -12,12 +12,13 @@
 <title>자주 묻는 질문</title>
 
 <style>
-    div{border: 1px solid red;}
+    /*div{border: 1px solid red;}*/
     #wrap{
         width: 900px;
         height: auto;
         margin: auto;
         margin-top: 100px;
+        margin-bottom: 100px;
     }
 
     #table{
@@ -27,6 +28,17 @@
     #title{
         font-size: 40px;
         font-weight: bold;
+    }
+    .question{
+    	font-weight: bold;
+    }
+    #table{
+    	border-right : none;
+    	border-left : none;
+    	border-bottom : none;
+    }
+    .answer{
+    	border-bottom : 1px solid black;
     }
 </style>
 
@@ -45,50 +57,35 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="question">예약을 취소하고 싶어요</td>
+                        <td class="question">Q. 예약을 취소하고 싶어요</td>
                     </tr>
                     <tr>
-                        <td class="answer">마이페이지 > 예약내역 > 예약내역 상세조회 > 환불하기 버튼으로 예약을 취소할 수 있습니다.</td>
+                        <td class="answer">A. 마이페이지 > 예약내역 > 예약내역 상세조회 > 환불하기 버튼으로 예약을 취소할 수 있습니다.</td>
                     </tr>
                     <tr>
-                        <td class="question">프로필 사진 변경을 할 수 있나요?</td>
+                        <td class="question">Q. 프로필 사진 변경을 할 수 있나요?</td>
                     </tr>
                     <tr>
-                        <td class="answer">사진 변경은 마이페이지 > 프로필 사진 클릭 > 바꾸고 싶은 사진 선택으로 하실 수 있습니다.</td>
+                        <td class="answer">A. 사진 변경은 마이페이지 > 프로필 사진 클릭 > 바꾸고 싶은 사진 선택으로 하실 수 있습니다.</td>
                     </tr>
                     <tr>
-                        <td class="question">쿠폰 적용은 어떻게 하나요?</td>
+                        <td class="question">Q. 쿠폰 적용은 어떻게 하나요?</td>
                     </tr>
                     <tr>
-                        <td class="answer">쿠폰적용은 예약 화면에서 쿠폰 적용 버튼을 클릭하시면 됩니다.</td>
+                        <td class="answer">A. 쿠폰적용은 예약 화면에서 쿠폰 적용 버튼을 클릭하시면 됩니다.</td>
                     </tr>
                     <tr>
-                        <td class="question">숙박업주인데 더놀자와 제휴 맺고 싶어요.</td>
+                        <td class="question">Q. 숙박업주인데 더놀자와 제휴 맺고 싶어요.</td>
                     </tr>
                     <tr>
-                        <td class="answer">제휴문의는 메인페이지 하단의 더놀자 전화번호로 문의 주시기 바랍니다.</td>
+                        <td class="answer">A. 제휴문의는 메인페이지 하단의 더놀자 전화번호로 문의 주시기 바랍니다.</td>
                     </tr>
                 </tbody>
             </table>
-
-            <script>
-                $('.answer').hide();
-
-                if($('.question').click()
-                
-            </script>
-
-
-
-
-
-
-
-
         </div>
     </div>
 	
-
+	<%@ include file="../common/footer.jsp" %>
 
 
 
