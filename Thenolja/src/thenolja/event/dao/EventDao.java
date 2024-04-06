@@ -100,7 +100,7 @@ public class EventDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(conn);
+			close(pstmt);
 		}
 		
 		
