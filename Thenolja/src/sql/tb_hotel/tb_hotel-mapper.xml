@@ -127,7 +127,8 @@
 		      HOTEL_NAME,
 		      HOTEL_PATH,
 		      HOTEL_CATEGORY,
-		      HOTEL_INTRO
+		      HOTEL_INTRO,
+		      HOTEL_LOCATION
     	  FROM TB_HOTEL  
          WHERE HOTEL_YN = 'Y'
            AND HOTEL_NO = ?

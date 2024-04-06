@@ -233,6 +233,7 @@ public class HotelDao {
 				dh.setHotelPath(rset.getString("HOTEL_PATH"));
 				dh.setHotelCate(rset.getString("HOTEL_CATEGORY"));
 				dh.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				dh.setHotelLocation(rset.getString("HOTEL_LOCATION"));
 				dh.setHotelNo(rset.getInt("HOTEL_NO"));
 			}
 			

@@ -96,7 +96,7 @@ div {
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="text" class="form-control"  name="maxPeople" required value="<%= room.getMaxPeople() %>" >
+					  <input type="number" class="form-control"  name="maxPeople" required value="<%= room.getMaxPeople() %>" >
 					</div>
 					
 					<div class="form-group">
@@ -116,12 +116,12 @@ div {
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" required value="<%= room.getRoomPrice() %>">
+					  <input type="number"  name="roomPrice" required value="<%= room.getRoomPrice() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" required value="<%= room.getRoomNum() %>">
+					  <input type="number"  name="roomNum" required value="<%= room.getRoomNum() %>">
 					</div>
 				</div>
 				</section>
