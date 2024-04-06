@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_hotel.model.vo.*" %>   
+<%@ page import="thenolja.tb_hotel.model.vo.*, java.util.Date" %>   
     
     <%
      	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
+    	
+	    Date today = new Date();
+		
+		System.out.println(today);
+		
+		// Date
+		// people 2
+		// location
+    	
     %>
 <!DOCTYPE html>
 <html>
@@ -349,16 +358,18 @@ svg{
 							<p>가격 : <%= ri.getRoomPrice() %></p>
 						</div>
 						<div>
-							<%if(searchDataForm != null){ %>
-							<p>쿠폰적용가능</p>
-							<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
-							<button class="btn btn-sm btn-info">객실 예약</button></a>
-							<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
-							<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
+							<%if(searchDataForm != null) {%>
+								<p>쿠폰적용가능</p>
+								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
+								<button class="btn btn-sm btn-info">객실 예약</button></a>
+								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
+								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 							<%} else { %>
-								<p>
-									원하시는 날짜와 인원수 장소를 선택해주세요.
-								</p>
+								<p>쿠폰적용가능</p>
+								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+								<button class="btn btn-sm btn-info">객실 예약</button></a>
+								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 							<%} %>
 						</div>
 					</div>			

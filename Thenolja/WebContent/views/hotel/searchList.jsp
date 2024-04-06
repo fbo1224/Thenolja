@@ -106,7 +106,6 @@
 							<h4><%= hc.getHotelLocation() %></h4>
 							<p>숙소명 : <%= hc.getHotelName() %></p>
 							<p>종류 : <%= hc.getHotelCategory() %><p>
-							<p><span>★</span><span>4.8</span></p>
 							<p>가격 : <%= hc.getRoomPrice() %></p>
 	  					</div>
 	  				</div>
