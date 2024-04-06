@@ -191,6 +191,8 @@
 	                TB_RESERVATION
 	          JOIN
 	                TB_NONMEM ON (MEM_NO = RE_MEM_NO)
+	         WHERE
+	          		CANCEL_YN = 'N'
 	         ORDER
 	            BY
 	                RESER_NO DESC)
