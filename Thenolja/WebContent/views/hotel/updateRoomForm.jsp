@@ -91,17 +91,17 @@ div {
 				<div class="content-div-1">
 					<div class="form-group">
 					  <label>객실이름</label>
-					  <input type="text" class="form-control" name="roomName" required value="<%= room.getRoomName() %>">
+					  <input type="text" class="form-control" name="roomName" required oninput="testVal(this,roomName);" value="<%= room.getRoomName() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="number" class="form-control"  name="maxPeople" required value="<%= room.getMaxPeople() %>" >
+					  <input type="text" class="form-control" maxlength="3" name="maxPeople" required oninput="testVal(this,maxPeople);"  value="<%= room.getMaxPeople() %>" >
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
-					  <input type="file"  name="roomImg" >
+					  <input type="file"  name="roomImg" oninput="testVal(this, roomImg);" >
 					  <img width="100px" height="100px" src="<%= room.getRoomImgPath() %>" >
 					  <input type="hidden" name="roomImgBefore" value="<%= room.getRoomImgPath() %>">
 					  <input type="hidden" name="roomImgNo" value="<%= room.getRoomImgNo() %>">
@@ -116,12 +116,12 @@ div {
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="number"  name="roomPrice" required value="<%= room.getRoomPrice() %>">
+					  <input type="text"  name="roomPrice" maxlength="9" required oninput="testVal(this, roomPrice);" value="<%= room.getRoomPrice() %>">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="number"  name="roomNum" required value="<%= room.getRoomNum() %>">
+					  <input type="text"  name="roomNum" maxlength="9" required oninput="testVal(this, roomNum);" value="<%= room.getRoomNum() %>">
 					</div>
 				</div>
 				</section>
@@ -131,5 +131,47 @@ div {
 			</form>
 		</div>
 	</div>
+	<script>
+	const regRoomName = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
+	const regNum = /^[1-9]+$/;
+	
+	function testVal(e, tag) {
+		if($(e).val() == " "){
+			alert('입력은 공백으로 시작할수 없습니다.');
+			$(e).val('');
+			return;
+		}
+		
+		if(tag.name === 'roomName'){
+			if(!regRoomNameW.test($(e).val())){
+				alert('입력할수 없는 문자입니다.');
+				$(e).val('');
+				return;
+			}	
+		}
+		else if(tag.name === 'maxPeople' ||
+				tag.name === 'roomPrice' ||
+				tag.name === 'roomNum') {
+					if($(e).val() == " "){
+						return;
+					}
+					if(!regNum.test($(e).val())){
+						alert('공백과 문자가 없는 숫자만 입력해주세요.');
+						$(e).val('');
+						return;
+					}
+		}
+		else if(tag.name === 'roomImg'){
+			if($(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpg" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".png" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpeg"
+			) {
+				alert('.jpg, .png, .jpeg 형식의 사진 파일만 가능합니다.');
+				$(e).val('');
+				return;
+			}
+		}
+	}
+	</script>
 </body>
 </html>

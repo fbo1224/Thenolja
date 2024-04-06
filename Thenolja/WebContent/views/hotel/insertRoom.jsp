@@ -101,7 +101,7 @@ div {
 					
 					<div class="form-grop">
 						<label>입실시간</label>
-						<input type="time" name="in_time" required><br>				
+						<input type="time" name="in_time" required><br>
 						<label>퇴실시간</label>
 						<input type="time" name="out_time" required>
 					</div>
@@ -163,9 +163,7 @@ div {
 				$(e).val('');
 				return;
 			}
-			
 		}
-		
 	}
 		
 	</script>
