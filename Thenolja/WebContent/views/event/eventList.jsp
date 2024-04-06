@@ -94,7 +94,6 @@
 	/* 이벤트 게시판 layout START */
 	#evtIng{
 	   padding-left: 350px;
-	   padding-top : 150px;
 	}
 	
 	.thumb-list{
@@ -182,6 +181,22 @@
 	    background-color: #D1D1D7;
 	}
 	/* 이벤트 게시판 layout END */
+	#contentHeader{
+	 padding-top:5%;
+	}
+   
+   .sort-btn{
+    	
+    	border : none;
+    	background : white;
+    	float: right;
+
+    }
+    
+     .sort-btn:hover{
+    	
+    	color : #5BA199;
+    }
 </style>
 	
 	
@@ -195,8 +210,12 @@
 
     <div id="content_1">
 
-        <div id="contentHeader"><h2 align="center">이벤트</h2></div>
-     
+        <div id="contentHeader"><h2 align="left">이벤트</h2></div>
+
+        <hr>
+        	<button class="sort-btn">오래된순</button>
+			<button class="sort-btn">최신순</button>
+		     
      <!-- 등록 버튼 영역 START -->
     <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
     <a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>
@@ -218,13 +237,12 @@
                 <a href="javascript:void(0);" onclick="clckEvent ('<%= n.getEventNo() %>')">    
                 <div id="eventContent">
                  <div class="img-box">         
-                      <img src="<%= n.getEventImg() %>" alt="당신의 직춘기 레벨을 진단해보세요!" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
+                      <img src="<%= n.getEventImg() %>" alt="" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
                    </div> 
                    <div class="txt-box">                                                         
                       <div class="category-box">
                          <% if( "Y".equals(n.getEventYn()) ) { %>
-                            <span class="flag type01 small">진행중</span>      
-                            <span class="txt">더놀자</span>                           
+                            <span class="flag type01 small">진행중</span>                           
                       </div>                                                                  
                                <strong class="title"><%=n.getEventContent() %></strong>
                                <!-- 이벤트 시작일 ~ 종료일 세팅 -->
