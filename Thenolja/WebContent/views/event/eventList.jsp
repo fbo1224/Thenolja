@@ -12,6 +12,11 @@
 <%@ include file="../common/menubar.jsp" %>
 <style>
 
+#content{
+	width:1200px;
+	height : 800px;
+}
+
 /* body layout 기준 */
 body, ul, li, strong, p{
 	border: 0;
@@ -177,7 +182,8 @@ function clckEvent(eventNo){
 </head>
 <body>
 
-    <br>
+	<div id="content">
+		<br>
    	 <h2 align="center">이벤트</h2>
     <br>
     
@@ -223,9 +229,9 @@ function clckEvent(eventNo){
          <% } %>
 
 	</ul>
-	<!-- 실제 구현 시 반복할 부분 END -->
 	
-	<%@ include file="../common/footer.jsp" %>
+	</div>
+
 	
 </body>
 </html>
