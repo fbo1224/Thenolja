@@ -46,157 +46,145 @@
 			margin: auto;
 		}
 
+	
 
+	       
+	
 
-       
+	#content_1{
+	    width: 1200px;
+	    margin : auto;
+	}
+	
+	
+	/* body layout 기준 */
+	body, ul, li, strong, p{
+	   border: 0;
+	    padding: 0;
+	    margin: 0;
+	    color: inherit;
+	    font-size: inherit;
+	    line-height: inherit;
+	    vertical-align: top; 
+	}
+	/* body layout 기준 */
+	a {
+	   text-decoration:none;
+	}
+	
+	img {
+	   vertical-align:top;
+	   border:0;
+	}
+	
+	li {
+	    display: list-item;
+	    text-align: -webkit-match-parent;
+	    unicode-bidi: isolate;
+	}
+	
 
+	#btn_reg{
+	   float:right;
+	   background-color:#17a2b8;
+	   margin:5px;
+	}
 
-div{
-    border:  1px solid red;
-}
+	
+	/* 이벤트 게시판 layout START */
+	#evtIng{
+	   padding-left: 350px;
+	   padding-top : 150px;
+	}
+	
+	.thumb-list{
+	   position:relative;
+	   margin: 30px -18px 0;
+	    display: flex;
+	    flex-wrap: wrap;      /* 이미지 일정하게 내리기 */
+	   list-style-type: none;   /* li태그 점 없애기 */
+	}
+	
+	.thunmb-list li{   
+	   width:440px;
+	   float:left;
+	   position:relative;
+	}
+	
+	.thumb-list.event li .txt-box .title {
+	    margin-top: 4px;
+	}
+	
+	
+	.thumb-list li .txt-box .title {
+	    overflow: hidden;
+	    display: block;
+	    color: #1a1d1d;
+	    font-size: 20px;
+	    line-height: 35px;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	
+	
+	.thumb-list.event li .img-box {
 
-#content_1{
-    width: 1200px;
-    margin : auto;
-}
-
-/* body layout 기준 */
-body, ul, li, strong, p{
-   border: 0;
-    padding: 0;
-    margin: 0;
-    color: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    vertical-align: top;
-   font-family: NotoSansKR, '맑은고딕', Malgun Gothic, dotum, '돋음', arial, sans-serif;    
-}
-/* body layout 기준 */
-a {
-   text-decoration:none;
-}
-
-img {
-   vertical-align:top;
-   border:0;
-}
-
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-    unicode-bidi: isolate;
-}
-
-.outer{
-   width : 1200px;
-   height : 800px;
-   margin : auto;
-   }
-
-#btn_reg{
-   float:right;
-   background-color:#17a2b8;
-   margin:5px;
-}
-.align_center{
-   text-align:center;
-}  
-
-/* 이벤트 게시판 layout START */
-#evtIng{
-   padding-left: 350px;
-   padding-top : 150px;
-}
-
-.thumb-list{
-   position:relative;
-   margin: 30px -18px 0;
-    display: flex;
-    flex-wrap: wrap;      /* 이미지 일정하게 내리기 */
-   list-style-type: none;   /* li태그 점 없애기 */
-}
-
-.thunmb-list li{   
-   width:440px;
-   float:left;
-   position:relative;
-}
-
-.thumb-list.event li .txt-box .title {
-    margin-top: 4px;
-}
-
-
-.thumb-list li .txt-box .title {
-    overflow: hidden;
-    display: block;
-    color: #1a1d1d;
-    font-size: 24px;
-    line-height: 35px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.thumb-list.event li .img-box {
-   width: 440px;
-   height: 234px;
-   border-radius: 16px;
-   overflow: hidden;
-}
-
-/* 게시판 이미지 크기 등 설정 */
-.thumb-list li .img-box img {
-    /* width: 100%; */
-    height: 100%;
-    object-fit: cover;
-    transform:scale(1);
-    transition: all 0.5s;
-}
-
-.thumb-list li .txt-box {
-    padding: 30px;
-}
-
-.thumb-list.event li .txt-box .category-box {
-    display: flex;
-}
-
-.thumb-list.event li .flag {
-    position: initial;
-    width: auto;
-    vertical-align: top;
-    min-width: 46px;
-}
-
-.flag.small {
-    height: 22px;
-    padding: 0 6px;
-    font-size: 12px;
-    line-height: 22px;
-}
-.flag {
-    display: inline-block;
-    height: 48px;
-    padding: 0 20px;
-    color: #fff;
-    font-size: 15px;
-    line-height: 48px;
-    text-align: center;
-    box-sizing: border-box;
-    white-space: nowrap;
-}
-
-.flag.type01 {
-    background-color: #eb008b;
-}
-.flag.type08 {
-    background-color: #D1D1D7;
-}
-/* 이벤트 게시판 layout END */
+	   border-radius: 16px;
+	   overflow: hidden;
+	}
+	
+	/* 게시판 이미지 크기 등 설정 */
+	.thumb-list li .img-box img {
+	    /* width: 100%; */
+	    height: 100%;
+	    object-fit: cover;
+	    transform:scale(1);
+	    transition: all 0.5s;
+	}
+	
+	.thumb-list li .txt-box {
+	    padding: 30px;
+	}
+	
+	.thumb-list.event li .txt-box .category-box {
+	    display: flex;
+	}
+	
+	.thumb-list.event li .flag {
+	    position: initial;
+	    width: auto;
+	    vertical-align: top;
+	    min-width: 46px;
+	}
+	
+	.flag.small {
+	    height: 22px;
+	    padding: 0 6px;
+	    font-size: 12px;
+	    line-height: 22px;
+	}
+	.flag {
+	    display: inline-block;
+	    height: 48px;
+	    padding: 0 20px;
+	    color: #fff;
+	    font-size: 15px;
+	    line-height: 48px;
+	    text-align: center;
+	    box-sizing: border-box;
+	    white-space: nowrap;
+	}
+	
+	.flag.type01 {
+	    background-color: #eb008b;
+	}
+	.flag.type08 {
+	    background-color: #D1D1D7;
+	}
+	/* 이벤트 게시판 layout END */
 </style>
-
-
+	
+	
 
 
 
@@ -225,8 +213,9 @@ li {
              <!-- 비어있지 않음 -->
              <%for( Event n: list) { %>
                 <li>
-                <a href="javascript:void(0);" onclick="clckEvent ('<%= n.getEventNo() %>')">            
-                   <div class="img-box">         
+                <a href="javascript:void(0);" onclick="clckEvent ('<%= n.getEventNo() %>')">    
+                <div id="eventContent">
+                 <div class="img-box">         
                       <img src="<%= n.getEventImg() %>" alt="당신의 직춘기 레벨을 진단해보세요!" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
                    </div> 
                    <div class="txt-box">                                                         
@@ -251,7 +240,10 @@ li {
           <% } %>
  
     </ul>
-
+                
+                
+                </div>        
+                  
 
     </div>
 
