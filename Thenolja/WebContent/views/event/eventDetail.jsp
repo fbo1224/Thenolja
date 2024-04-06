@@ -12,6 +12,50 @@
 <title>더놀자 > 공지사항 > 상세</title>
 <style>
 
+
+        div{
+        	border : 1px solid red;
+            box-sizing : border-box;
+        }
+
+        #wrap{
+            width: 1200px;
+            height: 1200px;
+            margin: auto;
+        }
+
+        #wrap > div{
+            width: 100%;
+        }
+
+        #header, #footer {
+            height: 15%;
+        }
+
+        #content{
+            height: 70%;
+        }
+
+        #content_1{
+            width: 100%;
+            height : 100%;
+        }
+        
+        #footer{
+			height: 15%;
+			margin: auto;
+		}
+
+	
+
+	       
+	
+
+	#content_1{
+	    width: 1200px;
+	    margin : auto;
+	}
+
 #detail-area{
 	width:100%;
 	height:100%;
@@ -22,16 +66,6 @@
     font-weight: bold; */
 }
 
-#detail_title-area{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 20px 60px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #d1d1d7;
-    background-color: #f2f2f2;
-}
 
 #detail_content-area{
 	width:100%;
@@ -43,22 +77,13 @@
     line-height: 26px;
     white-space: break-spaces;
 }
+
 .detail_content-area{
 	display:block;
 }
 
-.detail_title_name_td{
-    width: 60%;
-    color: #1a1d1d;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 40px;
-}
 
-.detail_title_date_td{
-	margin-right:0;
-	padding-right:0;
-}
+
 
 .btn-wrap{
 	display: flex;
@@ -70,9 +95,19 @@
 #detail-golist{
 	width:448px;
 	color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #5BA199;
+    border-color: none;
 }
+
+	#contentHeader{
+	 padding-top:5%;
+	}
+   
+   .detail_date{
+   	float : right;
+   }
+
+   
 
 </style>
 
@@ -82,32 +117,23 @@
 
 
 <div class="outer">
+<div id="content_1">
 
-	<br>
-	<h2 align="center">이벤트</h2>
-	<br>
-	
-	<br>
+
 	<table id="detail-area">
+        <div id="contentHeader"><h2 align="left">이벤트</h2></div>
 
+        <hr>
 		<!-- 타이틀 영역 -->
 	    <tr id="detail_title-area">
-	         <td class="detail_title_name_td" width="500" colspan="3"><%= event.getEventTitle()  %></td>
-	         <td class="detail_title_date_td"><%= event.getCreateDt() %> </td>
+	         <td class="detail_title_name_td"><%= event.getEventTitle()  %></td>
+	         <td class="detail_date">이벤트 기간 : <%= event.getEventStrtDt() %> ~ <%= event.getEventEndDt() %></td>	
 	    </tr>
-	    <!-- 컨텐츠영역 -->
-	    <tr id="detail_content-area">
-		   <td class="detail_content-area"><%= event.getEventContent() %></td>  
-	    </tr>
-		
-		 <tr id="detail_date-area">
-			<td class="detail_date-area"><%= event.getEventStrtDt() %></td>	
-			<td class="detail_date-area"><%= event.getEventEndDt() %></td>	
-		</tr>	
-		 
-		
-		
+	    <!-- 컨텐츠영역 -->		
 	</table>
+	
+	<img src="<%=event.getEventImg() %>">
+		    
 	<div class="btn-wrap">
 		<input type="button" id="detail-golist" class="btn btn-light"   value="목록으로 이동" onclick="history.back();"/>
 		
@@ -125,7 +151,7 @@
 	</div>	
 	<br>
 	<br><br>
-
+</div>
 </div>
 
 </body>

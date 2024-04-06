@@ -134,8 +134,6 @@
 	
 	/* 게시판 이미지 크기 등 설정 */
 	.thumb-list li .img-box img {
-	    /* width: 100%; */
-	    height: 100%;
 	    object-fit: cover;
 	    transform:scale(1);
 	    transition: all 0.5s;
@@ -237,7 +235,7 @@
                 <a href="javascript:void(0);" onclick="clckEvent ('<%= n.getEventNo() %>')">    
                 <div id="eventContent">
                  <div class="img-box">         
-                      <img src="<%= n.getEventImg() %>" alt="" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
+                      <img width="608" height="304" src="<%= n.getEventImg() %>" alt="" onerror="this.onerror=null; this.src=&quot;/static/images/temp/img_thumb04.jpg&quot;;">
                    </div> 
                    <div class="txt-box">                                                         
                       <div class="category-box">

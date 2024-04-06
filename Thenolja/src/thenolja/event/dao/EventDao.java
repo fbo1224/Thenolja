@@ -212,6 +212,7 @@ public class EventDao {
 				event.setEventEndDt(rset.getString("EVENT_END_DT"));
 				event.setWriter(rset.getString("WRITER"));
 				event.setCreateDt(rset.getString("CREATE_DATE"));
+				event.setEventImg(rset.getString("EVENT_IMG"));
 			}	
 		
 		} catch (SQLException e) {

@@ -58,7 +58,8 @@
                 EVENT_NO,   	    /* 이벤트 번호 */
                 EVENT_TITLE,        /* 이벤트 제목 */
                 EVENT_CONTENT,      /* 이벤트 내용 */
-                EVENT_YN,			/* 이벤트 진행여부 */	
+                EVENT_YN,			/* 이벤트 진행여부 */
+                EVENT_IMG,	
                 TO_CHAR(EVENT_STRT_DT,'YYYY-MM-DD') AS EVENT_STRT_DT,      /* 이벤트 시작일 */
                 TO_CHAR(EVENT_END_DT ,'YYYY-MM-DD') AS EVENT_END_DT,       /* 이벤트 종료일 */
                 (SELECT NICKNAME FROM TB_MEMBER
