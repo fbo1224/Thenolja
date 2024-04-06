@@ -4,7 +4,7 @@
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%
 	ArrayList<MyPageCoupon> couponList = (ArrayList<MyPageCoupon>)request.getAttribute("couponList");
-	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd, HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 %>  
 <!DOCTYPE html>
 <html>
@@ -135,6 +135,7 @@
 	                $(document).ready(function(){
 	                    $('#content').hover(function(){
 	                        $('#reser_info').css('border', 'none');
+	                        $('#reser_info').css('border', '3px solid black');
 	                    },function(){
 	                        $('#reser_info').css('border', 'outset');
 	                    });
