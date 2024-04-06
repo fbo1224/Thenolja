@@ -40,7 +40,7 @@ li {
 }
 
 .outer{
-	width : 1000px;
+	width : 1200px;
 	height : 800px;
 	margin : auto;
 	}
@@ -224,6 +224,8 @@ function clckEvent(eventNo){
 
 	</ul>
 	<!-- 실제 구현 시 반복할 부분 END -->
+	
+	<%@ include file="../common/footer.jsp" %>
 	
 </body>
 </html>
