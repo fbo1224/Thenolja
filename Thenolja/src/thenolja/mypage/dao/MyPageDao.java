@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import thenolja.common.JDBCTemplate;
 import thenolja.member.model.dao.MemberDao;
+import thenolja.mypage.model.vo.MyPageCoupon;
 import thenolja.mypage.model.vo.MyPageHeartList;
 import thenolja.mypage.model.vo.Profile;
 
@@ -132,9 +133,45 @@ public class MyPageDao {
 		}
 		return result;
 	}
+//-------------------------------------쿠폰함 조회-------------------------------------------------
 	
-	
-	
+
+	public ArrayList<MyPageCoupon> selectCoupon(Connection conn, int memNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MyPageCoupon> list = new ArrayList();
+		
+		String sql = prop.getProperty("selectCoupon");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				MyPageCoupon couponList = new MyPageCoupon(rset.getInt("COUPON_NO"),
+														   rset.getString("COUPON_CONTENT"),
+														   rset.getString("COUPON_DATE"),
+													   	   rset.getString("COUPON_CATE_CD"),
+														   rset.getString("COUPON_CATE_NM"),
+														   rset.getInt("COUPON_PERCENT"));
+				
+				list.add(couponList);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	
 	
 	

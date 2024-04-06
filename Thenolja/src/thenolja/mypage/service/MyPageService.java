@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 import thenolja.common.JDBCTemplate;
 import thenolja.mypage.dao.MyPageDao;
+import thenolja.mypage.model.vo.MyPageCoupon;
 import thenolja.mypage.model.vo.MyPageHeartList;
 import thenolja.mypage.model.vo.Profile;
 
 public class MyPageService {
-	
+//--------------------------------찜 목록 조회-------------------------------------------------
 	public ArrayList<MyPageHeartList> selectHeartList(int memNo){
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -56,7 +57,17 @@ public class MyPageService {
 		}
 		return result;
 	}
-	
+//-------------------------------쿠폰함 조회--------------------------------------------
+	public ArrayList<MyPageCoupon> selectCoupon(int memNo){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<MyPageCoupon> list = new MyPageDao().selectCoupon(conn, memNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 	
 	
 	

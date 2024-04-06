@@ -292,5 +292,27 @@
 		       )
 	</entry>
 	
+	<entry key="selectCoupon">
+		SELECT
+		       COUPON_NO,
+		       COUPON_CONTENT,
+		       COUPON_DATE,
+		       COUPON_CATE_CD,
+		       COUPON_CATE_NM,
+		       COUPON_PERCENT
+		  FROM
+		       TB_NONMEM
+		  JOIN
+		       TB_MY_COUPON
+		    ON
+		       (MEM_NO = CO_MEM_NO)
+		  JOIN
+		       TB_COUPON
+		 USING
+		       (COUPON_NO)
+		 WHERE
+		       MEM_NO = ?
+	
+	</entry>
 	
 </properties>

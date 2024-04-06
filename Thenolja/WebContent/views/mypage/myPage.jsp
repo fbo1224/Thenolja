@@ -308,7 +308,7 @@
 	        
 	        <div id="content3" class="content">
 	
-	            <div class="icon"><div class="iconImg"><a href="#"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.coupon?memNo=<%= loginUser.getMemNo() %>"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
 	            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.heart?memNo=<%= loginUser.getMemNo() %>"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
 	            <div class="icon"><div class="iconImg"><a href="<%= contextPath%>/myReview.list?memNo=<%= loginUser.getMemNo()%>"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
 	            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>/eventList?currentPage=1"><img class="img1" src="./resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
