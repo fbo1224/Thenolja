@@ -174,7 +174,6 @@
 							}
 							else{
 								alert("비밀번호가 일치합니다.");
-								name.disabled = false;
 								memJoin.disabled = false;
 								return true;
 							}
@@ -185,7 +184,7 @@
 				
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="5" required name="memName" disabled id="name"></td>
+					<td><input type="text" maxlength="5" required name="memName" id="name"></td>
 					<td></td>
 				</tr>
 				

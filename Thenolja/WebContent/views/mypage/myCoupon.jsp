@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList,thenolja.mypage.model.vo.MyPageCoupon" %>
+<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%
 	ArrayList<MyPageCoupon> couponList = (ArrayList<MyPageCoupon>)request.getAttribute("couponList");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd, HH:mm");
 %>  
 <!DOCTYPE html>
 <html>
@@ -29,7 +31,6 @@
         height: auto;
         margin-top: 20px;
         margin: auto;
-        background-color: lightgray;
     }
     #content_title{
         height: 100%;
@@ -49,18 +50,9 @@
         border: outset;
         border-radius: 10px;
     }
-    #reser_hotel_img{
-        width: 25%;
-        float: left;
-    }
-    #img{
-        border-radius: 10px;
-        width: 100px;
-        height: 95px;
-    }
-
     #reser_detail{
         margin-left: 250px;
+        margin-top : 20px;
     }
     #reser_detail > p{
         font-size: 20px;
@@ -86,11 +78,12 @@
     	color:black;
     }
 
-    #heart > img{
-        width: 25px;
-        height: 25px;
-        float: right;
-        margin-top: 10px;
+    #coupon > img{
+        width: 130px;
+        height: 13 0px;
+        float: left;
+        margin-top: 20px;
+        margin-left: 20px;
     }
 
     /*********************/
@@ -114,23 +107,30 @@
 			<% for(MyPageCoupon c : couponList) { %>
 			<div id="content">
 		        <div id="reser_info">
-		            <div id="img">
-                           <img src="#" alt="쿠폰이미지" width="100px" height="100px">
-                    </div>
+                    <div id="coupon"><img src="resources/mypage/coupons.png" alt="쿠폰이미지"></div>
                     <div id="reser_detail">
                         <h3><%= c.getCouponContent() %></h3><br>
-                        <p><%= c.getCouponDate() %></p>
-                        <p><%= c.getCouponPercent() %></p>
+                        <p>사용기한 : <%= c.getCouponDate() %></p>
+                        <p>할인율 : <%= c.getCouponPercent() %></p>
                     </div>
-                    <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
 		        </div>
 			</div>
 			<% } %>
 		<% } %>
-<div id="homeBtn">
-	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	<div id="homeBtn">
+		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	</div>
 </div>
-</div>
+
+	            <script>
+	                $(document).ready(function(){
+	                    $('#content').hover(function(){
+	                        $('#reser_info').css('border', 'none');
+	                    },function(){
+	                        $('#reser_info').css('border', 'outset');
+	                    });
+	                });
+	            </script>
 
 </body>
 </html>

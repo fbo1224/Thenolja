@@ -296,7 +296,7 @@
 		SELECT
 		       COUPON_NO,
 		       COUPON_CONTENT,
-		       COUPON_DATE,
+		       TO_CHAR(COUPON_DATE , 'YYYY/MM/DD'),
 		       COUPON_CATE_CD,
 		       COUPON_CATE_NM,
 		       COUPON_PERCENT
