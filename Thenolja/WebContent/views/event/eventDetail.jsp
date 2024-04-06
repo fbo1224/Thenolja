@@ -14,7 +14,6 @@
 
 
         div{
-        	border : 1px solid red;
             box-sizing : border-box;
         }
 
@@ -108,7 +107,12 @@
    }
 
    
-
+img {
+	padding-top:10%;
+	padding-bottom:10%;
+    margin: auto;
+    display: block;
+}
 </style>
 
 </head>
@@ -126,12 +130,12 @@
         <hr>
 		<!-- 타이틀 영역 -->
 	    <tr id="detail_title-area">
-	         <td class="detail_title_name_td"><%= event.getEventTitle()  %></td>
+	         <td class="detail_title_name_td"><b><%= event.getEventContent()  %></b></td>
 	         <td class="detail_date">이벤트 기간 : <%= event.getEventStrtDt() %> ~ <%= event.getEventEndDt() %></td>	
 	    </tr>
 	    <!-- 컨텐츠영역 -->		
 	</table>
-	
+	<hr>
 	<img src="<%=event.getEventImg() %>">
 		    
 	<div class="btn-wrap">
@@ -149,10 +153,12 @@
     	<a href="<%= contextPath %>/delete.event?eventNo=<%= event.getEventNo() %>"
     	class="btn btn-sm btn-danger">삭제하기</a> --%>
 	</div>	
-	<br>
-	<br><br>
+
 </div>
 </div>
+
+   
+   <%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>
