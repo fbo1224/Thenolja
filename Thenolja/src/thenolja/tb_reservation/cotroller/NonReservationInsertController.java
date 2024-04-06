@@ -38,10 +38,14 @@ public class NonReservationInsertController extends HttpServlet {
 	
 		request.setCharacterEncoding("UTF-8");
 		
-		String name = request.getParameter("nonMemName");
-		String phone = request.getParameter("nonMemPhone");
+		String name = request.getParameter("memName");
+		String phone = request.getParameter("memPhone");
 		String bicycle = request.getParameter("bicycle");
+		String checkIn = request.getParameter("checkIn");
+		String checkOut = request.getParameter("checkOut");
+		int people = Integer.parseInt(request.getParameter("people"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		
 		Member nonmem = new Member();
 		nonmem.setMemName(name);
@@ -54,8 +58,12 @@ public class NonReservationInsertController extends HttpServlet {
 		reser.setName(name);
 		reser.setPhone(phone);
 		reser.setBicycle(bicycle);
+		reser.setCheckIn(checkIn);
+		reser.setCheckOut(checkOut);
+		reser.setPeople(people);
 		reser.setRoomNo(roomNo);
 		reser.setMemNo(memNo);
+		reser.setPaymentPrice(paymentPrice);
 		
 		reser = new ReserService().insertReser(reser);
 		if(nonmem != null && reser != null ) {

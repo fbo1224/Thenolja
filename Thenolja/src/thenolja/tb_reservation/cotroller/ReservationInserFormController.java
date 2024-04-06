@@ -14,6 +14,7 @@ import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_reservation.model.Service.ReserService;
+import thenolja.tb_reservation.model.vo.ReserInfo;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
@@ -45,15 +46,15 @@ public class ReservationInserFormController extends HttpServlet {
 		int people = Integer.parseInt(request.getParameter("people"));
 		String startDate =  daterange.substring(0, daterange.indexOf(" ")).trim();
 		String endDate =  daterange.substring(daterange.lastIndexOf(" ")).trim();
-		System.out.println(startDate);
-		System.out.println(endDate);
+		//System.out.println(startDate);
+		//System.out.println(endDate);
 		if(startDate != null && endDate != null && people > 0) {
-			Reservation reser = new Reservation();
-			reser.setCheckIn(startDate);
-			reser.setCheckOut(endDate);
-			reser.setPeople(people);
+			ReserInfo rinfo = new ReserInfo();
+			rinfo.setStartDate(startDate);
+			rinfo.setEndDate(endDate);
+			rinfo.setPeople(people);
 		
-		}
+		
 		request.setAttribute("insertReservation", list);
 		Reservation reser = new Reservation();
 		
@@ -64,6 +65,7 @@ public class ReservationInserFormController extends HttpServlet {
 		request.setAttribute("reser", reser);
 		request.setAttribute("hotel", hotel);      
 		request.setAttribute("room", room);
+		request.setAttribute("rinfo", rinfo);
 		//System.out.println(list);
 		
 		//response.sendRedirect("/views/reservation/insertReservation.jsp");
@@ -74,7 +76,7 @@ public class ReservationInserFormController extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
+		}
 	}
 
 	/**
