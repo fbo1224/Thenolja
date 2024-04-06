@@ -37,11 +37,11 @@ public class HotelServlet extends HttpServlet {
 		HotelController hc = new HotelController();
 		
 		String view = "";
-		int result = 0;
 		boolean flag = true;
 		request.setCharacterEncoding("UTF-8");
 	
 		switch(mapping) {
+		
 			// insertHotel.jsp
 			case "insertForm" : view =  hc.insertForm(request, response); break;
 			

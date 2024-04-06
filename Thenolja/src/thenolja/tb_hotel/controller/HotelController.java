@@ -32,6 +32,7 @@ public class HotelController {
 	public String insert(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int result = 0;
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// loadName 도로명주소
 			// detailAddr 상세주소
