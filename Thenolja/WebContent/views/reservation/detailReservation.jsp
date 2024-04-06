@@ -267,7 +267,7 @@
                 </div>
             </div>
         </div>
-<%=hotel.getHotelNo()%>
+
     </div>
     <div id="my_btn">
 	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&reserNo=<%=reser.getReserNo()%>">

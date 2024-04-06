@@ -42,9 +42,12 @@ public class ReserDao {
 			pstmt.setString(1, reser.getName());
 			pstmt.setString(2, reser.getPhone());
 			pstmt.setString(3, reser.getBicycle());
-			pstmt.setInt(4, reser.getRoomNo());
-			pstmt.setInt(5, reser.getMemNo());
-			pstmt.setInt(6, reser.getPaymentPrice());
+			pstmt.setString(4, reser.getCheckIn());
+			pstmt.setString(5, reser.getCheckOut());
+			pstmt.setInt(6, reser.getPeople());
+			pstmt.setInt(7, reser.getRoomNo());
+			pstmt.setInt(8, reser.getReMemNo());
+			pstmt.setInt(9, reser.getPaymentPrice());
 		//	System.out.println(reser);
 			result = pstmt.executeUpdate();
 			

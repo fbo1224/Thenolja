@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member, thenolja.tb_coupon.model.vo.Coupon" %>
-<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>   
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room
+				,thenolja.tb_reservation.model.vo.ReserInfo" %>   
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("insertReservation");
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
+	ReserInfo rinfo = (ReserInfo)request.getAttribute("rinfo");
 %>   
   
 <!DOCTYPE html>
@@ -202,9 +204,9 @@
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
-			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
 			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
+			        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
 			        
     			</div>
 			</div>
@@ -230,6 +232,9 @@
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
 					<input id="hidePrice" type="hidden" name="paymentPrice" value="">
 					<input id="couponNo" type="hidden" name="couponNo" value="">
+					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
+					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
+					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
 		                <br>
@@ -293,6 +298,7 @@
     <!-- /0. 전체 감싸는 div 끝 -->
    
     <script>
+    
 	let coupon = {};
     
     $(function(){
@@ -308,6 +314,9 @@
     				$('#couponTable').append('<tr>'
 	                   +'<th colspan="5">쿠폰이 존재하지 않습니다.</th>'
 		                +'</tr>');
+    				$('#payPrice').append(
+    					'<%=room.getRoomPrice()%>'
+					);ss
     			} else{
     				for(let i = 0; i < result.length; i++){
     					
