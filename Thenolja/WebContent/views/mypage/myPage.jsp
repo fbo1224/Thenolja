@@ -26,6 +26,7 @@
     	width: 900px;
         height: auto;
         margin: auto;
+        margin-bottom : 50px;
     }
 
     .content{
