@@ -12,6 +12,44 @@
 
 <style>
 
+        div{
+            box-sizing : border-box;
+        }
+
+        #wrap{
+            width: 1200px;
+            height: 1200px;
+            margin: auto;
+        }
+
+        #wrap > div{
+            width: 100%;
+        }
+
+        #header, #footer {
+            height: 15%;
+        }
+
+        #content{
+            height: 70%;
+        }
+
+        #content_1{
+            width: 100%;
+            height : 100%;
+        }
+        
+        #footer{
+			height: 15%;
+			margin: auto;
+		}
+
+	#content_1{
+		    width: 1200px;
+		    margin : auto;
+		}
+
+
 /* 카테고리 영역 layout 기준 START */
 .nav-area{
 	margin-top:60px;
@@ -59,11 +97,10 @@
 /* 이벤트 게시판 layout START */
 .thumb-list{
 	position:relative;
-	margin: 160px 100px 0;
     display: flex;
     flex-wrap: wrap;		/* 이미지 일정하게 내리기 */
 	list-style-type: none;	/* li태그 점 없애기 */
-	padding-left:60px;
+	padding-left:95px;
 }
 
 .thunmb-list li{	
@@ -94,7 +131,7 @@
    border-radius: 16px;
    overflow: hidden;
    background-color: #ededed;
-   margin: 50px 12px auto 60px;
+   margin: 50px 12px;
 }
 
 /* 게시판 이미지 크기 등 설정 */
@@ -109,6 +146,7 @@
 .thumb-list li .txt-box {
     padding: 30px;
 }
+
 
 .thumb-list.coupon li .txt-box .category-box {
     display: flex;
@@ -159,7 +197,9 @@
     width: 74px;
     font-weight: bolder;	
 }
-
+.nav-area{
+	margin-right: 8%;
+}
 </style>
 
 
@@ -168,9 +208,8 @@
 
 <%@ include file="../common/menubar.jsp" %>
 
-   <br>
-   	 <h2 align="center">쿠폰 발행</h2>
-    <br>
+    <div id="content_1">
+
     
     <!-- 쿠폰발행 컨텐츠 전체 영역 START -->
     <div class="" style="margin-left:100px;">
@@ -193,7 +232,9 @@
 	 				<option name="" value="DESC">오래된순</option>
 	 			</select>
 	 			
+	 			<%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
 	 			<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/coupon/couponReg.jsp" role="button" style="background-color:#17a2b8;">발행하기</a>
+	 			<%} %>
 	 			
 	 		</div>	
 	 	</div>
@@ -228,6 +269,9 @@
 	 	
 	 </div>
 	<!-- 실제 구현 시 반복할 부분 END -->
+	</div>
+	
+   <%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>
