@@ -39,6 +39,7 @@ public class HotelServlet extends HttpServlet {
 		
 		HotelController hc = new HotelController();
 		
+		// 로그인정보 가져오기
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
@@ -62,8 +63,9 @@ public class HotelServlet extends HttpServlet {
 		// 관리자영역
 		if(loginUser != null && loginUser.getMemStatus().equals("A")) { 
 			switch(mapping) {
-			// insertHotel.jsp
+			
 			case "insertForm" : view =  hc.insertForm(request, response); break;
+			
 			case "insert" : view =  hc.insert(request, response, loginUser);
 							// hotelList로 이동
 							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus="+loginUser.getMemStatus())) flag = false;	

@@ -153,8 +153,7 @@ public class HotelController {
 		// 3) VO로 가공
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
 								  maxPage, startPage, endPage);
-		// System.out.println(pi);
-		
+
 		// 4) Service 호출
 		ArrayList<HotelCard> hotelList = null;
 		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
@@ -239,10 +238,8 @@ public class HotelController {
 			
 			// 서비스 목록
 			h.setSerList(serList);
-			// System.out.println(h);
 			
 			String beforeImgName = beforeImgPath.substring(h.getHotelPath().lastIndexOf("/") + 1);
-			// System.out.println(beforeImgName);
 			
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/" + multiRequest.getFilesystemName("hotelImg"));
@@ -260,7 +257,6 @@ public class HotelController {
 		}
 		return view;
 	}
-	
 	
 	public String select(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
@@ -330,11 +326,6 @@ public class HotelController {
 		int maxPage;     
 		int startPage;   
 		int endPage;
-		
-		String loginStatus = "";
-		if(request.getParameter("loginStatus") != null) {
-			loginStatus = request.getParameter("loginStatus"); 
-		}
 		
 		listCount = new HotelService().searchListCount(startDate,endDate,location,maxPeople);
 		

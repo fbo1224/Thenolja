@@ -207,7 +207,8 @@
 				},
 				type: 'get',
 				success : function(result){
-					console.log(result);
+					// 호텔 삭제후 ajax
+					// 기존  html요소 지우고  결과값으로 다시 요소 만들기 
 					$('#content-2-lists').empty();
 					$('.paging-area').empty();
 					
