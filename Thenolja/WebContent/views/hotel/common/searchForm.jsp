@@ -125,7 +125,6 @@ const toDay = new Date();
 	    		<% if(searchDataForm != null) { %>
 	    			$('#locations').children().each(function(idx, item){
 	    				if($(item).val() == '<%= searchDataForm.getLocation() %>'){
-	    					console.log($(item).val());
 	    					$(item).attr('selected', 'true');
 	    	    		}
 	    	  	    });
