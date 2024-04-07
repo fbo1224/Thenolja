@@ -66,6 +66,7 @@ public class NonReservationInsertController extends HttpServlet {
 		
 		int reserNo = new ReserService().insertReserNo(reser);
 		System.out.println(reserNo);
+		System.out.println(1);
 		if(reserNo > 0) {
 			reser = new ReserService().selectReserNo(reserNo);
 		}
@@ -74,10 +75,11 @@ public class NonReservationInsertController extends HttpServlet {
 		if(nonmem != null && reser != null ) {
 			
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-			Hotel hotel = new ReserService().selectHotel();
+			Hotel hotel = new ReserService().selectHotel1(hotelNo);
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
 			if(hotel != null && room != null) {
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("reser", reser);
 				session.setAttribute("hotel", hotel);

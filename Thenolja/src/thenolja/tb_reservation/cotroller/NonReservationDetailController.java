@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
@@ -37,7 +38,10 @@ public class NonReservationDetailController extends HttpServlet {
 		Reservation reser = new ReserService().selectReserNo(reserNo);
 			
 		if(reser != null) {
-			request.setAttribute("reser", reser);
+			
+			HttpSession session = request.getSession();
+					
+			session.setAttribute("reser", reser);
 			
 			RequestDispatcher view = request.getRequestDispatcher("views/reservation/nonDetailReservation.jsp");
 			view.forward(request, response);

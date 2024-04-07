@@ -199,7 +199,16 @@ public class ReserService {
 		return reserNo;
 	}
 
-
+	public Hotel selectHotel1(int hotelNo) {
+		
+		Connection conn = getConnection();
+		
+		Hotel hotel = new ReserDao().selectHotel1(conn, hotelNo);
+		
+		close(conn);
+		
+		return hotel;
+	}
 
 
 

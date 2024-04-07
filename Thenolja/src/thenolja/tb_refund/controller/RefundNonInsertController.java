@@ -36,7 +36,7 @@ public class RefundNonInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		String accNo = request.getParameter("accNo");
@@ -45,7 +45,8 @@ request.setCharacterEncoding("UTF-8");
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));	
 		int refundPrice = Integer.parseInt(request.getParameter("refundPrice"));
-		
+		System.out.println(roomNo);
+		System.out.println(hotelNo);
 		// 3) 데이터 가공
 		Refund refund = new Refund();
 		refund.setReserNo(reserNo);
@@ -65,7 +66,7 @@ request.setCharacterEncoding("UTF-8");
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
 			if(refund != null && reser != null && hotel != null && room != null) {
-				System.out.println(reser);
+				
 				request.setAttribute("refund", refund);
 				request.setAttribute("hotel", hotel);      
 				request.setAttribute("room", room);
@@ -81,12 +82,10 @@ request.setCharacterEncoding("UTF-8");
 		/*	
 			response.sendRedirect(request.getContextPath() + "/refundDetail?reserNo=" + refund.getReserNo());
 			}*/
-		}
+			}
 		} else {
 			request.setAttribute("errorMsg", "환불 처리에 실패했습니다!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		
-	
 		}
 	}
 

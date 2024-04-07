@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
 				 thenolja.tb_review.model.vo.Review" %>
-<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>  				   
+<%@ page import="java.text.SimpleDateFormat, java.util.Date, java.time.LocalDate, java.time.format.DateTimeFormatter"%>  				   
 <%
 	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
@@ -143,6 +143,9 @@
 				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
 				<input type="hidden" name="reserNo" value="<%=r.getReserNo() %>">
 	            <div id="reser_detail" onclick="myList();">
+	           
+	           
+	            
 	                <h3><%=r.getHotelName() %></h3>
 	                <p><%=r.getRoomName() %></p>
 	                <p><%=r.getPeople() %>인</p>
@@ -159,10 +162,17 @@
 
 
             <div id="review_in">
-            <% if(today.compareTo(r.getCheckOut()) > 0) { %>
-                <a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+             <% LocalDate currentDate = LocalDate.now();
+	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	            LocalDate specificDate = LocalDate.parse(r.getCheckOut(), formatter);
+	            
+	            
+	            %>
+            <% if(currentDate.isBefore(specificDate)) { %>
+                <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
             <% } else { %>
-            	<button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button>
+            	<a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>">
+                <button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
             <% } %>
             </div>
 
