@@ -172,8 +172,6 @@ public class ReserDao {
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
 				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
 				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));

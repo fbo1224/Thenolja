@@ -62,12 +62,12 @@ public class NonReservationInsertController extends HttpServlet {
 		reser.setRoomNo(roomNo);
 		reser.setReMemNo(reMemNo);
 		reser.setPaymentPrice(paymentPrice);
+		System.out.println(reser);
 		
 		int reserNo = new ReserService().insertReserNo(reser);
 		System.out.println(reserNo);
 		if(reserNo > 0) {
 			reser = new ReserService().selectReserNo(reserNo);
-			System.out.println(reser);
 		}
 		
 //		reser = new ReserService().insertReser(reser);
