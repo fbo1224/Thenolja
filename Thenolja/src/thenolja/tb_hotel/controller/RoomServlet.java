@@ -41,14 +41,11 @@ public class RoomServlet extends HttpServlet {
 		boolean flag = true;
 		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
 			switch(mapping) {
-				// insertRoom.jsp
 				case "insertForm" : view =  rc.insertForm(request, response); break;
 				case "insert" : view =  rc.insert(request, response); break;
-				
 				case "updateListForm" : view =  rc.updateListForm(request, response); break;
 				case "updateRoomForm" : view =  rc.updateRoomForm(request, response); break;
 				case "updateRoom" : view =  rc.updateRoom(request, response); break;
-				
 				case "deleteListForm" : view = rc.deleteListForm(request, response); break;
 			}
 		

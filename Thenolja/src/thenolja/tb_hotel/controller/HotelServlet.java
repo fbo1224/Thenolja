@@ -64,14 +64,10 @@ public class HotelServlet extends HttpServlet {
 			switch(mapping) {
 			// insertHotel.jsp
 			case "insertForm" : view =  hc.insertForm(request, response); break;
-			
-			// 뷰 응답 controller에서 할 것.
 			case "insert" : view =  hc.insert(request, response, loginUser);
 							// hotelList로 이동
 							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus="+loginUser.getMemStatus())) flag = false;	
 							break;
-			
-			// updateHotel.jsp
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
 			
 			case "update" : view =  hc.update(request, response, loginUser);
