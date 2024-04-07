@@ -18,9 +18,10 @@
 		
 		String dateRangeForm = today + " ~ " + tomo;
 		
-		System.out.println(dateRangeForm);
+		// System.out.println(dateRangeForm);
+		
 		// 해당 호텔 위치
-		System.out.println(dh.getHotelLocation());
+		// System.out.println(dh.getHotelLocation());
 		
 		int defaultPeople = 2;
 		// Date

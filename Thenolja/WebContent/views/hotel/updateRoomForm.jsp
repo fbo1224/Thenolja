@@ -132,18 +132,21 @@ div {
 		</div>
 	</div>
 	<script>
-	const regRoomName = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
+	const regNameRule = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
 	const regNum = /^[1-9]+$/;
 	
 	function testVal(e, tag) {
-		if($(e).val() == " "){
+		if($(e).val().charAt(0) === ' '){
 			alert('입력은 공백으로 시작할수 없습니다.');
 			$(e).val('');
 			return;
 		}
 		
 		if(tag.name === 'roomName'){
-			if(!regRoomNameW.test($(e).val())){
+			if($(e).val() === ''){
+				return;
+			}
+			if(!regNameRule.test($(e).val())){
 				alert('입력할수 없는 문자입니다.');
 				$(e).val('');
 				return;

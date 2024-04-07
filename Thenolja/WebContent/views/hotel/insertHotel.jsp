@@ -200,8 +200,8 @@ label{
 						<div id="content-div-half1">
 							<div id="addr-div">
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
-								<input type="text" id="roadAddress" placeholder="도로명주소" name="loadName" required>
-								<input type="text" id="detailAddress" placeholder="상세주소" name="detailAddr" required>
+								<input type="text" id="roadAddress" placeholder="도로명주소" name="loadName" readonly required>
+								<input type="text" id="detailAddress" placeholder="상세주소" maxlength="15" name="detailAddr" oninput="testVal(this, detailAddr)" required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
 
@@ -217,14 +217,14 @@ label{
 								</div>
 								<div class="hotel-cate-div">
 									<label>숙소명</label>
-									<input class="form-control" type="text" name="hotelName">
+									<input class="form-control" type="text" name="hotelName" oninput="testVal(this, hotelName)">
 								</div>
 							</div>
 
 							<div id="hotel-nameNImg">
 								<div id="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input type="file" name="hotelImg" required>
+									<input type="file" name="hotelImg" oninput="testVal(this, hotelImg);" required>
 								</div>
 							</div>
 						</div>
@@ -233,7 +233,7 @@ label{
 							<div id="nameNPhone">
 								<div id="nameNPhone-div-1">
 									<label>대표자명</label>
-									<input type="text" required class="form-control" name="ceoName">
+									<input type="text" required class="form-control" name="ceoName" maxlength="8" oninput="testVal(this, ceoName);">
 								</div>
 
 								<label id="phone-label">전화번호</label>
@@ -283,10 +283,7 @@ label{
 		<script>
 		function test(){
 			if($('#intro').val().includes("<script>")){
-				// alert('사용할수 없는 단어가 포함되었습니다.');
-				// $('#intro').val('');
 				$('#intro').replaceAll('<', '&gt;');
-				
 			}
 		}
 	    
@@ -315,6 +312,42 @@ label{
 	            }
 	        }).open();
 	    }
+	</script>
+	
+	<script>
+	const regNameRule = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
+	const regNum = /^[0-9]+$/;
+	
+	function testVal(e, tag) {
+		if($(e).val().charAt(0) === ' '){
+			alert('입력은 공백으로 시작할수 없습니다.');
+			$(e).val('');
+			return;
+		}
+		
+		if(tag.name === 'detailAddr' || tag.name === 'hotelName' || tag.name === 'ceoName'){
+			if($(e).val() === ''){
+				console.log($(e).val());
+				return;
+			}
+			if(!regNameRule.test($(e).val())){
+				alert('입력할수 없는 문자입니다.');
+				$(e).val('');
+				return;
+			}	
+		}
+		else if(tag.name === 'hotelImg') {
+			if($(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpg" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".png" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpeg"
+			  ){
+				alert('.jpg, .png, .jpeg 형식의 사진 파일만 가능합니다.');
+				$(e).val('');
+				return;
+			}
+		}
+	}
+		
 	</script>
 	</body>
 	</html>
