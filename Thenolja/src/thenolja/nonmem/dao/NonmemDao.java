@@ -233,7 +233,7 @@ public class NonmemDao {
 	}
 	public Member selectNonMember(Connection conn) {
 		
-		Member member = new Member();
+		Member nonmem = new Member();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectNonMember");
@@ -242,11 +242,11 @@ public class NonmemDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				member = new Member();
-				member.setMemNo(rset.getInt("CURRVAL"));
-				member.setMemName(rset.getString("MEM_NAME"));
-				member.setMemPhone(rset.getString("MEM_PHONE"));
+			if(rset.next()) {
+				nonmem = new Member();
+				nonmem.setMemNo(rset.getInt("CURRVAL"));
+				nonmem.setMemName(rset.getString("MEM_NAME"));
+				nonmem.setMemPhone(rset.getString("MEM_PHONE"));
 				
 			}
 		} catch (SQLException e) {
@@ -255,7 +255,7 @@ public class NonmemDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return member;
+		return nonmem;
 	}
 	
 }

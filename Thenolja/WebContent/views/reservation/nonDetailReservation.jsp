@@ -6,7 +6,6 @@
 	Reservation reser = (Reservation)session.getAttribute("reser");
 	Room room = (Room)session.getAttribute("room");
 	Hotel hotel = (Hotel)session.getAttribute("hotel");
-	System.out.println(reser.getName());
 %>	
 <!DOCTYPE html>
 <html lang="en">
@@ -188,16 +187,17 @@
                 
                 <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
 
-				<div id="reser_detail">
+              <div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+				<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
+				
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=room.getMaxPeople() %>인</p>
 			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=room.getCheckInTime() %> : 00 ~ <%=room.getCheckOutTime() %> : 00</p>
-			        
-    			</div>
+			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+                </div>
 
                 <div id="reser_btn">
                     <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>

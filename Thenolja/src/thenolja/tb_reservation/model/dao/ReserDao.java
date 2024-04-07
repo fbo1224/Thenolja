@@ -272,7 +272,6 @@ public class ReserDao {
 				hotel.setHotelPath(rset.getString("HOTEL_PATH"));
 				hotel.setHotelIntro(rset.getString("HOTEL_INTRO"));
 				hotel.setHostName(rset.getString("HOST_NAME"));
-				System.out.println(hotelNo);
 			}
 			
 		} catch (SQLException e) {
