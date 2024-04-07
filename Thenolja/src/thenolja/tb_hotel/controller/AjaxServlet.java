@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import thenolja.member.model.vo.Member;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.HotelCard;
@@ -42,6 +44,9 @@ public class AjaxServlet extends HttpServlet {
 		
 		AjaxController ac = new AjaxController();
 		
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		boolean flag = true;
 		Gson gson = new Gson();
 		String str = "";
@@ -51,13 +56,18 @@ public class AjaxServlet extends HttpServlet {
 		List<String> locList = null;
 		
 		switch(mapping) {
-			case "deleteHotel"    : datas =  ac.deleteHotel(request, response); break;
-			case "deleteRoom"     : str = ac.deleteRoom(request, response); flag = false; break; 
 			case "popularData"    : List = ac.selectPopular(request, response); break;
 			case "locRecomData"   : List = ac.locRecomData(request, response); break;
 			case "commentAdmin"   : cList = ac.commentAdmin(request, response); break;
 			case "reviewList"     : datas = ac.reviewList(request, response); break;
 			case "searchLocation" : locList = ac.searchLocation(request, response); flag = false; break;
+		}
+		
+		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
+			switch(mapping) {
+				case "deleteHotel" : datas =  ac.deleteHotel(request, response); break;
+				case "deleteRoom"  : str = ac.deleteRoom(request, response); flag = false; break; 
+			}
 		}
 		
 		if(flag) {
