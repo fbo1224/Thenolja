@@ -67,6 +67,13 @@ public class HotelController {
 			String[] serList = multiRequest.getParameterValues("serList");
 			String introText = multiRequest.getParameter("introText");
 			
+			
+			if(loadName.equals("")) {
+				request.setAttribute("errorMsg", "호텔 주소가 올바르지 않습니다.");
+				view="views/common/errorPage.jsp";
+				return view;
+			}
+			
 			// 지역만뽑기
 			String location = loadName.substring(0, loadName.indexOf(" ")).trim();
 			

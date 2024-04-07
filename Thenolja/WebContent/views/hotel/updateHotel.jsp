@@ -223,11 +223,11 @@ label{
 							<div id="addr-div">
 								<input type="hidden" value="<%= h.getHotelNo() %>" name="hotelNo" >
 								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
-								<input type="text" id="sample4_roadAddress"
+								<input type="text" id="roadAddress"
 								 placeholder="도로명주소" name="loadName" value="<%= h.getHotelAddress() %>"
 								 required readonly>
-								<input type="text" id="sample4_detailAddress" placeholder="상세주소"
-								 name="detailAddr" value="<%= h.getHotelDetail() %>"
+								<input type="text" id="detailAddress" placeholder="상세주소"
+								 name="detailAddr" value="<%= h.getHotelDetail() %>" maxlength="15" oninput="testVal(this, detailAddr);"
 								 required>
 								<span id="guide" style="color:#999;display:none"></span>
 							</div>
@@ -244,14 +244,14 @@ label{
 								</div>
 								<div class="hotel-cate-div">
 									<label>숙소명</label>
-									<input class="form-control" type="text" name="hotelName" value="<%= h.getHotelName() %>">
+									<input class="form-control" type="text" name="hotelName" value="<%= h.getHotelName() %>" oninput="testVal(this, hotelName)" >
 								</div>
 							</div>
 
 							<div id="hotel-nameNImg">
 								<div class="nameNimg-div">
 									<label>숙소대표사진</label>
-									<input width="50%" type="file" name="hotelImg">
+									<input width="50%" type="file" name="hotelImg" oninput="testVal(this, hotelImg);">
 								</div>
 								<div class="nameNimg-div">
 									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
@@ -264,7 +264,7 @@ label{
 							<div id="nameNPhone">
 								<div id="nameNPhone-div-1">
 									<label>대표자명</label>
-									<input type="text" required class="form-control" name="ceoName" value="<%= h.getHostName() %>" >
+									<input type="text" required class="form-control" name="ceoName" maxlength="8" oninput="testVal(this, ceoName);" value="<%= h.getHostName() %>" >
 								</div>
 
 								<label id="phone-label">전화번호</label>
@@ -300,7 +300,7 @@ label{
 						<div id="intro-text-area">
 							<label for="intro">소개말을 적어주세요</label>
 							<div>
-								<textarea required class="form-control" rows="5" id="intro" name="introText" ><%= h.getHotelIntro() %></textarea>
+								<textarea required class="form-control" onkeydown="test()" rows="5" id="intro" name="introText" ><%= h.getHotelIntro() %></textarea>
 							</div>
 						</div>
 						
@@ -317,27 +317,14 @@ label{
 			</div>
 				
 		<script>
-	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	    function findAddrs() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
-	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-	
-	                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var roadAddr = data.roadAddress; // 도로명 주소 변수
-	                // var extraRoadAddr = ''; // 참고 항목 변수
-	
-	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-	                
-	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                var roadAddr = data.roadAddress;
 	                if(data.buildingName !== '' && data.apartment === 'Y'){
 	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 	                }
-	               
-	                // document.getElementById('sample4_postcode').value = data.zonecode;
-	                document.getElementById("sample4_roadAddress").value = roadAddr;
+	                document.getElementById("roadAddress").value = roadAddr;
 	             
 	                var guideTextBox = document.getElementById("guide");
 	              
@@ -355,7 +342,7 @@ label{
 	                    guideTextBox.style.display = 'none';
 	                }
 	                
-	                $('#sample4_detailAddress').val('');
+	                $('#detailAddress').val('');
 	                
 	            }
 	        }).open();
@@ -379,5 +366,52 @@ label{
 	   	});
 	</script>
 	
+	<script>
+	const regNameRule = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
+	const regNum = /^[0-9]+$/;
+	
+	function test(){
+		if($('#intro').val().includes("<script>")){
+			alert('<script>태그는 입력 내용으로 사용할 수 없습니다.');
+			$('#intro').val($('#intro').val().replaceAll("<script>", 'script '));
+		}
+	}
+	
+	function testVal(e, tag) {
+		if($(e).val().charAt(0) === ' '){
+			alert('입력은 공백으로 시작할수 없습니다.');
+			$(e).val('');
+			return;
+		}
+		
+		if(tag.name === 'detailAddr' || tag.name === 'hotelName' || tag.name === 'ceoName'){
+			if($(e).val() === ''){
+				return;
+			}
+			if(!regNameRule.test($(e).val())){
+				alert('입력할수 없는 문자입니다.');
+				$(e).val('');
+				return;
+			}	
+		}
+		else if(tag.name === 'phone2') {
+			if(isNaN($(e).val())){
+				alert('올바른 숫자만 입력해주세요.');
+				$(e).val('');
+				return;
+			}
+		}
+		else if(tag.name === 'hotelImg') {
+			if($(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpg" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".png" &&
+			   $(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpeg"
+			  ){
+				alert('.jpg, .png, .jpeg 형식의 사진 파일만 가능합니다.');
+				$(e).val('');
+				return;
+			}
+		}
+	}
+	</script>
 </body>
 </html>
