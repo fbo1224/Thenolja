@@ -1,6 +1,9 @@
 package thenolja.tb_hotel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import thenolja.tb_hotel.model.service.HotelService;
+import thenolja.tb_hotel.model.vo.Comment;
+import thenolja.tb_hotel.model.vo.HotelCard;
 
 /**
  * Servlet implementation class AjaxController
@@ -35,15 +42,52 @@ public class AjaxServlet extends HttpServlet {
 		
 		AjaxController ac = new AjaxController();
 		
+		boolean flag = true;
+		Gson gson = new Gson();
+		String str = "";
+		Map<String, Object> datas = null;
+		ArrayList<HotelCard> List = null;
+		ArrayList<Comment> cList = null;
+		List<String> locList = null;
+		
 		switch(mapping) {
-			case "deleteHotel" : ac.deleteHotel(request, response); break;
-			case "deleteRoom"  : ac.deleteRoom(request, response); break;
-			case "popularData" : ac.selectPopular(request, response); break;
-			case "locRecomData" : ac.locRecomData(request, response); break;
-			case "commentAdmin" : ac.commentAdmin(request, response); break;
-			case "reviewList" : ac.reviewList(request, response); break;
-			case "searchLocation" : ac.searchLocation(request, response); break;
+			case "deleteHotel"    : datas =  ac.deleteHotel(request, response); break;
+			case "deleteRoom"     : str = ac.deleteRoom(request, response); flag = false; break; 
+			case "popularData"    : List = ac.selectPopular(request, response); break;
+			case "locRecomData"   : List = ac.locRecomData(request, response); break;
+			case "commentAdmin"   : cList = ac.commentAdmin(request, response); break;
+			case "reviewList"     : datas = ac.reviewList(request, response); break;
+			case "searchLocation" : locList = ac.searchLocation(request, response); flag = false; break;
 		}
+		
+		if(flag) {
+			response.setContentType("application/json; charset=UTF-8");
+			if(mapping.equals("deleteHotel")) {
+				gson.toJson(datas, response.getWriter());
+				
+			} else if(mapping.equals("popularData")) {
+				gson.toJson(List, response.getWriter());
+				
+			} else if(mapping.equals("locRecomData")) {
+				gson.toJson(List, response.getWriter());
+				
+			} else if(mapping.equals("commentAdmin")) {
+				gson.toJson(cList, response.getWriter());
+				
+			} else if(mapping.equals("reviewList")) {
+				gson.toJson(datas, response.getWriter());
+			}
+				
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+			if(mapping.equals("deleteRoom")) {
+				response.getWriter().print(str);
+				
+			} else if(mapping.equals("searchLocation")) {
+				response.getWriter().print(locList);
+			}
+		}
+		
 		
 	}
 

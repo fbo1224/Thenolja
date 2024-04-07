@@ -21,7 +21,7 @@ import thenolja.tb_hotel.model.vo.HotelReview;
 
 public class AjaxController {
 	
-	public void deleteHotel(HttpServletRequest request, HttpServletResponse response) {
+	public Map<String, Object> deleteHotel(HttpServletRequest request, HttpServletResponse response) {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		
 		// System.out.println(hotelNo);
@@ -70,21 +70,15 @@ public class AjaxController {
 			hotelList = new HotelService().selectList(pi);
 		}
 		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
 		Map<String, Object> datas = new HashMap<>();
 		
 		datas.put("hotelList", hotelList);
 		datas.put("pi", pi);
 		
-		try {
-			gson.toJson(datas, response.getWriter());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return datas;
 	}
 	
-	public void deleteRoom(HttpServletRequest request, HttpServletResponse response) {
+	public String deleteRoom(HttpServletRequest request, HttpServletResponse response) {
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		
 		int result = new RoomService().deleteRoom(roomNo);
@@ -94,69 +88,37 @@ public class AjaxController {
 			str = "삭제 성공";
 		}
 		
-		response.setContentType("text/html; charset=UTF-8");
-		try {
-			response.getWriter().print(str);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return str;
 		
 	}
 	
 	
-	public void selectPopular(HttpServletRequest request, HttpServletResponse response) {
+	public ArrayList<HotelCard> selectPopular(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<HotelCard> pList = new HotelService().selectPopular();
 		
-		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-		
-		try {
-			gson.toJson(pList, response.getWriter());
-		} catch (JsonIOException | IOException e) {
-			e.printStackTrace();
-		}
+		return pList;
 	}
 	
-	public void locRecomData(HttpServletRequest request, HttpServletResponse response) {
+	public ArrayList<HotelCard> locRecomData(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<HotelCard> rList = new HotelService().selectRecomData();
-		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-		
-		try {
-			gson.toJson(rList, response.getWriter());
-		} catch (JsonIOException | IOException e) {
-			e.printStackTrace();
-		}
+
+		return rList;
 	}
 	
-	public void searchLocation(HttpServletRequest request, HttpServletResponse response) {
+	public List<String> searchLocation(HttpServletRequest request, HttpServletResponse response) {
 		List<String> locList = new HotelService().selectLocation();
 		
-		response.setContentType("text/html; charset=UTF-8");
-		try {
-			response.getWriter().print(locList);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return locList;
 	}
 	
-	public void commentAdmin(HttpServletRequest request, HttpServletResponse response) {
+	public ArrayList<Comment> commentAdmin(HttpServletRequest request, HttpServletResponse response) {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		ArrayList<Comment> cList = new HotelService().commentAdmin(hotelNo);
 		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-		try {
-			gson.toJson(cList, response.getWriter());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		return cList;
 	}
 	
-	public void reviewList(HttpServletRequest request, HttpServletResponse response) {
+	public Map<String, Object> reviewList(HttpServletRequest request, HttpServletResponse response) {
 		
 		int listCount;   
 		int currentPage; 
@@ -187,23 +149,15 @@ public class AjaxController {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
 								  maxPage, startPage, endPage);
-		
-		
+			
 		ArrayList<HotelReview> reviewList = new HotelService().reviewList(pi,hotelNo);
-		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
+	
 		Map<String, Object> datas = new HashMap<>();
 		
 		datas.put("reviewList", reviewList);
 		datas.put("pi", pi);
 		
-		try {
-			gson.toJson(datas, response.getWriter());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return datas;
 		
 	}
 	

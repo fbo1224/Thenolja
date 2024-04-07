@@ -217,7 +217,7 @@ label{
 								</div>
 								<div class="hotel-cate-div">
 									<label>숙소명</label>
-									<input class="form-control" type="text" name="hotelName" oninput="testVal(this, hotelName)">
+									<input class="form-control" type="text" name="hotelName" required oninput="testVal(this, hotelName)">
 								</div>
 							</div>
 
@@ -239,7 +239,7 @@ label{
 								<label id="phone-label">전화번호</label>
 								<div id="nameNPhone-div-2">
 									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" maxlength="8" id="Phone-div-2" type="text" name="phone2" placeholder="-제외한 숫자만 입력해주세요.">
+									<input class="form-control" maxlength="8" id="Phone-div-2" type="text" name="phone2" required oninput="testVal(this, phone2);" placeholder="-제외한 숫자만 입력해주세요.">
 								</div>
 							</div>
 
@@ -280,18 +280,18 @@ label{
 				</div>
 			</div>
 				
-		<script>
+		<script>		
 		function test(){
 			if($('#intro').val().includes("<script>")){
-				$('#intro').replaceAll('<', '&gt;');
+				alert('<script>태그는 입력 내용으로 사용할 수 없습니다.');
+				$('#intro').val($('#intro').val().replaceAll("<script>", 'script '));
 			}
 		}
 	    
 	    function findAddrs() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
-	               
-	                var roadAddr = data.roadAddress; // 도로명 주소 변수
+	                var roadAddr = data.roadAddress;
 	                document.getElementById("roadAddress").value = roadAddr;
 	             
 	                var guideTextBox = document.getElementById("guide");
@@ -327,7 +327,6 @@ label{
 		
 		if(tag.name === 'detailAddr' || tag.name === 'hotelName' || tag.name === 'ceoName'){
 			if($(e).val() === ''){
-				console.log($(e).val());
 				return;
 			}
 			if(!regNameRule.test($(e).val())){
@@ -335,6 +334,13 @@ label{
 				$(e).val('');
 				return;
 			}	
+		}
+		else if(tag.name === 'phone2') {
+			if(isNaN($(e).val())){
+				alert('올바른 숫자만 입력해주세요.');
+				$(e).val('');
+				return;
+			}
 		}
 		else if(tag.name === 'hotelImg') {
 			if($(e).val().substring($(e).val().lastIndexOf(".")) !== ".jpg" &&
