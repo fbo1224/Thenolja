@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
     <%@ page import="thenolja.tb_hotel.model.vo.SearchData" %>
     <%
+    // searchList servlet에서 searchData 넘겨줌 
+    // searchData => searchDataForm에 저장
     
-    SearchData searchDataForm= null;
+    SearchData searchDataForm = null;
 	if(request.getAttribute("searchData") != null){
 		searchDataForm = (SearchData)request.getAttribute("searchData");
 	}

@@ -58,8 +58,9 @@ public class AjaxServlet extends HttpServlet {
 		switch(mapping) {
 			case "popularData"    : List = ac.selectPopular(request, response); break;
 			case "locRecomData"   : List = ac.locRecomData(request, response); break;
-			case "commentAdmin"   : cList = ac.commentAdmin(request, response); break;
 			case "reviewList"     : datas = ac.reviewList(request, response); break;
+			case "commentAdmin"   : cList = ac.commentAdmin(request, response); break;
+			// 지역 가져오기 
 			case "searchLocation" : locList = ac.searchLocation(request, response); flag = false; break;
 		}
 		

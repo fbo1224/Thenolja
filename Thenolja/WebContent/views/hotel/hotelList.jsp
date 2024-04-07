@@ -239,17 +239,17 @@
 						}
 				
 						if(result.pi.currentPage > 1){
-							$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move('+(result.pi.currentPage-1)+');">이전</button>');	
+							$('.paging-area').append(' <button class="btn btn btn-outline-info" onclick="move('+(result.pi.currentPage-1)+');">이전</button>');	
 						}
 						for(let i = result.pi.startPage; i <= result.pi.endPage; i++){
 		        			if(result.pi.currentPage != i) {
-		        				$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move('+i+')">'+i+'</button>');
+		        				$('.paging-area').append(' <button class="btn btn btn-outline-info" onclick="move('+i+')">'+i+'</button>');
 		        			} else {
-		        				$('.paging-area').append('<button class="btn btn btn-outline-info" disabled>'+i+'</button>');
+		        				$('.paging-area').append(' <button class="btn btn btn-outline-info" disabled>'+i+'</button>');
 		        			}
 		        		}
 						if(result.pi.currentPage != result.pi.maxPage){
-							$('.paging-area').append('<button class="btn btn btn-outline-info" onclick="move(' + (result.pi.currentPage+1) +');">다음</button>');
+							$('.paging-area').append(' <button class="btn btn btn-outline-info" onclick="move(' + (result.pi.currentPage+1) +');">다음</button>');
 		        		} 
 		
 					}

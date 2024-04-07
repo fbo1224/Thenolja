@@ -131,7 +131,7 @@
 	<script>
 	$(function (){
 		
-		// 인기있는
+		// 인기있는 숙소 ajax
 		$.ajax({
 			url:"popularData.jqAjax",
 			type: 'post',
@@ -164,7 +164,7 @@
 			success: function(result){
 				for(let i = 0; i < result.length; i++){
 					$('.recommands').append('<div class="swiper-slide">'
-							+'<div class="card" id="'+ result[i].hotelNo +'"style="width:250px; height:180px; cursor: pointer; white-space:nowrap;">'
+							+'<div class="card cards" id="'+ result[i].hotelNo +'"style="width:250px; height:180px; cursor: pointer; white-space:nowrap;">'
 							 	+'<img class="card-img-top" src="'+ result[i].hotelPath +'" alt="Card image">'
 							    +'<div class="card-body">'
 							    +'<h5 class="card-title">'+ result[i].hotelName +'</h5>'
@@ -180,6 +180,7 @@
 			},
 		});
 		
+		// swiper 상단 하단 순 
 		var swiper = new Swiper(".mySwiper", {
 		      slidesPerView: 3,
 		      spaceBetween: 30,
@@ -194,7 +195,7 @@
 		      },
 		});
 		
-		// 하단 swipper/ 갯수설정, 세부 설정 필요
+		// 하단 swipper 갯수설정, 세부 설정
 		var swiper = new Swiper(".mySwiper-2", {
 		      slidesPerView: 4,
 		      spaceBetween: 20,
@@ -205,13 +206,10 @@
 		      },		      
 		});
 		
+		// detail page이동
 		$('.cards').click(function(e){
 			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
-		});
-		
-		$('.card').click(function(e){
-			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
-		});
+		});	
 	
 	})
 	</script>
