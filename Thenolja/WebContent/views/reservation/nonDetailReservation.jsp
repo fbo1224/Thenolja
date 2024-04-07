@@ -258,6 +258,7 @@
                         </tr>
                     </table>
                 </div>
+                    <h2 align="center">예약번호 : <%= reser.getReserNo() %></h2>
             </div>
         </div>
 
