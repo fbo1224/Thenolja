@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.nonmem.model.vo.SelectNonmemReser"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member" %>
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, thenolja.tb_hotel.model.vo.Room" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%
@@ -270,8 +270,7 @@
 	                </div>
 	            </div>
 	        </div>
-	
-    
+	</div>	
       <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -285,10 +284,10 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert"  method="post"> 
+        <form action="<%= contextPath %>/refund.insert?reserNo=<%=r.getReserNo() %>%reMemNo=<%= r.getMemNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            
+            <input type="hidden" name="refundPrice" value="<%=r.getPaymentPrice() %>">
             <input type="hidden" value="<%= r.getReserNo() %>" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">

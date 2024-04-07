@@ -1,4 +1,4 @@
-package thenolja.tb_reservation.cotroller;
+ package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
 import java.util.ArrayList;

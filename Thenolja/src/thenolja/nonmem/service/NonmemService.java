@@ -2,6 +2,7 @@ package thenolja.nonmem.service;
 
 import static thenolja.common.JDBCTemplate.close;
 import static thenolja.common.JDBCTemplate.commit;
+import static thenolja.common.JDBCTemplate.getConnection;
 import static thenolja.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -79,7 +80,7 @@ public class NonmemService {
 		return list;
 	}
 
-	public Member insertNonMember(Member nonmem) {
+	public Member insertNonMember(Member nonmem, Reservation reser) {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new NonmemDao().insertNonMember(conn, nonmem);
@@ -88,12 +89,21 @@ public class NonmemService {
 		if(result > 0) {
 			non = new NonmemDao().selectNonMember(conn);
 		if(non != null) {
+			int ReMemNo = non.getMemNo();
+			
+			int result1 = new ReserDao().insertNonReser(conn, reser, ReMemNo);
+			
+			Reservation r = null;
+		if(result1 > 0) {
+			r = new ReserDao().selectReservation(conn);
+		if(r != null) {
 			commit(conn);}
 		} else {
 			rollback(conn);
 		}
 			close(conn);
-		
+		}
+	}
 		return non;	
 	}
 

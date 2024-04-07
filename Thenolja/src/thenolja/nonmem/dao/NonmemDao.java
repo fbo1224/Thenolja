@@ -61,6 +61,7 @@ public class NonmemDao {
 												                 	  rset.getString("BICYCLE"),
 												                 	  rset.getInt("PEOPLE"),
 												                 	  rset.getString("PAYMENT_PRICE"),
+												                 	  rset.getInt("ROOM_NO"),
 												                 	  rset.getString("ROOM_NAME"),
 												                 	  rset.getInt("ROOM_NUM"),
 												                 	  rset.getInt("MAX_PEOPLE"),
@@ -190,6 +191,7 @@ public class NonmemDao {
 								                 	rset.getString("BICYCLE"),
 								                 	rset.getInt("PEOPLE"),
 								                 	rset.getString("PAYMENT_PRICE"),
+								                 	rset.getInt("ROOM_NO"),
 								                 	rset.getString("ROOM_NAME"),
 								                 	rset.getInt("ROOM_NUM"),
 								                 	rset.getInt("MAX_PEOPLE"),
@@ -244,7 +246,7 @@ public class NonmemDao {
 			
 			if(rset.next()) {
 				nonmem = new Member();
-				nonmem.setMemNo(rset.getInt("CURRVAL"));
+				nonmem.setMemNo(rset.getInt("MEM_NO"));
 				nonmem.setMemName(rset.getString("MEM_NAME"));
 				nonmem.setMemPhone(rset.getString("MEM_PHONE"));
 				

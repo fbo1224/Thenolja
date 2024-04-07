@@ -50,7 +50,33 @@ public class ReserDao {
 			pstmt.setInt(9, reser.getPaymentPrice());
 		//	System.out.println(reser);
 			result = pstmt.executeUpdate();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertNonReser(Connection conn, Reservation reser, int reMemNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNonReser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reser.getName());
+			pstmt.setString(2, reser.getPhone());
+			pstmt.setString(3, reser.getBicycle());
+			pstmt.setString(4, reser.getCheckIn());
+			pstmt.setString(5, reser.getCheckOut());
+			pstmt.setInt(6, reser.getPeople());
+			pstmt.setInt(7, reser.getRoomNo());
+			pstmt.setInt(8, reMemNo);
+			pstmt.setInt(9, reser.getPaymentPrice());
+		//	System.out.println(reser);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -339,7 +365,7 @@ public class ReserDao {
 				room.setRoomPrice(rset.getInt("ROOM_PRICE"));
 				room.setMaxPeople(rset.getInt("MAX_PEOPLE"));
 			}
-			System.out.println(room);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -194,7 +194,7 @@
 				
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
-			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=reser.getPeople() %>인</p>
 			        <p><%=room.getRoomPrice() %>원</p>
 			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
                 </div>
@@ -249,8 +249,8 @@
                     <tr>
                             <td width="80px">이름</td> 
                             <td><%= reser.getName() %></td>
-                            <td width="80px">전화번호</td> 
-                            <td><%= reser.getPhone() %></td>
+                            <td width="80px">&nbsp;&nbsp;&nbsp;&nbsp;전화번호</td> 
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= reser.getPhone() %></td>
                         </tr>
                         <tr>
                             <td>차량</td> 
@@ -263,8 +263,8 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>">
-	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
+	    <a href="<%=contextPath%>">
+	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">메인으로 돌아가기</button>
 	    </a>
     </div>
       <!-- The Modal -->
