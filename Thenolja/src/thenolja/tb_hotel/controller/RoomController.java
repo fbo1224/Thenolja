@@ -75,15 +75,13 @@ public class RoomController {
 				r.setRoomImgPath("resources/roomImage/"+ multiRequest.getFilesystemName("roomImg"));					
 			}
 			
-			// System.out.println(r);
-			
 			result = new RoomService().insertRoom(r);
 			
 		}
 		
 		if(result > 0) {
 			request.setAttribute("loginStatus", "A");
-			view="/hotelList.hotels?currentPage=1";
+			view="/hotelList.hotels?currentPage=1&loginStatus=A";
 		} else {
 			request.setAttribute("errorMsg", "객실 추가에 실패했습니다.");
 			view="views/common/errorPage.jsp";
@@ -182,7 +180,7 @@ public class RoomController {
 		}
 		
 		if(result > 0) {
-			view = "/hotelList.hotels?currentPage=1";
+			view = "/hotelList.hotels?currentPage=1&loginStatus=A";
 		} else {
 			request.setAttribute("errorMsg", "객실정보 수정에 실패했습니다.");
 			view = "views/common/errorPage.jsp";
