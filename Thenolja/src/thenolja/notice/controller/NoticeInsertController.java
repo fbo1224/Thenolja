@@ -48,16 +48,20 @@ public class NoticeInsertController extends HttpServlet {
 		
 		// 화면에서 넘어온 파라미터 값 세팅
 		// request.getParameter에 작성하는 문자열은 > html 태그에 선언한 name과 일치해야함.
-		String title = "";
+		String title   = "";
 		String content = "";
-		String status = "";
-		title   = request.getParameter("title");
-		content = request.getParameter("content");
-		status  = request.getParameter("status");
+		String status  = "";
+		//int writerNo   = 0;
+		title    = request.getParameter("title");
+		content  = request.getParameter("content");
+		status   = request.getParameter("status");
+		//writerNo = Integer.parseInt(request.getParameter("writerNo"));
 		
-		System.out.println("title : " + title);
-		System.out.println("content : " + content);
-		System.out.println("status : " + status);
+		
+		System.out.println("title : "    + title);
+		System.out.println("content : "  + content);
+		System.out.println("status : "   + status);
+		//System.out.println("writerNo : " + writerNo);
 		
 		int svc = 0;
 		boolean rslt = false;

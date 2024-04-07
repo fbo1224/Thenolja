@@ -255,6 +255,7 @@ public class NoticeDao {
 			pstmt.setString(1, notice.getNoticeTitle());
 			pstmt.setString(2, notice.getNoticeContent());
 			pstmt.setString(3, notice.getStatus());
+			pstmt.setInt(4, notice.getWriterNo());
 		
 			result = pstmt.executeUpdate();	
 		

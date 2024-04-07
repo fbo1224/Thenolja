@@ -219,6 +219,7 @@ function regNotice(){
 	var inptTitle   = $('#title').val();
 	var inptContent = $('#txtArea_content').val();
 	var chkStatus   = $('input[name="status"]:checked').val();
+	//var writerNo    = <%=loginUser.getMemNo()%>
 	
 	// 유효성 검사 함수 호출
 	if(validation()){
