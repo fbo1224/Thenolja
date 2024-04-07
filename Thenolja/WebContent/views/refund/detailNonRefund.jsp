@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, 
+<%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_refund.model.vo.Refund, 
 				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room" %>  
 <%
 	Reservation reser = (Reservation)session.getAttribute("reser");
-	Room room = (Room)session.getAttribute("room");
-	Hotel hotel = (Hotel)session.getAttribute("hotel");
-%>	
+	Refund refund = (Refund)request.getAttribute("refund");
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
+	Room room = (Room)request.getAttribute("room");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>숙소이용목록상세조회</title>
+    <title>환불 처리</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 
-    div{
+   div{
         box-sizing : border-box;
     }
 
@@ -64,14 +66,12 @@
         height: 65%;
 
     }
-
     #reser_no {
         width: 100%;
         height: 10%;
     }
 
     #reser_no > p {
-        margin-top: 10px;
         padding-left: 120px;
     }
 
@@ -136,6 +136,28 @@
         padding-left: 120px;
         padding-top: 30px;
     }
+    #refund_member{
+        width: 100%;
+        height: 30%;
+        padding-left: 120px;
+        padding-top: 30px;
+    }
+
+    #refund_title {
+        width: 20%;
+        height: 20%;
+        float: left;
+    }
+    #refund_update{
+        width: 40%;
+        height: 20%;
+    }
+
+
+    table{
+        width: 70%;
+
+    }
 
     hr{
         border: 1px solid;
@@ -154,53 +176,61 @@
     #refund_btn > button{
         float: right;
     }
-    #my_btn{
+    #return_main{
     	width: 200px;
-    	height: 50px;
-    	border: 1px solid black;
+    	height:40px;
     	margin: auto;
-		margin-top: 100px;	
     }
-	#my_btn > button{
-		width: 200px;
-		height: 50px;
+	#re_main{
+		margin-top: 200px;
+		width:100%;
+		height:100%;
+		border-radius:5px;
+		border:0;
+		background-color:#5BA199;
+		color : white;
+		font-size:17px;
 	}
+	#re_main:hover{
+		font-size:18px;
+		backgound-color:#52928b;
+	}
+	
 
 </style>
 
 
 </head>
 <body>
-	
-    <%@ include file="../common/menubar.jsp" %>
+    <%@ include file="../common/menubar.jsp" %> 
+    
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>상세조회</h3></div>
         </div>
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
-                
-                <div id="reser_hotel_img"><img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/82237660.jpg?k=cb5db13896d348f7c4b47e3922a6753f83b5c36ba7b71a6f820523d07365fc2c&o=&hp=1" alt="" width="220px" height="220px"></div>
+                <div id="reser_no"><p>No.<%= refund.getReserNo() %></p></div>
 
-              <div id="reser_detail">
+                <div id="reser_hotel_img"><img src="<%=hotel.getHotelPath() %>" alt="" width="220px" height="220px"></div>
+
+ 				<div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
-				<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
-
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=reser.getPeople() %>인</p>
-			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
-                </div>
+			        <p><%=reser.getPaymentPrice() %>원</p>
+			        <p><%=reser.getCheckIn() %>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut() %>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+			        
+    			</div>
 
                 <div id="reser_btn">
-                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>
+                    <p class="btn btn-secondary" >환불 완료</p>
                 </div>
             </div>
         
@@ -211,25 +241,25 @@
                 <div id="rser_price">
                     <h3>결제 금액</h3>
                     <hr>
-   	        		<table>
-	        			<tr>
-	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
-							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-							<td width="400px">할인 금액 : 0원</td>
-							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
-						</tr>
-	               </table>
+                    <table>
+                        <tr>
+                            <td width="170x">결제금액 : <%= room.getRoomPrice() %></td>
+                            <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
+                            <td width="170x">할인 금액 : 0원</td>
+                            <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
+                            <td>환불금액 : <%=reser.getPaymentPrice() %>
+                        </tr>
+                    </table>
                 </div>
 
                 <div id="reser_price_info">
                     <h3>결제 내역</h3>
                     <hr>
-                    <p>무통장 입금</p>
+                    <p>무통장입금</p>
                     <table>
                     <tr>
                         <td width="80px">신한은행</td> 
-                        <td>110-404-432780</td>
+                        <td>110-424-432780</td>
                     </tr>
                     <tr>
                         <td>예금주</td> 
@@ -237,7 +267,7 @@
                     </tr>
                     <tr>
                         <td>입금자명</td> 
-                        <td><%=reser.getName() %></td>
+                        <td><%=refund.getRefundName() %></td>
                     </tr>
                     </table>
                 </div>
@@ -248,27 +278,47 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td><%= reser.getName() %></td>
-                            <td width="80px">&nbsp;&nbsp;&nbsp;&nbsp;전화번호</td> 
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= reser.getPhone() %></td>
+                            <td><%=reser.getName() %></td>
+                            <td width="80px">전화번호</td> 
+                            <td><%=reser.getPhone() %></td>
                         </tr>
                         <tr>
-                            <td>차량</td> 
-                            <td colspan="3"><%= reser.getBicycle() %></td>
+                            <td>이동방식</td> 
+                            <td colspan="3"><%=reser.getBicycle() %></td>
                         </tr>
                     </table>
+                </div>
+
+                <div id="refund_member">
+                    <div id="refund_title"><h3>환불 정보</h3></div>
+                    <div id="refund_update">
+                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">수정하기</button>
+                    </div>
+                    <hr>
+                    <table>
+                    <tr>
+                        <td width="80px">환불 수단</td> 
+                        <td>계좌이체</td>
+                    </tr>
+                    <tr>
+                        <td>결제 금액</td> 
+                        <td><%=refund.getRefundPrice() %></td>
+                    </tr>
+                    <tr>
+                        <td>예금주</td> 
+                        <td><%= refund.getRefundName() %></td>
+                    </tr>
+                    <tr>
+                        <td><%=refund.getBank() %></td> 
+                        <td><%=refund.getAccNo() %></td>
+                    </tr>
+                </table>
                 </div>
             </div>
         </div>
 
     </div>
-    <div id="my_btn">
-	    <a href="<%=contextPath%>">
-	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">메인으로 돌아가기</button>
-	    </a>
-    </div>
-      <!-- The Modal -->
-  <div class="modal" id="myModal">
+      <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
       
@@ -280,13 +330,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/nonRefund.insert?reserNo=<%=reser.getReserNo() %>%reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
+        <form action="<%= contextPath %>/update.refund?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
             <input type="hidden" name="refundPrice" value="<%=reser.getPaymentPrice() %>">
-            <input type="hidden" value="<%= reser.getReMemNo() %>" name="memNo"/>
-			<input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
-
+            <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
                 <option>신한은행</option>
@@ -297,16 +345,17 @@
             <input id="acc" type="text" placeholder="계좌번호 입력" required name="accNo">
             <div id="refund_btn">
                 <br>
-                <button type="submit" class="btn btn-dark">확인</button>
+                <button type="submit" class="btn btn-dark">수정</button>
                 <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-                
             </div>
         </form>
         </div>
       </div>
     </div>
   </div>
-	
-	<br><br><br><br><br><br><br><br><br><br>
+    
+    
+
+
 </body>
 </html>

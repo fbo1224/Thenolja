@@ -166,27 +166,24 @@
 		        RESER_NAME,
 		        RESER_PHONE,
 		        BICYCLE,
-		        TB_ROOM.CHECKIN_TIME,
-		        TB_ROOM.CHECKOUT_TIME,
 		        TO_CHAR(TB_RESERVATION.CHECKIN_TIME , 'YYYY/MM/DD') AS CHECKIN_DATE, 
     		    TO_CHAR(TB_RESERVATION.CHECKOUT_TIME , 'YYYY/MM/DD') AS CHECKOUT_DATE, 
 		        MAX_PEOPLE,
-		        TB_ROOM.ROOM_NO,
+		        ROOM_NO,
 		        RE_MEM_NO,
 		        PAYMENT,
 		        PAYMENT_PRICE
 		  FROM
 		        TB_RESERVATION
 		  JOIN
-		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
+		        TB_ROOM USING(ROOM_NO)	
 		  JOIN
-		        TB_HOTEL ON (TB_ROOM.HOTEL_NO = TB_HOTEL.HOTEL_NO)
-		  JOIN
-		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
+		        TB_HOTEL USING (HOTEL_NO)
 		 WHERE
 		 		CANCEL_YN = 'N'	
 		   AND
-		   		RESER_NO = ?	
+		   		RESER_NO = ?
+                
  	</entry>
 	<entry key="selectList">
 		SELECT
@@ -324,5 +321,6 @@
 		 WHERE
 		 		TB_MY_COUPON.COUPON_NO = ?       
 	</entry>
+	
 	
 </properties>
