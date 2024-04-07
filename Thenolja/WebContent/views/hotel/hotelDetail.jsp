@@ -10,16 +10,19 @@
 		Calendar cal = Calendar.getInstance();
 		
 		//오늘 날짜
-		String date = newForm.format(cal.getTime());
-		System.out.println(date);
+		String today = newForm.format(cal.getTime());
 
 		// 내일 날짜
 		cal.add(Calendar.DATE, 1);
-		System.out.println(newForm.format(cal.getTime()));
+		String tomo = newForm.format(cal.getTime());
 		
+		String dateRangeForm = today + " ~ " + tomo;
+		
+		System.out.println(dateRangeForm);
 		// 해당 호텔 위치
 		System.out.println(dh.getHotelLocation());
 		
+		int defaultPeople = 2;
 		// Date
 		// people 2 기본적으로 2로 설정
 		// location
@@ -377,9 +380,9 @@ svg{
 								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 							<%} else { %>
 								<p>쿠폰적용가능</p>
-								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= dateRangeForm %>&location=<%= dh.getHotelLocation() %>&people=<%= defaultPeople %>">
 								<button class="btn btn-sm btn-info">객실 예약</button></a>
-								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>">
+								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= dateRangeForm %>&location=<%= dh.getHotelLocation() %>&people=<%= defaultPeople %>">
 								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 							<%} %>
 						</div>
