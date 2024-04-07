@@ -21,7 +21,7 @@
 	
 	<entry key="selectNonMember">
 		SELECT
-				SEQ_MNO.CURRVAL,
+				SEQ_MNO.CURRVAL AS MEM_NO,
 				MEM_NAME,
 				MEM_PHONE
 		  FROM
@@ -53,6 +53,7 @@
 		       BICYCLE,
 		       PEOPLE,
 		       PAYMENT_PRICE,
+		       ROOM_NO,
 		       ROOM_NAME,
 		       ROOM_NUM,
 		       MAX_PEOPLE,
@@ -104,6 +105,7 @@
 		       BICYCLE,
 		       PEOPLE,
 		       PAYMENT_PRICE,
+		       ROOM_NO,
 		       ROOM_NAME,
 		       ROOM_NUM,
 		       MAX_PEOPLE,

@@ -61,7 +61,7 @@ public class ReservationInsertController extends HttpServlet {
 		reser.setPaymentPrice(paymentPrice);
 		
 		reser = new ReserService().insertReser(reser);
-		System.out.println(reser);
+		
 		Coupon coupon = new ReserService().selectoCoupon(couponNo);
 		
 		// 여기까지 INSERT는 정상적으로 됐음.

@@ -27,6 +27,28 @@
 		 		?
 				)
 	</entry>
+		
+	<entry key="insertNonReser">
+		INSERT
+		  INTO 
+		  		TB_RESERVATION
+		VALUES
+		 		(
+		 		SEQ_RESERVATION.NEXTVAL,
+		 		SYSDATE,
+		 		?,
+		 		?,
+		 		?,
+		 		DEFAULT,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		?,
+		 		'계좌이체',
+		 		?
+				)
+	</entry>
 	
 	<entry key="selectCouponList">
 		SELECT
@@ -56,7 +78,7 @@
     		    TO_CHAR(TB_RESERVATION.CHECKOUT_TIME , 'YYYY/MM/DD') AS CHECKOUT_DATE, 
 		        MAX_PEOPLE,	
 		        TB_ROOM.ROOM_NO,
-		        RE_MEM_NO,
+		        SEQ_MNO.CURRVAL AS RE_MEM_NO,
 		        PAYMENT,
 		        PAYMENT_PRICE
 		  FROM
@@ -65,8 +87,6 @@
 		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
 		  JOIN
 		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
-		  JOIN
-		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
 		   		CANCEL_YN = 'N'	
 	</entry>

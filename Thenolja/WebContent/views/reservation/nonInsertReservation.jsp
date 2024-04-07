@@ -197,7 +197,7 @@
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insertNon.reser?hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-					<input id="hidePrice" type="hidden" name="paymentPrice" value="<%=room.getRoomNo()%>">
+					<input type="hidden" name="paymentPrice" value="<%=room.getRoomPrice()%>">
 					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
 					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
 					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
@@ -238,7 +238,7 @@
 	                
 	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
-	                    <button type="submit" id="reser-btn">?원 결제하기</button>
+	                    <button type="submit" id="reser-btn"><%=room.getRoomPrice()%>원 결제하기</button>
 	                </div>
 
 	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->

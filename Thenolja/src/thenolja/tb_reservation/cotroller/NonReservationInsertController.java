@@ -50,8 +50,6 @@ public class NonReservationInsertController extends HttpServlet {
 		Member nonmem = new Member();
 		nonmem.setMemName(name);
 		nonmem.setMemPhone(phone);
-		nonmem = new NonmemService().insertNonMember(nonmem);
-		int memNo = nonmem.getMemNo();
 		
 		Reservation reser = new Reservation();
 		reser.setName(name);
@@ -61,10 +59,10 @@ public class NonReservationInsertController extends HttpServlet {
 		reser.setCheckOut(checkOut);
 		reser.setPeople(people);
 		reser.setRoomNo(roomNo);
-		reser.setReMemNo(memNo);
+		reser.setReMemNo(nonmem.getMemNo());
 		reser.setPaymentPrice(paymentPrice);
+		nonmem = new NonmemService().insertNonMember(nonmem, reser);
 		
-		reser = new ReserService().insertReser(reser);
 		if(nonmem != null && reser != null ) {
 			
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
@@ -77,7 +75,7 @@ public class NonReservationInsertController extends HttpServlet {
 				session.setAttribute("nonmem", nonmem);
 				session.setAttribute("hotel", hotel);
 				session.setAttribute("room", room);
-				System.out.println(reser);
+				
 				
 				response.sendRedirect(request.getContextPath() + "/nonReserDetail?reserNo=" + reser.getReserNo() + "&hotelNo=" + hotel.getHotelNo() +"&roomNo=" + room.getRoomNo());
 				
