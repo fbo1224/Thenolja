@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.coupon.model.vo.Coupon" %>
+<%@ page import="java.util.ArrayList, thenolja.coupon.model.vo.Coupon, thenolja.common.model.vo.PageInfo" %>
 <%
 	ArrayList<Coupon> list = (ArrayList<Coupon>)request.getAttribute("couponList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();	
 %>    
 <!DOCTYPE html>
 <html>
@@ -12,45 +18,61 @@
 
 <style>
 
-        div{
-            box-sizing : border-box;
-        }
+div{
+  box-sizing : border-box;
+}
 
-        #wrap{
-            width: 1200px;
-            height: 1200px;
-            margin: auto;
-        }
+#wrap{
+  width: 1200px;
+  height: 1200px;
+  margin: auto;
+}
 
-        #wrap > div{
-            width: 100%;
-        }
+#wrap > div{
+  width: 100%;
+}
 
-        #header, #footer {
-            height: 15%;
-        }
+#header, #footer {
+   height: 15%;
+}
 
-        #content{
-            height: 70%;
-        }
+#content{
+   height: 70%;
+}
 
-        #content_1{
-            width: 100%;
-            height : 100%;
-        }
+#content_1{
+   width: 100%;
+   height : 100%;
+}
         
-        #footer{
-			height: 15%;
-			margin: auto;
-		}
+#footer{
+	height: 15%;
+	margin: auto;
+}
 
-	#content_1{
-		    width: 1200px;
-		    margin : auto;
-		}
+#content_1{
+	/*width: 1200px;*/
+	/*margin : auto;*/
+}
 
-
+body, ul, li, strong, p{
+	border: 0;
+	padding: 0;
+	margin: 0;
+	color: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	vertical-align: top; 
+}
 /* 카테고리 영역 layout 기준 START */
+.thumb-list coupon{
+padding-left: 25%;
+}
+
+.align_center{
+	padding-left:42%;
+}
+
 .nav-area{
 	margin-top:60px;
 }
@@ -244,6 +266,12 @@
 	 	<!-- 쿠폰컨텐츠 영역 START -->
 	 	<div class="contents-area" algin="center">
 			<ul id="evtIng" class="thumb-list coupon">
+         	<% if(list.isEmpty()) { %>   <!-- 비어있음    비어있는지 확인   위 상단 null값 이들어있고 list참조 null값이 들어있음 nullporinException 발생 -->
+         	<tr>
+         		<th colspan="6"></th>
+         		<span class="align_center">등록된 게시글이 존재하지 않습니다.</span>
+         	</tr>
+         	<% } else{ %>			
 				<% for( Coupon n : list ) { %>
 				<li>
 					<div class="img-box">
@@ -263,8 +291,54 @@
 					</div>
 				</li>
 				<% } %>
+			<%} %>
 			</ul>	 	
 	 	</div>
+	 	
+	  	<!-- 페이징영역 START -->
+ 		<div class="paging-area" align="center">
+ 		<% if(list != null) { %>
+ 			<% if(currentPage > 1) { %>
+			<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=currentPage - 1%>'"><</button> 	     
+ 	     	<% } %>
+
+        	<% for(int i = startPage; i <= endPage; i++) { %>
+             	<% if (currentPage != i) { %>
+               	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=i%>'"><%= i %></button>
+                    
+	         	<% } else { %>
+	           	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+	         	<% } %>
+                    		
+        	<% } %> 	     
+ 	     
+         	<% if(currentPage != maxPage) { %>
+         	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=currentPage + 1%>'">></button>
+         	<% } %> 	     
+ 	 
+ 	 	<% }else { %>
+
+       	<%if(currentPage > 1) { %>
+           <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=currentPage - 1%>'"><</button>
+     	<%} %>
+                    
+        <% for(int i = startPage; i <= endPage; i ++) { %>
+             <%if (currentPage != i)  { %>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=i%>'"><%= i %></button>
+             <% } else { %>
+               <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+             <% } %>
+        <%} %>
+                  
+             <% if(currentPage != maxPage) { %>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/couponList?currentPage=<%=currentPage + 1%>'">></button>
+             <%} %>
+ 	     	     
+ 	 	<% } %> 
+ 
+ 	</div>  
+	  <!-- 페이징영역 END -->	 	
+	 	
 	 	<!-- 쿠폰컨텐츠 영역 END -->
 	 	
 	 </div>

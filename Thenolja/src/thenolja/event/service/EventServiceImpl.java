@@ -3,8 +3,11 @@ package thenolja.event.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 import thenolja.event.dao.EventDao;
 import thenolja.event.model.vo.Event;
+import thenolja.notice.dao.NoticeDao;
 import thenolja.event.dao.EventDao;
 import thenolja.event.model.vo.Event;
 
@@ -18,14 +21,14 @@ public class EventServiceImpl {
 	 * 이벤트 목록 조회
 	 * 
 	 * */
-	public ArrayList<Event> selectEventList(){
+	public ArrayList<Event> selectEventList(PageInfo pi){
 		
 		Connection con = getConnection();	// SQL-MAPPER작성된 SQL 받아담기
 		ArrayList<Event> list = null;
 		
 		try {
 			// dao에서 db connection 생성하고 데이터 조회해서 list에 담아서 반환
-			list = new EventDao().selectEventList(con);
+			list = new EventDao().selectEventList(con, pi);
 			System.out.println("[EventServiceImpl selectEventList] " + list);
 			for(int i=0; i<list.size(); i++) {
 				System.out.println("[EventServiceImpl content] " + list.get(i).getEventContent());
@@ -41,6 +44,23 @@ public class EventServiceImpl {
 		
 	}
 
+	/**
+	 * 페이징(관리자)
+	 * @return
+	 */
+	
+	public int selectListCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().selectListCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}	
+	
 	/*
 	 * 
 	 * 이벤트 등록

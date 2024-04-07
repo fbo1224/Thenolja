@@ -8,7 +8,11 @@
 	
 	<!-- 쿠폰 목록 조회 -->
 	<entry key="selectCouponList">
-		SELECT 
+  		SELECT *
+	  		FROM
+	     	(SELECT 
+	        A.*, ROWNUM RNUM
+	        FROM( SELECT 
         	COUPON_NO,			/* 쿠폰번호 */
         	COUPON_CONTENT,		/* 쿠폰내용 */
         	TO_CHAR(COUPON_DATE, 'YYYY.MM.DD') AS COUPON_DATE,	/* 쿠폰등록일 */
@@ -19,8 +23,18 @@
         	(SELECT NICKNAME FROM TB_MEMBER
                         	 WHERE 1=1
                         	 AND MEM_NO = 1) AS WRITER /* 작성자 */
-		FROM TB_COUPON	
+		FROM TB_COUPON
+		WHERE 1=1
+		ORDER BY CREATE_DATE DESC ) A)
+	    WHERE RNUM BETWEEN ? AND ?	
 	</entry>
-
+	
+	<!-- 쿠폰 총 데이터 수 -->
+	<entry key="selectListCount">
+		SELECT
+      	 	  COUNT(*)
+  		  FROM
+      		  TB_COUPON
+	</entry>
 	
 </properties>

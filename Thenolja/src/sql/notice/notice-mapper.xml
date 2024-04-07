@@ -8,21 +8,34 @@
 	
 	<!-- 공지사항 목록 조회 -->
 	<entry key="selectNoticeList">
-		SELECT 
-		        NOTICE_NO,     		 /* 공지사항 번호 */
-		        NOTICE_TITLE,  		 /* 공지사항 제목 */
-		        NOTICE_CONTENT, 	 /* 공지사항 내용 */
- 				(SELECT NICKNAME FROM TB_MEMBER
+	  SELECT *
+	    FROM
+	     (SELECT 
+	            A.*, ROWNUM RNUM
+	        FROM( SELECT
+	                       	NOTICE_NO,     		 /* 공지사항 번호 */
+                            NOTICE_TITLE,  		 /* 공지사항 제목 */
+                            NOTICE_CONTENT, 	 /* 공지사항 내용 */
+                    (SELECT NICKNAME FROM TB_MEMBER
                                  WHERE WRITER_NO = MEM_NO
                                  AND ROWNUM = 1) AS WRITER,   /* 작성자명 */		        
 		        TO_CHAR(CREATE_DATE, 'YYYY.MM.DD') as CREATE_DATE, 	   /* 공지사항 등록일 */
 		        STATUS,   		     		 /* 공지사항 상태(=노출여부) */
 		        NOTICE_VIEW_COUNT			 /* 공지사항 조회수 */
-		FROM TB_NOTICE
+	            FROM TB_NOTICE
 		
 		WHERE 1=1
-		ORDER BY CREATE_DATE DESC, NOTICE_NO DESC
+		ORDER BY CREATE_DATE DESC, NOTICE_NO DESC) A)
+	    WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<!-- 공지사항 총 데이터 수 -->
+	<entry key="selectListCount">
+		SELECT
+      	 	  COUNT(*)
+  		  FROM
+      		  TB_NOTICE
+	</entry>	
 	
 	<!-- 공지사항 등록 -->
 	<entry key="insertNotice">

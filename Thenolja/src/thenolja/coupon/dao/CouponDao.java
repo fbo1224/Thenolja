@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import oracle.net.nt.TcpNTAdapter;
+import thenolja.common.model.vo.PageInfo;
 import thenolja.coupon.model.vo.Coupon;
 import thenolja.notice.dao.NoticeDao;
 import thenolja.notice.model.vo.Notice;
@@ -36,14 +37,14 @@ public class CouponDao {
 	}
 	
 	/*
-	 * 荑좏룿 紐⑸줉 議고쉶
+	 * 쿠폰 목록 조회
 	 * 
 	 * */
-	public ArrayList<Coupon> selectCouponList(Connection conn){
+	public ArrayList<Coupon> selectCouponList(Connection conn, PageInfo pi){
 		
 		System.out.println("[CouponDao conn] " + conn);
 		
-		ArrayList<Coupon> list = new ArrayList(); // �옓 �쁺�뿭 怨듦컙 二쇱냼媛�
+		ArrayList<Coupon> list = new ArrayList<Coupon>(); // 
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -53,10 +54,17 @@ public class CouponDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery(); // �떎�젣 荑쇰━臾몄씠 �닔�뻾�릺�뒗 遺�遺�
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);				
+			
+			rset = pstmt.executeQuery(); //쿠폰목록 조회
 			
 			while(rset.next()) {
-				//while 諛섎났臾� �븞�뿉 吏��뿭蹂��닔 
+				// 쿠폰 목록 조회 결과 VO에 세팅
 				Coupon cpn = new Coupon();
 				cpn.setCouponNo(rset.getInt("COUPON_NO"));
 				cpn.setCouponContent(rset.getString("COUPON_CONTENT"));

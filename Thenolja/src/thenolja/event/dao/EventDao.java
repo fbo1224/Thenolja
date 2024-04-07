@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import thenolja.common.model.vo.PageInfo;
 import thenolja.event.model.vo.Event;
-import thenolja.notice.model.vo.Notice;
 
 public class EventDao {
 
@@ -33,10 +33,10 @@ public class EventDao {
 	 * 이벤트 목록 조회
 	 * 
 	 * */
-	public ArrayList<Event> selectEventList(Connection conn){
+	public ArrayList<Event> selectEventList(Connection conn, PageInfo pi){
 		
 		// 이벤트 목록 조회할 list 선언
-		ArrayList<Event> list = new ArrayList();
+		ArrayList<Event> list = new ArrayList<Event>();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
@@ -45,6 +45,13 @@ public class EventDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);				
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

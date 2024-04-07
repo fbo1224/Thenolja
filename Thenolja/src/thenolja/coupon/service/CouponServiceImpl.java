@@ -5,24 +5,28 @@ import static thenolja.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 import thenolja.coupon.dao.CouponDao;
 import thenolja.coupon.model.vo.Coupon;
+import thenolja.notice.dao.NoticeDao;
 
 public class CouponServiceImpl {
 
 	/*
 	 * 
-	 * 荑좏룿 紐⑸줉 議고쉶
+	 * 쿠폰목록 조회
 	 * 
 	 * */
-	public ArrayList<Coupon> selectCouponList(){
+	public ArrayList<Coupon> selectCouponList(PageInfo pi){
 		
-		Connection con = getConnection();	// SQL-MAPPER�옉�꽦�맂 SQL 諛쏆븘�떞湲�
+		Connection con = getConnection();	// SQL-연결정보 호출
 		ArrayList<Coupon> list = null;
 		
 		try {
-			// dao�뿉�꽌 db connection �깮�꽦�븯怨� �뜲�씠�꽣 議고쉶�빐�꽌 list�뿉 �떞�븘�꽌 諛섑솚
-			list = new CouponDao().selectCouponList(con);
+			
+			// 쿠폰조회 dao 호출
+			list = new CouponDao().selectCouponList(con, pi);
 			System.out.println("[CouponServiceImpl selectCouponList] " + list);
 			for(int i=0; i<list.size(); i++) {
 				System.out.println("[CouponServiceImpl rslt] " + list.get(i).getCouponNo());
@@ -35,5 +39,22 @@ public class CouponServiceImpl {
 		return list;
 		
 	}
+	
+	/**
+	 * 페이징(관리자)
+	 * @return
+	 */
+	
+	public int selectListCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().selectListCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}	
 	
 }

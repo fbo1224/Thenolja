@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thenolja.common.model.vo.PageInfo;
 import thenolja.coupon.model.vo.Coupon;
 import thenolja.coupon.service.CouponServiceImpl;
+import thenolja.event.service.EventServiceImpl;
 
 /**
  * Servlet implementation class CouponController
@@ -30,23 +32,52 @@ public class CouponController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 荑좏룿 紐⑸줉 議고쉶
+	 * 쿠폰목록
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("[CouponController]");
 		
-		// 荑좏룿 紐⑸줉 �꽌鍮꾩뒪 媛앹껜 �꽑�뼵 諛� �샇異�
+		// Event 게시판 조회
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new CouponServiceImpl().selectListCount();
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 5;
+		
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);				
+		
+		// 쿠폰목록 조회
 		ArrayList <Coupon> cpnList = new ArrayList<Coupon>();
 		CouponServiceImpl cpSvc = new CouponServiceImpl();
-		cpnList = cpSvc.selectCouponList();
+		cpnList = cpSvc.selectCouponList(pi);
 		
 		for(int i=0; i<cpnList.size(); i++) {
 			System.out.println("[CouponController result] " + cpnList.get(i).getClass());
 		}
 		
-		//�쓳�떟�솕硫� �쓣�슦湲� (list媛앹껜, �럹�씠吏� 媛앹껜 setAttribute)
+		// 쿠폰정보 setAttribute
 		request.setAttribute("couponList", cpnList);
-		//request.setAttribute("pagingVo", pagingVo);
+		request.setAttribute("pageInfo"  , pi);
 		RequestDispatcher view = request.getRequestDispatcher("/views/coupon/couponList.jsp");
 		view.forward(request, response);		
 		

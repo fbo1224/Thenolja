@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import thenolja.admin.member.model.dao.MemberDao;
+import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 import thenolja.notice.dao.NoticeDao;
 import thenolja.notice.model.vo.Notice;
 
@@ -17,14 +20,14 @@ public class NoticeServiceImpl{
 	 * 공지사항 목록 조회
 	 * 
 	 * */	
-	public ArrayList<Notice> selectNoticeList(){
+	public ArrayList<Notice> selectNoticeList(PageInfo pi){
 		
 		Connection conn = getConnection(); // SQL-MAPPER작성된 SQL 받아담기
 		ArrayList<Notice> list = null;
 		
 		try {
 			// dao에서 db connection 생성하고 데이터 조회해서 list에 담아서 반환
-			list = new NoticeDao().selectNoticeList(conn);
+			list = new NoticeDao().selectNoticeList(conn, pi);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -35,6 +38,23 @@ public class NoticeServiceImpl{
 		
 		return list;
 	}//method
+	
+	/**
+	 * 페이징(관리자)
+	 * @return
+	 */
+	
+	public int selectListCount() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().selectListCount(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}	
 	
 	/*
 	 * 공지사항 상세화면 조회 (회원)

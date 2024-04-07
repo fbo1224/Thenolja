@@ -12,6 +12,8 @@
 <title>더놀자 > 공지사항 > 상세</title>
 <style>
 
+
+
 #detail-area{
 	width:100%;
 	height:100%;

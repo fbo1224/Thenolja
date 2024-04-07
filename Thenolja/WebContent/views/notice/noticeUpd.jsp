@@ -225,7 +225,7 @@ function updNotice(eventStatus){
 			success:function(res){
 				
 				if(res == "SUCCESS"){
-					location.href= "<%= contextPath %>/noticeList"
+					location.href= "<%= contextPath %>/noticeList?currentPage=1"
 					alert(rsltMsg);
 				}else{
 					alert("게시글 수정/삭제 중 오류가 발생하였습니다.");
@@ -339,9 +339,9 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 								
 									<% if("Y".equals(status)) { %>
-										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status %> ">
+										<input type="radio" id="rdo_statusY" name="status" checked="" value="<%=status %>">
 									<% } else { %>
-									<input type="radio" id="rdo_statusY" name="status" checked="" value="Y">
+									<input type="radio" id="rdo_statusY" name="status" value="Y">
 									
 									<% } %>
 								
@@ -355,9 +355,9 @@ function countText(){
 								<% if(!"".equals(status)) { %>
 									
 									<% if("N".equals(status)) { %>
-										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status %> ">
+										<input type="radio" id="rdo_statusN" name="status" checked="" value="<%=status %>">
 									<% } else { %>
-									<input type="radio" id="rdo_statusN" name="status" checked="" value="N">
+									<input type="radio" id="rdo_statusN" name="status" value="N">
 									<% } %>
 								<% } %>
 								

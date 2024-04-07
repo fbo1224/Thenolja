@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.event.model.vo.Event" %>
+<%@ page import="java.util.ArrayList, thenolja.event.model.vo.Event, thenolja.common.model.vo.PageInfo" %>
 <%
-   ArrayList<Event> list = (ArrayList<Event>)request.getAttribute("eventList");
+    ArrayList<Event> list = (ArrayList<Event>)request.getAttribute("eventList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();	
 %>    
 
 
@@ -46,11 +52,6 @@
 			margin: auto;
 		}
 
-	
-
-	       
-	
-	
 		#content_1{
 		    width: 1200px;
 		    margin : auto;
@@ -92,9 +93,15 @@
 	
 		
 		/* 이벤트 게시판 layout START */
-		#evtIng{
-		   padding-left: 350px;
+		.thumb-list event{
+		   padding-left: 25%;
 		}
+		
+		.align_center{
+			padding-left:42%;
+		}
+		
+		
 		
 		.thumb-list{
 		   position:relative;
@@ -213,11 +220,17 @@
         <hr>
         	<button class="sort-btn">오래된순</button>
 			<button class="sort-btn">최신순</button>
-		     
-     <!-- 등록 버튼 영역 START -->
+	        <!-- 등록 버튼 영역 START -->
+    		<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>		     
     <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
-    <a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/event/eventReg.jsp" role="button" style=>등록하기</a>
-    <%} %>  
+	    <script>
+	    	$("#btn_reg").show();
+	    </script>    
+    <%} else { %>
+	    <script>
+	    	$("#btn_reg").hide();
+	    </script>    
+    <% } %>  
        <!-- 등록 버튼 영역 END -->
        
      <br>
@@ -225,8 +238,9 @@
      <ul id="evtIng" class="thumb-list event">
        
        <% if(list.isEmpty()) { %>
-             <tr class="align_center">
-                <th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
+             <tr>
+                <th colspan="6" ></th>
+                <span class="align_center">등록된 게시글이 존재하지 않습니다.</span>
              </tr>
           <%}else{ %>
              <!-- 비어있지 않음 -->
@@ -259,6 +273,47 @@
 		 
 	  </ul>
 		                
+
+	  <!-- 페이징영역 START -->
+ 	<div class="paging-area" align="center">
+ 	<% if(list != null) { %>
+ 		<% if(currentPage > 1) { %>
+			<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=currentPage - 1%>'"><</button> 	     
+ 	     <% } %>
+
+        <% for(int i = startPage; i <= endPage; i++) { %>
+             <% if (currentPage != i) { %>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=i%>'"><%= i %></button>
+                    
+	         <% } else { %>
+	           <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+	         <% } %>
+                    		
+        <% } %> 	     
+ 	     
+         <% if(currentPage != maxPage) { %>
+         <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=currentPage + 1%>'">></button>
+         <% } %> 	     
+ 	 
+ 	 <% }else { %>
+
+       <%if(currentPage > 1) { %>
+           <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=currentPage - 1%>'"><</button>
+     	<%} %>
+                    
+        <% for(int i = startPage; i <= endPage; i ++) { %>
+             <%if (currentPage != i)  { %>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=i%>'"><%= i %></button>
+             <% } else { %>
+               <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
+             <% } %>
+        <%} %>
+                  
+             <% if(currentPage != maxPage) { %>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/eventList?currentPage=<%=currentPage + 1%>'">></button>
+             <%} %>
+ 	     	     
+ 	 <% } %> 
 
 	</div>        
                   

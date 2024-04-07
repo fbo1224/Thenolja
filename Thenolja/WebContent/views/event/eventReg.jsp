@@ -208,7 +208,7 @@ function regEvent(){
 				
 				if(res == "SUCCESS"){
 					alert("이벤트가 정상적으로 등록되었습니다.");
-					location.href="<%= contextPath%>/eventList"
+					location.href="<%= contextPath%>/eventList?currentPage=1"
 				}else{
 					alert("이벤트 등록 중 오류가 발생하였습니다.");
 					return;

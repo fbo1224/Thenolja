@@ -12,6 +12,8 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import static thenolja.common.JDBCTemplate.*;
 
+import thenolja.common.JDBCTemplate;
+import thenolja.common.model.vo.PageInfo;
 //import thenoleja.common.PagingVO;
 import thenolja.notice.model.vo.Notice;
 
@@ -39,7 +41,8 @@ public class NoticeDao {
 	 * 공지사항 목록 조회
 	 * 
 	 * */
-	public ArrayList<Notice> selectNoticeList(Connection conn){ //selectNoticeList 호출
+	//selectNoticeList 호출
+	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi){ 
 		
 		System.out.println("[NoticeDao conn] " + conn);
 		
@@ -53,6 +56,13 @@ public class NoticeDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);			
+			
 			rset = pstmt.executeQuery(); // 실제 쿼리문이 수행되는 부분
 			
 			while(rset.next()) {
@@ -81,6 +91,36 @@ public class NoticeDao {
 	
 	
 	}//method
+	
+	/**
+	 * 페이징
+	 */
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return listCount;
+		
+	}	
 	
 	/*
 	 * 공지사항 상세화면 조회 (회원)

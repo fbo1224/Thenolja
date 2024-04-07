@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>더놀자 > 공지사항 > 상세</title>
+<title>더놀자 > 이벤트 > 상세</title>
 <style>
 
 

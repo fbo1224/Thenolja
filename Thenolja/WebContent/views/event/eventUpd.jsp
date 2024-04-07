@@ -237,7 +237,7 @@ function updEvent(eventStatus){
 			
 				if(res == "SUCCESS"){
 					alert(rsltMsg);
-					location.href="<%= contextPath%>/eventList"
+					location.href="<%= contextPath%>/eventList?currentPage=1"
 				}else{
 					alert(rsltMsg);
 					return;

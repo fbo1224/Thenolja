@@ -234,7 +234,7 @@ function regNotice(){
 
 				if(res == "SUCCESS"){
 					alert("게시글이 정상적으로 등록되었습니다.");
-					location.href= "<%= contextPath %>/noticeList"
+					location.href= "<%= contextPath %>/noticeList?currentPage=1"
 				}else{
 					alert("게시글 등록 중 오류가 발생하였습니다.");
 					return;
