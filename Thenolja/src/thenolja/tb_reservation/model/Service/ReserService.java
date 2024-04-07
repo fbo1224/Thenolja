@@ -178,8 +178,7 @@ public class ReserService {
 		
 		return coupon;
 	}
-
-
+	
 	public int insertReserNo(Reservation reser) {
 		Connection conn = getConnection();
 		

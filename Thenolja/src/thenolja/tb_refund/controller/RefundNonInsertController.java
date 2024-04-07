@@ -1,6 +1,5 @@
 package thenolja.tb_refund.controller;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.tb_coupon.model.vo.Coupon;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.Room;
 import thenolja.tb_refund.model.service.RefundService;
@@ -19,16 +17,16 @@ import thenolja.tb_reservation.model.Service.ReserService;
 import thenolja.tb_reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class RefundUpdateController
+ * Servlet implementation class RefundNonInsertController
  */
-@WebServlet("/refund.insert")
-public class RefundInsertController extends HttpServlet {
+@WebServlet("/nonRefund.insert")
+public class RefundNonInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefundInsertController() {
+    public RefundNonInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,8 +35,8 @@ public class RefundInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
+	
+request.setCharacterEncoding("UTF-8");
 		
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
 		String accNo = request.getParameter("accNo");
@@ -67,13 +65,13 @@ public class RefundInsertController extends HttpServlet {
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
 			if(refund != null && reser != null && hotel != null && room != null) {
-				
+				System.out.println(reser);
 				request.setAttribute("refund", refund);
 				request.setAttribute("hotel", hotel);      
 				request.setAttribute("room", room);
 				request.setAttribute("reser", reser);
 				// System.out.println(reser);
-				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailNonRefund.jsp");
 				view.forward(request, response);
 	   			
 			} else {
@@ -90,7 +88,6 @@ public class RefundInsertController extends HttpServlet {
 		
 	
 		}
-	
 	}
 
 	/**
