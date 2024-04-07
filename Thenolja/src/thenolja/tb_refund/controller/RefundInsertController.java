@@ -55,7 +55,7 @@ public class RefundInsertController extends HttpServlet {
 		refund.setRefundName(refundName);
 		refund.setBank(bankName);
 		
-		int result1 = new RefundService().insertRefund(refund);
+		int result1 = new RefundService().insertRefund(refund, reserNo);
 		int result2 = new ReserService().deleteReser(reserNo);
 		
 		if(result1 * result2 > 0) {

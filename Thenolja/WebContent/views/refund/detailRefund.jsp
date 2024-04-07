@@ -224,7 +224,7 @@
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
-			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=reser.getPeople() %>인</p>
 			        <p><%=reser.getPaymentPrice() %>원</p>
 			        <p><%=reser.getCheckIn() %>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut() %>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
 			        
@@ -244,11 +244,11 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
+                            <td width="170x">결제금액 : <%= room.getRoomPrice() %></td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : <%=(coupon.getCouponPercent()* 0.01) * room.getRoomPrice()%>원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
+                            <td width="170x">할인 금액 : <%=Math.round((coupon.getCouponPercent()* 0.01) * room.getRoomPrice())%>원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=refund.getRefundPrice() %></td>
+                            <td>환불금액 : <%=reser.getPaymentPrice() %>
                         </tr>
                     </table>
                 </div>
@@ -355,7 +355,7 @@
     </div>
   </div>
 <div id="return_main">
-   <a href="<%=contextPath %>"><button id="re_main" type="button">메인 화면</button></a>
+   <a href="<%=contextPath %>/myReser.list?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"><button id="re_main" type="button">내 예약내역</button></a>
 </div> 
     <br><br><br><br><br><br><br><br><br><br>
     

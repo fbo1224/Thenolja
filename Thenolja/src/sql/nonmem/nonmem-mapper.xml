@@ -142,4 +142,11 @@
 	
 	</entry>
 	
+	<entry key="recentReserNo">
+		 SELECT
+				SEQ_MNO.CURRVAL 
+		  FROM
+		  		DUAL
+	</entry>
+	
 </properties>

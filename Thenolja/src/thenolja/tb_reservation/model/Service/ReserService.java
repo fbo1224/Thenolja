@@ -180,6 +180,27 @@ public class ReserService {
 	}
 
 
+	public int insertReserNo(Reservation reser) {
+		Connection conn = getConnection();
+		
+		int result = new ReserDao().insertReser(conn, reser);
+		int reserNo = 0;
+		Reservation r = null;
+		if(result > 0) {
+			r = new ReserDao().selectNonReservation(conn);
+			reserNo = r.getReserNo();
+			
+		if(r != null) {
+			commit(conn);}
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return reserNo;
+	}
+
+
 
 
 

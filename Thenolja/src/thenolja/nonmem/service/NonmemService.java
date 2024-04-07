@@ -80,33 +80,57 @@ public class NonmemService {
 		return list;
 	}
 
-	public Member insertNonMember(Member nonmem, Reservation reser) {
+	public int insertNonMember(Member nonmem) {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new NonmemDao().insertNonMember(conn, nonmem);
+		int reMemNo = 0;
 		
 		Member non = null;
 		if(result > 0) {
 			non = new NonmemDao().selectNonMember(conn);
+			reMemNo = non.getMemNo();
 		if(non != null) {
-			int ReMemNo = non.getMemNo();
-			
-			int result1 = new ReserDao().insertNonReser(conn, reser, ReMemNo);
-			
-			Reservation r = null;
-		if(result1 > 0) {
-			r = new ReserDao().selectReservation(conn);
-		if(r != null) {
 			commit(conn);}
 		} else {
 			rollback(conn);
 		}
 			close(conn);
+		return reMemNo;	
+	}
+	
+	/*
+	public Reservation insertNonMember(Member nonmem, Reservation reser) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NonmemDao().insertNonMember(conn, nonmem);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
 		}
+		
+		if(result > 0) {
+			
+			int reMemNo = new NonmemDao().recentReserNo(conn);
+				
+			int result1 = new ReserDao().insertNonReser(conn, reser, reMemNo);
+			
+			if(result1 > 0) {
+				reser.setReMemNo(reMemNo);
+				commit(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return reser;
 	}
-		return non;	
-	}
-
+*/
 	
 	
 	

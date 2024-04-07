@@ -191,7 +191,7 @@
 				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
 				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
 				<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
-				
+
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
 			        <p><%=reser.getPeople() %>인</p>
@@ -283,7 +283,7 @@
         <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>%reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            
+            <input type="hidden" name="refundPrice" value="<%=reser.getPaymentPrice() %>">
             <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
 
             <label for="text">환불계좌</label>

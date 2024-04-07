@@ -88,6 +88,9 @@
         left: 0px;
         margin:auto;
     }
+    #reser_info:hover{
+    	box-shadow: 0px 0px 5px silver;
+    }
     #homeBtn {
     	text-align:center;
     }

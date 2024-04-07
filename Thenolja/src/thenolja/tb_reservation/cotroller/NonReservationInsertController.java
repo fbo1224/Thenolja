@@ -51,6 +51,7 @@ public class NonReservationInsertController extends HttpServlet {
 		nonmem.setMemName(name);
 		nonmem.setMemPhone(phone);
 		
+		int reMemNo = new NonmemService().insertNonMember(nonmem);
 		Reservation reser = new Reservation();
 		reser.setName(name);
 		reser.setPhone(phone);
@@ -59,10 +60,17 @@ public class NonReservationInsertController extends HttpServlet {
 		reser.setCheckOut(checkOut);
 		reser.setPeople(people);
 		reser.setRoomNo(roomNo);
-		reser.setReMemNo(nonmem.getMemNo());
+		reser.setReMemNo(reMemNo);
 		reser.setPaymentPrice(paymentPrice);
-		nonmem = new NonmemService().insertNonMember(nonmem, reser);
 		
+		int reserNo = new ReserService().insertReserNo(reser);
+		System.out.println(reserNo);
+		if(reserNo > 0) {
+			reser = new ReserService().selectReserNo(reserNo);
+			System.out.println(reser);
+		}
+		
+//		reser = new ReserService().insertReser(reser);
 		if(nonmem != null && reser != null ) {
 			
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));

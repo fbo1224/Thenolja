@@ -67,7 +67,7 @@
 	
 	<entry key="selectReservation">
         SELECT
-		        SEQ_RESERVATION.CURRVAL,
+		        SEQ_RESERVATION.CURRVAL AS RESER_NO,
 		        RESER_DATE,
 		        RESER_NAME,
 		        RESER_PHONE,
@@ -89,6 +89,8 @@
 		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
 		 WHERE
 		   		CANCEL_YN = 'N'	
+		   AND
+		   		RE_MEM_NO = ?
 	</entry>
 	
 		<entry key="selectNonReservation">

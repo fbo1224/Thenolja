@@ -166,15 +166,14 @@
 	    			<img src="<%=hotel.getHotelPath() %>" alt="" width="300px" height="300px">
     			</div>
 	
-<div id="reser_detail">
-				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
-			        <h2><%=hotel.getHotelName() %></h2>
-			        <p><%=room.getRoomName() %></p>
-			        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
-			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
-			        
+				<div id="reser_detail">
+					<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+					<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
+				        <h2><%=hotel.getHotelName() %></h2>
+				        <p><%=room.getRoomName() %></p>
+				        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
+				        <p><%=room.getRoomPrice() %>원</p>
+				        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
     			</div>
 			</div>
 			<!-- /0-2-1. 호텔 정보 끝 -->

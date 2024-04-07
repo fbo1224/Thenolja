@@ -28,7 +28,7 @@ public class RefundDao {
 		}
 
 	}
-	public int insertRefund(Connection conn, Refund refund) {
+	public int insertRefund(Connection conn, Refund refund, int reserNo) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -37,7 +37,7 @@ public class RefundDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, refund.getReserNo());
+			pstmt.setInt(1, reserNo);
 			pstmt.setInt(2, refund.getRefundPrice());
 			pstmt.setString(3, refund.getAccNo());
 			pstmt.setString(4, refund.getRefundName());

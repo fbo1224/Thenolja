@@ -130,7 +130,7 @@ public class ReserDao {
 			
 			if(rset.next()) {
 				reser = new Reservation();
-				reser.setReserNo(rset.getInt("CURRVAL"));
+				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));

@@ -202,7 +202,7 @@
 				
 			        <h2><%=hotel.getHotelName() %></h2>
 			        <p><%=room.getRoomName() %></p>
-			        <p><%=room.getMaxPeople() %>인</p>
+			        <p><%=reser.getPeople() %>인</p>
 			        <p><%=room.getRoomPrice() %>원</p>
 			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
                 </div>
@@ -226,6 +226,7 @@
                             <td width="170x">할인 금액 : <%=Math.round((coupon.getCouponPercent()* 0.01) * room.getRoomPrice())%>원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
                             <td>결제금액 : <%=reser.getPaymentPrice() %>
+                        </tr>
                     </table>
                 </div>
 

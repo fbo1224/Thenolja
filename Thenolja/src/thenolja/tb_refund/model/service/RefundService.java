@@ -10,11 +10,11 @@ import static thenolja.common.JDBCTemplate.*;
 
 public class RefundService {
 
-	public int insertRefund(Refund refund) {
+	public int insertRefund(Refund refund, int reserNo) {
 		
 		Connection conn = getConnection();
 		
-		int result = new RefundDao().insertRefund(conn, refund);
+		int result = new RefundDao().insertRefund(conn, refund, reserNo);
 		
 		if(result > 0) {
 			commit(conn);

@@ -221,17 +221,17 @@
 	        			<tr>
 	        				<td width="300px">결제금액 : <%=room.getRoomPrice() %>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-							<td width="500px">할인 금액 : <span id="pprice"></span>원</td>
+							<td width="500px">할인 금액 : <span id="pprice">0</span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="300px" style="font-weight: bold;" >결제금액 : <span id="payPrice"></span> 원</td>
+							<td width="300px" style="font-weight: bold;" >결제금액 : <span id="payPrice"><%= room.getRoomPrice()%></span> 원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-					<input id="hidePrice" type="hidden" name="paymentPrice" value="">
-					<input id="couponNo" type="hidden" name="couponNo" value="">
+					<input id="hidePrice" type="hidden" name="paymentPrice" value="<%=room.getRoomPrice()%>">
+					<input id="couponNo" type="hidden" name="couponNo" value="0">
 					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
 					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
 					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
@@ -285,7 +285,7 @@
 	                
 	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
-	                    <button type="submit" id="reser-btn"><span id="lastPay"></span>원 결제하기</button>
+	                    <button type="submit" id="reser-btn"><span id="lastPay"><%=room.getRoomPrice() %></span>원 결제하기</button>
 	                </div>
 
 	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
@@ -374,7 +374,9 @@
 		coupon.percent = parseInt(percent);
 	 	// console.log(parseInt(percent));
 	 	$('#pprice').append('<span name="couponPrice">' + ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>) + '</span>');
+	 	console.log($('#hidePrice'));
 		$('#hidePrice').val((<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)));
+		console.log($('#hidePrice'));
 		$('#couponNo').val(coupon.couponNo);
 		// console.log($('#couponNo').val(coupon.couponNo));
 		//console.log($('#hidePrice').val());
