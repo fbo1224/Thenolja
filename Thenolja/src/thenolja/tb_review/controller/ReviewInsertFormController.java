@@ -72,7 +72,7 @@ public class ReviewInsertFormController extends HttpServlet {
 		
 		if(result > 0) {
 			int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-	       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo);
+	       	 response.sendRedirect(request.getContextPath() + "/reviewList?hotelNo=" + hotelNo + "&reserNo=" + reserNo);
 	       	 
        	} else {
         

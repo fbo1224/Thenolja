@@ -195,7 +195,17 @@
 		font-size:18px;
 		backgound-color:#52928b;
 	}
-	
+    #my_btn{
+    	width: 200px;
+    	height: 50px;
+    	border: 1px solid black;
+    	margin: auto;
+		margin-top: 300px;	
+    }
+	#my_btn > button{
+		width: 200px;
+		height: 50px;
+	}
 
 </style>
 
@@ -316,7 +326,11 @@
                 </div>
             </div>
         </div>
-
+	    <div id="my_btn">
+	    <a href="<%=contextPath%>">
+	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">메인으로 돌아가기</button>
+	    </a>
+    </div>
     </div>
       <div class="modal" id="myModal">
     <div class="modal-dialog">

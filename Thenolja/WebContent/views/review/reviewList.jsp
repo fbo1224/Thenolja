@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList" %>  
+<%@ page import="thenolja.tb_review.model.vo.Review, java.util.ArrayList, thenolja.tb_reservation.model.vo.Reservation" %>  
 <%
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	Reservation reser = (Reservation)request.getAttribute("reser");
 %>	
 <!DOCTYPE html>
 <html>

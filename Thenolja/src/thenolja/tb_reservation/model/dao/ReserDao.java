@@ -555,6 +555,38 @@ public class ReserDao {
 		return coupon;
 	}
 
+	public Hotel selectHotel1(Connection conn, int hotelNo) {
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Hotel hotel = new Hotel();
+		String sql = prop.getProperty("selectHotelNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hotelNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				hotel = new Hotel();
+				hotel.setHotelNo(rset.getInt("HOTEL_NO"));
+				hotel.setHotelName(rset.getString("HOTEL_NAME"));
+				hotel.setHotelPhone(rset.getString("HOTEL_PHONE"));
+				hotel.setHotelLocation(rset.getString("HOTEL_LOCATION"));
+				hotel.setHotelAddress(rset.getString("HOTEL_ADDRESS"));
+				hotel.setHotelCategory(rset.getString("HOTEL_CATEGORY"));
+				hotel.setHotelPath(rset.getString("HOTEL_PATH"));
+				hotel.setHotelIntro(rset.getString("HOTEL_INTRO"));
+				hotel.setHostName(rset.getString("HOST_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return hotel;
+	}
 
 
 

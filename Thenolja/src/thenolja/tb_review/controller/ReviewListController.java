@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thenolja.common.model.vo.PageInfo;
+import thenolja.tb_reservation.model.Service.ReserService;
+import thenolja.tb_reservation.model.vo.Reservation;
 import thenolja.tb_review.model.service.ReviewService;
 import thenolja.tb_review.model.vo.Review;
 

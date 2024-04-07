@@ -5,6 +5,7 @@
 <%
 	Review r = (Review)request.getAttribute("review");
 	Room room = (Room)request.getAttribute("room");
+	Reservation reser = (Reservation)request.getAttribute("reser");
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -157,8 +158,8 @@
                 <p><%=r.getRoomName() %></p>
                 <p><%=room.getMaxPeople() %>인</p>
                 <p><%=r.getPaymentPrice() %>원</p>
-                <p>2024-02-28&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ 2024-02-29&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
-            </div>
+				<p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+                </div>
     	</div>
     </div>
     <div id="content_2">
