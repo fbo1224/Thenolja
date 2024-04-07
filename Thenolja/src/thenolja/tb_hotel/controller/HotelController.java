@@ -13,6 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import thenolja.common.MyFileRenamePolicy;
 import thenolja.common.model.vo.PageInfo;
+import thenolja.member.model.vo.Member;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.vo.DetailHotel;
 import thenolja.tb_hotel.model.vo.Hotel;
@@ -29,7 +30,7 @@ public class HotelController {
 		return view;
 	}
 	
-	public String insert(HttpServletRequest request, HttpServletResponse response) {
+	public String insert(HttpServletRequest request, HttpServletResponse response, Member loginUser) {
 		String view = "";
 		int result = 0;
 		
@@ -97,7 +98,7 @@ public class HotelController {
 			result = new HotelService().insertHotel(h);
 		}
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus="+loginUser.getMemStatus();
 		}
 		else {
 			request.setAttribute("errorMsg", "hotel 추가 실패...");
@@ -106,7 +107,7 @@ public class HotelController {
 		return view;
 	}
 	
-	public String hotelList(HttpServletRequest request, HttpServletResponse response) {
+	public String hotelList(HttpServletRequest request, HttpServletResponse response, Member loginUser) {
 		String view = "";
 		
 		int listCount;   // 현재 일반게시판의 게시글 총 개수 => BOARD테이블로 부터 COUNT(*)활용해서 조회
@@ -118,19 +119,16 @@ public class HotelController {
 		int startPage;   // 페이지 하단에 보여질 페이징바의 시작 수
 		int endPage;     // 페이지 하단에 보여질 페이징바의 끝 수
 		
-		String loginStatus = "";
-		if(request.getParameter("loginStatus") != null) {
-			loginStatus = request.getParameter("loginStatus"); 
-		}
 		
-		if(loginStatus != null && loginStatus.equals("A")) {
-			// * listCount : 총 게시글의 수
-			listCount = new HotelService().selectListCount();
-		} else {
+		
+		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
+			// listCountRoomIn : 객실이 하나라도 있는 호텔의 총 갯수
 			listCount = new HotelService().selectListCountRoomIn();
+		} else {
+			// listCount : 총 게시글의 수
+			listCount = new HotelService().selectListCount();
 		}
 		
-	
 		// * currentPage : 현재 페이지(사용자가 요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -159,9 +157,9 @@ public class HotelController {
 		
 		// 4) Service 호출
 		ArrayList<HotelCard> hotelList = null;
-		if(loginStatus.equals("A")) {
+		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
 			hotelList = new HotelService().selectAllList(pi);
-			request.setAttribute("loginStatus", loginStatus);
+			request.setAttribute("loginStatus", loginUser.getMemStatus());
 		} else {
 			hotelList = new HotelService().selectList(pi);
 		}
@@ -192,11 +190,11 @@ public class HotelController {
 	}
 	
 	
-	public String update(HttpServletRequest request, HttpServletResponse response) {
+	public String update(HttpServletRequest request, HttpServletResponse response, Member loginUser) {
 		Hotel h = null;
 		int result = 0;
 		String view = "";
-		// 업데이트 데이터 가지고 업데이트 수행
+
 		if(ServletFileUpload.isMultipartContent(request)) {
 			String savePath = request.getServletContext()
 			         .getRealPath("/resources/hotelImage");
@@ -255,7 +253,7 @@ public class HotelController {
 		result = new HotelService().updateHotel(h);
 		
 		if(result > 0) {
-			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus=A";
+			view = request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus="+loginUser.getMemStatus();
 		} else {
 			request.setAttribute("errorMsg", "호텔정보 수정에 실패했습니다.");
 			view = "views/common/errorPage.jsp";
