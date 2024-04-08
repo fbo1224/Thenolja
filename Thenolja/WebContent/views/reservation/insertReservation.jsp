@@ -9,7 +9,8 @@
 	Room room = (Room)request.getAttribute("room");
 	ReserInfo rinfo = (ReserInfo)request.getAttribute("rinfo");
 %>   
-  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,20 +167,25 @@
 </head>
 <body>
     
-    <%@ include file="../common/menubar.jsp" %>
-	<% if(loginUser == null) { %>
+    <jsp:include page="../common/menubar.jsp"/>
+    
+    <c:set var="path" value="${ pageContext.request.contextPath }"/>
+    
+    <c:choose>
+    <c:when test="${ empty sessionScope.loginUser }">
+		<form action="${path }/login" method="post"></form>
 	<script>
 		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
-		location.href = '<%=contextPath%>/loginPage';
 	 </script>
-	<% } else {%>
+	</c:when>
+	<c:otherwise>
     
     <div id="content">
     	
         <div id="content_title">
         
             <div id="left_img">
-                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="${path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             
             <div id="left_title">
@@ -190,17 +196,18 @@
 		<div id="detail">
 			<div id="reser_info">
 	    		<div id="reser_hotel_img">
-	    			<img src="<%=hotel.getHotelPath() %>" alt="" width="300px" height="300px">
+	    			<img src=<c:out value = "${ hotel.hotelPath }"/> alt="" width="300px" height="300px">
     			</div>
 	
 				<div id="reser_detail">
-				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
-			        <h2><%=hotel.getHotelName() %></h2>
-			        <p><%=room.getRoomName() %></p>
-			        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
-			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+				<input type="hidden" name="hotelNo" value="${ hotel.hotelNo }">
+				<input type="hidden" name="roomNum" value="${ room.roomNo }">
+			        <h2><c:out value= "${ hotel.hotelName }"/></h2>
+			        <p><c:out value= "${ room.roomName }"/></p>
+			        <p><c:out value= "${ rinfo.people }"/>인&nbsp;<small>최대인원&nbsp;<c:out value = "${ room.maxPeople }"/>인</small></p>
+			        <p><c:out value= "${ room.roomPrice }"/>원</p>
+			        <p><c:out value="${ rinfo.startDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkInTime }"/> : 00 ~ 
+			        <c:out value="${ rinfo.endDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkOutTime }"/>: 00</p>
 			        
     			</div>
 			</div>
@@ -208,21 +215,21 @@
 	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="300px">결제금액 : <%=room.getRoomPrice() %>원</td>
+	        				<td width="300px">결제금액 : <c:out value= "${ room.roomPrice }"/>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="500px">할인 금액 : <span id="pprice">0</span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="300px" style="font-weight: bold;" >결제금액 : <span id="payPrice"><%= room.getRoomPrice()%></span> 원</td>
+							<td width="300px" style="font-weight: bold;" >결제금액 : <span id="payPrice"><c:out value= "${ room.roomPrice }"/></span> 원</td>
 						</tr>
 	               </table>
 				</div>
 
-				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-					<input id="hidePrice" type="hidden" name="paymentPrice" value="<%=room.getRoomPrice()%>">
+				<form action="${path}/insert.reser?memNo=${ sessionScope.loginUser.memNo }&hotelNo=${ hotel.hotelNo }&roomNo=${ room.roomNo }" method="post" id="insert-form">
+					<input id="hidePrice" type="hidden" name="paymentPrice" value="${ room.roomPrice }">
 					<input id="couponNo" type="hidden" name="couponNo" value="0">
-					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
-					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
-					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
+					<input type="hidden" name="checkIn" value="${ rinfo.startDate }">
+					<input type="hidden" name="checkOut" value="${ rinfo.endDate }">
+					<input type="hidden" name="people" value="${ rinfo.people }">
 					
 					<div id="reser_mem_info">
 		                <br>
@@ -268,7 +275,7 @@
 	                </div>
 	                
 	                <div id="reservation">
-	                    <button type="submit" id="reser-btn"><span id="lastPay"><%=room.getRoomPrice() %></span>원 결제하기</button>
+	                    <button type="submit" id="reser-btn"><span id="lastPay"><c:out value="${ room.roomPrice }"/></span>원 결제하기</button>
 	                </div>
 
 	            </form>
@@ -285,7 +292,7 @@
     		url: "cupon.jqAjax",
     		type: 'get',
     		data:{
-    			memberNo: <%= loginUser.getMemNo() %>
+    			memberNo: ${ sessionScope.loginUser.memNo }
     		},
     		success: function(result){
     			// console.log(result);
@@ -294,7 +301,7 @@
 	                   +'<th colspan="5">쿠폰이 존재하지 않습니다.</th>'
 		                +'</tr>');
     				$('#payPrice').append(
-    					'<%=room.getRoomPrice()%>'
+    					'${ room.roomPrice }'
 					);ss
     			} else{
     				for(let i = 0; i < result.length; i++){
@@ -385,7 +392,8 @@
 			</div>
 		</div>
 	</div>
-<% } %>
+</c:otherwise>
+</c:choose>
 
 <%@ include file="../common/footer.jsp" %>
 

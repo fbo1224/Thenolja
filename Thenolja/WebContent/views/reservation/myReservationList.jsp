@@ -12,6 +12,8 @@
     String today = simpleDate.format(date);
 	
 %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,13 +115,16 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-	<% if(loginUser == null) { %>
-		<script>
-			alert("로그인 페이지로 이동합니다.")
-			location.href = '<%=contextPath%>/loginPage';
-		</script>
-	<% } %>
+	    <jsp:include page="../common/menubar.jsp"/>
+    <c:set var="path" value="${ pageContext.request.contextPath }"/>
+    <c:choose>
+    <c:when test="${ empty sessionScope.loginUser }">
+		<form action="${path }/login" method="post"></form>
+	<script>
+		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
+	 </script>
+	</c:when>
+	<c:otherwise>
 	<div id="output">
         <div id="content_title">
             <div id="left_img">
@@ -177,13 +182,13 @@
             </div>
 
         </div>
-			<% } %>
-		<% } %>
 		</div>
+</div>
+	</c:otherwise>
+</c:choose>
 	<div id="homeBtn">
 		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
-</div>
 
 </body>
 </html>

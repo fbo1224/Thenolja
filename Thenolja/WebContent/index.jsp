@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,8 @@
 <title>메인페이지</title>
 <!-- CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
 <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <style>
 	div{
@@ -130,7 +130,19 @@
 	
 	<script>
 	$(function (){
-		
+		// 이벤트 사진 가져오기
+		$.ajax({
+			url: "eventData.jqAjax",
+			type: "post",
+			success: function(result){
+				
+			},
+			error: function(result){
+				
+			}
+			
+			
+		});
 		// 인기있는 숙소 ajax
 		$.ajax({
 			url:"popularData.jqAjax",
@@ -208,7 +220,7 @@
 		
 		// detail page이동
 		$('.cards').click(function(e){
-			location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+			location.href = '${ contextPath }/select.hotels?hotelNo='+ $(this).attr('id');
 		});	
 	
 	})
