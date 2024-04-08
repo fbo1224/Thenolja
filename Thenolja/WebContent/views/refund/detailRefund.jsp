@@ -2,14 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.tb_refund.model.vo.Refund, 
 				thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room,  thenolja.tb_coupon.model.vo.Coupon" %>  
-<%
-	Reservation reser = (Reservation)session.getAttribute("reser");
-	Coupon coupon = (Coupon)session.getAttribute("coupon");
-	Refund refund = (Refund)request.getAttribute("refund");
-	Hotel hotel = (Hotel)request.getAttribute("hotel");
-	Room room = (Room)request.getAttribute("room");
 
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
