@@ -153,11 +153,11 @@
 				<c:choose>
 					<c:when test="${requestScope.selectMemberList ne null }">
 						<c:if test="${ pageInfo.currentPage > 1 }">
-							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${papageInfo.currentPageth - 1}'"><</button>
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${pageInfo.currentPage - 1}'"><</button>
 						</c:if>
 						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
 							<c:choose>
-								<c:when test="${PageInfo.currentPage ne i }">
+								<c:when test="${pageInfo.currentPage ne i }">
 									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${ i }'">${ i }</button>
 								</c:when>
 								<c:otherwise>
@@ -169,13 +169,16 @@
 							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${pageInfo.currentPage + 1}'">></button>
 						</c:if>				
 					</c:when>
+					
+					
+					
 					<c:otherwise>
 						<c:if test="${ pageInfo.currentPage > 1 }">
-							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${papageInfo.currentPageth - 1}"><</button>
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
 						</c:if>
 						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
 							<c:choose>
-								<c:when test="${PageInfo.currentPage ne i }">
+								<c:when test="${pageInfo.currentPage ne i }">
 									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${ i }'">${ i }</button>
 								</c:when>
 								<c:otherwise>
@@ -187,6 +190,9 @@
 							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${pageInfo.currentPage + 1}'">></button>
 						</c:if>							
 					</c:otherwise>
+					
+					
+					
                   </c:choose>
                   
                   
