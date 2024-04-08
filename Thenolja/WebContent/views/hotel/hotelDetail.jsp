@@ -10,7 +10,7 @@
     
     <c:set var="tomo" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
 	<fmt:formatDate value="${tomo}" pattern="yy/MM/dd" var="tomorrow" />
-	
+	<c:set var="dateRangeForm" value='${ toDay += " ~ " += tomorrow  }' />
 	<c:set var="defaultPeople" value="2" />
 
     
@@ -248,12 +248,8 @@ svg{
 </style>
 </head>
 <body>
-	
 	<%@ include file="./common/searchForm.jsp" %>
-	<div id="detail-wrap">
-	${ toDay  }
-	${ tomorrow }
-	
+	<div id="detail-wrap">	
 		<c:choose>
 			<c:when test="${ hotelDetail ne null }">
 			<div id="detail-content">

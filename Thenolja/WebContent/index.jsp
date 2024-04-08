@@ -220,7 +220,7 @@
 		
 		// detail page이동
 		$('.cards').click(function(e){
-			location.href = '${ contextPath }/select.hotels?hotelNo='+ $(this).attr('id');
+			location.href = '${path}/select.hotels?hotelNo='+ $(this).attr('id');
 		});	
 	
 	})
