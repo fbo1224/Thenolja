@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList,thenolja.mypage.model.vo.MyPageCoupon" %>
-<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
+<%--<%@ page import="java.text.SimpleDateFormat, java.util.Date" %> --%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%--
 <%
 	ArrayList<MyPageCoupon> couponList = (ArrayList<MyPageCoupon>)request.getAttribute("couponList");
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 %>  
+ --%>
+   <c:set var="current" value="<%= new java.util.Date() %>" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,41 +98,52 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp"%>
+	<%--<%@ include file="../common/menubar.jsp"%> --%>
+	<jsp:include page="../common/menubar.jsp" />
 
 	<div id="output">
         <div id="content_title">
             <div id="left_title"><span>쿠폰함</span></div>
 		</div>
-    	<% if(couponList.isEmpty()) { %>
-			<table>
-				<tr>
-					<th style="font-size:40px;" colspan="5">쿠폰이 존재하지 않습니다.</th>
-				</tr>
-			</table>
-		<% } else { %>
-			<% for(MyPageCoupon c : couponList) { %>
-			<div id="content">
-		        <div id="reser_info">
-                    <div id="coupon"><img src="resources/mypage/coupons.png" alt="쿠폰이미지"></div>
-                    <div id="reser_detail">
-                    
-                    <% 
-                    	Date newDate = sdf.parse(c.getCouponDate()); 
-                   	%>
-                   	<%
-                    	SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
-                    	String date = sdf2.format(newDate);
-                    %>
-                    
-                        <h3><%= c.getCouponContent() %></h3><br>
-                        <p>사용기한 : <%= date %></p>
-                        <p>할인율 : <%= c.getCouponPercent() %></p>
-                    </div>
-		        </div>
-			</div>
+		
+    	<c:choose>
+	    	<c:when test="${ empty couponList }">
+	    	<%--<% if(couponList.isEmpty()) { --%>
+				<table>
+					<tr>
+						<th style="font-size:40px;" colspan="5">쿠폰이 존재하지 않습니다.</th>
+					</tr>
+				</table>
+			</c:when>
+			<%--<% } else { --%>
+			<c:otherwise>
+			<c:forEach var="c" items="${ requestScope.personList }">
+				<%--<% for(MyPageCoupon c : couponList) { --%>
+				<div id="content">
+			        <div id="reser_info">
+	                    <div id="coupon"><img src="resources/mypage/coupons.png" alt="쿠폰이미지"></div>
+	                    <div id="reser_detail">
+	                    
+	                    <% 
+	                    	Date newDate = sdf.parse(c.getCouponDate()); 
+	                   	%>
+	                   	
+	                   	<%
+	                    	SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
+	                    	String date = sdf2.format(newDate);
+	                    %>
+	                    
+	                        <h3><%= c.getCouponContent() %></h3><br>
+	                        <p>사용기한 : <%= date %></p>
+	                        <p>할인율 : <%= c.getCouponPercent() %></p>
+	                    </div>
+			        </div>
+				</div>
+				<% } %>
 			<% } %>
-		<% } %>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	<div id="homeBtn">
 		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
