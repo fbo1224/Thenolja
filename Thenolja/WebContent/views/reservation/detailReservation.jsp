@@ -9,6 +9,8 @@
 	Coupon coupon = (Coupon)session.getAttribute("coupon");
 	
 	%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,31 +182,33 @@
 </head>
 <body>
 	
-    <%@ include file="../common/menubar.jsp" %>
+    <jsp:include page="../common/menubar.jsp"/>
+    <c:set var="path" value="${ pageContext.request.contextPath }"/>
+    
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="${path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>상세조회</h3></div>
         </div>
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_no"><p>No.<%= reser.getReserNo() %></p></div>
+                <div id="reser_no"><p>No.${ reser.reserNo }</p></div>
                 
-                <div id="reser_hotel_img"><img src="<%=hotel.getHotelPath() %>" alt="" width="220px" height="220px"></div>
+                <div id="reser_hotel_img"><img src="${ hotel.hotelPath }" alt="" width="220px" height="220px"></div>
 
                 <div id="reser_detail">
-				<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-				<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
-				<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
+				<input type="hidden" name="hotelNo" value="${ hotel.hotelNo }">
+				<input type="hidden" name="roomNum" value="${ room.roomNo }">
+				<input type="hidden" name="reserNo" value="${ reser.reserNo }">
 				
-			        <h2><%=hotel.getHotelName() %></h2>
-			        <p><%=room.getRoomName() %></p>
-			        <p><%=reser.getPeople() %>인</p>
-			        <p><%=room.getRoomPrice() %>원</p>
-			        <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+			        <h2>${ hotel.hotelName }</h2>
+			        <p>${ room.roomName }</p>
+			        <p>${ reser.people }인</p>
+			        <p>${ room.roomPrice }원</p>
+			        <p>${ reser.checkIn }&nbsp;&nbsp;${ room.checkInTime } : 00 ~ ${ reser.checkOut }&nbsp;&nbsp;${ room.checkOutTime } : 00</p>
                 </div>
 
                 <div id="reser_btn">
@@ -221,11 +225,11 @@
                     <hr>
                     <table>
                         <tr>
-                            <td width="170x">예약금액 : <%= room.getRoomPrice() %></td>
+                            <td width="170x">예약금액 : ${ room.roomPrice }</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-                            <td width="170x">할인 금액 : <%=Math.round((coupon.getCouponPercent()* 0.01) * room.getRoomPrice())%>원</td>
+                            <td width="170x">할인 금액 : ${ Math.round((coupon.getCouponPercent()* 0.01) * room.roomPrice)}원</td>
                             <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-                            <td>결제금액 : <%=reser.getPaymentPrice() %>
+                            <td>결제금액 : ${ reser.paymentPrice }
                         </tr>
                     </table>
                 </div>
@@ -245,7 +249,7 @@
                     </tr>
                     <tr>
                         <td>입금자명</td> 
-                        <td><%=reser.getName() %></td>
+                        <td>${ reser.name }</td>
                     </tr>
                     </table>
                 </div>
@@ -256,13 +260,13 @@
                     <table>
                     <tr>
                             <td width="80px">이름</td> 
-                            <td><%= reser.getName() %></td>
+                            <td>${ reser.name }</td>
                             <td width="80px">전화번호</td> 
-                            <td><%= reser.getPhone() %></td>
+                            <td>${ reser.phone }</td>
                         </tr>
                         <tr>
                             <td>차량</td> 
-                            <td colspan="3"><%= reser.getBicycle() %></td>
+                            <td colspan="3">${ reser.bicycle }</td>
                         </tr>
                     </table>
                 </div>
@@ -271,7 +275,7 @@
 
     </div>
     <div id="my_btn">
-	    <a href="<%=contextPath%>/myReser.list?reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&reserNo=<%=reser.getReserNo()%>">
+	    <a href="${path }/myReser.list?reMemNo=${ reser.reMemNo }&hotelNo=${ hotel.hotelNo }&reserNo=${ reser.reserNo }">
 	    	<button class="btn btn-outline-secondary" style="width:200px; height:50px;">내 예약 내역 조회</button>
 	    </a>
     </div>
@@ -288,11 +292,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert?reserNo=<%=reser.getReserNo() %>&reMemNo=<%= reser.getReMemNo()%>&hotelNo=<%=hotel.getHotelNo()%>&roomNo=<%=room.getRoomNo() %>"  method="post"> 
+        <form action="${path }/refund.insert?reMemNo=${ reser.reMemNo }&hotelNo=${ hotel.hotelNo }&reserNo=${ reser.reserNo }&roomNo=${ room.roomNo }"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            <input type="hidden" name="refundPrice" value="<%=reser.getPaymentPrice() %>">
-            <input type="hidden" value="<%= reser.getReserNo() %>" name="reserNo"/>
+            <input type="hidden" name="refundPrice" value="${ reser.paymentPrice }">
+            <input type="hidden" value="${ reser.reserNo }" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
                 <option>신한은행</option>
