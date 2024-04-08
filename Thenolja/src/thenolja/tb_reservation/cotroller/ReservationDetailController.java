@@ -40,7 +40,7 @@ public class ReservationDetailController extends HttpServlet {
 
 
 		int reserNo = Integer.parseInt(request.getParameter("reserNo"));
-		System.out.println(reserNo);
+		
 		Reservation reser = new ReserService().selectReserNo(reserNo);
 		
 		//System.out.println(couponNo);
