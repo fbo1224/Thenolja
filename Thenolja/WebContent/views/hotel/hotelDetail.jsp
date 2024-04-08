@@ -249,7 +249,8 @@ svg{
 </head>
 <body>
 	<%@ include file="./common/searchForm.jsp" %>
-	<div id="detail-wrap">	
+	<div id="detail-wrap">
+		
 		<c:choose>
 			<c:when test="${ hotelDetail ne null }">
 			<div id="detail-content">
@@ -688,7 +689,6 @@ svg{
         			+'다음'
         			+'</button>');
         		}
-        		
         		
 			},
 			error: function(result){

@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.HotelCard, thenolja.common.model.vo.PageInfo" %>    
-<%
-	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("hotelList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	String loginStatus = (String)request.getAttribute("loginStatus");
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,86 +78,98 @@
 	<%@ include file="./common/searchForm.jsp" %>
 	<div id="wrap">
 		<div id="content-2-lists">
-			<%if(list.isEmpty()){ %>
+			<c:choose>
+				<c:when test="${ empty hotelList }">
 				<div>
 					<h3>조회된 호텔이 없습니다.</h3>
 				</div>	
-				<%} else { %>
-					<%for(HotelCard hc : list){ %>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="hc" items="${ hotelList }">
 					<div class="cards">
-						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
-							<img class="card-img" src="<%= hc.getHotelPath() %>">
+						<div class="card-imgDiv" id="${ hc.hotelNo }">
+							<img class="card-img" src="${ hc.hotelPath }">
 						</div>
 	  					<div class="card-info">
-							<h4><%= hc.getHotelLocation() %></h4>
-							<p>숙소명 : <%= hc.getHotelName() %></p>
-							<p>종류 : <%= hc.getHotelCategory() %><p>
-							<%if(loginUser != null && loginUser.getMemStatus().equals("Y")){ %>
-								<p><span>★</span><span>4.8</span></p>
-								<p>가격 : <%= hc.getRoomPrice() %></p>
-							<%} else if(loginStatus != null && loginStatus.equals("A")) {%>
-								<div class="option-btns-room" align="center">
-									<a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실추가</a>
-									<a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo=<%= hc.getHotelNo() %>">객실정보수정</a>
-									<a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo=<%= hc.getHotelNo() %>" >객실삭제</a>
-								</div>
-								<div class="option-btns" align="center">
-									<a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo=<%= hc.getHotelNo() %>">숙소정보수정</a>
-									<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal" >숙소삭제</a>
-								</div>
-							<%} %>
+							<h4>${hc.hotelLocation}</h4>
+							<p>숙소명 : ${hc.hotelName}</p>
+							<p>종류 : ${hc.hotelCategory}<p>
+							<c:choose>
+								<c:when test='${ loginUser ne null and loginUser.getMemStatus().equals("Y") }'>
+									<p>가격 : ${ hc.roomPrice }</p>
+								</c:when>
+								<c:when test='${ loginStatus ne null && loginStatus.equals("A") }'>
+									<div class="option-btns-room" align="center">
+										<a class="btn btn-sm btn-primary" href="${ path }/insertForm.rooms?hotelNo=${ hc.hotelNo }">객실추가</a>
+										<a class="btn btn-sm btn-info" href="${ path }/updateListForm.rooms?hotelNo=${hc.hotelNo}">객실정보수정</a>
+										<a class="btn btn-sm btn-danger roomBtn" href="${ path }/deleteListForm.rooms?hotelNo=${hc.hotelNo  }" >객실삭제</a>
+									</div>
+									<div class="option-btns" align="center">
+										<a class="btn btn btn-info" href="${ path }/updateForm.hotels?hotelNo=${ hc.hotelNo}">숙소정보수정</a>
+										<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal" >숙소삭제</a>
+									</div>
+								</c:when>
+							</c:choose>
 	  					</div>
 	  				</div>
-					<%} %>
-  				<%} %>
+					</c:forEach>
+  				</c:otherwise>
+  			</c:choose>	
 		</div>
 		
 		<div class="paging-area" align="center">
-			<%if(loginStatus != null && loginStatus.equals("A")){ %>
-	        	<%if(currentPage > 1){ %>
+			<c:choose>
+			<c:when test='${ loginStatus ne null and loginStatus.equals("A") }'>
+	        	<c:if test="${pageInfo.currentPage gt 1}">
 	        		<button class="btn btn btn-outline-info"
-					onclick="location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>&loginStatus=A' " >이전</button>
-				<%} %>
+					onclick="location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage - 1}&${ loginStatus }' " >이전</button>
+				</c:if>
 				
-	        	<%for(int i = startPage; i <= endPage; i++){ %>
-	        		<% if(currentPage != i) { %>
+				<c:forEach var="i" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" step="1">	       
+		        		<c:choose>
+		        			<c:when test="${ pageInfo.currentPage ne i }">
+		        				<button class="btn btn btn-outline-info"
+		        				onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ i }&${ loginStatus }'" >${ i }</button>
+		        			</c:when>
+		        			<c:otherwise>
+		        			<button
+			        			class="btn btn btn-outline-info"
+			        			disabled >${ i }</button>
+		        			</c:otherwise>
+		        		</c:choose>
+	        	</c:forEach>
+	        		<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
 	        			<button class="btn btn btn-outline-info"
-	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>&loginStatus=A'" ><%= i %></button>
-	        		<%} else { %>
-	        			<button
-	        			class="btn btn btn-outline-info"
-	        			disabled ><%= i %></button>
-	        		<%} %>
-	        	<%} %>
-	        	
-	        	<%if(currentPage != maxPage){ %>
-	        		<button class="btn btn btn-outline-info"
-	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>&loginStatus=A' " >다음</button>
-	        	<%} %>
-	        	
-	        <%} else { %>	
+	        			onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage + 1 }&${ loginStatus }' " >다음</button>
+	        		</c:if>
+	        </c:when>	
 	        
-	        	<%if(currentPage > 1){ %>
+	        <c:otherwise>	
+	        	<c:if test="${pageInfo.currentPage > 1}">
 	        		<button class="btn btn btn-outline-info"
-					onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage - 1 %>' " >이전</button>
-				<%} %>
+					onclick="location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage - 1}'" >이전</button>
+				</c:if>
 				
-	        	<%for(int i = startPage; i <= endPage; i++){ %>
-	        		<% if(currentPage != i) { %>
-	        			<button class="btn btn btn-outline-info"
-	        			onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= i %>'" ><%= i %></button>
-	        		<%} else { %>
-	        			<button
-	        			class="btn btn btn-outline-info"
-	        			disabled ><%= i %></button>
-	        		<%} %>
-	        	<%} %>
+	        	<c:forEach var="i" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" step="1">	       
+		        		<c:choose>
+		        			<c:when test="${ pageInfo.currentPage ne i }">
+		        				<button class="btn btn btn-outline-info"
+		        				onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ i }'" >${ i }</button>
+		        			</c:when>
+		        			<c:otherwise>
+		        				<button
+			        			class="btn btn btn-outline-info"
+			        			disabled >${ i }</button>
+		        			</c:otherwise>
+		        		</c:choose>
+	        	</c:forEach>
 	        	
-	        	<%if(currentPage != maxPage){ %>
-	        		<button class="btn btn btn-outline-info"
-	        		onclick=" location.href='<%= contextPath %>/hotelList.hotels?currentPage=<%= currentPage + 1 %>' " >다음</button>
-	        	<%} %>
-	        <%} %>	
+	        	<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+	        			<button class="btn btn btn-outline-info"
+	        			onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage + 1 }'" >다음</button>
+	        		</c:if>
+	        </c:otherwise>
+	        </c:choose>	
 	     </div>
 
 		<!-- The Modal -->
@@ -196,7 +199,6 @@
 		
 		<script>
 		let hotelNo;
-		const loginStatus = '<%= loginStatus %>';
 		
 		function deleteAjax(){
 			$.ajax({
@@ -227,12 +229,12 @@
 										+'<p>숙소명 : '+result.hotelList[i].hotelName+'</p>'
 										+'<p>종류 : '+result.hotelList[i].hotelCategory+'</p>'
 											+'<div class="option-btns-room" align="center">'
-												+' <a class="btn btn-sm btn-primary" href="<%= contextPath %>/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
-												+' <a class="btn btn-sm btn-info" href="<%= contextPath %>/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
-												+' <a class="btn btn-sm btn-danger roomBtn" href="<%= contextPath %>/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
+												+' <a class="btn btn-sm btn-primary" href="${ path }/insertForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실추가</a>'
+												+' <a class="btn btn-sm btn-info" href="${ path }/updateListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실정보수정</a>'
+												+' <a class="btn btn-sm btn-danger roomBtn" href="${ path }/deleteListForm.rooms?hotelNo="'+result.hotelList[i].hotelNo+'>객실삭제</a>'		
 											+'</div>'
 											+'<div class="option-btns" align="center">'
-												+' <a class="btn btn btn-info" href="<%= contextPath %>/updateForm.hotels?hotelNo="'+result.hotelList[i].hotelNo+'>숙소정보수정</a>'
+												+' <a class="btn btn btn-info" href="${ path }/updateForm.hotels?hotelNo="'+result.hotelList[i].hotelNo+'>숙소정보수정</a>'
 												+' <a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal">숙소삭제</a>'
 											+'</div>'
 									+'</div>'
@@ -262,7 +264,7 @@
 				});
 		}
 			function move(currentPage){
-				location.href="<%= contextPath %>/hotelList.hotels?currentPage="+currentPage+"&loginStatus=A";
+				location.href="${ path }/hotelList.hotels?currentPage="+currentPage+"${loginUser.memStatus}";
 			}
 			
 			$(document).on('click', '.hotelBtn', function(e){
@@ -278,7 +280,7 @@
 		
 		<script>
 			$('.card-imgDiv').click(function(e){
-				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id');
+				location.href = '${ path }/select.hotels?hotelNo='+ $(this).attr('id');
 			});
 		</script>
 	</div>
