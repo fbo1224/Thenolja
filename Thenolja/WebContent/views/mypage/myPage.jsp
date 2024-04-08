@@ -169,9 +169,7 @@
 	
 	                </form>
 					
-					<!-- input값을 servlet으로 넘기기 -->
-	
-	                <!-- 이미지 클릭하면 input요소 선택되게-->
+	                <!-- 이미지 클릭하면 input요소 선택-->
 	                <script>
 	                    $(function(){
 	                        $('#profileChange').hide();
