@@ -173,10 +173,9 @@
 		location.href = '<%=contextPath%>/loginPage';
 	 </script>
 	<% } else {%>
-    <!-- 0. 전체 감싸는 div 시작 -->
-    <div id="content">
     
-    	<!-- 0-1. 왼쪽 상단 '<' 숙소예약 시작 -->
+    <div id="content">
+    	
         <div id="content_title">
         
             <div id="left_img">
@@ -187,14 +186,9 @@
             	<h2>숙소 예약</h2>
             </div>
         </div>
-        <!-- /0-1. 왼쪽 상단 '<' 숙소예약 끝 -->
-        
-       <!-- 0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 시작 -->
+       
 		<div id="detail">
-		
-			<!-- 0-2-1. 호텔 정보 -->
 			<div id="reser_info">
-				
 	    		<div id="reser_hotel_img">
 	    			<img src="<%=hotel.getHotelPath() %>" alt="" width="300px" height="300px">
     			</div>
@@ -210,12 +204,7 @@
 			        
     			</div>
 			</div>
-			<!-- /0-2-1. 호텔 정보 끝 -->
-			
-			<!-- 0-2-2. 가격 & 예약자 & 쿠폰 & 결제 정보 시작 -->
 	        <div id="price_info">
-	        	
-	        	<!-- 0-2-2-1. 가격정보 시작 -->
 	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
@@ -227,7 +216,6 @@
 						</tr>
 	               </table>
 				</div>
-				<!-- /0-2-2-1. 가격정보 끝 -->
 
 				<form action="<%= contextPath %>/insert.reser?memNo=<%=loginUser.getMemNo() %>&hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
 					<input id="hidePrice" type="hidden" name="paymentPrice" value="<%=room.getRoomPrice()%>">
@@ -235,7 +223,7 @@
 					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
 					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
 					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
-					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
+					
 					<div id="reser_mem_info">
 		                <br>
 						<h3 id="info" style="margin-left: 50px;">예약자 정보</h3>
@@ -255,9 +243,8 @@
 						</div>
 						
 	                </div>
-	                <!-- /0-2-2-2. 예약자 정보 끝 -->
 	                
-	                <!-- 0-2-2-3. 쿠폰 정보 시작 -->
+	                
 	                <div id="reser-coupon">
 	                
 	                    <br>
@@ -270,9 +257,7 @@
 	                    <button type="button" data-toggle="modal" data-target="#myModal" id="in-coupon">쿠폰 적용</button>
 	           
 	                </div>
-	                <!-- /0-2-2-3. 쿠폰 정보 끝 -->
-	                
-	                <!-- 0-2-2-4. 결제 정보 시작 -->
+	               
 	                <div id="reser_pay">
 	                    <h3>결제 수단</h3>
 	                    <br>
@@ -281,21 +266,15 @@
 	                    <h5>신한은행 110-424-432780 예금주((주)더놀자)</h5>
 	                    <h5 style="color:red">"반드시 예약자 성함으로 입금해주세요"</h5>
 	                </div>
-	                <!-- /0-2-2-4. 결제 정보 끝 -->
 	                
-	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
 	                    <button type="submit" id="reser-btn"><span id="lastPay"><%=room.getRoomPrice() %></span>원 결제하기</button>
 	                </div>
 
-	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
 	            </form>
 			</div>
-			<!-- /0-2-2. 가격 & 예약자 & 쿠폰 & 결제 정보 끝 -->
 		</div>
-		<!-- /0-2. 호텔정보 & 가격 & 예약자 & 쿠폰 & 결제  정보 끝 -->
     </div>
-    <!-- /0. 전체 감싸는 div 끝 -->
    
     <script>
     
@@ -339,15 +318,6 @@
     		}
     		
     	});
-    	/*
-    	function getPercent(){
-
-    		let abc = $('#percent1').html();
-    		console.log(abc);
-    		
-    		
-    	}*/
-    	
     	
     });
 
@@ -362,10 +332,7 @@
 		percent = $(e).children().eq(4).text();
 		
 		// console.log(parseInt("2%"));
-		//$('#myModal').hide('.modal-content');
-		//$('#myModal').css('display', 'none');
-		//$('.show').css('display', 'none');
-		// console.log(coupon);
+		
 		$('#couponInput').val(content +' '+ percent + ' 할인!');
 		coupon.couponNo = couponNo;
 		coupon.content = content;

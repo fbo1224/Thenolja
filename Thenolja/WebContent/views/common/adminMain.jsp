@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>  
-<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
-<%
-	Date date = new Date();
-	SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy년 M월 d일");
-	String today = simpleDate.format(date);
-%>
+    pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,7 +126,7 @@
     
     <div id="wrap">
         <div id="header">
-	        <%@ include file="menubar.jsp" %> 
+        	<jsp:include page="menubar.jsp"></jsp:include>
         </div>
                
         <div id="content">
@@ -181,7 +177,7 @@
         </div>
    	 </div>
      <div id="footer">
-       	<%@ include file="footer.jsp" %> 
+     	<jsp:include page="footer.jsp"></jsp:include>
      </div>
     
     
@@ -323,13 +319,14 @@
     
  <!-- 오늘 가입자 명단 모달 -->   
  <div class="modal" id="myModal">
-
+	<c:set var="current" value="<%= new java.util.Date() %>" />
+	
     <div class="modal-dialog">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-            <p class="modal-title"><%=today %> 가입자</p>
+            <p class="modal-title"><fmt:formatDate value="${ current }" type="both" pattern="yyyy.MM.dd(E)" /> 가입자</p>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -362,7 +359,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-            <p class="modal-title"><%=today %> 예약자</p>
+            <p class="modal-title"><fmt:formatDate value="${ current }" type="both" pattern="yyyy.MM.dd(E)" /> 예약자</p>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
