@@ -88,8 +88,8 @@
                     </div>
         
 			          <div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='{path}/oldestList.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='{path}/selectMember?currentPage=1'">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/selectMember?currentPage=1'">최신순</button>
 					</div>
 
                 </div>
@@ -130,79 +130,33 @@
                        </c:choose>
                         
                        
-              
-           
-                       	
-                       	<% if(oldList!=null &&oldList.isEmpty()) { %>
+              		  <c:choose>
+              		  	<c:when test="${ requestScope.memberOldsetList ne null && empty requestScope.memberOldsetList }">
                        	   <tr>
                        	   		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
-                       	  </tr>
-                       <% } else { %>
-                       	<% if(oldList != null) { %>
-                       		<%for(AdminMember m : oldList) { %>
-                       	<tr>
-	                       	   		<td><%= m.getMemNo() %></td>
-	                       	   		<td><%= m.getMemId() %></td>
-	                       	   		<td><%= m.getNickName() %></td>
-	                       	   		<td><%= m.getGradeName() %></td>
-	                       	   		
-		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(<%= m.getMemNo() %>)">조회</button></td>
-		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%= m.getMemNo() %>)">삭제</button></td>
-		                            
-	                       	  </tr>
-                       		<%} %>
-                       	<% } %>
-                       <% } %>
-                          
+                       	  </tr>              		  	
+              		  	</c:when>
+              		  	<c:when test="${requestScope.memberOldsetList ne null }">
+                       		<c:forEach var="m" items="${ requestScope.memberOldsetList }">
+	                       		<tr>
+		                       	   		<td>${m.memNo}</td>
+		                       	   		<td>${m.memId}</td>
+		                       	   		<td>${m.nickName}</td>
+		                       	   		<td>${m.gradeName}</td>
+		                       	   		
+			                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#memberModal" onclick="detailMem(${m.memNo})">조회</button></td>
+			                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(${m.memNo})">삭제</button></td>
+			                            
+		                       	 </tr>              		  		
+              		  		</c:forEach>
+              		  	</c:when>
+              		  </c:choose>
                           
                         </tbody>
                       </table>
                 </div>
 
-                <div class="paging-area" align="center";>
                 
-				
-				<% if(list!=null) { %>
-				<%-- selectMember 페이징처리.... --%>
-                	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='{path}/selectMember?currentPage={path - 1}'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<{path}/selectMember?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='{path}/selectMember?currentPage={path + 1}'">></button>
-                  <%} %>
-                  
-              <% } else { %>
-              	<%--oldestList.do? 페이징처리..... --%>
-                    <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<{path}/oldestList.do?currentPage={path - 1}"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='{path}/oldestList.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='{path}/oldestList.do?currentPage=<{path + 1}'">></button>
-                  <%} %>
-                  
-                  <%} %>
-              	
-                  
-                </div>
-      
         
             </div>
         </div>
@@ -232,7 +186,7 @@
   				//$('.memNo').text(result);
   				if(result == null){
   					alert('회원이 존재하지 않습니다.');
-  					location.href = '{path}/selectMember?currentPage=1';
+  					location.href = '${path}/selectMember?currentPage=1';
   					
   				} else {
   						let resultStr = '';
@@ -300,7 +254,7 @@
 			             type : 'get',
 			             success : function(result){
 			             alert(result.message);
-			             location.href = '{path}/selectMember?currentPage=1';
+			             location.href = '${path}/selectMember?currentPage=1';
 			             
 			             }
 			             

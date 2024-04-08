@@ -104,7 +104,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+	<%--<%@ include file="../common/menubar.jsp" %> --%>
+	<jsp:include page="../common/menubar.jsp" />
 
 	
       
@@ -114,7 +115,7 @@
 					<span>로그인</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/login" method="post">
+					<form action="${ path }/login" method="post">
 						<div id="content1">
 							<input type="text" name="memId" id="id" class="input" placeholder="아이디" maxlength="12" autofocus required>
 							<input type="password" name="memPwd" id="password" class="input" placeholder="비밀번호" maxlength="15" required>
@@ -122,9 +123,9 @@
 
 						<div id="content2" class="content">
 							<br><br>
-							<a href="<%= contextPath %>/findIdPage">아이디 찾기</a>
+							<a href="${ path }/findIdPage">아이디 찾기</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="<%= contextPath %>/findPwdPage">비밀번호 찾기</a>
+							<a href="${ path }/findPwdPage">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">
