@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 %>
@@ -172,7 +172,7 @@ input[type="text"], input[type="password"] {
  <%@ include file="../common/menubar.jsp" %>
 
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
-<%-- <script type="text/javascript" src="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script> --%>
+<script type="text/javascript" src="<%=contextPath%>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가(경로확인) -->
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js" charset="utf-8"></script> -->
 <script type="text/javascript">
@@ -412,4 +412,4 @@ function countText(){
 	</div>
 
 </body>
-</html>
+</html> 

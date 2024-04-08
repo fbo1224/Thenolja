@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
-<%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();	
-%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,16 +41,26 @@
    	 <h2 align="center">공지사항</h2>
     <br>
     <!-- 등록 버튼 영역 START -->
-	<a id="btn_reg" class="btn btn-primary" href="<%=contextPath%>/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
+	<a id="btn_reg" class="btn btn-primary" href="${"path"} }/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
+  
+   
+   
+   	
     <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
-	    <script>
-	    	$("#btn_reg").show();
-	    </script>
-	<%} else{ %>
-	    <script>
-	    	$("#btn_reg").hide();
-	    </script>
-	<% } %>  
+	    
+	    
+	    <c:choose>
+		<c:when loginUser!="${ Status eq A }"> <!-- if블럭 -->
+			$("#btn_reg").show();
+		</c:when>
+		<c:when test="${ value2 eq 300 }"> <!-- else if블럭 -->
+			<b>반갑습니다.</b>
+		</c:when>
+		<c:otherwise><!-- else블럭 -->
+				$("#btn_reg").hide();	
+		</c:otherwise>
+	</c:choose>
+	  
    	<!-- 등록 버튼 영역 END -->
    	
      <!-- 관리자가 아니면 등록하기 버튼 숨김처리 -->
@@ -85,7 +90,25 @@
 
          <!-- 공지사항이 있을수도있고 없을 수도 있음 -->
          <!-- 비어있음    비어있는지 확인   위 상단 null값 이들어있고 list참조 null값이 들어있음 nullporinException 발생 -->
-         <% if(list.isEmpty()) { %>   
+       		 <c:choose>
+       		 	<c:when test="${ empty noticeList }">
+        			<tr>
+						<td colspan="6">등록된 게시글이 존재하지 않습니다.</td>
+					</tr>
+        		</c:when>
+				<c:otherwise>
+					<c:forEach var="p" items="${ requestScope.noticeList }" varStatus="s">
+        				<tr>
+     					   <td>${ n.NoticeNo }</td>
+							<td>${ n.NoticeTitle }</td>
+							<td>${ n.Writer }</td>
+							<td>${ n.CreateDate }</td>
+							<td>${ n.ViewCount }</td>
+							<td>${ n.Status }</td>
+        				</tr>
+					</c:forEach>
+				</c:otherwise>
+       		 </c:choose>  
          	<tr class="align_center">
          		<th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
          	</tr>
@@ -204,4 +227,4 @@
 <body>
 
 </body>
-</html>
+</html> 

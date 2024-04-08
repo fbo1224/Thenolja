@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.event.model.vo.Event" %>
      <%
@@ -147,11 +147,11 @@ img {
         <!-- 새롭게 조회해온 USER_NO컬럼값을 가지고 비교    매핑값? SERVLET키값= -->
 	 
       
-     <%--  <a href="<%= contextPath %>/updateForm.event?eventNo=<%= event.getEventNo() %>"   
+      <a href="<%= contextPath %>/updateForm.event?eventNo=<%= event.getEventNo() %>"   
          class="btn btn-sm btn-warning">수정하기</a>
 
     	<a href="<%= contextPath %>/delete.event?eventNo=<%= event.getEventNo() %>"
-    	class="btn btn-sm btn-danger">삭제하기</a> --%>
+    	class="btn btn-sm btn-danger">삭제하기</a>
 	</div>	
 
 </div>
@@ -161,4 +161,4 @@ img {
    <%@ include file="../common/footer.jsp" %>
 
 </body>
-</html>
+</html> 
