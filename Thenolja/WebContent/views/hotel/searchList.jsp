@@ -111,16 +111,15 @@
 				</c:otherwise>
  			</c:choose>
 		</div>
-	
 		<div class="paging-area" align="center">
-			<c:if test="${ pageInfo.getCurrentPage() > 1}" >
+			<c:if test="${ pageInfo.currentPage > 1}" >
         		<button class="btn btn btn-outline-info"
-				onclick="pageMove(${ pageInfo.getCurrentPage()-1 })" >이전</button>
+				onclick="pageMove(${ pageInfo.currentPage-1 })" >이전</button>
 			</c:if>
 			
-			<c:forEach var="i" begin="${ pageInfo.getStartPage() }" end="${pageInfo.getEndPage() }" step="1">
+			<c:forEach var="i" begin="${ pageInfo.startPage }" end="${pageInfo.endPage }" step="1">
 				<c:choose>
-        			<c:when test="${ pageInfo.getCurrentPage() ne i}">
+        			<c:when test="${ pageInfo.currentPage ne i}">
 	        			<button class="btn btn btn-outline-info"
 	        			onclick="pageMove(${ i })">${ i }</button>
         			</c:when>
@@ -132,19 +131,19 @@
         		</c:choose>
         	</c:forEach>
         	
-        	<c:if test="${ pageInfo.getCurrentPage() ne pageInfo.getMaxPage() }">
+        	<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
         			<button class="btn btn btn-outline-info"
-        			onclick="pageMove(${pageInfo.getCurrentPage() + 1});" >다음</button>
+        			onclick="pageMove(${pageInfo.currentPage + 1});" >다음</button>
         	</c:if>
 	     </div>
 </div>
 	<script>
 			$('.card-imgDiv').click(function(e){
-				location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.getDaterange() }&location=${ searchData.getLocation() }&people=${ searchData.getMaxPeople() }";
+				location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople }";
 			});
 			
 			function pageMove(currentPage){
-				 location.href="${path}/searchList.hotels?currentPage="+currentPage+"&daterange=${ searchData.getDaterange()}&location=${ searchData.getLocation() }&people=${ searchData.getMaxPeople()}";
+				 location.href="${path}/searchList.hotels?currentPage="+currentPage+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople}";
 					 
 			}
 			

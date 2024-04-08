@@ -1,34 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="thenolja.tb_hotel.model.vo.*, java.util.Calendar, java.text.SimpleDateFormat" %>   
-    
-    <%
-     	DetailHotel dh = (DetailHotel)request.getAttribute("hotelDetail");
-		
-		SimpleDateFormat newForm = new SimpleDateFormat("yy/MM/dd");
-		
-		Calendar cal = Calendar.getInstance();
-		
-		//오늘 날짜
-		String today = newForm.format(cal.getTime());
+<%@ page import="thenolja.tb_hotel.model.vo.*, java.util.*" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-		// 내일 날짜
-		cal.add(Calendar.DATE, 1);
-		String tomo = newForm.format(cal.getTime());
-		
-		String dateRangeForm = today + " ~ " + tomo;
-		
-		// System.out.println(dateRangeForm);
-		
-		// 해당 호텔 위치
-		// System.out.println(dh.getHotelLocation());
-		
-		int defaultPeople = 2;
-		// Date
-		// people 2 기본적으로 2로 설정
-		// location
-    	
-    %>
+    <c:set var="nowDate" value="<%= new Date() %>"/>
+    
+    <fmt:formatDate value="${ nowDate }" pattern="yy/MM/dd" var="toDay"/>
+    
+    <c:set var="tomo" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
+	<fmt:formatDate value="${tomo}" pattern="yy/MM/dd" var="tomorrow" />
+	
+	<c:set var="defaultPeople" value="2" />
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -263,152 +248,103 @@ svg{
 </style>
 </head>
 <body>
+	
 	<%@ include file="./common/searchForm.jsp" %>
 	<div id="detail-wrap">
-		<%if(dh != null) { %>
-		<div id="detail-content">
-			<div id="detail-content-title">
-				<h3>
-					<span><%= dh.getHotelName() %></span> <span>호텔</span>
-				</h3>
-			</div>
-			<div id="detail-content-img">
-				<img src="<%= dh.getHotelPath() %>" alt="pic">
-			</div>
-			
-			<div id="detail-content-imgInfo">
-				<div>
-					 <span>★</span>
-					 <span><%= dh.getCountReviews() %> 개의 리뷰</span>
-					 <span><a href="#reviews">리뷰조회</a></span>
+	${ toDay  }
+	${ tomorrow }
+	
+		<c:choose>
+			<c:when test="${ hotelDetail ne null }">
+			<div id="detail-content">
+				<div id="detail-content-title">
+					<h3>
+						<span>${hotelDetail.hotelName}</span> <span>호텔</span>
+					</h3>
 				</div>
-				<div>
-					<span><%= dh.getHotelCate() %></span>
+				<div id="detail-content-img">
+					<img src="${ hotelDetail.hotelPath }" alt="pic">
 				</div>
-			</div>
-			
-			<div id="detail-content-services">
-				<ul>
-					<%for(ServiceList sl : dh.getSerList()) { %>
-						<li><%= sl.getServiceName() %></li>
-					<% } %>
-					
-				</ul>
 				
-				<!-- 동혁 시작-->
-				<% if(loginUser != null) { %> 
-					<div id="favorite">
-						<label for="checkbox" id="label"></label>
+				<div id="detail-content-imgInfo">
+					<div>
+						 <span>★</span>
+						 <span>${hotelDetail.countReviews} 개의 리뷰</span>
+						 <span><a href="#reviews">리뷰조회</a></span>
 					</div>
+					<div>
+						<span>${ hotelDetail.hotelCate }</span>
+					</div>
+				</div>
+				
+				<div id="detail-content-services">
+					<ul>
+						<c:forEach var="sl" items="${ hotelDetail.serList }">
+							<li>${ sl.serviceName}</li>
+						</c:forEach>
+					</ul>
 					
-					<script>
-						window.onload = function(){
-							$.ajax({
-								url : 'selectHeart',
-								type : 'get',
-								data : {
-				            		   memNo : <%= loginUser.getMemNo() %>,
-				            		   hotelNo : <%= dh.getHotelNo() %>
-				            		   },
-								success: function(result){
-									console.log(result);
-									let resultStr;
-									
-									if(result != 0){
-										resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" checked hidden>'+
-								        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
-									} else {
-										resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden>'+
-								        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
-									}
-									
-									$('#label').html(resultStr);
-								}
-							})
-						}
-							
-					// 클릭할 시 insert, delete 시작
-		               function heartClick(){
-		            	   const cb = document.getElementById('checkbox');
-		            	   
-			            	   var hc = '';
-			            	   if(cb.checked == true){
-			                       hc = 'insertheart';
-			                       
-			            	   } else {
-			            		   hc = 'deleteheart';
-			            	   }
-		                   
-		            	   $.ajax({
-		            		   url : hc,
-		            		   type: 'post',
-		            		   data : {
-		            		   memNo : <%= loginUser.getMemNo() %>,
-		            		   hotelNo : <%= dh.getHotelNo() %>
-		            		   },
-		            		   success: function(result){
-		            			   console.log(result);
-		            		   },
-		            		   error: function(e){
-		           				console.log(e);
-		           			}
-		            	   })
-		                }
-		            // 클릭할 시 insert, delete 끝
-		            
-					</script>
-				<% } %>
-				<!-- 동혁 끝 -->
-			</div>
-			
-			<div id="detail-content-rooms">
-				<h3 style="text-align: center; margin-top: 5px;">객실</h3>
-					<%for(RoomInfo ri : dh.getRoomList()) { %>
-					<div class="content-rooms-card">
-						<img src="<%= ri.getRoomImg() %>">
-						<div class="room-infos">
-							<h4><%= ri.getRoomName() %></h4>
-							<p>입실시간 : <%= ri.getCheckInTime() %></p>
-							<p>퇴실시간 : <%= ri.getCheckOutTime() %></p>
-							<p>가격 : <%= ri.getRoomPrice() %></p>
+					<!-- 동혁 시작-->
+					<c:if test="${ loginUser ne null }"> 
+						<div id="favorite">
+							<label for="checkbox" id="label"></label>
 						</div>
-						<div>
-							<%if(searchDataForm != null) {%>
-								<p>쿠폰적용가능</p>
-								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
-								<button class="btn btn-sm btn-info">객실 예약</button></a>
-								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= searchDataForm.getDaterange()%>&location=<%= searchDataForm.getLocation() %>&people=<%= searchDataForm.getMaxPeople()%>">
-								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
-							<%} else { %>
-							
-								<p>쿠폰적용가능</p>
-								<a href="<%=contextPath%>/insertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= dateRangeForm %>&location=<%= dh.getHotelLocation() %>&people=<%= defaultPeople %>">
-								<button class="btn btn-sm btn-info">객실 예약</button></a>
-								<a href="<%=contextPath%>/nonInsertReservation?hotelNo=<%= dh.getHotelNo()%>&roomNo=<%= ri.getRoomNo() %>&daterange=<%= dateRangeForm %>&location=<%= dh.getHotelLocation() %>&people=<%= defaultPeople %>">
-								<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
-						 	<%} %>
-						</div>
-					</div>			
-					<%} %>
+					</c:if>
+					<!-- 동혁 끝 -->
+				</div>
+				
+				<div id="detail-content-rooms">
+					<h3 style="text-align: center; margin-top: 5px;">객실</h3>
+						<c:forEach var="ri" items="${ hotelDetail.roomList }">
+						<div class="content-rooms-card">
+							<img src="${ ri.roomImg}">
+							<div class="room-infos">
+								<h4>${ ri.roomName }</h4>
+								<p>입실시간 : ${ ri.checkInTime }</p>
+								<p>퇴실시간 : ${ ri.checkOutTime }</p>
+								<p>가격 : ${ ri.roomPrice }</p>
+							</div>
+							<div>
+								<c:choose>
+									<c:when test="${ searchDataForm ne null }">
+										<p>쿠폰적용가능</p>
+										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchDataForm.daterange }&location=${ searchDataForm.location}&people=${searchDataForm.maxPeople}">
+										<button class="btn btn-sm btn-info">객실 예약</button></a>
+										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchDataForm.daterange }&location=${ searchDataForm.location}&people=${searchDataForm.maxPeople}">
+										<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
+									</c:when>
+									<c:otherwise>
+										<p>쿠폰적용가능</p>
+										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ defaultPeople }">
+										<button class="btn btn-sm btn-info">객실 예약</button></a>
+										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ defaultPeople }">
+										<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
+									</c:otherwise>
+							 	</c:choose>
+							</div>
+						</div>			
+						</c:forEach>
+				</div>
+				
+				<div id="detail-content-intro">
+					<h3>숙소소개</h3>
+					<p>${ hotelDetil.hotelIntro}</p>
+				</div>
+				
+				<div id="detail-content-cancel">
+					<h3>예약 취소 및 환불 규정</h3>
+					<p>
+					    자세한 사항은 더놀자 홈페이지 고객센터의 자주 묻는 질문에서 확인해주세요.
+					</p>
+				</div>	
+		  </div>
+		</c:when>
+		<c:otherwise>
+			<div>
+				<h1>찾을 수 없습니다.</h1>
 			</div>
-			
-			<div id="detail-content-intro">
-				<h3>숙소소개</h3>
-				<p><%= dh.getHotelIntro() %></p>
-			</div>
-			
-			<div id="detail-content-cancel">
-				<h3>예약 취소 및 환불 규정</h3>
-				<p>
-				    자세한 사항은 더놀자 홈페이지 고객센터의 자주 묻는 질문에서 확인해주세요.
-				</p>
-			</div>	
-	</div>
-			
-	</div>
-		<%} else { %>
-			<h1>찾을 수 없습니다.</h1>
-		<%} %>
+		</c:otherwise>
+	</c:choose>
 	</div>
 	
 	<style>
@@ -683,9 +619,9 @@ svg{
 		                <div class="chat-header clearfix">
 		                    <div class="row">
 		                        <div class="col-lg-6">
-		                            <img src="<%= dh.getHotelPath() %>" alt="avatar">
+		                            <img src="${hotelDetail.hotelPath}" alt="avatar">
 		                            <div class="chat-about">
-		                                <h6 class="m-b-0"><%= dh.getHotelName() %></h6>
+		                                <h6 class="m-b-0">${hotelDetail.hotelName}</h6>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -711,7 +647,7 @@ svg{
 		$.ajax({
 			url: "reviewList.jqAjax",
 			data: {
-				hotelNo : '<%= dh.getHotelNo() %>',
+				hotelNo : ${hotelDetail.hotelNo},
 				currentPage: value,
 			},
 			type: 'get',
@@ -768,7 +704,7 @@ svg{
 		$.ajax({
 			url: "commentAdmin.jqAjax",
 			data: {
-				hotelNo: '<%= dh.getHotelNo() %>'
+				hotelNo: ${hotelDetail.hotelNo}
 			},
 			type: 'get',
 			success: function(result){
@@ -802,12 +738,62 @@ svg{
 	$(function(){
 		reviewAjax(1);
 	});
+	
+	
+	window.onload = function(){
+		$.ajax({
+			url : 'selectHeart',
+			type : 'get',
+			data : {
+	        		   memNo : ${ loginUser.memNo },
+	        		   hotelNo : ${ hotelDetail.hotelNo }
+        		   },
+			success: function(result){
+				console.log(result);
+				let resultStr;
+				
+				if(result != 0){
+					resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" checked hidden>'+
+			        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
+				} else {
+					resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden>'+
+			        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
+				}
+				
+				$('#label').html(resultStr);
+			}
+		})
+	}
 		
+	// 클릭할 시 insert, delete 시작
+   function heartClick(){
+	   const cb = document.getElementById('checkbox');
+	   
+    	   var hc = '';
+    	   if(cb.checked == true){
+               hc = 'insertheart';
+               
+    	   } else {
+    		   hc = 'deleteheart';
+    	   }
+    	   
+	   $.ajax({
+		   url : hc,
+		   type: 'post',
+		   data : {
+		   memNo : ${ loginUser.memNo },
+		   hotelNo : ${ hotelDetail.hotelNo }
+		   },
+		   success: function(result){
+			   console.log(result);
+		   },
+		   error: function(e){
+				console.log(e);
+			}
+	   })
+    }
+	// 클릭할 시 insert, delete 끝
 	</script>
-	
-
-	
-	
 	
 </body>
 </html>
