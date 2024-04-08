@@ -107,6 +107,7 @@
 </head>
 <body>
    	<jsp:include page="../common/menubar.jsp"/>
+   	<c:set var="path" value="${ pageContext.request.contextPath }"/>
     
     <c:if test="${ empty sessionScope.loginUser }">
 		<form action="${path }/login" method="post"></form>

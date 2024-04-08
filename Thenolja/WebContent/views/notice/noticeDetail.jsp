@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice" %>
      <%
@@ -112,11 +112,11 @@
         <!-- 새롭게 조회해온 USER_NO컬럼값을 가지고 비교    매핑값? SERVLET키값= -->
 	 
       
-     <%--  <a href="<%= contextPath %>/updateForm.notice?noticeNo=<%= notice.getNoticeNo() %>"   
+      <a href="<%= contextPath %>/updateForm.notice?noticeNo=<%= notice.getNoticeNo() %>"   
          class="btn btn-sm btn-warning">수정하기</a>
 
     	<a href="<%= contextPath %>/delete.notice?noticeNo=<%= notice.getNoticeNo() %>"
-    	class="btn btn-sm btn-danger">삭제하기</a> --%>
+    	class="btn btn-sm btn-danger">삭제하기</a>
 	</div>	
 	<br>
 	<br><br>
@@ -124,4 +124,4 @@
 </div>
 
 </body>
-</html>
+</html> 
