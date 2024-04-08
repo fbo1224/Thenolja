@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="thenolja.tb_hotel.model.vo.SearchData" %>
-    <%
-    // searchList servlet에서 searchData 넘겨줌 
-    // searchData => searchDataForm에 저장
-    
-    SearchData searchDataForm = null;
-	if(request.getAttribute("searchData") != null){
-		searchDataForm = (SearchData)request.getAttribute("searchData");
-	}
-   		
-    %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,21 +45,23 @@
 </head>
 <body>
 
-<%@ include file="/views/common/menubar.jsp" %>
+<jsp:include page="/views/common/menubar.jsp" />
 
 <div id="content-1">
-	<form id="select-form" action="<%= contextPath %>/searchList.hotels" method="get">
-		<%if(searchDataForm != null){ %>
+	<form id="select-form" action="${ path }/searchList.hotels" method="get">
+		<c:choose>
+		<c:when test="${ searchDataForm ne null }" >
 			<div style="display: inline-block;">
 				<input type="text" name="daterange" readonly
-				required value="<%= searchDataForm.getDaterange() %>" />	
+				required value="${ searchDataForm.getDaterange() }" />	
 			</div>
-			<span id="date"><%= searchDataForm.getDaterange() %></span>
+			<span id="date">${ searchDataForm.getDaterange() }</span>
 			<input required class="form-control" id="people-input"
-			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요."  value="<%= searchDataForm.getMaxPeople() %>" >
+			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요."  value="${ searchDataForm.getMaxPeople() }" >
 			<select id="locations" name="location">
 			</select>
-		<%} else { %>
+		</c:when>
+		<c:otherwise>
 			<div style="display: inline-block;">
 				<input class="form-control" type="text" name="daterange" required/>
 			</div>
@@ -76,7 +70,8 @@
 			 type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요." >
 			<select id="locations" name="location">
 			</select>
-		<%} %>
+		</c:otherwise>
+		</c:choose>	
 		<input type="hidden" name="currentPage" value="1">
 		<input class="btn btn btn-info" id="search" type="submit" value="검색">
 	</form>
@@ -124,13 +119,13 @@ const toDay = new Date();
 	    			$('#locations').append('<option value="'+result[i].trim()+'">'+result[i].trim()+'</option>');
 	    		}
 	    		
-	    		<% if(searchDataForm != null) { %>
+	    		<c:if test="${searchDataForm ne null}">
 	    			$('#locations').children().each(function(idx, item){
-	    				if($(item).val() == '<%= searchDataForm.getLocation() %>'){
+	    				if($(item).val() == '${ searchDataForm.getLocation() }'){
 	    					$(item).attr('selected', 'true');
 	    	    		}
 	    	  	    });
-	    		<%} %>
+	    		</c:if>
 	    	},
 	    	error: function(result){
 	    		console.log(result);
