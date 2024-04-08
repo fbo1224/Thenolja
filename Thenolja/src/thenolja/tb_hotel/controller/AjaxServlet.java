@@ -98,8 +98,6 @@ public class AjaxServlet extends HttpServlet {
 				response.getWriter().print(locList);
 			}
 		}
-		
-		
 	}
 
 	/**

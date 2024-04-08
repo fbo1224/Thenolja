@@ -47,13 +47,10 @@ public class HotelServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-			// hotelList.jsp
 			case "hotelList" : view =  hc.hotelList(request, response, loginUser); break;
 									
-			// hotelDetail
 			case "select" : view =  hc.select(request, response); break;
 		
-			// searchList
 			case "searchList" : view = hc.searchList(request, response); break;
 			
 			default : request.setAttribute("errorMsg", "올바른 접근이 아닙니다.");
@@ -67,7 +64,7 @@ public class HotelServlet extends HttpServlet {
 			case "insertForm" : view =  hc.insertForm(request, response); break;
 			
 			case "insert" : view =  hc.insert(request, response, loginUser);
-							// hotelList로 이동
+			
 							if(view.equals(request.getContextPath() + "/hotelList.hotels?currentPage=1&loginStatus="+loginUser.getMemStatus())) flag = false;	
 							break;
 			case "updateForm" : view =  hc.updateForm(request, response);  break;
@@ -84,7 +81,6 @@ public class HotelServlet extends HttpServlet {
 		} else {
 			response.sendRedirect(view);
 		}
-		
 		
 	}
 
