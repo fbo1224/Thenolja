@@ -164,11 +164,11 @@
             <div id="review_in">
              <% LocalDate currentDate = LocalDate.now();
 	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	            LocalDate day = LocalDate.parse(r.getCheckOut(), formatter);
+	            LocalDate specificDate = LocalDate.parse(r.getCheckOut(), formatter);
 	            
 	            
 	            %>
-            <% if(currentDate.isBefore(day)) { %>
+            <% if(currentDate.isBefore(specificDate)) { %>
                 <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
             <% } else { %>
             	<a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>">
