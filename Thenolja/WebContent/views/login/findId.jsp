@@ -88,19 +88,21 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-      
+	<%--<%@ include file="../common/menubar.jsp" %> --%>
+    <jsp:include page="../common/menubar.jsp" />
+    
 		<div id="wrap">
 			<div id="content">
 				<div id="loginword">
 					<span>아이디 찾기 결과</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/findId" method="post">
+					<form action="${ path }/findId" method="post">
 						<div id="content1">
 							<img src="resources/mypage/person.png" alt="프로필">
 						</div>
 						<div id="content2" class="content">
+						
 							<% if(findId == null) {  %>
 								<div>입력하신 정보로 조회된 아이디가 존재하지 않습니다.</div>
 							<% } else { %>
@@ -110,8 +112,8 @@
 
 					</form>
 					<div id="content3">
-						<button class="btn" onclick="location.href='<%= contextPath %>/loginPage'">로그인</button>
-                           <button class="btn" onclick="location.href='<%= contextPath %>/findPwdPage'">비밀번호 찾기</button>
+						<button class="btn" onclick="location.href='${ path }/loginPage'">로그인</button>
+                           <button class="btn" onclick="location.href='${ path }/findPwdPage'">비밀번호 찾기</button>
 					</div>
 				
 				</div>
