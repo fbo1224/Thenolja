@@ -2,18 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo" %>
-<%
-	ArrayList<AdminMember> oldList = (ArrayList<AdminMember>)request.getAttribute("memberOldsetList");
-	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("selectMemberList");
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-	
-	
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,7 +145,54 @@
                       </table>
                 </div>
 
+                <div class="paging-area" align="center";>
                 
+                
+                
+                
+				<c:choose>
+					<c:when test="${requestScope.selectMemberList ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${papageInfo.currentPageth - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${PageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectMember?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${papageInfo.currentPageth - 1}"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${PageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestList.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+                  </c:choose>
+                  
+                  
+                  
+                </div>
+      
         
             </div>
         </div>
