@@ -35,15 +35,6 @@ public class HotelController {
 		int result = 0;
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
-			// loadName 도로명주소
-			// detailAddr 상세주소
-			// hotelCate 숙소종류
-			// hotelName 호텔이름
-			// phone1 == 010 /전화번호
-			// phone2 == xxxxxxxx
-			// serList 서비스 리스트 
-			// introText 소개말
-			// hotelImg 대표사진
 			String savePath = request.getServletContext()
 			         .getRealPath("/resources/hotelImage");
 			
@@ -93,7 +84,7 @@ public class HotelController {
 			if(multiRequest.getOriginalFileName("hotelImg") != null) {
 				h.setHotelPath("resources/hotelImage/"+multiRequest.getFilesystemName("hotelImg"));
 			}
-			// System.out.println(h);
+
 			
 			result = new HotelService().insertHotel(h);
 		}
@@ -333,7 +324,6 @@ public class HotelController {
 		
 		pageLimit = 5;
 		
-
 		boardLimit = 6;
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
@@ -349,6 +339,7 @@ public class HotelController {
 		// 3) VO로 가공
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
 								  maxPage, startPage, endPage);
+		
 		so.setMaxPeople(maxPeople);
 		so.setLocation(location);
 		so.setStartDate(startDate);
