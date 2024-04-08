@@ -16,6 +16,7 @@ import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.service.HotelService;
 import thenolja.tb_hotel.model.service.RoomService;
 import thenolja.tb_hotel.model.vo.Comment;
+import thenolja.tb_hotel.model.vo.Event;
 import thenolja.tb_hotel.model.vo.HotelCard;
 import thenolja.tb_hotel.model.vo.HotelReview;
 
@@ -154,6 +155,11 @@ public class AjaxController {
 		
 	}
 	
+	public List<Event> eventData(HttpServletRequest request, HttpServletResponse response) {
+		List<Event> eventData = new HotelService().eventData();
+				
+		return eventData;
+	}
 	
 	
 	

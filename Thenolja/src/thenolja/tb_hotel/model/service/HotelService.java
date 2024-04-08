@@ -13,6 +13,7 @@ import thenolja.common.model.vo.PageInfo;
 import thenolja.tb_hotel.model.dao.HotelDao;
 import thenolja.tb_hotel.model.vo.Comment;
 import thenolja.tb_hotel.model.vo.DetailHotel;
+import thenolja.tb_hotel.model.vo.Event;
 import thenolja.tb_hotel.model.vo.Hotel;
 import thenolja.tb_hotel.model.vo.HotelCard;
 import thenolja.tb_hotel.model.vo.HotelReview;
@@ -233,7 +234,13 @@ public class HotelService {
 		return cnt;
 	}
 	
-	
+	public List<Event> eventData(){
+		Connection conn = getConnection();
+		
+		List<Event> eventList = new HotelDao().eventData(conn); 
+		
+		return eventList;
+	}
 	
 	
 }

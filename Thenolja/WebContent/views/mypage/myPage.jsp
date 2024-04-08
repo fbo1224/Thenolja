@@ -148,7 +148,7 @@
 		<%--<%@ include file="../common/menubar.jsp" %> --%>
 		<jsp:include page="../common/menubar.jsp" />
 		
-		<c:set var="path" value="${ pageContext.request.contextPath }" />
+		<!--<c:set var="path" value="${ pageContext.request.contextPath }" />-->
 	
     <div id="wrap">
     	<div id="content">

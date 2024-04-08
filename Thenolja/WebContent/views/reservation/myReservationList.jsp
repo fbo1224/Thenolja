@@ -3,15 +3,8 @@
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, java.util.ArrayList,
 				 thenolja.tb_review.model.vo.Review" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date, java.time.LocalDate, java.time.format.DateTimeFormatter"%>  				   
-<%
-	ArrayList<Reservation> reserList = (ArrayList<Reservation>)request.getAttribute("reserList");
-	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
-	
-	Date date = new Date();
-    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
-    String today = simpleDate.format(date);
-	
-%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,77 +106,87 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-	<% if(loginUser == null) { %>
-		<script>
-			alert("로그인 페이지로 이동합니다.")
-			location.href = '<%=contextPath%>/loginPage';
-		</script>
-	<% } %>
+   	<jsp:include page="../common/menubar.jsp"/>
+    
+    <c:if test="${ empty sessionScope.loginUser }">
+		<form action="${path }/login" method="post"></form>
+	<script>
+		alert("로그인이 되어있지 않습니다. 로그인페이지로 이동합니다.");
+	 </script>
+	</c:if>
 	<div id="output">
         <div id="content_title">
             <div id="left_img">
-                <a href="<%=contextPath %>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="${ path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>내 예약 내역</h3></div>
 		</div>
     
-		<% if(reserList.isEmpty()) { %>
+    <c:choose>
+		<c:when test="${ reserList.isEmpty())}">
 			<table>
 				<tr>
 					<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
 				</tr>
 			</table>
-		<% } else { %>
-		<% for(Reservation r : reserList) { %>
+		</c:when>
+		<c:otherwise>
+		<c:forEach var="r" items="${ requestScope.personList }">
 		<div id="content">
 	        <div id="reser_info">
-	            <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-				<input type="hidden" name="hotelNo" value="<%=r.getHotelNo() %>">
-				<input type="hidden" name="roomNo" value="<%=r.getRoomNo() %>">
-				<input type="hidden" name="reserNo" value="<%=r.getReserNo() %>">
+	            <div id="reser_hotel_img"><img src="${ r.hotelPath }" alt="" width="220px" height="220px"></div>
+				<input type="hidden" name="hotelNo" value="${ r.hotelNo }">
+				<input type="hidden" name="roomNo" value="${ r.roomNo }">
+				<input type="hidden" name="reserNo" value="${ r.reserNo }">
 	            <div id="reser_detail" onclick="myList();">
 	           
 	           
 	            
-	                <h3><%=r.getHotelName() %></h3>
-	                <p><%=r.getRoomName() %></p>
-	                <p><%=r.getPeople() %>인</p>
-	                <p><%=r.getPaymentPrice() %>원</p>
-	                <p><%=r.getCheckIn() %>&nbsp;&nbsp;<%=r.getCheckInTime() %> : 00 ~ <%=r.getCheckOut() %>&nbsp;&nbsp;<%=r.getCheckOutTime() %> : 00</p>
+	                <h3>${ r.hotelName }</h3>
+	                <p>${ r.roomName }</p>
+	                <p>${ r.people }인</p>
+	                <p>${ r.paymentPrice }원</p>
+	                <p>${ r.checkIn }&nbsp;&nbsp;${ r.checkInTime } : 00 ~ ${ r.checkOut }&nbsp;&nbsp;${ r.checkOutTime } : 00</p>
 	            </div>
 	            <script>
 	            	function myList(){
 	            		
-	            		location.href="<%=contextPath%>/reserDetail?reserNo=<%=r.getReserNo()%>";
+	            		location.href="${ path }/reserDetail?reserNo=${ r.reserNo }";
 	            	}
 	            
 	            </script>
 
-
+	
             <div id="review_in">
-             <% LocalDate currentDate = LocalDate.now();
+             	${ LocalDate currentDate = LocalDate.now();
 	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	            LocalDate specificDate = LocalDate.parse(r.getCheckOut(), formatter);
 	            
 	            
-	            %>
-            <% if(currentDate.isBefore(specificDate)) { %>
-                <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
-            <% } else { %>
-            	<a href="<%=contextPath %>/review.insert?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>">
-                <button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
-            <% } %>
+	            }
+	        <c:choose>
+		        <c:when test="${currentDate.isBefore(specificDate) }">
+	                <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
+	            </c:when>
+	            <c:otherwise>
+	            	<a href="${path }/review.insert?reserNo=${ r.reserNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }">
+	                <button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+	            </c:otherwise>
+            </c:choose>
+            
             </div>
-
         </div>
-			<% } %>
-		<% } %>
-		</div>
-	<div id="homeBtn">
-		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
+		</c:forEach>
+		</c:otherwise>
+	</c:choose>
 </div>
+
+
+
+	<div id="homeBtn">
+		<a href="${path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	</div>
 
 </body>
 </html>
