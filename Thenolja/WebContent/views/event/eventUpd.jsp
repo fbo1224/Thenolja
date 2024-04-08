@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.event.model.vo.Event" %>
 <%
@@ -6,6 +6,7 @@
 	String eventYn  = event.getEventYn();
 	int eventNo 	= event.getEventNo();	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -517,4 +518,4 @@ function countText(){
 </div>
 <!-- form태그 끝 -->	
 </body>
-</html>
+</html> 
