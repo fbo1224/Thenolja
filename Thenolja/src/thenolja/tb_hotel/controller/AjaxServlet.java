@@ -50,6 +50,7 @@ public class AjaxServlet extends HttpServlet {
 		boolean flag = true;
 		Gson gson = new Gson();
 		String str = "";
+		
 		Map<String, Object> datas = null;
 		ArrayList<HotelCard> List = null;
 		ArrayList<Comment> cList = null;

@@ -1,7 +1,6 @@
 package thenolja.tb_hotel.model.vo;
 
 // hotelList에서 보여주는 카드내용 담는 vo
-// card내용에 아직 리뷰 점수 관련 필드 없음
 
 public class HotelCard {
 	
@@ -11,7 +10,6 @@ public class HotelCard {
 	private String hotelPath;
 	private int hotelNo;
 	private int roomPrice;
-	//
 	
 	public HotelCard() {
 		super();
