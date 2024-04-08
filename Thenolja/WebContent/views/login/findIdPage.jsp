@@ -101,8 +101,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-
+	<%--<%@ include file="../common/menubar.jsp" %> --%>
+	<jsp:include page="../common/menubar.jsp" />
 	
       
 		<div id="wrap">
@@ -111,7 +111,7 @@
 					<span>아이디 찾기</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/findId" method="post">
+					<form action="${ path }/findId" method="post">
 						<div id="content1">
 							<input type="text" name="name" id="name" class="input" placeholder="이름" maxlength="15" required>
 							<input type="text" name="bornDate" id="bornDate" class="input" placeholder="생년월일" maxlength="8" required>
@@ -120,7 +120,7 @@
 
 						<div id="content2" class="content">
 							<br>
-							<a href="<%= contextPath %>/findPwdPage">비밀번호 찾기</a>
+							<a href="${ path }/findPwdPage">비밀번호 찾기</a>
 						</div>
 
 						<div id="content3">
