@@ -3,21 +3,14 @@
     <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*, thenolja.common.model.vo.PageInfo " %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <%
-	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("sList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	
-	SearchData searchData= null;
-	if(request.getAttribute("searchData") != null){
-		searchData = (SearchData)request.getAttribute("searchData");
-	}
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
+    <!--
+    	sList
+    	pageInfo
+    	searchData
+		
+-->
 
-%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,58 +88,63 @@
 		<jsp:include page="./common/searchForm.jsp" />
 		<div id="content-2-lists">
 			<c:choose>
-				<c:when test="${ empty sList }"></c:when>
-				<div>
-					<h3>조회된 호텔이 없습니다.</h3>
-				</div>	
-			<%} else { %>
-				<%for(HotelCard hc : list){ %>
-				<div class="cards">
-					<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
-						<img class="card-img" src="<%= hc.getHotelPath() %>">
-					</div>
-  					<div class="card-info">
-						<h4><%= hc.getHotelLocation() %></h4>
-						<p>숙소명 : <%= hc.getHotelName() %></p>
-						<p>종류 : <%= hc.getHotelCategory() %><p>
-						<p>가격 : <%= hc.getRoomPrice() %></p>
-  					</div>
-  				</div>
-				<%} %>
+				<c:when test="${ empty sList }">
+					<div>
+						<h3>조회된 호텔이 없습니다.</h3>
+					</div>	
+				</c:when>
+				
+				<c:otherwise>
+					<c:forEach var="hc" items="${ sList }">
+						<div class="cards">
+							<div class="card-imgDiv" id="${ hc.getHotelNo() }">
+								<img class="card-img" src="${ hc.getHotelPath() }">
+							</div>
+		  					<div class="card-info">
+								<h4>${ hc.getHotelLocation()  }</h4>
+								<p>숙소명 : ${ hc.getHotelName() }</p>
+								<p>종류 : ${ hc.getHotelCategory() }</p>
+								<p>가격 : ${ hc.getRoomPrice() }</p>
+		  					</div>
+		  				</div>
+	  				</c:forEach>
+				</c:otherwise>
  			</c:choose>
-  			
 		</div>
 	
 		<div class="paging-area" align="center">
-        	<%if(currentPage > 1){ %>
+			<c:if test="${ pageInfo.getCurrentPage() > 1}" >
         		<button class="btn btn btn-outline-info"
-				onclick="pageMove(<%= currentPage-1 %>)" >이전</button>
-			<%} %>
+				onclick="pageMove(${ pageInfo.getCurrentPage()-1 })" >이전</button>
+			</c:if>
 			
-        	<%for(int i = startPage; i <= endPage; i++){ %>
-        		<% if(currentPage != i) { %>
-        			<button class="btn btn btn-outline-info"
-        			onclick="pageMove(<%= i %>)"><%= i %></button>
-        		<%} else { %>
-        			<button
-        			class="btn btn btn-outline-info"
-        			disabled ><%= i %></button>
-        		<%} %>
-        	<%} %>
+			<c:forEach var="i" begin="${ pageInfo.getStartPage() }" end="${pageInfo.getEndPage() }" step="1">
+				<c:choose>
+        			<c:when test="${ pageInfo.getCurrentPage() ne i}">
+	        			<button class="btn btn btn-outline-info"
+	        			onclick="pageMove(${ i })">${ i }</button>
+        			</c:when>
+        			<c:otherwise>	
+        				<button
+        				class="btn btn btn-outline-info"
+        				disabled >${ i }</button>
+        			</c:otherwise>
+        		</c:choose>
+        	</c:forEach>
         	
-        	<%if(currentPage != maxPage){ %>
-        		<button class="btn btn btn-outline-info"
-        		onclick="pageMove(<%= currentPage + 1 %>);" >다음</button>
-        	<%} %>
+        	<c:if test="${ pageInfo.getCurrentPage() ne pageInfo.getMaxPage() }">
+        			<button class="btn btn btn-outline-info"
+        			onclick="pageMove(${pageInfo.getCurrentPage() + 1});" >다음</button>
+        	</c:if>
 	     </div>
 </div>
 	<script>
 			$('.card-imgDiv').click(function(e){
-				location.href = '<%= contextPath %>/select.hotels?hotelNo='+ $(this).attr('id')+"&daterange=<%= searchData.getDaterange()%>&location=<%= searchData.getLocation() %>&people=<%= searchData.getMaxPeople()%>";
+				location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.getDaterange() }&location=${ searchData.getLocation() }&people=${ searchData.getMaxPeople() }";
 			});
 			
 			function pageMove(currentPage){
-				 location.href="<%= contextPath %>/searchList.hotels?currentPage="+currentPage+"&daterange=<%= searchData.getDaterange()%>&location=<%= searchData.getLocation() %>&people=<%= searchData.getMaxPeople()%>";
+				 location.href="${path}/searchList.hotels?currentPage="+currentPage+"&daterange=${ searchData.getDaterange()}&location=${ searchData.getLocation() }&people=${ searchData.getMaxPeople()}";
 					 
 			}
 			
