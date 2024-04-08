@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	String gradeName = (String)session.getAttribute("gradeName");
@@ -143,7 +144,11 @@
 </head>
 <body>
 
-		<%@ include file="../common/menubar.jsp" %>
+
+		<%--<%@ include file="../common/menubar.jsp" %> --%>
+		<jsp:include page="../common/menubar.jsp" />
+		
+		<c:set var="path" value="${ pageContext.request.contextPath }" />
 	
     <div id="wrap">
     	<div id="content">
@@ -159,7 +164,7 @@
 	        <div id="content2" class="content">
 	            <div id="ct2_1">
 	                
-	                <form action="insertProfile?memNo=<%= loginUser.getMemNo() %>" enctype="multipart/form-data" method="post" id="insertform">
+	                <form action="insertProfile?memNo=${ sessionScope.loginUser.memNo }" enctype="multipart/form-data" method="post" id="insertform">
 	                    
 	                    <div id="profile"></div>
 	
@@ -188,7 +193,7 @@
 	                    $(function(){
 	                        $.ajax({
 	                        url: 'selectProfile',
-	                        data:{memNo : <%= loginUser.getMemNo() %>},
+	                        data:{memNo : ${ sessionScope.loginUser.memNo }},
 	                        success: function(result){
 	                           // console.log(typeof(result));
 								let resultStr;
@@ -225,29 +230,44 @@
 	
 	            </div>
 	            <div id="ct2_2">
-	                <div id="name"><%= loginUser.getMemName() %>님</div>
+	                <div id="name">${ sessionScope.loginUser.memName }님</div>
 	            </div>
 	            <div id="ct2_3">
 	                <div id="gradeIcon">
 	                
 	                <!-- 회원등급에 따라 색 조정 -->
-	                <% if(gradeName.equals("FAMILY")) { %>
-	                    <span id="grade" style="color: chocolate;"><%= gradeName %></span>
+	                <%--<% if(gradeName.equals("FAMILY")) { %> --%>
+	                <c:choose>
+	                <c:when test="${ gradeName eq 'FAMILY' }">
+	                    <span id="grade" style="color: chocolate;">${ gradeName }</span>
 	                    <img src="./resources/mypage/FAMILY.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
-					<% } else if(gradeName.equals("SILVER")) { %>
-						<span id="grade" style="color: silver;"><%= gradeName %></span>
+	                </c:when>
+	                
+					<%--<% } else if(gradeName.equals("SILVER")) { --%>
+					<c:when test="${ gradeName eq 'SILVER'}">
+						<span id="grade" style="color: silver;">${ gradeName }</span>
 	                    <img src="./resources/mypage/SILVER.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
-					<% } else if(gradeName.equals("GOLD")) { %>
-						<span id="grade" style="color: gold;"><%= gradeName %></span>
+	                </c:when>
+	                
+					<%--<% } else if(gradeName.equals("GOLD")) { --%>
+					<c:when test="${ gradeName eq 'GOLD' }">
+						<span id="grade" style="color: gold;">${ gradeName }</span>
 	                    <img src="./resources/mypage/GOLD.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
-					<% } else if(gradeName.equals("VIP")) { %>
-						<span id="grade" style="color: yellowgreen;"><%= gradeName %></span>
-	                    <img src="./resources/mypage/VIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
-	                <% } else { %>
-	                	<span id="grade" style="color: plum;"><%= gradeName %></span>
-	                    <img src="./resources/mypage/VVIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
-	                <% } %>
+	                </c:when>
 	                    
+					<%--<% } else if(gradeName.equals("VIP")) { --%>
+					<c:when test="${ gradeName eq 'VIP' }">
+						<span id="grade" style="color: yellowgreen;">${ gradeName }</span>
+	                    <img src="./resources/mypage/VIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
+					</c:when>	                    
+	                <%--<% } else { --%>
+	                <c:otherwise>
+	                	<span id="grade" style="color: plum;"><c:out value="${ gradeName })"/></span>
+	                    <img src="./resources/mypage/VVIP.png" alt="회원등급" style="width: 40px; height: 40px; margin-bottom: 10px;">
+	                </c:otherwise>
+	                <%--<% } --%>
+	                </c:choose>
+	                
 	                </div>
 	                <div id="gradeInfo">
 	                    <p>
@@ -272,7 +292,7 @@
 	            </script>
 	
 	            <div id="ct2_4">
-	                <button type="button" id="update" onclick="location.href='<%= contextPath %>/update.ck'">정보수정</button>
+	                <button type="button" id="update" onclick="location.href='${path}/update.ck'">정보수정</button>
 	                <button type="button" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
 	            </div>
 	        </div>
@@ -289,16 +309,16 @@
 				
 				<!-- Modal body -->
 				<div class="modal-body">
-				<form action="<%=contextPath%>/delete.me" method="post">
+				<form action="${path}/delete.me" method="post">
 				
 				<div class="form-group">
 				   	<label for="memPwd" style="font-size:20px; color:orangered">회원탈퇴시 회원혜택을 이용할 수 없습니다.</label><br>
 				   	<input type="password" name="memPwd" class="form-control" placeholder="비밀번호를 입력해주세요." id="deletePwd" required>
 	                <button type="submit" class="btn btn-sm btn-danger" onclick="return deleteMember();" style="float: right;">탈퇴하기</button>
 				</div>
-				 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
-				 	<input type="hidden" value="<%= loginUser.getMemPwd() %>" name="pwdCheck">
-				 	<input type="hidden" value="<%= loginUser.getMemNo() %>" name="reMemNo">
+				 	<input type="hidden" value="${ sessionScope.loginUser.memNo }" name="memNo">
+				 	<input type="hidden" value="${ sessionScope.loginUser.memPwd }" name="pwdCheck">
+				 	<input type="hidden" value="${ sessionScope.loginUser.memNo }" name="reMemNo">
 				</form>
 			 	</div>
 				</div>
@@ -307,17 +327,17 @@
 	        
 	        <div id="content3" class="content">
 	
-	            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.coupon?memNo=<%= loginUser.getMemNo() %>"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
-	            <div class="icon"><div class="iconImg"><a href="<%= contextPath %>/mypage.heart?memNo=<%= loginUser.getMemNo() %>"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
-	            <div class="icon"><div class="iconImg"><a href="<%= contextPath%>/myReview.list?memNo=<%= loginUser.getMemNo()%>"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
-	            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>/eventList?currentPage=1"><img class="img1" src="./resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/mypage.coupon?memNo=${ sessionScope.loginUser.memNo }"><img class="img1" src="./resources/mypage/coupons.png" alt="쿠폰"><span>쿠폰함</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/mypage.heart?memNo=${ sessionScope.loginUser.memNo }"><img class="img1" src="./resources/mypage/favorite.png" alt="찜목록"><span>찜목록</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/myReview.list?memNo=${ sessionScope.loginUser.memNo }"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/review.png" alt="리뷰"></div><span>내 리뷰</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/eventList?currentPage=1"><img class="img1" src="./resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
 	        </div>
 	        <div id="content4" class="content">
 	            
-	            <div class="icon"><div class="iconImg"><a href="<%=contextPath%>/myReser.list?reMemNo=<%=loginUser.getMemNo()%>"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/reservation.png" alt="예약내역"></div><span>예약내역</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/myReser.list?reMemNo=${ sessionScope.loginUser.memNo }"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/reservation.png" alt="예약내역"></div><span>예약내역</span></a></div></div>
 	            <div class="icon"><div class="iconImg"><a href="#"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/action.png" alt="이용내역"></div><span>이용내역</span></a></div></div>
-	            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>noticeList?currentPage=1"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/bell.png" alt="공지사항"></div><span>공지사항</span></a></div></div>
-	            <div class="icon"><div class="iconImg"><a href="<%= contextPath%>/mypage.qna"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/question.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }noticeList?currentPage=1"><div style="width: 80%;margin: auto;"><img class="img1" src="./resources/mypage/bell.png" alt="공지사항"></div><span>공지사항</span></a></div></div>
+	            <div class="icon"><div class="iconImg"><a href="${ path }/mypage.qna"><div style="width: 50%;margin: auto;"><img class="img1" src="./resources/mypage/question.png" alt="자주 묻는 질문"></div><span>자주 묻는 질문</span></a></div></div>
 	            
 	        </div>
 
