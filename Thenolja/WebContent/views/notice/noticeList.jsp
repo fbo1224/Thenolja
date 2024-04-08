@@ -40,6 +40,8 @@
     <br>
    	 <h2 align="center">공지사항</h2>
     <br>
+    
+    <C:
     <!-- 등록 버튼 영역 START -->
 	<a id="btn_reg" class="btn btn-primary" href="${"path"} }/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
   
@@ -50,7 +52,7 @@
 	    
 	    
 	    <c:choose>
-		<c:when loginUser!="${ Status eq A }"> <!-- if블럭 -->
+		<c:when loginUser!="${ null eq MemStatus }"> <!-- if블럭 -->
 			$("#btn_reg").show();
 		</c:when>
 		<c:when test="${ value2 eq 300 }"> <!-- else if블럭 -->
@@ -124,7 +126,7 @@
 			         		<th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
 			         	</tr>  	 -->
 			         	 
-			         <% } else { %>
+			       <c:otherwise>
 			           <tr id="tr_notice" class="list">
 		         		 <td><%= list.get(i).getNoticeNo() %></td>
 		         		 <td><%= list.get(i).getNoticeTitle () %></td>
@@ -132,9 +134,9 @@
 		         		 <td><%= list.get(i).getCreateDate() %></td>
 		         		 <td><%= list.get(i).getViewCount() %></td>
 		         		</tr>
-			         <% } %>
+			        </c:otherwise>
 			         	      		
-         		<% } else { %>
+         		<c:otherwise>
          		<!-- 관리자인 경우 -->
          		 <tr id="tr_notice" class="list">
          			<td><%= list.get(i).getNoticeNo() %></td>
@@ -144,7 +146,7 @@
          			<td><%= list.get(i).getViewCount() %></td>
          			<td><%= list.get(i).getStatus() %></td>
          		</tr>
-         		<% } %>
+         		</c:otherwise>
          		
          	<% } %>
 
