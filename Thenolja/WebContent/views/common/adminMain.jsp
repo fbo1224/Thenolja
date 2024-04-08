@@ -126,7 +126,7 @@
     
     <div id="wrap">
         <div id="header">
-	        <%@ include file="menubar.jsp" %> 
+        	<jsp:include page="menubar.jsp"></jsp:include>
         </div>
                
         <div id="content">
@@ -177,7 +177,7 @@
         </div>
    	 </div>
      <div id="footer">
-       	<%@ include file="footer.jsp" %> 
+     	<jsp:include page="footer.jsp"></jsp:include>
      </div>
     
     
