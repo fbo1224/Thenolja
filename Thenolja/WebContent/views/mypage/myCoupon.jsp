@@ -107,7 +107,7 @@
 		</div>
 		
     	<c:choose>
-	    	<c:when test="${ empty couponList }">
+	    	<c:when test="${ empty requestScope.couponList }">
 	    	<%--<% if(couponList.isEmpty()) { --%>
 				<table>
 					<tr>
@@ -116,6 +116,7 @@
 				</table>
 			</c:when>
 			<%--<% } else { --%>
+			
 			<c:otherwise>
 			<c:forEach var="c" items="${ requestScope.personList }">
 				<%--<% for(MyPageCoupon c : couponList) { --%>
@@ -124,28 +125,29 @@
 	                    <div id="coupon"><img src="resources/mypage/coupons.png" alt="쿠폰이미지"></div>
 	                    <div id="reser_detail">
 	                    
-	                    <% 
+	                    <%--
 	                    	Date newDate = sdf.parse(c.getCouponDate()); 
-	                   	%>
+	                   	--%>
 	                   	
-	                   	<%
+	                   	
+	                   	<%--
 	                    	SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
 	                    	String date = sdf2.format(newDate);
-	                    %>
+	                    --%>
 	                    
-	                        <h3><%= c.getCouponContent() %></h3><br>
-	                        <p>사용기한 : <%= date %></p>
-	                        <p>할인율 : <%= c.getCouponPercent() %></p>
+	                        <h3>${ c.couponContent } <%--<%= c.getCouponContent() --%></h3><br>
+	                        <p>사용기한 : <fmt:formatDate value="${ c.couponDate }" pattern="yy년MM월dd일"/> <%--<%= date --%></p>
+	                        <p>할인율 : ${ c.couponPercent } <%--<%= c.getCouponPercent() --%></p>
 	                    </div>
 			        </div>
 				</div>
-				<% } %>
-			<% } %>
+				<%--<% } --%>
+			<%--<% } --%>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	<div id="homeBtn">
-		<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+		<a href="${ path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
 </div>
 
