@@ -159,7 +159,7 @@ div {
 				roomNo = $(this).parent().parent().attr('id');
 			});
 			
-			$('.deleteRoomBtn').click(function(e){ // 의미없음
+			$('.deleteRoomBtn').click(function(e){
 				$.ajax({
 						url: 'deleteRoom.jqAjax',
 						data: {
@@ -174,7 +174,6 @@ div {
 						},
 						async: false
 					});
-					
 				location.reload();
 			});
 			

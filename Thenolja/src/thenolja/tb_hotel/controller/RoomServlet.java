@@ -39,6 +39,7 @@ public class RoomServlet extends HttpServlet {
 		
 		String view = "";
 		boolean flag = true;
+		
 		if(loginUser != null && loginUser.getMemStatus().equals("A")) {
 			switch(mapping) {
 				case "insertForm" : view =  rc.insertForm(request, response); break;

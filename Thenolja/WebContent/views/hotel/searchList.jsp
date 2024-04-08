@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*, thenolja.common.model.vo.PageInfo " %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
     <%
 	ArrayList<HotelCard> list = (ArrayList<HotelCard>)request.getAttribute("sList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
@@ -90,27 +92,28 @@
 </head>
 <body>
 	<div id="wrap">
-		<%@ include file="./common/searchForm.jsp" %>
+		<jsp:include page="./common/searchForm.jsp" />
 		<div id="content-2-lists">
-			<%if(list.isEmpty()){ %>
+			<c:choose>
+				<c:when test="${ empty sList }"></c:when>
 				<div>
 					<h3>조회된 호텔이 없습니다.</h3>
 				</div>	
-				<%} else { %>
-					<%for(HotelCard hc : list){ %>
-					<div class="cards">
-						<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
-							<img class="card-img" src="<%= hc.getHotelPath() %>">
-						</div>
-	  					<div class="card-info">
-							<h4><%= hc.getHotelLocation() %></h4>
-							<p>숙소명 : <%= hc.getHotelName() %></p>
-							<p>종류 : <%= hc.getHotelCategory() %><p>
-							<p>가격 : <%= hc.getRoomPrice() %></p>
-	  					</div>
-	  				</div>
-					<%} %>
-  				<%} %>
+			<%} else { %>
+				<%for(HotelCard hc : list){ %>
+				<div class="cards">
+					<div class="card-imgDiv" id="<%= hc.getHotelNo() %>">
+						<img class="card-img" src="<%= hc.getHotelPath() %>">
+					</div>
+  					<div class="card-info">
+						<h4><%= hc.getHotelLocation() %></h4>
+						<p>숙소명 : <%= hc.getHotelName() %></p>
+						<p>종류 : <%= hc.getHotelCategory() %><p>
+						<p>가격 : <%= hc.getRoomPrice() %></p>
+  					</div>
+  				</div>
+				<%} %>
+ 			</c:choose>
   			
 		</div>
 	

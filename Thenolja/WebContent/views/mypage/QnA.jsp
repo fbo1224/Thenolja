@@ -49,7 +49,8 @@
 </head>
 <body>
 	
-	<%@ include file="../common/menubar.jsp"%>
+	<%--<%@ include file="../common/menubar.jsp"%> --%>
+	<jsp:include page="../common/menubar.jsp" />
 	
     <div id="wrap">
         <div id="content" class="container">
@@ -87,7 +88,10 @@
                 </tbody>
             </table>
         </div>
-	<%@ include file="../common/footer.jsp" %>
+        
+	<%--<%@ include file="../common/footer.jsp" %> --%>
+	<jsp:include page="../common/footer.jsp" />
+	
     </div>
 	
 

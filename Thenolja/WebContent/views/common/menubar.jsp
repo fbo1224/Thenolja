@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
-
-<%
-    String contextPath = request.getContextPath();
-	
-	Member loginUser = (Member)session.getAttribute("loginUser");
-
-	String alertMsg = (String)session.getAttribute("alertMsg");
-%>    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+ 
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -257,23 +253,19 @@ div {
     
 </head>
 <body>
-	<script>
-			// script태그 안에서도 스크립틀릿 같은 JSP요소를 사용할 수 있음
-			
-			const msg = '<%= alertMsg %>'; 
-			// 문자열을 넘겨받았기 때문에 문자열로 묶어주어야 가져올 수 있다.
-			
-			if(msg != 'null'){ // 양 옆에 따옴표를 붙였기 때문에 문자열null과 비교
-				alert(msg);
-			
-				// menubar.jsp가 로딩 될 때마다 alert이 계속 수행됨
-				// session에 들어있는 alertMsg키값에 해당하는 벨류값을 지워줄 것!
-				// XX.removeAttribute("키값");
-				<% session.removeAttribute("alertMsg"); %>
-			}
-	</script>
-	<%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
-
+	
+	<c:if test="${not empty alertMsg }">
+		<script>
+			alertMsg('${ alertMsg }'); 	
+			<c:remove var="alertMsg" scope="session" />
+		</script>
+	</c:if>
+	
+	<c:set var="path" value="${ pageContext.request.contextPath }" scope="session" />
+	<c:set var="loginUser" value="${ sessionScope.loginUser }" scope="session" />
+	
+	<c:choose>
+		<c:when test='${ loginUser ne null and loginUser.getMemStatus().equals("A") }' >
 		<div id="header">
 	        <div id="tnj_header">
 	            <div id="tnj_icon">
@@ -281,11 +273,11 @@ div {
 	            </div>
 	
 	            <div id="tnj_title">
-	                <h2><a href="<%= contextPath %>/adminMain">관리자</a></h2>
+	                <h2><a href="${ path }/adminMain">관리자</a></h2>
 	            </div>
 	
 	            <div id="admin_login">
-	                <p><a href="<%= contextPath %>/logout">로그아웃</a></P>
+	                <p><a href="${ path }/logout">로그아웃</a></P>
 	            </div>
 	        </div>
 	        <div id="line"></div>
@@ -294,34 +286,34 @@ div {
 	                <li>
 	                    <a href="#">회원관리</a>
 	                    <ul>
-	                        <li><a href="<%= contextPath %>/selectMember?currentPage=1">회원조회</a></li>
-	                        <li><a href="<%= contextPath %>/reserMember?currentPage=1">회원 예약 조회</a></li>
-	                        <li><a href="<%= contextPath %>/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
+	                        <li><a href="${ path }/selectMember?currentPage=1">회원조회</a></li>
+	                        <li><a href="${ path }/reserMember?currentPage=1">회원 예약 조회</a></li>
+	                        <li><a href="${ path }/accountCancellation?currentPage=1">탈퇴 회원 조회</a></li>
 	                    </ul>
 	                </li>
 	    
 	                <li>
 	                    <a href="#">비회원관리</a>
 	                    <ul>
-	                        <li><a href="<%= contextPath %>/selectNonMem?currentPage=1">비회원 조회</a></li>
-	                         <li><a href="<%= contextPath %>/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
+	                        <li><a href="${ path }/selectNonMem?currentPage=1">비회원 조회</a></li>
+	                         <li><a href="${ path }/reserNonMem?currentPage=1">비회원 예약 조회</a></li>
 	                    </ul>
 	                </li>
 	    
 	                <li>
 	                    <a href="#">숙소관리</a>
 	                    <ul>
-	                    	<li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1&loginStatus=<%= loginUser.getMemStatus() %>">숙소 관리</a></li>
-	                    	<li><a href="<%= contextPath %>/insertForm.hotels">숙소 추가</a></li>
-	                        <li><a href="<%= contextPath %>/hotelList.hotels?currentPage=1">숙소 조회</a></li>
+	                    	<li><a href="${ path }/hotelList.hotels?currentPage=1&loginStatus=${ loginUser.getMemStatus() }">숙소 관리</a></li>
+	                    	<li><a href="${ path }/insertForm.hotels">숙소 추가</a></li>
+	                        <li><a href="${ path }/hotelList.hotels?currentPage=1">숙소 조회</a></li>
 	                    </ul>
 	                </li>
 	                
 	                <li>
 	                    <a href="#">결제관리</a>
 	                    <ul>
-                        <li><a href="<%= contextPath %>/refundMem?currentPage=1">회원 환불 조회</a></li>
-                        <li><a href="<%= contextPath %>/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
+                        <li><a href="${ path }/refundMem?currentPage=1">회원 환불 조회</a></li>
+                        <li><a href="${ path }/refundNonMem?currentPage=1">비회원 환불 조회</a></li>
 	                    </ul>
 	    
 	                </li>
@@ -329,58 +321,67 @@ div {
 	                <li>
 	                    <a href="#">고객센터관리</a>
 	                    <ul>
-	                        <li><a href="<%=contextPath %>/noticeList?currentPage=1">공지사항</a></li>
-	                        <li><a href="<%=contextPath %>/eventList?currentPage=1">이벤트</a></li>
-	                        <li><a href="<%=contextPath %>/couponList?currentPage=1">쿠폰</a></li>
-	                        <li><a href="<%= contextPath %>/adminReviewList?currentPage=1">리뷰</a></li>
+	                        <li><a href="${ path }/noticeList?currentPage=1">공지사항</a></li>
+	                        <li><a href="${ path }/eventList?currentPage=1">이벤트</a></li>
+	                        <li><a href="${ path }/couponList?currentPage=1">쿠폰</a></li>
+	                        <li><a href="${ path }/adminReviewList?currentPage=1">리뷰</a></li>
 	                    </ul>
-	    
 	                </li>
-	    
 	            </ul>
-	
-	        </div>
-	
-	    </div>
-	<%} else { %>
-		<header id="header-navi">
-		    <div>
-		       <a href="<%= contextPath %>"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
-		       <h2 id="header-title">더 놀자</h2>
-		    <div id="menu-list">
-		    <ul id="optionList" style="font-size: 20px;">
-		    
-		   		<% if(loginUser == null){  %> <!-- 로그아웃 상태라면 -->
-		        	<li><a href="<%= contextPath %>/loginPage">로그인</a></li>
-		        <% } else { %> <!-- 로그인상태라면 -->
-		        	<li><a href="<%= contextPath %>/logout">로그아웃</a></li>
-		        <% }%>
-		        
-		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		         	<li><a href="<%= contextPath %>/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
-		        <% } else { %> <!-- 로그인상태라면 -->
-		         	<li><a href="<%= contextPath %>/myPage">마이페이지
-		         	</a></li>
-		        <% } %>
-		        
-		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		         	<li><a href="<%= contextPath %>/memberJoin">회원가입</a></li>
-		        <% } else { %> <!-- 로그인상태라면 -->
-		          	<li></li>
-		        <% } %>
-		        
-		        <% if(loginUser == null){  %><!-- 로그아웃 상태라면 -->
-		        	<li>
-		        	<button type="button" id="nonmemBtn" data-toggle="modal" data-target="#nonmemReser">
-						비회원 예약조회
-					</button></li>
-		        <% } else { %> <!-- 로그인상태라면 -->
-		         	<li><a href="<%= contextPath %>/views/customer/customerCenter.jsp">고객센터</a></li>
-	         	<% } %>
-		    </ul>
+		        </div>
 		    </div>
-		</header>
-	<% } %>
+	    	</c:when>
+		<c:otherwise>
+			<header id="header-navi">
+			    <div>
+			       <a href="${  path  }"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
+			       <h2 id="header-title">더 놀자</h2>
+			    <div id="menu-list">
+			    <ul id="optionList" style="font-size: 20px;">
+			    	<c:choose>
+			   			<c:when test="${ loginUser eq null }"> <!-- 로그아웃 상태라면 -->
+			        		<li><a href="${  path  }/loginPage">로그인</a></li>
+			        	</c:when>
+			        	<c:otherwise> <!-- 로그인상태라면 -->
+			        		<li><a href="${  path  }/logout">로그아웃</a></li>
+			        	</c:otherwise>
+			        </c:choose>
+			        
+			        <c:choose>
+			        	<c:when test="${loginUser eq null  }"> <!-- 로그아웃 상태라면 -->
+			         		<li><a href="${  path  }/loginPage" id="logoutMP" onclick="alert('로그인이 필요합니다.')">마이페이지</a></li>
+			         	</c:when>	
+			        	<c:otherwise> <!-- 로그인상태라면 -->
+			         	<li><a href="${  path  }/myPage">마이페이지</a></li>
+			         	</c:otherwise>
+			       </c:choose>
+			        
+			        <c:choose>
+			        	<c:when test="${ loginUser eq null }"> <!-- 로그아웃 상태라면 -->
+			         		<li><a href="${  path  }/memberJoin">회원가입</a></li>
+			         	</c:when>
+			        	<c:otherwise> <!-- 로그인상태라면 -->
+			          		<li></li>
+			          	</c:otherwise>
+			        </c:choose>
+			        
+			        <c:choose>
+			        	<c:when test="${ loginUser eq null }"> <!-- 로그아웃 상태라면 -->
+			        	<li>
+			        		<button type="button" id="nonmemBtn" data-toggle="modal" data-target="#nonmemReser">
+								비회원 예약조회
+							</button></li>
+						</c:when>
+			        	<c:otherwise> <!-- 로그인상태라면 -->
+			         		<li><a href="${  path  }/views/customer/customerCenter.jsp">고객센터</a></li>
+			         	</c:otherwise>
+		         	</c:choose>
+		    	</ul>
+		    	</div>
+			</header>
+		</c:otherwise>
+	</c:choose>
+	
 	<!-- The Modal -->
 	<div class="modal" id="nonmemReser">
 	  <div class="modal-dialog">
@@ -393,7 +394,7 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-		  	<form action="<%= contextPath %>/selectNonmem" method="get">
+		  	<form action="${ contextPath }/selectNonmem" method="get">
 	      		<div class="modal-body">
 					예약번호<br><input type="text" maxlength="11" name="nonmemNo" required><br>
 					예약자 성함<br><input type="text" maxlength="15" name="nonmemName" required>
