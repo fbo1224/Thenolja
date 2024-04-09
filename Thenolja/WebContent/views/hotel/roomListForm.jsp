@@ -86,51 +86,51 @@ div {
 		<h3>등록된 객실이 없습니다.</h3>
 	</c:when>
 	<c:otherwise>
-	<div id="title-div">
-		<h2>등록된 객실들</h2>
-	</div>
-	<div id="content-div">
-		<section id="content-add-sect">
-		<c:forEach var="r" items="${ rooms }">
-			<div class="content-div-1">
-				<div class="form-group">
-				  <label>객실이름</label>
-				  <input type="text" class="form-control" name="roomName" readonly value="${r.roomName }" >
+		<div id="title-div">
+			<h2>등록된 객실들</h2>
+		</div>
+		<div id="content-div">
+			<section id="content-add-sect">
+			  <c:forEach var="r" items="${ rooms }">
+				<div class="content-div-1">
+					<div class="form-group">
+					  <label>객실이름</label>
+					  <input type="text" class="form-control" name="roomName" readonly value="${r.roomName }" >
+					</div>
+					
+					<div class="form-group">
+					  <label>최대인원</label>
+					  <input type="text" class="form-control"  name="maxPeople" readonly value="${r.maxPeople }" >
+					</div>
+					
+					<div class="form-group">
+					  <label>객실 사진</label>
+					  <img width="100px" height="100px" src="${ r.roomImgPath }" alt="beforeImg">
+					</div>
+					
+					<div class="form-group">
+						<label>입실시간</label>
+						<input type="time" name="in_time" readonly value="${ r.checkInTime }" ><br>				
+						<label>퇴실시간</label>
+						<input type="time" name="out_time" readonly value="${ r.checkOutTime }" >
+					</div>
+					
+					<div class="form-group">
+					  <label>객실 가격</label>
+					  <input type="text"  name="roomPrice" readonly value="${ r.roomPrice }">
+					</div>
+					
+					<div class="form-group">
+					  <label>객실 번호</label>
+					  <input type="text"  name="roomNum" readonly  value="${ r.roomNum }">
+					</div>
+					<div id="btn-div" align="center">
+						<button type="button" class="btn btn btn-info" onclick="updateRoom(this,${ r.roomNo});">객실정보수정</button>
+					</div>
 				</div>
-				
-				<div class="form-group">
-				  <label>최대인원</label>
-				  <input type="text" class="form-control"  name="maxPeople" readonly value="${r.maxPeople }" >
-				</div>
-				
-				<div class="form-group">
-				  <label>객실 사진</label>
-				  <img width="100px" height="100px" src="${ r.roomImgPath }" alt="beforeImg">
-				</div>
-				
-				<div class="form-group">
-					<label>입실시간</label>
-					<input type="time" name="in_time" readonly value="${ r.checkInTime }" ><br>				
-					<label>퇴실시간</label>
-					<input type="time" name="out_time" readonly value="${ r.checkOutTime }" >
-				</div>
-				
-				<div class="form-group">
-				  <label>객실 가격</label>
-				  <input type="text"  name="roomPrice" readonly value="${ r.roomPrice }">
-				</div>
-				
-				<div class="form-group">
-				  <label>객실 번호</label>
-				  <input type="text"  name="roomNum" readonly  value="${ r.roomNum }">
-				</div>
-				<div id="btn-div" align="center">
-					<button type="button" class="btn btn btn-info" onclick="updateRoom(this,${ r.roomNo});">객실정보수정</button>
-				</div>
-			</div>
-			</c:forEach>
-		</section>
-	</div>
+			  </c:forEach>
+			</section>
+		</div>
 	</c:otherwise>
 	</c:choose>
 	</div>

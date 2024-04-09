@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList, thenolja.admin.member.model.vo.AdminMember, thenolja.common.model.vo.PageInfo"%>
-
-<%
-	AdminMember member = (AdminMember)request.getAttribute("member");
-	ArrayList<AdminMember> oldList = (ArrayList<AdminMember>)request.getAttribute("oldDeleteMemberList");
-	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("deleteMemberList");
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +37,7 @@
     
     <div id="wrap">
         <div id="header"> 
-        	<%@ include file="../../common/menubar.jsp" %> 
+            <jsp:include page="../../common/menubar.jsp"></jsp:include>
         </div>
 
                
@@ -77,8 +65,8 @@
                     </div>
         
                    	<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestDeleteMemList.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=1'">최신순</button>			      
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestDeleteMemList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/accountCancellation?currentPage=1'">최신순</button>			      
 					</div>
         
                 </div>
@@ -95,48 +83,50 @@
                           </tr>
                         </thead>
                         <tbody>
-                        <% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="4">탈퇴 회원이 존재하지 않습니다.</th> 
-                        	</tr>
-                        <% } else { %>
-                        	<%if(list != null){ %>
-                        	<% for (AdminMember m : list) { %>
-                        		<tr>
-                        			<td><%= m.getMemNo() %></td>
-                        			<td><%= m.getMemId() %></td>
-                        			<td><%= m.getNickName() %></td>
-                        			<td><%= m.getGradeName() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(<%= m.getMemNo() %>)">조회</button></td>
-                            		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(<%= m.getMemNo() %>)">삭제</button></td>
-                        		</tr>
-                        	<% }  %>
-                        <% } %>
                         
-                      <% } %>
-                      
-                        <% if(oldList!=null &&oldList.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">탈퇴 회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
-                      
-                           	<% if(oldList != null) { %>
-                       		<%for(AdminMember m : oldList) { %>
-                       	<tr>
-	                       	   		<td><%= m.getMemNo() %></td>
-	                       	   		<td><%= m.getMemId() %></td>
-	                       	   		<td><%= m.getNickName() %></td>
-	                       	   		<td><%= m.getGradeName() %></td>
-	                       	   		
-		                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(<%= m.getMemNo() %>)">조회</button></td>
-                            		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(<%= m.getMemNo() %>)">삭제</button></td>
-		                            
-	                       	  </tr>
-                       		<%} %>
-                       	<% } %>
-					<% } %>
-                      
+                        <c:choose>
+                        	<c:when test="${ requestScope.deleteMemberList ne null && empty requestScope.deleteMemberList}">
+	                        	<tr>
+	                        		<th colspan="4">탈퇴 회원이 존재하지 않습니다.</th> 
+	                        	</tr>    
+	                        </c:when>                    	
+                        	<c:when test="${ requestScope.deleteMemberList ne null }">
+                        		<c:forEach var="m" items="${ requestScope.deleteMemberList }">
+	                        		<tr>
+	                        			<td>${m.memNo}</td>
+	                        			<td>${m.memId}</td>
+	                        			<td>${m.nickName}</td>
+	                        			<td>${m.gradeName}</td>
+	                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(${m.memNo})">조회</button></td>
+	                            		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(${m.memNo})">삭제</button></td>
+	                        		</tr>                        		
+                        		</c:forEach>
+                        	</c:when>
+                        </c:choose>
+
+
+
+                      	<c:choose>
+                      		<c:when test="${requestScope.oldDeleteMemberList ne null && empty requestScope.oldDeleteMemberList }">
+	                        	<tr>
+	                        		<th colspan="3">탈퇴 회원이 존재하지 않습니다.</th>
+	                        	</tr>                      		
+                      		</c:when>
+                      		<c:when test="${ requestScope.oldDeleteMemberList ne null}">
+                      			<c:forEach var="m" items="${requestScope.oldDeleteMemberList }">
+	                       			<tr>
+		                       	   		<td>${m.memNo}</td>
+		                       	   		<td>${m.memId}</td>
+		                       	   		<td>${m.nickName}</td>
+		                       	   		<td>${m.gradeName}</td>
+		                       	   		
+			                            <td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailDeleteMem(${m.memNo})">조회</button></td>
+	                            		<td><button class="btn btn-sm btn-outline-secondary" onclick="completeDeleteMem(${m.memNo})">삭제</button></td>
+			                            
+		                       	  </tr>                      				
+                      			</c:forEach>
+                      		</c:when>
+                      	</c:choose>
                       
                           
                         </tbody>
@@ -146,51 +136,55 @@
                 
                 
                 
-        
-                <div class="paging-area" align="center";>
+                <div class="paging-area" align="center";>                
+				
+				<c:choose>
+					<c:when test="${requestScope.deleteMemberList ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/accountCancellation?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/accountCancellation?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/accountCancellation?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					
+					
+					
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestDeleteMemList.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestDeleteMemList.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestDeleteMemList.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+					
+					
+					
+                  </c:choose>
                 
-                <% if(list!=null) { %>
-	                <% if(currentPage > 1) { %>
-	                 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=<%=currentPage - 1%>'"><</button>
-	                <% } %>
-	                
-	                
-                	<% for(int i = startPage; i <= endPage; i++) { %>
-                		<% if (currentPage != i) { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=<%=i%>'"><%= i %></button>
-                    
-	                    <% } else { %>
-	                    <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-	                    <% } %>
-                    		
-                    <% } %>
-                    
-                    <% if(currentPage != maxPage) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/accountCancellation?currentPage=<%=currentPage + 1%>'">></button>
-                	<% } %>
-                	
-                <% } else { %>
-                	
-                	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestDeleteMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestDeleteMemList.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestDeleteMemList.do?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                  
-                  <%} %>
-              	
-                	
-                	
+        
+
                 	
                 	
                 	
@@ -202,7 +196,7 @@
             </div>
         </div>
         <div id="footer">
-       		<%@ include file="../../common/footer.jsp" %>  
+     		<jsp:include page="../../common/footer.jsp"></jsp:include> 
         </div>
 
     </div>
@@ -222,7 +216,7 @@
     				
     				if(result == null){
       					alert('탈퇴 회원이 존재하지 않습니다.');
-      					location.href = '<%=contextPath%>/accountCancellation?currentPage=1';
+      					location.href = '${path }/accountCancellation?currentPage=1';
       					
       				} else {
       						let resultStr = '';
@@ -296,7 +290,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
-    				location.href = '<%=contextPath%>/accountCancellation?currentPage=1';
+    				location.href = '${path }/accountCancellation?currentPage=1';
     			}
     			
     		});

@@ -48,9 +48,8 @@
 <body>
     
     <div id="wrap">
-        <div id="header">
-       		
-       		<%@ include file="../../common/menubar.jsp" %> 
+        <div id="header">     		
+       		<jsp:include page="../../common/menubar.jsp"></jsp:include>
         </div>       
         <div id="content">
             <div id="content_1">
@@ -75,8 +74,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=1'">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestNonMemList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/selectNonMem?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -92,46 +91,44 @@
                           </tr>
                         </thead>
                         <tbody>
-                        <% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <%} else { %>	
-                        	<%if(list != null){ %>
-                        	<% for(NonMember n : list) { %>
-                          <tr>
-                            <td><%= n.getMemNo() %></td>
-                            <td><%= n.getMemName() %></td>
-                            <td><%= n.getMemPhone() %></td>
-                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(<%=n.getMemNo()%>)">삭제</button></td>
-                          </tr>
-                         <% } %>
-                        <% }  %>
-                        <% } %>
-                          
-                          	<% if(oldList!=null &&oldList.isEmpty()) { %>
+                        
+                        <c:choose>
+                        	<c:when test="${requestScope.selectNonMemberList ne null && empty selectNonMemberList }">
 	                        	<tr>
 	                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
-	                        	</tr>
-                       		 <%} else { %>
+	                        	</tr>                        	
+                        	</c:when>
+                        	<c:when test="${requestScope.selectNonMemberList ne null}">
+                        		<c:forEach var="n" items="${requestScope.selectNonMemberList}">
+		                          <tr>
+		                            <td>${n.memNo}</td>
+		                            <td>${n.memName}</td>
+		                            <td>${n.memPhone}</td>
+		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(${n.memNo}">삭제</button></td>
+		                          </tr>                        		
+                        		</c:forEach>
+                        	</c:when>
+                        </c:choose>
                         
-                         	<% if(oldList != null) { %>
-                       		<%for(NonMember n : oldList) { %>
-                       	<tr>
-	                       	   		<td><%= n.getMemNo() %></td>
-	                                <td><%= n.getMemName() %></td>
-	                                <td><%= n.getMemPhone()%></td>
-		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteMember(<%=  n .getMemNo() %>)">삭제</button></td>
-		                            
-	                       	  </tr>
-	                       		<%} %>
-	                       	<% } %>
-	 					<% } %>
-	                        
-                        
-                        
-                        
-                        
+						<c:choose>
+						<c:when test="${ requestScope.oldNonMemList ne null && empty requestScope.oldNonMemList }">
+						  <tr>
+						  		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
+						 </tr>              		  	
+						</c:when>
+						<c:when test="${requestScope.oldNonMemList ne null }">
+						<c:forEach var="n" items="${ requestScope.oldNonMemList }">
+							<tr>
+		                            <td>${n.memNo}</td>
+		                            <td>${n.memName}</td>
+		                            <td>${n.memPhone}</td>
+						      		<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(${n.memNo})">삭제</button></td>
+						      
+							 </tr>              		  		
+						</c:forEach>
+						</c:when>
+						</c:choose>
+
                         </tbody>
                       </table>
 
@@ -141,37 +138,37 @@
                
                <% if(list!=null) { %>
                 	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>
                     	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=i%>'"><%= i %></button>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=i%>'"><%= i %></button>
                   		<% } else { %>
                     	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
                     <% } %>
                    <%} %>
                   
                   <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/selectNonMem?currentPage=<%=currentPage + 1%>'">></button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                   
                    <% } else { %>
 
                     <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>
                     	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=i%>'"><%= i %></button>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=i%>'"><%= i %></button>
                   		<% } else { %>
                     	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
                     <% } %>
                    <%} %>
                   
                   <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonMemList.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                   
                   <%} %>
@@ -188,7 +185,7 @@
             </div>
         </div>
         <div id="footer">
-        	<%@ include file="../../common/footer.jsp" %> 
+     		<jsp:include page="../../common/footer.jsp"></jsp:include> 
         </div>
 
     </div>
@@ -205,7 +202,7 @@
     			success : function(result){
     				if(result == null){
       					alert('비회원이 존재하지 않습니다.');
-      					location.href = '<%=contextPath%>/selectNonMem?currentPage=1';
+      					location.href = '${path}/selectNonMem?currentPage=1';
       					
       				} else {
       						let resultStr = '';
@@ -241,7 +238,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
-    				location.href = '<%=contextPath%>/selectNonMem?currentPage=1';
+    				location.href = '${path}/selectNonMem?currentPage=1';
     			}
     		});
     		

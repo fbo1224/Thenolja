@@ -3,16 +3,6 @@
 <%@ page import="thenolja.tb_hotel.model.vo.*, java.util.*" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-    <c:set var="nowDate" value="<%= new Date() %>"/>
-    
-    <fmt:formatDate value="${ nowDate }" pattern="yy/MM/dd" var="toDay"/>
-    
-    <c:set var="tomo" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
-	<fmt:formatDate value="${tomo}" pattern="yy/MM/dd" var="tomorrow" />
-	<c:set var="dateRangeForm" value='${ toDay += " ~ " += tomorrow  }' />
-	<c:set var="defaultPeople" value="2" />
-
     
 <!DOCTYPE html>
 <html>

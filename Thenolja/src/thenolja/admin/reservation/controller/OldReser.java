@@ -1,7 +1,10 @@
 package thenolja.admin.reservation.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,7 +72,17 @@ public class OldReser extends HttpServlet {
 		
 		//  System.out.println(pi);
 		 ArrayList<AdminReservation> list = new ReservatoinService().reserOldestList(pi);
-		 
+		    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
+		    Date current = new Date();
+		    
+		    for(int i = 0; i < list.size(); i++) {
+	        	try {
+					boolean reserStatus = simpleDate.parse(list.get(i).getCheckInTime()).before(current);
+					list.get(i).setReserStatus(reserStatus);
+	        	} catch (ParseException e) {
+					e.printStackTrace();
+				}
+		    }
 		 System.out.println(list);
 		 
 		 request.setAttribute("reserOldestList", list);
