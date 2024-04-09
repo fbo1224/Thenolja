@@ -394,7 +394,7 @@ div {
 	      </div>
 	
 	      <!-- Modal body -->
-		  	<form action="${ contextPath }/selectNonmem" method="get">
+		  	<form action="${ path }/selectNonmem" method="get">
 	      		<div class="modal-body">
 					예약번호<br><input type="text" maxlength="11" name="nonmemNo" required><br>
 					예약자 성함<br><input type="text" maxlength="15" name="nonmemName" required>

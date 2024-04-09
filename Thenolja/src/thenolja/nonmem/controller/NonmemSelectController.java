@@ -1,7 +1,10 @@
 package thenolja.nonmem.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,6 +45,23 @@ public class NonmemSelectController extends HttpServlet {
 		ArrayList<SelectNonmemReser> list = new NonmemService().selectNonmemReser(nonmemName, nonmemNo);
 		
 		// System.out.println(list);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
+		
+		for(SelectNonmemReser sn : list) {
+			try {
+				Date date1 = sdf1.parse(sn.getCheckInDate());
+				Date date2 = sdf1.parse(sn.getCheckOutDate());
+				
+				sn.setCheckInDate(sdf2.format(date1));
+				sn.setCheckOutDate(sdf2.format(date2));
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("nonmemReser", list);

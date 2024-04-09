@@ -4,6 +4,7 @@
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, thenolja.tb_hotel.model.vo.Room" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%
 	ArrayList<SelectNonmemReser> nonmemReser = (ArrayList) session.getAttribute("nonmemReser");
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
@@ -209,65 +210,74 @@ String date2 = sdf2.format(newDate2);
 	                    <p>${ r.people }명</p>
 	                    <p>${ r.paymentPrice }원</p>
 	                    
-	                       <p>${ r.checkInDate } ~ ${ r.checkOutDate }</p>
-	                       <p>오후 ${ r.checkInTime }:00 ~ 오전 ${ r.checkOutTime }:00</p>
+                       <p>${ r.checkInDate } ~ ${ r.checkOutDate }</p>
+                       
+                       
+                       <p>오후 ${ r.checkInTime - 12 }시 ~ 오전${ r.checkOutTime }시</p>
+		                       
+	                       
+	                       
 	                </div>
-	
+				</c:forEach>
+				
 	                <div id="reser_btn">
 	                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>
 	                </div>
 	            </div>
 		        
 	            <div id="price_info">
-	            
-	                <div id="rser_price">
-	                    <h3>결제 금액</h3>
-	                    <hr>
-	                    <table>
-	                        <tr>
-	                            <td width="170x">예약금액 : ${ r.paymentPrice }</td>
-	                            <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-	                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
-	                            <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-	                            <td>결제금액 : ${ r.paymentPrice } <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
-	                    </table>
-	                </div>
-	
-	                <div id="reser_price_info">
-	                    <h3>결제 내역</h3>
-	                    <hr>
-	                    <p>무통장 입금</p>
-	                    <table>
-	                    <tr>
-	                        <td width="80px">신한은행</td> 
-	                        <td>110-404-432780</td>
-	                    </tr>
-	                    <tr>
-	                        <td>예금주</td> 
-	                        <td>(주)더놀자</td>
-	                    </tr>
-	                    <tr>
-	                        <td>입금자명</td> 
-	                        <td>${ r.reserName }</td>
-	                    </tr>
-	                    </table>
-	                </div>
-	
+	            	<c:forEach var="r" items="${ sessionScope.nonmemReser }">
+		                <div id="rser_price">
+		                    <h3>결제 금액</h3>
+		                    <hr>
+		                    <table>
+		                        <tr>
+		                            <td width="170x">예약금액 : ${ r.paymentPrice }</td>
+		                            <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
+		                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
+		                            <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
+		                            <td>결제금액 : ${ r.paymentPrice } <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+		                    </table>
+		                </div>
+					</c:forEach>
+		                <div id="reser_price_info">
+			                <c:forEach var="r" items="${ sessionScope.nonmemReser }">
+			                    <h3>결제 내역</h3>
+			                    <hr>
+			                    <p>무통장 입금</p>
+			                    <table>
+			                    <tr>
+			                        <td width="80px">신한은행</td> 
+			                        <td>110-404-432780</td>
+			                    </tr>
+			                    <tr>
+			                        <td>예금주</td> 
+			                        <td>(주)더놀자</td>
+			                    </tr>
+			                    <tr>
+			                        <td>입금자명</td> 
+			                        <td>${ r.reserName }</td>
+			                    </tr>
+			                    </table>
+							</c:forEach>
+		                </div>
 	                <div id="reser_member">
-	                    <h3>예약자 정보</h3>
-	                    <hr>
-	                    <table>
-	                    <tr>
-	                            <td width="80px">이름</td> 
-	                            <td>${ r.reserName }</td>
-	                            <td width="80px">전화번호</td> 
-	                            <td>${ r.reserPhone }</td>
-	                        </tr>
-	                        <tr>
-	                            <td>차량</td> 
-	                            <td colspan="3">${ r.bicycle }</td>
-	                        </tr>
-	                    </table>
+		                <c:forEach var="r" items="${ sessionScope.nonmemReser }">
+		                    <h3>예약자 정보</h3>
+		                    <hr>
+		                    <table>
+		                    	<tr>
+		                            <td width="80px">이름</td> 
+		                            <td>${ r.reserName }</td>
+		                            <td width="80px">전화번호</td> 
+		                            <td>${ r.reserPhone }</td>
+		                        </tr>
+		                        <tr>
+		                            <td>차량</td> 
+		                            <td colspan="3">${ r.bicycle }</td>
+		                        </tr>
+		                    </table>
+	                    </c:forEach>
 	                </div>
 	            </div>
 	        </div>
@@ -285,31 +295,32 @@ String date2 = sdf2.format(newDate2);
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body">
-		        <form action="${ path }/refund.insert?reserNo=${ r.reserNo }%reMemNo=${ r.memNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"  method="post"> 
-		            <label for="text">예금주</label>
-		            <input type="text" id="refund_name" required name="refundName"><br><br>
-		            <input type="hidden" name="refundPrice" value="${ r.paymentPrice }">
-		            <input type="hidden" value="${ r.reserNo }" name="reserNo"/>
-		            <label for="text">환불계좌</label>
-		            <select id="bank_name" name="bankName">
-		                <option>신한은행</option>
-		                <option>국민은행</option>
-		                <option>농협은행</option>
-		                <option>우리은행</option>
-		            </select>
-		            <input id="acc" type="text" placeholder="계좌번호 입력 -제외" required name="accNo">
-		            <div id="refund_btn">
-		                <br>
-		                <button type="submit" class="btn btn-dark">확인</button>
-		                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-		                
-		            </div>
-		        </form>
+		        <c:forEach var="r" items="${ sessionScope.nonmemReser }">
+			        <form action="${ path }/refund.insert?reserNo=${ r.reserNo }%reMemNo=${ r.memNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"  method="post"> 
+			            <label for="text">예금주</label>
+			            <input type="text" id="refund_name" required name="refundName"><br><br>
+			            <input type="hidden" name="refundPrice" value="${ r.paymentPrice }">
+			            <input type="hidden" value="${ r.reserNo }" name="reserNo"/>
+			            <label for="text">환불계좌</label>
+			            <select id="bank_name" name="bankName">
+			                <option>신한은행</option>
+			                <option>국민은행</option>
+			                <option>농협은행</option>
+			                <option>우리은행</option>
+			            </select>
+			            <input id="acc" type="text" placeholder="계좌번호 입력 -제외" required name="accNo">
+			            <div id="refund_btn">
+			                <br>
+			                <button type="submit" class="btn btn-dark">확인</button>
+			                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+			                
+			            </div>
+			        </form>
+		        </c:forEach>
 	        </div>
 	      </div>
 	    </div>
   	</div>
-</c:forEach>
 	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
