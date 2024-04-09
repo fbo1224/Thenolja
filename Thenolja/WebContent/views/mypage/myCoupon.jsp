@@ -59,10 +59,10 @@
     }
     #reser_detail{
         margin-left: 250px;
-        margin-top : 20px;
+        margin-top : 10px;
     }
     #reser_detail > p{
-        font-size: 20px;
+        font-size: 18px;
     }
     #reser_detail > span{
         font-weight: bold;
@@ -105,7 +105,6 @@
         <div id="content_title">
             <div id="left_title"><span>쿠폰함</span></div>
 		</div>
-		
     	<c:choose>
 	    	<c:when test="${ empty requestScope.couponList }">
 	    	<%--<% if(couponList.isEmpty()) { --%>
@@ -118,7 +117,7 @@
 			<%--<% } else { --%>
 			
 			<c:otherwise>
-			<c:forEach var="c" items="${ requestScope.personList }">
+			<c:forEach var="c" items="${ requestScope.couponList }">
 				<%--<% for(MyPageCoupon c : couponList) { --%>
 				<div id="content">
 			        <div id="reser_info">
@@ -136,7 +135,7 @@
 	                    --%>
 	                    
 	                        <h3>${ c.couponContent } <%--<%= c.getCouponContent() --%></h3><br>
-	                        <p>사용기한 : <fmt:formatDate value="${ c.couponDate }" pattern="yy년MM월dd일"/> <%--<%= date --%></p>
+	                        <p>사용기한 : ${ c.couponDate } <%--<%= date --%></p>
 	                        <p>할인율 : ${ c.couponPercent } <%--<%= c.getCouponPercent() --%></p>
 	                        ${c.couponDate }
 	                    </div>
@@ -162,6 +161,6 @@
             });
         });
     </script>
-${c.couponDate }
+
 </body>
 </html>
