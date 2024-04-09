@@ -218,9 +218,7 @@ String date2 = sdf2.format(newDate2);
 	                </div>
 	            </div>
 		        
-	
 	            <div id="price_info">
-	
 	            
 	                <div id="rser_price">
 	                    <h3>결제 금액</h3>
