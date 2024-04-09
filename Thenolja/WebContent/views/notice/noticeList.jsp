@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
-<%
+<%@ page import="thenolja.member.model.vo.Member" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%-- <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -9,7 +11,7 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int maxPage = pageInfo.getMaxPage();	
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,15 +41,40 @@
  
 <body>
 
-<%@ include file="../common/menubar.jsp" %>
-<div class="">
+<jsp:include page="menubar.jsp"/>
+
+
 
     <br>
    	 <h2 align="center">공지사항</h2>
     <br>
     <!-- 등록 버튼 영역 START -->
 	<a id="btn_reg" class="btn btn-primary" href="${ path } /views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
-    <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
+  
+  	<c:choose>
+  	<c:when test="${loginUser != null} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  		${} 
+  	<c:otherwise>
+  		${} 
+  	</c:otherwise>
+  	
+  	</c:choose>
+  
+  
+  
+  
+  <%--   <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
 	    <script>
 	    	$("#btn_reg").show();
 	    </script>
@@ -64,7 +91,7 @@
     		$("#btn_reg").style.display='none';
     	</script> -->
     <% } %>  	
-    
+     --%>
     <br>
     
     <table class="table table-hover">
@@ -102,12 +129,12 @@
 			         	</tr>  	 -->
 			         	 
 			         <% } else { %>
-			           <tr id="tr_notice" class="list">
-		         		 <td><%= list.get(i).getNoticeNo() %></td>
-		         		 <td><%= list.get(i).getNoticeTitle () %></td>
-		         		 <td><%= list.get(i).getWriter() %></td>
-		         		 <td><%= list.get(i).getCreateDate() %></td>
-		         		 <td><%= list.get(i).getViewCount() %></td>
+			           <tr id="tr_notice" class="list">						 
+		         		 <td><%= list.get(i).getNoticeNo() %></td>			${NoticeNo} 
+		         		 <td><%= list.get(i).getNoticeTitle () %></td>		${NoticeTitle} 
+		         		 <td><%= list.get(i).getWriter() %></td>			${Writer} 
+		         		 <td><%= list.get(i).getCreateDate() %></td>		${CreateDate} 
+		         		 <td><%= list.get(i).getViewCount() %></td>			${ViewCount} 
 		         		</tr>
 			         <% } %>
 			         	      		

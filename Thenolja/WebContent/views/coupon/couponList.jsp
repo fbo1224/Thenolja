@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.coupon.model.vo.Coupon, thenolja.common.model.vo.PageInfo" %>
 <%
@@ -348,4 +348,4 @@ padding-left: 25%;
    <%@ include file="../common/footer.jsp" %>
 
 </body>
-</html> --%>
+</html> 

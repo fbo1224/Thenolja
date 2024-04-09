@@ -112,10 +112,10 @@
         <!-- 새롭게 조회해온 USER_NO컬럼값을 가지고 비교    매핑값? SERVLET키값= -->
 	 
       
-      <a href="<%= contextPath %>/updateForm.notice?noticeNo=<%= notice.getNoticeNo() %>"   
+      <a href="${ path } /updateForm.notice?noticeNo=<%= notice.getNoticeNo() %>"   
          class="btn btn-sm btn-warning">수정하기</a>
 
-    	<a href="<%= contextPath %>/delete.notice?noticeNo=<%= notice.getNoticeNo() %>"
+    	<a href="${ path }/delete.notice?noticeNo=<%= notice.getNoticeNo() %>"
     	class="btn btn-sm btn-danger">삭제하기</a>
 	</div>	
 	<br>
