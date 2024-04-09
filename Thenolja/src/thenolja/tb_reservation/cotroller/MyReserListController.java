@@ -1,7 +1,10 @@
 package thenolja.tb_reservation.cotroller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,12 +38,22 @@ public class MyReserListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int reMemNo = Integer.parseInt(request.getParameter("reMemNo"));
-		
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
+		Date currentDate = new Date();
 		ArrayList<Review> reviewList = new ReviewService().selectReviewList(reMemNo);
 		ArrayList<Reservation> reserList = new ReserService().selectList(reMemNo);
 		
 		if(reserList != null) {
-			
+			for(int i = 0; i < reserList.size(); i++) {
+				try {
+					boolean reserStatus = dateformat.parse(reserList.get(i).getCheckOut()).before(currentDate);
+					
+					reserList.get(i).setReserStatus(reserStatus);
+				} catch (ParseException e) {
+					
+					e.printStackTrace();
+				}
+			}
 			request.setAttribute("reserList", reserList);
 			request.setAttribute("reviewList", reviewList);
 			// System.out.println(review);

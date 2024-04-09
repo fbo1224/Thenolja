@@ -28,8 +28,18 @@ public class Reservation {
 	private int hotelNo;
 	private int roomNum;
 	private String hotelPath;
+	private boolean reserStatus;
 
 
+
+	public boolean isReserStatus() {
+		return reserStatus;
+	}
+
+
+	public void setReserStatus(boolean reserStatus) {
+		this.reserStatus = reserStatus;
+	}
 
 
 	public String getHotelPath() {
