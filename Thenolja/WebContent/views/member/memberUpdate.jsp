@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +69,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %> 
+	<%--<%@ include file="../common/menubar.jsp" %>  --%>
+	<jsp:include page="../common/menubar.jsp"/>
 	
 	
 	<div class="outer">
@@ -78,24 +80,24 @@
 
 		</div>
 		
-		<form id="mypage-form" method="post" action="<%=contextPath%>/update.me">
+		<form id="mypage-form" method="post" action="${ path }/update.me">
 			<table align="center">
 
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="5" required name="memName" value="<%= loginUser.getMemName() %>" autofocus></td>
+					<td><input type="text" maxlength="5" required name="memName" value="${ loginUser.memName }" autofocus></td>
 					<td></td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text" placeholder="-포함해서 입력해주세요." name="memPhone" value="<%= loginUser.getMemPhone() %>" required></td>
+					<td><input type="text" placeholder="-포함해서 입력해주세요." name="memPhone" value="${ loginUser.memPhone }" required></td>
 					<td></td>
 				</tr>
 				<tr></tr>
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email" value="<%= loginUser.getEmail() %>" required></td>
+					<td><input type="email" name="email" value="${ loginUser.email }" required></td>
 					<td></td>
 				</tr>
 				<tr></tr>
@@ -226,8 +228,8 @@
 			<div align="center">
 				<button type="reset" id="reset">초기화</button>
 				<button type="submit" id="changeBtn" id="next">변경하기</button>
-				<input type="hidden" value="<%= loginUser.getMemNo() %>" name="memNo">
-				<input type="hidden" value="<%= loginUser.getMemId() %>" name="memId">
+				<input type="hidden" value="${ loginUser.memNo }" name="memNo">
+				<input type="hidden" value="${ loginUser.memId }" name="memId">
 			</div>
 
 			<br><br>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList,thenolja.mypage.model.vo.MyPageHeartList" %>  
-<%
+<%--<%
 	ArrayList<MyPageHeartList> heartList = (ArrayList<MyPageHeartList>)request.getAttribute("heartList");
-%>  
+--%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,31 +103,39 @@
         <div id="content_title">
             <div id="left_title"><span>내 찜목록</span></div>
 		</div>
-    	<% if(heartList.isEmpty()) { %>
+    	<%--<% if(heartList.isEmpty()) { --%>
+    	<c:choose>
+    	<c:when test="${ empty heartList }">
 			<table>
 				<tr>
 					<th style="font-size:40px;" colspan="5">찜한 내역이 존재하지 않습니다.</th>
 				</tr>
 			</table>
-		<% } else { %>
-			<% for(MyPageHeartList h : heartList) { %>
-			<div id="content">
+			</c:when>
+			<c:otherwise>
+		<%--<% } else { --%>
+			<%--<% for(MyPageHeartList h : heartList) { --%>
+			<c:forEach var="h" items="${ requestScope.heartList }">
+				<div id="content">
 			        <div id="reser_info">
 			            <div id="reser_hotel_img">
-                            <img src="<%= h.getHotelPath() %>" alt="호텔이미지" width="220px" height="220px">
+                            <img src="${ h.hotelPath }" alt="호텔이미지" width="220px" height="220px">
                         </div>
                         <div id="reser_detail">
-                            <h3><%= h.getHotelName() %></h3><br>
-                            <p><%= h.getHotelLocation() %></p>
-                            <p><%= h.getHotelAddress() %></p>
+                            <h3>${ h.hotelName }</h3><br>
+                            <p>${ h.hotelLocation }</p>
+                            <p>${ h.hotelAddress }</p>
                         </div>
                         <div id="heart"><img src="resources/mypage/myHeart.png" alt="하트이미지"></div>
 			        </div>
 				</div>
-			<% } %>
-		<% } %>
+			</c:forEach>
+			<%--<% } %>
+		<%--<% } --%>
+		</c:otherwise>
+		</c:choose>
 <div id="homeBtn">
-	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	<a href="${ path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 </div>
 </div>
 

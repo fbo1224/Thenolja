@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="thenolja.member.model.vo.Member" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,9 +92,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-
-	
+	<%--<%@ include file="../common/menubar.jsp" %> --%>
+	<jsp:include page="../common/menubar.jsp"/>
       
 		<div id="wrap">
 			<div id="content">
@@ -111,7 +109,7 @@
 
 						<div id="content3">
                             <button class="btn" onclick="pwdCheck()">비밀번호 확인</button>
-							<button type="submit" class="btn" id="next" disabled onclick="location.href='<%= contextPath%>/update.ck2'">다음</button>
+							<button type="submit" class="btn" id="next" disabled onclick="location.href='${ path }/update.ck2'">다음</button>
 						</div>
                         
                         <script>
@@ -120,12 +118,13 @@
                                 const pwdCheck = document.getElementById('pwdCheck2');
                                 const next = document.getElementById('next');
                                 
-                                if('<%= loginUser.getMemPwd()%>' != pwd.value){
+                                if('${ loginUser.memPwd }' != pwd.value){
+                                	
                                 	pwdCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
                                     pwd.value = '';
 									pwdCheck.style = "color:red; background-color:rgb(255, 218, 224); display:block;"
                                     return false;
-                                } 
+                                }
                                 else{
                                     pwdCheck.innerHTML = "비밀번호가 일치합니다. ✓";
                                     next.disabled = false;
@@ -133,7 +132,7 @@
 									pwd.readOnly = true;
                                     return true;
                                 }
-                            }        
+                            }
 
                         </script>
 

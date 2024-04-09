@@ -7,6 +7,8 @@
 	Room room = (Room)request.getAttribute("room");
 	Reservation reser = (Reservation)request.getAttribute("reser");
 %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,27 +141,27 @@
 
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reviewUpdate.do?reserNo=<%=r.getReserNo() %>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>" method="post" enctype="multipart/form-data">
+	<form action="${ path }/reviewUpdate.do?reserNo=${ reser.reserNo }&hotelNo=${ hotel.hotelNo }&roomNo=${ r.roomNo}" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
-	       		<a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+	       		<a href="${ path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
 		    </div>
 		    <div id="left_title"><h3>리뷰 작성</h3></div>
 		</div>
 	<div id="content_1">
 	    <div id="hotel-no">
-	        No.<%=r.getReserNo() %>
+	        No.${ r.reserNo }
 	    </div>
 	    <div>
-           <div id="reser_hotel_img"><img src="<%=r.getHotelPath() %>" alt="" width="220px" height="220px"></div>
+           <div id="reser_hotel_img"><img src="${ hotel.hotelPath }" alt="" width="220px" height="220px"></div>
 	            <div id="reser_detail">
-                <h3><%=r.getHotelName() %></h3>
-                <p><%=r.getRoomName() %></p>
-                <p><%=room.getMaxPeople() %>인</p>
-                <p><%=r.getPaymentPrice() %>원</p>
-				<p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
-                </div>
+                <h3>${ hotel.hotelName }</h3>
+                <p>${ room.roomName }</p>
+                <p>${ reser.people }인</p>
+                <p>${ reser.paymentPrice }원</p>
+                <p>${ reser.checkIn }&nbsp;&nbsp;${ room.checkInTime } : 00 ~ ${ reser.checkOut }&nbsp;&nbsp;${ room.checkOutTime } : 00</p>
+           </div>
     	</div>
     </div>
     <div id="content_2">

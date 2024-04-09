@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="thenolja.member.model.vo.Member" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,14 +96,15 @@
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %> 
+	<%--<%@ include file="../common/menubar.jsp" %> --%> 
+	<jsp:include page="../common/menubar.jsp" />
 
 	<div class="outer">
 		<br>
 		<div id="title" align="center">
 			<span>회원가입</span>
 		</div>
-		<form id="enroll-form" method="post" action="<%=contextPath%>/insert.me">
+		<form id="enroll-form" method="post" action="${ path }/insert.me">
 			<table align="center" id="table">
 				<tr>
 					<td id="idWord">아이디</td>

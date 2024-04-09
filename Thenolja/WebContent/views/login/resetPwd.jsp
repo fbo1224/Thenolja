@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String memId = (String)request.getAttribute("memId");
 	// System.out.println(memId);
@@ -101,8 +101,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-
+	<%-- <%@ include file="../common/menubar.jsp" %>--%>
+	<jsp:include page="../common/menubar.jsp" />
 	
       
 		<div id="wrap">
@@ -111,8 +111,8 @@
 					<span>비밀번호 재설정</span>
 				</div>
 				<div id="login-area" class="content">
-					<form action="<%= contextPath %>/find.resetPwd" method="post">
-						<input type="hidden" name="memId" value="<%= memId %>">
+					<form action="${ path }/find.resetPwd" method="post">
+						<input type="hidden" name="memId" value="${ memId }">
 						<div id="content1">
 							<img src="resources/login/password.png" alt="프로필">
 						</div>

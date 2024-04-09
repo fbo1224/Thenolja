@@ -177,7 +177,9 @@
 </head>
 <body>
 	
-    <%@ include file="../common/menubar.jsp" %>
+    <%-- --%><%@ include file="../common/menubar.jsp" %>
+    <jsp:include page="../common/menubar.jsp"/>
+    
     <div id="content">
         <div id="content_title">
             <div id="left_img">

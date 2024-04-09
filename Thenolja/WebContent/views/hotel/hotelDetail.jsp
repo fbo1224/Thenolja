@@ -3,16 +3,6 @@
 <%@ page import="thenolja.tb_hotel.model.vo.*, java.util.*" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-    <c:set var="nowDate" value="<%= new Date() %>"/>
-    
-    <fmt:formatDate value="${ nowDate }" pattern="yy/MM/dd" var="toDay"/>
-    
-    <c:set var="tomo" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
-	<fmt:formatDate value="${tomo}" pattern="yy/MM/dd" var="tomorrow" />
-	<c:set var="dateRangeForm" value='${ toDay += " ~ " += tomorrow  }' />
-	<c:set var="defaultPeople" value="2" />
-
     
 <!DOCTYPE html>
 <html>
@@ -248,7 +238,8 @@ svg{
 </style>
 </head>
 <body>
-	<%@ include file="./common/searchForm.jsp" %>
+	<jsp:include page="./common/searchForm.jsp"/>
+	
 	<div id="detail-wrap">
 		
 		<c:choose>
@@ -649,7 +640,6 @@ svg{
 			},
 			type: 'get',
 			success: function(result){
-				//console.log(result);
 				for(let i = 0; i < result.reviewList.length; i++){
 					$('#review-ul').append('<li class="clearfix" id="'+result.reviewList[i].reserNo+'">'
 										   +'<div class="message-data">'
@@ -689,12 +679,10 @@ svg{
         			+'다음'
         			+'</button>');
         		}
-        		
 			},
 			error: function(result){
 				console.log(result);	
-			},
-			async: false
+			}
 		});
 		
 		$.ajax({
@@ -735,61 +723,63 @@ svg{
 		reviewAjax(1);
 	});
 	
-	
-	window.onload = function(){
-		$.ajax({
-			url : 'selectHeart',
-			type : 'get',
-			data : {
-	        		   memNo : ${ loginUser.memNo },
-	        		   hotelNo : ${ hotelDetail.hotelNo }
-        		   },
-			success: function(result){
-				console.log(result);
-				let resultStr;
-				
-				if(result != 0){
-					resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" checked hidden>'+
-			        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
-				} else {
-					resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden>'+
-			        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
-				}
-				
-				$('#label').html(resultStr);
-			}
-		})
-	}
-		
-	// 클릭할 시 insert, delete 시작
-   function heartClick(){
-	   const cb = document.getElementById('checkbox');
-	   
-    	   var hc = '';
-    	   if(cb.checked == true){
-               hc = 'insertheart';
-               
-    	   } else {
-    		   hc = 'deleteheart';
-    	   }
-    	   
-	   $.ajax({
-		   url : hc,
-		   type: 'post',
-		   data : {
-		   memNo : ${ loginUser.memNo },
-		   hotelNo : ${ hotelDetail.hotelNo }
-		   },
-		   success: function(result){
-			   console.log(result);
-		   },
-		   error: function(e){
-				console.log(e);
-			}
-	   })
-    }
-	// 클릭할 시 insert, delete 끝
 	</script>
 	
+	<c:if test="${ loginUser ne null }">
+		<script>
+		window.onload = function(){
+			$.ajax({
+				url : 'selectHeart',
+				type : 'get',
+				data : {
+		        		   memNo : ${ loginUser.memNo },
+		        		   hotelNo : ${ hotelDetail.hotelNo }
+	        		   },
+				success: function(result){
+					let resultStr;
+					
+					if(result != 0){
+						resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" checked hidden>'+
+				        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
+					} else {
+						resultStr = '<input type="checkbox" id="checkbox" name="heart" value="heart" onclick="heartClick();" hidden>'+
+				        '<svg t="1689815540548" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2271"><path d="M742.4 101.12A249.6 249.6 0 0 0 512 256a249.6 249.6 0 0 0-230.72-154.88C143.68 101.12 32 238.4 32 376.32c0 301.44 416 546.56 480 546.56s480-245.12 480-546.56c0-137.92-111.68-275.2-249.6-275.2z" fill="#231F20" p-id="2272" id="heart"></path></svg>';
+					}
+					
+					$('#label').html(resultStr);
+				}
+			})
+		}
+			
+		// 클릭할 시 insert, delete 시작
+	   function heartClick(){
+		   const cb = document.getElementById('checkbox');
+		   
+	    	   var hc = '';
+	    	   if(cb.checked == true){
+	               hc = 'insertheart';
+	               
+	    	   } else {
+	    		   hc = 'deleteheart';
+	    	   }
+	    	   
+		   $.ajax({
+			   url : hc,
+			   type: 'post',
+			   data : {
+			   memNo : ${ loginUser.memNo },
+			   hotelNo : ${ hotelDetail.hotelNo }
+			   },
+			   success: function(result){
+				   console.log(result);
+			   },
+			   error: function(e){
+					console.log(e);
+				}
+		   })
+	    }
+		// 클릭할 시 insert, delete 끝
+		</script>
+	</c:if>
 </body>
 </html>

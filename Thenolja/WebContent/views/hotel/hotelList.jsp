@@ -75,7 +75,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="./common/searchForm.jsp" %>
+	<jsp:include page="./common/searchForm.jsp" />
+	
 	<div id="wrap">
 		<div id="content-2-lists">
 			<c:choose>
@@ -122,14 +123,14 @@
 			<c:when test='${ loginStatus ne null and loginStatus.equals("A") }'>
 	        	<c:if test="${pageInfo.currentPage gt 1}">
 	        		<button class="btn btn btn-outline-info"
-					onclick="location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage - 1}&${ loginStatus }' " >이전</button>
+					onclick="location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage - 1}&loginStatus=${ loginStatus }' " >이전</button>
 				</c:if>
 				
 				<c:forEach var="i" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" step="1">	       
 		        		<c:choose>
 		        			<c:when test="${ pageInfo.currentPage ne i }">
 		        				<button class="btn btn btn-outline-info"
-		        				onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ i }&${ loginStatus }'" >${ i }</button>
+		        				onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ i }&loginStatus=${ loginStatus }'" >${ i }</button>
 		        			</c:when>
 		        			<c:otherwise>
 		        			<button
@@ -140,7 +141,7 @@
 	        	</c:forEach>
 	        		<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
 	        			<button class="btn btn btn-outline-info"
-	        			onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage + 1 }&${ loginStatus }' " >다음</button>
+	        			onclick=" location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage + 1 }&loginStatus=${ loginStatus }' " >다음</button>
 	        		</c:if>
 	        </c:when>	
 	        
@@ -270,7 +271,6 @@
 			$(document).on('click', '.hotelBtn', function(e){
 				hotelNo = $(this).parent().parent().prev().attr('id');
 			});
-			
 			
 			$('.deleteHotelBtn').click(function(e){
 				deleteAjax();
