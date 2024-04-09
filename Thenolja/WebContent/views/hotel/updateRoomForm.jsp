@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*" %>    
-    <%
-    	int roomNo = (int)request.getAttribute("roomNo");
-    	Room room = (Room)request.getAttribute("room");
-    %>
+<%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,49 +77,50 @@ div {
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp"%>
+	<jsp:include page="../common/menubar.jsp" />
+	
 	<div id="wrap">
 		<div id="title-div">
 			<h2>객실정보수정</h2>
 		</div>
 		<div id="content-div">
-			<form id="content-add-form" action="<%= contextPath %>/updateRoom.rooms" enctype="multipart/form-data" method="post">
-			<input type="hidden" name="roomNo" value="<%= roomNo %>" >
+			<form id="content-add-form" action="${ path }/updateRoom.rooms" enctype="multipart/form-data" method="post">
+			<input type="hidden" name="roomNo" value="${ roomNo }" >
 			<section id="content-add-sect">
 				<div class="content-div-1">
 					<div class="form-group">
 					  <label>객실이름</label>
-					  <input type="text" class="form-control" name="roomName" required oninput="testVal(this,roomName);" value="<%= room.getRoomName() %>">
+					  <input type="text" class="form-control" name="roomName" required oninput="testVal(this,roomName);" value="${ room.roomName }">
 					</div>
 					
 					<div class="form-group">
 					  <label>최대인원</label>
-					  <input type="text" class="form-control" maxlength="3" name="maxPeople" required oninput="testVal(this,maxPeople);"  value="<%= room.getMaxPeople() %>" >
+					  <input type="text" class="form-control" maxlength="3" name="maxPeople" required oninput="testVal(this,maxPeople);"  value="${ room.maxPeople }" >
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 사진</label>
 					  <input type="file"  name="roomImg" oninput="testVal(this, roomImg);" >
-					  <img width="100px" height="100px" src="<%= room.getRoomImgPath() %>" >
-					  <input type="hidden" name="roomImgBefore" value="<%= room.getRoomImgPath() %>">
-					  <input type="hidden" name="roomImgNo" value="<%= room.getRoomImgNo() %>">
+					  <img width="100px" height="100px" src="${ room.roomImgPath }" >
+					  <input type="hidden" name="roomImgBefore" value="${ room.roomImgPath}">
+					  <input type="hidden" name="roomImgNo" value="${ room.roomImgNo}">
 					</div>
 					
 					<div class="form-grop">
 						<label>입실시간</label>
-						<input type="time" name="in_time" required value="<%= room.getCheckInTime() %>"><br>				
+						<input type="time" name="in_time" required value="${room.checkInTime }"><br>				
 						<label>퇴실시간</label>
-						<input type="time" name="out_time" required value="<%= room.getCheckOutTime() %>">
+						<input type="time" name="out_time" required value="${ room.checkOutTime }">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" maxlength="9" required oninput="testVal(this, roomPrice);" value="<%= room.getRoomPrice() %>">
+					  <input type="text"  name="roomPrice" maxlength="9" required oninput="testVal(this, roomPrice);" value="${ room.roomPrice }">
 					</div>
 					
 					<div class="form-group">
 					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" maxlength="9" required oninput="testVal(this, roomNum);" value="<%= room.getRoomNum() %>">
+					  <input type="text"  name="roomNum" maxlength="9" required oninput="testVal(this, roomNum);" value="${ room.roomNum }">
 					</div>
 				</div>
 				</section>
