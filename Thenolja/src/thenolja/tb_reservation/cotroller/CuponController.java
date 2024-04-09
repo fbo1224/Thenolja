@@ -36,6 +36,8 @@ public class CuponController extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		ArrayList<Coupon> coupon = new ReserService().selectCoupon(memberNo);
 		
+		System.out.println("memberNo : " +memberNo);
+		
 		response.setContentType("application/json; charset=UTF-8");
 		Gson gson = new Gson();
 		

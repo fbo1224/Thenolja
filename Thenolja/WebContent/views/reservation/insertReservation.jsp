@@ -285,14 +285,12 @@
     <script>
     
 	let coupon = {};
-    
+    debugger
     $(function(){
     	$.ajax({
     		url: "cupon.jqAjax",
     		type: 'get',
-    		data:{
-    			memberNo: ${ loginUser.memNo }
-    		},
+    		data:{memberNo: ${ loginUser.memNo }},
     		success : function(result){
     			// console.log(result);
     			if(result.length == 0){
@@ -301,8 +299,8 @@
 		                +'</tr>');
     				$('#payPrice').append(
     					'${ room.roomPrice }'
-					);ss
-    			} else{
+					);
+    			} else {
     				for(let i = 0; i < result.length; i++){
     					
     					$('#couponTable').append(
@@ -316,7 +314,6 @@
 	    			              + '<td id="percent' + i + '" name="percent">' + result[i].couponPercent + '%</td>'
     			                  +'</tr></tbody>');
     				}
-    				
     			}
     		},
     		error: function(result){
@@ -346,15 +343,16 @@
 		coupon.code = code;
 		coupon.percent = parseInt(percent);
 	 	// console.log(parseInt(percent));
-	 	$('#pprice').append('<span name="couponPrice">' + ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>) + '</span>');
+	 	roomPrice = ${ room.roomPrice };
+	 	$('#pprice').append('<span name="couponPrice">' + (coupon.percent* 0.01)*roomPrice  + '</span>');
 	 	console.log($('#hidePrice'));
-		$('#hidePrice').val((<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)));
+		$('#hidePrice').val(roomPrice - (coupon.percent* 0.01)*roomPrice );
 		console.log($('#hidePrice'));
 		$('#couponNo').val(coupon.couponNo);
 		// console.log($('#couponNo').val(coupon.couponNo));
 		//console.log($('#hidePrice').val());
-		$('#payPrice').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
-		$('#lastPay').append('<span>' + (<%=room.getRoomPrice()%> - ((coupon.percent* 0.01)*<%=room.getRoomPrice()%>)) + '</span>');
+		$('#payPrice').append('<span>' + roomPrice - (coupon.percent* 0.01)*roomPrice + '</span>');
+		$('#lastPay').append('<span>' + roomPrice - (coupon.percent* 0.01)*roomPrice + '</span>');
 	}	
     </script>
     
@@ -368,7 +366,6 @@
 			        <h4 class="modal-title">내 쿠폰</h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        		</div>
-	        
 			        <div class="modal-body">
 			        <table class="table table-hover" id="couponTable">
 			        
