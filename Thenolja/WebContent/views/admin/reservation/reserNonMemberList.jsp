@@ -5,24 +5,7 @@
 
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
 <% SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd"); %>
-    
-    
-    
-<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>       
-<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
-<%
 
-	ArrayList<AdminReservation> oldList = (ArrayList<AdminReservation>)request.getAttribute("oldReserNonMember");
-	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-%>    
-    
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>

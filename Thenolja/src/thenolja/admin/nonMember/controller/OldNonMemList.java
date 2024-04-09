@@ -81,7 +81,7 @@ public class OldNonMemList extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/views/admin/nonMember/nonMemberList.jsp");
 		view.forward(request, response);
 		
-		// System.out.println(list);
+		System.out.println(list);
 		
 	}
 
