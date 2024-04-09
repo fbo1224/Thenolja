@@ -40,8 +40,8 @@
 </head>
  
 <body>
-<include file="../views/menubar.jsp"/>
-<%-- <jsp:include page="menubar.jsp"/> --%>
+
+<jsp:include page="menubar.jsp"/>
 
 
 
@@ -50,24 +50,31 @@
     <br>
     <!-- 등록 버튼 영역 START -->
 	<a id="btn_reg" class="btn btn-primary" href="${ path } /views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
-   <c:choose>
-		<c:when test="${ value1 eq 100 }"> <!-- if블럭 -->
-			<b>안녕하세요.</b>
-		</c:when>
-		<c:when test="${ value2 eq 300 }"> <!-- else if블럭 -->
-		<script>
-	    	$("#btn_reg").show();
-	    </script>
-		</c:when>
-		<c:otherwise><!-- else블럭 -->
-			<script>
-	    	$("#btn_reg").hide();
-	    </script>	
-		</c:otherwise>
-	</c:choose>
+  
+  	<c:choose>
+  	<c:when test="${loginUser != null} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  	<c:when test="${} " 
+  		${} 
+  	</c:when>
+  		${} 
+  	<c:otherwise>
+  		${} 
+  	</c:otherwise>
+  	
+  	</c:choose>
   
   
-   <%--  <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
+  
+  
+  <%--   <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
 	    <script>
 	    	$("#btn_reg").show();
 	    </script>
@@ -83,8 +90,8 @@
     <!-- 	<script>
     		$("#btn_reg").style.display='none';
     	</script> -->
-    <% } %>  	 --%>
-    
+    <% } %>  	
+     --%>
     <br>
     
     <table class="table table-hover">
@@ -112,7 +119,7 @@
          <%}else{ %>
          <!-- 비어있지 않음 -->
          	<%for(int i=0; i<list.size(); i++) { %>
-         	<C:forEach var="i" begin="1" end="list.size()  " step="i++"/>
+         	
          		<!-- 일반 회원인 경우 -->
          		<% if(loginUser != null && !"A".equals(loginUser.getMemStatus())) { %>
 			         
@@ -123,11 +130,11 @@
 			         	 
 			         <% } else { %>
 			           <tr id="tr_notice" class="list">						 
-		         		 <td><%= list.get(i).getNoticeNo() %></td>			<%-- ${NoticeNo} --%> 
-		         		 <td><%= list.get(i).getNoticeTitle () %></td>		<%-- ${NoticeTitle}  --%>
-		         		 <td><%= list.get(i).getWriter() %></td>			<%-- ${Writer}  --%>
-		         		 <td><%= list.get(i).getCreateDate() %></td>		<%-- ${CreateDate}  --%>
-		         		 <td><%= list.get(i).getViewCount() %></td>			<%-- ${ViewCount}  --%>
+		         		 <td><%= list.get(i).getNoticeNo() %></td>			${NoticeNo} 
+		         		 <td><%= list.get(i).getNoticeTitle () %></td>		${NoticeTitle} 
+		         		 <td><%= list.get(i).getWriter() %></td>			${Writer} 
+		         		 <td><%= list.get(i).getCreateDate() %></td>		${CreateDate} 
+		         		 <td><%= list.get(i).getViewCount() %></td>			${ViewCount} 
 		         		</tr>
 			         <% } %>
 			         	      		
