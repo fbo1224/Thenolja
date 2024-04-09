@@ -160,7 +160,7 @@
  	-->
  	
  	<entry key="selectReserNo">
- 		SELECT 
+		SELECT 
 		        RESER_NO,
 		        RESER_DATE,
 		        RESER_NAME,
@@ -168,7 +168,7 @@
 		        BICYCLE,
 		        TO_CHAR(TB_RESERVATION.CHECKIN_TIME , 'YYYY/MM/DD') AS CHECKIN_DATE, 
     		    TO_CHAR(TB_RESERVATION.CHECKOUT_TIME , 'YYYY/MM/DD') AS CHECKOUT_DATE, 
-		        MAX_PEOPLE,
+		        PEOPLE,
 		        ROOM_NO,
 		        RE_MEM_NO,
 		        PAYMENT,
@@ -180,8 +180,6 @@
 		  JOIN
 		        TB_HOTEL USING (HOTEL_NO)
 		 WHERE
-		 		CANCEL_YN = 'N'	
-		   AND
 		   		RESER_NO = ?
                 
  	</entry>

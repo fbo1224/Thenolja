@@ -61,18 +61,18 @@ public class RefundUpdateController extends HttpServlet {
 		if(result1 * result2 > 0) {
 			
 			refund = new RefundService().selectRefund(reserNo);
-			Reservation reser = new RefundService().selectReservation(reserNo);
+			Reservation reser = new ReserService().selectReserNo(reserNo);
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			
 			if(refund != null && reser != null && hotel != null && room != null) {
-				System.out.println(reser);
+				
 				request.setAttribute("refund", refund);
 				request.setAttribute("hotel", hotel);      
 				request.setAttribute("room", room);
 				request.setAttribute("reser", reser);
 		// 		request.getRequestDispatcher("views/refund/detailRefund.jsp").forward(request, response);
-				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailNonRefund.jsp");
 				view.forward(request, response);
 				
 			} else {

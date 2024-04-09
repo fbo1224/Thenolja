@@ -57,7 +57,7 @@
 	</entry>
 	-->
 	<entry key="selectReservation">
-	SELECT
+        SELECT
 		        RESER_NO,
 		        RESER_DATE,
 		        RESER_NAME,
@@ -65,6 +65,8 @@
 		        BICYCLE,
 		        TB_ROOM.CHECKIN_TIME,
 		        TB_ROOM.CHECKOUT_TIME,
+		        TO_CHAR(TB_RESERVATION.CHECKIN_TIME , 'YYYY/MM/DD') AS CHECKIN_DATE, 
+    		    TO_CHAR(TB_RESERVATION.CHECKOUT_TIME , 'YYYY/MM/DD') AS CHECKOUT_DATE, 
 		        MAX_PEOPLE,	
 		        TB_ROOM.ROOM_NO,
 		        RE_MEM_NO,
@@ -76,10 +78,10 @@
 		        TB_ROOM ON (TB_RESERVATION.ROOM_NO = TB_ROOM.ROOM_NO)	
 		  JOIN
 		        TB_HOTEL ON (TB_ROOM.ROOM_NO = TB_HOTEL.HOTEL_NO)
-		  JOIN
-		        TB_MEMBER ON (TB_RESERVATION.RE_MEM_NO = TB_MEMBER.MEM_NO)
 		 WHERE
-		 		RESER_NO = ?
+		   		CANCEL_YN = 'N'	
+		   AND
+		   		RESER_NO = ?
 		</entry>
 		
 		<entry key="updateRefund">

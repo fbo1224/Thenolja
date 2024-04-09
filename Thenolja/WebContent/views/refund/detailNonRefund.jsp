@@ -301,7 +301,7 @@
                         </tr>
                     </table>
                 </div>
-                    <h2 align="center">예약번호 : ${ reser.reserNo }</h2>
+                   
 
 
                 <div id="refund_member">

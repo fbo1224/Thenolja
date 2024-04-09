@@ -62,7 +62,7 @@ public class RefundInsertController extends HttpServlet {
 		if(result1 * result2 > 0) {
 			
 			refund = new RefundService().selectRefund(reserNo);
-			Reservation reser = new RefundService().selectReservation(reserNo);
+			Reservation reser = new ReserService().selectReserNo(reserNo);
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
 			

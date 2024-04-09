@@ -160,34 +160,28 @@
 			<!-- 0-2-1. 호텔 정보 -->
 			<div id="reser_info">
 				
-	              <div id="reser_hotel_img"><img src="${ hotel.hotelPath }" alt="" width="220px" height="220px"></div>
+	              <div id="reser_hotel_img"><img src=<c:out value = "${ hotel.hotelPath }"/> alt="" width="300px" height="300px"></div>
 
-                <div id="reser_detail">
+				<div id="reser_detail">
 				<input type="hidden" name="hotelNo" value="${ hotel.hotelNo }">
 				<input type="hidden" name="roomNum" value="${ room.roomNo }">
-				<input type="hidden" name="reserNo" value="${ reser.reserNo }">
-				
-			        <h2>${ hotel.hotelName }</h2>
-			        <p>${ room.roomName }</p>
-			        <p>${ reser.people }인</p>
-			        <p>${ room.roomPrice }원</p>
-			        <p>${ reser.checkIn }&nbsp;&nbsp;${ room.checkInTime } : 00 ~ ${ reser.checkOut }&nbsp;&nbsp;${ room.checkOutTime } : 00</p>
-                </div>
+			        <h2><c:out value= "${ hotel.hotelName }"/></h2>
+			        <p><c:out value= "${ room.roomName }"/></p>
+			        <p><c:out value= "${ rinfo.people }"/>인&nbsp;<small>최대인원&nbsp;<c:out value = "${ room.maxPeople }"/>인</small></p>
+			        <p><c:out value= "${ room.roomPrice }"/>원</p>
+			        <p><c:out value="${ rinfo.startDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkInTime }"/> : 00 ~ 
+			        <c:out value="${ rinfo.endDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkOutTime }"/>: 00</p>
+    			</div>
 			</div>
-			<!-- /0-2-1. 호텔 정보 끝 -->
-			
-			<!-- 0-2-2. 가격 & 예약자 & 쿠폰 & 결제 정보 시작 -->
 	        <div id="price_info">
-	        	
-	        	<!-- 0-2-2-1. 가격정보 시작 -->
-	   	        	<div id="reser_price">
+	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="170x">예약금액 : ${ room.roomPrice }</td>
+	        				<td width="400px">결제금액 : <c:out value="${ room.roomPrice }"/>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
-							<td width="400px">할인 금액 : 0원</td>
+							<td width="400px">할인 금액 : <span id="pprice">0</span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" >${ room.roomPrice }</span> 원</td>
+							<td width="400px" style="font-weight: bold;" >결제금액 : <span id="payPrice"><c:out value= "${ room.roomPrice }"/></span> 원</td>
 						</tr>
 	               </table>
 				</div>

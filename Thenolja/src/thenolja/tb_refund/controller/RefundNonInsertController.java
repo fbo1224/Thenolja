@@ -45,8 +45,7 @@ public class RefundNonInsertController extends HttpServlet {
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));	
 		int refundPrice = Integer.parseInt(request.getParameter("refundPrice"));
-		System.out.println(roomNo);
-		System.out.println(hotelNo);
+		
 		// 3) 데이터 가공
 		Refund refund = new Refund();
 		refund.setReserNo(reserNo);
@@ -61,9 +60,10 @@ public class RefundNonInsertController extends HttpServlet {
 		if(result1 * result2 > 0) {
 			
 			refund = new RefundService().selectRefund(reserNo);
-			Reservation reser = new RefundService().selectReservation(reserNo);
+			Reservation reser = new ReserService().selectReserNo(reserNo);
 			Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 			Room room = new ReserService().selectRoom(hotelNo, roomNo);
+			
 			
 			if(refund != null && reser != null && hotel != null && room != null) {
 				

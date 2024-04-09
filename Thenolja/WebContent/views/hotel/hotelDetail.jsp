@@ -89,6 +89,7 @@
 							</div>
 						</div>			
 						</c:forEach>
+						
 				</div>
 				
 				<div id="detail-content-intro">

@@ -285,11 +285,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="${path }/nonRefund.insert?reserNo=reMemNo=${ reser.reMemNo }&hotelNo=${ hotel.hotelNo }&reserNo=${ reser.reserNo }&roomNo=${ room.roomNo }"  method="post"> 
+        <form action="${path }/nonRefund.insert?reMemNo=${ reser.reMemNo }&hotelNo=${ hotel.hotelNo }&reserNo=${ reser.reserNo }&roomNo=${ room.roomNo }"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
             <input type="hidden" value="${ reser.reMemNo }" name="memNo"/>
-			            <input type="hidden" name="refundPrice" value="${ reser.paymentPrice }">
+            <input type="hidden" name="refundPrice" value="${ reser.paymentPrice }">
             <input type="hidden" value="${ reser.reserNo }" name="reserNo"/>
 
             <label for="text">환불계좌</label>

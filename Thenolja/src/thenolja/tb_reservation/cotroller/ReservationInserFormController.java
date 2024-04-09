@@ -44,7 +44,6 @@ public class ReservationInserFormController extends HttpServlet {
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		String daterange = request.getParameter("daterange");
 		int people = Integer.parseInt(request.getParameter("people"));
-		System.out.println(request.getParameter("daterange"));
 		
 		String startDate =  daterange.substring(0, daterange.indexOf(" ")).trim();
 		String endDate =  daterange.substring(daterange.lastIndexOf(" ")).trim();

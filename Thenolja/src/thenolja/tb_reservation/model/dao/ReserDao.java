@@ -174,7 +174,7 @@ public class ReserDao {
 				reser.setBicycle(rset.getString("BICYCLE"));
 				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
 				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
-				reser.setPeople(rset.getInt("MAX_PEOPLE"));
+				reser.setPeople(rset.getInt("PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
 				reser.setPayment(rset.getString("PAYMENT"));
@@ -186,7 +186,7 @@ public class ReserDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}
+		} 
 		return reser;
 	}
 	/*

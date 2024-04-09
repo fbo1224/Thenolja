@@ -121,15 +121,18 @@ public class RefundDao {
 			pstmt.setInt(1, reserNo);
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
+			
+			if(rset.next()) {
 				reser = new Reservation();
 				reser.setReserNo(rset.getInt("RESER_NO"));
 				reser.setReserDate(rset.getDate("RESER_DATE"));
 				reser.setName(rset.getString("RESER_NAME"));
 				reser.setPhone(rset.getString("RESER_PHONE"));
 				reser.setBicycle(rset.getString("BICYCLE"));
-				reser.setCheckIn(rset.getString("CHECKIN_TIME"));
-				reser.setCheckOut(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckInTime(rset.getString("CHECKIN_TIME"));
+				reser.setCheckOutTime(rset.getString("CHECKOUT_TIME"));
+				reser.setCheckIn(rset.getString("CHECKIN_DATE"));
+				reser.setCheckOut(rset.getString("CHECKOUT_DATE"));
 				reser.setPeople(rset.getInt("MAX_PEOPLE"));
 				reser.setRoomNo(rset.getInt("ROOM_NO"));
 				reser.setReMemNo(rset.getInt("RE_MEM_NO"));
@@ -142,7 +145,7 @@ public class RefundDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}
+		} 
 		return reser;
 	}
 	public int updateRefund(Connection conn, Refund refund) {
