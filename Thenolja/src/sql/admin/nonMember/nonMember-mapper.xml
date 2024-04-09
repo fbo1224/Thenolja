@@ -82,8 +82,12 @@
 				        MEM_PHONE
 				  FROM
 				        TB_NONMEM
+                  JOIN
+                        TB_RESERVATION ON(RE_MEM_NO = MEM_NO)
 				  WHERE
 				        MEM_STATUS = 'N'
+                   AND
+                        CANCEL_YN ='N'
 				 ORDER
 				  	BY
 				  		MEM_NO ASC) A)

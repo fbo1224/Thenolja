@@ -150,9 +150,7 @@ public class RoomController {
 			String inTime = multiRequest.getParameter("in_time");
 			String outTime = multiRequest.getParameter("out_time");
 			String roomImgBefore = multiRequest.getParameter("roomImgBefore"); 
-			
-			// System.out.println("roomImgBefore : " + roomImgBefore);
-			
+		
 			inTime = inTime.substring(0, inTime.indexOf(":"));
 			outTime = outTime.substring(0, outTime.indexOf(":"));
 			

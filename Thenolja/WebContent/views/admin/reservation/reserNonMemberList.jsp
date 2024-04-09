@@ -1,26 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>       
-<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>     
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-	ArrayList<AdminReservation> oldList = (ArrayList<AdminReservation>)request.getAttribute("oldReserNonMember");
-	ArrayList<AdminReservation> list = (ArrayList<AdminReservation>)request.getAttribute("selectReserNonMember");
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-	
-	
-	Date date = new Date();
-    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd");
-	String today = simpleDate.format(date);
+<%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
+<% SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd"); %>
 
-%>    
-    
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +43,7 @@
     <div id="wrap">
         <div id="header">
        		
-			<%@ include file="../../common/menubar.jsp" %> 
+			<jsp:include page="../../common/menubar.jsp"></jsp:include>
 
         </div>
                
@@ -85,8 +70,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=1'">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestListNonMem.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/reserNonMem?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -105,55 +90,77 @@
                         <tbody>
                         <tr>
                         
-                       <% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
                         
-                        <%if(list != null){ %>
-                        	<% for (AdminReservation adminReserNon : list) { %>
-                        	<tr>
-                        		<td><%=adminReserNon.getReserNo() %></td>
-                        		<td><%=adminReserNon.getReserName() %></td>
-                        		<td><%=adminReserNon.getMemPhone() %></td>
-                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
-                            	
-                            	<%if(today.compareTo(adminReserNon.getCheckInTime()) < 0) {%>
-                            	<td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
-                        	 	<% } else { %>
-                        	 	<td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
-                        		<%} %>
-                        	</tr>
-                        	
-                        	
-                        		<% } %>
-                        	<% } %>
-                        <%} %>
                         
-                  		<% if(oldList!=null &&oldList.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
+                        <c:choose>
+                        	<c:when test="${ requestScope.selectReserNonMember ne null && empty requestScope.selectReserNonMember}">
+	                        	<tr>
+                        			<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
+	                        	</tr>                        	
+                        	</c:when>
+                        	<c:when test="${requestScope.selectReserNonMember ne null}">
+		                    	<c:forEach var="adminReserNon" items="${requestScope.selectReserNonMember}">
+		                        	<tr>
+		                        		<td>${adminReserNon.reserNo}</td>
+		                        		<td>${adminReserNon.reserName}</td>
+		                        		<td>${adminReserNon.memPhone}</td>                        		
+		                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(${adminReserNon.reserNo})">조회</button></td>
+			                        	
+										
+										<c:choose>
+											<c:when test="${adminReservation.reserStatus}">
+												<td><button  class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:when>
+											<c:otherwise>
+											    <td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:otherwise>
+										</c:choose>
+			                            
+		                          	</tr>      		                    	
+		                    	</c:forEach>
+                  		
+                        	</c:when>
+                        </c:choose>
                         
-                            <% if(oldList != null) { %>
-                       		<%for(AdminReservation adminReserNon: oldList) { %>
-                              <tr>
-                        		<td><%=adminReserNon.getReserNo() %></td>
-                        		<td><%=adminReserNon.getReserName() %></td>
-                        		<td><%=adminReserNon.getMemPhone() %></td>
-                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(<%=adminReserNon.getReserNo()%>)">조회</button></td>
-                            	
-                            	<%if(today.compareTo(adminReserNon.getCheckInTime()) < 0) {%>
-                            	<td><button class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
-                        	 	<% } else { %>
-                        	 	<td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(<%=adminReserNon.getReserNo()%>)">환불처리</button></td>
-                        		<%} %>
-                        	</tr>
-                       		<%} %>
-                       	<% } %>
-   					<%} %>
+                       <c:choose>
+                        	<c:when test="${ requestScope.oldReserNonMember ne null && empty requestScope.oldReserNonMember}">
+	                        	<tr>
+                        			<th colspan="3">예약 비회원이 존재하지 않습니다.</th>
+	                        	</tr>                        	
+                        	</c:when>
+                        	<c:when test="${requestScope.oldReserNonMember ne null}">
+		                    	<c:forEach var="adminReserNon" items="${requestScope.oldReserNonMember}">
+		                        	<tr>
+		                        		<td>${adminReserNon.reserNo}</td>
+		                        		<td>${adminReserNon.reserName}</td>
+		                        		<td>${adminReserNon.memPhone}</td>                        		
+		                        		<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserNonMem(${adminReserNon.reserNo})">조회</button></td>
+			                        	
+										
+										<c:choose>
+											<c:when test="${adminReservation.reserStatus}">
+												<td><button  class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:when>
+											<c:otherwise>
+											    <td><button disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserNonMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:otherwise>
+										</c:choose>
+			                            
+		                          	</tr>      		                    	
+		                    	</c:forEach>
+                  		
+                        	</c:when>
+                        </c:choose>
+                        
+                        
+                        
+                        
+                        
+                        
+                                                
+                        
+
+                        
 
                         </tbody>
                       </table>
@@ -163,52 +170,60 @@
                 <div class="paging-area" align="center";>
                 
                 
-                <% if(list!=null) { %>
-                	<% if(currentPage > 1) { %>
-                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage - 1%>'"><</button>
-                	<% } %>
-                	
-                    <% for (int i = startPage; i <= endPage; i++) { %>
-                    	<%if (currentPage != i) { %>
-                   		 <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=i%>'"><%=i %></button>
-                   		<% } else { %>
-                   			<button disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
-                   	<% } %>
-                   	
-                   	<% } %>
-                   	
-                   	<% if(currentPage != maxPage) { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserNonMem?currentPage=<%=currentPage + 1%>'">></button>
-                	<% } %>
-                	
-                	<% } else { %>
-   
-                    <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
+                                
+                
+				<c:choose>
+					<c:when test="${requestScope.selectReserNonMember ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserNonMem?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserNonMem?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserNonMem?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					
+					
+					
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestListNonMem.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestListNonMem.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestListNonMem.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+					
+					
+					
+                  </c:choose>
                   
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestListNonMem.do?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                  
-                  <%} %>
-              	
-                	
                 </div>
         
 
             </div>
         </div>
         <div id="footer">
-       		<%@ include file="../../common/footer.jsp" %>          
+     		<jsp:include page="../../common/footer.jsp"></jsp:include>       
         </div>
 
     </div>
@@ -225,7 +240,7 @@
     			success : function(result){
     				if(result.length === 0){
     					alert('예약 회원이 존재하지 않습니다.');
-    					location.href = '<%=contextPath%>/reserNonMem?currentPage=1';
+    					location.href = '${path}/reserNonMem?currentPage=1';
     				} else{
     					
     					
@@ -308,7 +323,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
-    				location.href = '<%=contextPath%>/reserNonMem?currentPage=1'
+    				location.href = '${path}/reserNonMem?currentPage=1'
     			}
     		})
     		

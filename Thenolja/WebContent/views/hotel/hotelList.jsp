@@ -29,9 +29,9 @@
 							<img class="card-img" src="${ hc.hotelPath }">
 						</div>
 	  					<div class="card-info">
-							<h4>${hc.hotelLocation}</h4>
-							<p>숙소명 : ${hc.hotelName}</p>
-							<p>종류 : ${hc.hotelCategory}<p>
+							<h4>${ hc.hotelLocation }</h4>
+							<p>숙소명 : ${ hc.hotelName }</p>
+							<p>종류 : ${ hc.hotelCategory }<p>
 							<c:choose>
 								<c:when test='${ loginUser ne null and loginUser.getMemStatus().equals("Y") }'>
 									<p>가격 : ${ hc.roomPrice }</p>
@@ -39,11 +39,11 @@
 								<c:when test='${ loginStatus ne null && loginStatus.equals("A") }'>
 									<div class="option-btns-room" align="center">
 										<a class="btn btn-sm btn-primary" href="${ path }/insertForm.rooms?hotelNo=${ hc.hotelNo }">객실추가</a>
-										<a class="btn btn-sm btn-info" href="${ path }/updateListForm.rooms?hotelNo=${hc.hotelNo}">객실정보수정</a>
-										<a class="btn btn-sm btn-danger roomBtn" href="${ path }/deleteListForm.rooms?hotelNo=${hc.hotelNo  }" >객실삭제</a>
+										<a class="btn btn-sm btn-info" href="${ path }/updateListForm.rooms?hotelNo=${ hc.hotelNo }">객실정보수정</a>
+										<a class="btn btn-sm btn-danger roomBtn" href="${ path }/deleteListForm.rooms?hotelNo=${ hc.hotelNo }" >객실삭제</a>
 									</div>
 									<div class="option-btns" align="center">
-										<a class="btn btn btn-info" href="${ path }/updateForm.hotels?hotelNo=${ hc.hotelNo}">숙소정보수정</a>
+										<a class="btn btn btn-info" href="${ path }/updateForm.hotels?hotelNo=${ hc.hotelNo }">숙소정보수정</a>
 										<a class="btn btn btn-danger hotelBtn" data-toggle="modal" data-target="#myModal" >숙소삭제</a>
 									</div>
 								</c:when>
@@ -58,7 +58,7 @@
 		<div class="paging-area" align="center">
 			<c:choose>
 			<c:when test='${ loginStatus ne null and loginStatus.equals("A") }'>
-	        	<c:if test="${pageInfo.currentPage gt 1}">
+	        	<c:if test="${ pageInfo.currentPage gt 1}">
 	        		<button class="btn btn btn-outline-info"
 					onclick="location.href='${ path }/hotelList.hotels?currentPage=${ pageInfo.currentPage - 1}&loginStatus=${ loginStatus }' " >이전</button>
 				</c:if>
@@ -216,9 +216,15 @@
 		</script>
 		
 		<script>
+		$(document).on('click', '.card-imgDiv', function(e){
+			location.href = '${ path }/select.hotels?hotelNo='+ $(this).attr('id');
+		});
+			
+			/*
 			$('.card-imgDiv').click(function(e){
 				location.href = '${ path }/select.hotels?hotelNo='+ $(this).attr('id');
 			});
+			*/
 		</script>
 	</div>
 </body>

@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ page import="java.util.ArrayList,   thenolja.admin.nonMember.model.vo.NonMember , thenolja.common.model.vo.PageInfo" %>    
-<%
-	ArrayList<NonMember> oldList = (ArrayList<NonMember>)request.getAttribute("oldNonMemList");
-	
-	ArrayList<NonMember> list = (ArrayList<NonMember>)request.getAttribute("selectNonMemberList");
-	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
 
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,23 +79,25 @@
                         <tbody>
                         
                         <c:choose>
-                        	<c:when test="${requestScope.selectNonMemberList ne null && empty selectNonMemberList }">
-	                        	<tr>
-	                        		<th colspan="3">비회원이 존재하지 않습니다.</th>
-	                        	</tr>                        	
-                        	</c:when>
-                        	<c:when test="${requestScope.selectNonMemberList ne null}">
-                        		<c:forEach var="n" items="${requestScope.selectNonMemberList}">
-		                          <tr>
-		                            <td>${n.memNo}</td>
-		                            <td>${n.memName}</td>
-		                            <td>${n.memPhone}</td>
-		                            <td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(${n.memNo}">삭제</button></td>
-		                          </tr>                        		
-                        		</c:forEach>
-                        	</c:when>
-                        </c:choose>
-                        
+                       	<c:when test="${ requestScope.selectNonMemberList ne null && empty requestScope.selectNonMemberList }">
+                         	   <tr>
+	                        		<th colspan="3">비회원이 존재하지 않습니다.</th>                     	   
+                       	  	   </tr>
+                       	</c:when>
+                       	<c:when test="${ requestScope.selectNonMemberList ne null }">
+                       		<c:forEach var="n" items="${ requestScope.selectNonMemberList }">
+                       			<tr>
+	                       	   		<td>${n.memNo}</td>
+	                       	   		<td>${n.memName}</td>
+	                       	   		<td>${n.memPhone}</td>
+	                       	   		
+									<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteNonMember(${n.memNo}">삭제</button></td>
+		                            
+	                       	  </tr>
+                       		</c:forEach>
+                       	</c:when>
+                       </c:choose>
+
 						<c:choose>
 						<c:when test="${ requestScope.oldNonMemList ne null && empty requestScope.oldNonMemList }">
 						  <tr>
