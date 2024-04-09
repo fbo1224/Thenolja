@@ -137,14 +137,16 @@
 			</div>
 			<div id="left_title"><h3>MY REVIEW</h3></div>
 		</div>
-		<% if(myList.isEmpty()) { %>
+		<c:choose>
+		<c:when test="${ empty requestScope.myList }">
 		<table>
 			<tr>
 				<th style="font-size:40px;" colspan="5">작성된 리뷰가 존재하지 않습니다.</th>
 			</tr>
 		</table>
-		<% } else { %>
-		<%for(Review r : myList){ %>
+		</c:when>
+		<c:otherwise>
+		<c:forEach var="r" items="${ myList }">
 		<div id="content">
 			<div id="review_detail">
 				<div id="hotel_name">
@@ -165,8 +167,9 @@
 				</div>
 			</div>
 		</div> 
-		<% } %>
-		<% } %>
+			</c:forEach>
+		</c:otherwise>
+		</c:choose>
 	<div id="homeBtn">
 	<a href="${ path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
