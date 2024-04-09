@@ -293,7 +293,7 @@
     		data:{
     			memberNo: ${ sessionScope.loginUser.memNo }
     		},
-    		success: function(result){
+    		success : function(result){
     			// console.log(result);
     			if(result.length == 0){
     				$('#couponTable').append('<tr>'

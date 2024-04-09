@@ -44,7 +44,6 @@ public class MyPageCouponController extends HttpServlet {
 		ArrayList<MyPageCoupon> couponList = new MyPageService().selectCoupon(memNo);
 		for( MyPageCoupon mp : couponList) {
 			
-			System.out.println(mp.getCouponDate());
 			try {
 				
 				Date date = dateformat.parse(mp.getCouponDate());
