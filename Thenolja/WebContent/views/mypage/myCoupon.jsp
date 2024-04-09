@@ -138,6 +138,7 @@
 	                        <p>사용기한 : ${ c.couponDate } <%--<%= date --%></p>
 	                        <p>할인율 : ${ c.couponPercent }% <%--<%= c.getCouponPercent() --%></p>
 	                    </div>
+
 			        </div>
 				</div>
 				<%--<% } --%>

@@ -140,7 +140,9 @@
 
 
 <body>
-	<%@ include file="../common/menubar.jsp" %>
+   	<jsp:include page="../common/menubar.jsp"/>
+   	<c:set var="path" value="${ pageContext.request.contextPath }"/>
+   	
 	<form action="${ path }/reviewUpdate.do?reserNo=${ reser.reserNo }&hotelNo=${ hotel.hotelNo }&roomNo=${ r.roomNo}" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
@@ -176,14 +178,14 @@
 	<div id="content_3">
 	    <input type="file" name="upfile" id="file-up">
 	    <button type="button" id="insert-img">사진추가</button>
-     	<% if(r != null) { %>
-     	<label style="margin-left: 20px;">첨부파일 :&nbsp;&nbsp; <img id="review_img" src="<%= r.getImgPath()%>" width="100px" height="100px"></label>
-     	<input type="hidden" name="fileNo" value="<%=r.getFileNo() %>"/>
-     	<input type="hidden" name="changeName" value="<%=r.getChangeName() %>"/>
-     	<% } %>
+	    <c:if test="${ r != null }">
+     	<label style="margin-left: 20px;">첨부파일 :&nbsp;&nbsp; <img id="review_img" src="${ r.imgPath }" width="100px" height="100px"></label>
+     	<input type="hidden" name="fileNo" value="${ r.fileNo }"/>
+     	<input type="hidden" name="changeName" value="${ r.changeName }"/>
+		</c:if>
 	</div>
     <div id="content_4">
-        <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;"><%=r.getContent() %></textarea>
+        <textarea name="reviewContent" id="review-content" cols="70" rows="15" style="resize:none;">${ r.content }</textarea>
     </div>
         
     <div id="footer">
@@ -227,7 +229,7 @@
         		url : 'reviewInsert.do',
         		type : 'post',
         		data : {
-        			reserNo : <%=r.getReserNo()%>,
+        			reserNo : ${ r.reserNo },
         			imgPath : $('#file-up').val(),
         			content : $('#review-content').val(),
         			score : $('.star').val()
