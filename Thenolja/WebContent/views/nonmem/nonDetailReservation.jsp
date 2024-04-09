@@ -186,7 +186,6 @@ String date2 = sdf2.format(newDate2);
 </head>
 <body>
 	
-    <%-- <%@ include file="../common/menubar.jsp" %>--%>
     <jsp:include page="../common/menubar.jsp"/>
     
     <div id="content">
@@ -199,8 +198,7 @@ String date2 = sdf2.format(newDate2);
         <div id="detail">
             <div id="reser_info">
             
-            	<c:forEach var="r" items="${ sessionScope.nonmemReser }">
-				<%--<% for(SelectNonmemReser r : nonmemReser) { --%>
+      			<c:forEach var="r" items="${ sessionScope.nonmemReser }">
 	                <div id="reser_no"><p>No.${ r.reserNo }</p></div>
 	                
 	                <div id="reser_hotel_img"><img src="${ r.hotelPath }"></div>
@@ -211,15 +209,15 @@ String date2 = sdf2.format(newDate2);
 	                    <p>${ r.people }명</p>
 	                    <p>${ r.paymentPrice }원</p>
 	                    
-                        <p>${ date1 } ~ ${ date2 }</p>
-                        <p>오후 ${ r.checkInTime }:00 ~ 오전 ${ r.checkOutTime }:00</p>
+	                       <p>${ r.checkInDate } ~ ${ r.checkOutDate }</p>
+	                       <p>오후 ${ r.checkInTime }:00 ~ 오전 ${ r.checkOutTime }:00</p>
 	                </div>
 	
 	                <div id="reser_btn">
 	                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">환불하기</button>
 	                </div>
 	            </div>
-	        
+		        
 	
 	            <div id="price_info">
 	
@@ -275,46 +273,45 @@ String date2 = sdf2.format(newDate2);
 	                </div>
 	            </div>
 	        </div>
-	</div>	
+		</div>
       <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">환불 계좌 입력</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-        <form action="${ path }/refund.insert?reserNo=${ r.reserNo }%reMemNo=${ r.memNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"  method="post"> 
-            <label for="text">예금주</label>
-            <input type="text" id="refund_name" required name="refundName"><br><br>
-            <input type="hidden" name="refundPrice" value="${ r.paymentPrice }">
-            <input type="hidden" value="${ r.reserNo }" name="reserNo"/>
-            <label for="text">환불계좌</label>
-            <select id="bank_name" name="bankName">
-                <option>신한은행</option>
-                <option>국민은행</option>
-                <option>농협은행</option>
-                <option>우리은행</option>
-            </select>
-            <input id="acc" type="text" placeholder="계좌번호 입력 -제외" required name="accNo">
-            <div id="refund_btn">
-                <br>
-                <button type="submit" class="btn btn-dark">확인</button>
-                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-                
-            </div>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-	<%--<% } --%>
-	</c:forEach>
+  	<div class="modal" id="myModal">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	      
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h4 class="modal-title">환불 계좌 입력</h4>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body">
+		        <form action="${ path }/refund.insert?reserNo=${ r.reserNo }%reMemNo=${ r.memNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"  method="post"> 
+		            <label for="text">예금주</label>
+		            <input type="text" id="refund_name" required name="refundName"><br><br>
+		            <input type="hidden" name="refundPrice" value="${ r.paymentPrice }">
+		            <input type="hidden" value="${ r.reserNo }" name="reserNo"/>
+		            <label for="text">환불계좌</label>
+		            <select id="bank_name" name="bankName">
+		                <option>신한은행</option>
+		                <option>국민은행</option>
+		                <option>농협은행</option>
+		                <option>우리은행</option>
+		            </select>
+		            <input id="acc" type="text" placeholder="계좌번호 입력 -제외" required name="accNo">
+		            <div id="refund_btn">
+		                <br>
+		                <button type="submit" class="btn btn-dark">확인</button>
+		                <button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+		                
+		            </div>
+		        </form>
+	        </div>
+	      </div>
+	    </div>
+  	</div>
+</c:forEach>
 	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
