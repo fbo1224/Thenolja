@@ -4,7 +4,7 @@
 				 thenolja.tb_review.model.vo.Review" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date, java.time.LocalDate, java.time.format.DateTimeFormatter"%>  				   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +103,7 @@
     /*********************/
 </style>
 
-
+<% SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd"); %>
 </head>
 <body>
    	<jsp:include page="../common/menubar.jsp"/>
@@ -124,7 +124,7 @@
 		</div>
     
     <c:choose>
-		<c:when test="${ reserList.isEmpty())}">
+		<c:when test="${ reserList.isEmpty()}">
 			<table>
 				<tr>
 					<th style="font-size:40px;" colspan="5">예약 내역이 존재하지 않습니다.</th>
@@ -132,7 +132,7 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-		<c:forEach var="r" items="${ requestScope.personList }">
+		<c:forEach var="r" items="${ requestScope.reserList }">
 		<div id="content">
 	        <div id="reser_info">
 	            <div id="reser_hotel_img"><img src="${ r.hotelPath }" alt="" width="220px" height="220px"></div>
@@ -147,7 +147,7 @@
 	                <p>${ r.roomName }</p>
 	                <p>${ r.people }인</p>
 	                <p>${ r.paymentPrice }원</p>
-	                <p>${ r.checkIn }&nbsp;&nbsp;${ r.checkInTime } : 00 ~ ${ r.checkOut }&nbsp;&nbsp;${ r.checkOutTime } : 00</p>
+	                <p>${ r.checkIn }&nbsp;&nbsp;오후 ${ r.checkInTime } : 00 ~ ${ r.checkOut }&nbsp;&nbsp;오전 ${ r.checkOutTime } : 00</p>
 	            </div>
 	            <script>
 	            	function myList(){
@@ -159,19 +159,20 @@
 
 	
             <div id="review_in">
-             	${ LocalDate currentDate = LocalDate.now();
-	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	            LocalDate specificDate = LocalDate.parse(r.getCheckOut(), formatter);
-	            
-	            
-	            }
+
+	            <c:set var="currentDate" value="<%= new java.util.Date()%>"/>
+	            <!-- 
+	            currentDate.compareTo(${specificDate}) < 0 
+	             -->
+	             
+	             
 	        <c:choose>
-		        <c:when test="${currentDate.isBefore(specificDate) }">
-	                <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
-	            </c:when>
-	            <c:otherwise>
+		        <c:when test="${ r.reserStatus }">
 	            	<a href="${path }/review.insert?reserNo=${ r.reserNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }">
 	                <button id="reser_btn" class="btn btn-outline-secondary">리뷰 작성</button></a>
+	            </c:when>
+	            <c:otherwise>
+	                <a href="#"><button id="reser_btn" class="btn btn-outline-secondary" disabled>리뷰 작성</button></a>
 	            </c:otherwise>
             </c:choose>
             
@@ -188,6 +189,7 @@
 	<div id="homeBtn">
 		<a href="${path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
+
 
 </body>
 </html>

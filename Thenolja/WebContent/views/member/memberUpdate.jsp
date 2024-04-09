@@ -70,7 +70,7 @@
 </head>
 <body>
 	<%--<%@ include file="../common/menubar.jsp" %>  --%>
-	<jsp:include page="../common/menubar.jsp">
+	<jsp:include page="../common/menubar.jsp"/>
 	
 	
 	<div class="outer">

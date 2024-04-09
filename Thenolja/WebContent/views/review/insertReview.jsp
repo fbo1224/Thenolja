@@ -7,6 +7,8 @@
 	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Room room = (Room)request.getAttribute("room");
 %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,29 +138,30 @@
 
 
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-	<form action="<%=contextPath %>/reviewInsert.do?reserNo=<%=reser.getReserNo()%>&hotelNo=<%=hotel.getHotelNo() %>" method="post" enctype="multipart/form-data">
+   	<jsp:include page="../common/menubar.jsp"/>
+   	<c:set var="path" value="${ pageContext.request.contextPath }"/>
+	<form action="${ path }/reviewInsert.do?reserNo=${ reser.reserNo }&hotelNo=${ hotel.hotelNo }" method="post" enctype="multipart/form-data">
     <div id="content">
 		<div id="content_title">
 		   	<div id="left_img">
-	       		<a href="<%=contextPath %>/myReser.list?reserNo=<%=reser.getReserNo()%>&hotelNo=<%=hotel.getHotelNo() %>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+	       		<a href="${ path }/myReser.list?reserNo=${ reser.reserNo }&hotelNo=${ hotel.hotelNo }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
 		    </div>
 		    <div id="left_title"><h3>리뷰 작성</h3></div>
 		</div>
 	<div id="content_1">
 	    <div id="hotel-no">
-	        No.<%=reser.getReserNo() %>
+	        No.${ reser.reserNo }
 	    </div>
 	    <div>
-           <div id="reser_hotel_img"><img src="<%=hotel.getHotelPath() %>" alt="" width="220px" height="220px"></div>
-			<input type="hidden" name="reserNo" value="<%=reser.getReserNo() %>">
-			<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
+           <div id="reser_hotel_img"><img src="${ hotel.hotelPath }" alt="" width="220px" height="220px"></div>
+			<input type="hidden" name="reserNo" value="${ reser.reserNo }">
+			<input type="hidden" name="hotelNo" value="${ hotel.hotelNo }">
 	            <div id="reser_detail">
-                <h3><%=hotel.getHotelName() %></h3>
-                <p><%=room.getRoomName() %></p>
-                <p><%=reser.getPeople() %>인</p>
-                <p><%=reser.getPaymentPrice() %>원</p>
-                <p><%=reser.getCheckIn()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=reser.getCheckOut()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
+                <h3>${ hotel.hotelName }</h3>
+                <p>${ room.roomName }</p>
+                <p>${ reser.people }인</p>
+                <p>${ reser.paymentPrice }원</p>
+                <p>${ reser.checkIn }&nbsp;&nbsp;${ room.checkInTime } : 00 ~ ${ reser.checkOut }&nbsp;&nbsp;${ room.checkOutTime } : 00</p>
            </div>
     	</div>
     </div>
@@ -221,7 +224,7 @@
         		url : 'reviewInsert.do',
         		type : 'post',
         		data : {
-        			reserNo : <%=reser.getReserNo()%>,
+        			reserNo : ${ reser.reserNo },
         			imgPath : $('#file-up').val(),
         			content : $('#review-content').val(),
         			score : $('.star').val()

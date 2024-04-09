@@ -5,6 +5,8 @@
 	ArrayList<Review> myList = (ArrayList<Review>)request.getAttribute("myList");
 	
 %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,11 +128,12 @@
 </head>
 <body>
 	
-	<%@ include file="../common/menubar.jsp" %>
+   	<jsp:include page="../common/menubar.jsp"/>
+   	<c:set var="path" value="${ pageContext.request.contextPath }"/>
 	<div id="output">
 		<div id="content_title">
 			<div id="left_img">
-				<a href="<%=contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+				<a href="${ path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
 			</div>
 			<div id="left_title"><h3>MY REVIEW</h3></div>
 		</div>
@@ -145,19 +148,19 @@
 		<div id="content">
 			<div id="review_detail">
 				<div id="hotel_name">
-					<span id="nickName"><%=r.getNickName() %></span>님<br>
-					<span id="hotelName"><%=r.getHotelName() %></span>&nbsp;&nbsp;<span id="score"><%=r.getScore() %></span><br><br>
-					<span id="roomName"><%=r.getRoomName() %></span>
+					<span id="nickName">${ r.nickName }</span>님<br>
+					<span id="hotelName">${ hotel.hotelName }</span>&nbsp;&nbsp;<span id="score">${ r.score }</span><br><br>
+					<span id="roomName">${ r.roomName }</span>
 				</div>
 				<div id="review_content">
-					<span id="reviewCC"><%=r.getContent() %></span>
+					<span id="reviewCC">${ r.content }</span>
 				</div>
 			</div>
 			<div id="reivew_set">
-				<div id="review_img"><img id="reser_review_img" src="<%=r.getImgPath() %>" alt="숙소사진" width="150px" height="150px"></div>
+				<div id="review_img"><img id="reser_review_img" src="${ r.imgPath }" alt="숙소사진" width="150px" height="150px"></div>
 				<div id="img_btn">
-					<a href="update.review?reserNo=<%=r.getReserNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo()%>"><button id="updateReview">리뷰 수정</button></a>
-					<a href="delete.review?reserNo=<%=r.getReserNo()%>">
+					<a href="update.review?reserNo=${ r.reserNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"><button id="updateReview">리뷰 수정</button></a>
+					<a href="delete.review?reserNo=${ r.reserNo }">
 					<input id="cancel" type="button" value="X" style="border: 0; background-color: white;"></a>
 				</div>
 			</div>
@@ -165,7 +168,7 @@
 		<% } %>
 		<% } %>
 	<div id="homeBtn">
-	<a href="<%=contextPath%>"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
+	<a href="${ path }"><button id="goHome" class="btn btn-info">메인으로 돌아가기</button></a>
 	</div>
 	</div>	
 		

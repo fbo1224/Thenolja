@@ -93,7 +93,7 @@
 </head>
 <body>
 	<%--<%@ include file="../common/menubar.jsp" %> --%>
-	<jsp:include page="../common/menubar.jsp">
+	<jsp:include page="../common/menubar.jsp"/>
       
 		<div id="wrap">
 			<div id="content">
@@ -118,7 +118,7 @@
                                 const pwdCheck = document.getElementById('pwdCheck2');
                                 const next = document.getElementById('next');
                                 
-                                if("${ loginUser.memPwd }" != pwd.value){
+                                if('${ loginUser.memPwd }' != pwd.value){
                                 	
                                 	pwdCheck.innerHTML = "비밀번호가 일치하지 않습니다.";
                                     pwd.value = '';
