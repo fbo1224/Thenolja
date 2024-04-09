@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
     <%
     	int hotelNo = (int)request.getAttribute("hotelNo");
     	int roomCnt = (int)request.getAttribute("roomCnt");
@@ -73,60 +75,64 @@ div {
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp"%>
+	<jsp:include page="../common/menubar.jsp" />
 	<div id="wrap">
-	<%if(roomCnt < 3){ %>
-		<div id="title-div">
-			<h2>객실추가</h2>
-		</div>
-		<div id="content-div">
-			<form id="content-add-form" action="<%= contextPath %>/insert.rooms" enctype="multipart/form-data" method="post">
-			<input type="hidden" value="<%= hotelNo %>" name="hotelNo" >
-			<section id="content-add-sect">
-				<div class="content-div-1">
-					<div class="form-group">
-					  <label>객실이름</label>
-					  <input type="text" class="form-control" maxlength="25" name="roomName" oninput="testVal(this, roomName);" required >
-					</div>
-					
-					<div class="form-group">
-					  <label>최대인원</label>
-					  <input type="text" class="form-control" maxlength="3" name="maxPeople" oninput="testVal(this, maxPeople);" required >
-					</div>
-					
-					<div class="form-group">
-					  <label>객실 사진</label>
-					  <input id="attachImg" type="file"  name="roomImg" oninput="testVal(this, roomImg);" required>
-					</div>
-					
-					<div class="form-grop">
-						<label>입실시간</label>
-						<input type="time" name="in_time" required><br>
-						<label>퇴실시간</label>
-						<input type="time" name="out_time" required>
-					</div>
-					
-					<div class="form-group">
-					  <label>객실 가격</label>
-					  <input type="text"  name="roomPrice" maxlength="9" oninput="testVal(this, roomPrice);" required>
-					</div>
-					
-					<div class="form-group">
-					  <label>객실 번호</label>
-					  <input type="text"  name="roomNum" maxlength="9" oninput="testVal(this, roomNum);" required>
-					</div>
-				</div>
-			</section>
-			<div id="btn-div" align="center">
-				<button class="btn btn btn-info">객실 추가</button>
+	<c:choose>
+		<c:when test="${ roomCnt lt 3 }">
+			<div id="title-div">
+				<h2>객실추가</h2>
 			</div>
-			</form>
-		</div>
-	<%} else { %>
-		<h1>호텔 숙소 등록은 3개 이상 할 수 없습니다.</h1>
-		<button type="button" class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
-	<%} %>	
+			<div id="content-div">
+				<form id="content-add-form" action="${ path }/insert.rooms" enctype="multipart/form-data" method="post">
+				<input type="hidden" value="${ hotelNo }" name="hotelNo" >
+				<section id="content-add-sect">
+					<div class="content-div-1">
+						<div class="form-group">
+						  <label>객실이름</label>
+						  <input type="text" class="form-control" maxlength="25" name="roomName" oninput="testVal(this, roomName);" required >
+						</div>
+						
+						<div class="form-group">
+						  <label>최대인원</label>
+						  <input type="text" class="form-control" maxlength="3" name="maxPeople" oninput="testVal(this, maxPeople);" required >
+						</div>
+						
+						<div class="form-group">
+						  <label>객실 사진</label>
+						  <input id="attachImg" type="file"  name="roomImg" oninput="testVal(this, roomImg);" required>
+						</div>
+						
+						<div class="form-grop">
+							<label>입실시간</label>
+							<input type="time" name="in_time" required><br>
+							<label>퇴실시간</label>
+							<input type="time" name="out_time" required>
+						</div>
+						
+						<div class="form-group">
+						  <label>객실 가격</label>
+						  <input type="text"  name="roomPrice" maxlength="9" oninput="testVal(this, roomPrice);" required>
+						</div>
+						
+						<div class="form-group">
+						  <label>객실 번호</label>
+						  <input type="text"  name="roomNum" maxlength="9" oninput="testVal(this, roomNum);" required>
+						</div>
+					</div>
+				</section>
+				<div id="btn-div" align="center">
+					<button class="btn btn btn-info">객실 추가</button>
+				</div>
+				</form>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<h1>호텔 숙소 등록은 3개 이상 할 수 없습니다.</h1>
+			<button type="button" class="btn btn-lg btn-outline-info" onclick="history.back();" >돌아가기</button>
+		</c:otherwise>
+	</c:choose>	
 	</div>
+	
 	<script>
 	const regNameRule = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;
 	const regNum = /^[0-9]+$/;

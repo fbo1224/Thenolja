@@ -4,25 +4,6 @@
 <%@ page import="thenolja.tb_hotel.model.vo.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-    <%
-     	Hotel h = (Hotel)request.getAttribute("hotelInfo");
-    	ArrayList<String> list = null;
-    	String phoneNum = "";
-    	String BeforeImgName = "";
-    	
-    	if(h != null){
-	    	phoneNum = h.getHotelPhone().substring(4);
-	    	
-	    	list = new ArrayList();
-	    	
-	    	for(int i = 0; i < h.getSerList().length; i++){
-		    	if(h.getSerList()[i] != null){
-		    		list.add(h.getSerList()[i]);
-		    	}
-	    	}
-    	}
-    %>
     <c:if test="${ hotelInfo ne null }">
     	<c:set var="phoneNum" value="${ hotelInfo.hotelPhone.substring(4) }" />
     </c:if>
