@@ -79,7 +79,7 @@
 
                 <div id="mem_list">
                 	<c:set var="current" value="<%= new java.util.Date() %>" />
-                	<fmt:formatDate value="${ current }" type="both" pattern="yyyy.MM.dd" />
+                	
                     <table class="table table-hover">
                         <thead>
                           <tr>
@@ -122,7 +122,41 @@
                   		
                         	</c:when>
                         </c:choose>
-                       
+                        
+                        
+                        <c:choose>
+                        	<c:when test="${ requestScope.reserOldestList ne null && empty requestScope.reserOldestList}">
+	                        	<tr>
+	                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
+	                        	</tr>                        	
+                        	</c:when>
+                        	<c:when test="${requestScope.reserOldestList ne null}">
+		                    	<c:forEach var="adminReserNon" items="${requestScope.reserOldestList}">
+		                        	<tr>
+		                        		<td>${adminReserNon.reserNo}</td>
+		                        		<td>${adminReserNon.memId}</td>
+		                        		<td>${adminReserNon.reserName}</td>
+		                        		<td>${adminReserNon.memPhone}</td>
+			                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(${adminReserNon.reserNo})">조회</button></td>
+			                        	
+										
+										<c:choose>
+											<c:when test="${adminReserNon.reserStatus}">
+												<td><button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:when>
+											<c:otherwise>
+												<td><button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(${adminReserNon.reserNo})">환불처리</button></td>
+											</c:otherwise>
+										</c:choose>
+			                            
+		                          	</tr>      		                    	
+		                    	</c:forEach>
+                  		
+                        	</c:when>
+                        </c:choose>
+                        
+                        
+                        
 
                         </tbody>
                       </table>
@@ -180,7 +214,7 @@
             </div>
         </div>
         <div id="footer">
-       		<%@ include file="../../common/footer.jsp" %>          
+			<jsp:include page="../../common/footer.jsp"></jsp:include>         
         </div>
 
     </div>

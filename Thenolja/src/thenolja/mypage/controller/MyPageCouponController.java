@@ -1,7 +1,10 @@
 package thenolja.mypage.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +38,22 @@ public class MyPageCouponController extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 		// System.out.println(memNo);
+		SimpleDateFormat dateformat = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat dateformat2 = new SimpleDateFormat("yy년 MM월 dd일");
 		
 		ArrayList<MyPageCoupon> couponList = new MyPageService().selectCoupon(memNo);
+		for( MyPageCoupon mp : couponList) {
+			
+			System.out.println(mp.getCouponDate());
+			try {
+				
+				Date date = dateformat.parse(mp.getCouponDate());
+				mp.setCouponDate(dateformat2.format(date));
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		request.setAttribute("couponList", couponList);
 		

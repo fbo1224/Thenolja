@@ -78,7 +78,6 @@ public class ReserMemberController extends HttpServlet {
 	    for(int i = 0; i < list.size(); i++) {
         	try {
 				boolean reserStatus = simpleDate.parse(list.get(i).getCheckInTime()).before(current);
-				System.out.println(reserStatus);
 				list.get(i).setReserStatus(reserStatus);
         	} catch (ParseException e) {
 				e.printStackTrace();
