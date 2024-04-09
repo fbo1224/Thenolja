@@ -7,68 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>deleteListForm</title>
-<style>
-div {
-	box-sizing: border-box;
-}
-#title-div {
-	width: 100%;
-	height: 10%;
-	margin: auto;
-	border-bottom:  1px solid gray;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-#title-div > h2 {
-	margin-top: 15px;
-	margin-left: 15px;
-	font-weight: bold;
-}
-
-#wrap {
-	width: 1200px;
-	height: 850px;
-	margin: auto;
-	padding : 10px;
-}
-#content-div{
-	width: 100%;
-	height: 80%;
-	padding: 10px;
-}
-
-#timeOptions{
-	display: flex;
-	align-items: center;
-	flex-wrap: nowrap;
-}
-#timeOptions label{
-	font-size: 12px;
-}
-.content-div-1{
-	width: 32%;
-	height: 70%;
-	padding: 10px;
-}
-.content-div-1:hover {
-	border-radius: 10px;
-	border: 1px solid gray;
-	box-shadow: 5px 3px 3px gray;
-	padding: 9px;
-}
-
-#content-add-sect{
-	display:flex;
-	align-items: center;
-	height: 100%;
-}
-#btn-div{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-</style>
+<link rel="stylesheet" href="views/hotel/css/deleteListForm.css">
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />

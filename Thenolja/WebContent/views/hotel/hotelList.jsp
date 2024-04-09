@@ -216,9 +216,15 @@
 		</script>
 		
 		<script>
+		$(document).on('click', '.card-imgDiv', function(e){
+			location.href = '${ path }/select.hotels?hotelNo='+ $(this).attr('id');
+		});
+			
+			/*
 			$('.card-imgDiv').click(function(e){
 				location.href = '${ path }/select.hotels?hotelNo='+ $(this).attr('id');
 			});
+			*/
 		</script>
 	</div>
 </body>
