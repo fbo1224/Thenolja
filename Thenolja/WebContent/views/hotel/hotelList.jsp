@@ -272,7 +272,6 @@
 				hotelNo = $(this).parent().parent().prev().attr('id');
 			});
 			
-			
 			$('.deleteHotelBtn').click(function(e){
 				deleteAjax();
 			})

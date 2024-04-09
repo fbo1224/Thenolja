@@ -4,9 +4,10 @@
 <%@ page import="thenolja.tb_hotel.model.vo.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <c:if test="${ hotelInfo ne null }">
-    	<c:set var="phoneNum" value="${ hotelInfo.hotelPhone.substring(4) }" />
-    </c:if>
+
+<c:if test="${ hotelInfo ne null }">
+	<c:set var="phoneNum" value="${ hotelInfo.hotelPhone.substring(4) }" />
+</c:if>
     
 <!DOCTYPE html>
 <html>
