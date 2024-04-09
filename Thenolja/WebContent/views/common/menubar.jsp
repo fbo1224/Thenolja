@@ -334,13 +334,13 @@ div {
 		<c:otherwise>
 			<header id="header-navi">
 			    <div>
-			       <a href="${  path  }"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
+			       <a href="${ path }"><img id="logo-img" src="./resources/img/logo.png"alt="logo"></a></div>
 			       <h2 id="header-title">더 놀자</h2>
 			    <div id="menu-list">
 			    <ul id="optionList" style="font-size: 20px;">
 			    	<c:choose>
 			   			<c:when test="${ loginUser eq null }"> <!-- 로그아웃 상태라면 -->
-			        		<li><a href="${  path  }/loginPage">로그인</a></li>
+			        		<li><a href="${ path }/loginPage">로그인</a></li>
 			        	</c:when>
 			        	<c:otherwise> <!-- 로그인상태라면 -->
 			        		<li><a href="${  path  }/logout">로그아웃</a></li>

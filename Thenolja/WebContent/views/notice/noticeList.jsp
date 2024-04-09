@@ -1,10 +1,15 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
-
-
-
-
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pageInfo.getCurrentPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,29 +45,17 @@
     <br>
    	 <h2 align="center">공지사항</h2>
     <br>
-    
-    <C:
     <!-- 등록 버튼 영역 START -->
-	<a id="btn_reg" class="btn btn-primary" href="${"path"} }/views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
-  
-   
-   
-   	
+	<a id="btn_reg" class="btn btn-primary" href="${ path } /views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
     <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
-	    
-	    
-	    <c:choose>
-		<c:when loginUser!="${ null eq MemStatus }"> <!-- if블럭 -->
-			$("#btn_reg").show();
-		</c:when>
-		<c:when test="${ value2 eq 300 }"> <!-- else if블럭 -->
-			<b>반갑습니다.</b>
-		</c:when>
-		<c:otherwise><!-- else블럭 -->
-				$("#btn_reg").hide();	
-		</c:otherwise>
-	</c:choose>
-	  
+	    <script>
+	    	$("#btn_reg").show();
+	    </script>
+	<%} else{ %>
+	    <script>
+	    	$("#btn_reg").hide();
+	    </script>
+	<% } %>  
    	<!-- 등록 버튼 영역 END -->
    	
      <!-- 관리자가 아니면 등록하기 버튼 숨김처리 -->
@@ -92,25 +85,7 @@
 
          <!-- 공지사항이 있을수도있고 없을 수도 있음 -->
          <!-- 비어있음    비어있는지 확인   위 상단 null값 이들어있고 list참조 null값이 들어있음 nullporinException 발생 -->
-       		 <c:choose>
-       		 	<c:when test="${ empty noticeList }">
-        			<tr>
-						<td colspan="6">등록된 게시글이 존재하지 않습니다.</td>
-					</tr>
-        		</c:when>
-				<c:otherwise>
-					<c:forEach var="p" items="${ requestScope.noticeList }" varStatus="s">
-        				<tr>
-     					   <td>${ n.NoticeNo }</td>
-							<td>${ n.NoticeTitle }</td>
-							<td>${ n.Writer }</td>
-							<td>${ n.CreateDate }</td>
-							<td>${ n.ViewCount }</td>
-							<td>${ n.Status }</td>
-        				</tr>
-					</c:forEach>
-				</c:otherwise>
-       		 </c:choose>  
+         <% if(list.isEmpty()) { %>   
          	<tr class="align_center">
          		<th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
          	</tr>
@@ -126,7 +101,7 @@
 			         		<th colspan="6">등록된 게시글이 존재하지 않습니다.</th>
 			         	</tr>  	 -->
 			         	 
-			       <c:otherwise>
+			         <% } else { %>
 			           <tr id="tr_notice" class="list">
 		         		 <td><%= list.get(i).getNoticeNo() %></td>
 		         		 <td><%= list.get(i).getNoticeTitle () %></td>
@@ -134,9 +109,9 @@
 		         		 <td><%= list.get(i).getCreateDate() %></td>
 		         		 <td><%= list.get(i).getViewCount() %></td>
 		         		</tr>
-			        </c:otherwise>
+			         <% } %>
 			         	      		
-         		<c:otherwise>
+         		<% } else { %>
          		<!-- 관리자인 경우 -->
          		 <tr id="tr_notice" class="list">
          			<td><%= list.get(i).getNoticeNo() %></td>
@@ -146,7 +121,7 @@
          			<td><%= list.get(i).getViewCount() %></td>
          			<td><%= list.get(i).getStatus() %></td>
          		</tr>
-         		</c:otherwise>
+         		<% } %>
          		
          	<% } %>
 
@@ -158,12 +133,12 @@
  	  <div class="paging-area" align="center">
  	  <% if(list != null) { %>
  		<% if(currentPage > 1) { %>
-			<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=currentPage - 1%>'"><</button> 	     
+			<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=currentPage - 1%>'"><</button> 	     
  	     <% } %>
 
         <% for(int i = startPage; i <= endPage; i++) { %>
              <% if (currentPage != i) { %>
-               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=i%>'"><%= i %></button>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=i%>'"><%= i %></button>
                     
 	         <% } else { %>
 	           <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
@@ -172,25 +147,25 @@
         <% } %> 	     
  	     
          <% if(currentPage != maxPage) { %>
-         <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=currentPage + 1%>'">></button>
+         <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=currentPage + 1%>'">></button>
          <% } %> 	     
  	 
  	 <% }else { %>
 
        <%if(currentPage > 1) { %>
-           <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=currentPage - 1%>'"><</button>
+           <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=currentPage - 1%>'"><</button>
      	<%} %>
                     
         <% for(int i = startPage; i <= endPage; i ++) { %>
              <%if (currentPage != i)  { %>
-               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=i%>'"><%= i %></button>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=i%>'"><%= i %></button>
              <% } else { %>
                <button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
              <% } %>
         <%} %>
                   
              <% if(currentPage != maxPage) { %>
-               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/noticeList?currentPage=<%=currentPage + 1%>'">></button>
+               <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${ path } /noticeList?currentPage=<%=currentPage + 1%>'">></button>
              <%} %>
  	     	     
  	  <% } %> 
@@ -229,4 +204,4 @@
 <body>
 
 </body>
-</html> 
+</html>
