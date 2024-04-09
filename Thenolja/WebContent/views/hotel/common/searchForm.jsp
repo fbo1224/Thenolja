@@ -50,14 +50,14 @@
 <div id="content-1">
 	<form id="select-form" action="${ path }/searchList.hotels" method="get">
 		<c:choose>
-		<c:when test="${ searchDataForm ne null }" >
+		<c:when test="${ searchData ne null }" >
 			<div style="display: inline-block;">
 				<input type="text" name="daterange" readonly
-				required value="${ searchDataForm.getDaterange() }" />	
+				required value="${ searchData.daterange }" />	
 			</div>
-			<span id="date">${ searchDataForm.getDaterange() }</span>
+			<span id="date">${ searchData.daterange }</span>
 			<input required class="form-control" id="people-input"
-			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요."  value="${ searchDataForm.getMaxPeople() }" >
+			type="number" name="people" min="1" max="99" placeholder="인원수를 입력해주세요."  value="${ searchData.maxPeople }" >
 			<select id="locations" name="location">
 			</select>
 		</c:when>
@@ -119,9 +119,9 @@ const toDay = new Date();
 	    			$('#locations').append('<option value="'+result[i].trim()+'">'+result[i].trim()+'</option>');
 	    		}
 	    		
-	    		<c:if test="${searchDataForm ne null}">
+	    		<c:if test="${searchData ne null}">
 	    			$('#locations').children().each(function(idx, item){
-	    				if($(item).val() == '${ searchDataForm.getLocation() }'){
+	    				if($(item).val() == '${ searchData.location }'){
 	    					$(item).attr('selected', 'true');
 	    	    		}
 	    	  	    });

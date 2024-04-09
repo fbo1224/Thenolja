@@ -113,7 +113,7 @@
 						<c:choose>
 						<c:when test="${ requestScope.oldNonMemList ne null && empty requestScope.oldNonMemList }">
 						  <tr>
-						  		<th colspan="6">회원이 존재하지 않습니다.</th>                       	   
+						  		<th colspan="3">비회원이 존재하지 않습니다.</th>                       	   
 						 </tr>              		  	
 						</c:when>
 						<c:when test="${requestScope.oldNonMemList ne null }">
@@ -135,50 +135,49 @@
                 </div>  
         
      		<div class="paging-area" align="center";>
-               
-               <% if(list!=null) { %>
-                	<%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                  
-                   <% } else { %>
+     		
+     		
+     		 <c:choose>
+					<c:when test="${requestScope.selectNonMemberList ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/selectNonMem?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+	
+                  </c:choose>
 
-                    <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonMemList.do?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                  
-                  <%} %>
-                  
-                  
-                  
-                  
-                  
-                  
-                  
                 </div>
         
 

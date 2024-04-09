@@ -65,6 +65,7 @@ public class RefundMemberController extends HttpServlet {
 		// System.out.println(pi);
 		
 		ArrayList<AdminRefund> list = new RefundService().selectRefundMemberList(pi);
+		System.out.println(list);
 		
 		request.setAttribute("selectRefundMemberList", list);
 		request.setAttribute("pageInfo", pi);

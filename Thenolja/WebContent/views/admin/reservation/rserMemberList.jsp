@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
-<%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <% SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy.MM.dd"); %>
 
 <!DOCTYPE html>
