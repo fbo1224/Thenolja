@@ -42,7 +42,6 @@ public class FindIdController extends HttpServlet {
 		
 		request.getRequestDispatcher("views/login/findId.jsp").forward(request, response);
 	
-	
 	}
 
 	/**

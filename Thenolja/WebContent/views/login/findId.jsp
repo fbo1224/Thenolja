@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%
 	Member findId =(Member)request.getAttribute("findId");
-%>
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,11 +104,17 @@
 						</div>
 						<div id="content2" class="content">
 						
-							<% if(findId == null) {  %>
-								<div>입력하신 정보로 조회된 아이디가 존재하지 않습니다.</div>
-							<% } else { %>
-								<div>입력하신 정보로 조회된 아이디는 <%= findId.getMemId() %>입니다.</div>
-							<% } %>
+							<%--<% if(findId == null) {  --%>
+							<c:choose>
+								<c:when test="${ empty findId }">
+									<div>입력하신 정보로 조회된 아이디가 존재하지 않습니다.</div>
+								</c:when>
+								<c:otherwise>
+							<%--<% } else { --%>
+									<div>입력하신 정보로 조회된 아이디는 ${ findId.memId }입니다.</div>
+								</c:otherwise>
+							<%--<% } --%>
+							</c:choose>
 						</div>
 
 					</form>
