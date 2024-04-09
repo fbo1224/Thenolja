@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, thenolja.notice.model.vo.Notice, thenolja.member.model.vo.Member, thenolja.common.model.vo.PageInfo" %>
-<%
+<%@ page import="thenolja.member.model.vo.Member" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%-- <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	
@@ -9,7 +11,7 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int maxPage = pageInfo.getMaxPage();	
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,16 +40,34 @@
 </head>
  
 <body>
+<include file="../views/menubar.jsp"/>
+<%-- <jsp:include page="menubar.jsp"/> --%>
 
-<%@ include file="../common/menubar.jsp" %>
-<div class="">
+
 
     <br>
    	 <h2 align="center">공지사항</h2>
     <br>
     <!-- 등록 버튼 영역 START -->
 	<a id="btn_reg" class="btn btn-primary" href="${ path } /views/notice/noticeReg.jsp" role="button" style=>등록하기</a>
-    <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
+   <c:choose>
+		<c:when test="${ value1 eq 100 }"> <!-- if블럭 -->
+			<b>안녕하세요.</b>
+		</c:when>
+		<c:when test="${ value2 eq 300 }"> <!-- else if블럭 -->
+		<script>
+	    	$("#btn_reg").show();
+	    </script>
+		</c:when>
+		<c:otherwise><!-- else블럭 -->
+			<script>
+	    	$("#btn_reg").hide();
+	    </script>	
+		</c:otherwise>
+	</c:choose>
+  
+  
+   <%--  <%if(loginUser != null && loginUser.getMemStatus().equals("A")){ %>
 	    <script>
 	    	$("#btn_reg").show();
 	    </script>
@@ -63,7 +83,7 @@
     <!-- 	<script>
     		$("#btn_reg").style.display='none';
     	</script> -->
-    <% } %>  	
+    <% } %>  	 --%>
     
     <br>
     
@@ -92,7 +112,7 @@
          <%}else{ %>
          <!-- 비어있지 않음 -->
          	<%for(int i=0; i<list.size(); i++) { %>
-         	
+         	<C:forEach var="i" begin="1" end="list.size()  " step="i++"/>
          		<!-- 일반 회원인 경우 -->
          		<% if(loginUser != null && !"A".equals(loginUser.getMemStatus())) { %>
 			         
@@ -102,12 +122,12 @@
 			         	</tr>  	 -->
 			         	 
 			         <% } else { %>
-			           <tr id="tr_notice" class="list">
-		         		 <td><%= list.get(i).getNoticeNo() %></td>
-		         		 <td><%= list.get(i).getNoticeTitle () %></td>
-		         		 <td><%= list.get(i).getWriter() %></td>
-		         		 <td><%= list.get(i).getCreateDate() %></td>
-		         		 <td><%= list.get(i).getViewCount() %></td>
+			           <tr id="tr_notice" class="list">						 
+		         		 <td><%= list.get(i).getNoticeNo() %></td>			<%-- ${NoticeNo} --%> 
+		         		 <td><%= list.get(i).getNoticeTitle () %></td>		<%-- ${NoticeTitle}  --%>
+		         		 <td><%= list.get(i).getWriter() %></td>			<%-- ${Writer}  --%>
+		         		 <td><%= list.get(i).getCreateDate() %></td>		<%-- ${CreateDate}  --%>
+		         		 <td><%= list.get(i).getViewCount() %></td>			<%-- ${ViewCount}  --%>
 		         		</tr>
 			         <% } %>
 			         	      		
