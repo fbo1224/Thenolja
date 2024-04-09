@@ -2,7 +2,9 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -165,11 +167,14 @@ public class HotelController {
 	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		Hotel h = new Hotel();
+		Hotel h = null;
+		
 		h = new HotelService().updateForm(hotelNo);
+		String phoneNum = h.getHotelPhone().substring(4);
 		
 		if(h != null) {
 			request.setAttribute("hotelInfo", h);
+			request.setAttribute("phoneNum", phoneNum);
 			view="views/hotel/updateHotel.jsp";
 		} else {
 			request.setAttribute("errorMsg", "조회에 실패했습니다.");
@@ -252,6 +257,10 @@ public class HotelController {
 	public String select(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
+		
+		// 선택한 호텔 정보 가져오기
+		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
+		
 		String daterange = "";
 		String location = "";
 		int maxPeople = 0;
@@ -269,12 +278,26 @@ public class HotelController {
 			searchData.setDaterange(daterange);
 			searchData.setLocation(location);
 			searchData.setMaxPeople(maxPeople);
+			
+			request.setAttribute("searchData", searchData);
+			
+		} else {
+			Date toDay = new Date();
+			SimpleDateFormat newDate = new SimpleDateFormat("yy/MM/dd");
+			String newToday = newDate.format(toDay);
+			
+			// 내일 구하기
+			Date tomo = new Date(new Date().getTime() + 60*60*24*1000*1);
+			String newTomo = newDate.format(tomo);
+			
+			searchData = new SearchData();
+			searchData.setDaterange(newToday+ " ~ " + newTomo);
+			searchData.setLocation(dh.getHotelLocation());
+			searchData.setMaxPeople(2);
+			
 			request.setAttribute("searchData", searchData);
 		}
 
-		// 선택한 호텔 정보 가져오기
-		DetailHotel dh =  new HotelService().selectHotel(hotelNo);
-		
 		if(dh != null) {
 			request.setAttribute("hotelDetail", dh);
 			view = "views/hotel/hotelDetail.jsp";

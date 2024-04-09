@@ -19,10 +19,22 @@ public class AdminReservation {
 	private String memPhone;
 	private String hotelName;
 	private String hotelPath;
+	private boolean reserStatus;
+	
+	
 	
 	
 	
 
+
+
+	public boolean isReserStatus() {
+		return reserStatus;
+	}
+
+	public void setReserStatus(boolean reserStatus) {
+		this.reserStatus = reserStatus;
+	}
 
 	public AdminReservation() {
 		super();
