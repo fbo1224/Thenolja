@@ -1,6 +1,7 @@
 package thenolja.mypage.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -37,7 +38,6 @@ public class MyPageCouponController extends HttpServlet {
 		// System.out.println(memNo);
 		
 		ArrayList<MyPageCoupon> couponList = new MyPageService().selectCoupon(memNo);
-		
 		request.setAttribute("couponList", couponList);
 		
 		request.getRequestDispatcher("views\\mypage\\myCoupon.jsp").forward(request, response);

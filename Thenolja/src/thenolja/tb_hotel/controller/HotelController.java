@@ -167,11 +167,14 @@ public class HotelController {
 	public String updateForm(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		int hotelNo = Integer.parseInt(request.getParameter("hotelNo"));
-		Hotel h = new Hotel();
+		Hotel h = null;
+		
 		h = new HotelService().updateForm(hotelNo);
+		String phoneNum = h.getHotelPhone().substring(4);
 		
 		if(h != null) {
 			request.setAttribute("hotelInfo", h);
+			request.setAttribute("phoneNum", phoneNum);
 			view="views/hotel/updateHotel.jsp";
 		} else {
 			request.setAttribute("errorMsg", "조회에 실패했습니다.");
@@ -277,6 +280,7 @@ public class HotelController {
 			searchData.setMaxPeople(maxPeople);
 			
 			request.setAttribute("searchData", searchData);
+			
 		} else {
 			Date toDay = new Date();
 			SimpleDateFormat newDate = new SimpleDateFormat("yy/MM/dd");
