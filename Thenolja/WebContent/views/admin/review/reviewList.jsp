@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ page import="java.util.ArrayList, thenolja.admin.review.model.vo.AdminReview, thenolja.common.model.vo.PageInfo" %>   
-<%
 
-	ArrayList<AdminReview> oldList = (ArrayList<AdminReview>)request.getAttribute("oldReviewMemberList");
-	ArrayList<AdminReview> list = (ArrayList<AdminReview>)request.getAttribute("selectReviewMemberList");
-	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-
-%>    
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +44,7 @@
     <div id="wrap">
         <div id="header">
 		
-			<%@ include file="../../common/menubar.jsp" %> 
+            <jsp:include page="../../common/menubar.jsp"></jsp:include>
 
         </div>
                
@@ -85,8 +71,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=1'">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestReviewList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/adminReviewList?currentPage=1'">최신순</button>
 					</div>
         
         
@@ -105,46 +91,48 @@
                         </thead>
                         <tbody>
                         
-                        
-                        <% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="4">리뷰가 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
-                        	<%if(list != null){ %>
-                        	<% for(AdminReview review : list) { %>
-                        		<tr>
-                        			<td><%=review.getHotelName() %></td>
-                        			<td><%=review.getMemId() %></td>
-                        			<td><%=review.getNickName() %></td>
-                        			<td><%=review.getCreateDate() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=review.getReserNo()%>)">조회</button></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(<%=review.getReserNo()%>)">삭제</button></td>
-                        		</tr>
-                        	<% } %>
-                        <% } %>
-                       <%} %>
-                       
-                       <% if(oldList!=null &&oldList.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="4">리뷰가 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
-                       
-                        <% if(oldList != null) { %>
-                       		<%for(AdminReview review  : oldList) { %>
+ 					<c:choose>
+                       	<c:when test="${ requestScope.selectReviewMemberList ne null && empty requestScope.selectReviewMemberList }">
+                         	   <tr>
+                        			<th colspan="4">리뷰가 존재하지 않습니다.</th>                    	   
+                       	  	   </tr>
+                       	</c:when>
+                       	<c:when test="${ requestScope.selectReviewMemberList ne null }">
+                       		<c:forEach var="review" items="${ requestScope.selectReviewMemberList }">
                        			<tr>
-									<td><%=review.getHotelName() %></td>
-                        			<td><%=review.getMemId() %></td>
-                        			<td><%=review.getNickName() %></td>
-                        			<td><%=review.getCreateDate() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(<%=review.getReserNo()%>)">조회</button></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(<%=review.getReserNo()%>)">삭제</button></td>
+	                       	   		<td>${review.hotelName}</td>
+	                       	   		<td>${review.memId}</td>
+	                       	   		<td>${review.nickName}</td>
+	                       	   		<td>${review.createDate}</td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(${review.reserNo})">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(${review.reserNo})">삭제</button></td>
 		                            
 	                       	  </tr>
-                       		<%} %>
-                       	<% } %>
-                       <% } %>  
+                       		</c:forEach>
+                       	</c:when>
+                       </c:choose> 
+
+ 					<c:choose>
+                       	<c:when test="${ requestScope.oldReviewMemberList ne null && empty requestScope.oldReviewMemberList }">
+                         	   <tr>
+                        			<th colspan="4">리뷰가 존재하지 않습니다.</th>                    	   
+                       	  	   </tr>
+                       	</c:when>
+                       	<c:when test="${ requestScope.oldReviewMemberList ne null }">
+                       		<c:forEach var="review" items="${ requestScope.oldReviewMemberList }">
+                       			<tr>
+	                       	   		<td>${review.hotelName}</td>
+	                       	   		<td>${review.memId}</td>
+	                       	   		<td>${review.nickName}</td>
+	                       	   		<td>${review.createDate}</td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReview(${review.reserNo})">조회</button></td>
+                        			<td><button class="btn btn-sm btn-outline-secondary" onclick="deleteReview(${review.reserNo})">삭제</button></td>
+		                            
+	                       	  </tr>
+                       		</c:forEach>
+                       	</c:when>
+                       </c:choose>	
+
                    
                         </tbody>
                       </table>
@@ -152,49 +140,59 @@
                 </div>
         
                 <div class="paging-area" align="center";>
-                
-				<% if(list!=null) { %>
-                	<%if(currentPage > 1) {%>
-                    <button class="btn btn-sm btn-outline-secondary"  onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage - 1%>'"><</button>
-                    <% } %>
-                    
-                    <% for(int i = startPage; i <= endPage; i++) { %>
-                    	<% if(currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=i%>'"><%=i %></button>
-                    	<% } else { %>
-							<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                		<% } %>
-                		<% } %>
-                		
-                		<% if(currentPage != maxPage) { %>
-                		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/adminReviewList?currentPage=<%=currentPage + 1%>'">></button>
-                		<% } %>
-                		
-                		<% } else { %>
-	                    <%if(currentPage > 1) { %>
-	                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=<%=currentPage - 1%>'"><</button>
-	     				<%} %>
-	                    
-	                    <% for(int i = startPage; i <= endPage; i ++) { %>
-	                    	<%if (currentPage != i)  { %>
-	                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.do?currentPage=<%=i%>'"><%= i %></button>
-	                  		<% } else { %>
-	                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-	                    <% } %>
-	                   <%} %>
-	                  
-	                  <% if(currentPage != maxPage) { %>
-	                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestReviewList.docurrentPage=<%=currentPage + 1%>'">></button>
-	                  <%} %>
-	                  
-	                  <%} %>
+
+				<c:choose>
+					<c:when test="${requestScope.selectReviewMemberList ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/adminReviewList?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/adminReviewList?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/adminReviewList?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					
+					
+					
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestReviewList.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestReviewList.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestReviewList.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+					
+					
+					
+                  </c:choose>
+                               
                 	</div>
         
 
             </div>
         </div>
         <div id="footer">
-       		<%@ include file="../../common/footer.jsp" %>  
+			<jsp:include page="../../common/footer.jsp"></jsp:include>        
         </div>
 
     </div>
@@ -212,7 +210,7 @@
     			success : function(result){
     				if(result.length === 0){
     					alert('회원이 존재하지 않습니다.');
-    					location.href = '<%=contextPath%>/adminReviewList?currentPage=1';
+    					location.href = '${path}/adminReviewList?currentPage=1';
     				} else{
     					let resultStr = '';
 						for(let i = 0; i < result.length; i++){
@@ -273,7 +271,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
-    				location.href = '<%=contextPath%>/adminReviewList?currentPage=1'
+    				location.href = '${path}/adminReviewList?currentPage=1'
     			}
     			
     		});
@@ -372,7 +370,7 @@
 				data : {
 					content : $('#comment').val(),
 					reserNo : $('#reserNo22').val(),
-					memNo : <%= loginUser.getMemNo() %>
+					memNo : ${loginUser.memNo}
 				},
 				success : function(result){
 					console.log(result);	
