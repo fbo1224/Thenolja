@@ -62,7 +62,7 @@
         margin-top : 10px;
     }
     #reser_detail > p{
-        font-size: 18px;
+        font-size: 20px;
     }
     #reser_detail > span{
         font-weight: bold;
@@ -136,8 +136,7 @@
 	                    
 	                        <h3>${ c.couponContent } <%--<%= c.getCouponContent() --%></h3><br>
 	                        <p>사용기한 : ${ c.couponDate } <%--<%= date --%></p>
-	                        <p>할인율 : ${ c.couponPercent } <%--<%= c.getCouponPercent() --%></p>
-	                        ${c.couponDate }
+	                        <p>할인율 : ${ c.couponPercent }% <%--<%= c.getCouponPercent() --%></p>
 	                    </div>
 			        </div>
 				</div>
