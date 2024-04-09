@@ -1,19 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList,   thenolja.admin.refund.model.vo.AdminRefund , thenolja.common.model.vo.PageInfo" %>        
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+   
 
-	ArrayList<AdminRefund> oldList = (ArrayList<AdminRefund>)request.getAttribute("oldRefundNonMemberList");
-	ArrayList<AdminRefund> list = (ArrayList<AdminRefund>)request.getAttribute("selectRefundNonMemberList");
-	
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pageInfo.getCurrentPage();
-	int startPage = pageInfo.getStartPage();
-	int endPage = pageInfo.getEndPage();
-	int maxPage = pageInfo.getMaxPage();
-
-%>    
     
     
 <!DOCTYPE html>
@@ -49,8 +38,7 @@
     
     <div id="wrap">
         <div id="header">
-        
-       		<%@ include file="../../common/menubar.jsp" %> 
+			<jsp:include page="../../common/menubar.jsp"></jsp:include>
         </div>
                
         <div id="content">
@@ -76,8 +64,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest"  onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=1'">최신순</button>			          	 
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldestNonRefund.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest"  onclick="location.href='${path}/refundNonMem?currentPage=1'">최신순</button>			          	 
 					</div>
         
                 </div>
@@ -94,43 +82,48 @@
                         </thead>
                         <tbody>
                         
-                   		<% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">환불 비회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
-                        
-                      	<%if(list != null){ %>                       
-                        	<% for(AdminRefund refunNonMem : list) { %>
-                        		<tr>
-                        			<td><%=refunNonMem.getReserNo() %></td>
-                        			<td><%=refunNonMem.getReserName() %></td>
-                        			<td><%=refunNonMem.getMemPhone() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refunNonMem.getReserNo()%>)">조회</button></td>
-                        		</tr>
-                        	<% } %>
-                        <% } %>
-                       <% } %>
-
-                   		<% if(oldList!=null &&oldList.isEmpty()) { %>
-                        	<tr>
-                        		<th colspan="3">환불 비회원이 존재하지 않습니다.</th>
-                        	</tr>
-                        <% } else { %>
-                        
-                       	<% if(oldList != null) { %>
-                       		<%for(AdminRefund refunNonMem : oldList) { %>
+                        <c:choose>
+                       	<c:when test="${ requestScope.selectRefundNonMemberList ne null && empty requestScope.selectRefundNonMemberList }">
+                         	   <tr>
+                        			<th colspan="3">환불 비회원이 존재하지 않습니다.</th>                	   
+                       	  	   </tr>
+                       	</c:when>
+                       	<c:when test="${ requestScope.selectRefundNonMemberList ne null }">
+                       		<c:forEach var="refunNonMem" items="${ requestScope.selectRefundNonMemberList }">
                        			<tr>
-	                       	   		<td><%=refunNonMem.getReserNo() %></td>
-                        			<td><%=refunNonMem.getReserName() %></td>
-                        			<td><%=refunNonMem.getMemPhone() %></td>
-                        			<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(<%=refunNonMem.getReserNo()%>)">조회</button></td>
+	                       	   		<td>${refunNonMem.reserNo}</td>
+	                       	   		<td>${refunNonMem.reserName}</td>
+	                       	   		<td>${refunNonMem.memPhone}</td>
+	                       	   		
+									<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(${refunNonMem.reserNo})">조회</button></td>
 		                            
-	                       	   </tr>
-                       		<%} %>
-                       	<% } %>
-					<%} %>
-                   
+	                       	  </tr>
+                       		</c:forEach>
+                       	</c:when>
+                       </c:choose>
+                        
+                        <c:choose>
+                       	<c:when test="${ requestScope.oldRefundNonMemberList ne null && empty requestScope.oldRefundNonMemberList }">
+                         	   <tr>
+                        			<th colspan="3">환불 비회원이 존재하지 않습니다.</th>                	   
+                       	  	   </tr>
+                       	</c:when>
+                       	<c:when test="${ requestScope.oldRefundNonMemberList ne null }">
+                       		<c:forEach var="refunNonMem" items="${ requestScope.oldRefundNonMemberList }">
+                       			<tr>
+	                       	   		<td>${refunNonMem.reserNo}</td>
+	                       	   		<td>${refunNonMem.reserName}</td>
+	                       	   		<td>${refunNonMem.memPhone}</td>
+	                       	   		
+									<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="selectRefundMember(${refunNonMem.reserNo})">조회</button></td>
+		                            
+	                       	  </tr>
+                       		</c:forEach>
+                       	</c:when>
+                       </c:choose>       
+       
+       
+
                         </tbody>
                       </table>
 
@@ -138,53 +131,59 @@
         
                 <div class="paging-area" align="center";>
                 
-                <% if(list!=null) { %>
-                	<%if(currentPage > 1) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=currentPage - 1%>'"><</button>
-                    <% } %>
-                    
-                    <% for(int i = startPage; i <= endPage; i++) { %>
-                    	<% if(currentPage != i) {%>
-                    		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=i%>'"><%=i %></button>
-                    	<% } else { %>
-                    		<button  disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
-                    	<% } %>
-                    
-                    <% } %>
-                    
-                    <% if(currentPage != maxPage) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/refundNonMem?currentPage=<%=currentPage + 1%>'">></button>
-                	<% } %>
-                	
-                	<% } else { %>
-                   
-                    <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=currentPage - 1%>'"><</button>
-     				<%} %>
-                    
-                    <% for(int i = startPage; i <= endPage; i ++) { %>
-                    	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=i%>'"><%= i %></button>
-                  		<% } else { %>
-                    	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
-                    <% } %>
-                   <%} %>
-                  
-                  <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldestNonRefund.do?currentPage=<%=currentPage + 1%>'">></button>
-                  <%} %>
-                  
-                  <%} %>
-                	
-                	
-                	
+                
+				<c:choose>
+					<c:when test="${requestScope.selectRefundNonMemberList ne null }">
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/refundNonMem?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/refundNonMem?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/refundNonMem?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>				
+					</c:when>
+					
+					
+					
+					<c:otherwise>
+						<c:if test="${ pageInfo.currentPage > 1 }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonRefund.do?currentPage=${pageInfo.currentPage - 1}'"><</button>
+						</c:if>
+						<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i">
+							<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonRefund.do?currentPage=${ i }'">${ i }</button>
+								</c:when>
+								<c:otherwise>
+									<button disabled class="btn btn-sm btn-outline-secondary">${ i }</button>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+							<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldestNonRefund.do?currentPage=${pageInfo.currentPage + 1}'">></button>
+						</c:if>							
+					</c:otherwise>
+					
+					
+					
+                  </c:choose>                
+                    	
                 </div>
         
 
             </div>
         </div>
         <div id="footer">
-       		<%@ include file="../../common/footer.jsp" %>          	
+     		<jsp:include page="../../common/footer.jsp"></jsp:include>            	
         </div>
 
     </div>
@@ -204,7 +203,7 @@
     			success : function(result){
     				if(result.length === 0){
     					alert('환불 비회원이 존재하지 않습니다.');
-    					location.href = '<%=contextPath%>/refundNonMem?currentPage=1';
+    					location.href = '${path}/refundNonMem?currentPage=1';
     				} else {
     					
     					let resultStr = '';
