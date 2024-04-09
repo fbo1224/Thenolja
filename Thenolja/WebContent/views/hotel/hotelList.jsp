@@ -8,72 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  
-<style>
-	div{
-		box-sizing: border-box;
-	}
-	#wrap {
-		width: 1200px;
-		height: auto;
-		margin: auto;
-	}
-	#content-2-lists {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-		flex-wrap: wrap;
-		padding: 10px;
-	}
-	
-	.cards{
-		width:	45%;
-		height: 250px;
-		margin: 10px;
-		
-	}
-	.card-imgDiv, .card-info{
-		display: inline-block;
-		width: 50%;
-		height: 100%;
-	}
-	.card-img{
-		width: 100%;
-		height: 100%;
-		border-radius: 10px;
-		cursor: pointer;
-	}
-	.card-info {
-		float:right;
-	}
-	.card-info > h4 {
-		text-align: center;
-	}
-	.card-info > p{
-		margin: 0px;
-		padding-left: 30px;
-		margin-bottom: 10px;
-	}
-	.option-btns-room{
-		margin: 20px 0px;
-	}
-	.option-btns{
-		margin: 3px 0px;
-	}
-	.cards:hover{
-		scale: 103%;
-		box-shadow: 3px 3px 2px gray;
-		border-radius: 10px;
-	}
-	.paging-area{
-		padding: 10px;
-		margin : 5px;
-		border-top: 1px solid gray;
-		border-bottom: 1px solid gray;
-	}
-</style>
+<link rel="stylesheet" href="views/hotel/css/hotelList.css" >
 </head>
+
 <body>
 	<jsp:include page="./common/searchForm.jsp" />
 	

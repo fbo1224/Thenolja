@@ -8,40 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>searchForm</title>
-<style>
-	div{
-		box-sizing: border-box;
-	}
 
-	#content-1{
-		width: 1200px;
-		margin: auto;
-		height: 100px;
-		border-top: 1px solid gray;
-		border-bottom: 1px solid gray;
-		display: flex;
-		align-items: center;
-		justify-content: center;		
-	}
-	#select-form {
-		width: 80%;
-		height: 100%;
-		display:flex;
-		align-items: center;
-		justify-content: space-evenly;
-	}
-	#people-input, #search-input, #checkIn_date, #checkOut_date{
-		width: 230px;
-		height: 40px;
-		margin: 5px;
-	}
-	#date {
-		display: inline-block;
-		font-size: 12px;
-		color: green;
-		text-align: center;
-	}
-</style>
+<link rel="stylesheet" href="views/hotel/css/searchForm.css" >
+
 </head>
 <body>
 
