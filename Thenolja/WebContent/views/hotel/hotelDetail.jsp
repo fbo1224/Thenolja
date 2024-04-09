@@ -71,18 +71,18 @@
 							</div>
 							<div>
 								<c:choose>
-									<c:when test="${ searchDataForm ne null }">
+									<c:when test="${ searchData ne null }">
 										<p>쿠폰적용가능</p>
-										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchDataForm.daterange }&location=${ searchDataForm.location}&people=${searchDataForm.maxPeople}">
+										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchData.daterange }&location=${ searchData.location}&people=${searchData.maxPeople}">
 										<button class="btn btn-sm btn-info">객실 예약</button></a>
-										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchDataForm.daterange }&location=${ searchDataForm.location}&people=${searchDataForm.maxPeople}">
+										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ searchData.daterange }&location=${ searchData.location}&people=${searchData.maxPeople}">
 										<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 									</c:when>
 									<c:otherwise>
 										<p>쿠폰적용가능</p>
-										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ defaultPeople }">
+										<a href="${ path }/insertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ searchData.maxPeople }">
 										<button class="btn btn-sm btn-info">객실 예약</button></a>
-										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ defaultPeople }">
+										<a href="${ path }/nonInsertReservation?hotelNo=${ hotelDetail.hotelNo }&roomNo=${ ri.roomNo }&daterange=${ dateRangeForm }&location=${ hotelDetail.hotelLocation }&people=${ searchData.maxPeople }">
 										<button class="btn btn-sm btn-primary" >비회원예약하기</button></a>
 									</c:otherwise>
 							 	</c:choose>
