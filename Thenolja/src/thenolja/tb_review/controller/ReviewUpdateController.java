@@ -43,11 +43,13 @@ public class ReviewUpdateController extends HttpServlet {
 		Review review = new ReviewService().selectReview(reserNo);
 		Room room = new ReserService().selectRoom(hotelNo, roomNo);
 		Reservation reser = new ReserService().selectReserNo(reserNo);
+		Hotel hotel = new ReserService().selectHotelNo(hotelNo);
 		
 		if(room != null && review != null) {
 			request.setAttribute("room", room);
 			request.setAttribute("review", review);
 			request.setAttribute("reser", reser);
+			request.setAttribute("hotel", hotel);
 
 			request.getRequestDispatcher("views/review/updateReview.jsp").forward(request, response);
 		} else {

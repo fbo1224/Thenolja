@@ -5,6 +5,7 @@
 <%
 	Review r = (Review)request.getAttribute("review");
 	Room room = (Room)request.getAttribute("room");
+	Hotel hotel = (Hotel)request.getAttribute("hotel");
 	Reservation reser = (Reservation)request.getAttribute("reser");
 %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -178,10 +179,10 @@
 	<div id="content_3">
 	    <input type="file" name="upfile" id="file-up">
 	    <button type="button" id="insert-img">사진추가</button>
-	    <c:if test="${ r != null }">
-     	<label style="margin-left: 20px;">첨부파일 :&nbsp;&nbsp; <img id="review_img" src="${ r.imgPath }" width="100px" height="100px"></label>
-     	<input type="hidden" name="fileNo" value="${ r.fileNo }"/>
-     	<input type="hidden" name="changeName" value="${ r.changeName }"/>
+	    <c:if test="${ review ne null }">
+     	<label style="margin-left: 20px;">첨부파일 :&nbsp;&nbsp; <img id="review_img" src="${ review.imgPath }" width="100px" height="100px"></label>
+     	<input type="hidden" name="fileNo" value="${ review.fileNo }"/>
+     	<input type="hidden" name="changeName" value="${ review.changeName }"/>
 		</c:if>
 	</div>
     <div id="content_4">
@@ -229,7 +230,7 @@
         		url : 'reviewInsert.do',
         		type : 'post',
         		data : {
-        			reserNo : ${ r.reserNo },
+        			reserNo : ${ reser.reserNo },
         			imgPath : $('#file-up').val(),
         			content : $('#review-content').val(),
         			score : $('.star').val()

@@ -72,7 +72,7 @@ public class RefundInsertController extends HttpServlet {
 				request.setAttribute("hotel", hotel);      
 				request.setAttribute("room", room);
 				request.setAttribute("reser", reser);
-				// System.out.println(reser);
+				
 				RequestDispatcher view = request.getRequestDispatcher("views/refund/detailRefund.jsp");
 				view.forward(request, response);
 	   			
