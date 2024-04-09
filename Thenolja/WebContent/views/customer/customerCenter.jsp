@@ -147,9 +147,9 @@
         </div>
         
         <div id="content3" class="content">
-            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>/noticeList?currentPage=1"><img class="img1" src="../../resources/mypage/bell.png" alt="공지사항"><span>공지사항</span></a></div></div>
-            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>/eventList?currentPage=1"><img class="img1" src="../../resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
-            <div class="icon"><div class="iconImg"><a href="<%=contextPath %>/couponList?currentPage=1"><div style="width: 80%;margin: auto;"><img class="img1" src="../../resources/mypage/coupons.png" alt="쿠폰"></div><span>쿠폰</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href=" ${ path } /noticeList?currentPage=1"><img class="img1" src="../../resources/mypage/bell.png" alt="공지사항"><span>공지사항</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="${ path } /eventList?currentPage=1"><img class="img1" src="../../resources/mypage/events.png" alt="이벤트"><span>이벤트</span></a></div></div>
+            <div class="icon"><div class="iconImg"><a href="${ path } /couponList?currentPage=1"><div style="width: 80%;margin: auto;"><img class="img1" src="../../resources/mypage/coupons.png" alt="쿠폰"></div><span>쿠폰</span></a></div></div>
             <div class="icon"><div class="iconImg"><a href="javascript:void(0)" onclick="alert('페이지 준비중입니다. 잠시만 기다려주세요.^^')"><img class="img1" src="../../resources/mypage/question.png" alt="자주 묻는 질문"><span>자주 묻는 질문</span></a></div></div>
         </div>
 

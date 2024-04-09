@@ -75,6 +75,7 @@ div {
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
+	
 	<div id="wrap">
 	<%if(rooms != null && rooms.isEmpty()) {%>
 		<h3>등록된 객실이 없습니다.</h3>

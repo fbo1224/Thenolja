@@ -208,14 +208,13 @@
 			        <p><c:out value= "${ room.roomPrice }"/>원</p>
 			        <p><c:out value="${ rinfo.startDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkInTime }"/> : 00 ~ 
 			        <c:out value="${ rinfo.endDate }"/>&nbsp;&nbsp;<c:out value="${ room.checkOutTime }"/>: 00</p>
-			        
     			</div>
 			</div>
 	        <div id="price_info">
 	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="300px">결제금액 : <c:out value= "${ room.roomPrice }"/>원</td>
+	        				<td width="300px">결제금액 : <c:out value="${ room.roomPrice }"/>원</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="500px">할인 금액 : <span id="pprice">0</span>원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>

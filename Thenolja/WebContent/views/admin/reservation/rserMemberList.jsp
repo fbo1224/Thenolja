@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>    
 <%@ page import="java.util.ArrayList, thenolja.admin.reservation.model.vo.AdminReservation, thenolja.common.model.vo.PageInfo" %>    
 <%
@@ -50,7 +53,11 @@
 		}
 
 
-</style>   		<%@ include file="../../common/menubar.jsp" %> 
+</style>   
+		
+    <div id="wrap">
+        <div id="header"> 
+        	<jsp:include page="../../common/menubar.jsp"></jsp:include>
         </div>
                
         <div id="content">
@@ -76,8 +83,8 @@
                     </div>
         
  					<div id="mem_sort">
-			          	 <button class="sort-btn" id="oldest" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=1'">오래된순</button>
-			   			 <button class="sort-btn" id="newest" onclick="location.href='<%=contextPath%>/reserMember?currentPage=1'">최신순</button>
+			          	 <button class="sort-btn" id="oldest" onclick="location.href='${path}/oldReserList.do?currentPage=1'">오래된순</button>
+			   			 <button class="sort-btn" id="newest" onclick="location.href='${path}/reserMember?currentPage=1'">최신순</button>
 					</div>
         
                 </div>
@@ -96,32 +103,35 @@
                         </thead>
                         <tbody>
                         
-                        <% if(list!=null &&list.isEmpty()) { %>
-                        	<tr>
-                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
-                        	</tr>
-                        <% } else { %>
-                         <%if(list != null){ %>
-                        	<% for (AdminReservation adminReservation : list) { %>
-                        	
-                        	<tr>
-                        		<td><%=adminReservation.getReserNo()%></td>
-                        		<td><%=adminReservation.getMemId() %></td>
-                        		<td><%=adminReservation.getReserName()%></td>
-                        		<td><%=adminReservation.getMemPhone() %></td>
-	                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
-	                        	
-
-	                        	<%if(today.compareTo(adminReservation.getCheckInTime()) < 0) {%>
-	                            <td><button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
-	                      		<% } else { %>
-	                      		<td><button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
-	                      		<% } %>
-	                            
-                        </tr>
-                        <% } %>
-                       <% } %>
-                       <%} %>
+                        <c:choose>
+                        	<c:when test="${ requestScope.selectReserMember ne null && empty requestScope.selectReserMember}">
+	                        	<tr>
+	                        		<td colspan="4">예약 회원이 존재하지 않습니다.</td>
+	                        	</tr>                        	
+                        	</c:when>
+                        	<c:when test="${requestScope.selectReserMember ne null}">
+		                    	<c:forEach var="adminReservation" items="${requestScope.selectReserMember}">
+		                        	<tr>
+		                        		<td>${adminReservation.reserNo}</td>
+		                        		<td>${adminReservation.memId}</td>
+		                        		<td>${adminReservation.reserName}</td>
+		                        		<td>${adminReservation.memPhone}</td>
+			                        	<td><button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal" onclick="detailReserMem(<%=adminReservation.getReserNo()%>)">조회</button></td>
+			                        	
+		
+			                        	<%if(today.compareTo(adminReservation.getCheckInTime()) < 0) {%>
+			                            <td><button id="refundBtn" class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
+			                      		<% } else { %>
+			                      		<td><button id="refundBtn"  disabled class="btn btn-sm btn-outline-secondary" onclick="refundReserMem(<%=adminReservation.getReserNo()%>)">환불처리</button></td>
+			                      		<% } %>
+			                            
+		                          	</tr>      		                    	
+		                    	</c:forEach>
+                  		
+                        	</c:when>
+                        </c:choose>
+                       
+                       
                        
                        <% if(oldList!=null &&oldList.isEmpty()) { %>
                         	<tr>
@@ -164,12 +174,12 @@
                 
                 <% if(list!=null) { %>
                 	<%if(currentPage > 1) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserMember?currentPage=<%=currentPage - 1%>'"><</button>
                     <% } %>
                     
                     <% for(int i = startPage; i <= endPage; i++) { %>
                     	<% if(currentPage != i) {%>
-                    		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=i%>'"><%=i %></button>
+                    		<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserMember?currentPage=<%=i%>'"><%=i %></button>
                     	<% } else { %>
                     		<button  disabled class="btn btn-sm btn-outline-secondary"><%=i %></button>
                     	<% } %>
@@ -177,25 +187,25 @@
                     <% } %>
                     
                     <% if(currentPage != maxPage) { %>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/reserMember?currentPage=<%=currentPage + 1%>'">></button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/reserMember?currentPage=<%=currentPage + 1%>'">></button>
                 	<% } %>
                 	
                 	<% } else { %>
                    
                     <%if(currentPage > 1) { %>
-                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage - 1%>'"><</button>
+                	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldReserList.do?currentPage=<%=currentPage - 1%>'"><</button>
      				<%} %>
                     
                     <% for(int i = startPage; i <= endPage; i ++) { %>
                     	<%if (currentPage != i)  { %>
-                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=i%>'"><%= i %></button>
+                    	<button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldReserList.do?currentPage=<%=i%>'"><%= i %></button>
                   		<% } else { %>
                     	<button disabled class="btn btn-sm btn-outline-secondary"><%= i %></button>
                     <% } %>
                    <%} %>
                   
                   <% if(currentPage != maxPage) { %>
-                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='<%=contextPath%>/oldReserList.do?currentPage=<%=currentPage + 1%>'">></button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="location.href='${path}/oldReserList.do?currentPage=<%=currentPage + 1%>'">></button>
                   <%} %>
                   
                   <%} %>
@@ -227,7 +237,7 @@
     			success : function(result){
     				if(result.length === 0){
     					alert('예약 회원이 존재하지 않습니다.');
-    					location.href = '<%=contextPath%>/reserMember?currentPage=1';
+    					location.href = '${path}/reserMember?currentPage=1';
     				} else{
     					
     					
@@ -314,7 +324,7 @@
     			type : 'get',
     			success : function(result){
     				alert(result.message);
-    				location.href = '<%=contextPath%>/reserMember?currentPage=1';
+    				location.href = '${path}/reserMember?currentPage=1';
     			}
     			
     		});

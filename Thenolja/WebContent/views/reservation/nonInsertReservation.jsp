@@ -2,11 +2,8 @@
     pageEncoding="UTF-8" %>
 <%@ page import="thenolja.member.model.vo.Member" %>
 <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.Hotel, thenolja.tb_hotel.model.vo.Room, thenolja.tb_reservation.model.vo.ReserInfo" %>   
-<%
-	Hotel hotel = (Hotel)request.getAttribute("hotel");
-	Room room = (Room)request.getAttribute("room");
-	ReserInfo rinfo = (ReserInfo)request.getAttribute("rinfo");
-%>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,6 +137,7 @@
 <body>
     
     <%@ include file="../common/menubar.jsp" %>
+    <c:set var="path" value="${ pageContext.request.contextPath }"/>
     <!-- 0. 전체 감싸는 div 시작 -->
     <div id="content">
     
@@ -147,7 +145,7 @@
         <div id="content_title">
         
             <div id="left_img">
-                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="${ path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             
             <div id="left_title">
@@ -162,19 +160,19 @@
 			<!-- 0-2-1. 호텔 정보 -->
 			<div id="reser_info">
 				
-	    		<div id="reser_hotel_img">
-	    			<img src="<%=hotel.getHotelPath() %>" alt="" width="300px" height="300px">
-    			</div>
-	
-				<div id="reser_detail">
-					<input type="hidden" name="hotelNo" value="<%=hotel.getHotelNo() %>">
-					<input type="hidden" name="roomNum" value="<%=room.getRoomNo() %>">
-				        <h2><%=hotel.getHotelName() %></h2>
-				        <p><%=room.getRoomName() %></p>
-				        <p><%=rinfo.getPeople() %>인&nbsp;<small>최대인원&nbsp;<%=room.getMaxPeople() %>인</small></p>
-				        <p><%=room.getRoomPrice() %>원</p>
-				        <p><%=rinfo.getStartDate()%>&nbsp;&nbsp;<%=room.getCheckInTime() %> : 00 ~ <%=rinfo.getEndDate()%>&nbsp;&nbsp;<%=room.getCheckOutTime() %> : 00</p>
-    			</div>
+	              <div id="reser_hotel_img"><img src="${ hotel.hotelPath }" alt="" width="220px" height="220px"></div>
+
+                <div id="reser_detail">
+				<input type="hidden" name="hotelNo" value="${ hotel.hotelNo }">
+				<input type="hidden" name="roomNum" value="${ room.roomNo }">
+				<input type="hidden" name="reserNo" value="${ reser.reserNo }">
+				
+			        <h2>${ hotel.hotelName }</h2>
+			        <p>${ room.roomName }</p>
+			        <p>${ reser.people }인</p>
+			        <p>${ room.roomPrice }원</p>
+			        <p>${ reser.checkIn }&nbsp;&nbsp;${ room.checkInTime } : 00 ~ ${ reser.checkOut }&nbsp;&nbsp;${ room.checkOutTime } : 00</p>
+                </div>
 			</div>
 			<!-- /0-2-1. 호텔 정보 끝 -->
 			
@@ -185,21 +183,22 @@
 	   	        	<div id="reser_price">
 	        		<table>
 	        			<tr>
-	        				<td width="400px">결제금액 : <%=room.getRoomPrice() %>원</td>
+	        				<td width="170x">예약금액 : ${ room.roomPrice }</td>
 							<td width="20px"><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 							<td width="400px">할인 금액 : 0원</td>
 							<td width="25px"><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" ><%=room.getRoomPrice() %></span> 원</td>
+							<td width="400px" style="font-weight: bold;" >결제금액 : <span name="paymentPrice" >${ room.roomPrice }</span> 원</td>
 						</tr>
 	               </table>
 				</div>
 				<!-- /0-2-2-1. 가격정보 끝 -->
 
-				<form action="<%= contextPath %>/insertNon.reser?hotelNo=<%=hotel.getHotelNo() %>&roomNo=<%=room.getRoomNo() %>" method="post" id="insert-form">
-					<input type="hidden" name="paymentPrice" value="<%=room.getRoomPrice()%>">
-					<input type="hidden" name="checkIn" value="<%=rinfo.getStartDate()%>">
-					<input type="hidden" name="checkOut" value="<%=rinfo.getEndDate()%>">
-					<input type="hidden" name="people" value="<%=rinfo.getPeople() %>">
+				<form action="${path}/insertNon.reser?memNo=${ sessionScope.loginUser.memNo }&hotelNo=${ hotel.hotelNo }&roomNo=${ room.roomNo }" method="post" id="insert-form">
+					<input id="hidePrice" type="hidden" name="paymentPrice" value="${ room.roomPrice }">
+					<input id="couponNo" type="hidden" name="couponNo" value="0">
+					<input type="hidden" name="checkIn" value="${ rinfo.startDate }">
+					<input type="hidden" name="checkOut" value="${ rinfo.endDate }">
+					<input type="hidden" name="people" value="${ rinfo.people }">
 					<!-- 0-2-2-2. 예약자 정보 시작(얘 정보 뽑아서 DB에 저장할 용도) -->
 					<div id="reser_mem_info">
 					
@@ -237,7 +236,7 @@
 	                
 	                <!-- 0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 시작 -->
 	                <div id="reservation">
-	                    <button type="submit" id="reser-btn"><%=room.getRoomPrice()%>원 결제하기</button>
+	                    <button type="submit" id="reser-btn">${ room.roomPrice }원 결제하기</button>
 	                </div>
 
 	                <!-- /0-2-2-5. 폼태그 안에 있는 모든 정보를 서블릿으로 보내주는 버튼 div 끝 -->
