@@ -75,7 +75,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="./common/searchForm.jsp" %>
+	<jsp:include page="./common/searchForm.jsp" />
+	
 	<div id="wrap">
 		<div id="content-2-lists">
 			<c:choose>

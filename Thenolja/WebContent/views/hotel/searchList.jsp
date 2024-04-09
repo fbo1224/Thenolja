@@ -3,14 +3,6 @@
     <%@ page import="java.util.ArrayList, thenolja.tb_hotel.model.vo.*, thenolja.common.model.vo.PageInfo " %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <!--
-    	sList
-    	pageInfo
-    	searchData
-		
--->
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,15 +128,16 @@
         			onclick="pageMove(${pageInfo.currentPage + 1});" >다음</button>
         	</c:if>
 	     </div>
+	     
 </div>
+
 	<script>
 			$('.card-imgDiv').click(function(e){
 				location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople }";
 			});
 			
 			function pageMove(currentPage){
-				 location.href="${path}/searchList.hotels?currentPage="+currentPage+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople}";
-					 
+				 location.href="${path}/searchList.hotels?currentPage="+currentPage+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople}";	 				
 			}
 			
 	</script>

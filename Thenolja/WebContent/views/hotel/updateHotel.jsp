@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="thenolja.tb_hotel.model.vo.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
     <%
      	Hotel h = (Hotel)request.getAttribute("hotelInfo");
     	ArrayList<String> list = null;
@@ -19,8 +22,11 @@
 		    	}
 	    	}
     	}
-    	// System.out.println(h);
     %>
+    <c:if test="${ hotelInfo ne null }">
+    	<c:set var="phoneNum" value="${ hotelInfo.hotelPhone.substring(4) }" />
+    </c:if>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,110 +215,112 @@ label{
 </style>
 </head>
 	<body>
-		<%@ include file="../common/menubar.jsp" %>
-
+		<jsp:include page="../common/menubar.jsp" />
 			<div id="wrap">
 				<div id="title-div">
 					<h2>숙소정보수정하기</h2>
 				</div>
 				<div id="content-div">
-				<%if(h != null){ %>
-					<form method="post" id="content-add-form" action="<%= contextPath %>/update.hotels" 
-					enctype="multipart/form-data" >
-						<div id="content-div-half1">
-							<div id="addr-div">
-								<input type="hidden" value="<%= h.getHotelNo() %>" name="hotelNo" >
-								<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
-								<input type="text" id="roadAddress"
-								 placeholder="도로명주소" name="loadName" value="<%= h.getHotelAddress() %>"
-								 required readonly>
-								<input type="text" id="detailAddress" placeholder="상세주소"
-								 name="detailAddr" value="<%= h.getHotelDetail() %>" maxlength="15" oninput="testVal(this, detailAddr);"
-								 required>
-								<span id="guide" style="color:#999;display:none"></span>
+				<c:choose>
+					<c:when test="${ hotelInfo ne null }">
+						<form method="post" id="content-add-form" action="${ path }/update.hotels" 
+							enctype="multipart/form-data" >
+							<div id="content-div-half1">
+								<div id="addr-div">
+									<input type="hidden" value="${ hotelInfo.hotelNo }" name="hotelNo" >
+									<input type="button" onclick="findAddrs();" value="우편번호 찾기"><br>
+									<input type="text" id="roadAddress"
+									 placeholder="도로명주소" name="loadName" value="${ hotelInfo.hotelAddress }"
+									 required readonly>
+									<input type="text" id="detailAddress" placeholder="상세주소"
+									 name="detailAddr" value="${ hotelInfo.hotelDetail }" maxlength="15" oninput="testVal(this, detailAddr);"
+									 required>
+									<span id="guide" style="color:#999;display:none"></span>
+								</div>
+	
+								<div id="hotel-cate">
+									<div class="hotel-cate-div" >
+									<label>숙소종류</label>
+										<select class="form-control" name="hotelCate">
+											<option >호텔</option>
+											<option >모텔</option>
+											<option >게스트하우스</option>
+											<option >캠핑/글림핑</option>
+										</select>
+									</div>
+									<div class="hotel-cate-div">
+										<label>숙소명</label>
+										<input class="form-control" type="text" name="hotelName" value="${ hotelInfo.hotelName }" oninput="testVal(this, hotelName)" >
+									</div>
+								</div>
+	
+								<div id="hotel-nameNImg">
+									<div class="nameNimg-div">
+										<label>숙소대표사진</label>
+										<input width="50%" type="file" name="hotelImg" oninput="testVal(this, hotelImg);">
+									</div>
+									<div class="nameNimg-div">
+										<img width="50%" height="100%" src="${ hotelInfo.hotelPath }" alt="등록된이미지">
+									</div>
+								</div>
+								<input type="hidden" name="beforeImgPath" value="${ hotelInfo.hotelPath }" >
 							</div>
-
-							<div id="hotel-cate">
-								<div class="hotel-cate-div" >
-								<label>숙소종류</label>
-									<select class="form-control" name="hotelCate">
-										<option >호텔</option>
-										<option >모텔</option>
-										<option >게스트하우스</option>
-										<option >캠핑/글림핑</option>
-									</select>
+	
+							<div id="content-div-half2">
+								<div id="nameNPhone">
+									<div id="nameNPhone-div-1">
+										<label>대표자명</label>
+										<input type="text" required class="form-control" name="ceoName" maxlength="8" oninput="testVal(this, ceoName);" value="${ hotelInfo.hostName }" >
+									</div>
+	
+									<label id="phone-label">전화번호</label>
+									<div id="nameNPhone-div-2">
+										<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
+										<input class="form-control" id="Phone-div-2" type="text" name="phone2" readonly
+										 value="${ phoneNum }"
+										 placeholder="-제외한 숫자만 입력해주세요.">
+									</div>
 								</div>
-								<div class="hotel-cate-div">
-									<label>숙소명</label>
-									<input class="form-control" type="text" name="hotelName" value="<%= h.getHotelName() %>" oninput="testVal(this, hotelName)" >
+	
+								<div id="hotel-serviceList">
+									<div id="serviceList-div">
+										<h3>숙소 이용 가능한 서비스 목록</h3>
+									</div>
+									<div id="serviceList-half1">
+										<label>WIFI</label><input class="form-check-input" type="checkbox" value="1" name="serList">
+										<label>금연</label><input class="form-check-input" type="checkbox" value="2" name="serList">
+										<label>헬스장</label><input class="form-check-input" type="checkbox" value="3" name="serList">
+										<label>에어컨</label><input class="form-check-input" type="checkbox" value="4" name="serList">
+									</div>
+									<div id="serviceList-half2">
+										<label>주차장</label><input class="form-check-input" type="checkbox" value="5" name="serList">
+										<label>반려견동반</label><input class="form-check-input" type="checkbox" value="6" name="serList">
+										<label>엘레베이터</label><input class="form-check-input" type="checkbox" value="7" name="serList">
+										<label>PC</label><input class="form-check-input" type="checkbox" value="8" name="serList">
+									</div>
+									
+								</div>
+	
+							</div>
+							
+							<div id="intro-text-area">
+								<label for="intro">소개말을 적어주세요</label>
+								<div>
+									<textarea required class="form-control" onkeydown="test()" rows="5" id="intro" name="introText" >${ hotelInfo.hotelIntro }</textarea>
 								</div>
 							</div>
-
-							<div id="hotel-nameNImg">
-								<div class="nameNimg-div">
-									<label>숙소대표사진</label>
-									<input width="50%" type="file" name="hotelImg" oninput="testVal(this, hotelImg);">
-								</div>
-								<div class="nameNimg-div">
-									<img width="50%" height="100%" src="<%= h.getHotelPath() %>" alt="등록된이미지">
-								</div>
+							
+							<div align="center">
+								<button class="btn btn btn-outline-info" type="submit">수정하기</button>
+								<button class="btn btn btn-outline-info" type="button" onclick="history.back();" >돌아가기</button>
 							</div>
-							<input type="hidden" name="beforeImgPath" value="<%= h.getHotelPath() %>" >
-						</div>
-
-						<div id="content-div-half2">
-							<div id="nameNPhone">
-								<div id="nameNPhone-div-1">
-									<label>대표자명</label>
-									<input type="text" required class="form-control" name="ceoName" maxlength="8" oninput="testVal(this, ceoName);" value="<%= h.getHostName() %>" >
-								</div>
-
-								<label id="phone-label">전화번호</label>
-								<div id="nameNPhone-div-2">
-									<input class="form-control" id="Phone-div-1" type="text" name="phone1" value="010" readonly>
-									<input class="form-control" id="Phone-div-2" type="text" name="phone2" readonly
-									 value="<%= phoneNum %>"
-									 placeholder="-제외한 숫자만 입력해주세요.">
-								</div>
-							</div>
-
-							<div id="hotel-serviceList">
-								<div id="serviceList-div">
-									<h3>숙소 이용 가능한 서비스 목록</h3>
-								</div>
-								<div id="serviceList-half1">
-									<label>WIFI</label><input class="form-check-input" type="checkbox" value="1" name="serList">
-									<label>금연</label><input class="form-check-input" type="checkbox" value="2" name="serList">
-									<label>헬스장</label><input class="form-check-input" type="checkbox" value="3" name="serList">
-									<label>에어컨</label><input class="form-check-input" type="checkbox" value="4" name="serList">
-								</div>
-								<div id="serviceList-half2">
-									<label>주차장</label><input class="form-check-input" type="checkbox" value="5" name="serList">
-									<label>반려견동반</label><input class="form-check-input" type="checkbox" value="6" name="serList">
-									<label>엘레베이터</label><input class="form-check-input" type="checkbox" value="7" name="serList">
-									<label>PC</label><input class="form-check-input" type="checkbox" value="8" name="serList">
-								</div>
-								
-							</div>
-
-						</div>
-						
-						<div id="intro-text-area">
-							<label for="intro">소개말을 적어주세요</label>
-							<div>
-								<textarea required class="form-control" onkeydown="test()" rows="5" id="intro" name="introText" ><%= h.getHotelIntro() %></textarea>
-							</div>
-						</div>
-						
-						<div align="center">
-							<button class="btn btn btn-outline-info" type="submit">수정하기</button>
-							<button class="btn btn btn-outline-info" type="button" onclick="history.back();" >돌아가기</button>
-						</div>
-					</form>
-				<%} else { %>
-					<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
-					<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
-				<%} %>
+						</form>
+					  </c:when>
+					<c:otherwise>
+						<h3>해당 숙소정보를 가져오지 못했습니다.</h3>
+						<button class="btn btn btn-outline-info" onclick="history.back();" >돌아가기</button>
+					</c:otherwise>
+				</c:choose>
 				</div>	
 			</div>
 				
@@ -349,22 +357,24 @@ label{
 	    }
 	    
 	    $('option').each(function(){
-	    	if('<%= h.getHotelCategory() %>' == $(this).text().trim()){
+	    	if('${ hotelInfo.hotelCategory }' == $(this).text().trim()){
 	    		$(this).attr('selected', 'true');
 	    	}
 	    });
 	    
 	</script>
 	
-	<script>
-	 	$('input[type=checkbox]').each(function(){
-	 		<%for(int i = 0; i < list.size(); i++) {%>
-	 		if('<%= list.get(i) %>' == $(this).prev().text()){
-				$(this).attr('checked', 'true');
-	 		}
-	 		<%} %>
-	   	});
-	</script>
+	<c:if test="${ hotelInfo.serList ne null }">
+		<c:forEach var="item" items="${ hotelInfo.serList }">
+			<script>
+			 	$('input[type=checkbox]').each(function(){
+		 			if('${ item }' == $(this).prev().text()){
+						$(this).attr('checked', 'true');
+		 			}
+			   	});
+			</script>
+		</c:forEach>
+	</c:if>
 	
 	<script>
 	const regNameRule = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]+$/;

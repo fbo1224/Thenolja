@@ -248,7 +248,8 @@ svg{
 </style>
 </head>
 <body>
-	<%@ include file="./common/searchForm.jsp" %>
+	<jsp:include page="./common/searchForm.jsp"/>
+	
 	<div id="detail-wrap">
 		
 		<c:choose>
@@ -745,7 +746,6 @@ svg{
 		        		   hotelNo : ${ hotelDetail.hotelNo }
 	        		   },
 				success: function(result){
-					console.log(result);
 					let resultStr;
 					
 					if(result != 0){

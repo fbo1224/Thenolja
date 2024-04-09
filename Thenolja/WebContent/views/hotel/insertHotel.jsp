@@ -188,14 +188,13 @@ label{
 </style>
 </head>
 	<body>
-		<%@ include file="../common/menubar.jsp" %>
-
+		<jsp:include page="../common/menubar.jsp" />
 			<div id="wrap">
 				<div id="title-div">
 					<h2>숙소추가하기</h2>
 				</div>
 				<div id="content-div">
-					<form method="post" id="content-add-form" action="<%= contextPath %>/insert.hotels" 
+					<form method="post" id="content-add-form" action="${ path }/insert.hotels" 
 					enctype="multipart/form-data" >
 						<div id="content-div-half1">
 							<div id="addr-div">
