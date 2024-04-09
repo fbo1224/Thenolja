@@ -4,10 +4,19 @@
 <%@ page import="thenolja.tb_reservation.model.vo.Reservation, thenolja.member.model.vo.Member, thenolja.tb_hotel.model.vo.Room" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
-<%
+<%--<%
 	ArrayList<SelectNonmemReser> nonmemReser = (ArrayList) session.getAttribute("nonmemReser");
-	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd, HH:mm");
-%>
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+--%>
+<%--<% Date newDate = sdf.parse(r.getCheckInDate()); --%>
+<%--<% Date newDate2 = sdf.parse(r.getCheckOutDate()); --%>
+<%--<%
+// System.out.println(c.getCheckInDate());
+// System.out.println(newDate);
+SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
+String date1 = sdf2.format(newDate);
+String date2 = sdf2.format(newDate2);
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,39 +186,33 @@
 </head>
 <body>
 	
-    <%-- --%><%@ include file="../common/menubar.jsp" %>
+    <%-- <%@ include file="../common/menubar.jsp" %>--%>
     <jsp:include page="../common/menubar.jsp"/>
     
     <div id="content">
         <div id="content_title">
             <div id="left_img">
-                <a href="<%= contextPath%>"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
+                <a href="${ path }"><img src="https://www.pngarts.com/files/2/Left-Arrow-PNG-Free-Download.png" alt="왼쪽 화살표" width="40px"></a>
             </div>
             <div id="left_title"><h3>예약조회</h3></div>
         </div>
         <div id="detail">
             <div id="reser_info">
-				<% for(SelectNonmemReser r : nonmemReser) { %>
-	                <div id="reser_no"><p>No.<%= r.getReserNo() %></p></div>
+            
+            	<c:forEach var="r" items="${ sessionScope.nonmemReser }">
+				<%--<% for(SelectNonmemReser r : nonmemReser) { --%>
+	                <div id="reser_no"><p>No.${ r.reserNo }</p></div>
 	                
-	                <div id="reser_hotel_img"><img src="<%= r.getHotelPath() %>"></div>
+	                <div id="reser_hotel_img"><img src="${ r.hotelPath }"></div>
 	
 	                <div id="reser_detail">
-	                    <h3><%= r.getHotelName()%></h3>
-	                    <p><%= r.getRoomName() %></p>
-	                    <p><%= r.getPeople() %>명</p>
-	                    <p><%= r.getPaymentPrice() %>원</p>
-	                    <% Date newDate = sdf.parse(r.getCheckInDate()); %>
-                        <% Date newDate2 = sdf.parse(r.getCheckOutDate()); %>
-                        <%
-                           // System.out.println(c.getCheckInDate());
-                           // System.out.println(newDate);
-                           SimpleDateFormat sdf2 = new SimpleDateFormat("yy년MM월dd일");
-                           String date1 = sdf2.format(newDate);
-                           String date2 = sdf2.format(newDate2);
-                        %>
-                        <p><%= date1 %> ~ <%= date2 %></p>
-                        <p>오후 <%= r.getCheckInTime() %>:00 ~ 오전 <%= r.getCheckOutTime() %>:00</p>
+	                    <h3>${ r.hotelName }</h3>
+	                    <p>${ r.roomName }</p>
+	                    <p>${ r.people }명</p>
+	                    <p>${ r.paymentPrice }원</p>
+	                    
+                        <p>${ date1 } ~ ${ date2 }</p>
+                        <p>오후 ${ r.checkInTime }:00 ~ 오전 ${ r.checkOutTime }:00</p>
 	                </div>
 	
 	                <div id="reser_btn">
@@ -226,11 +229,11 @@
 	                    <hr>
 	                    <table>
 	                        <tr>
-	                            <td width="170x">예약금액 : <%= r.getPaymentPrice() %></td>
+	                            <td width="170x">예약금액 : ${ r.paymentPrice }</td>
 	                            <td><img src="https://cdn-icons-png.flaticon.com/512/561/561179.png" alt="" width="20px"></td>
 	                            <td width="170x">할인 금액 : 0원</td> <!--  나중에 스크립틀릿 만들어서 넣어놓기 -->
 	                            <td><img src="https://cdn-icons-png.flaticon.com/512/6492/6492285.png" alt="" width="25px"></td>
-	                            <td>결제금액 : <%= r.getPaymentPrice() %> <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
+	                            <td>결제금액 : ${ r.paymentPrice } <!-- 얘는 나중에 예약금액 - 할인금액 만들어서 하기 -->
 	                    </table>
 	                </div>
 	
@@ -249,7 +252,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td>입금자명</td> 
-	                        <td><%=r.getReserName() %></td>
+	                        <td>${ r.reserName }</td>
 	                    </tr>
 	                    </table>
 	                </div>
@@ -260,13 +263,13 @@
 	                    <table>
 	                    <tr>
 	                            <td width="80px">이름</td> 
-	                            <td><%= r.getReserName() %></td>
+	                            <td>${ r.reserName }</td>
 	                            <td width="80px">전화번호</td> 
-	                            <td><%= r.getReserPhone() %></td>
+	                            <td>${ r.reserPhone }</td>
 	                        </tr>
 	                        <tr>
 	                            <td>차량</td> 
-	                            <td colspan="3"><%= r.getBicycle() %></td>
+	                            <td colspan="3">${ r.bicycle }</td>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -286,11 +289,11 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="<%= contextPath %>/refund.insert?reserNo=<%=r.getReserNo() %>%reMemNo=<%= r.getMemNo()%>&hotelNo=<%=r.getHotelNo()%>&roomNo=<%=r.getRoomNo() %>"  method="post"> 
+        <form action="${ path }/refund.insert?reserNo=${ r.reserNo }%reMemNo=${ r.memNo }&hotelNo=${ r.hotelNo }&roomNo=${ r.roomNo }"  method="post"> 
             <label for="text">예금주</label>
             <input type="text" id="refund_name" required name="refundName"><br><br>
-            <input type="hidden" name="refundPrice" value="<%=r.getPaymentPrice() %>">
-            <input type="hidden" value="<%= r.getReserNo() %>" name="reserNo"/>
+            <input type="hidden" name="refundPrice" value="${ r.paymentPrice }">
+            <input type="hidden" value="${ r.reserNo }" name="reserNo"/>
             <label for="text">환불계좌</label>
             <select id="bank_name" name="bankName">
                 <option>신한은행</option>
@@ -310,7 +313,8 @@
       </div>
     </div>
   </div>
-	<% } %>
+	<%--<% } --%>
+	</c:forEach>
 	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
