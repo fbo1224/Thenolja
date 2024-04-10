@@ -65,10 +65,17 @@
 	     </div>
 	     
 </div>
-
+	<c:url var="select" value="/select.hotels">
+		<c:param name="daterange" value="${ searchData.daterange }" />
+		<c:param name="location" value="${ searchData.location }" />
+		<c:param name="people" value="${ searchData.maxPeople }" />
+	</c:url>
+	
 	<script>
 			$('.card-imgDiv').click(function(e){
-				location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople }";
+				// location.href ="${path}/select.hotels?hotelNo="+ $(this).attr('id')+"&daterange=${ searchData.daterange }&location=${ searchData.location }&people=${ searchData.maxPeople }";
+				console.log('tset');
+				location.href = '${ select }&hotelNo='+$(this).attr('id');
 			});
 			
 			function pageMove(currentPage){
