@@ -1,34 +1,99 @@
-# Travel Recommendation Service
+# THE NOLJA — 숙박 예약 플랫폼
 
-## Overview
-코로나 완화 이후 여행 수요가 꾸준히 증가하며, 특히 2023년에는 여행 인구가 큰 폭으로 늘어났습니다.  
-이러한 변화 속에서 사용자 개개인의 취향에 맞는 여행 정보를 제공하고,  
-직관적이고 간결한 UI를 통해 누구나 쉽게 사용할 수 있는 서비스를 목표로 개발했습니다.
+> 사용자 취향에 맞는 숙소 정보를 제공하고 직관적인 흐름으로 예약까지 이어지는 숙박 서비스
 
-정보가 많은 여행 서비스 특성상,  
-불필요한 탐색 과정을 줄이고 사용자가 원하는 정보를 빠르게 찾을 수 있도록  
-전체 흐름과 화면 구성을 단순하게 설계하는 데 집중했습니다.
+![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Oracle](https://img.shields.io/badge/Oracle-F80000?style=flat&logo=oracle&logoColor=white)
 
----
+<br>
 
-## Key Features
-- 사용자 취향을 고려한 여행 정보 제공
-- 복잡하지 않은 화면 구성과 직관적인 UI
-- 빠른 정보 탐색을 위한 간결한 사용자 흐름
+## 기술 스택
 
----
+| 분류 | 기술 |
+|---|---|
+| 백엔드 | Java · Spring Framework |
+| 프론트엔드 | JavaScript · jQuery · Ajax · JSTL |
+| 데이터베이스 | Oracle DB · MyBatis |
+| 보안 | BCryptPasswordEncoder |
+| 인프라 | AWS |
 
-## Focus
-이 프로젝트에서는 단순히 기능을 구현하는 것보다  
-서비스의 구조와 흐름을 먼저 정리하고,  
-사용자 입장에서 자연스럽게 사용할 수 있는 경험을 만드는 데 중점을 두었습니다.  
+<br>
 
-문제가 발생했을 때는 증상을 바로 고치기보다  
-원인을 먼저 파악하고, 같은 문제가 반복되지 않도록 구조를 점검하며 개선했습니다.
+## 아키텍처
 
----
+```
+Client (JSP)
+    ↕ Ajax
+Spring Controller
+    ↕
+Service → MyBatis Mapper → Oracle DB
+```
 
-## What I Learned
-- 사용자 경험을 고려한 화면 및 흐름 설계의 중요성
-- 기능 구현 이전에 구조를 정리하는 개발 방식
-- 문제 발생 시 차분하게 원인을 분석하고 해결하는 과정의 가치
+<br>
+
+## 핵심 코드
+
+### 닉네임 중복 확인 — 실시간 Ajax
+
+입력값 2글자 이상일 때 서버에 중복 여부를 요청하고 반환값으로 결과를 표시한다.
+
+```javascript
+$nickname.keyup(() => {
+  if ($nickname.val().length >= 2) {
+    $.ajax({
+      url: 'nickNameCheck.do',
+      data: { checkNickname: $nickname.val() },
+      success: result => {
+        if (result.substr(4) === 'N') {
+          $checkResult.show().css('color', 'orangered').text('중복되는 닉네임입니다.');
+        } else {
+          $checkResult.show().css('color', 'green').text('사용가능한 닉네임입니다.');
+        }
+      }
+    });
+  } else {
+    $checkResult.hide();
+  }
+});
+```
+
+### 비밀번호 재설정 — BCrypt 암호화
+
+기존 비밀번호를 노출하지 않고 새 비밀번호를 입력받아 BCrypt 암호화 후 저장한다.
+
+```java
+@PostMapping("resetPwd")
+public ModelAndView resetPwd(ModelAndView mv, HttpSession session,
+                             String memId, String memPwd) {
+  String newPwd = bcryptPasswordEncoder.encode(memPwd);
+  Member member = new Member();
+  member.setMemId(memId);
+  member.setMemPwd(newPwd);
+  if (memberService.resetPwd(member) > 0) {
+    session.setAttribute("alertMsg", "비밀번호 변경에 성공하였습니다.");
+    mv.setViewName("redirect:/");
+  } else {
+    mv.addObject("errorMsg", "비밀번호 변경에 실패하였습니다.")
+      .setViewName("common/errorPage");
+  }
+  return mv;
+}
+```
+
+### 프로필 사진 — INSERT / UPDATE 분기
+
+이전 이력이 있으면 UPDATE, 없으면 INSERT. 파일명은 랜덤 숫자를 붙여 중복을 방지한다.
+
+```java
+@PostMapping("insertProfile")
+public String insertProfile(Profile profile, MultipartFile upfile, HttpSession session) {
+  profile.setProfilePath(saveFile(upfile, session));
+  if (mypageService.updateProfile(profile) == 0) {
+    mypageService.insertProfile(profile);
+  }
+  session.setAttribute("alertMsg", "사진변경 성공!");
+  return "redirect:/myPage";
+}
+```
